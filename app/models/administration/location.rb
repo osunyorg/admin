@@ -28,15 +28,15 @@ class Administration::Location < ApplicationRecord
 
   include AsIndirectObject
   include Filterable
+  include GeneratesGitFiles
+  include Geolocated
+  include HasUniversity
+  include HasCountry
   include Lifecyclable
   include Localizable
   include LocalizableOrderByNameScope
-  include GeneratesGitFiles
   include Sanitizable
   include WebsitesLinkable
-  include HasCountry
-  include Geolocated
-  include HasUniversity
 
   has_and_belongs_to_many :schools,
                           class_name: 'Education::School',

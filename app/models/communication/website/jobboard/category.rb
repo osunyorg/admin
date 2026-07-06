@@ -34,10 +34,10 @@ class Communication::Website::Jobboard::Category < ApplicationRecord
   include AsCategory
   include AsDirectObject
   include GeneratesGitFiles
-  include Localizable
-  include Sanitizable
-  include MenuItemTargetable
   include HasUniversity
+  include Localizable
+  include MenuItemTargetable
+  include Sanitizable
 
   belongs_to              :program,
                           class_name: 'Education::Program',

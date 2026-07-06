@@ -32,6 +32,8 @@ class Communication::Website::Post < ApplicationRecord
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include HasListBlocks
+  include HasUniversity
   include Lifecyclable
   include Localizable
   include MovableToWebsite
@@ -39,8 +41,6 @@ class Communication::Website::Post < ApplicationRecord
   include Searchable
   include MenuItemTargetable
   include WithOpenApi
-  include HasListBlocks
-  include HasUniversity
 
   has_and_belongs_to_many :authors,
                           class_name: 'University::Person',

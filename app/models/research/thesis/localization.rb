@@ -29,9 +29,9 @@ class Research::Thesis::Localization < ApplicationRecord
   acts_as_paranoid
 
   include AsLocalization
+  include HasUniversity
   include Initials
   include Sanitizable
-  include HasUniversity
 
   validates :title, presence: true
 

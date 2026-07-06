@@ -33,10 +33,10 @@ class Research::Journal::Localization < ApplicationRecord
 
   include AsLocalization
   include HasGitFiles
+  include HasUniversity
   include Initials
   include Permalinkable
   include Sanitizable
-  include HasUniversity
 
   has_summernote :summary
 

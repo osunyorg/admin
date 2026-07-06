@@ -19,9 +19,9 @@
 #  fk_rails_2a55cf899a  (university_id => universities.id)
 #
 class Communication::Extranet::Document::Kind < ApplicationRecord
+  include HasUniversity
   include Localizable
   include LocalizableOrderByNameScope
-  include HasUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
 

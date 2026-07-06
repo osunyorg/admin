@@ -43,16 +43,16 @@ class Communication::Extranet < ApplicationRecord
   # We don't include Sanitizable because too many complex attributes. We handle it below.
   include Favoritable
   include Filterable
+  include HasAbouts
+  include HasUniversity
   include Localizable
   include LocalizableOrderByNameScope
   include Searchable
   include SsoEnabled
-  include HasAbouts
   include WithConnectedObjects
   include WithFeatures
   include WithLegal
   include WithStyle
-  include HasUniversity
 
   belongs_to :default_language, class_name: "Language"
   has_many :languages, through: :localizations

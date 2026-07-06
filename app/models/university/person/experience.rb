@@ -27,8 +27,8 @@
 class University::Person::Experience < ApplicationRecord
   acts_as_paranoid
 
-  include Localizable
   include HasUniversity
+  include Localizable
 
   attr_accessor :organization_name
 

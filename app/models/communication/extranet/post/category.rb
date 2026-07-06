@@ -19,9 +19,9 @@
 #  fk_rails_e53c2a25fc  (extranet_id => communication_extranets.id)
 #
 class Communication::Extranet::Post::Category < ApplicationRecord
+  include HasUniversity
   include Localizable
   include LocalizableOrderByNameScope
-  include HasUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
   has_many :posts

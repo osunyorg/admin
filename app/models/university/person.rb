@@ -56,14 +56,15 @@ class University::Person < ApplicationRecord
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include Duplicable
   include GeneratesGitFiles
+  include HasBlobs
+  include HasCountry
+  include HasUniversity
   include Lifecyclable
   include Localizable
   include MentionableByBlocks
   include Sanitizable
   include Searchable
   include WithAlumnus
-  include HasBlobs
-  include HasCountry
   include WithFacets
   include WithInvolvements
   include WithPersonalData
@@ -72,7 +73,6 @@ class University::Person < ApplicationRecord
   include WithRealmCommunication
   include WithRealmEducation
   include WithRealmResearch
-  include HasUniversity
 
   enum :gender, { male: 0, female: 1, non_binary: 2 }
 

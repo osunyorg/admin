@@ -43,17 +43,17 @@ class University::Organization < ApplicationRecord
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include Duplicable
   include GeneratesGitFiles
+  include Geolocated
+  include HasCountry
+  include HasUniversity
   include Lifecyclable
   include Localizable
   include LocalizableOrderByNameScope
   include MentionableByBlocks
   include Sanitizable
   include Searchable
-  include HasCountry
-  include Geolocated
   include WithKind
   include WithOpenApi
-  include HasUniversity
 
   attr_accessor :created_from_extranet
 

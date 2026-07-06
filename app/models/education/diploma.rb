@@ -27,12 +27,12 @@ class Education::Diploma < ApplicationRecord
 
   include AsIndirectObject
   include GeneratesGitFiles
+  include HasUniversity
   include Lifecyclable
   include Localizable
   include Orderable
   include Sanitizable
   include Searchable
-  include HasUniversity
 
   enum :level, {
     not_applicable: 0,

@@ -28,8 +28,8 @@ class University::Role::Localization < ApplicationRecord
   acts_as_paranoid
 
   include AsLocalization
-  include Sanitizable
   include HasUniversity
+  include Sanitizable
 
   def to_s
     "#{description}"

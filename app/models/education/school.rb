@@ -29,18 +29,18 @@ class Education::School < ApplicationRecord
   include AsIndirectObject
   include Filterable
   include GeneratesGitFiles
+  include HasCountry
+  include HasUniversity
   include Lifecyclable
   include Localizable
   include LocalizableOrderByNameScope
   include Sanitizable
   include Searchable
   include WebsitesLinkable
-  include HasCountry
   include WithLocations
   include WithPrograms # must come before WithAlumni and WithTeam
   include WithAlumni
   include WithTeam
-  include HasUniversity
 
   # 'websites' might override the same method defined in WithWebsites, so we use the full name
   has_many    :communication_websites,

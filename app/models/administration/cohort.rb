@@ -32,12 +32,12 @@ class Administration::Cohort < ApplicationRecord
   include AsIndirectObject
   include Filterable
   include GeneratesGitFiles
+  include HasUniversity
   include Lifecyclable
   include Localizable
   include LocalizableOrderByNameScope
   include Sanitizable
   include Searchable
-  include HasUniversity
 
   belongs_to  :school,
               class_name: 'Education::School'

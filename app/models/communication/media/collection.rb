@@ -16,9 +16,9 @@
 #  fk_rails_d927f11355  (university_id => universities.id)
 #
 class Communication::Media::Collection < ApplicationRecord
+  include HasUniversity
   include Localizable
   include LocalizableOrderByNameScope
-  include HasUniversity
 
   has_many  :medias,
             class_name: 'Communication::Media',

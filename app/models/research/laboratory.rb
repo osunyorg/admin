@@ -26,15 +26,15 @@ class Research::Laboratory < ApplicationRecord
   include AsIndirectObject
   include Filterable
   include GeneratesGitFiles
+  include HasCountry
+  include HasUniversity
   include Lifecyclable
   include Localizable
   include LocalizableOrderByNameScope
   include Sanitizable
   include Searchable
   include WebsitesLinkable
-  include HasCountry
 
-  belongs_to  :university
   has_many    :communication_websites,
               class_name: 'Communication::Website',
               as: :about,

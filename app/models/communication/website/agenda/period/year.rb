@@ -24,8 +24,8 @@ class Communication::Website::Agenda::Period::Year < ApplicationRecord
   include AsDirectObject
   include Communication::Website::Agenda::Period::Base
   include GeneratesGitFiles
-  include Localizable
   include HasUniversity
+  include Localizable
 
   after_create :create_months
   before_save :set_needs_checking

@@ -32,16 +32,16 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   include AsDirectObject
   include Duplicable
   include Filterable
-  include GeneratesGitFiles
   include Categorizable # Must be loaded after Filterable to be filtered by categories
-  include Lifecyclable
-  include Localizable
-  include Sanitizable
-  include Searchable
-  include MenuItemTargetable
-  include WithOpenApi
+  include GeneratesGitFiles
   include HasListBlocks
   include HasUniversity
+  include Lifecyclable
+  include Localizable
+  include MenuItemTargetable
+  include Sanitizable
+  include Searchable
+  include WithOpenApi
 
   belongs_to  :created_by,
               class_name: 'User',

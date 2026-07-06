@@ -60,17 +60,17 @@ class Education::Program::Localization < ApplicationRecord
   include AsLocalization
   include AsLocalizedTree # ordered scope is overridden below
   include Contentful
+  include HasBlobs
+  include HasFeaturedImage
   include HasGitFiles
+  include HasUniversity
   include Initials
   include Pathable
   include Permalinkable
   include Publishable
   include Sanitizable
   include Shareable
-  include HasBlobs
-  include HasFeaturedImage
   include WithInheritance
-  include HasUniversity
 
   has_summernote :summary
   has_summernote :presentation

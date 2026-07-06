@@ -34,11 +34,11 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   include AsCategory
   include AsDirectObject
   include GeneratesGitFiles
+  include HasUniversity
   include Localizable
   include Sanitizable
   include MenuItemTargetable
   include WithOpenApi
-  include HasUniversity
 
   belongs_to              :program,
                           class_name: 'Education::Program',

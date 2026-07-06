@@ -37,14 +37,14 @@ class Research::Journal::Volume::Localization < ApplicationRecord
   acts_as_paranoid
 
   include AsLocalization
+  include HasBlobs
+  include HasFeaturedImage
   include HasGitFiles
+  include HasUniversity
   include Initials
   include Permalinkable
   include Publishable
   include Sanitizable
-  include HasBlobs
-  include HasFeaturedImage
-  include HasUniversity
 
   alias :volume :about
 

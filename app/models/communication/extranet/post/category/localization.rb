@@ -29,10 +29,10 @@
 #
 class Communication::Extranet::Post::Category::Localization < ApplicationRecord
   include AsLocalization
+  include HasUniversity
   include Initials
   include Sanitizable
   include Sluggable
-  include HasUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
 

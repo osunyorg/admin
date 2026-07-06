@@ -26,8 +26,8 @@ class Communication::Website::Agenda::Period::Month < ApplicationRecord
   include AsDirectObject
   include Communication::Website::Agenda::Period::Base
   include GeneratesGitFiles
-  include Localizable
   include HasUniversity
+  include Localizable
 
   belongs_to :year
   has_many :days, dependent: :destroy

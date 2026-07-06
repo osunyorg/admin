@@ -33,11 +33,11 @@
 #
 class Research::Publication < ApplicationRecord
   include AsIndirectObject
+  include Citable
   include Filterable
   include HasGitFiles
   include Permalinkable
   include Sanitizable
-  include Citable
 
   enum :source, {
     osuny: 0,

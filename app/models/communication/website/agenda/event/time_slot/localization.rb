@@ -33,14 +33,14 @@
 class Communication::Website::Agenda::Event::TimeSlot::Localization < ApplicationRecord
   acts_as_paranoid
 
-  include AddableToCalendar
   # Needs to be included before Sluggable (which is included by Permalinkable)
   include AsDirectObjectLocalization
   include AsLocalization
+  include Communication::Website::Agenda::AddableToCalendar
   include HasGitFiles
+  include HasUniversity
   include Permalinkable
   include WithOpenApi
-  include HasUniversity
 
   belongs_to :website,
               class_name: 'Communication::Website',

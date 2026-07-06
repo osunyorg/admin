@@ -23,13 +23,13 @@ class Research::Journal < ApplicationRecord
   include Favoritable
   include Filterable
   include GeneratesGitFiles
+  include HasUniversity
   include Lifecyclable
   include Localizable
   include LocalizableOrderByTitleScope
   include Sanitizable
   include Searchable
   include WebsitesLinkable
-  include HasUniversity
 
   has_many  :communication_websites,
             class_name: 'Communication::Website',

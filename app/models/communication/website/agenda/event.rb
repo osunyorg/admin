@@ -47,8 +47,11 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include HasListBlocks
+  include HasUniversity
   include Lifecyclable
   include Localizable
+  include MenuItemTargetable
   include MovableToWebsite
   include Sanitizable
   include Searchable
@@ -57,10 +60,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include WithPeriodSync
   include WithTimeSlots
   include WithKinds
-  include MenuItemTargetable
   include WithOpenApi
-  include HasListBlocks
-  include HasUniversity
 
   belongs_to  :created_by,
               class_name: "User",

@@ -32,10 +32,10 @@ class Research::Laboratory::Localization < ApplicationRecord
 
   include AsLocalization
   include HasGitFiles
+  include HasUniversity
   include Initials
   include Permalinkable
   include Sanitizable
-  include HasUniversity
 
   validates :name, presence: true
 

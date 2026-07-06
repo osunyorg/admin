@@ -36,10 +36,10 @@
 #
 class Communication::Website::Menu::Item < ApplicationRecord
   include AsTree
+  include HasUniversity
   include Initials
   include Orderable
   include Sanitizable
-  include HasUniversity
 
   attr_accessor :skip_publication_callback
 

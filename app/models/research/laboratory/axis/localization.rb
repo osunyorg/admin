@@ -31,9 +31,9 @@ class Research::Laboratory::Axis::Localization < ApplicationRecord
   acts_as_paranoid
 
   include AsLocalization
+  include HasUniversity
   include Initials
   include Sanitizable
-  include HasUniversity
 
   has_summernote :summary
 

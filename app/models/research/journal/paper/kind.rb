@@ -24,11 +24,11 @@ class Research::Journal::Paper::Kind < ApplicationRecord
 
   include AsIndirectObject
   include GeneratesGitFiles
+  include HasUniversity
   include Lifecyclable
   include Localizable
   include LocalizableOrderByTitleScope
   include Sanitizable
-  include HasUniversity
 
   belongs_to :journal, class_name: 'Research::Journal'
   has_many :papers, dependent: :nullify

@@ -21,10 +21,10 @@
 class Communication::File < ApplicationRecord
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
+  include HasUniversity
   include Localizable
   include LocalizableOrderByNameScope
   include WithOpenApi
-  include HasUniversity
 
   scope :for_search_term, -> (term, language = nil) {
     joins(:localizations)

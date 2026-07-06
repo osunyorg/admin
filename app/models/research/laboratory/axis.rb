@@ -23,12 +23,12 @@
 class Research::Laboratory::Axis < ApplicationRecord
   acts_as_paranoid
 
+  include HasUniversity
   include Lifecyclable
   include Localizable
   include LocalizableOrderByNameScope
   include Orderable
   include Sanitizable
-  include HasUniversity
 
   belongs_to  :laboratory,
               foreign_key: :research_laboratory_id

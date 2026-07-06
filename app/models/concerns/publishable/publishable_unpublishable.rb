@@ -1,6 +1,6 @@
 # L'objet doit être un objet direct et avoir 1 attribut :
 # - unpublication_job_id:references { to_table: :good_jobs, on_delete: :nullify }
-module Unpublishable
+module PublishableUnpublishable
   extend ActiveSupport::Concern
 
   included do

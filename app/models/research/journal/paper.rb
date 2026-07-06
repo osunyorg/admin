@@ -39,12 +39,12 @@ class Research::Journal::Paper < ApplicationRecord
 
   include AsIndirectObject
   include GeneratesGitFiles
+  include HasUniversity
   include Lifecyclable
   include Localizable
   include Orderable
   include Sanitizable
   include Searchable
-  include HasUniversity
 
   belongs_to  :journal,
               foreign_key: :research_journal_id

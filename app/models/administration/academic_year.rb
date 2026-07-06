@@ -22,11 +22,11 @@ class Administration::AcademicYear < ApplicationRecord
 
   include AsIndirectObject
   include GeneratesGitFiles
+  include HasUniversity
   include Localizable
   include LocalizableOrderByNameScope
   include Sanitizable
   include Searchable
-  include HasUniversity
 
   has_many  :administration_cohorts,
             class_name: 'Administration::Cohort'
