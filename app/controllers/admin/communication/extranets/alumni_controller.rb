@@ -3,9 +3,9 @@ class Admin::Communication::Extranets::AlumniController < Admin::Communication::
     @about = @extranet.about
     @alumni = @extranet.alumni
                        .filter_by(params[:filters], current_language)
-    @alumni = filter_by_account(@alumni)
-    @alumni = @alumni.alumni
-                     .ordered(current_language)
+                       .for_alumni_account(params.dig(:filters, :for_alumni_account), @extranet)
+                       .alumni
+                       .ordered(current_language)
 
     respond_to do |format|
       format.html {
@@ -34,21 +34,6 @@ class Admin::Communication::Extranets::AlumniController < Admin::Communication::
     else
       redirect_to admin_communication_extranet_alumni_path(@extranet), 
                   alert: t('admin.communication.extranet.alumni.already_active')
-    end
-  end
-
-  private
-
-  # This filter can't live in the Filterable scopes because it needs the extranet context.
-  def filter_by_account(alumni)
-    with_account = params.dig(:filters, :for_alumni_account)
-    return alumni if with_account.blank?
-
-    people_with_account = University::Person.where(user_id: @extranet.users.select(:id)).select(:id)
-    if ActiveModel::Type::Boolean.new.cast(with_account)
-      alumni.where(id: people_with_account)
-    else
-      alumni.where.not(id: people_with_account)
     end
   end
 end
