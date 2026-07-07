@@ -23,18 +23,22 @@
     <p><%= language_name(@user.language.iso_code) %></p>
   </div>
   <div class="col-lg-6">
-    <%= osuny_label User.human_attribute_name('role') %>
-    <% if @user.roles.any? %>
-      <ul class="list-unstyled">
-        <% @user.roles.includes(:scope).each do |user_role| %>
-          <li>
-            <%= t("activerecord.attributes.user.roles.#{user_role.role}") %><%
-              if user_role.scope %> — <%= user_role.scope.try(:to_s_in, current_language) || user_role.scope %><% end %>
-          </li>
-        <% end %>
-      </ul>
+    <%= osuny_label User.human_attribute_name('roles') %>
+    <% if @user.server_admin? %>
+      <p><%= t("activerecord.attributes.user.server_admin") %></p>
     <% else %>
-      <p><%= t("activerecord.attributes.user.roles.#{@user.role}") %></p>
+      <% if @user.roles.any? %>
+        <ul class="list-unstyled">
+          <% @user.roles.includes(:scope).each do |user_role| %>
+            <li>
+              <%= t("activerecord.attributes.user/role.roles.#{user_role.role}") %><%
+                if user_role.scope %> — <%= user_role.scope.try(:to_s_in, current_language) || user_role.scope %><% end %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p><%= t("activerecord.attributes.user.roles.#{@user.role}") %></p>
+      <% end %>
     <% end %>
     <% if @user.person %>
       <%= osuny_label User.human_attribute_name('person') %>

@@ -1,4 +1,3 @@
-<%# TODO(roles-cache): prédicat sur le cache `role` -> has_role?('server_admin') si cache supprimé. %>
 <% if current_user.server_admin? && content_for?(:server_admin_only) %>
   <div class="mt-5">
     <i  class="<%= Icon::SETTINGS %>"

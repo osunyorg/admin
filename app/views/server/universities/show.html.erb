@@ -21,8 +21,9 @@
         </tr>
         <tr>
           <td><%= t('server_admin.universities.users_count') %></td>
-          <%# TODO(roles-cache): scope d'enum sur le cache `role`. Sans cache -> jointure sur `roles`. %>
-          <td class="text-end"><%= link_to @university.users.not_server_admin.count, "#{@university.url}/admin/users", target: :_blank %></td>
+          <td class="text-end"><%= link_to  @university.users.not_server_admin.count, 
+                                            "#{@university.url}/admin/users",
+                                            target: :_blank %></td>
         </tr>
 
         <% unless @university.contribution_amount.to_i.zero? %>

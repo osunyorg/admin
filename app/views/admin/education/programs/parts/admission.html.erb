@@ -36,12 +36,9 @@
 
 <%
 action = ''
-# TODO(roles-cache): program_manager? est un prédicat sur le cache `role` -> has_role?('program_manager') si cache supprimé.
-if !current_user.program_manager? || current_user.scopes_for('program_manager').map(&:id).include?(@program.id)
 action += link_to t('education.manage_roles'),
                   admin_education_program_roles_path(program_id: @program.id),
-                  class: 'action' if can?(:update, University::Role)
-end
+                  class: 'action' if can?(:edit, @program)
 %>
 <%= osuny_panel Education::Program.human_attribute_name('roles'), action: action, classes: 'mt-5' do %>
   <% if @roles.any? %>

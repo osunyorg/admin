@@ -30,6 +30,7 @@
 #  reset_password_token          :string           uniquely indexed
 #  role                          :integer          default("visitor")
 #  second_factor_attempts_count  :integer          default(0)
+#  server_admin                  :boolean          default(FALSE)
 #  session_token                 :string
 #  sign_in_count                 :integer          default(0), not null
 #  totp_timestamp                :datetime

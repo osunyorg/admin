@@ -5,10 +5,10 @@
 # cibles du même type. (Côté soumission, seul l'uuid part : le type est redéduit
 # du rôle dans User::Role.)
 role_options = safe_join(
-  (current_user.managed_roles - ['visitor']).map { |role|
-    content_tag(:option, t("activerecord.attributes.user.roles.#{role}"),
+  current_user.managed_roles.map { |role|
+    content_tag(:option, t("activerecord.attributes.user/role.roles.#{role}"),
                 value: role, selected: role == f.object.role,
-                data: { 'scope-type': User::Role::SCOPED_ROLES[role] })
+                data: { 'scope-type': User::Role.roles[role] })
   }
 )
 scope_options = safe_join(

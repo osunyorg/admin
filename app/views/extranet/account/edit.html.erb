@@ -59,8 +59,7 @@
 
   <%= submit f %>
 
-  <%# TODO(roles-cache): visitor? = aucun rôle effectif. Sans cache -> roles.none?. %>
-  <% if current_user.visitor? %>
+  <% if current_user.roles.none? %>
     <%# we don't want the osuny priviledged account to be able to get deleted through extranet %>
     <h3 class="mt-5 mb-4"><%= t("devise.registrations.edit.cancel_my_account") %></h3>
 

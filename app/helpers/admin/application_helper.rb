@@ -74,7 +74,6 @@ module Admin::ApplicationHelper
   end
 
   def static_link(path)
-    # TODO(roles-cache): prédicat sur le cache `role` -> has_role?('server_admin') si cache supprimé.
     return unless current_user.server_admin?
     raw "<a href=\"#{path}\" class=\"#{button_classes}\">#{t 'static' }</a>"
   end

@@ -96,7 +96,6 @@ languages = current_university.languages.ordered
     </div>
     <hr>
     <%= link_to t('menu.edit_profile'), admin_profile_path %><br>
-    <%# TODO(roles-cache): prédicat sur le cache `role` -> has_role?('server_admin') si cache supprimé. %>
     <% if current_user.server_admin?  %>
       <%= link_to t('menu.server_admin'), server_root_path %>
     <% end %>

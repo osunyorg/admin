@@ -4,19 +4,18 @@ module User::WithRoles
   included do
     attr_accessor :modified_by, :just_autopromoted
 
-    # `role` reste une colonne : c'est un cache dénormalisé du rôle le plus élevé
-    # détenu, qui pilote la hiérarchie (managed_roles, menu, auto-promotion, sync,
-    # ciblage des messages…). La source de vérité des droits est `roles`.
-    #
-    # TODO(roles-cache): arbitrage d'équipe — garder ou supprimer ce cache ?
-    # Le cache `role` évite de réécrire tout l'existant (prédicats d'enum
-    # `server_admin?`/`visitor?`…, scopes SQL `where(role:)`, menu) mais impose
-    # une synchronisation cache <-> `roles` (cf. les TODO(roles-cache) ci-dessous :
-    # refresh_cached_role!, bootstrap_role_assignment, set_default_role, et les
-    # callbacks de User::Role). Le supprimer = tout dériver de `roles`, au prix de
-    # ~10-15 points d'appel à réécrire (extranet, sync, emergency_message, menu,
-    # vues). À trancher ensemble.
-    enum :role, User::Role::ROLES
+    # TODO(multiroles) remove
+    enum :role, {
+      visitor: 0,
+      contributor: 4,
+      author: 5,
+      teacher: 10,
+      program_manager: 12,
+      website_manager: 15,
+      alumni_manager: 18,
+      admin: 20,
+      server_admin: 30
+    }
 
     has_many :roles,
              class_name: 'User::Role',
@@ -24,7 +23,7 @@ module User::WithRoles
              inverse_of: :user
     accepts_nested_attributes_for :roles, reject_if: :all_blank, allow_destroy: true
 
-    # TODO(roles-cache): requête sur la colonne cache ; sans cache -> jointure sur `roles`.
+    # TODO(multiroles) écrire ça en fonction des rôles liés au user
     scope :for_role, -> (role, language = nil) { where(role: role) }
 
     before_validation :set_default_role, on: :create
@@ -55,8 +54,6 @@ module User::WithRoles
            .filter_map(&:scope)
     end
 
-    # Crée (idempotente) et retourne une attribution de rôle. Le cache `role` est
-    # rafraîchi par le callback after_save de User::Role.
     def grant_role!(role_name, scope: nil)
       roles.find_or_create_by!(
         role: role_name,
@@ -65,23 +62,12 @@ module User::WithRoles
       )
     end
 
-    # TODO(roles-cache): toute cette méthode disparaît si on supprime le cache.
-    # Recalcule la colonne cache `role` à partir des roles. Les entiers de
-    # l'enum sont ordonnés par privilège croissant, donc MAX(role) = rôle le plus
-    # élevé détenu (ou visitor si aucun).
-    def refresh_cached_role!
-      return unless persisted?
-      new_value = roles.maximum(:role) || self.class.roles['visitor']
-      update_column(:role, new_value) if read_attribute(:role) != new_value
+    def managed_roles
+      can_grant_roles? ? User::Role.roles.keys : []
     end
 
-    # TODO(roles-cache): s'appuie sur la colonne cache `role` ; sans cache, calculer
-    # le niveau le plus élevé depuis `roles`.
-    def managed_roles
-      User.roles.map do |role_name, role_id|
-        next if role_id > User.roles[role]
-        role_name
-      end.compact
+    def can_grant_roles?
+      server_admin? || has_role?('admin')
     end
 
     def managed_websites
@@ -110,25 +96,13 @@ module User::WithRoles
       errors.add(:base, 'cannot assign a role above your own') if forbidden.any?
     end
 
-    # TODO(roles-cache): pont cache -> `roles`. Sans cache, créer directement la
-    # ligne `roles` par défaut (le concept de "matérialiser le cache" disparaît).
-    # À la création, si aucune attribution n'a été fournie (création hors
-    # formulaire : tout premier utilisateur, premier de l'université, seeds…),
-    # on matérialise le rôle calculé par set_default_role en user_role.
-    def bootstrap_role_assignment
-      return if roles.any?
-      return if visitor?
-      grant_role!(role)
-    end
-
-    # TODO(roles-cache): écrit le cache `role` (puis bootstrap_role_assignment le
-    # matérialise). Sans cache, cette règle d'auto-promotion créerait directement
-    # la ligne `roles` adéquate.
     def set_default_role
       return if server_admin?
       if User.all.empty?
+        # Premier user de toutes les instances
         self.role = :server_admin
       elsif !university.admin_already_auto_promoted? && university.users.not_server_admin.empty?
+        # Premier user de l'instsance
         self.role = :admin
         self.just_autopromoted = true
       end

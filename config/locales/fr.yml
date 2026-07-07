@@ -76,6 +76,11 @@ fr:
         picture: Photo de profil
         picture_url: Url de la photo de profil
         programs_to_manage: Formation(s) gérée(s)
+        roles: Rôles
+        server_admin: Administrateurice du serveur
+        university: Université
+        websites_to_manage: Sites gérés
+      user/role:
         role: Rôle
         roles:
           admin: Administrateur
@@ -83,12 +88,9 @@ fr:
           author: Auteur
           contributor: Contributeur
           program_manager: Responsable de formation
-          server_admin: Administrateur du serveur
           teacher: Enseignant·e
           visitor: Visiteur
           website_manager: Responsable de site web
-        university: Université
-        websites_to_manage: Sites gérés
     errors:
       messages:
         invalid_year: L'année doit être un nombre à 4 chiffres.

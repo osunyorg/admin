@@ -24,12 +24,7 @@ class Extranet::ApplicationController < ApplicationController
   end
 
   def user_is_authorized?
-    user_is_more_than_visitor || user_is_alumnus || user_is_contact
-  end
-
-  def user_is_more_than_visitor
-    # TODO(roles-cache): visitor? = aucun rôle effectif. Sans cache -> roles.none?.
-    !current_user.visitor?
+    current_user.can? :read, current_extranet
   end
 
   def user_is_alumnus

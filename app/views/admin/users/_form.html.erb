@@ -11,19 +11,23 @@
       <%= render 'admin/application/l10n/form', f: f %>
     </div>
     <div class="col-lg-6">
-      <%= osuny_label User.human_attribute_name('role') %>
-      <p class="text-muted small mb-2"><%= t('admin.users.roles_hint') %></p>
-      <div id="user_roles">
-        <%= f.simple_fields_for :roles do |role_f| %>
-          <%= render 'admin/users/role_fields', f: role_f %>
-        <% end %>
-      </div>
-      <%= link_to_add_association t('admin.users.add_role'), f, :roles,
-            class: button_classes,
-            data: {
-              'association-insertion-method': 'append',
-              'association-insertion-node':   '#user_roles'
-            } %>
+      <%= osuny_label User.human_attribute_name('roles') %>
+      <% if user.server_admin? %>
+        <%= f.input :server_admin %>
+      <% else %>
+        <p class="text-muted small mb-2"><%= t('admin.users.roles_hint') %></p>
+        <div id="user_roles">
+          <%= f.simple_fields_for :roles do |role_f| %>
+            <%= render 'admin/users/role_fields', f: role_f %>
+          <% end %>
+        </div>
+        <%= link_to_add_association t('admin.users.add_role'), f, :roles,
+              class: button_classes,
+              data: {
+                'association-insertion-method': 'append',
+                'association-insertion-node':   '#user_roles'
+              } %>
+      <% end %>
     </div>
     <div class="col-lg-3">
       <%= f.input :picture,
