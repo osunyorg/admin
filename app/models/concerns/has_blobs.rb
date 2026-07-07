@@ -1,4 +1,4 @@
-module WithBlobs
+module HasBlobs
   extend ActiveSupport::Concern
 
   def active_storage_blobs

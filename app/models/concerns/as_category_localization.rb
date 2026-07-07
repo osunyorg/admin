@@ -10,9 +10,9 @@ module AsCategoryLocalization
   include Permalinkable
   include Sanitizable
   include Shareable
-  include WithBlobs
-  include WithFeaturedImage
-  include WithUniversity
+  include HasBlobs
+  include HasFeaturedImage
+  include HasUniversity
 
   included do
     has_summernote :summary

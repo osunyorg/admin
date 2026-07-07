@@ -27,12 +27,12 @@ class Communication::Website::Alert < ApplicationRecord
   include Federated
   include Filterable
   include GeneratesGitFiles
+  include HasUniversity
   include Lifecyclable
   include Localizable
   include LocalizableOrderByTitleScope
   include Sanitizable
   include Searchable
-  include WithUniversity
 
   enum :kind, { info: 0, warning: 50, danger: 100 }
 

@@ -55,19 +55,19 @@ class Communication::Website::Post::Localization < ApplicationRecord
   include AsDirectObjectLocalization
   include AsLocalization
   include Contentful
+  include HasBlobs
+  include HasFeaturedImage
   include HasGitFiles
+  include HasUniversity
   include HeaderCallToAction
   include Initials
   include Permalinkable
   include Publishable
   include PublishableByTheHour
-  include Unpublishable
   include Sanitizable
   include Shareable
-  include WithBlobs
-  include WithFeaturedImage
+  include Unpublishable
   include WithOpenApi
-  include WithUniversity
 
   belongs_to :website,
               class_name: 'Communication::Website',

@@ -1,4 +1,4 @@
-module WithGeolocation
+module Geolocated
   extend ActiveSupport::Concern
 
   included do

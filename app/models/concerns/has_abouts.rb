@@ -1,4 +1,4 @@
-module WithAbouts
+module HasAbouts
   extend ActiveSupport::Concern
 
   included do

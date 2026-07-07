@@ -1,4 +1,4 @@
-module AddableToCalendar
+module Communication::Website::Agenda::AddableToCalendar
   extend ActiveSupport::Concern
 
   included do

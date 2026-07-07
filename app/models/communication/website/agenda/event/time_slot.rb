@@ -31,11 +31,11 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   include AsDirectObject
   include Communication::Website::Agenda::Period::InPeriod
   include Communication::Website::Agenda::WithStatus
+  include HasUniversity
   include GeneratesGitFiles
   include Localizable
   include MovableToWebsite
   include WithOpenApi
-  include WithUniversity
 
   belongs_to  :communication_website_agenda_event,
               class_name: 'Communication::Website::Agenda::Event',

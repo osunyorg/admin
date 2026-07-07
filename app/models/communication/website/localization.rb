@@ -41,10 +41,10 @@ class Communication::Website::Localization < ApplicationRecord
   include AsLocalization
   include Contentful
   include HasGitFiles
+  include HasUniversity
   include Initials
   include Publishable
   include WithOpenApi
-  include WithUniversity
 
   alias :website :about
 

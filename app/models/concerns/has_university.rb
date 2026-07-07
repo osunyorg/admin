@@ -1,4 +1,4 @@
-module WithUniversity
+module HasUniversity
   extend ActiveSupport::Concern
 
   included do

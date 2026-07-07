@@ -1,4 +1,4 @@
-module WithFeaturedImage
+module HasFeaturedImage
   extend ActiveSupport::Concern
 
   included do

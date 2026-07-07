@@ -32,12 +32,12 @@ class Education::School::Localization < ApplicationRecord
   include Accessible
   include AsLocalization
   include Contentful
+  include HasBlobs
   include HasGitFiles
+  include HasUniversity
   include Initials
   include Permalinkable
   include Sanitizable
-  include WithBlobs
-  include WithUniversity
 
   has_one_attached_deletable :logo
 

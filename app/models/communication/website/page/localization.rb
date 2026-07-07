@@ -58,10 +58,10 @@ class Communication::Website::Page::Localization < ApplicationRecord
   include Publishable
   include Sanitizable
   include Shareable
-  include WithBlobs
-  include WithFeaturedImage
+  include HasBlobs
+  include HasFeaturedImage
   include WithOpenApi
-  include WithUniversity
+  include HasUniversity
 
   belongs_to  :website,
               class_name: 'Communication::Website',

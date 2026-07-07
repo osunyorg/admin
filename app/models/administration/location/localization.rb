@@ -37,14 +37,14 @@ class Administration::Location::Localization < ApplicationRecord
 
   include AsLocalization
   include Contentful
+  include HasBlobs
+  include HasFeaturedImage
   include HasGitFiles
+  include HasUniversity
   include Initials
   include Permalinkable
   include Sanitizable
   include Accessible
-  include WithBlobs
-  include WithFeaturedImage
-  include WithUniversity
 
   has_summernote :summary
 

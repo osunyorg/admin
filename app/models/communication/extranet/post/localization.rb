@@ -37,13 +37,13 @@ class Communication::Extranet::Post::Localization < ApplicationRecord
   include Accessible
   include AsLocalization
   include Contentful
+  include HasFeaturedImage
+  include HasUniversity
   include Initials
   include Publishable
   include Sanitizable
   include Sluggable
-  include WithFeaturedImage
-  include WithUniversity
-
+  
   belongs_to :extranet, class_name: 'Communication::Extranet'
 
   has_summernote :summary

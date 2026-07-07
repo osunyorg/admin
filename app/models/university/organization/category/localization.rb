@@ -38,6 +38,7 @@
 #
 class University::Organization::Category::Localization < ApplicationRecord
   include AsCategoryLocalization
+  include HasUniversity
   include WithOpenApi
 
   def git_path_relative

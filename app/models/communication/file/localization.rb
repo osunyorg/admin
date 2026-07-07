@@ -34,9 +34,9 @@
 class Communication::File::Localization < ApplicationRecord
   include AsLocalization
   include HasOriginalBlob
+  include HasUniversity
   include WithIcon
   include WithOpenApi
-  include WithUniversity
 
   has_many    :contexts,
               foreign_key: :communication_file_localization_id,
