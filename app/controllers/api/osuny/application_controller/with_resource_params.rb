@@ -45,6 +45,8 @@ module Api::Osuny::ApplicationController::WithResourceParams
     end
     # Set the image URL so that the object can delay the upload if needed
     l10n_params[:featured_image_new_url] = featured_image_data[:url]
+    # We also force the updated_at to change, as changing on the featured_image does not trigger the save
+    l10n_params[:updated_at] = Time.current
   end
 
   def set_blocks_attributes_to_l10n_params(l10n_params, l10n: nil)

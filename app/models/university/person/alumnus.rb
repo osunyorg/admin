@@ -14,6 +14,7 @@
 #  email_visibility              :integer          default("private")
 #  gender                        :integer
 #  habilitation                  :boolean          default(FALSE)
+#  invitation_sent_at            :datetime
 #  is_administration             :boolean
 #  is_alumnus                    :boolean          default(FALSE)
 #  is_author                     :boolean

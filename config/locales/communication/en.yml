@@ -484,6 +484,18 @@ en:
         drag_and_drop: Drag and drop
         language_mismatch_alert: This block does not exist in this language.
       extranet:
+        alumni:
+          account_active: Account activated
+          already_active: This account is already active
+          filters:
+            account:
+              label: account
+              without_account: Without account
+              with_account: With account
+          send_invitation:
+            cta: Send an invitation email
+            just_sent: Invitation email sent to %{name}
+            too_soon: An invitation email has already been sent less than 5 minutes ago.
         confirm_localization:
           text_html: "The creation of <i>%{about}</i> in %{language} requires the localization of the extranet <i>%{extranet}</i> in %{language}."
           title: Localization confirmation
