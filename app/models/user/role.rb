@@ -26,10 +26,34 @@
 class User::Role < ApplicationRecord
   self.table_name = 'user_roles'
 
+  # Encodage partagé par User (colonne `role`, cache du rôle le plus élevé) et
+  # par User::Role (source de vérité, scopée). Les entiers sont figés : ils sont
+  # stockés en base et utilisés par la migration de backfill.
+  ROLES = {
+    visitor: 0,
+    contributor: 4,
+    author: 5,
+    teacher: 10,
+    program_manager: 12,
+    website_manager: 15,
+    alumni_manager: 18,
+    admin: 20,
+    server_admin: 30
+  }.freeze
+
+  # Rôles qui se rattachent à une ou plusieurs cibles (sites / formations).
+  # Les autres (visitor, teacher, admin, server_admin) sont globaux.
+  SCOPED_ROLES = {
+    'contributor'     => 'Communication::Website',
+    'author'          => 'Communication::Website',
+    'website_manager' => 'Communication::Website',
+    'program_manager' => 'Education::Program'
+  }.freeze
+
   # Source de vérité des droits : un utilisateur a autant de lignes que de
   # couples (rôle, cible). Le scope est polymorphe et facultatif (les rôles
   # globaux — teacher, admin, server_admin — n'ont pas de cible).
-  enum :role, User::WithRoles::ROLES
+  enum :role, ROLES
 
   belongs_to :user, inverse_of: :roles
   belongs_to :university
@@ -40,7 +64,7 @@ class User::Role < ApplicationRecord
   validate :scope_required_for_scoped_role
 
   # TODO(roles-cache): ces deux callbacks maintiennent le cache User#role ; ils
-  # disparaissent si l'équipe décide de supprimer le cache (cf. User::WithRoles).
+  # disparaissent si l'équipe décide de supprimer le cache (cf. User::Role).
   after_save :refresh_user_cached_role
   after_destroy :refresh_user_cached_role
   after_create :autoset_favorite_for_website_manager
@@ -75,7 +99,7 @@ class User::Role < ApplicationRecord
       self.scope_type = nil
       self.scope_id = nil
     else
-      self.scope_type = User::WithRoles::SCOPED_ROLES[role]
+      self.scope_type = User::Role::SCOPED_ROLES[role]
     end
   end
 
@@ -84,7 +108,7 @@ class User::Role < ApplicationRecord
   end
 
   def global_role?
-    User::WithRoles::SCOPED_ROLES[role].nil?
+    User::Role::SCOPED_ROLES[role].nil?
   end
 
   def refresh_user_cached_role

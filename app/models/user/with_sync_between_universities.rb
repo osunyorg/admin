@@ -6,7 +6,7 @@ module User::WithSyncBetweenUniversities
 
     # TODO(roles-cache): server_admin? et le scope .server_admin reposent sur la
     # colonne cache `role`. Sans cache -> has_role?('server_admin') et une
-    # jointure sur `roles`. (cf. arbitrage dans User::WithRoles)
+    # jointure sur `roles`. (cf. arbitrage dans User::Role)
     after_save :sync_between_universities, if: Proc.new { |user| user.server_admin? && !user.skip_server_admin_sync }
     after_destroy :remove_from_all_universities, if: Proc.new { |user| user.server_admin? && !user.skip_server_admin_sync }
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Ability
+class User::Ability
   include CanCan::Ability
 
   def self.for(user)
@@ -10,7 +10,7 @@ class Ability
     # pour que, en cas de conflit, la règle du rôle le plus puissant — déclarée
     # en dernier — l'emporte (CanCanCan : last rule wins).
     user.ability_roles.each do |role_name|
-      ability.merge "Ability::#{role_name.classify}".constantize.new(user)
+      ability.merge "User::Ability::#{role_name.classify}".constantize.new(user)
     end
     ability
   end

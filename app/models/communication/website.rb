@@ -137,7 +137,7 @@ class Communication::Website < ApplicationRecord
 
   def self.organized_for(user, language, limit: 6)
     university = user.university
-    ability = ::Ability.for(user)
+    ability = ::User::Ability.for(user)
     # Favorites first
     favorites_ids = user.favorites.websites.pluck(:about_id)
     websites =  university.websites

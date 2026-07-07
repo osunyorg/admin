@@ -8,7 +8,7 @@ role_options = safe_join(
   (current_user.managed_roles - ['visitor']).map { |role|
     content_tag(:option, t("activerecord.attributes.user.roles.#{role}"),
                 value: role, selected: role == f.object.role,
-                data: { 'scope-type': User::WithRoles::SCOPED_ROLES[role] })
+                data: { 'scope-type': User::Role::SCOPED_ROLES[role] })
   }
 )
 scope_options = safe_join(

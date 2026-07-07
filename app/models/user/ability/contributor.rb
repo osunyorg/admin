@@ -1,4 +1,4 @@
-class Ability::Contributor < Ability::Author
+class User::Ability::Contributor < User::Ability::Author
 
   def initialize(user)
     super

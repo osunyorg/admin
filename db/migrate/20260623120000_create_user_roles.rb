@@ -21,7 +21,7 @@ class CreateUserRoles < ActiveRecord::Migration[8.1]
 
   private
 
-  # Encodage de l'enum User::ROLES (cf. User::WithRoles) :
+  # Encodage de l'enum User::ROLES (cf. User::Role) :
   #   contributor 4, author 5, website_manager 15  -> scopés sur des sites
   #   program_manager 12                            -> scopé sur des formations
   #   teacher 10, admin 20, server_admin 30         -> globaux (sans scope)

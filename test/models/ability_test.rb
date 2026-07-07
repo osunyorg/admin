@@ -25,26 +25,26 @@ class AbilityTest < ActiveSupport::TestCase
   end
 
   test "un seul rôle : admin gère son université mais ne détruit pas de site" do
-    ability = Ability.for(admin)
+    ability = User::Ability.for(admin)
     assert ability.can?(:manage, University::Organization.new(university_id: default_university.id))
     assert_not ability.can?(:destroy, Communication::Website.new(university_id: default_university.id))
   end
 
   test "visitor (aucun rôle) : aucun droit" do
-    ability = Ability.for(alumnus)
+    ability = User::Ability.for(alumnus)
     assert_not ability.can?(:manage, Communication::Website.new(university_id: default_university.id))
   end
 
   test "un author n'a de droits que sur SES sites" do
     user = user_with(:alumnus, { role: :author, scope: website_with_github })
-    ability = Ability.for(user)
+    ability = User::Ability.for(user)
     assert ability.can?(:create, event_on(website_with_github))
     assert_not ability.can?(:create, event_on(website_with_gitlab))
   end
 
   test "les rôles sont additifs : chacun apporte ses droits" do
-    author_only = Ability.for(user_with(:alumnus, { role: :author, scope: website_with_github }))
-    author_and_pm = Ability.for(user_with(:alumnus,
+    author_only = User::Ability.for(user_with(:alumnus, { role: :author, scope: website_with_github }))
+    author_and_pm = User::Ability.for(user_with(:alumnus,
                                           { role: :author, scope: website_with_github },
                                           { role: :program_manager, scope: program }))
     category = Education::Program::Category.new(university_id: default_university.id)
@@ -63,6 +63,6 @@ class AbilityTest < ActiveSupport::TestCase
     # l'ordre de fusion doit préserver le droit de destruction du server_admin.
     user = user_with(:server_admin, { role: :website_manager, scope: website_with_github })
     website = Communication::Website.new(university_id: default_university.id)
-    assert Ability.for(user).can?(:destroy, website)
+    assert User::Ability.for(user).can?(:destroy, website)
   end
 end

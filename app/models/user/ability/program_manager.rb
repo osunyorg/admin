@@ -1,4 +1,4 @@
-class Ability::ProgramManager < Ability
+class User::Ability::ProgramManager < User::Ability
 
   def initialize(user)
     super

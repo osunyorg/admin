@@ -1,30 +1,6 @@
 module User::WithRoles
   extend ActiveSupport::Concern
 
-  # Encodage partagé par User (colonne `role`, cache du rôle le plus élevé) et
-  # par User::Role (source de vérité, scopée). Les entiers sont figés : ils sont
-  # stockés en base et utilisés par la migration de backfill.
-  ROLES = {
-    visitor: 0,
-    contributor: 4,
-    author: 5,
-    teacher: 10,
-    program_manager: 12,
-    website_manager: 15,
-    alumni_manager: 18,
-    admin: 20,
-    server_admin: 30
-  }.freeze
-
-  # Rôles qui se rattachent à une ou plusieurs cibles (sites / formations).
-  # Les autres (visitor, teacher, admin, server_admin) sont globaux.
-  SCOPED_ROLES = {
-    'contributor'     => 'Communication::Website',
-    'author'          => 'Communication::Website',
-    'website_manager' => 'Communication::Website',
-    'program_manager' => 'Education::Program'
-  }.freeze
-
   included do
     attr_accessor :modified_by, :just_autopromoted
 
@@ -40,7 +16,7 @@ module User::WithRoles
     # callbacks de User::Role). Le supprimer = tout dériver de `roles`, au prix de
     # ~10-15 points d'appel à réécrire (extranet, sync, emergency_message, menu,
     # vues). À trancher ensemble.
-    enum :role, ROLES
+    enum :role, User::Role::ROLES
 
     has_many :roles,
              class_name: 'User::Role',

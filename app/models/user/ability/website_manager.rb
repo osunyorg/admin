@@ -1,4 +1,4 @@
-class Ability::WebsiteManager < Ability
+class User::Ability::WebsiteManager < User::Ability
 
   def initialize(user)
     super
