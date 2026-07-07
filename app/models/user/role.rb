@@ -54,11 +54,8 @@ class User::Role < ApplicationRecord
 
   after_create :autoset_favorite_for_website_manager
 
-  def to_s
-    [
-      I18n.t("activerecord.attributes.user.roles.#{role}"),
-      scope&.to_s
-    ].compact.join(' — ')
+  def self.scope_type_for(role_name)
+    ROLES_WITH_SCOPE[role_name]
   end
 
   def scope_choice
@@ -70,6 +67,13 @@ class User::Role < ApplicationRecord
     self.scope_id = value.presence
   end
 
+  def to_s
+    [
+      I18n.t("activerecord.attributes.user.roles.#{role}"),
+      scope&.to_s
+    ].compact.join(' — ')
+  end
+
   protected
 
   def set_university_from_user
@@ -77,7 +81,7 @@ class User::Role < ApplicationRecord
   end
 
   def scope_required_for_scoped_role
-    errors.add(:scope, 'is required for this role') if !global_role? && scope_id.blank?
+    errors.add(:scope, 'is required for this role') if has_scope? && scope_id.blank?
   end
 
   def has_scope?
