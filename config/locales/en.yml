@@ -79,6 +79,7 @@ en:
         role: Role
         roles:
           admin: Administrator
+          alumni_manager: Alumni Manager
           author: Author
           contributor: Contributor
           program_manager: Program manager
@@ -166,7 +167,7 @@ en:
     meta_description:
       hint: Plain text without HTML, dedicated to Search Engine Optimization (SEO).
       label: Meta description
-    move: 
+    move:
       cta: Move
       description: "Move this item to another website you manage:"
       permission_denied: You cannot move this item.

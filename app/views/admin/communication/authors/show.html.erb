@@ -19,7 +19,9 @@
         <%= total_posts.count %>
         <%= Communication::Website::Post.model_name.human(count: total_posts.count).downcase %>
       </p>
-      <%= render 'admin/communication/websites/posts/list', posts: recent_posts %>
+      <%= render 'admin/communication/websites/posts/list',
+                  posts: recent_posts,
+                  website: website %>
     </div>
   </div>
 <% end  %>

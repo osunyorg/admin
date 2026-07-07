@@ -32,7 +32,7 @@
     # administration.description.parts.qualiopi
     # research.description.parts.researcher
     # research.hal.description.parts.publication
-    key = "#{@namespace.to_s.underscore.gsub('/', '.')}.description.parts.#{class_name.to_s.demodulize.downcase}"
+    key = "#{@namespace.to_s.underscore.gsub('/', '.')}.description.parts.#{class_name.to_s.demodulize.underscore}"
     title = t "#{key}.title"
     description = t "#{key}.description"
     %>

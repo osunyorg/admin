@@ -1,4 +1,5 @@
-<div class="row g-2">
+<% hide_school ||= false %>
+<div class="row g-2 mb-3">
   <% cohorts.ordered.each do |cohort| %>
     <div>
       <div class="<%= osuny_card_classes(horizontal: true) %>">
@@ -10,7 +11,7 @@
           <% if can?(:restore, cohort) %>
             <div class="card-footer">
               <%= link_to t('restore'),
-                          restore_admin_education_cohort_path(cohort),
+                          restore_admin_administration_cohort_path(cohort),
                           method: :post,
                           class: button_classes %>
             </div>
@@ -19,14 +20,16 @@
           <div class="card-body">
             <div class="row">
               <div class="col-lg-8">
-                <%= link_to [:admin, cohort] do %>
+                <%= link_to [:admin, cohort, { school_id: nil, program_id: nil }] do %>
                   <%= cohort.program.to_s_in(current_language) %>
                   <%= cohort.year %>
                 <% end %>
               </div>
-              <div class="col-lg-4">
-                <%= cohort.school.to_s_in(current_language) %>
-              </div>
+              <% unless hide_school %>
+                <div class="col-lg-4">
+                  <%= cohort.school.to_s_in(current_language) %>
+                </div>
+              <% end %>
             </div>
           </div>
           <div class="card-footer">

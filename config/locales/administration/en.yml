@@ -4,6 +4,13 @@ en:
       administration/qualiopi: Qualiopi
   activerecord:
     attributes:
+      administration/academic_year:
+        year: Year
+      administration/cohort:
+        alumni: Alumni
+        program: Program
+        school: School
+        year: Year
       administration/location:
         address: Address
         city: City
@@ -34,6 +41,12 @@ en:
         proof: Proof
         requirement: Requirement
     models:
+      administration/academic_year:
+        one: Year
+        other: Years
+      administration/cohort:
+        one: Cohort
+        other: Cohorts
       administration/location:
         one: Location
         other: Locations
@@ -51,9 +64,15 @@ en:
   administration:
     description:
       parts:
+        academic_year:
+          description: Presentation of the academic years
+          title: Years
         alumnus:
-          description: Presentation of the students who have studied in the various courses.
+          description: Presentation of the students who have studied in the various courses
           title: Alumni
+        cohort:
+          description: Presentation of the cohorts of alumni
+          title: Cohorts
         location:
           description: Management of the various (physical) education and research sites
           title: Locations

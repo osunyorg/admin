@@ -11,6 +11,7 @@ module User::WithRoles
     teacher: 10,
     program_manager: 12,
     website_manager: 15,
+    alumni_manager: 18,
     admin: 20,
     server_admin: 30
   }.freeze
