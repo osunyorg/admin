@@ -81,6 +81,10 @@ class Communication::Website::Localization < ApplicationRecord
     [default_shared_image&.blob]
   end
 
+  def communication_website_id
+    about_id
+  end
+
   def to_s
     name
   end

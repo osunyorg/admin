@@ -39,7 +39,6 @@ module University::Person::WithAlumnus
         .select("university_people.*")
         .distinct
     }
-
     scope :for_alumni_program, -> (program_ids, language = nil) {
       left_joins(:cohorts)
         .where(administration_cohorts: { program_id: program_ids })
@@ -52,6 +51,22 @@ module University::Person::WithAlumnus
         .select("university_people.*")
         .distinct
     }
+  end
+
+  class_methods do
+    # This scope needs the extranet context, so it can't be a Filterable scope
+    # (Filterable only ever passes a language as the second argument). It is
+    # applied explicitly rather than through #filter_by.
+    def for_alumni_account(with_account, extranet)
+      return all if with_account.blank?
+
+      people_with_account = University::Person.where(user_id: extranet.users.select(:id)).select(:id)
+      if ActiveModel::Type::Boolean.new.cast(with_account)
+        where(id: people_with_account)
+      else
+        where.not(id: people_with_account)
+      end
+    end
   end
 
   def find_cohorts

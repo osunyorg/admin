@@ -505,6 +505,18 @@ fr:
         drag_and_drop: Drag and drop
         language_mismatch_alert: Le bloc n'existe pas dans cette langue.
       extranet:
+        alumni:
+          account_active: Compte activé
+          already_active: Ce compte est déjà actif
+          filters:
+            account:
+              label: compte
+              without_account: Sans compte
+              with_account: Avec compte
+          send_invitation:
+            cta: Envoyer un mail d'invitation
+            just_sent: Mail d'invitation envoyé à %{name}
+            too_soon: Un mail d'invitation a déjà été envoyé il y a moins de 5 minutes. 
         confirm_localization:
           text_html: "La création de <i>%{about}</i> en %{language} nécessite la traduction de l'extranet <i>%{extranet}</i> en %{language}."
           title: Confirmation de traduction

@@ -234,7 +234,11 @@ namespace :communication do
       get :confirm_localization
       post :do_confirm_localization
     end
-    resources :alumni, only: :index, controller: 'extranets/alumni'
+    resources :alumni, only: :index, controller: 'extranets/alumni' do
+      member do
+        post :send_invitation
+      end
+    end
     resources :contacts, only: :index, controller: 'extranets/contacts' do
       collection do
         get :export_people

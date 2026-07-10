@@ -63,7 +63,7 @@ class Education::Diploma::Localization < ApplicationRecord
   end
 
   def git_path_relative
-    "diplomas/#{slug}/_index.html"
+    "diplomas/#{slug}.html"
   end
 
   def template_static

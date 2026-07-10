@@ -1,0 +1,38 @@
+<%= simple_form_for :filters, url: current_path, method: :get do |f| %>
+  <%= filters_panel current_path: current_path, active_filters_count: active_filters_count do |form| %>
+
+    <%= render_filter f,
+                      :string,
+                      :for_search_term,
+                      label: t('search')
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_alumni_year,
+                      label: t('filters.attributes.element', element: Administration::AcademicYear.model_name.human.downcase),
+                      collection: @extranet.years.ordered(current_language),
+                      multiple: true
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_alumni_organization,
+                      label: t('filters.attributes.element', element: University::Organization.model_name.human.downcase),
+                      collection: osuny_collection(@extranet.organizations, localized: true),
+                      multiple: true
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_alumni_account,
+                      label: t('filters.attributes.element', element: t('admin.communication.extranet.alumni.filters.account.label')),
+                      collection: [
+                        [t('admin.communication.extranet.alumni.filters.account.with_account'), true],
+                        [t('admin.communication.extranet.alumni.filters.account.without_account'), false]
+                      ]
+                      %>
+
+
+    <% end %>
+<% end %>
