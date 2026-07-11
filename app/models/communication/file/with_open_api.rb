@@ -11,7 +11,7 @@ module Communication::File::WithOpenApi
           type: :object,
           description: "Localizations of the file. The key is the language's ISO 639-1 code.",
           additionalProperties: {
-            "$ref": "#/components/schemas/communication_media_localization"
+            "$ref": "#/components/schemas/communication_file_localization"
           }
         },
         created_at: { type: :string, format: "date-time" },

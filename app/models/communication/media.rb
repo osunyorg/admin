@@ -98,6 +98,10 @@ class Communication::Media < ApplicationRecord
     "https://#{ENV['KEYCDN_HOST']}/#{original_blob.key}?width=600"
   end
 
+  def max_file_size
+    Rails.application.config.default_image_max_size
+  end
+
   protected
 
   def self.find_or_create_media_from_blob(blob, origin)

@@ -66,6 +66,10 @@ class Communication::File::Localization < ApplicationRecord
     localization
   end
 
+  def max_file_size
+    Rails.application.config.default_file_max_size
+  end
+
   def to_s
     "#{name}"
   end

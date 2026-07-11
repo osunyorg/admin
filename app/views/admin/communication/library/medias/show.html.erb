@@ -64,7 +64,7 @@
   
     <% if @l10n.internal_description.present? %>
       <%= osuny_label Communication::Media::Localization.human_attribute_name(:internal_description) %>
-      <p><%= number_to_human_size @l10n.internal_description %></p>
+      <p><%= @l10n.internal_description %></p>
     <% end %>
     
     <% if @media.collection.present? %>

@@ -24,22 +24,15 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
   end
   
   def direct_upload
-    # TODO factorize this with ActiveStorage::DirectUploadsController#create
-    blob_args = params.require(:blob).permit(:filename, :byte_size, :checksum, :content_type, metadata: {}).to_h.symbolize_keys
     @blob = ActiveStorage::Blob.create_before_direct_upload!(**blob_args)
     @blob.update_column(:university_id, current_university&.id)
-    # TODO faut-il l'id ou l'iso ?
     @language = Language.find(params[:language])
     @localization = Communication::File::Localization.create_from_blob(@blob, @language)
     @file = @localization.file
   end
 
   def pick
-    picker = Osuny::File::Picker.new
-    picker.university = current_university
-    picker.language = current_language
-    picker.params = params.to_unsafe_hash
-    render json: picker.to_json
+    # TODO generic picker
   end
 
   def edit
@@ -77,6 +70,10 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
   end
 
   protected
+
+  def blob_args
+    params.require(:blob).permit(:filename, :byte_size, :checksum, :content_type, metadata: {}).to_h.symbolize_keys
+  end
 
   def file_params
     params.require(:communication_file)

@@ -38,6 +38,10 @@ module HasOriginalBlob
     self.original_byte_size = value.byte_size
   end
 
+  def max_file_size
+    raise NotImplementedError, "You must implement max_file_size in the including class"
+  end
+
   protected
 
   def create_original_blob_from_upload
@@ -63,7 +67,7 @@ module HasOriginalBlob
   end
 
   def file_size_too_big?
-    if original_uploaded_file.size > Rails.application.config.default_image_max_size
+    if original_uploaded_file.size > max_file_size
       errors.add :original_uploaded_file, :too_big
       true
     else
