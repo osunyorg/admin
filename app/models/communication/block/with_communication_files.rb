@@ -15,7 +15,7 @@ module Communication::Block::WithCommunicationFiles
   end
 
   def first_or_create_file_context_for(localization)
-    context = communication_file_contexts.where(
+    communication_file_contexts.where(
       communication_file_localization_id: localization.id
     ).first_or_create!
   end
