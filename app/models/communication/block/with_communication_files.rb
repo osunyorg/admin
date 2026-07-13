@@ -27,7 +27,6 @@ module Communication::Block::WithCommunicationFiles
     .destroy_all
   end
 
-  # On ne memoize rien parce qu'il faut toujours la version à jour, on agit sur les listes
   def communication_files
     template.communication_files
   end
