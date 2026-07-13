@@ -51,7 +51,7 @@ class Communication::File::Localization < ApplicationRecord
       university_id: blob.university_id,
       language_id: language.id,
       original_checksum: blob.checksum
-    ).first_or_initialize do |localization|
+    ).first_or_create do |localization|
       # La localisation n'existe pas, on crée le fichier
       file = Communication::File.create!(university_id: blob.university_id)
       # On attribue le blob
@@ -60,8 +60,6 @@ class Communication::File::Localization < ApplicationRecord
       localization.about_id = file.id
       # On prend le nom du fichier comme nom par défaut (c'est mieux que rien)
       localization.name = blob.filename.to_s
-      # On enregistre
-      localization.save
     end
     localization
   end
