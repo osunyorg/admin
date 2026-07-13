@@ -52,7 +52,9 @@ export default {
       const delegate = {
         directUploadWillStoreFileWithXHR(xhr) {
           xhr.upload.addEventListener('progress', (event) => {
-            if (event.total) onProgressUpdate((event.loaded / event.total) * 100);
+            if (event.total) {
+              onProgressUpdate((event.loaded / event.total) * 100);
+            }
           });
         },
       };
