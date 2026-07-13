@@ -270,7 +270,7 @@ namespace :communication do
     end
     resources :jobs, controller: 'extranets/jobs'
   end
-  scope module: 'library' do 
+  scope module: 'library' do
     resources :medias do
       collection do
         post 'pick' => 'medias#pick', as: :pick
@@ -291,7 +291,7 @@ namespace :communication do
     end
     resources :files do
       collection do
-        post 'direct-upload/language/:language' => 'files#direct_upload', as: :direct_upload
+        post 'direct-upload' => 'files#direct_upload', as: :direct_upload
         post 'pick' => 'files#pick', as: :pick
         resources :categories, controller: '/admin/communication/library/files/categories', as: 'file_categories' do
           collection do

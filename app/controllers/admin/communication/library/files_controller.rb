@@ -22,12 +22,11 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
     @categories = categories
     breadcrumb
   end
-  
+
   def direct_upload
     @blob = ActiveStorage::Blob.create_before_direct_upload!(**blob_args)
     @blob.update_column(:university_id, current_university&.id)
-    @language = Language.find(params[:language])
-    @localization = Communication::File::Localization.create_from_blob(@blob, @language)
+    @localization = Communication::File::Localization.create_from_blob(@blob, current_language)
     @file = @localization.file
   end
 
