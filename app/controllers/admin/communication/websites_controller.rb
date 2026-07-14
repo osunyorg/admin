@@ -65,6 +65,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
                           can?(:read, Communication::Website::Jobboard::Job)
     # Git files
     @desynchronized_generated_git_files = @website.desynchronized_generated_git_files
+    @sync_with_git_scheduled = @website.sync_with_git_scheduled?
     breadcrumb
   end
 
@@ -103,8 +104,17 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     else
       load_invalid_localization
       breadcrumb
-      add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_content
+      case params[:_return_to]
+      when 'technical'
+        @l10n = @website.localization_for(current_language)
+        @feature_nav = 'navigation/admin/communication/website/settings'
+        add_breadcrumb t('admin.subnav.settings'), edit_admin_communication_website_path(@website, website_id: nil)
+        add_breadcrumb t('admin.communication.website.technical.label')
+        render 'admin/communication/websites/settings/technical', status: :unprocessable_content
+      else
+        add_breadcrumb t('edit')
+        render :edit, status: :unprocessable_content
+      end
     end
   end
 

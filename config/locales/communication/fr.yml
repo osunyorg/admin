@@ -700,6 +700,9 @@ fr:
           button: Synchroniser
           running: La synchronisation est lancée, un peu de patience...
         technical:
+          check_git_access:
+            button: Tester la connexion
+            success: La connexion au dépôt Git fonctionne correctement.
           description: Tout ce qui est lié aux réglages techniques
           label: Technique
   communication:
