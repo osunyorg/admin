@@ -57,6 +57,7 @@ fr:
       details: détail
       events_count: "%{count} événements"
       force_clean_and_rebuild: Forcer le clean&rebuild de tous les sites
+      force_resync_with_git_notice: Tous les fichiers ont été marqués comme désynchronisés. Utilisez le bouton "Synchroniser" sur la page du site pour lancer l'envoi.
       git_repo:
         full: Référentiel Git
         short: Référentiel

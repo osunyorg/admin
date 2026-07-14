@@ -57,6 +57,7 @@ en:
       details: detail
       events_count: "%{count} events"
       force_clean_and_rebuild: Force clean&rebuild of every websites
+      force_resync_with_git_notice: All files have been marked as desynchronized. Use the "Synchronize" button on the website page to push them.
       git_repo:
         full: Git Repository
         short: Repository
