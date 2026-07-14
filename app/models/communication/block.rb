@@ -38,7 +38,7 @@ class Communication::Block < ApplicationRecord
     basic: [:title, :chapter, :image, :video, :sound, :datatable],
     storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
     references: [:pages, :posts, :persons, :organizations, :agenda, :exhibitions, :programs, :locations, :projects, :papers, :volumes, :jobs, :categories],
-    utilities: [:files, :definitions, :contact, :links, :license, :embed]
+    utilities: [:form, :files, :definitions, :contact, :links, :license, :embed]
   }
 
   include AsIndirectObject

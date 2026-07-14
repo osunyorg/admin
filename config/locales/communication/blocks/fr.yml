@@ -374,6 +374,19 @@ fr:
                   label: Titre
                   placeholder: Entrer le titre du fichier
               remove_file: Supprimer le fichier
+          form:
+            description: Un formulaire permettant aux internautes d'envoyer des informations ou de poser des questions.
+            edit:
+              form_title:
+                hint: Utile pour l'accessibilité aux personnes en situation de handicap
+                label: Titre du formulaire
+                placeholder: Indiquer le titre du formulaire
+              url:
+                hint: |
+                  Ex: https://tally.so/r/jaY00R
+                label: URL du formulaire
+                placeholder: Entrer l'URL du formulaire
+              warning_html: Le bloc permet d'intégrer les formulaires <a href="https://tally.so" target="_blank">Tally</a>.
           gallery:
             description: Une galerie d'images, avec pour chaque image une description accessible, un texte et un crédit.
             edit:
@@ -917,6 +930,7 @@ fr:
           exhibitions: Expositions
           features: Fonctionnalités
           files: Fichiers
+          form: Formulaire
           gallery: Galerie
           image: Image
           jobs: Offres d'emploi
