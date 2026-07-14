@@ -32,12 +32,16 @@ class Git::Repository
     provider.computed_sha(string)
   end
 
-  def previous_sha(git_file)
-    provider.previous_sha(git_file)
-  end
-
   def git_sha(path)
     provider.git_sha path
+  end
+
+  def check_repository_access!
+    provider.check_repository_access!
+  end
+
+  def check_repository_format!
+    provider.check_repository_format!
   end
 
   def valid?

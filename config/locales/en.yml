@@ -523,6 +523,21 @@ en:
         body_1_html: "A new user (%{username}) just registered on instance %{instance}."
         body_2_html: "Click <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">here</a> to see the account."
         subject: "A new user just registered: %{mail}"
+      website_git_access_broken:
+        subject: "Git synchronization interrupted for \"%{website}\""
+        text_line_1_html: "The synchronization of website \"%{website}\" with its Git repository has failed and been interrupted."
+        text_line_2_html: "Error encountered: %{error}"
+        text_line_3_html: "Check the repository configuration (existence, branch, permissions, endpoint) by clicking <a href=\"%{url}\" target=\"_blank\" style=\"color: #c72b43;\">here</a>."
+        errors:
+          invalid_repository: "The configured repository identifier \"%{repository}\" is not in a valid format."
+          unreachable: "The configured Git endpoint (%{endpoint}) is currently unreachable."
+          invalid_endpoint: "The configured Git endpoint does not point to a valid instance."
+          unauthorized: "The access token no longer exists, is invalid, or has expired."
+          repository_not_found: "Repository \"%{repository}\" no longer exists or is no longer accessible with this token."
+          repository_forbidden: "The access token no longer has permission to push to repository \"%{repository}\"."
+          branch_not_found: "Branch \"%{branch}\" no longer exists in the repository."
+          branch_protected: "Branch \"%{branch}\" is now protected and no longer allows write access with this token."
+          workflows_forbidden: "The access token is missing the \"Workflows\" permission required to write deployment files."
       website_invalid_access_token:
         subject: "Expired access token for \"%{website}\""
         text_line_1_html: "The access token used for the website \"%{website}\" has expired and does not allow the website to be updated anymore."

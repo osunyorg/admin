@@ -1,11 +1,79 @@
 class Git::Providers::Github < Git::Providers::Abstract
   BASE_URL = "https://github.com".freeze
   COMMIT_BATCH_SIZE = 20
+  WORKFLOWS_PATH_PREFIX = '.github/workflows/'.freeze
+
+  # same as Octokit::Repository::NAME_WITH_OWNER_PATTERN stricter than our generic one in abstract
+  REPOSITORY_FORMAT = %r{\A[\w.-]+/[\w.-]+\z}i.freeze
 
   include WithSecrets
 
+  # tag native gem class with our custom error class
+  Octokit::Error.include Git::Providers::Abstract::Error
+  [
+    Octokit::BadRequest,
+    Octokit::NotFound,
+    Octokit::BranchNotProtected,
+    Octokit::MethodNotAllowed,
+    Octokit::NotAcceptable,
+    Octokit::Conflict,
+    Octokit::Deprecated,
+    Octokit::UnsupportedMediaType,
+    Octokit::UnprocessableEntity,
+    Octokit::UnavailableForLegalReasons,
+    Octokit::TooLargeContent,
+    Octokit::RepositoryUnavailable,
+    Octokit::UnverifiedEmail,
+    Octokit::AccountSuspended,
+    Octokit::BillingIssue,
+    Octokit::SAMLProtected,
+    Octokit::InstallationSuspended
+  ].each { |klass| klass.include Git::Providers::Abstract::ClientError }
+
+  class Unauthorized < StandardError
+    include Git::Providers::Abstract::Unauthorized
+  end
+
+  class RepositoryNotFound < StandardError
+    include Git::Providers::Abstract::RepositoryNotFound
+  end
+
+  class RepositoryForbidden < StandardError
+    include Git::Providers::Abstract::RepositoryForbidden
+  end
+
+  class BranchNotFound < StandardError
+    include Git::Providers::Abstract::BranchNotFound
+  end
+
+  class BranchProtected < StandardError
+    include Git::Providers::Abstract::BranchProtected
+  end
+
+  class WorkflowsForbidden < StandardError
+    include Git::Providers::Abstract::WorkflowsForbidden
+  end
+
   def url
     "#{BASE_URL}/#{repository}"
+  end
+
+  def check_repository_push_access!
+    repo = client.repository(repository)
+    raise RepositoryForbidden, "Token does not have push access to #{repository}" unless repo[:permissions][:push]
+  rescue Octokit::Unauthorized => e
+    raise Unauthorized, e.message
+  rescue Octokit::NotFound => e
+    raise RepositoryNotFound, e.message
+  rescue Octokit::Forbidden => e
+    raise RepositoryForbidden, e.message
+  end
+
+  def check_branch_push_access!
+    branch_sha
+    raise BranchProtected, "Branch is protected and the token cannot push to it" if branch_protected_for_token?
+  rescue Octokit::NotFound => e
+    raise BranchNotFound, e.message
   end
 
   def create_file(path, content)
@@ -20,10 +88,8 @@ class Git::Providers::Github < Git::Providers::Abstract
   def update_file(path, previous_path, content)
     previous_path_file = tree_item_at_path(previous_path)
     new_path_file = tree_item_at_path(path)
-    # En cas de dissonnance entre l'analyzer et le provider, on raise une erreur
-    if previous_path_file.nil? && new_path_file.nil?
-      raise "File to update does not exist on Git (repository: #{repository}, previous_path: #{previous_path}, path: #{path})"
-    end
+    # if the file has been deleted from repository and does not exist anymore, re-create it
+    return create_file(path, content) if previous_path_file.nil? && new_path_file.nil?
     if previous_path_file.present?
       # Delete previous file
       batch << {
@@ -78,13 +144,10 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def push(commit_message)
-    return if !valid? || batch.empty?
+    return if batch.empty?
     commit = create_commit_from_batch(batch, commit_message)
-    client.update_branch repository, default_branch, commit[:sha]
-    # The repo changed, invalidate the tree
-    @tree = nil
-    @tree_items_by_path = nil
-    #
+    client.update_branch repository, branch, commit[:sha]
+    reset_tree_cache!
     true
   end
 
@@ -107,6 +170,22 @@ class Git::Providers::Github < Git::Providers::Abstract
     puts "Creating commit with #{sub_batch.size} files."
     new_tree = client.create_tree repository, sub_batch, base_tree: base_tree_sha
     client.create_commit repository, sub_commit_message, new_tree[:sha], base_commit_sha
+  rescue Octokit::Forbidden => e
+    raise workflows_forbidden_error(e) if workflows_permission_issue?(sub_batch, e)
+    raise e
+  end
+
+  # If we need to write to .github/workflows/, needed to write deuxfleurs.yml
+  def workflows_permission_issue?(sub_batch, error)
+    error.message.include?('Resource not accessible by personal access token') &&
+      sub_batch.any? { |entry| entry[:path].to_s.start_with?(WORKFLOWS_PATH_PREFIX) }
+  end
+
+  def workflows_forbidden_error(original_error)
+    WorkflowsForbidden.new(
+      "Token is missing the \"Workflows\" permission required to write under " \
+      "#{WORKFLOWS_PATH_PREFIX} (#{original_error.message})"
+    )
   end
 
   def computed_sha(string)
@@ -131,12 +210,31 @@ class Git::Providers::Github < Git::Providers::Abstract
     @client ||= Octokit::Client.new access_token: access_token
   end
 
-  def default_branch
-    @default_branch ||= branch.presence || 'main'
+  def branch_sha
+    @branch_sha ||= begin
+      response = client.branch(repository, branch)
+      # special case: branch was renamed
+      if response[:name] != branch
+        raise BranchNotFound, "Branch '#{branch}' no longer exists on GitHub (renamed to '#{response[:name]}')"
+      end
+      response[:commit][:sha]
+    end
   end
 
-  def branch_sha
-    @branch_sha ||= client.branch(repository, default_branch)[:commit][:sha]
+  def branch_protected_for_token?
+    protection = client.branch_protection(repository, branch)
+    return false if protection.nil?
+    return true if protection[:required_pull_request_reviews].present?
+    restrictions = protection[:restrictions]
+    restrictions.present? && restrictions[:users].none? { |user| user[:login] == token_login }
+  rescue Octokit::Forbidden
+    # can occur if the token does not have permission to access branch protection
+    # in that case, we assume the branch is not protected
+    false
+  end
+
+  def token_login
+    @token_login ||= client.user[:login]
   end
 
   def tree_item_at_path(path)

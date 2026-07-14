@@ -339,6 +339,21 @@ fr:
             original_uploaded_file:
               already_imported: déjà importé dans la médiathèque
               too_big: trop lourd !
+        communication/website:
+          attributes:
+            git_endpoint:
+              invalid: ne pointe pas vers une instance valide
+              unreachable: est actuellement injoignable (réessayez plus tard)
+            access_token:
+              unauthorized: n'existe pas, n'est pas valide ou a expiré
+              forbidden: n'a pas les permissions nécessaires pour accéder à ce dépôt
+              workflows_forbidden: n'a pas la permission "Workflows" nécessaire pour écrire les fichiers de déploiement (.github/workflows/), en plus de la permission "Contents"
+            repository:
+              invalid: n'est pas au format attendu (organisation/nom)
+              not_found: n'existe pas ou n'est pas accessible avec ce token (vérifiez le nom du référentiel indiqué et les permissions associées au jeton d'accès)
+            git_branch:
+              not_found: n'existe pas (créez d'abord la branche sur le dépôt distant)
+              protected: est protégée et ne permet pas l'écriture avec ce token
         communication/website/agenda/event:
           attributes:
             from_day:

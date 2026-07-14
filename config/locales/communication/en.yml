@@ -339,6 +339,21 @@ en:
             original_uploaded_file:
               already_imported: already imported in media library
               too_big: too heavy!
+        communication/website:
+          attributes:
+            git_endpoint:
+              invalid: does not point to a valid instance
+              unreachable: is currently unreachable (try again later)
+            access_token:
+              unauthorized: does not exist, is invalid or has expired
+              forbidden: does not have required permissions to access this repository
+              workflows_forbidden: is missing the fine-grained "Workflows" permission required to write deployment files (.github/workflows/), in addition to the "Contents" permission
+            repository:
+              invalid: is not in the expected format (organization/name)
+              not_found: does not exist or is not accessible with this token (check the specified repository name and the permissions associated with the access token)
+            git_branch:
+              not_found: does not exist (create the branch on the remote repository first)
+              protected: is protected and does not allow write access with this token
         communication/website/agenda/event:
           attributes:
             from_day:
