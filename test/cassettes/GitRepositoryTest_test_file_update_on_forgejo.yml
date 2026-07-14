@@ -1,0 +1,231 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: "<TEST_FORGEJO_ENDPOINT>/repos/<TEST_FORGEJO_REPOSITORY>/git/trees/main?page=1&recursive=true"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - "<Authorization-REDACTED>"
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.22.1
+      Date:
+      - Fri, 10 Jul 2026 15:30:38 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '719'
+      Connection:
+      - keep-alive
+      Access-Control-Expose-Headers:
+      - X-Total-Count
+      Cache-Control:
+      - max-age=0, private, must-revalidate, no-transform
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Total-Count:
+      - '2'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"sha":"7c0655c7f766e8cd1636be3d0bf48d67fe9b71ec","url":"<TEST_FORGEJO_ENDPOINT>/repos/<TEST_FORGEJO_REPOSITORY>/git/trees/7c0655c7f766e8cd1636be3d0bf48d67fe9b71ec","tree":[{"path":"README.md","mode":"100644","type":"blob","size":8,"sha":"52da238091fabcd84e921bb6029d9addf9afd02f","url":"<TEST_FORGEJO_ENDPOINT>/repos/<TEST_FORGEJO_REPOSITORY>/git/blobs/52da238091fabcd84e921bb6029d9addf9afd02f"},{"path":"test.txt","mode":"100644","type":"blob","size":7,"sha":"6b584e8ece562ebffc15d38808cd6b98fc3d97ea","url":"<TEST_FORGEJO_ENDPOINT>/repos/<TEST_FORGEJO_REPOSITORY>/git/blobs/6b584e8ece562ebffc15d38808cd6b98fc3d97ea"}],"truncated":false,"page":1,"total_count":2}
+
+        '
+  recorded_at: Fri, 10 Jul 2026 15:30:38 GMT
+- request:
+    method: get
+    uri: "<TEST_FORGEJO_ENDPOINT>/version"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.22.1
+      Date:
+      - Fri, 10 Jul 2026 15:30:38 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '34'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - max-age=0, private, must-revalidate, no-transform
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"version":"15.0.3+gitea-1.22.0"}
+
+        '
+  recorded_at: Fri, 10 Jul 2026 15:30:39 GMT
+- request:
+    method: get
+    uri: "<TEST_FORGEJO_ENDPOINT>/repos/<TEST_FORGEJO_REPOSITORY>"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - "<Authorization-REDACTED>"
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.22.1
+      Date:
+      - Fri, 10 Jul 2026 15:30:39 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - max-age=0, private, must-revalidate, no-transform
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"id":17,"owner":{"id":5,"login":"neuronnexion","login_name":"","source_id":0,"full_name":"Neuronnexion","email":"contact@nnx.com","avatar_url":"https://git.nnx.com/avatars/f98397a1a3ddbd151b410802b62a9eb1fb64a003dba80fe4d37f40ce3af1c76b","html_url":"https://git.nnx.com/neuronnexion","language":"","is_admin":false,"last_login":"0001-01-01T00:00:00Z","created":"2025-08-01T14:30:25+02:00","restricted":false,"active":false,"prohibit_login":false,"location":"","pronouns":"","website":"https://www.neuronnexion.coop","description":"","visibility":"public","followers_count":0,"following_count":0,"starred_repos_count":0,"username":"neuronnexion"},"name":"osuny-forgejo-provider-test","full_name":"<TEST_FORGEJO_REPOSITORY>","description":"","empty":false,"private":false,"fork":false,"template":false,"parent":null,"mirror":false,"size":29,"language":"","languages_url":"<TEST_FORGEJO_ENDPOINT>/repos/<TEST_FORGEJO_REPOSITORY>/languages","html_url":"https://git.nnx.com/<TEST_FORGEJO_REPOSITORY>","url":"<TEST_FORGEJO_ENDPOINT>/repos/<TEST_FORGEJO_REPOSITORY>","link":"","ssh_url":"ssh://git@git.nnx.com/<TEST_FORGEJO_REPOSITORY>.git","clone_url":"https://git.nnx.com/<TEST_FORGEJO_REPOSITORY>.git","original_url":"","website":"","stars_count":0,"forks_count":0,"watchers_count":2,"open_issues_count":0,"open_pr_counter":0,"release_counter":0,"default_branch":"main","archived":false,"created_at":"2026-07-09T13:27:38+02:00","updated_at":"2026-07-10T17:30:29+02:00","archived_at":"1970-01-01T01:00:00+01:00","permissions":{"admin":true,"push":true,"pull":true},"has_issues":true,"internal_tracker":{"enable_time_tracker":true,"allow_only_contributors_to_track_time":true,"enable_issue_dependencies":true},"has_wiki":true,"has_wiki_contents":false,"wiki_branch":"main","wiki_ssh_url":"ssh://git@git.nnx.com/<TEST_FORGEJO_REPOSITORY>.wiki.git","wiki_clone_url":"https://git.nnx.com/<TEST_FORGEJO_REPOSITORY>.wiki.git","globally_editable_wiki":false,"has_pull_requests":true,"has_projects":true,"has_releases":true,"has_packages":true,"has_actions":true,"ignore_whitespace_conflicts":false,"allow_merge_commits":true,"allow_rebase":true,"allow_rebase_explicit":true,"allow_squash_merge":true,"allow_fast_forward_only_merge":true,"allow_rebase_update":true,"default_delete_branch_after_merge":false,"default_merge_style":"merge","default_allow_maintainer_edit":false,"default_update_style":"merge","avatar_url":"","internal":false,"mirror_interval":"","object_format_name":"sha1","mirror_updated":"0001-01-01T00:00:00Z","repo_transfer":null,"topics":[]}
+
+        '
+  recorded_at: Fri, 10 Jul 2026 15:30:39 GMT
+- request:
+    method: get
+    uri: "<TEST_FORGEJO_ENDPOINT>/repos/<TEST_FORGEJO_REPOSITORY>/branches/main"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - "<Authorization-REDACTED>"
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.22.1
+      Date:
+      - Fri, 10 Jul 2026 15:30:39 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '776'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - max-age=0, private, must-revalidate, no-transform
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJuYW1lIjoibWFpbiIsImNvbW1pdCI6eyJpZCI6IjdjMDY1NWM3Zjc2NmU4Y2QxNjM2YmUzZDBiZjQ4ZDY3ZmU5YjcxZWMiLCJtZXNzYWdlIjoiQ3JlYXRpbmcgdGVzdC50eHQgZmlsZVxuIiwidXJsIjoiaHR0cHM6Ly9naXQubm54LmNvbS88VEVTVF9GT1JHRUpPX1JFUE9TSVRPUlk+L2NvbW1pdC83YzA2NTVjN2Y3NjZlOGNkMTYzNmJlM2QwYmY0OGQ2N2ZlOWI3MWVjIiwiYXV0aG9yIjp7Im5hbWUiOiJKZWFuIFRyYXVsbMOpIiwiZW1haWwiOiJqLnRyYXVsbGVAbm54LmNvbSIsInVzZXJuYW1lIjoianRyYXVsbGUifSwiY29tbWl0dGVyIjp7Im5hbWUiOiJKZWFuIFRyYXVsbMOpIiwiZW1haWwiOiJqLnRyYXVsbGVAbm54LmNvbSIsInVzZXJuYW1lIjoianRyYXVsbGUifSwidmVyaWZpY2F0aW9uIjp7InZlcmlmaWVkIjpmYWxzZSwicmVhc29uIjoiZ3BnLmVycm9yLm5vdF9zaWduZWRfY29tbWl0Iiwic2lnbmF0dXJlIjoiIiwic2lnbmVyIjpudWxsLCJwYXlsb2FkIjoiIn0sInRpbWVzdGFtcCI6IjIwMjYtMDctMTBUMTc6MzA6MjYrMDI6MDAiLCJhZGRlZCI6bnVsbCwicmVtb3ZlZCI6bnVsbCwibW9kaWZpZWQiOm51bGx9LCJwcm90ZWN0ZWQiOmZhbHNlLCJyZXF1aXJlZF9hcHByb3ZhbHMiOjAsImVuYWJsZV9zdGF0dXNfY2hlY2siOmZhbHNlLCJzdGF0dXNfY2hlY2tfY29udGV4dHMiOltdLCJ1c2VyX2Nhbl9wdXNoIjp0cnVlLCJ1c2VyX2Nhbl9tZXJnZSI6dHJ1ZSwiZWZmZWN0aXZlX2JyYW5jaF9wcm90ZWN0aW9uX25hbWUiOiIifQo=
+  recorded_at: Fri, 10 Jul 2026 15:30:39 GMT
+- request:
+    method: post
+    uri: "<TEST_FORGEJO_ENDPOINT>/repos/<TEST_FORGEJO_REPOSITORY>/contents"
+    body:
+      encoding: UTF-8
+      string: '{"branch":"main","message":"Updating test.txt file","files":[{"operation":"update","path":"test.txt","content":"bmV3IGNvbnRlbnQ=","sha":"6b584e8ece562ebffc15d38808cd6b98fc3d97ea"}]}'
+    headers:
+      Authorization:
+      - "<Authorization-REDACTED>"
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/1.22.1
+      Date:
+      - Fri, 10 Jul 2026 15:30:40 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - max-age=0, private, must-revalidate, no-transform
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJmaWxlcyI6W3sibmFtZSI6InRlc3QudHh0IiwicGF0aCI6InRlc3QudHh0Iiwic2hhIjoiNDdkMjczOWJhMmMzNDY5MDI0OGM4ZjkxYjg0YmI1NGU4OTM2ODk5YSIsImxhc3RfY29tbWl0X3NoYSI6IjYxNzc0ZmQ5YzEwNTNjMzA0MTU4NzY4ZmIxNTg2OGYyYmEwMWJhMGUiLCJsYXN0X2NvbW1pdF93aGVuIjoiMjAyNi0wNy0xMFQxNzozMDozOSswMjowMCIsInR5cGUiOiJmaWxlIiwic2l6ZSI6MTEsImVuY29kaW5nIjoiYmFzZTY0IiwiY29udGVudCI6ImJtVjNJR052Ym5SbGJuUT0iLCJ0YXJnZXQiOm51bGwsInVybCI6IjxURVNUX0ZPUkdFSk9fRU5EUE9JTlQ+L3JlcG9zLzxURVNUX0ZPUkdFSk9fUkVQT1NJVE9SWT4vY29udGVudHMvdGVzdC50eHQ/cmVmPW1haW4iLCJodG1sX3VybCI6Imh0dHBzOi8vZ2l0Lm5ueC5jb20vPFRFU1RfRk9SR0VKT19SRVBPU0lUT1JZPi9zcmMvYnJhbmNoL21haW4vdGVzdC50eHQiLCJnaXRfdXJsIjoiPFRFU1RfRk9SR0VKT19FTkRQT0lOVD4vcmVwb3MvPFRFU1RfRk9SR0VKT19SRVBPU0lUT1JZPi9naXQvYmxvYnMvNDdkMjczOWJhMmMzNDY5MDI0OGM4ZjkxYjg0YmI1NGU4OTM2ODk5YSIsImRvd25sb2FkX3VybCI6Imh0dHBzOi8vZ2l0Lm5ueC5jb20vPFRFU1RfRk9SR0VKT19SRVBPU0lUT1JZPi9yYXcvYnJhbmNoL21haW4vdGVzdC50eHQiLCJzdWJtb2R1bGVfZ2l0X3VybCI6bnVsbCwiX2xpbmtzIjp7InNlbGYiOiI8VEVTVF9GT1JHRUpPX0VORFBPSU5UPi9yZXBvcy88VEVTVF9GT1JHRUpPX1JFUE9TSVRPUlk+L2NvbnRlbnRzL3Rlc3QudHh0P3JlZj1tYWluIiwiZ2l0IjoiPFRFU1RfRk9SR0VKT19FTkRQT0lOVD4vcmVwb3MvPFRFU1RfRk9SR0VKT19SRVBPU0lUT1JZPi9naXQvYmxvYnMvNDdkMjczOWJhMmMzNDY5MDI0OGM4ZjkxYjg0YmI1NGU4OTM2ODk5YSIsImh0bWwiOiJodHRwczovL2dpdC5ubnguY29tLzxURVNUX0ZPUkdFSk9fUkVQT1NJVE9SWT4vc3JjL2JyYW5jaC9tYWluL3Rlc3QudHh0In19XSwiY29tbWl0Ijp7InVybCI6IjxURVNUX0ZPUkdFSk9fRU5EUE9JTlQ+L3JlcG9zLzxURVNUX0ZPUkdFSk9fUkVQT1NJVE9SWT4vZ2l0L2NvbW1pdHMvNjE3NzRmZDljMTA1M2MzMDQxNTg3NjhmYjE1ODY4ZjJiYTAxYmEwZSIsInNoYSI6IjYxNzc0ZmQ5YzEwNTNjMzA0MTU4NzY4ZmIxNTg2OGYyYmEwMWJhMGUiLCJjcmVhdGVkIjoiMDAwMS0wMS0wMVQwMDowMDowMFoiLCJodG1sX3VybCI6Imh0dHBzOi8vZ2l0Lm5ueC5jb20vPFRFU1RfRk9SR0VKT19SRVBPU0lUT1JZPi9jb21taXQvNjE3NzRmZDljMTA1M2MzMDQxNTg3NjhmYjE1ODY4ZjJiYTAxYmEwZSIsImF1dGhvciI6eyJuYW1lIjoiSmVhbiBUcmF1bGzDqSIsImVtYWlsIjoiai50cmF1bGxlQG5ueC5jb20iLCJkYXRlIjoiMjAyNi0wNy0xMFQxNTozMDozOVoifSwiY29tbWl0dGVyIjp7Im5hbWUiOiJKZWFuIFRyYXVsbMOpIiwiZW1haWwiOiJqLnRyYXVsbGVAbm54LmNvbSIsImRhdGUiOiIyMDI2LTA3LTEwVDE1OjMwOjM5WiJ9LCJwYXJlbnRzIjpbeyJ1cmwiOiI8VEVTVF9GT1JHRUpPX0VORFBPSU5UPi9yZXBvcy88VEVTVF9GT1JHRUpPX1JFUE9TSVRPUlk+L2dpdC9jb21taXRzLzdjMDY1NWM3Zjc2NmU4Y2QxNjM2YmUzZDBiZjQ4ZDY3ZmU5YjcxZWMiLCJzaGEiOiI3YzA2NTVjN2Y3NjZlOGNkMTYzNmJlM2QwYmY0OGQ2N2ZlOWI3MWVjIiwiY3JlYXRlZCI6IjAwMDEtMDEtMDFUMDA6MDA6MDBaIn1dLCJtZXNzYWdlIjoiVXBkYXRpbmcgdGVzdC50eHQgZmlsZVxuIiwidHJlZSI6eyJ1cmwiOiI8VEVTVF9GT1JHRUpPX0VORFBPSU5UPi9yZXBvcy88VEVTVF9GT1JHRUpPX1JFUE9TSVRPUlk+L2dpdC90cmVlcy84NDNlN2I1MDEzOTdkMmFmMTI2NmIxMjlkZjMzNWVjMmZjMmQ1OTFiIiwic2hhIjoiODQzZTdiNTAxMzk3ZDJhZjEyNjZiMTI5ZGYzMzVlYzJmYzJkNTkxYiIsImNyZWF0ZWQiOiIwMDAxLTAxLTAxVDAwOjAwOjAwWiJ9fSwidmVyaWZpY2F0aW9uIjp7InZlcmlmaWVkIjpmYWxzZSwicmVhc29uIjoiZ3BnLmVycm9yLm5vdF9zaWduZWRfY29tbWl0Iiwic2lnbmF0dXJlIjoiIiwic2lnbmVyIjpudWxsLCJwYXlsb2FkIjoiIn19Cg==
+  recorded_at: Fri, 10 Jul 2026 15:30:40 GMT
+recorded_with: VCR 6.4.0

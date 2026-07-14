@@ -26,3 +26,18 @@ website_with_gitlab:
   destination_websites:
     - website_with_github
   university: default_university
+
+website_with_forgejo:
+  git_provider: forgejo
+  git_endpoint: <%= ENV['TEST_FORGEJO_ENDPOINT'] %>
+  git_branch: <%= ENV['TEST_FORGEJO_BRANCH'] %>
+  access_token: <%= ENV['TEST_FORGEJO_TOKEN'] %>
+  repository: <%= ENV['TEST_FORGEJO_REPOSITORY'] %>
+  default_language: fr
+  default_time_zone: Europe/Paris
+  hosting: undefined
+  deuxfleurs_hosting: false
+  feature_agenda: true
+  destination_websites:
+    - website_with_github
+  university: default_university

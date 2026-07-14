@@ -105,7 +105,8 @@ class Communication::Website < ApplicationRecord
 
   enum :git_provider, {
     github: 0,
-    gitlab: 1
+    gitlab: 1,
+    forgejo: 2
   }
 
   belongs_to :default_language, class_name: "Language"

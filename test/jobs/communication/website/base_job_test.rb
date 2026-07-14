@@ -35,4 +35,28 @@ class Communication::Website::BaseJobTest < ActiveSupport::TestCase
       end
     end
   end
+
+  test "notifies admins and discards cleanly when Forgejo repository access does not exists anymore" do
+    assert_enqueued_emails 2 do
+      assert_nothing_raised do
+        RaisingJob.perform_now(
+          website_with_forgejo.id,
+          error_class: "Git::Providers::Forgejo::RepositoryNotFound",
+          error_message: "repository not found"
+        )
+      end
+    end
+  end
+
+  test "notifies admins via the invalid access token mail, not git-access-broken, when Unauthorized reaches the job" do
+    assert_enqueued_emails 2 do
+      assert_nothing_raised do
+        RaisingJob.perform_now(
+          website_with_forgejo.id,
+          error_class: "Git::Providers::Forgejo::Unauthorized",
+          error_message: "bad token"
+        )
+      end
+    end
+  end
 end

@@ -1,0 +1,91 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: "<TEST_FORGEJO_ENDPOINT>/version"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.22.1
+      Date:
+      - Fri, 10 Jul 2026 16:42:25 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '34'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - max-age=0, private, must-revalidate, no-transform
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"version":"15.0.3+gitea-1.22.0"}
+
+        '
+  recorded_at: Fri, 10 Jul 2026 16:42:25 GMT
+- request:
+    method: get
+    uri: "<TEST_FORGEJO_ENDPOINT>/repos/<TEST_FORGEJO_REPOSITORY>"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - "<Authorization-REDACTED>"
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - nginx/1.22.1
+      Date:
+      - Fri, 10 Jul 2026 16:42:25 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '72'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - max-age=0, private, must-revalidate, no-transform
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"message":"token is required","url":"https://git.nnx.com/api/swagger"}
+
+        '
+  recorded_at: Fri, 10 Jul 2026 16:42:25 GMT
+recorded_with: VCR 6.4.0
