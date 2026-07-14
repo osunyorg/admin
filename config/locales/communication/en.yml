@@ -751,7 +751,9 @@ en:
       none: No summary yet
     website:
       advanced_options: Advanced options
-      analytics: Analytics
+      analytics:
+        adblock_warning: If Plausible does not load, make sure that it is not blocked by your browser through an extension or its privacy settings.
+        title: Analytics
       git: Git
       golive:
         button: Go live

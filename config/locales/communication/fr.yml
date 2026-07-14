@@ -516,7 +516,7 @@ fr:
           send_invitation:
             cta: Envoyer un mail d'invitation
             just_sent: Mail d'invitation envoyé à %{name}
-            too_soon: Un mail d'invitation a déjà été envoyé il y a moins de 5 minutes. 
+            too_soon: Un mail d'invitation a déjà été envoyé il y a moins de 5 minutes.
         confirm_localization:
           text_html: "La création de <i>%{about}</i> en %{language} nécessite la traduction de l'extranet <i>%{extranet}</i> en %{language}."
           title: Confirmation de traduction
@@ -751,7 +751,9 @@ fr:
       none: Il n'y a pas encore de résumé
     website:
       advanced_options: Options avancées
-      analytics: Audience
+      analytics:
+        adblock_warning: Si Plausible ne charge pas, veuillez vérifier qu'il n'est pas bloqué par votre navigateur par une extension ou ses paramètres de confidentialité.
+        title: Audience
       git: Git
       golive:
         button: Mettre en production

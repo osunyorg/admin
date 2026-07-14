@@ -12,7 +12,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def analytics
     breadcrumb
-    add_breadcrumb t('communication.website.analytics')
+    add_breadcrumb t('communication.website.analytics.title')
   end
 
   def security
