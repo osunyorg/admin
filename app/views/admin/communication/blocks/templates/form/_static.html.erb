@@ -5,5 +5,7 @@
         platform: "<%= block.template.platform %>"
         identifier: "<%= block.template.identifier %>"
         iframe: >-
-          <%= block.template.iframe %>
+          <%= raw block.template.iframe %>
+        script: >-
+          <%= raw block.template.script %>
 <% end %>
