@@ -5,6 +5,7 @@ module Communication::Website::WithSecurity
     list = allowed_domains_default
     list.concat allowed_domains_plausible
     list.concat allowed_domains_from_all_blocks_video
+    list.concat allowed_domains_from_all_blocks_form
     list.concat allowed_domains_from_all_blocks_embed
     list.uniq.compact
   end
@@ -27,15 +28,8 @@ module Communication::Website::WithSecurity
   end
 
   def allowed_domains_from_all_blocks_video
-    allowed_domains_from_blocks_video(blocks) +
-    allowed_domains_from_blocks_video(blocks_from_education) +
-    allowed_domains_from_blocks_video(blocks_from_research) +
-    allowed_domains_from_blocks_video(blocks_from_university)
-  end
-
-  def allowed_domains_from_blocks_video(blocks)
     list = []
-    blocks.template_video.each do |block|
+    all_blocks.template_video.each do |block|
       video_url = block.template.url
       next unless video_url.present?
       list.concat Video::Provider.find(video_url).csp_domains
@@ -43,16 +37,17 @@ module Communication::Website::WithSecurity
     list
   end
 
-  def allowed_domains_from_all_blocks_embed
-    allowed_domains_from_blocks_embed(blocks) +
-    allowed_domains_from_blocks_embed(blocks_from_education) +
-    allowed_domains_from_blocks_embed(blocks_from_research) +
-    allowed_domains_from_blocks_embed(blocks_from_university)
+  def allowed_domains_from_all_blocks_form
+    list = []
+    all_blocks.template_form.published.each do |block|
+      list += block.template.csp_domains
+    end
+    list
   end
 
-  def allowed_domains_from_blocks_embed(blocks)
+  def allowed_domains_from_all_blocks_embed
     list = []
-    blocks.template_embed.published.each do |block|
+    all_blocks.template_embed.published.each do |block|
       code = block.template.code
       # https://stackoverflow.com/questions/25095176/extracting-all-urls-from-a-page-using-ruby
       code.scan(/[[:lower:]]+:\/\/[^\s"]+/).each do |url|
@@ -63,6 +58,8 @@ module Communication::Website::WithSecurity
     list
   end
 
+  # @SebouChu tu crois pas qu'on devrait mettre ça dans le template Embed ? 
+  # Comme ça il fournit ses domaines et basta, non ?
   def load_allowed_domain_from_url(url)
     url = CGI.unescapeHTML(url)
     url = ActionController::Base.helpers.strip_tags(url)

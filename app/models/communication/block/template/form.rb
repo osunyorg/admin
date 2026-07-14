@@ -24,6 +24,12 @@ class Communication::Block::Template::Form < Communication::Block::Template::Bas
     @platform ||= url.include?('tally.so') ? :tally : nil
   end
 
+  def csp_domains
+    [
+      'tally.so'
+    ]
+  end
+
   protected
 
   def embed_url
