@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     hasValue() {
-      return Boolean(this.modelValue?.id);
+      return Boolean(this.modelValue?.communication_file_id);
     },
     effectiveSizeLimit() {
       return parseInt(this.sizeLimit, 10) || (10 * 1024 * 1024);
@@ -68,8 +68,8 @@ export default {
             return;
           }
           this.$emit('update:modelValue', {
-            id: data.file.id,
-            name: data.file.name,
+            communication_file_id: data.file.id,
+            communication_file_name: data.file.name,
             filename: data.file.filename,
           });
         },

@@ -8,6 +8,7 @@ class Communication::Block::Component::File < Communication::Block::Component::B
     {
       properties: {
         id: { type: :string, format: :uuid, nullable: true },
+        communication_file_id: { type: :string, format: :uuid, nullable: true },
         filename: { type: :string, nullable: true }
       }
     }
@@ -15,22 +16,27 @@ class Communication::Block::Component::File < Communication::Block::Component::B
 
   def blob
     return if data_empty?
-    @blob ||= communication_file_localisation&.original_blob
+    @blob ||= communication_file_localization&.original_blob
+  end
+
+  def communication_file_id
+    data['communication_file_id']
   end
 
   def communication_file
     return if data_empty?
-    @communication_file ||= university.communication_files.find_by(id: data['id'])
+    @communication_file ||= university.communication_files.find_by(id: communication_file_id)
   end
 
-  def communication_file_localisation
+  def communication_file_localization
     return if data_empty?
-    @communication_file_localisation ||= communication_file.localization_for(language)
+    @communication_file_localization ||= communication_file.localization_for(language)
   end
 
   def default_data
     {
-      'id' => ''
+      'id' => '', # Legacy active storage blob id
+      'communication_file_id' => '' # New file id
     }
   end
 
@@ -44,7 +50,7 @@ class Communication::Block::Component::File < Communication::Block::Component::B
   protected
 
   def data_empty?
-    data.nil? || data['id'].blank?
+    data.nil? || data['communication_file_id'].blank?
   end
 
   def university
