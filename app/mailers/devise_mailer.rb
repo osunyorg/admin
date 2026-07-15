@@ -70,7 +70,7 @@ class DeviseMailer < Devise::Mailer
   end
 
   def should_send?(email)
-    Rails.env.production? || email.end_with?(*Rails.application.config.internal_domains)
+    Rails.env.production? || Rails.env.development? || email.end_with?(*Rails.application.config.internal_domains)
   end
 
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   draw 'showcase'
   constraints host: ENV['OSUNY_TRANSPARENCY'] do
     get '/' => 'transparency/home#index'
