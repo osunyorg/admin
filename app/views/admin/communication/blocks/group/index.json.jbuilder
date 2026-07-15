@@ -1,6 +1,7 @@
 json.about do
   json.type params[:about_type]
   json.id params[:about_id]
+  json.dom_count @about.dom_count
 end
 json.blocks @blocks do |block|
   json.id block.id
