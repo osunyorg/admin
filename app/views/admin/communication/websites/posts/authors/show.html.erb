@@ -9,6 +9,8 @@
     <%= @posts.total_count %>
     <%= Communication::Website::Post.model_name.human(count: @posts.total_count).downcase %>
   </p>
-  <%= render 'admin/communication/websites/posts/list', posts: @posts %>
+  <%= render 'admin/communication/websites/posts/list',
+              posts: @posts,
+              website: @website %>
   <%= paginate @posts if @posts.total_pages > 1 %>
 <% end %>
