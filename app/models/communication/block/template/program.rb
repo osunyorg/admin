@@ -32,9 +32,4 @@ class Communication::Block::Template::Program < Communication::Block::Template::
   def children
     selected_programs
   end
-
-  def dom_count
-    5 +
-    children.length * 25
-  end
 end

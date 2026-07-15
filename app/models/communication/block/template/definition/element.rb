@@ -5,8 +5,4 @@ class Communication::Block::Template::Definition::Element < Communication::Block
   def empty?
     title.blank? && description.blank?
   end
-
-  def dom_count
-    2 + description_component.dom_count
-  end
 end

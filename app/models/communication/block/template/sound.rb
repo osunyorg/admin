@@ -11,13 +11,6 @@ class Communication::Block::Template::Sound < Communication::Block::Template::Ba
   def empty?
     file_component.blob.nil?
   end
-
-  def dom_count
-    5 +
-    file_component.dom_count +
-    title_component.dom_count +
-    transcription_component.dom_count
-  end
   
   protected
 

@@ -6,10 +6,4 @@ class Communication::Block::Template::Timeline::Element < Communication::Block::
   def empty?
    title.blank? && text.blank?
   end
-
-  def dom_count
-    2 +
-    title_component.dom_count +
-    text_component.dom_count
-  end
 end

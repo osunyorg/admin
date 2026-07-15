@@ -50,14 +50,6 @@ class Communication::Block::Template::Video < Communication::Block::Template::Ba
     block.attributes['data']['video_title'] = video_provider.title
   end
 
-  def dom_count
-    2 +
-    description_component.dom_count +
-    url_component.dom_count +
-    video_title_component.dom_count +
-    transcription_component.dom_count
-  end
-
   protected
 
   def video_provider

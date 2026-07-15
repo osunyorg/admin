@@ -14,60 +14,6 @@ fr:
         deletion: Est-ce que vous confirmez la suppression ?
         duplication: Est-ce que vous confirmez la duplication ?
         reset: La réinitialisation va supprimer tous les blocs dans cette langue. Est-ce que vous confirmez ?
-      dom_count:
-        count: Environ {count} éléments dans le DOM
-        credit: "Illustration tirée de l'ouvrage<br>Botanique élémentaire : organographie et classification<br>Ferdinand Faideau (1862-193.)<br>Source gallica.bnf.fr / Bibliothèque nationale de France"
-        more:
-          title: Comment ça marche ?
-          explanation: "<p>
-              Une page Web est composée d'un ensemble d'éléments. 
-              Un paragraphe de texte est un élément, un lien à l'intérieur de ce texte est un autre élément, un mot en italique constitue un troisième élément. 
-              Cela ne présage pas du poids de la page, parce qu'un élément img peut appeler une image qui pèse plusieurs mégaoctets, et qu'un seul paragraphe peut contenir tous les livres de Balzac bout à bout. 
-              En code, on interagit avec ces éléments via un modèle de document, le DOM (Document Object Model).
-            </p>
-            <p>
-              Le score EcoIndex accorde une très grande importance à la taille du DOM pour calculer la qualité écologique d'une page. 
-              L'idée sous-jacente est qu'un DOM plus grand va nécessiter plus d'énergie du périphérique pour être rendu, et affiché dans le navigateur. 
-              Si cette idée est juste théoriquement, elle passe à côté du plus gros consommateur d'énergie du périphérique : le JavaScript.
-              Ainsi, il suffit d'une animation gourmande ou d'un objet 3D pour que le JavaScript transforme votre ordinateur en ventilateur ou votre téléphone mobile en chaufferette. 
-              Pour en savoir plus, consultez l'article <a href=\"https://www.osuny.org/actualites/2026-06-03-osuny-et-le-score-ecoindex/\" target=\"_blank\">osuny et le score EcoIndex</a>.
-            </p>
-            <p>
-              Néanmoins, le nombre d'éléments du DOM est un élément intéressant en termes de sobriété éditoriale. 
-              Il s'agit, non pas d'essayer de mesurer l'impact écologique, mais d'évaluer l'effet sur l'attention.
-              Là non plus, ce n'est pas très exact, par exemple, si vous utilisez des titres repliés, vous ne saturez pas l'attention de la personne de la même manière que si le contenu est directement affiché.
-              Mais il est souhaitable de se demander si le contenu est à la fois aussi petit que possible, et aussi gros que nécessaire. 
-              Qu'il n'y en a ni trop, ni trop peu. 
-            </p>
-            <p>
-              Pour cela, osuny s'appuie sur les blocs utilisés pour calculer approximativement le nombre d'éléments de la page.
-              Ce nombre d'éléments est ensuite traduit en cinq paliers, présentés ci-dessous. 
-              Aucun de ces paliers n'est bon ou mauvais en soi, c'est purement une question d'adéquation aux usages.
-              Une des méthodes permettant d'évaluer la pertinence des pages denses est de vérifier que le temps passé sur ces pages par les internautes est significatif. 
-              Pour les pages très simples, il s'agit d'évaluer si les personnes trouvent l'information qu'elles cherchent, ou si elles sont contraintes de charger d'autres pages. 
-              Le travail d'écoconception est subtil, et il s'appuie toujours sur l'écoute des personnes et l'observation des usages. 
-            </p>"
-        level:
-          one:
-            title: Coquelicot
-            text: Cette page web est extrêmement simple ! C'est probablement une très bonne chose, si ça correspond bien à l'usage des internautes. Mais il faut aussi se demander si cela ne les oblige pas à charger plusieurs pages pour trouver l'information souhaitée. Une page bien écoconçue, c'est une page qui répond aux besoins des personnes, ni plus ni moins.
-            dom: Moins de 300 éléments dans le DOM
-          two:
-            title: Rose trémière
-            text: Cette page est simple, c'est bon signe ! Toutefois, il faut vérifier si elle répond bien à l'usage des internautes. Si elle est simple mais qu'elle contraint les internautes à en charger 3 autres, ce n'est probablement pas le meilleur équilibre. Une page bien écoconçue, c'est une page qui répond aux besoins des personnes, ni plus ni moins.
-            dom: Entre 300 et 600 éléments dans le DOM
-          three:
-            title: Olivier
-            text: Cette page est de taille intermédiaire. C'est peut-être un peu gros, tout dépend de l'usage. Est-ce que tous les éléments sont utiles aux personnes utilisatrices ? S'il en manque, il faut envisager de les ajouter. Si certains sont presque toujours superflus, il vaut mieux les enlever ou les regrouper dans une page dédiée. Une page bien écoconçue, c'est une page qui répond aux besoins des personnes, ni plus ni moins.
-            dom: Entre 600 et 1000 éléments dans le DOM
-          four:
-            title: Chêne
-            text: Cette page est grande, il faut s'arrêter pour y réfléchir. Si les internautes passent plusieurs minutes à la parcourir, et que c'est vraiment pratique, c'est très bien. Mais les personnes se perdent dans la page, il serait préférable de la couper en plusieurs pages, répondant mieux à chaque usage. Une page bien écoconçue, c'est une page qui répond aux besoins des personnes, ni plus ni moins.
-            dom: Entre 1000 et 2000 éléments dans le DOM
-          five:
-            title: Séquoia géant
-            text: Cette page est absolument énorme. Si vos statistiques de visite vous indiquent que le temps moyen passé sur la page est de 30 minutes, c'est très bien. Mais dans les autres cas, il faut certainement ranger et découper le contenus en morceaux plus simples, afin de bien répondre aux besoins réels des internautes. Une page bien écoconçue, c'est une page qui répond aux besoins des personnes, ni plus ni moins.
-            dom: Plus de 2000 éléments dans le DOM
       empty: Ce bloc est vide et n'apparaitra pas
       offcanvas:
         close: Fermer l'édition du bloc

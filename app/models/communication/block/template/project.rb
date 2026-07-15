@@ -47,11 +47,6 @@ class Communication::Block::Template::Project < Communication::Block::Template::
     nil
   end
 
-  def dom_count
-    5 +
-    children.length * 25
-  end
-
   protected
 
   def link_to_category

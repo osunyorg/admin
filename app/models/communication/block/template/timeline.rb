@@ -14,9 +14,4 @@ class Communication::Block::Template::Timeline < Communication::Block::Template:
   def empty?
     elements.none?
   end
-
-  def dom_count
-    5 +
-    children.sum(&:dom_count)
-  end
 end

@@ -61,12 +61,6 @@ class Communication::Block::Template::Exhibition < Communication::Block::Templat
     title_link
   end
 
-  def dom_count
-    5 +
-    description_component.dom_count +
-    children.length * 25
-  end
-
   protected
 
   def link_to_exhibitions

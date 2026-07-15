@@ -32,8 +32,4 @@ class Communication::Block::Component::File < Communication::Block::Component::B
     [blob]
   end
 
-  def blob_count
-    5
-  end
-
 end
