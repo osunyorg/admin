@@ -49,8 +49,6 @@ module Osuny
     config.i18n.enforce_available_locales = false
     config.i18n.load_path += Dir["#{Rails.root.to_s}/config/locales/**/*.yml"]
 
-    config.internal_domains = ['@noesya.coop', '@osuny.org'].freeze
-
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
         address: ENV['SMTP_ADDRESS'].presence || "smtp-relay.brevo.com",
