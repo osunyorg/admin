@@ -4,6 +4,7 @@ module Brevo
     SMS_CREDITS_LIMIT = 500
 
     def self.send_mfa_code(user, code)
+      return if ENV['BREVO_API_KEY'].blank?
       duration =  ActiveSupport::Duration.build(Rails.application.config.devise.direct_otp_valid_for).inspect
       context = user.registration_context.respond_to?(:to_s_in) ? user.registration_context.to_s_in(user.language)
                                                                 : user.registration_context.to_s
@@ -12,6 +13,7 @@ module Brevo
     end
 
     def sms_credits
+      return if ENV['BREVO_API_KEY'].blank?
       @sms_credits ||= plan.detect { |plan| plan.type == 'sms' }&.credits
     end
 

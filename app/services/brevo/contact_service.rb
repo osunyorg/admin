@@ -2,10 +2,12 @@ module Brevo
   class ContactService
 
     def self.sync(user)
+      return if ENV['BREVO_API_KEY'].blank?
       new(user).sync
     end
 
     def self.destroy(contact_id, university_id)
+      return if ENV['BREVO_API_KEY'].blank?
       api_instance = Brevo::ContactsApi.new
       other_user = User.where(brevo_contact_id: contact_id).first
 

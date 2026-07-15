@@ -1,3 +1,5 @@
+return if ENV['BREVO_API_KEY'].blank?
+
 # Load the gem
 require 'brevo'
 
