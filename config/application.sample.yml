@@ -60,6 +60,10 @@ SECRET_KEY_BASE:
 
 SKYLIGHT_AUTHENTICATION:
 
+# If not provided, fallback to smtp-relay.brevo.com / 587 / plain
+SMTP_ADDRESS:
+SMTP_PORT:
+SMTP_AUTHENTICATION:
 SMTP_PASSWORD:
 SMTP_USER:
 
