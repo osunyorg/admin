@@ -1,4 +1,4 @@
-class Education::Cohort::Facets < FacetedSearch::Facets
+class Administration::Cohort::Facets < FacetedSearch::Facets
   def initialize(params, options)
     super params
 
@@ -8,7 +8,7 @@ class Education::Cohort::Facets < FacetedSearch::Facets
 
     filter_with_list :academic_year_id, {
       source: @about.academic_years.ordered,
-      title: Education::AcademicYear.model_name.human(count: 2)
+      title: Administration::AcademicYear.model_name.human(count: 2)
     }
 
     filter_with_checkboxes :program_id, {

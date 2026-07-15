@@ -50,7 +50,7 @@ SimpleNavigation::Configuration.run do |navigation|
                     admin_communication_website_alerts_path(website_id: @website.id).in?(request.path)
                   } if @website.feature_alerts
     primary.item  :subnav_analytics,
-                  t('communication.website.analytics'),
+                  t('communication.website.analytics.title'),
                   analytics_admin_communication_website_path(id: @website.id, website_id: nil) if @website.plausible_url.present?
     primary.item  :subnav_settings,
                   t('admin.subnav.settings'),

@@ -8,6 +8,8 @@
 <%= osuny_panel t('admin.communication.website.pages.special_page') do %>
   <p><%= t('admin.communication.website.pages.special_pages.communication_post.native', count: @posts.total_count) %></p>
   <%= create_link Communication::Website::Post %>
-  <%= render 'admin/communication/websites/posts/list', posts: @posts %>
+  <%= render 'admin/communication/websites/posts/list',
+              posts: @posts,
+              website: @website %>
   <%= paginate @posts, param_name: :posts_page %>
 <% end %>

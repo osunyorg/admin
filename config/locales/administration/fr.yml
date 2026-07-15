@@ -4,6 +4,13 @@ fr:
       administration/qualiopi: Qualiopi
   activerecord:
     attributes:
+      administration/academic_year:
+        year: Année
+      administration/cohort:
+        alumni: Alumni
+        program: Formation
+        school: École
+        year: Année
       administration/location:
         address: Adresse
         city: Ville
@@ -34,6 +41,12 @@ fr:
         proof: Éléments de preuve
         requirement: Obligations spécifiques
     models:
+      administration/academic_year:
+        one: Année
+        other: Années
+      administration/cohort:
+        one: Promotion
+        other: Promotions
       administration/location:
         one: Lieu
         other: Lieux
@@ -51,9 +64,15 @@ fr:
   administration:
     description:
       parts:
+        academic_year:
+          description: Présentation des années universitaires
+          title: Années
         alumnus:
           description: Présentation des étudiants et étudiantes ayant étudié dans les différentes formations
           title: Alumni
+        cohort:
+          description: Présentation des promotions d'alumni
+          title: Promotions
         location:
           description: Gestion des différents lieux de formation et de recherche
           title: Lieux

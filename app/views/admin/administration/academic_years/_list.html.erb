@@ -2,8 +2,8 @@
   <table class="<%= table_classes %>">
     <thead>
       <tr>
-        <th><%= Education::AcademicYear.human_attribute_name('year') %></th>
-        <th><%= Education::Cohort.model_name.human(count: 2) %></th>
+        <th><%= Administration::AcademicYear.human_attribute_name('year') %></th>
+        <th><%= Administration::Cohort.model_name.human(count: 2) %></th>
         <th><%= University::Person::Alumnus.model_name.human(count: 2) %></th>
       </tr>
     </thead>

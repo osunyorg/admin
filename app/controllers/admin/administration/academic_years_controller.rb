@@ -1,5 +1,5 @@
-class Admin::Education::AcademicYearsController < Admin::Education::ApplicationController
-  load_and_authorize_resource class: Education::AcademicYear,
+class Admin::Administration::AcademicYearsController < Admin::Administration::ApplicationController
+  load_and_authorize_resource class: Administration::AcademicYear,
                               through: :current_university,
                               through_association: :academic_years
   include Admin::HasStaticAction
@@ -44,7 +44,7 @@ class Admin::Education::AcademicYearsController < Admin::Education::ApplicationC
 
   def destroy
     @academic_year.destroy
-    redirect_to education_academic_years_url,
+    redirect_to administration_academic_years_url,
                 notice: t('admin.successfully_destroyed_html', model: @academic_year.to_s)
   end
 
@@ -52,12 +52,12 @@ class Admin::Education::AcademicYearsController < Admin::Education::ApplicationC
 
   def breadcrumb
     super
-    add_breadcrumb Education::AcademicYear.model_name.human(count: 2), admin_education_academic_years_path
+    add_breadcrumb Administration::AcademicYear.model_name.human(count: 2), admin_administration_academic_years_path
     breadcrumb_for @academic_year
   end
 
   def academic_year_params
-    params.require(:education_academic_year)
+    params.require(:administration_academic_year)
           .permit(:year)
           .merge(
             university_id: current_university.id

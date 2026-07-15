@@ -1,4 +1,4 @@
-class Communication::Website::Page::EducationAcademicYear < Communication::Website::Page
+class Communication::Website::Page::AdministrationAcademicYear < Communication::Website::Page
 
   def is_hugo_index?
     true

@@ -14,6 +14,7 @@
 #  email_visibility              :integer          default("private")
 #  gender                        :integer
 #  habilitation                  :boolean          default(FALSE)
+#  invitation_sent_at            :datetime
 #  is_administration             :boolean
 #  is_alumnus                    :boolean          default(FALSE)
 #  is_author                     :boolean
@@ -186,6 +187,19 @@ class University::Person < ApplicationRecord
 
   def to_s_alphabetical_in(language)
     best_localization_for(language).to_s_alphabetical
+  end
+
+  def xlsx_gender
+    case gender
+    when 'male'
+      'm'
+    when 'female'
+      'f'
+    when 'non_binary'
+      'n'
+    else
+      nil
+    end
   end
 
   protected
