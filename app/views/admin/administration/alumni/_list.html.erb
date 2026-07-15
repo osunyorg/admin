@@ -12,7 +12,7 @@
           <% if person.cohorts.any? %>
             <p class="small text-muted mb-0">
               <%= person.cohorts.size %>
-              <%= Education::Cohort.model_name.human(count: person.cohorts.size).downcase %>
+              <%= Administration::Cohort.model_name.human(count: person.cohorts.size).downcase %>
             </p>
           <% end %>
         </div>

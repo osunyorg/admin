@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "4.0.3"
+ruby "4.0.5"
 
 gem "activestorage-scaleway-service"#, path: "../activestorage-scaleway-service"
 gem "active_hashcash"
@@ -19,6 +19,7 @@ gem "bugsnag"
 gem "cancancan", "~> 3.3.0"
 gem "caxlsx_rails", "~> 0"
 gem "cgi", "~> 0.5.1" # To handle CGI::parse
+gem "chartkick", "~> 5.2"
 gem "citeproc", "~> 1"
 gem "citeproc-ruby", "~> 2"
 gem "cocoon", "~> 1"
@@ -58,6 +59,7 @@ gem "metainspector", git: "https://github.com/jaimeiniesta/metainspector.git"
 gem "octokit"
 gem "omniauth-saml", "~> 2"
 gem "orthotypo"
+gem "ostruct" # Needed for rswag(-ui)
 gem "paranoia"
 gem "pexels", "~> 0"
 gem "pg", "~> 1"
@@ -65,12 +67,13 @@ gem "pghero"
 gem "pg_query"
 gem "puma"
 gem "rack-timeout"
-gem "rails", "~> 8.1.2"
+gem "rails", "~> 8.1.3"
 gem "rails-autocomplete", "~> 2"
 gem "rails-i18n"
 gem "rbnacl", "~> 7.1"
-gem "redis", "~> 5.1"
+gem "redis", "~> 5.4"
 gem "roo", "~> 2"
+gem "rorvswild"
 gem "rswag", "~> 2"
 gem "ruby-vips", "~> 2.3"
 gem "sanitize"
@@ -101,18 +104,17 @@ group :development do
   gem "annotaterb"
   gem "better_errors"
   gem "binding_of_caller"
-  gem "listen", "~> 3.3"
-  gem "rack-mini-profiler", "~> 3.0"
+  gem "listen", "~> 3.10"
+  gem "rack-mini-profiler", "~> 4.0"
   gem "spring"
   gem "web-console", ">= 4.1.0"
 end
 
 group :test do
-  gem "capybara", ">= 3.26"
+  gem "capybara", ">= 3.40"
   gem "selenium-webdriver"
   gem "webdrivers"
   gem "simplecov", require: false
 end
 
 gem "tzinfo-data", platforms: [:windows, :jruby]
-

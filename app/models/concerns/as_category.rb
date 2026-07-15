@@ -6,6 +6,7 @@ module AsCategory
   include Orderable
 
   included do
+
     belongs_to  :parent,
                 class_name: self.name,
                 optional: true
@@ -26,6 +27,43 @@ module AsCategory
                       .flatten
                       .compact
       where.not(id: ids) }
+
+    # Not named "reorder" to avoid confusion with ActiveRecord reorder method
+    def self.reorder_categories(categories:, item_id:, previous_parent_id:, parent_id:, ids: [])
+      item = categories.find(item_id)
+      if item.is_taxonomy? && parent_id.present?
+        # Moving taxonomy is ok, but not inside a category or taxonomy
+        return false
+      else
+        ids.each.with_index do |id, index|
+          category = categories.find(id)
+          category.update_columns parent_id: parent_id,
+                                  position: index + 1
+        end
+        touch_categories!(
+          categories: categories,
+          item: item,
+          previous_parent_id: previous_parent_id,
+          parent_id: parent_id
+        )
+        true
+      end
+    end
+
+    protected
+
+    def self.touch_categories!(categories:, item:, previous_parent_id:, parent_id:)
+      list = []
+      list << item
+      list << categories.find(previous_parent_id) if previous_parent_id.present?
+      list << categories.find(parent_id) if parent_id.present?
+      if previous_parent_id != parent_id
+        # The parent did change, so we need to touch the whole subtree of the item
+        list.concat(item.descendants)
+      end
+      list.compact.uniq.each(&:touch)
+    end
+
   end
 
   def dependencies

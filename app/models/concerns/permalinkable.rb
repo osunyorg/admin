@@ -53,7 +53,7 @@ module Permalinkable
     new_permalink_in_website(website).save_if_needed
   end
 
-  def add_redirection(path)
+  def add_redirection(path, website)
     clean_path = Static.clean_path(path)
     aliases.create(website: website, path: clean_path)
   end

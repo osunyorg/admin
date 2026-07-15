@@ -139,7 +139,6 @@ en:
         feature_portfolio: Portfolio
         feature_posts: Posts
         features: Features
-        federations: Federated content sources
         git_branch: Git branch
         git_endpoint: Git endpoint
         git_provider: Git provider
@@ -345,6 +344,8 @@ en:
             from_day:
               events_before: must be before the first event
               time_slots_before: must be before the first time slot
+            parent_id:
+              outside_parent_dates: must happen at compatible dates
             to_day:
               events_after: must be after the last event
               time_slots_after: must be after the last time slot
@@ -423,6 +424,9 @@ en:
       communication/website/agenda/period/year:
         one: Year
         other: Years
+      communication/website/alert:
+        one: Alert
+        other: Alerts
       communication/website/connection:
         one: Connection
         other: Connections
@@ -480,6 +484,18 @@ en:
         drag_and_drop: Drag and drop
         language_mismatch_alert: This block does not exist in this language.
       extranet:
+        alumni:
+          account_active: Account activated
+          already_active: This account is already active
+          filters:
+            account:
+              label: account
+              without_account: Without account
+              with_account: With account
+          send_invitation:
+            cta: Send an invitation email
+            just_sent: Invitation email sent to %{name}
+            too_soon: An invitation email has already been sent less than 5 minutes ago.
         confirm_localization:
           text_html: "The creation of <i>%{about}</i> in %{language} requires the localization of the extranet <i>%{extranet}</i> in %{language}."
           title: Localization confirmation
@@ -549,6 +565,11 @@ en:
           show: Show page
           special_page: Special page
           special_pages:
+            administration_academic_year:
+              native:
+                zero: This page is a special page that natively displays the site's alumni, sorted by year. Currently, there are no alumni on the site.
+                one: This page is a special page that natively displays the site's alumni, sorted by year. Currently, there is one alumnus.
+                other: This page is a special page that natively displays the site's %{count} alumni, sorted by year.
             administration_location:
               native:
                 zero: This page is a special page, which natively presents the campus locations. For now, there is no location.
@@ -579,11 +600,6 @@ en:
                 zero: This page is a special page that natively displays the site's news.
                 one: This page is a special page that natively displays the site's news . Currently, there's a single post.
                 other: This page is a special page that natively displays the %{count} published news.
-            education_academic_year:
-              native:
-                zero: This page is a special page that natively displays the site's alumni, sorted by year. Currently, there are no alumni on the site.
-                one: This page is a special page that natively displays the site's alumni, sorted by year. Currently, there is one alumnus.
-                other: This page is a special page that natively displays the site's %{count} alumni, sorted by year.
             education_diploma:
               native:
                 zero: This page is a special page that natively displays the diplomas associated with the site. Currently, there are no diplomas on the site.
@@ -710,7 +726,9 @@ en:
       none: No summary yet
     website:
       advanced_options: Advanced options
-      analytics: Analytics
+      analytics:
+        adblock_warning: If Plausible does not load, make sure that it is not blocked by your browser through an extension or its privacy settings.
+        title: Analytics
       git: Git
       golive:
         button: Go live
@@ -727,6 +745,9 @@ en:
           accessibility:
             slug: accessibility
             title: Accessibility
+          administration_academic_year:
+            slug: alumni
+            title: Alumni
           administration_location:
             slug: campus
             title: Campus
@@ -757,9 +778,6 @@ en:
           communication_post:
             slug: posts
             title: Posts
-          education_academic_year:
-            slug: alumni
-            title: Alumni
           education_diploma:
             slug: diplomas
             title: Diplomas
@@ -886,7 +904,7 @@ en:
         access_token_with_existing: Your Github or Gitlab confidential access token.<br>Leave the field blank if you don't want to change the token.
         access_token_without_existing: Your Github or Gitlab confidential access token. Leave it empty when creating a new website with Deuxfleurs.
         apache_config_custom_content: The redirects will be added after this content.
-        archive_content: "If you check this box, the posts, events and exhibitions will be archived after the defined time period. You can also mark a content as « lasting » to prevent it from being archived."
+        archive_content: "If you check this box, the posts, events and exhibitions will be automatically unpublished after the defined time period, and therefore removed from the site. You can also mark a content as « lasting » to prevent it from being unpublished automatically."
         deployment_status_badge: "Badge URL: <a href=\"https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge\" target=\"_blank\">Github</a>, <a href=\"https://docs.gitlab.com/ee/user/project/badges.html\" target=\"_blank\">Gitlab</a>"
         feature_agenda: To share events
         feature_alerts: To display alert banners
@@ -908,8 +926,9 @@ en:
       communication_website_menu_item:
         html_class: This parameter is useful to code the website. The values entered are transformed into parameters (without accents or capitals), and the classes generated can be seen below.
       communication_website_page:
-        breadcrumb_title: If the field is empty, page title will be used in breadcrumbs.
         full_width: On large screens, a full width page uses all available space for the content. This is good for landing pages, or to make them spectacular. If the page is not full width, the content column will be smaller to make reading easier. The unused space might be used for a table of contents.
+      communication_website_page_localization:
+        breadcrumb_title: If the field is empty, page title will be used in breadcrumbs.
         header_text: By default, this text replaces the title. On some sites, it is displayed in addition.
         text: This field is deprecated, content will not be displayed on the website.
       communication_website_permalink:

@@ -115,8 +115,11 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   scope :future, -> {
     where("communication_website_agenda_events.from_day > :today", today: Date.current)
   }
+  scope :current_on, -> (date) {
+    where("communication_website_agenda_events.from_day <= :date AND communication_website_agenda_events.to_day >= :date", date: date)
+  }
   scope :current, -> {
-    where("communication_website_agenda_events.from_day <= :today AND communication_website_agenda_events.to_day >= :today", today: Date.current)
+    current_on(Date.current)
   }
   scope :future_or_current, -> {
     future.or(current)

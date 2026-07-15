@@ -81,7 +81,7 @@ selectable ||= false
                   <div class="col-lg-4">
                     <% unless event.is_template? %>
                       <div class="row mb-2">
-                        <% if event.same_day? %>
+                        <% if event.single_day? %>
                           <div>
                             <%= osuny_label Communication::Website::Agenda::Event.human_attribute_name(:day) %>
                             <p><%= l event.from_day %></p>

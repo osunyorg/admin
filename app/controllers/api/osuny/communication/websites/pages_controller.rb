@@ -1,9 +1,7 @@
 class Api::Osuny::Communication::Websites::PagesController < Api::Osuny::Communication::Websites::ApplicationController
   include Api::Osuny::HasResource
-  include Api::Osuny::HasMigrationIdentifier
 
   def index
-    @pages = paginate(website.pages.includes(:localizations))
   end
 
   def show
@@ -72,12 +70,16 @@ class Api::Osuny::Communication::Websites::PagesController < Api::Osuny::Communi
 
   protected
 
-  def integrity_checker
-    @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@page, page_params, website.pages.with_deleted)
+  def resources_name
+    :pages
   end
 
-  def load_resource
-    @page = website.pages.find(params[:id])
+  def resource_name
+    :page
+  end
+
+  def resource_list
+    website.pages
   end
 
   def l10n_permitted_keys

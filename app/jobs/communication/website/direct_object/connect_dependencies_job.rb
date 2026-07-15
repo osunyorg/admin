@@ -1,5 +1,5 @@
 class Communication::Website::DirectObject::ConnectDependenciesJob < ApplicationJob
-  queue_as :cats
+  queue_as :mice
 
   def perform(direct_object)
     return if direct_object.paranoid? && direct_object.deleted?

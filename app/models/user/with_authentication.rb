@@ -26,7 +26,11 @@ module User::WithAuthentication
     before_validation :adjust_mobile_phone, :sanitize_fields
 
     def self.find_for_authentication(warden_conditions)
-      where(email: warden_conditions[:email].downcase, university_id: warden_conditions[:university_id]).first
+      host = warden_conditions.delete(:host)
+      user = where(email: warden_conditions[:email].downcase, university_id: warden_conditions[:university_id]).first
+      return unless user
+      user.set_registration_context_from_host(host)
+      user
     end
 
     def self.send_reset_password_instructions(attributes = {})
@@ -68,10 +72,7 @@ module User::WithAuthentication
     end
 
     def send_new_otp(request, options = {})
-      current_extranet = Communication::Extranet.with_host(request.host)
-      current_university = University.with_host(request.host)
-      current_university ||= university
-      self.registration_context = current_extranet || current_university
+      set_registration_context_from_host(request.host)
       super
     end
 

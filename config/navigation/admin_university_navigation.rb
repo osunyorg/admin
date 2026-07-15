@@ -7,7 +7,7 @@ SimpleNavigation::Configuration.run do |navigation|
     realm.parts.each do |part|
       name = part.first
       identifier = name.to_s.to_sym
-      key = "#{realm.to_s.downcase}.description.parts.#{name.to_s.demodulize.downcase}.title"
+      key = "#{realm.to_s.downcase}.description.parts.#{name.to_s.demodulize.underscore}.title"
       label = I18n.t(key)
       path = send part.last, lang: current_language.iso_code
       menu.item identifier, label, path if can?(:read, name)
@@ -45,11 +45,12 @@ SimpleNavigation::Configuration.run do |navigation|
         secondary.item :administration_statistics, 'Statistiques', nil
       end
     end
+    
+    if feature_directory?
+      primary.item :directory, t('university.description.title'), admin_university_root_path, { image: 'admin/university-thumb.jpg' } do |secondary|
+        load_realm University, secondary
+      end
+    end
 
-    primary.item :directory, t('university.description.title'), admin_university_root_path, { image: 'admin/university-thumb.jpg' } do |secondary|
-      secondary.item :directory_persons, University::Person.model_name.human(count: 2), admin_university_people_path
-      secondary.item :directory_organizations, University::Organization.model_name.human(count: 2), admin_university_organizations_path
-      secondary.item :directory_users, User.model_name.human(count: 2), admin_users_path
-    end if can?(:read, User)
   end
 end

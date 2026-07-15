@@ -18,7 +18,7 @@ class Communication::Block::Template::Job < Communication::Block::Template::Base
   has_component :option_image,        :boolean, default: true
   has_component :option_subtitle,     :boolean, default: true
   has_component :option_categories,   :boolean, default: false
-  has_component :option_date,         :boolean, default: false
+  has_component :option_dates,        :boolean, default: false
   has_component :option_summary,      :boolean, default: true
 
   def category

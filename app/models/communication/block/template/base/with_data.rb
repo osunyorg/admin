@@ -19,7 +19,7 @@ module Communication::Block::Template::Base::WithData
     end
     if has_element_class?
       hash['elements'] = []
-      elements.each do |element|
+      @elements.each do |element|
         hash['elements'] << element.data
       end
     end

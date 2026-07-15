@@ -5,7 +5,8 @@
               <%= 'treeview__element--draft' unless page.published_in?(current_language) %>
               <%= 'treeview__element--empty' unless page.has_children? %>"
       data-id="<%= page.id %>"
-      data-parent="<%= page.parent_id %>">
+      data-parent="<%= page.parent_id %>"
+      data-special="<%= page.is_special_page? %>">
     <div class="<%= osuny_card_classes(horizontal: true) %> treeview__label">
       <%= link_to children_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
                   class: 'js-treeview-openzone d-inline-block', remote: true do %>

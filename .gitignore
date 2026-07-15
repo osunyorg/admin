@@ -31,6 +31,9 @@
 /public/packs
 /public/packs-test
 
+# Vue i18n messages generated at boot (cf. config/initializers/vue_i18n.rb)
+/public/vue/*.json
+
 # Ignore some JS stuff
 /node_modules
 /yarn-error.log
@@ -56,3 +59,7 @@ coverage
 
 # Ignore editors
 .vscode
+
+# Instruments IAc
+AGENTS.md
+.clinerules/

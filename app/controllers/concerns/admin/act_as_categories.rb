@@ -7,27 +7,17 @@ module Admin::ActAsCategories
   end
 
   def reorder
-    moved_category_id = params.dig(:itemId)
-    moved_category = categories.find(moved_category_id)
-    parent_id = params.dig(:parentId)
-
-    if moved_category.is_taxonomy? && parent_id.present?
-      render plain: I18n.t('admin.categories.cant_move_taxonomy_here'), status: :unprocessable_content
-    else
-      old_parent_id = params.dig(:oldParentId)
-      ids = params[:ids] || []
-      ids.each.with_index do |id, index|
-        category = categories.find(id)
-        category.update_columns parent_id: parent_id,
-                                position: index + 1
-      end
-      if old_parent_id.present?
-        old_parent = categories.find(old_parent_id)
-        old_parent.touch
-      end
-      category = categories.find(params[:itemId])
-      category.touch
+    result = categories_class.reorder_categories(
+      categories: categories,
+      item_id: params[:itemId],
+      previous_parent_id: params[:oldParentId], 
+      parent_id: params[:parentId], 
+      ids: params[:ids]
+    )
+    if result
       head :ok
+    else
+      render plain: I18n.t('admin.categories.cant_move_taxonomy_here'), status: :unprocessable_content
     end
   end
 

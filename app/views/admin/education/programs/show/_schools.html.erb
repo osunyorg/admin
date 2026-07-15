@@ -1,0 +1,8 @@
+<% if schools.any? %>
+  <%= osuny_label Education::Program.human_attribute_name('schools') %>
+  <ul class="list-unstyled mb-4">
+    <% schools.ordered(current_language).each do |school| %>
+      <li><%= osuny_link_localized school, [:admin, school] %></li>
+    <% end %>
+  </ul>
+<% end %>

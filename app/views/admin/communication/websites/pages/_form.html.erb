@@ -12,13 +12,20 @@ url = page.new_record?  ? admin_communication_website_pages_path
     <div class="row">
       <div class="col-md-8">
         <%= osuny_panel t('content') do %>
-          <%= lf.input :title, input_html: { data: { translatable: true } } %>
-          <%= lf.input :subtitle, input_html: { data: { translatable: true } } %>
-          <%= lf.input :breadcrumb_title, input_html: { data: { translatable: true } } %>
-          <%= render 'admin/application/summary/form', f: lf, about: l10n %>
-          <%= lf.input :header_text, as: :string, input_html: { data: { translatable: true } } %>
-          <%= render 'admin/application/header_cta/form', f: lf %>
-          <%= lf.input :text, as: :summernote if strip_tags(l10n.text).present? %>
+          <%= lf.input  :title, input_html: { data: { translatable: true } } %>
+          <%= lf.input  :subtitle, input_html: { data: { translatable: true } } %>
+          <%= lf.input  :breadcrumb_title,
+                        input_html: { data: { translatable: true } },
+                        hint: t('simple_form.hints.communication_website_page_localization.breadcrumb_title') %>
+          <%= render    'admin/application/summary/form', f: lf, about: l10n %>
+          <%= lf.input  :header_text,
+                        as: :string,
+                        input_html: { data: { translatable: true } },
+                        hint: t('simple_form.hints.communication_website_page_localization.header_text') %>
+          <%= render    'admin/application/header_cta/form', f: lf %>
+          <%= lf.input  :text,
+                        as: :summernote,
+                        hint: t('simple_form.hints.communication_website_page_localization.text') if strip_tags(l10n.text).present? %>
         <% end %>
         <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
         <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
@@ -37,7 +44,7 @@ url = page.new_record?  ? admin_communication_website_pages_path
                               except: page,
                               localized: true
                             ),
-                            include_blank: false unless page.is_home? %>
+                            include_blank: false unless page.is_special_page? %>
           <%= f.input :bodyclass, label: t('admin.bodyclass') if can?(:edit, @website) %>
           <%= f.input :full_width if page.editable_width? %>
         <% end %>

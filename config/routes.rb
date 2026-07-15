@@ -40,13 +40,13 @@ Rails.application.routes.draw do
         post 'resend_confirmation_email' => 'users#resend_confirmation_email', on: :member
         patch 'unlock' => 'users#unlock', on: :member
       end
+      get 'tasks_count' => 'dashboard#tasks_count', as: :tasks_count
       get 'profile' => 'profile#edit'
       patch 'profile' => 'profile#update'
       delete 'profile' => 'profile#destroy'
       post 'profile/optin_newsletter' => 'profile#optin_newsletter', as: :optin_newsletter
       # libre_translate route
       post 'translate/from/:source/to/:target' => 'translation#translate', as: :translate
-      get 'vue_i18n' => 'vue_i18n#index', as: :vue_i18n, defaults: { format: :json }
       put 'favorite' => 'users#favorite', as: :favorite
       get 'search(/website/:website_id)(/extranet/:extranet_id)' => 'search#index', as: :search
       draw 'admin/administration'

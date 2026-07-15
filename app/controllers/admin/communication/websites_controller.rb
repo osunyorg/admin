@@ -12,7 +12,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def analytics
     breadcrumb
-    add_breadcrumb t('communication.website.analytics')
+    add_breadcrumb t('communication.website.analytics.title')
   end
 
   def security
@@ -64,7 +64,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
                           @jobs.any? &&
                           can?(:read, Communication::Website::Jobboard::Job)
     # Git files
-    @git_files_desynchronized = @website.git_files_desynchronized
+    @desynchronized_generated_git_files = @website.desynchronized_generated_git_files
     breadcrumb
   end
 

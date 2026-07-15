@@ -31,12 +31,14 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def reorder
-    @website.reorder_pages(
+    result = @website.reorder_pages(
+      item_id: params[:itemId],
       previous_parent_id: params[:oldParentId], 
       parent_id: params[:parentId], 
       ids: params[:ids],
       language: current_language
     )
+    head result ? :ok : :unprocessable_entity
   end
 
   def children

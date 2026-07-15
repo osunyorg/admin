@@ -58,7 +58,7 @@ class Osuny::Media::Resizer
   end
 
   def valid_params?
-    [left, top, width, height].none? { |key| params[key].nil? } &&
+    [left, top, width, height].none?(&:nil?) &&
     width > 0 && height > 0
   end
 

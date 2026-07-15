@@ -1,9 +1,7 @@
 class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::Osuny::Communication::Websites::ApplicationController
   include Api::Osuny::HasResource
-  include Api::Osuny::HasMigrationIdentifier
 
   def index
-    @projects = paginate(website.portfolio_projects.includes(:localizations))
   end
 
   def show
@@ -72,12 +70,16 @@ class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::
 
   protected
 
-  def integrity_checker
-    @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@project, project_params, website.portfolio_projects.with_deleted)
+  def resources_name
+    :projects
   end
 
-  def load_resource
-    @project = website.portfolio_projects.find(params[:id])
+  def resource_name
+    :project
+  end
+
+  def resource_list
+    website.portfolio_projects
   end
 
   def l10n_permitted_keys

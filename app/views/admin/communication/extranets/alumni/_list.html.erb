@@ -1,0 +1,32 @@
+<div class="row g-2">
+  <% alumni.each do |person| %>
+    <div>
+      <div class="<%= osuny_card_classes(horizontal: true) %>">
+        <%= osuny_thumbnail_localized person %>
+        <div class="card-body">
+          <p class="mb-1">
+            <%= osuny_link_localized  person,
+                                      admin_administration_alumnus_path(person),
+                                      classes: 'stretched-link' %>
+          </p>
+        </div>
+        <div class="card-footer">
+          <% if person.user_id %>
+            <p class="small text-muted mb-0">
+              <%= t('admin.communication.extranet.alumni.account_active') %>
+            </p>
+          <% elsif person.invitation_sent_at.nil? || person.invitation_sent_at < 5.minutes.ago %>
+              <%= link_to t('admin.communication.extranet.alumni.send_invitation.cta'), 
+                          send_invitation_admin_communication_extranet_alumnus_path(extranet_id: @extranet.id, id: person.id), 
+                          method: :post,
+                          class: 'btn btn-light btn-sm position-relative z-2' %>
+          <% else %>
+            <p class="small text-muted mb-0">
+              <%= t('admin.communication.extranet.alumni.send_invitation.too_soon') %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

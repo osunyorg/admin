@@ -343,7 +343,7 @@ RSpec.describe 'Communication::Website::Portfolio::Category' do
 
       parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
       let(:website_id) { communication_websites(:website_with_github).id }
-      parameter name: :id, in: :path, type: :string, description: 'Category identifier'
+      parameter name: :id, in: :path, type: :string, description: 'Category identifier or migration identifier'
       let(:id) { communication_website_portfolio_categories(:test_category).id }
 
       response '200', 'Successful operation' do
@@ -373,7 +373,7 @@ RSpec.describe 'Communication::Website::Portfolio::Category' do
 
       parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
       let(:website_id) { communication_websites(:website_with_github).id }
-      parameter name: :id, in: :path, type: :string, description: 'Category identifier'
+      parameter name: :id, in: :path, type: :string, description: 'Category identifier or migration identifier'
       let(:id) { communication_website_portfolio_categories(:test_category).id }
 
       parameter name: :communication_website_portfolio_category, in: :body, type: :object, schema: {
@@ -490,7 +490,7 @@ RSpec.describe 'Communication::Website::Portfolio::Category' do
 
       parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
       let(:website_id) { communication_websites(:website_with_github).id }
-      parameter name: :id, in: :path, type: :string, description: 'Category identifier'
+      parameter name: :id, in: :path, type: :string, description: 'Category identifier or migration identifier'
       let(:id) { communication_website_portfolio_categories(:test_category).id }
 
       response '204', 'Successful deletion' do

@@ -16,11 +16,13 @@ module Communication::Website::GitFile::WithContent
     return if up_to_date?
     @current_content = nil
     ActiveStorage::Utils.attach_from_text(current_content_file, computed_content, 'file.html')
+    now = Time.zone.now
     update(
       current_path: computed_path,
       current_sha: computed_sha,
       desynchronized: true,
-      desynchronized_at: Time.zone.now
+      desynchronized_at: now,
+      generated_at: now
     )
   end
 

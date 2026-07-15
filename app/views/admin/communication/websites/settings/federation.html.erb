@@ -15,11 +15,8 @@
         <%= f.association :source_websites,
                           collection: @source_websites,
                           as: :check_boxes %>
-
-        <% content_for :action_bar_right do %>
-          <%= cancel [:admin, @website] %>
-          <%= submit f %>
-        <% end %>
+                          
+        <%= submit f %>
       <% end %>
     <% end %>
   </div>

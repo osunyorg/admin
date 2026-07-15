@@ -211,12 +211,18 @@ class Communication::Website < ApplicationRecord
 
   def move_to_university(new_university_id)
     return if self.university_id == new_university_id
+    Communication::Website::MoveToUniversityJob.perform_later(id, { new_university_id: new_university_id })
+  end
+
+  def move_to_university_safely(new_university_id)
+    return if self.university_id == new_university_id
     update_column :university_id, new_university_id
     recursive_dependencies_following_direct.each do |dependency|
       reconnect_dependency dependency, new_university_id
     end
     git_files.update_all(university_id: new_university_id)
     permalinks.update_all(university_id: new_university_id)
+    menu_items.update_all(university_id: new_university_id)
   end
 
   def domain

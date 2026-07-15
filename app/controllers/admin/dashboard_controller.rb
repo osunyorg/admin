@@ -6,13 +6,19 @@ class Admin::DashboardController < Admin::ApplicationController
     @namespaces << Research if feature_research?
     @namespaces << Communication if feature_communication?
     @namespaces << Administration if feature_administration?
-    @namespaces << University if feature_settings?
+    @namespaces << University if feature_directory?
     breadcrumb
   end
 
   # called from /admin without any language specified
   def redirect_to_default_language
     redirect_to admin_root_path(lang: current_university.default_language)
+  end
+
+  def tasks_count
+    @chart = TasksCountChart.new(params[:range])
+    breadcrumb
+    add_breadcrumb TasksCount.model_name.human(count: 2)
   end
 
 end
