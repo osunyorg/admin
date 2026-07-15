@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: education_academic_years
+# Table name: administration_academic_years
 #
 #  id            :uuid             not null, primary key
 #  deleted_at    :datetime
@@ -11,15 +11,15 @@
 #
 # Indexes
 #
-#  index_education_academic_years_on_university_id  (university_id)
+#  index_administration_academic_years_on_university_id  (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_7d376afe35  (university_id => universities.id)
 #
-class Education::AcademicYear < ApplicationRecord
+class Administration::AcademicYear < ApplicationRecord
   acts_as_paranoid
-  
+
   include AsIndirectObject
   include GeneratesGitFiles
   include Localizable
@@ -28,18 +28,18 @@ class Education::AcademicYear < ApplicationRecord
   include Searchable
   include WithUniversity
 
-  has_many  :education_cohorts,
-            class_name: 'Education::Cohort'
-  alias_method :cohorts, :education_cohorts
+  has_many  :administration_cohorts,
+            class_name: 'Administration::Cohort'
+  alias_method :cohorts, :administration_cohorts
 
   # Dénormalisation des alumni pour le faceted search
   has_and_belongs_to_many   :university_people,
                             class_name: 'University::Person',
-                            foreign_key: :education_academic_year_id,
+                            foreign_key: :administration_academic_year_id,
                             association_foreign_key: :university_person_id
   has_many :people,
            class_name: 'University::Person',
-           through: :education_cohorts
+           through: :administration_cohorts
 
   validates :year, numericality: { only_integer: true, greater_than: 0 }
 
@@ -48,7 +48,7 @@ class Education::AcademicYear < ApplicationRecord
   scope :ordered, -> (language = nil) { order(year: :desc) }
 
   def cohorts_in_context(context)
-    return Education::Cohort.none unless context.respond_to?(:cohorts)
+    return Administration::Cohort.none unless context.respond_to?(:cohorts)
     cohorts.where(id: context.cohorts.pluck(:id))
   end
 

@@ -1,8 +1,8 @@
 <% content_for :title, @l10n %>
 
 <% if @academic_year.cohorts.any? %>
-  <h2><%= Education::Cohort.model_name.human(count: 2) %></h2>
-  <%= render 'admin/education/cohorts/list', cohorts: @cohorts %>
+  <h2><%= Administration::Cohort.model_name.human(count: 2) %></h2>
+  <%= render 'admin/administration/cohorts/list', cohorts: @cohorts %>
 <% end %>
 
 <% if @academic_year.people.any? %>
@@ -11,6 +11,6 @@
 <% end %>
 
 <% content_for :server_admin_only do %>
-  <%= static_link static_admin_education_academic_year_path(@academic_year) %>
+  <%= static_link static_admin_administration_academic_year_path(@academic_year) %>
   <%= render 'admin/communication/websites/git_files/list', git_files: @l10n.git_files %>
-<% end %>  
+<% end %>

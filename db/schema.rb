@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_18_144210) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_02_133651) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -74,6 +74,72 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_18_144210) do
     t.uuid "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "administration_academic_year_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "about_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
+    t.uuid "language_id", null: false
+    t.string "slug"
+    t.uuid "university_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_7962406d05", unique: true
+    t.index ["about_id"], name: "index_administration_academic_year_localizations_on_about_id"
+    t.index ["language_id"], name: "idx_on_language_id_a52fb1a1c1"
+    t.index ["university_id"], name: "idx_on_university_id_31eabbc7a7"
+  end
+
+  create_table "administration_academic_years", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
+    t.uuid "university_id", null: false
+    t.datetime "updated_at", null: false
+    t.integer "year"
+    t.index ["university_id"], name: "index_administration_academic_years_on_university_id"
+  end
+
+  create_table "administration_academic_years_university_people", id: false, force: :cascade do |t|
+    t.uuid "administration_academic_year_id", null: false
+    t.uuid "university_person_id", null: false
+    t.index ["administration_academic_year_id", "university_person_id"], name: "index_academic_year_person"
+    t.index ["university_person_id", "administration_academic_year_id"], name: "index_person_academic_year"
+  end
+
+  create_table "administration_cohort_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "about_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
+    t.uuid "language_id", null: false
+    t.string "slug"
+    t.uuid "university_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_ae60ea28b0", unique: true
+    t.index ["about_id"], name: "index_administration_cohort_localizations_on_about_id"
+    t.index ["language_id"], name: "index_administration_cohort_localizations_on_language_id"
+    t.index ["university_id"], name: "index_administration_cohort_localizations_on_university_id"
+  end
+
+  create_table "administration_cohorts", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "academic_year_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
+    t.string "name"
+    t.uuid "program_id", null: false
+    t.uuid "school_id", null: false
+    t.uuid "university_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["academic_year_id"], name: "index_administration_cohorts_on_academic_year_id"
+    t.index ["program_id"], name: "index_administration_cohorts_on_program_id"
+    t.index ["school_id"], name: "index_administration_cohorts_on_school_id"
+    t.index ["university_id"], name: "index_administration_cohorts_on_university_id"
+  end
+
+  create_table "administration_cohorts_university_people", id: false, force: :cascade do |t|
+    t.uuid "administration_cohort_id", null: false
+    t.uuid "university_person_id", null: false
+    t.index ["administration_cohort_id", "university_person_id"], name: "index_cohort_person"
+    t.index ["university_person_id", "administration_cohort_id"], name: "index_person_cohort"
   end
 
   create_table "administration_location_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1454,72 +1520,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_18_144210) do
     t.index ["user_id", "communication_website_id"], name: "user_website"
   end
 
-  create_table "education_academic_year_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "about_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "deleted_at"
-    t.uuid "language_id", null: false
-    t.string "slug"
-    t.uuid "university_id", null: false
-    t.datetime "updated_at", null: false
-    t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_eb13d82b8d", unique: true
-    t.index ["about_id"], name: "index_education_academic_year_localizations_on_about_id"
-    t.index ["language_id"], name: "index_education_academic_year_localizations_on_language_id"
-    t.index ["university_id"], name: "index_education_academic_year_localizations_on_university_id"
-  end
-
-  create_table "education_academic_years", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "deleted_at"
-    t.uuid "university_id", null: false
-    t.datetime "updated_at", null: false
-    t.integer "year"
-    t.index ["university_id"], name: "index_education_academic_years_on_university_id"
-  end
-
-  create_table "education_academic_years_university_people", id: false, force: :cascade do |t|
-    t.uuid "education_academic_year_id", null: false
-    t.uuid "university_person_id", null: false
-    t.index ["education_academic_year_id", "university_person_id"], name: "index_academic_year_person"
-    t.index ["university_person_id", "education_academic_year_id"], name: "index_person_academic_year"
-  end
-
-  create_table "education_cohort_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "about_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "deleted_at"
-    t.uuid "language_id", null: false
-    t.string "slug"
-    t.uuid "university_id", null: false
-    t.datetime "updated_at", null: false
-    t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_a0a453655b", unique: true
-    t.index ["about_id"], name: "index_education_cohort_localizations_on_about_id"
-    t.index ["language_id"], name: "index_education_cohort_localizations_on_language_id"
-    t.index ["university_id"], name: "index_education_cohort_localizations_on_university_id"
-  end
-
-  create_table "education_cohorts", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "academic_year_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "deleted_at"
-    t.string "name"
-    t.uuid "program_id", null: false
-    t.uuid "school_id", null: false
-    t.uuid "university_id", null: false
-    t.datetime "updated_at", null: false
-    t.index ["academic_year_id"], name: "index_education_cohorts_on_academic_year_id"
-    t.index ["program_id"], name: "index_education_cohorts_on_program_id"
-    t.index ["school_id"], name: "index_education_cohorts_on_school_id"
-    t.index ["university_id"], name: "index_education_cohorts_on_university_id"
-  end
-
-  create_table "education_cohorts_university_people", id: false, force: :cascade do |t|
-    t.uuid "education_cohort_id", null: false
-    t.uuid "university_person_id", null: false
-    t.index ["education_cohort_id", "university_person_id"], name: "index_cohort_person"
-    t.index ["university_person_id", "education_cohort_id"], name: "index_person_cohort"
-  end
-
   create_table "education_diploma_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "about_id"
     t.text "accessibility"
@@ -2327,6 +2327,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_18_144210) do
     t.integer "email_visibility", default: 0
     t.integer "gender"
     t.boolean "habilitation", default: false
+    t.datetime "invitation_sent_at"
     t.boolean "is_administration"
     t.boolean "is_alumnus", default: false
     t.boolean "is_author"
@@ -2568,6 +2569,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_18_144210) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "administration_academic_year_localizations", "administration_academic_years", column: "about_id"
+  add_foreign_key "administration_academic_year_localizations", "languages"
+  add_foreign_key "administration_academic_year_localizations", "universities"
+  add_foreign_key "administration_academic_years", "universities"
+  add_foreign_key "administration_cohort_localizations", "administration_cohorts", column: "about_id"
+  add_foreign_key "administration_cohort_localizations", "languages"
+  add_foreign_key "administration_cohort_localizations", "universities"
+  add_foreign_key "administration_cohorts", "administration_academic_years", column: "academic_year_id"
+  add_foreign_key "administration_cohorts", "education_programs", column: "program_id"
+  add_foreign_key "administration_cohorts", "education_schools", column: "school_id"
+  add_foreign_key "administration_cohorts", "universities"
   add_foreign_key "administration_location_localizations", "administration_locations", column: "about_id"
   add_foreign_key "administration_location_localizations", "languages"
   add_foreign_key "administration_location_localizations", "universities"
@@ -2783,17 +2795,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_18_144210) do
   add_foreign_key "communication_website_posts", "universities"
   add_foreign_key "communication_websites", "languages", column: "default_language_id"
   add_foreign_key "communication_websites", "universities"
-  add_foreign_key "education_academic_year_localizations", "education_academic_years", column: "about_id"
-  add_foreign_key "education_academic_year_localizations", "languages"
-  add_foreign_key "education_academic_year_localizations", "universities"
-  add_foreign_key "education_academic_years", "universities"
-  add_foreign_key "education_cohort_localizations", "education_cohorts", column: "about_id"
-  add_foreign_key "education_cohort_localizations", "languages"
-  add_foreign_key "education_cohort_localizations", "universities"
-  add_foreign_key "education_cohorts", "education_academic_years", column: "academic_year_id"
-  add_foreign_key "education_cohorts", "education_programs", column: "program_id"
-  add_foreign_key "education_cohorts", "education_schools", column: "school_id"
-  add_foreign_key "education_cohorts", "universities"
   add_foreign_key "education_diploma_localizations", "education_diplomas", column: "about_id"
   add_foreign_key "education_diploma_localizations", "languages"
   add_foreign_key "education_diploma_localizations", "universities"

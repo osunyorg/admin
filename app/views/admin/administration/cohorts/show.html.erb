@@ -8,15 +8,15 @@
 
 <div class="row">
   <div class="col-lg-3">
-    <%= osuny_label Education::Cohort.human_attribute_name('school') %>
+    <%= osuny_label Administration::Cohort.human_attribute_name('school') %>
     <p><%= osuny_link_localized @cohort.school, [:admin, @cohort.school] %></p>
   </div>
   <div class="col-lg-3">
-    <%= osuny_label Education::Cohort.human_attribute_name('program') %>
+    <%= osuny_label Administration::Cohort.human_attribute_name('program') %>
     <p><%= osuny_link_localized @cohort.program, [:admin, @cohort.program] %></p>
   </div>
   <div class="col-lg-3">
-    <%= osuny_label Education::Cohort.human_attribute_name('year') %>
+    <%= osuny_label Administration::Cohort.human_attribute_name('year') %>
     <p><%= link_to @cohort.academic_year, [:admin, @cohort.academic_year] %></p>
   </div>
   <div class="col-lg-3">
@@ -30,6 +30,6 @@
 <% end %>
 
 <% content_for :server_admin_only do %>
-  <%= static_link static_admin_education_cohort_path(@cohort) %>
+  <%= static_link static_admin_administration_cohort_path(@cohort) %>
   <%= render 'admin/communication/websites/git_files/list', git_files: @l10n.git_files %>
-<% end %>  
+<% end %>

@@ -10,10 +10,10 @@ export default {
   computed: {
     sizeWarningSentence: {
       get() {
-        let sentence = this.i18n.size.text;
-        sentence = sentence.replace(':size', this.file.size.mo);
-        sentence = sentence.replace(':max', this.size.max.mo);
-        return sentence;
+        return this.$t('mediaPicker.imageUploader.size.text', {
+          size: this.file.size.mo,
+          max: this.size.max.mo,
+        });
       }
     },
   },
@@ -46,7 +46,6 @@ export default {
       },
       directUpload: null,
       keycdnUrl: null,
-      i18n: {},
     }
   },
   methods: {
@@ -116,7 +115,6 @@ export default {
     if (dataset.keycdn !== '') {
       this.keycdnUrl = "https://" + dataset.keycdn;
     }
-    this.i18n = JSON.parse(dataset.i18n).mediaPicker.imageUploader;
     this.formats = {
       accepted: dataset.formatsAccepted,
       hint: dataset.formatsAcceptedHint,
@@ -137,7 +135,7 @@ export default {
               class="btn"
               @click.prevent="$refs.file.click()">
         <Upload stroke-width="1.5" />
-        {{ i18n.button }}
+        {{ $t('mediaPicker.imageUploader.button') }}
       </button>
       <div class="form-text">{{ formats.hint }}</div>
     </div>
@@ -152,7 +150,7 @@ export default {
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">{{ i18n.size.title }}</h5>
+            <h5 class="modal-title">{{ $t('mediaPicker.imageUploader.size.title') }}</h5>
             <button type="button"
                     class="btn-close"
                     @click="closeAlert()">
@@ -164,7 +162,7 @@ export default {
             <button type="button"
                     class="btn btn-sm btn-secondary ms-auto"
                     @click="closeAlert()">
-              {{ i18n.size.close }}
+              {{ $t('mediaPicker.imageUploader.size.close') }}
             </button>
           </div>
         </div>

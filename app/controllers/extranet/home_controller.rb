@@ -20,7 +20,7 @@ class Extranet::HomeController < Extranet::ApplicationController
   end
 
   def load_alumni_variables
-    @cohorts =  current_extranet.about.education_cohorts
+    @cohorts =  current_extranet.about.administration_cohorts
                                       .ordered(current_language)
                                       .limit(5)
     @experiences =  current_extranet.about.university_person_experiences

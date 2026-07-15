@@ -24,7 +24,7 @@ class Admin::Administration::Alumni::CohortsController < Admin::Administration::
     super
     add_breadcrumb University::Person::Alumnus.model_name.human(count: 2), admin_administration_alumni_path
     add_breadcrumb @alumnus.to_s_in(current_language), admin_administration_alumnus_path(@alumnus)
-    add_breadcrumb Education::Cohort.model_name.human(count: 2)
+    add_breadcrumb Administration::Cohort.model_name.human(count: 2)
   end
 
   def cohorts_params

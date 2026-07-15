@@ -484,6 +484,18 @@ en:
         drag_and_drop: Drag and drop
         language_mismatch_alert: This block does not exist in this language.
       extranet:
+        alumni:
+          account_active: Account activated
+          already_active: This account is already active
+          filters:
+            account:
+              label: account
+              without_account: Without account
+              with_account: With account
+          send_invitation:
+            cta: Send an invitation email
+            just_sent: Invitation email sent to %{name}
+            too_soon: An invitation email has already been sent less than 5 minutes ago.
         confirm_localization:
           text_html: "The creation of <i>%{about}</i> in %{language} requires the localization of the extranet <i>%{extranet}</i> in %{language}."
           title: Localization confirmation
@@ -553,6 +565,11 @@ en:
           show: Show page
           special_page: Special page
           special_pages:
+            administration_academic_year:
+              native:
+                zero: This page is a special page that natively displays the site's alumni, sorted by year. Currently, there are no alumni on the site.
+                one: This page is a special page that natively displays the site's alumni, sorted by year. Currently, there is one alumnus.
+                other: This page is a special page that natively displays the site's %{count} alumni, sorted by year.
             administration_location:
               native:
                 zero: This page is a special page, which natively presents the campus locations. For now, there is no location.
@@ -583,11 +600,6 @@ en:
                 zero: This page is a special page that natively displays the site's news.
                 one: This page is a special page that natively displays the site's news . Currently, there's a single post.
                 other: This page is a special page that natively displays the %{count} published news.
-            education_academic_year:
-              native:
-                zero: This page is a special page that natively displays the site's alumni, sorted by year. Currently, there are no alumni on the site.
-                one: This page is a special page that natively displays the site's alumni, sorted by year. Currently, there is one alumnus.
-                other: This page is a special page that natively displays the site's %{count} alumni, sorted by year.
             education_diploma:
               native:
                 zero: This page is a special page that natively displays the diplomas associated with the site. Currently, there are no diplomas on the site.
@@ -714,7 +726,9 @@ en:
       none: No summary yet
     website:
       advanced_options: Advanced options
-      analytics: Analytics
+      analytics:
+        adblock_warning: If Plausible does not load, make sure that it is not blocked by your browser through an extension or its privacy settings.
+        title: Analytics
       git: Git
       golive:
         button: Go live
@@ -731,6 +745,9 @@ en:
           accessibility:
             slug: accessibility
             title: Accessibility
+          administration_academic_year:
+            slug: alumni
+            title: Alumni
           administration_location:
             slug: campus
             title: Campus
@@ -761,9 +778,6 @@ en:
           communication_post:
             slug: posts
             title: Posts
-          education_academic_year:
-            slug: alumni
-            title: Alumni
           education_diploma:
             slug: diplomas
             title: Diplomas

@@ -1,6 +1,7 @@
 <%= osuny_panel @website.feature_posts_name(current_language) do %>
   <%= render 'admin/communication/websites/posts/list', 
               posts: @posts, 
+              website: @website,
               small: true,
               link_to_all: true %>
 <% end %>
