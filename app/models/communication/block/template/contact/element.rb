@@ -8,9 +8,4 @@ class Communication::Block::Template::Contact::Element < Communication::Block::T
     time_slot_morning['from'].blank? &&
     time_slot_afternoon['from'].blank?
   end
-
-  def dom_count
-    25
-  end
-
 end

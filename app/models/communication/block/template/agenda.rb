@@ -68,12 +68,6 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
     title_link
   end
 
-  def dom_count
-    5 +
-    description_component.dom_count +
-    children.length * 25
-  end
-
   protected
 
   def selected_events_all

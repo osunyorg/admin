@@ -44,12 +44,4 @@ class Communication::Block::Template::Organization::Element < Communication::Blo
     organization_l10n.logo&.blob
   end
 
-  def dom_count
-    2 + 
-    name_component.dom_count +
-    url_component.dom_count +
-    logo_component.dom_count +
-    role_component.dom_count
-  end
-
 end

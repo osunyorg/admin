@@ -14,60 +14,6 @@ en:
         deletion: Are you sure you want to delete?
         duplication: Are you sure you want to duplicate?
         reset: Reset will remove all blocks in this language. Are you sure?
-      dom_count:
-        count: Around {count} elements in the DOM
-        credit: "Illustration from the book<br>Botanique élémentaire : organographie et classification<br>Ferdinand Faideau (1862-193.)<br>Source gallica.bnf.fr / Bibliothèque nationale de France"
-        more:
-          title: How does it work?
-          explanation: "<p>
-              A web page is made up of a set of elements.
-              A paragraph of text is an element, a link inside that text is another element, a word in italics is a third element.
-              This does not say anything about the weight of the page, because an img element can load an image weighing several megabytes, and a single paragraph can contain all of Balzac's books.
-              In code, we interact with these elements through a document model, the DOM (Document Object Model).
-            </p>
-            <p>
-              The EcoIndex score places a great deal of importance on the size of the DOM when calculating the ecological quality of a page.
-              The underlying idea is that a larger DOM will require more energy from the device to be rendered and displayed in the browser.
-              While this idea is theoretically correct, it misses the biggest consumer of energy on the device: JavaScript.
-              A single demanding animation or 3D object is enough for JavaScript to turn your computer into a fan, or your mobile phone into a heater.
-              To learn more, read the article <a href=\"https://www.osuny.org/actualites/2026-06-03-osuny-et-le-score-ecoindex/\" target=\"_blank\">osuny and the EcoIndex score</a>.
-            </p>
-            <p>
-              Nevertheless, the number of DOM elements is an interesting indicator in terms of editorial sobriety.
-              It is not a matter of trying to measure the ecological impact, but of evaluating the effect on attention.
-              Here too, it is not very exact: for instance, if you use collapsed titles, you do not saturate a person's attention in the same way as when the content is displayed directly.
-              But it is worth asking whether the content is both as small as possible, and as large as necessary.
-              Neither too much, nor too little.
-            </p>
-            <p>
-              For this, osuny relies on the blocks used to approximately compute the number of elements on the page.
-              This number of elements is then translated into five tiers, presented below.
-              None of these tiers is good or bad in itself, it is purely a question of fit with actual usage.
-              One way of evaluating the relevance of dense pages is to check that the time spent on those pages by users is significant.
-              For very simple pages, it is about evaluating whether people find the information they are looking for, or whether they are forced to load other pages.
-              Eco-design work is subtle, and it always relies on listening to people and observing usage.
-            </p>"
-        level:
-          one:
-            title: Poppy
-            text: This web page is extremely simple! That is probably a very good thing, if it matches user expectations. But you should also ask whether it forces users to load several pages to find the information they need. A well eco-designed page is one that meets people's needs, no more and no less.
-            dom: Less than 300 elements in the DOM
-          two:
-            title: Hollyhock
-            text: This page is simple, which is a good sign! However, you should check that it actually meets user needs. If it is simple but forces users to load 3 others, that is probably not the best balance. A well eco-designed page is one that meets people's needs, no more and no less.
-            dom: Between 300 and 600 elements in the DOM
-          three:
-            title: Olive tree
-            text: This page is medium-sized. It may be a bit large, depending on the use case. Are all the elements useful to the users? If some are missing, you should consider adding them. If some are almost always superfluous, it is better to remove them or group them on a dedicated page. A well eco-designed page is one that meets people's needs, no more and no less.
-            dom: Between 600 and 1000 elements in the DOM
-          four:
-            title: Oak
-            text: This page is large, it is worth pausing to think about it. If users spend several minutes browsing it and find it really useful, that is fine. But if people get lost in the page, it would be better to split it into several pages, each better matching a specific use. A well eco-designed page is one that meets people's needs, no more and no less.
-            dom: Between 1000 and 2000 elements in the DOM
-          five:
-            title: Giant sequoia
-            text: This page is absolutely huge. If your visit statistics show that the average time spent on the page is 30 minutes, that is fine. But in other cases, you should probably tidy up and split the content into simpler pieces, in order to better address users' actual needs. A well eco-designed page is one that meets people's needs, no more and no less.
-            dom: More than 2000 elements in the DOM
       empty: This block is empty and will not appear
       offcanvas:
         close: Close block edition

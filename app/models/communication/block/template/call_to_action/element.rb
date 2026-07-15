@@ -4,7 +4,4 @@ class Communication::Block::Template::CallToAction::Element < Communication::Blo
   has_component :url, :string
   has_component :target_blank, :boolean
 
-  def dom_count
-    1
-  end
 end

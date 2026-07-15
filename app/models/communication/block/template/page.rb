@@ -60,11 +60,6 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
     page_l10n.hugo(website).permalink
   end
 
-  def dom_count
-    5 +
-    children.length * 25
-  end
-
   protected
 
   def page_l10n
