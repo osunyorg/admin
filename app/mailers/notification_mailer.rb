@@ -13,7 +13,7 @@ class NotificationMailer < ApplicationMailer
         from: import.university.mail_from[:full],
         to: import.user.email,
         subject: subject
-      ) if should_send?(import.user.email)
+      )
     end
   end
 
@@ -26,7 +26,7 @@ class NotificationMailer < ApplicationMailer
         from: user.university.mail_from[:full],
         to: user.email,
         subject: subject
-      ) if should_send?(user.email)
+      )
     end
   end
 
@@ -40,7 +40,7 @@ class NotificationMailer < ApplicationMailer
         from: user.university.mail_from[:full],
         to: user.email,
         subject: subject
-      ) if should_send?(user.email)
+      )
     end
   end
 
@@ -52,7 +52,7 @@ class NotificationMailer < ApplicationMailer
         from: university.mail_from[:full],
         to: user.email,
         subject: subject
-      ) if should_send?(user.email)
+      )
     end
   end
 
