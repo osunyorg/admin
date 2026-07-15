@@ -2,12 +2,12 @@ module Education::Program::WithAlumni
   extend ActiveSupport::Concern
 
   included do
-    has_many   :education_cohorts,
-               class_name: 'Education::Cohort'
-               alias_method :cohorts, :education_cohorts
+    has_many   :administration_cohorts,
+               class_name: 'Administration::Cohort'
+               alias_method :cohorts, :administration_cohorts
 
     has_many   :alumni,
-               through: :education_cohorts,
+               through: :administration_cohorts,
                source: :people
                alias_method :university_person_alumni, :alumni
 
@@ -29,21 +29,21 @@ module Education::Program::WithAlumni
                association_foreign_key: :university_person_id
 
     # NOTE: Find a fix for wrong table name on WHERE clause
-    #   SELECT "education_academic_years".*
-    #   FROM "education_academic_years"
-    #   INNER JOIN "education_cohorts"
-    #     ON "education_academic_years"."id" = "education_cohorts"."academic_year_id"
+    #   SELECT "administration_academic_years".*
+    #   FROM "administration_academic_years"
+    #   INNER JOIN "administration_cohorts"
+    #     ON "administration_academic_years"."id" = "administration_cohorts"."academic_year_id"
     #   WHERE "cohorts"."program_id" = '<uuid>'
     #
     # has_many   :academic_years,
-    #            class_name: 'Education::AcademicYear',
-    #            through: :education_cohorts,
-    #            source: :education_academic_year
-    #            alias_method :education_academic_years, :academic_years
+    #            class_name: 'Administration::AcademicYear',
+    #            through: :administration_cohorts,
+    #            source: :administration_academic_year
+    #            alias_method :administration_academic_years, :academic_years
 
     def academic_years
-      Education::AcademicYear.where(id: education_cohorts.pluck(:academic_year_id))
+      Administration::AcademicYear.where(id: administration_cohorts.pluck(:academic_year_id))
     end
-    alias :education_academic_years :academic_years
+    alias :administration_academic_years :academic_years
   end
 end

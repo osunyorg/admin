@@ -19,6 +19,10 @@ class Communication::Website::Page::Author < Communication::Website::Page
     'authors/_index.html'
   end
 
+  def default_parent
+    website.special_page(Communication::Website::Page::Person)
+  end
+  
   protected
 
   def dependencies_authors
@@ -28,7 +32,4 @@ class Communication::Website::Page::Author < Communication::Website::Page
     )
   end
 
-  def default_parent
-    website.special_page(Communication::Website::Page::Person)
-  end
 end

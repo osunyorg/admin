@@ -3,18 +3,19 @@
 # Table name: communication_website_git_files
 #
 #  id                :uuid             not null, primary key, indexed => [website_id]
-#  about_type        :string           indexed => [about_id]
+#  about_type        :string           indexed => [about_id], uniquely indexed => [website_id, about_id]
 #  current_path      :string
 #  current_sha       :string
 #  desynchronized    :boolean          default(TRUE)
 #  desynchronized_at :datetime         indexed
+#  generated_at      :datetime
 #  previous_path     :string
 #  previous_sha      :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  about_id          :uuid             indexed => [about_type]
-#  university_id     :uuid             not null, indexed
-#  website_id        :uuid             not null, indexed => [id]
+#  about_id          :uuid             indexed => [about_type], uniquely indexed => [website_id, about_type]
+#  university_id     :uuid             indexed
+#  website_id        :uuid             not null, indexed => [id], uniquely indexed => [about_type, about_id]
 #
 # Indexes
 #
@@ -22,6 +23,7 @@
 #  index_communication_website_git_files_on_university_id      (university_id)
 #  index_communication_website_git_files_on_website_id_and_id  (website_id,id)
 #  index_communication_website_github_files_on_about           (about_type,about_id)
+#  index_git_files_unique_about_per_website                    (website_id,about_type,about_id) UNIQUE WHERE (about_id IS NOT NULL)
 #
 # Foreign Keys
 #
@@ -40,6 +42,7 @@ class Communication::Website::GitFile < ApplicationRecord
   # One Git File per about and website, unless about is nil (destroy orphans)
   validates :about_id, uniqueness: { scope: [:about_type, :website_id] }, allow_nil: true
 
+  scope :generated, -> { where.not(generated_at: nil) }
   scope :desynchronized, -> { where(desynchronized: true) }
   scope :desynchronized_since, -> (time) { desynchronized.where('desynchronized_at > ?', time) }
   scope :desynchronized_until, -> (time) { desynchronized.where('desynchronized_at <= ?', time) }
@@ -53,8 +56,12 @@ class Communication::Website::GitFile < ApplicationRecord
     # Blobs need to be completely analyzed, which is async
     analyze_if_blob about
     # The git file might exist or not
-    git_file = where(university: website.university, website: website, about: about).first_or_initialize
-    git_file.analyze!
+    scope = where(university: website.university, website: website, about: about)
+    scope.first_or_initialize.analyze!
+  rescue ActiveRecord::RecordNotUnique
+    # A concurrent job created the row between our validation and our INSERT:
+    # the unique index rejected it, so we fetch the existing one and analyze it.
+    scope.first&.analyze!
   end
 
   # 3 cases:
@@ -82,11 +89,13 @@ class Communication::Website::GitFile < ApplicationRecord
 
   def mark_for_destruction!
     return if current_path.nil? && current_sha.nil?
+    now = Time.zone.now
     update(
       current_path: nil,
       current_sha: nil,
       desynchronized: true,
-      desynchronized_at: Time.zone.now
+      desynchronized_at: now,
+      generated_at: now
     )
   end
 
@@ -101,6 +110,10 @@ class Communication::Website::GitFile < ApplicationRecord
       desynchronized: false,
       desynchronized_at: nil
     )
+  end
+
+  def generated?
+    generated_at.present?
   end
 
   def to_s

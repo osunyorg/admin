@@ -1,0 +1,123 @@
+<script>
+import { VueDraggableNext } from "vue-draggable-next";
+
+export default {
+    components: {
+      draggable: VueDraggableNext,
+    },
+    props: [
+      'modelValue',
+    ],
+    emits: [
+      'update:modelValue',
+      'edit',
+      'delete',
+      'copy',
+      'duplicate',
+      'reorder'
+    ],
+    computed: {
+      value: {
+        get() {
+          return this.modelValue;
+        },
+        set(value) {
+          this.$emit('update:modelValue', value);
+        }
+      },
+    },
+    methods: {
+      onEdit(event, block) {
+        event.preventDefault();
+        this.$emit('edit', block);
+      },
+      onReorder() {
+        this.$emit('reorder');
+      },
+      onDelete(event, block) {
+        event.preventDefault();
+        if (!confirm(this.$t('blocksEditor.confirm.deletion'))) return;
+        this.$emit('delete', block);
+      },
+      onCopy(event, block) {
+        event.preventDefault();
+        this.$emit('copy', block);
+      },
+      onDuplicate(event, block) {
+        event.preventDefault();
+        if (!confirm(this.$t('blocksEditor.confirm.duplication'))) return;
+        this.$emit('duplicate', block);
+      },
+    }
+};
+</script>
+
+<template>
+  <section>
+    <draggable
+      :list="value"
+      @change="onReorder"
+      handle=".handle">
+      <div
+        v-for="block in value"
+        :id="`block-${block.id}`"
+        class="vue__blocks-editor__elements__element">
+        <div
+          class="row"
+          :class="{'draft': !block.published}">
+          <div class="col-lg-4 text-lg-end pt-2">
+            <label class="form-label">{{ block.template.name }}</label>
+          </div>
+          <div class="col-lg-8 col-xxl-6">
+            <div class="card card-body border-bottom py-1 px-2 border-light plan-mode--true">
+              <p class="handle small mb-0 text-truncate">
+                <i class="fas fa-sort me-2"></i>
+                {{ block.text }}
+              </p>
+            </div>
+            <div class="card card-body border-bottom border-light px-3 px-sm-5 plan-mode--false">
+              <div class="text-end mb-2">
+                <span class="vue__blocks-editor__elements__element--hover">
+                  <span class="vue__blocks-editor__elements__handle">
+                    <span class="handle">
+                      <i class="fas fa-sort"></i>
+                      <span class="small">
+                         {{ $t('blocksEditor.actions.move') }}
+                      </span>
+                    </span>
+                  </span>
+                  <a
+                    href="#"
+                    class="action text-danger ms-2"
+                    @click="onDelete($event, block)">
+                    {{ $t('blocksEditor.actions.delete') }}</a>
+                  <a
+                    href="#"
+                    class="action ms-2"
+                    @click="onCopy($event, block)">
+                    {{ $t('blocksEditor.actions.copy') }}</a>
+                  <a
+                    href="#"
+                    class="action ms-2"
+                    @click="onDuplicate($event, block)">
+                    {{ $t('blocksEditor.actions.duplicate') }}</a>
+                </span>
+                <a 
+                  href="#"
+                  class="action ms-2"
+                  @click="onEdit($event, block)">
+                  {{ $t('blocksEditor.actions.edit') }}</a>
+              </div>
+              <div
+                class="vue__blocks-editor__elements__preview"
+                :class="`vue__blocks-editor__elements__preview--${block.template.kind}`">
+                <div v-html="block.snippet"></div>
+              </div>
+              <span v-html="block.a11y.status"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </draggable>
+  </section>
+</template>

@@ -1,4 +1,4 @@
-<% content_for :title, t('create') %>
+<% content_for :title, @website.feature_portfolio_name(current_language) %>
 
 <% content_for :title_right do %>
   <%= create_link Communication::Website::Portfolio::Project %>

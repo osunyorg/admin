@@ -1,0 +1,4 @@
+<% if diploma.present? %>
+  <%= osuny_label Education::Program.human_attribute_name('diploma') %>
+  <p><%= osuny_link_localized diploma, [:admin, diploma] %></p>
+<% end %>

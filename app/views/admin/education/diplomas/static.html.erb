@@ -6,6 +6,10 @@ language = @l10n.language
                     .root
                     .published_now_in(language)
                     .ordered(language) if @website.present?
+@programs_flattened = @website.education_programs
+                              .where(diploma: diploma)
+                              .published_now_in(language)
+                              .ordered(language)
 %>---
 <%= render 'admin/application/static/core', about: @l10n, skip_date: true %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
@@ -22,11 +26,17 @@ programs:
             programs: @programs,
             language: language %>
 <% end %>
+programs_flattened:
+<%= render 'admin/education/programs/static_list',
+            diploma: diploma,
+            programs: @programs_flattened,
+            language: language,
+            hide_children: true %>
 <%= osuny_static_html 'short_name', @l10n.short_name %>
 <%= osuny_static_html 'summary', @l10n.summary %>
 <%= osuny_static_html 'level', diploma.level_i18n unless diploma.level_not_applicable? %>
 ects: <%= diploma.ects %>
 certification: <%= diploma.certification %>
 <%= osuny_static_html 'duration', @l10n.duration %>
-<%= render 'admin/communication/contents/static', about: @l10n %>
+<%= render 'admin/communication/blocks/group/static', about: @l10n %>
 ---

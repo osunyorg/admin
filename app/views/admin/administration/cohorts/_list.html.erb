@@ -1,0 +1,43 @@
+<% hide_school ||= false %>
+<div class="row g-2 mb-3">
+  <% cohorts.ordered.each do |cohort| %>
+    <div>
+      <div class="<%= osuny_card_classes(horizontal: true) %>">
+        <%= osuny_thumbnail_localized cohort.program %>
+        <% if cohort.deleted? %>
+          <div class="card-body">
+            <%= cohort.best_localization_for(current_language) %>
+          </div>
+          <% if can?(:restore, cohort) %>
+            <div class="card-footer">
+              <%= link_to t('restore'),
+                          restore_admin_administration_cohort_path(cohort),
+                          method: :post,
+                          class: button_classes %>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-8">
+                <%= link_to [:admin, cohort, { school_id: nil, program_id: nil }] do %>
+                  <%= cohort.program.to_s_in(current_language) %>
+                  <%= cohort.year %>
+                <% end %>
+              </div>
+              <% unless hide_school %>
+                <div class="col-lg-4">
+                  <%= cohort.school.to_s_in(current_language) %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="card-footer">
+            <%= cohort.people.count %>
+            <%= University::Person::Alumnus.model_name.human(count: cohort.people.count).downcase %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,4 @@
+<% if parent %>
+  <%= osuny_label Education::Program.human_attribute_name('parent') %>
+  <p><%= osuny_link_localized parent, [:admin, parent] %></p>
+<% end %>

@@ -8,7 +8,8 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   include Admin::Localizable
 
   before_action :load_localization,
-                :redirect_if_not_localized,
+                only: [:show, :edit, :update, :duplicate, :static, :publish, :preview, :generate_from_template]
+  before_action :redirect_if_not_localized,
                 only: [:show, :edit, :update, :static, :publish, :preview, :generate_from_template]
 
   def index
@@ -30,16 +31,14 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def reorder
-    parent_page = @website.pages.find(params[:parentId])
-    old_parent_page = @website.pages.find(params[:oldParentId])
-    ids = params[:ids] || []
-    ids.each.with_index do |id, index|
-      page = @website.pages.find(id)
-      page.update(parent_id: parent_page.id, position: index + 1)
-    end
-    old_parent_page.touch
-    parent_page.touch if parent_page != old_parent_page
-    @website.generate_automatic_menus_for_language(current_language)
+    result = @website.reorder_pages(
+      item_id: params[:itemId],
+      previous_parent_id: params[:oldParentId], 
+      parent_id: params[:parentId], 
+      ids: params[:ids],
+      language: current_language
+    )
+    head result ? :ok : :unprocessable_entity
   end
 
   def children
@@ -123,10 +122,11 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def duplicate
     if @page.is_special_page?
-      redirect_back(fallback_location: admin_communication_website_page_path(@page), alert: t('admin.communication.website.pages.duplicate_special_page_notice'))
+      redirect_back fallback_location: admin_communication_website_page_path(@page),
+                    alert: t('admin.communication.website.pages.duplicate_special_page_notice')
     else
       redirect_to [:admin, @page.duplicate],
-                  notice: t('admin.successfully_duplicated_html', model: @page.to_s)
+                  notice: t('admin.successfully_duplicated_html', model: @l10n.to_s)
     end
   end
 
@@ -142,7 +142,11 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   def restore
     @page = @website.pages.only_deleted.find(params[:id])
     authorize!(:restore, @page)
-    @page.restore(recursive: true)
+    Osuny::BulkOperation.silently do
+      @page.restore(recursive: true)
+    end
+    @page.touch
+    @website.generate_automatic_menus_for_language(current_language)
     redirect_to admin_communication_website_page_path(@page),
                 notice: t('admin.successfully_restored_html', model: @page.to_s_in(current_language))
   end

@@ -1,5 +1,16 @@
 <% content_for :title, University::Person::Alumnus.model_name.human(count: 2) %>
 
+<% content_for :title_right do %>
+  <%= button_advanced do %>
+    <%= link_to t('export'),
+                request.params.merge(format: "xlsx"),
+                class: button_classes %>
+  <% end %>
+  <%= link_to t('university.alumni.cohorts.import_btn'),
+              new_admin_administration_alumni_cohorts_import_path,
+              class: button_classes if can? :create, University::Person::Alumnus %>
+<% end %>
+
 <div class="d-flex justify-content-between mb-4">
   <p>
     <%= @alumni.total_count %>
@@ -10,9 +21,3 @@
 
 <%= render 'admin/administration/alumni/list', alumni: @alumni %>
 <%= paginate @alumni %>
-
-<% content_for :title_right do %>
-  <%= link_to t('university.alumni.cohorts.import_btn'),
-              new_admin_administration_alumni_cohorts_import_path,
-              class: button_classes if can? :create, University::Person::Alumnus %>
-<% end %>

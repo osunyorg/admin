@@ -75,7 +75,7 @@ link_to_all ||= false
                           <%= Communication::Website::Post::Localization.human_attribute_name('pinned') %>
                         </span>
                       <% end %>
-                      <% if @website.archive_content && post.is_lasting %>
+                      <% if website.archive_content && post.is_lasting %>
                         <span class="badge border border-subtle text-dark">
                           <%= t('admin.content_archive.is_lasting.label') %>
                         </span>

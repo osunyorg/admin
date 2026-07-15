@@ -20,7 +20,6 @@ module Communication::Website::Page::WithSpecialPage
       Communication::Website::Page::EducationSchool,
       Communication::Website::Page::EducationDiploma,
       Communication::Website::Page::EducationProgram,
-      Communication::Website::Page::EducationAcademicYear,
       # Research
       Communication::Website::Page::ResearchJournal,
       Communication::Website::Page::ResearchLaboratory,
@@ -28,6 +27,7 @@ module Communication::Website::Page::WithSpecialPage
       Communication::Website::Page::ResearchPaper,
       Communication::Website::Page::ResearchPublication,
       # Administration
+      Communication::Website::Page::AdministrationAcademicYear,
       Communication::Website::Page::AdministrationLocation,
       # People facets
       Communication::Website::Page::Administrator,
@@ -123,11 +123,12 @@ module Communication::Website::Page::WithSpecialPage
     save if l10n_created
   end
 
-  protected
-
   def default_parent
     website.special_page(Communication::Website::Page::Home)
   end
+
+  protected
+
 
   def initialize_special_page
     # Set default attributes for special page

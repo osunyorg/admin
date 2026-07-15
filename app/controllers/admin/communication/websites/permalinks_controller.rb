@@ -53,7 +53,7 @@ class Admin::Communication::Websites::PermalinksController < Admin::Communicatio
       mandatory_module: Permalinkable
     )
     @path = params.dig('communication_website_permalink', 'path')
-    @permalink = @about.add_redirection(@path)
+    @permalink = @about.add_redirection(@path, @website)
   end
 
   def create_from_form

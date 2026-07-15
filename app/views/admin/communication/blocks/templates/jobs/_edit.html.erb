@@ -25,7 +25,7 @@
         </div>
         <div>
           <a  class="btn btn-sm text-danger ms-3"
-              v-on:click="deleteElement(element)"
+              @click="deleteElement(element)"
               title="<%= t('delete') %>">
               <i class="<%= Icon::DELETE %>"></i>
           </a>
@@ -40,8 +40,15 @@
 <%= osuny_small_panel t('admin.communication.blocks.components.layouts.label') do %>
   <%= block_component_edit block, :layout %>
   <%= osuny_label t('admin.communication.blocks.display_options.title') %>
-  <%= block_component_edit block, :option_image, label: Communication::Website::Jobboard::Job::Localization.human_attribute_name(:featured_image) %>
-  <%= block_component_edit block, :option_subtitle, label: Communication::Website::Jobboard::Job::Localization.human_attribute_name(:subtitle) %>
-  <%= block_component_edit block, :option_summary, label: t('admin.summary.label') %>
-  <%= block_component_edit block, :option_categories, label: Communication::Website::Jobboard::Job.human_attribute_name(:categories) %>
+  <div class="row">
+    <div class="col-sm-6">
+      <%= block_component_edit block, :option_image, label: Communication::Website::Jobboard::Job::Localization.human_attribute_name(:featured_image) %>
+      <%= block_component_edit block, :option_subtitle, label: Communication::Website::Jobboard::Job::Localization.human_attribute_name(:subtitle) %>
+      <%= block_component_edit block, :option_summary, label: t('admin.summary.label') %>
+    </div>
+    <div class="col-sm-6">
+      <%= block_component_edit block, :option_dates, label: Communication::Website::Jobboard::Job.human_attribute_name(:dates) %>
+      <%= block_component_edit block, :option_categories, label: Communication::Website::Jobboard::Job.human_attribute_name(:categories) %>
+    </div>
+  </div>
 <% end %>

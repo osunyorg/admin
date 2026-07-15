@@ -24,9 +24,7 @@ class Git::Repository
   end
 
   def update_theme_version!
-    provider.update_theme
-    theme_name = ENV["GITHUB_WEBSITE_THEME_REPOSITORY"].to_s.split("/").last
-    provider.push("Updated #{theme_name} version")
+    provider.update_theme!
   end
 
   # Based on content, with the provider's algorithm (sha1 or sha256)

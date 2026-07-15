@@ -5,7 +5,7 @@ class Transparency::HomeController < Transparency::ApplicationController
     @costs = [
       ['Brevo', 'SMS et mails transactionnels', 420],
       ['CodeClimate', 'Qualité de code (gratuit pour l\'open source)', 0],
-      ['Deuxfleurs', 'Hébergement sans data center', 3000],
+      ['Deuxfleurs', 'Hébergement sans data center', 5000],
       ['Insight Hub', 'Interception d\'erreur (gratuit pour l\'open source)', 0],
       ['KeyCDN', 'Redimensionnement des images', 3000],
       ['LanguageTool', 'Aide à la qualité des contenus', 1200],

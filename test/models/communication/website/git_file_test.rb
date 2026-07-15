@@ -67,6 +67,7 @@ class Communication::Website::GitFileTest < ActiveSupport::TestCase
     block = page_l10n.blocks.create(position: 1, published: true, template_kind: :persons)
     block.data = "{ \"elements\": [ { \"id\": \"#{arnaud.id}\" } ] }"
     block.save
+    perform_enqueued_jobs(except: Communication::Website::GitFile::IdentifyJob)
 
     page = page.reload
 
@@ -86,14 +87,10 @@ class Communication::Website::GitFileTest < ActiveSupport::TestCase
       block.save
     end
 
-    # On lance l'identification pour Olivia
     assert_difference -> { olivia.original_localization.git_files.count } do
-      perform_enqueued_jobs(only: Communication::Website::GitFile::IdentifyJob)
-    end
-
-    # On vérifie qu'on enqueue le job qui clean les websites
-    assert_enqueued_with(job: Communication::Website::CleanJob) do
-      perform_enqueued_jobs(only: Dependencies::CleanWebsitesIfNecessaryJob)
+      assert_enqueued_with(job: Communication::Website::CleanJob) do
+        perform_enqueued_jobs
+      end
     end
       
     perform_enqueued_jobs(only: Communication::Website::CleanJob)

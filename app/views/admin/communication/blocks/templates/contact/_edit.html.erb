@@ -1,86 +1,72 @@
-<div class="row mb-4">
-  <div class="col-xxl-6">
-    <%= block_component_edit block, :description, summernote_config: 'mini' %>
-  </div>
-</div>
-<div class="row mb-4">
-  <div class="col-xxl-6">
-    <%= osuny_panel t('.contacts') do %>
-      <%= block_component_edit block, :name %>
-      <%= block_component_edit block, :information %>
-      <%= block_component_edit block, :address %>
-      <div class="row">
-        <div class="col-md-4">
-          <%= block_component_edit block, :zipcode %>
-        </div>
-        <div class="col-md-8">
-          <%= block_component_edit block, :city %>
-        </div>
-      </div>
-      <%= block_component_edit block, :country %>
-    <% end %>
-  </div>
-  <div class="col-xxl-6">
-    <%= osuny_panel t('.website') do %>
-      <%= block_component_edit block, :url %>
-    <% end %>
-    <% 
-    action = "<a class=\"#{ button_classes }\" v-on:click=\"data.phone_numbers.push('')\">#{ t('.add') }</a>"
-    placeholder = t '.phones.placeholder'
-    %>
-    <%= osuny_panel t('.phones.label'), action: action do %>
-      <div v-for="(element, index) in data.phone_numbers">
-        <div class="d-flex mb-2">
-          <input  type="tel"
-                  class="form-control"
-                  placeholder="<%= placeholder %>"
-                  v-model="data.phone_numbers[index]">
-          <a class="btn text-danger" v-on:click="data.phone_numbers.splice(index, 1)">
-            <i class="<%= Icon::DELETE %>"></i>
-          </a>
-        </div>
-      </div>
-    <% end %>
-    <% 
-    action = "<a class=\"#{ button_classes }\" v-on:click=\"data.emails.push('')\">#{ t('.add') }</a>"
-    placeholder = t '.mails.placeholder'
-    %>
-    <%= osuny_panel t('.mails.label'), action: action do %>
-      <div v-for="(element, index) in data.emails">
-        <div class="d-flex mb-2">
-          <input  type="email"
-                  class="form-control" 
-                  placeholder="<%= placeholder %>"
-                  v-model="data.emails[index]">
-          <a class="btn text-danger" v-on:click="data.emails.splice(index, 1)">
-            <i class="<%= Icon::DELETE %>"></i>
-          </a>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
-
-<%= osuny_panel t('.social') do %>
-  <div class="row mb-4">
-    <% 
-    [
-      :social_mastodon, 
-      :social_x, 
-      :social_linkedin, 
-      :social_youtube, 
-      :social_vimeo, 
-      :social_peertube, 
-      :social_instagram, 
-      :social_facebook, 
-      :social_tiktok, 
-      :social_github,
-    ].each do |network| %>
-    <div class="col-xxl-6">
-      <%= block_component_edit block, network, label: Communication::Website.human_attribute_name(network) %>
+<%= block_component_edit block, :description, summernote_config: 'mini' %>
+<%= osuny_panel t('.contacts') do %>
+  <%= block_component_edit block, :name %>
+  <%= block_component_edit block, :information %>
+  <%= block_component_edit block, :address %>
+  <div class="row">
+    <div class="col-md-4">
+      <%= block_component_edit block, :zipcode %>
     </div>
-    <% end %>
+    <div class="col-md-8">
+      <%= block_component_edit block, :city %>
+    </div>
   </div>
+  <%= block_component_edit block, :country %>
+<% end %>
+<%= osuny_panel t('.website') do %>
+  <%= block_component_edit block, :url %>
+<% end %>
+<% 
+action = "<a class=\"#{ button_classes }\" @click=\"data.phone_numbers.push('')\">#{ t('.add') }</a>"
+placeholder = t '.phones.placeholder'
+%>
+<%= osuny_panel t('.phones.label'), action: action do %>
+  <div v-for="(element, index) in data.phone_numbers">
+    <div class="d-flex mb-2">
+      <input  type="tel"
+              class="form-control"
+              placeholder="<%= placeholder %>"
+              v-model="data.phone_numbers[index]">
+      <a class="btn text-danger" @click="data.phone_numbers.splice(index, 1)">
+        <i class="<%= Icon::DELETE %>"></i>
+      </a>
+    </div>
+  </div>
+<% end %>
+<% 
+action = "<a class=\"#{ button_classes }\" @click=\"data.emails.push('')\">#{ t('.add') }</a>"
+placeholder = t '.mails.placeholder'
+%>
+<%= osuny_panel t('.mails.label'), action: action do %>
+  <div v-for="(element, index) in data.emails">
+    <div class="d-flex mb-2">
+      <input  type="email"
+              class="form-control" 
+              placeholder="<%= placeholder %>"
+              v-model="data.emails[index]">
+      <a class="btn text-danger" @click="data.emails.splice(index, 1)">
+        <i class="<%= Icon::DELETE %>"></i>
+      </a>
+    </div>
+  </div>
+<% end %>
+
+<%= osuny_panel Communication::Website.human_attribute_name(:social) do %>
+  <% 
+  [
+    :social_mastodon, 
+    :social_x, 
+    :social_linkedin, 
+    :social_youtube, 
+    :social_vimeo, 
+    :social_peertube, 
+    :social_instagram, 
+    :social_facebook, 
+    :social_tiktok, 
+    :social_github,
+  ].each do |network| %>
+  <%= block_component_edit block, network, label: Communication::Website::Localization.human_attribute_name(network) %>
+  <% end %>
 <% end %>
 
 <h3 class="h4"><%= t '.slots' %></h3>
@@ -93,21 +79,19 @@
       </a>
     </div>
     <div class="flex-fill">
+      <div><%= block_component_edit block, :title, template: @element %></div>
       <div class="row mb-n3">
-        <div class="col-xxl-4">
-          <%= block_component_edit block, :title, template: @element %>
-        </div>
-        <div class="col-xxl-4 col-md-6">
+        <div class="col-md-6">
           <%= block_component_edit block, :time_slot_morning, template: @element %>
         </div>
-        <div class="col-xxl-4 col-md-6">
+        <div class="col-md-6">
           <%= block_component_edit block, :time_slot_afternoon, template: @element %>
         </div>
       </div>
     </div>
     <div>
       <a  class="btn text-danger position-absolute top-0 end-0"
-          v-on:click="data.elements.splice(index, 1)">
+          @click="data.elements.splice(index, 1)">
           <i class="<%= Icon::DELETE %>"></i>
       </a>
     </div>

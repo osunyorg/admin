@@ -12,7 +12,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def analytics
     breadcrumb
-    add_breadcrumb t('communication.website.analytics')
+    add_breadcrumb t('communication.website.analytics.title')
   end
 
   def security
@@ -64,7 +64,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
                           @jobs.any? &&
                           can?(:read, Communication::Website::Jobboard::Job)
     # Git files
-    @git_files_desynchronized = @website.git_files_desynchronized
+    @desynchronized_generated_git_files = @website.desynchronized_generated_git_files
     breadcrumb
   end
 
@@ -139,7 +139,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       :url, :repository, :about_type, :about_id, :in_production, :in_production_at,
       :in_showcase,
       :git_provider, :git_endpoint, :git_branch, :plausible_url,
-      :feature_posts, :feature_agenda, :feature_portfolio, :feature_jobboard, :feature_alumni, :feature_syndication, :feature_alerts, :feature_hourly_publication,
+      :feature_posts, :feature_agenda, :feature_portfolio, :feature_jobboard, :feature_alumni, :feature_syndication, :feature_alerts, :feature_hourly_publication, :feature_unpublication_date,
       :default_time_zone, :hosting, :apache_config_custom_content,
       :deployment_status_badge, :autoupdate_theme, :archive_content, :years_before_archive_content,
       showcase_tag_ids: [], source_website_ids: [],

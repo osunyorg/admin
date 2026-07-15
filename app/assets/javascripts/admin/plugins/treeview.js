@@ -20,6 +20,16 @@ window.osuny.treeView = {
                 animation: 150,
                 fallbackOnBody: true,
                 swapThreshold: 0.65,
+                onMove: function (evt) {
+                    var dragged = evt.dragged,
+                        to = evt.to;
+                    // prevent moving special pages
+                    if (dragged.dataset.special === 'true' &&
+                            to.classList.contains('js-treeview-children')) {
+                        return false;
+                    }
+                    return true;
+                },
                 onEnd: function (evt) {
                     var item = evt.item,
                         from = evt.from,
