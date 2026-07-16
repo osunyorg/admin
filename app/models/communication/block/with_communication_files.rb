@@ -2,10 +2,20 @@ module Communication::Block::WithCommunicationFiles
   extend ActiveSupport::Concern
 
   included do
+    after_create :check_if_all_files_are_localized
     after_save :manage_file_contexts
   end
 
   protected
+
+  def check_if_all_files_are_localized
+    # As many files as localizations, no need to check
+    return if commmunication_file_ids.size == commmunication_file_localization_ids.size
+    communication_files.each do |file|
+      file_l10n = file.localizations.find_by(language_id: language.id)
+      file.original_localization.localize_in!(language) unless file_l10n
+    end
+  end
 
   def manage_file_contexts
     communication_file_localizations.each do |localization|
