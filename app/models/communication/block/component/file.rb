@@ -47,7 +47,7 @@ class Communication::Block::Component::File < Communication::Block::Component::B
     ]
   end
   
-  def blob_count
+  def dom_count
     5
   end
 
