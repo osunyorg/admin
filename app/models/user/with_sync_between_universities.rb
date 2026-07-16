@@ -24,13 +24,16 @@ module User::WithSyncBetweenUniversities
     unless User.where(email: email, university_id: target_university.id).any?
       duplicate_user_for_university(target_university)
     else
-      User.find_by(email: email, university_id: target_university.id)&.update_columns(
+      existing = User.find_by(email: email, university_id: target_university.id)
+      existing&.update_columns(
         encrypted_password: self.encrypted_password,
         first_name: self.first_name,
         last_name: self.last_name,
         mobile_phone: self.mobile_phone,
         role: :server_admin
       )
+      # `role` est un cache ; la source de vérité est roles.
+      existing&.grant_role!(:server_admin)
     end
   end
 

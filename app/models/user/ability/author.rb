@@ -1,4 +1,4 @@
-class Ability::Author < Ability
+class User::Ability::Author < User::Ability
 
   def initialize(user)
     super
@@ -26,6 +26,12 @@ class Ability::Author < Ability
   end
 
   protected
+
+  # Sites sur lesquels l'utilisateur est author. Surchargé en :contributor par
+  # Ability::Contributor, qui hérite des mêmes règles mais sur ses propres sites.
+  def managed_websites_ids
+    @managed_websites_ids ||= scoped_ids(:author)
+  end
 
   def manage_records_based_on_abouts(record_class)
     can :manage, record_class, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event::Localization', about_id: managed_agenda_event_localization_ids

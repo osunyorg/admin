@@ -1,4 +1,4 @@
-class Ability::WebsiteManager < Ability
+class User::Ability::WebsiteManager < User::Ability
 
   def initialize(user)
     super
@@ -37,6 +37,11 @@ class Ability::WebsiteManager < Ability
   end
 
   protected
+
+  # Sites dont l'utilisateur est responsable (rôle website_manager).
+  def managed_websites_ids
+    @managed_websites_ids ||= scoped_ids(:website_manager)
+  end
 
   def managed_agenda_category_localization_ids
     @managed_agenda_category_localization_ids ||= begin

@@ -1,4 +1,4 @@
-class Ability::AlumniManager < Ability
+class User::Ability::AlumniManager < User::Ability
 
   def initialize(user)
     super

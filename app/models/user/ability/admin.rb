@@ -1,4 +1,4 @@
-class Ability::Admin < Ability
+class User::Ability::Admin < User::Ability
 
   def initialize(user)
     super
