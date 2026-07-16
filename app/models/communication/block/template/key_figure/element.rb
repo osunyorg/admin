@@ -9,4 +9,8 @@ class Communication::Block::Template::KeyFigure::Element < Communication::Block:
     image_component.blob
   end
 
+  def dom_count
+    5 +
+    image_component.dom_count
+  end
 end
