@@ -25,7 +25,6 @@
 #
 class User::Role < ApplicationRecord
 
-
   # Rôles qui se rattachent à une cible (site ou formation)
   ROLES_WITH_SCOPE = {
     'contributor'     => 'Communication::Website',

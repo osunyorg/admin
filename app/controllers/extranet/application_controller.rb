@@ -24,7 +24,7 @@ class Extranet::ApplicationController < ApplicationController
   end
 
   def user_is_authorized?
-    current_user.can? :read, current_extranet
+    current_ability.can? :read, current_extranet
   end
 
   def user_is_alumnus

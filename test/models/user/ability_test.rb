@@ -1,7 +1,7 @@
 require "test_helper"
 
-# rails test test/models/ability_test.rb
-class AbilityTest < ActiveSupport::TestCase
+# rails test test/models/user/ability_test.rb
+class User::AbilityTest < ActiveSupport::TestCase
   def program
     @program ||= education_programs(:default_program)
   end

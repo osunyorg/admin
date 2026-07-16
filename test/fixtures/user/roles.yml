@@ -3,7 +3,3 @@ admin:
   university: default_university
   role: admin
 
-server_admin:
-  user: server_admin
-  university: default_university
-  role: server_admin
