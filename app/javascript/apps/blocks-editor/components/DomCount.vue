@@ -3,8 +3,7 @@ import { CircleQuestionMark } from '@lucide/vue';
 export default {
   name: 'DomCount',
   props: [
-    'count',
-    'i18n'
+    'count'
   ],
   components: {
     CircleQuestionMark,
@@ -15,9 +14,6 @@ export default {
     },
     roundedCount() {
       return Math.round(this.count / this.rounding_step) * this.rounding_step;
-    },
-    countSentence() {
-      return this.i18n.blocksEditor.dom_count.count.replace('{count}', this.roundedCount);
     },
   },
   data () {
@@ -44,22 +40,22 @@ export default {
         <div class="vue__dom-count__information">
           <div class="vue__dom-count__information__button">
             <button data-bs-toggle="collapse" data-bs-target="#dom-count-information">
-              {{ i18n.blocksEditor.dom_count.more.title }}
+              {{ $t('blocksEditor.dom_count.more.title') }}
               <CircleQuestionMark />
             </button>
           </div>
           <div class="collapse vue__dom-count__information__content" id="dom-count-information">
-            <h2>{{ i18n.blocksEditor.dom_count.more.title }}</h2>
-            <div v-html="i18n.blocksEditor.dom_count.more.explanation"></div>
+            <h2>{{ $t('blocksEditor.dom_count.more.title') }}</h2>
+            <div v-html="$t('blocksEditor.dom_count.more.explanation')"></div>
             <ol>
               <li v-for="level in levels" :key="level.name">
                 <img :src="`/vue/dom_count/${level.name}.png`" class="vue__dom-count__image img-fluid" alt="" />
                 <div>
                   <p class="vue__dom-count__information__content__title">
-                    {{ i18n.blocksEditor.dom_count.level[level.name].title }}
+                    {{ $t(`blocksEditor.dom_count.level.${level.name}.title`) }}
                   </p>
                   <p class="vue__dom-count__information__content__text">
-                    {{ i18n.blocksEditor.dom_count.level[level.name].dom }}
+                    {{ $t(`blocksEditor.dom_count.level.${level.name}.dom`) }}
                   </p>
                 </div>
               </li>
@@ -73,15 +69,15 @@ export default {
           </div>
           <div class="col-md-7">
             <p class="vue__dom-count__title">
-              {{ i18n.blocksEditor.dom_count.level[level].title }}
+              {{ $t(`blocksEditor.dom_count.level.${level}.title`) }}
             </p>
             <p class="vue__dom-count__count">
-              {{ countSentence }}
+              {{ $t('blocksEditor.dom_count.count', { count: this.roundedCount }) }}
             </p>
             <p class="vue__dom-count__text">
-              {{ i18n.blocksEditor.dom_count.level[level].text }}
+              {{ $t(`blocksEditor.dom_count.level.${level}.text`) }}
             </p>
-            <p class="vue__dom-count__credit" v-html="i18n.blocksEditor.dom_count.credit"></p>
+            <p class="vue__dom-count__credit" v-html="$t('blocksEditor.dom_count.credit')"></p>
           </div>
         </div>
       </div>
