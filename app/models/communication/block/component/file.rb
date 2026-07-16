@@ -46,6 +46,10 @@ class Communication::Block::Component::File < Communication::Block::Component::B
       communication_file
     ]
   end
+  
+  def blob_count
+    5
+  end
 
   protected
 
@@ -60,4 +64,5 @@ class Communication::Block::Component::File < Communication::Block::Component::B
   def language
     @language ||= template.block.language
   end
+
 end

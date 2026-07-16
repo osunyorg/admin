@@ -72,6 +72,8 @@ class Communication::Block < ApplicationRecord
   scope :for_about_type, -> (about_type, language = nil) { where(about_type: about_type) }
   scope :for_university, -> (university, language = nil) { where(university: university) }
 
+  delegate :dom_count, to: :template
+
   # When we set data from json, we pass it to the template.
   # The json we save is first sanitized and prepared by the template.
   def data=(value)

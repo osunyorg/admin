@@ -29,6 +29,11 @@ class Communication::Block::Template::Paper < Communication::Block::Template::Ba
     l10n.hugo(website).permalink
   end
 
+  def dom_count
+    5 +
+    children.length * 25
+  end
+
   protected
 
   def selected_papers_all
