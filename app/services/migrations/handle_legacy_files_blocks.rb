@@ -46,6 +46,7 @@ class Migrations::HandleLegacyFilesBlocks
     # Save the updated block data
     block.data = data
     block.update_column :data, block.data
+    block.send(:manage_file_contexts)
   end
 
   def process_file_element(file_data, block)
