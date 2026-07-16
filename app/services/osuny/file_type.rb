@@ -1,5 +1,4 @@
-module Communication::File::Localization::WithIcon
-  extend ActiveSupport::Concern
+class Osuny::FileType
 
   FILE_TYPES = [
     {
@@ -84,16 +83,11 @@ module Communication::File::Localization::WithIcon
 
   GENERIC_FILE_TYPE = 'bi bi-file-earmark'
 
-  def icon
-    FILE_TYPES.each do |file_type|
-      return file_type[:icon] if is_current_type?(file_type)
+  def self.icon_for(file_type)
+    FILE_TYPES.each do |ft|
+      return ft[:icon] if file_type.in?(ft[:content_types])
     end
     return GENERIC_FILE_TYPE
   end
 
-  protected
-
-  def is_current_type?(file_type)
-    original_content_type.in?(file_type[:content_types])
-  end
 end

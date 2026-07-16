@@ -35,7 +35,6 @@ class Communication::File::Localization < ApplicationRecord
   include AsLocalization
   include HasOriginalBlob
   include HasUniversity
-  include WithIcon
   include WithOpenApi
 
   has_many    :contexts,
@@ -66,6 +65,10 @@ class Communication::File::Localization < ApplicationRecord
 
   def max_file_size
     Rails.application.config.default_file_max_size
+  end
+
+  def icon
+    @icon ||= Osuny::FileType.icon_for(original_content_type)
   end
 
   def to_s
