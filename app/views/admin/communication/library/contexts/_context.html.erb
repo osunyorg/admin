@@ -10,6 +10,7 @@ partial = "admin/communication/library/contexts/#{key}"
   <%
   object = context.about
   if object.present?
+    object = object.about if object.is_a?(Communication::Block)
     # If it's a localization, get real object
     if object.respond_to?(:about)
       object = object.about
