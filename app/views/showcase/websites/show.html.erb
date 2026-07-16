@@ -18,7 +18,7 @@
     <div class="mb-5">
     <p class="small text-muted">Code source</p>
     <i class="bi bi-github me-1"></i>
-      <%= contact_link @website.repository_url, :github %>
+      <%= link_to @website.repository_url.remove('https://'), @website.repository_url %>
     </div>
     <div class="mb-5">
       <p class="small text-muted">Thèmes</p>
