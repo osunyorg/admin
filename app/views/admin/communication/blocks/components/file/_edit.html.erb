@@ -4,6 +4,10 @@ remove = t('admin.communication.blocks.components.file.input.remove')
 hint = file_hint if hint.blank?
 accept ||= '*'
 %>
+<Picker
+  v-model="<%= model %>.<%= property %>"
+  endpoint="<%= picker_admin_communication_files_path %>">
+</Picker>
 <file-upload-input
   v-model="<%= model %>.<%= property %>"
   upload-url="<%= direct_upload_admin_communication_files_path %>"

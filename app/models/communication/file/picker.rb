@@ -42,12 +42,12 @@ class Communication::File::Picker
     [
       {
         id: 'date-desc',
-        name: 'Trier du plus récent au plus ancien',
+        name: 'Les plus récents d\'abord',
         selected: true
       },
       {
         id: 'date-asc',
-        name: 'Trier du plus ancien au plus récent',
+        name: 'Les plus anciens d\'abord',
         selected: false
       }
     ]
