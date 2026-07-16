@@ -60,7 +60,7 @@ class Migrations::HandleLegacyFilesBlocks
     blob = ActiveStorage::Blob.find(blob_id)
 
     # Create or find the Communication::File and Localization
-    localization = Communication::File::Localization.create_from_blob(blob, language)
+    localization = Communication::File::Localization.find_or_create_from_blob(blob, language)
 
     # Update the element data to reference the new Communication::File
     file_data['communication_file_id'] = localization.about_id

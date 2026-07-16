@@ -45,13 +45,13 @@ class Communication::File::Localization < ApplicationRecord
               source: :active_storage_blob
   alias :file :about
 
-  def self.create_from_blob(blob, language)
+  def self.find_or_create_from_blob(blob, language)
     localization = where(
       university_id: blob.university_id,
       language_id: language.id,
       original_checksum: blob.checksum
     ).first_or_create do |localization|
-      file = Communication::File.find_or_create_for_blob(blob)
+      file = Communication::File.find_or_create_from_blob(blob)
       # On attribue le blob
       localization.original_blob = blob
       # On connecte au fichier

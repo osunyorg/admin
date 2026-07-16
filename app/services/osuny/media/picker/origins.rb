@@ -135,7 +135,7 @@ class Osuny::Media::Picker::Origins
         original_checksum: checksum
       )
     else
-      @media = Communication::Media.create_from_blob(
+      @media = Communication::Media.find_or_create_from_blob(
         blob, 
         in_context: about,
         origin: origin,
