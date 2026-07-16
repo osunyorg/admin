@@ -27,11 +27,13 @@ class Migrations::HandleLegacyFilesBlocks
     @processed_blocks += 1
     puts "Processing block #{block.id} with language #{block.language}"
 
-    block.data['elements'].each do |element_data|
+    data = block.data
+
+    data['elements'].each do |element_data|
       next if element_data.blank? || element_data['file'].blank?
 
       file_data = element_data['file']
-      next if file_data['signed_id'].blank?
+      next if file_data['communication_file_id'].present?
 
       begin
         process_file_element(file_data, block)
@@ -40,27 +42,28 @@ class Migrations::HandleLegacyFilesBlocks
         next
       end
     end
+
+    # Save the updated block data
+    block.data = data
+    block.update_column :data, block.data
   end
 
   def process_file_element(file_data, block)
-    signed_id = file_data['signed_id']
+    blob_id = file_data['id']
     filename = file_data['filename']
     language = block.language
 
-    puts "  Processing file with signed_id: #{signed_id[0..20]}... (filename: #{filename})"
+    puts "  Processing file with blob id: #{blob_id}... (filename: #{filename})"
 
-    # Find the ActiveStorage blob by signed_id
-    blob = ActiveStorage::Blob.find_signed!(signed_id)
+    # Find the ActiveStorage blob by ID
+    blob = ActiveStorage::Blob.find(blob_id)
 
     # Create or find the Communication::File and Localization
     localization = Communication::File::Localization.create_from_blob(blob, language)
 
     # Update the element data to reference the new Communication::File
-    file_data['id'] = localization.about_id
-    file_data['signed_id'] = '' # Clear the signed_id as it's no longer needed
-
-    # Save the updated block data
-    block.save! if block.changed?
+    file_data['communication_file_id'] = localization.about_id
+    file_data['signed_id'] = nil # Clear the signed_id as it's no longer needed
 
     if localization.saved_change_to_id?
       @created_localizations += 1
