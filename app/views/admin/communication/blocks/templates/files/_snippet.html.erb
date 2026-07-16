@@ -4,7 +4,6 @@ block.template.elements.each do |element|
   file = element.communication_file
   next if file.nil?
   l10n = element.communication_file_l10n
-  blob = l10n.original_blob
   image_blob = element.image_component.blob
   %>
   <div class="row mb-3">
@@ -15,7 +14,7 @@ block.template.elements.each do |element|
     </div>
     <div class="col-8">
       <p class="mb-0"><%= element.title %></p>
-      <span class="small"><%= blob.filename %></span>
+      <span class="small"><%= l10n.original_filename %></span>
     </div>
     <div class="col-3">
       <%= kamifusen_tag image_blob, width: 200, class: 'img-fluid' if image_blob %>
