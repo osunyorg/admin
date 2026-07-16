@@ -64,7 +64,6 @@ class Migrations::HandleLegacyFilesBlocks
 
     # Update the element data to reference the new Communication::File
     file_data['communication_file_id'] = localization.about_id
-    file_data['signed_id'] = nil # Clear the signed_id as it's no longer needed
 
     if localization.saved_change_to_id?
       @created_localizations += 1
