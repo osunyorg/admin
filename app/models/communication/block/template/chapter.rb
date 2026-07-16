@@ -19,6 +19,15 @@ class Communication::Block::Template::Chapter < Communication::Block::Template::
     ]
   end
 
+  def dom_count
+    5 +
+    text_component.dom_count +
+    notes_component.dom_count +
+    image_component.dom_count +
+    alt_component.dom_count +
+    credit_component.dom_count
+  end
+
   protected
 
   def check_accessibility
