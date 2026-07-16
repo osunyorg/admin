@@ -73,6 +73,7 @@ class Communication::Website < ApplicationRecord
   include WithContentArchive
   include WithDependencies
   include WithDeuxfleurs
+  include WithDomCount
   include WithFeatureAgenda
   include WithFeatureAlerts
   include WithFeatureAlumni
@@ -210,6 +211,11 @@ class Communication::Website < ApplicationRecord
   end
 
   def move_to_university(new_university_id)
+    return if self.university_id == new_university_id
+    Communication::Website::MoveToUniversityJob.perform_later(id, { new_university_id: new_university_id })
+  end
+
+  def move_to_university_safely(new_university_id)
     return if self.university_id == new_university_id
     update_column :university_id, new_university_id
     recursive_dependencies_following_direct.each do |dependency|

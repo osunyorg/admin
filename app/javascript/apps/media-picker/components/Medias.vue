@@ -1,5 +1,5 @@
 <script>
-import { Image, ArrowRight, ArrowLeft } from 'lucide-vue-next';
+import { Image, ArrowRight, ArrowLeft } from '@lucide/vue';
 import Taxonomies from './medias/Taxonomies.vue';
 
 export default {
@@ -24,7 +24,6 @@ export default {
           collections: [],
           categories: [],
         },
-        i18n: {},
       }
     },
     methods: {
@@ -86,7 +85,6 @@ export default {
     },
     beforeMount() {
       const dataset = document.getElementById('media-picker-app').dataset;
-      this.i18n = JSON.parse(dataset.i18n).mediaPicker.medias;
       this.endpoint = dataset.mediaEndpoint;
     },
 };
@@ -98,7 +96,7 @@ export default {
             class="btn btn-sm mx-n2"
             @click="open()">
       <Image stroke-width="1.5" />
-      {{ i18n.button }}
+      {{ $t('mediaPicker.medias.button') }}
     </button>
     <div  class="modal"
           tabindex="-1"
@@ -108,21 +106,21 @@ export default {
         <div class="modal-content">
           <div class="modal-header">
             <div class="col-auto d-none d-lg-block">
-              <h5 class="modal-title">{{ i18n.title }}</h5>
+              <h5 class="modal-title">{{ $t('mediaPicker.medias.title') }}</h5>
             </div>
             <div class="col-auto d-flex flex-fill mx-lg-5">
               <div class="input-group">
                 <input  type="text"
                         name="search"
                         class="form-control ms-auto"
-                        :placeholder="i18n.placeholder"
+                        :placeholder="$t('mediaPicker.medias.placeholder')"
                         v-model="query"
                         @keyup.enter="search">
                 <button type="button"
                         class="btn btn-primary me-auto"
-                        :aria-label="i18n.search"
+                        :aria-label="$t('mediaPicker.medias.search')"
                         @click="search">
-                  {{ i18n.search }}
+                  {{ $t('mediaPicker.medias.search') }}
                 </button>
               </div>
             </div>
@@ -137,7 +135,7 @@ export default {
             <div class="row">
               <div class="col-md-2">
                 <div class="mb-4">
-                  <p class="small text-muted mb-1">{{ i18n.collections }}</p>
+                  <p class="small text-muted mb-1">{{ $t('mediaPicker.medias.collections') }}</p>
                   <div v-for="collection in data.collections" class="form-check">
                     <input  class="form-check-input"
                             type="checkbox"
@@ -153,14 +151,14 @@ export default {
                 <Taxonomies v-model="data.taxonomies" @toggle="toggleCategory" />
               </div>
               <div class="col-md-10">
-                <p v-if="data.results.length === 0" >{{ i18n.nothing }}</p>
+                <p v-if="data.results.length === 0" >{{ $t('mediaPicker.medias.nothing') }}</p>
                 <div v-if="data.total_pages" class="d-flex justify-content-between mb-2">
                   <div class="vue__media-picker__button_container">
                     <button
                       class="btn btn-sm ps-0"
                       v-if="page > 1"
                       @click="page = page - 1"
-                      title="{{ i18n.previous }}">
+                      :title="$t('mediaPicker.medias.previous')">
                       <ArrowLeft stroke-width="1.5" />
                     </button>
                   </div>
@@ -172,7 +170,7 @@ export default {
                       class="btn btn-sm pe-0"
                       v-if="page < data.total_pages"
                       @click="page = page + 1"
-                      title="{{ i18n.next }}">
+                      :title="$t('mediaPicker.medias.next')">
                       <ArrowRight stroke-width="1.5" />
                     </button>
                   </div>

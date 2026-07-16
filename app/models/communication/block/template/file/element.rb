@@ -7,4 +7,10 @@ class Communication::Block::Template::File::Element < Communication::Block::Temp
   def blob
     file_component.blob
   end
+
+  def dom_count
+    2 +
+    file_component.blob_count +
+    image_component.blob_count
+  end
 end

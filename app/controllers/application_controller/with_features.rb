@@ -25,16 +25,18 @@ module ApplicationController::WithFeatures
 
     def feature_administration?
       current_university.is_really_a_university? &&
-        can?(:read, Administration::Qualiopi::Criterion)
+        can?(:read, Administration::Qualiopi) ||
+        can?(:read, Administration::Location) ||
+        can?(:read, University::Person::Alumnus)
     end
     helper_method :feature_administration?
 
-    def feature_settings?
+    def feature_directory?
       can?(:read, University::Person) ||
       can?(:read, University::Organization) ||
       can?(:read, User)
     end
-    helper_method :feature_settings?
+    helper_method :feature_directory?
 
   end
 

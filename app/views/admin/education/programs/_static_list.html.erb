@@ -2,6 +2,7 @@
 # TODO FIXME incohérence entre les depths traduits en 1 espace, et ceux traduits en 2 espaces
 depth ||= 2
 indentation = ' ' * depth
+hide_children = local_assigns[:hide_children] || false
 %>
 <% programs.ordered(language).each do |program| %>
   <%
@@ -20,7 +21,7 @@ children = program.children.published_now_in(language).where(diploma: diploma)
 # Limit to a global list of programs, for example on a location
 children = children.where(id: all_programs) if local_assigns[:all_programs]
 %>
-<% if children.any? %>
+<% if !hide_children && children.any? %>
 <%= indentation %>  children:
 <%= render 'admin/education/programs/static_list',
             diploma: diploma,

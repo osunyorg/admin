@@ -20,7 +20,6 @@ cloud = {
       data-changes-endpoint="<%= pick_admin_communication_medias_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json) %>"
       data-formats-accepted="<%= default_images_formats_accepted %>"
       data-formats-accepted-hint="<%= images_formats_accepted_hint %>"
-      data-i18n="<%= t('vue').to_json %>"
       data-cloud="<%= cloud.to_json %>"
       data-keycdn="<%= ENV["KEYCDN_HOST"] %>"
       data-media-endpoint="<%= admin_communication_medias_url(website_id: nil, extranet_id: nil, journal_id: nil, format: :json) %>"

@@ -75,6 +75,11 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
     organizations.collect(&:categories).flatten.compact.uniq
   end
 
+  def dom_count
+    5 +
+    children.length * 15
+  end
+
   protected
 
   def link_to_category

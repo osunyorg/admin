@@ -1,5 +1,5 @@
 <script>
-import { Cropper } from 'vue-advanced-cropper';
+import { Cropper } from 'vue-advanced-cropper';
 
 export default {
     components: {
@@ -23,7 +23,6 @@ export default {
           width: null,
           height: null,
         },
-        i18n: {},
       }
     },
     methods: {
@@ -74,10 +73,6 @@ export default {
         xhr.send(JSON.stringify(this.data));
       },
     },
-    beforeMount() {
-      this.dataset = document.getElementById('media-picker-app').dataset;
-      this.i18n = JSON.parse(this.dataset.i18n).cropperModal;
-    },
 };
 
 // On utilise canvas=false et check-orientation=false pour éviter les problèmes de CORS
@@ -94,7 +89,7 @@ export default {
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">{{i18n.title}}</h5>
+            <h5 class="modal-title">{{ $t('cropperModal.title') }}</h5>
             <button type="button"
                     class="btn-close"
                     @click="close()">
@@ -115,7 +110,7 @@ export default {
           <div class="modal-footer justify-content-between">
             <button type="button"
                     class="btn btn-sm"
-                    :aria-label="i18n.rotate"
+                    :aria-label="$t('cropperModal.rotate')"
                     @click="rotate(90)">
               <i class="bi bi-arrow-clockwise"></i>
             </button>
@@ -124,13 +119,13 @@ export default {
                       class="btn btn-sm btn-secondary me-2"
                       :disabled="pending"
                       @click="close()">
-                {{ i18n.cancel }}
+                {{ $t('cropperModal.cancel') }}
               </button>
               <button type="button"
                       class="btn btn-sm btn-primary"
                       :disabled="pending"
                       @click="crop()">
-                {{ i18n.validate }}
+                {{ $t('cropperModal.validate') }}
               </button>
             </div>
           </div>
