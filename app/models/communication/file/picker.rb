@@ -19,13 +19,13 @@ class Communication::File::Picker
   def paginated_objects
     @paginated_objects ||= objects.ordered(language)
                                   .page(params[:page])
-                                  #.per(2)
+                                  .per(2)
   end
 
   protected
 
   def term
-    ''
+    params[:term]
   end
 
   def filters
