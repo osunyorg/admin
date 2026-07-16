@@ -9,7 +9,7 @@ class Communication::File::Picker
 
   def parameters
     {
-      search: search,
+      term: term,
       filters: filters,
       sorts: sorts,
       pagination: pagination
@@ -17,12 +17,14 @@ class Communication::File::Picker
   end
 
   def paginated_objects
-    @paginated_objects ||= objects.ordered(language).page(params[:page])
+    @paginated_objects ||= objects.ordered(language)
+                                  .page(params[:page])
+                                  #.per(2)
   end
 
   protected
 
-  def search
+  def term
     ''
   end
 

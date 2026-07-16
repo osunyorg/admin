@@ -1,11 +1,10 @@
 <script>
-import { ArrowRight, ArrowLeft } from '@lucide/vue';
+import Pagination from './picker/Pagination.vue';
 
 export default {
   name: 'Picker',
   components: {
-    ArrowRight,
-    ArrowLeft
+    Pagination,
   },
   props: [
     'modelValue',
@@ -25,10 +24,8 @@ export default {
   data () {
     return {
       modal: false,
-      term: '',
-      filters: {},
-      sorts: {},
-      pagination: {},
+      url: '',
+      parameters: {},
       results: {},
     }
   },
@@ -44,32 +41,30 @@ export default {
     },
     search() {
       var xhr = new XMLHttpRequest(),
-          url = this.endpoint,
           data;
+      this.buildUrl();
       xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
           data = JSON.parse(xhr.responseText);
-          this.search = data.parameters.search;
-          this.filters = data.parameters.filters;
-          this.sorts = data.parameters.sorts;
-          this.pagination = data.parameters.pagination;
+          this.parameters = data.parameters;
           this.results = data.results;
         }
       }.bind(this);
-      xhr.open("GET", url, false);
+      xhr.open("GET", this.url, false);
       xhr.send();
+    },
+    buildUrl() {
+      this.url = this.endpoint;
+      if (this.parameters.pagination) {
+        this.url += '?page=' + this.parameters.pagination.current_page;
+      }
     },
     select(event, object) {
       event.preventDefault();
       this.value = object.data;
       this.close();
     },
-    previousPage() {
-      this.pagination.current_page = this.pagination.current_page - 1;
-      this.search();
-    },
-    nextPage() {
-      this.pagination.current_page = this.pagination.current_page + 1
+    changePage() {
       this.search();
     },
   },
@@ -106,7 +101,7 @@ export default {
                           name="search"
                           class="form-control mb-2"
                           placeholder="Tapez le texte"
-                          v-model="term"
+                          v-model="parameters.term"
                           @keyup.enter="search">
                   <button type="button"
                           class="btn btn-primary btn-sm mb-2"
@@ -117,7 +112,7 @@ export default {
                 </div>
                 <div class="mb-3">
                   <b>Filtrer</b>
-                  <div v-for="filter in filters">
+                  <div v-for="filter in parameters.filters">
                     {{ filter.name }}
                     <div v-for="value in filter.values">
                       {{ value.name }}
@@ -126,37 +121,16 @@ export default {
                 </div>
                 <div class="mb-3">
                   <b>Trier</b>
-                  <div v-for="sort in sorts">
+                  <div v-for="sort in parameters.sorts">
                     {{ sort.name }}
                     {{ sort.selected }}
                   </div>
                 </div>
               </div>
               <div class="col-md-10">
-                <p v-if="results.length === 0" >Aucun fichier</p>
-                <div v-if="pagination.total_pages > 1" class="d-flex justify-content-between mb-2">
-                  <div class="vue__media-picker__button_container">
-                    <button
-                      class="btn btn-sm ps-0"
-                      v-if="pagination.current_page > 1"
-                      @click="previousPage"
-                      title="Page précédente">
-                      <ArrowLeft stroke-width="1.5" />
-                    </button>
-                  </div>
-                  <p class="m-0">
-                    {{ pagination.current_page }} / {{ pagination.total_pages }}
-                  </p>
-                  <div class="vue__media-picker__button_container text-end">
-                    <button
-                      class="btn btn-sm pe-0"
-                      v-if="pagination.current_page < pagination.total_pages"
-                      @click="nextPage"
-                      title="Page suivante">
-                      <ArrowRight stroke-width="1.5" />
-                    </button>
-                  </div>
-                </div>
+                <Pagination 
+                  :data="parameters.pagination"
+                  @changePage="changePage" />
                 <div class="row g-2">
                   <div v-for="object in results">
                     <div v-html="object.snippet" @click="select($event, object)"></div>
