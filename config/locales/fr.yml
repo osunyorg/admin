@@ -498,11 +498,16 @@ fr:
   look_feel: Look & feel
   mailers:
     extranet:
-      invitation_message:
-        subject: Bienvenue sur votre extranet
-        text: Vous avez désormais accès à l'extranet.
-        with_user_html: Vous pouvez vous y connecter avec votre adresse email <b>%{email}</b> en <a href="%{sign_in_url}">cliquant ici</a>.
-        without_user_html: Vous pouvez vous y inscrire avec votre adresse email <b>%{email}</b> en <a href="%{sign_up_url}">cliquant ici</a>.
+      invitation_messages:
+        automatic:
+          subject: Bienvenue sur votre extranet
+          text: Vous avez désormais accès à l'extranet.
+          with_user_html: Vous pouvez vous y connecter avec votre adresse email <b>%{email}</b> en <a href="%{sign_in_url}">cliquant ici</a>.
+          without_user_html: Vous pouvez vous y inscrire avec votre adresse email <b>%{email}</b> en <a href="%{sign_up_url}">cliquant ici</a>.
+        manual:
+          signature: Cordialement
+          subject: Invitation de {{sender_name}} (promotion {{sender_promotion}}) à rejoindre l'extranet
+          text: "Bonjour {{name}},\n\n{{sender_name}} vous invite à rejoindre l'extranet des Alumni.\n\nVous y retrouverez notamment l'annuaire de toutes les promotions.\nÀ très bientôt !\n\n{{sender_name}} (promotion {{sender_promotion}})"
     notifications:
       gdpr_deletion_incoming:
         subject: "osuny - votre compte va bientôt être supprimé"

@@ -72,9 +72,37 @@
             <%= f.input :feature_jobs %>
           <% end %>
         <% end %>
-        <%= osuny_panel Communication::Extranet::Localization.human_attribute_name(:invitation_message) do %>
-          <%= lf.input :invitation_message_subject %>
-          <%= lf.input :invitation_message_text, input_html: { rows: 5 } %>
+        <%= osuny_panel t('admin.communication.extranet.invitation_messages.title') do %>
+          <p class="fw-bold"><%= t('admin.communication.extranet.invitation_messages.automatic') %></p>
+          <p class="form-text"><%= t('admin.communication.extranet.invitation_messages.automatic_hint') %></p>
+          <%= lf.input :invitation_message_automatic_subject, 
+                        input_html: { 
+                          value: l10n.invitation_message_automatic_subject.presence || t('mailers.extranet.invitation_messages.automatic.subject') 
+                        } %>
+          <%= lf.input :invitation_message_automatic_text, 
+                        as: :text, 
+                        input_html: { 
+                          rows: 5,
+                          value: l10n.invitation_message_automatic_text.presence || t('mailers.extranet.invitation_messages.automatic.text') 
+                        } %>
+          <p class="fw-bold"><%= t('admin.communication.extranet.invitation_messages.manual') %></p>
+          <p class="form-text"><%= t('admin.communication.extranet.invitation_messages.manual_hint_html') %></p>
+          <%= lf.input :invitation_message_manual_subject,
+                        input_html: {
+                          value: l10n.invitation_message_manual_subject.presence || t('mailers.extranet.invitation_messages.manual.subject')
+                        } %>
+          <%= lf.input :invitation_message_manual_text, 
+                        as: :text, 
+                        input_html: { 
+                            rows: 5,
+                            value: l10n.invitation_message_manual_text.presence || t('mailers.extranet.invitation_messages.manual.text')
+                          } %>
+          <%= lf.input :invitation_message_manual_signature, 
+                        as: :text, 
+                        input_html: { 
+                            rows: 2,
+                            value: l10n.invitation_message_manual_signature.presence || t('mailers.extranet.invitation_messages.manual.signature')
+                          } %>
         <% end %>
         <%= osuny_panel t('legal') do %>
           <%= lf.input :terms, as: :summernote %>

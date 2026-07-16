@@ -17,7 +17,7 @@ class ExtranetMailer < ApplicationMailer
     I18n.with_locale(@language.iso_code.to_sym) do
       mail  from: @university.mail_from[:full],
             to: @email,
-            subject: @l10n.invitation_message_subject if should_send?(@email)
+            subject: @l10n.invitation_message_automatic_subject if should_send?(@email)
     end
   end
 

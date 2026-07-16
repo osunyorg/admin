@@ -66,9 +66,11 @@ fr:
         cookies_policy: Politique de cookies
         favicon: Icône de navigateur (favicon)
         home_sentence: Phrase affichée sur la home
-        invitation_message: Message d'invitation automatique
-        invitation_message_subject: Sujet du mail
-        invitation_message_text: Texte du mail
+        invitation_message_automatic_subject: Sujet du mail
+        invitation_message_automatic_text: Texte du mail
+        invitation_message_manual_signature: Signature
+        invitation_message_manual_subject: Sujet du mail
+        invitation_message_manual_text: Texte du mail
         logo: Logo
         name: Nom
         privacy_policy: Politique de confidentialité
@@ -509,6 +511,12 @@ fr:
         confirm_localization:
           text_html: "La création de <i>%{about}</i> en %{language} nécessite la traduction de l'extranet <i>%{extranet}</i> en %{language}."
           title: Confirmation de traduction
+        invitation_messages: 
+          automatic: Message automatique
+          automatic_hint: Ce message sera envoyé après un import d'alumni ou lors du clic sur le bouton "envoyer l'invitation" dans l'admin, si l'alumnus a un email.
+          manual: Message manuel
+          manual_hint_html: "Ce message sera envoyé depuis l'extranet, lorsqu'un utilisateur clique sur le bouton \"inviter un alumnus\", si l'utilisateur n'a pas d'email.<br>Dans ces champs vous pouvez utiliser les variables suivantes : <ul><li>{{name}} : le nom de l'alumnus</li><li>{{email}} : l'email indiqué pour l'alumnus</li><li>{{sender_name}} : le nom de l'utilisateur qui envoie l'invitation</li><li>{{sender_promotion}} : la promotion de l'utilisateur qui envoie l'invitation</li></ul>"
+          title: Messages d'invitation
         languages: Langues
       website:
         agenda:

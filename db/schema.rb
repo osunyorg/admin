@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_06_155316) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_16_132522) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -351,8 +351,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_06_155316) do
     t.text "cookies_policy"
     t.datetime "created_at", null: false
     t.text "home_sentence"
-    t.string "invitation_message_subject", default: ""
-    t.text "invitation_message_text", default: ""
+    t.string "invitation_message_automatic_subject", default: ""
+    t.text "invitation_message_automatic_text", default: ""
+    t.text "invitation_message_manual_signature"
+    t.string "invitation_message_manual_subject"
+    t.text "invitation_message_manual_text"
     t.uuid "language_id"
     t.string "name"
     t.text "privacy_policy"
