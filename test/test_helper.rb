@@ -54,6 +54,10 @@ class ActiveSupport::TestCase
     @website_with_gitlab ||= communication_websites(:website_with_gitlab)
   end
 
+  def website_with_forgejo
+    @website_with_forgejo ||= communication_websites(:website_with_forgejo)
+  end
+
   def default_school
     @default_school ||= education_schools(:default_school)
   end

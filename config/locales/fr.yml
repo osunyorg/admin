@@ -524,6 +524,21 @@ fr:
         body_1_html: "Un nouvel utilisateur (%{username}) vient de s'enregistrer sur l'instance %{instance}."
         body_2_html: "Cliquez <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">ici</a> pour voir son compte."
         subject: "Un nouvel utilisateur vient de s'inscrire : %{mail}"
+      website_git_access_broken:
+        subject: Synchronisation Git interrompue pour « %{website} »
+        text_line_1_html: La synchronisation du site « %{website} » avec son dépôt Git a échoué et a été interrompue.
+        text_line_2_html: "Erreur rencontrée : %{error}"
+        text_line_3_html: "Vérifiez la configuration du dépôt (existence, branche, permissions, endpoint) en cliquant <a href=\"%{url}\" target=\"_blank\" style=\"color: #c72b43;\">ici</a>."
+        errors:
+          invalid_repository: "L'identifiant de dépôt configuré « %{repository} » n'est pas dans un format valide."
+          unreachable: "L'endpoint Git configuré (%{endpoint}) est actuellement injoignable."
+          invalid_endpoint: "L'endpoint Git configuré ne pointe pas vers une instance valide."
+          unauthorized: "Le jeton d'accès n'existe plus, n'est plus valide ou a expiré."
+          repository_not_found: "Le dépôt « %{repository} » n'existe plus ou n'est plus accessible avec ce jeton."
+          repository_forbidden: "Le jeton d'accès n'a plus la permission de pousser vers le dépôt « %{repository} »."
+          branch_not_found: "La branche « %{branch} » n'existe plus dans le dépôt."
+          branch_protected: "La branche « %{branch} » est désormais protégée et ne permet plus l'écriture avec ce jeton."
+          workflows_forbidden: "Le jeton d'accès n'a pas la permission « Workflows » nécessaire pour écrire les fichiers de déploiement."
       website_invalid_access_token:
         subject: Jeton d'accès expiré pour « %{website} »
         text_line_1_html: Le jeton d'accès utilisé pour le site « %{website} » a expiré et ne permet plus la mise à jour du site.

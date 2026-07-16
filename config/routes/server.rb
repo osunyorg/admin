@@ -13,6 +13,7 @@ namespace :server do
     member do
       post :analyse
       post :clean_and_rebuild
+      post :force_resync_with_git
       post :sync_theme_version
       post :unlock_for_background_jobs
       post :update_theme

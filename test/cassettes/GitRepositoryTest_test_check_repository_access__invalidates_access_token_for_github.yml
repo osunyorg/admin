@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>/branches/main
+    uri: https://api.github.com/repos/<TEST_GITHUB_REPOSITORY>
     body:
       encoding: US-ASCII
       string: ''
@@ -10,7 +10,7 @@ http_interactions:
       Accept:
       - application/vnd.github.v3+json
       User-Agent:
-      - Octokit Ruby Gem 9.2.0
+      - Octokit Ruby Gem 10.0.0
       Content-Type:
       - application/json
       Authorization:
@@ -22,24 +22,10 @@ http_interactions:
       code: 401
       message: Unauthorized
     headers:
-      Date:
-      - Mon, 24 Mar 2025 15:57:34 GMT
       Content-Type:
       - application/json; charset=utf-8
-      Content-Length:
-      - '95'
       X-Github-Media-Type:
       - github.v3; format=json
-      X-Ratelimit-Limit:
-      - '60'
-      X-Ratelimit-Remaining:
-      - '59'
-      X-Ratelimit-Reset:
-      - '1742835454'
-      X-Ratelimit-Used:
-      - '1'
-      X-Ratelimit-Resource:
-      - core
       Access-Control-Expose-Headers:
       - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
         X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes,
@@ -63,10 +49,15 @@ http_interactions:
       - Accept-Encoding, Accept, X-Requested-With
       Server:
       - github.com
+      Date:
+      - Fri, 10 Jul 2026 16:37:21 GMT
       X-Github-Request-Id:
-      - D5AA:1B3783:D64838:DAFE09:67E180EE
+      - BC9C:3726CB:1986E5C:1828772:6A511FC1
+      Connection:
+      - close
     body:
       encoding: UTF-8
-      string: '{"message":"Bad credentials","documentation_url":"https://docs.github.com/rest","status":"401"}'
-  recorded_at: Mon, 24 Mar 2025 15:57:34 GMT
-recorded_with: VCR 6.3.1
+      string: "{\r\n  \"message\": \"Bad credentials\",\r\n  \"documentation_url\":
+        \"https://docs.github.com/rest\",\r\n  \"status\": \"401\"\r\n}"
+  recorded_at: Fri, 10 Jul 2026 16:37:21 GMT
+recorded_with: VCR 6.4.0

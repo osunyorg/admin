@@ -45,6 +45,12 @@ class Server::WebsitesController < Server::ApplicationController
                   notice: t('admin.communication.website.git_file.analysis.launched')
   end
 
+  def force_resync_with_git
+    @website.force_resync_with_git!
+    redirect_back fallback_location: server_website_path(@website),
+                  notice: t('server_admin.websites.force_resync_with_git_notice')
+  end
+
   def edit
     breadcrumb
     add_breadcrumb t('edit')

@@ -1,6 +1,7 @@
 <% content_for :title, t('admin.communication.website.technical.label') %>
 
 <%= simple_form_for [:admin, @website] do |f| %>
+  <%= hidden_field_tag :_return_to, 'technical' %>
   <%= f.simple_fields_for :localizations, @l10n do |lf| %>
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -18,20 +19,51 @@
       </div>
       <div class="col-lg-6 col-xxl-4">
         <%= osuny_panel t('communication.website.git') do %>
-          <%= f.input :git_provider, include_blank: false %>
-          <%= f.input :git_endpoint %>
-          <%= f.input :access_token,
-                      as: :string,
-                      placeholder: masked_string(f.object.access_token),
-                      hint: t("simple_form.hints.communication_website.access_token_#{f.object.access_token.blank? ? 'without' : 'with'}_existing").html_safe,
-                      input_html: {
-                        autocomplete: 'access_token',
-                        role: 'presentation',
-                        value: ''
-                      }
-                      %>
-          <%= f.input :repository %>
-          <%= f.input :git_branch %>
+          <% if @website.access_token.present? && !@website.git_access_errors? %>
+            <%= link_to technical_admin_communication_website_path(id: @website.id, website_id: nil, check_git_access: true),
+                        class: button_classes('btn-xs position-absolute top-0 end-0 m-0'),
+                        data: { 'hide-on-change': 'git_access_fields' } do %>
+              <%= lucide_icon :plug, width: 16 %>
+              <%= t('admin.communication.website.technical.check_git_access.button') %>
+            <% end %>
+          <% end %>
+          <div id="git_access_fields">
+            <%= f.input :git_provider,
+                        include_blank: false,
+                        input_html: { data: { 'conditional': true }, id: 'git_provider' } %>
+            <div  class="<%= 'd-none' if f.object.github? %>"
+                  data-conditional-source="git_provider"
+                  data-conditional-value-not="github"
+                  data-conditional-optional="true">
+              <%= f.input :git_endpoint,
+                          placeholder: f.object.git_provider_default_endpoint,
+                          input_html: {
+                            data: {
+                              'placeholder-source': 'git_provider',
+                              'placeholder-map': Communication::Website.git_provider_default_endpoints.to_json
+                            }
+                          } %>
+            </div>
+            <%= f.input :access_token,
+                        as: :string,
+                        placeholder: masked_string(f.object.access_token),
+                        hint: t("simple_form.hints.communication_website.access_token_#{f.object.access_token.blank? ? 'without' : 'with'}_existing").html_safe,
+                        input_html: {
+                          autocomplete: 'access_token',
+                          role: 'presentation',
+                          value: f.object.will_save_change_to_access_token? ? f.object.access_token : ''
+                        }
+                        %>
+            <%= f.input :repository %>
+            <%= f.input :git_branch,
+                        placeholder: f.object.git_provider_default_branch,
+                        input_html: {
+                          data: {
+                            'placeholder-source': 'git_provider',
+                            'placeholder-map': Communication::Website.git_provider_default_branches.to_json
+                          }
+                        } %>
+          </div>
           <%= f.input :deployment_status_badge,
                       as: :string,
                       input_html: {
@@ -57,7 +89,12 @@
                           class: "font-monospace fs-5 pt-1"
                         } %>
           </div>
-          <%= f.input :autoupdate_theme %>
+          <div  class="<%= 'd-none' if f.object.forgejo? %>"
+                data-conditional-source="git_provider"
+                data-conditional-value-not="forgejo"
+                data-conditional-optional="true">
+            <%= f.input :autoupdate_theme %>
+          </div>
           <%= f.input :plausible_url %>
         <% end %>
         <%= osuny_panel t('communication.website.showcase') do %>

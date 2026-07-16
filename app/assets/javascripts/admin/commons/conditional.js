@@ -20,22 +20,31 @@ window.osuny.conditional = {
     update: function (source, value) {
         'use strict';
         var allTargets = document.querySelectorAll('[data-conditional-source="' + source + '"]'),
-            activeTargets = document.querySelectorAll('[data-conditional-source="' + source + '"][data-conditional-value="' + value + '"]'),
             i,
             target;
         for (i = 0; i < allTargets.length; i += 1) {
             target = allTargets[i];
-            this.hide(target);
+            if (this.matches(target, value)) {
+                this.show(target);
+            } else {
+                this.hide(target);
+            }
         }
-        for (i = 0; i < activeTargets.length; i += 1) {
-            target = activeTargets[i];
-            this.show(target);
+    },
+
+    // data-conditional-value="x": displayed only when value equals to x
+    // data-conditional-value-not="x": displayed when value different from x
+    matches: function (target, value) {
+        'use strict';
+        if (target.hasAttribute('data-conditional-value-not')) {
+            return target.getAttribute('data-conditional-value-not') !== value;
         }
+        return target.getAttribute('data-conditional-value') === value;
     },
 
     hide: function (target) {
         'use strict';
-        var input = target.querySelector('select');
+        var input = target.querySelector('select, input, textarea');
         target.classList.add('d-none');
         if (input) {
             input.removeAttribute('required');
@@ -45,11 +54,14 @@ window.osuny.conditional = {
 
     show: function (target) {
         'use strict';
-        var input = target.querySelector('select');
+        var input = target.querySelector('select, input, textarea'),
+            optional = target.getAttribute('data-conditional-optional') === 'true';
         target.classList.remove('d-none');
         if (input) {
             input.removeAttribute('disabled');
-            input.setAttribute('required', 'required');
+            if (!optional) {
+                input.setAttribute('required', 'required');
+            }
         }
     },
 

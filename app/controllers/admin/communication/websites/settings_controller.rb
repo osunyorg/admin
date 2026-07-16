@@ -35,9 +35,18 @@ class Admin::Communication::Websites::SettingsController < Admin::Communication:
   def technical
     breadcrumb
     add_breadcrumb t('admin.communication.website.technical.label')
+    check_git_access if params[:check_git_access].present?
   end
 
   protected
+
+  def check_git_access
+    if @website.check_git_access
+      flash.now[:notice] = t('admin.communication.website.technical.check_git_access.success')
+    else
+      flash.now[:alert] = @website.errors.full_messages.to_sentence
+    end
+  end
 
   def breadcrumb
     super

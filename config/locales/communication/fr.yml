@@ -339,6 +339,21 @@ fr:
             original_uploaded_file:
               already_imported: déjà importé dans la médiathèque
               too_big: trop lourd !
+        communication/website:
+          attributes:
+            git_endpoint:
+              invalid: ne pointe pas vers une instance valide
+              unreachable: est actuellement injoignable (réessayez plus tard)
+            access_token:
+              unauthorized: n'existe pas, n'est pas valide ou a expiré
+              forbidden: n'a pas les permissions nécessaires pour accéder à ce dépôt
+              workflows_forbidden: n'a pas la permission "Workflows" nécessaire pour écrire les fichiers de déploiement (.github/workflows/), en plus de la permission "Contents"
+            repository:
+              invalid: n'est pas au format attendu (organisation/nom)
+              not_found: n'existe pas ou n'est pas accessible avec ce token (vérifiez le nom du référentiel indiqué et les permissions associées au jeton d'accès)
+            git_branch:
+              not_found: n'existe pas (créez d'abord la branche sur le dépôt distant)
+              protected: est protégée et ne permet pas l'écriture avec ce token
         communication/website/agenda/event:
           attributes:
             from_day:
@@ -685,6 +700,9 @@ fr:
           button: Synchroniser
           running: La synchronisation est lancée, un peu de patience...
         technical:
+          check_git_access:
+            button: Tester la connexion
+            success: La connexion au dépôt Git fonctionne correctement.
           description: Tout ce qui est lié aux réglages techniques
           label: Technique
   communication:
@@ -901,11 +919,11 @@ fr:
       communication_media_localization:
         internal_description: Description complémentaire de l'image. Vous pouvez donner des informations complémentaires sur l'image, utiles pour la recherche et indiquer des instructions spécifiques d'usage pour les utilisateur·rices de la médiathèque.
       communication_website:
-        access_token_with_existing: Votre jeton d'accès Github ou Gitlab confidentiel.<br>Laisser le champ vide pour ne pas le modifier.
-        access_token_without_existing: Votre jeton d'accès Github ou Gitlab confidentiel, à laisser vide lors de la création d'un site avec Deuxfleurs.
+        access_token_with_existing: Votre jeton d'accès confidentiel de fournisseur git.<br>Laisser le champ vide pour ne pas le modifier.
+        access_token_without_existing: Votre jeton d'accès confidentiel de fournisseur git, à laisser vide lors de la création d'un site avec Deuxfleurs.
         apache_config_custom_content: Les redirections seront ajoutées à la suite de ce contenu.
         archive_content: "Si vous cochez cette case, les actualités, événements et expositions seront automatiquement dépubliés après la période définie, et donc supprimés du site. Vous pouvez également définir un contenu comme « pérenne » pour qu'il ne soit pas dépublié automatiquement."
-        deployment_status_badge: "URL du badge : <a href=\"https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge\" target=\"_blank\">Github</a>, <a href=\"https://docs.gitlab.com/ee/user/project/badges.html\" target=\"_blank\">Gitlab</a>"
+        deployment_status_badge: "URL du badge : <a href=\"https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge\" target=\"_blank\">Github</a>, <a href=\"https://docs.gitlab.com/ee/user/project/badges.html\" target=\"_blank\">Gitlab</a>, <a href=\"https://forgejo.org/docs/latest/user/readme-badges/\" target=\"_blank\">Forgejo</a><br>Fonctionne uniquement si la visibilité du dépôt est Public."
         feature_agenda: Pour partager des événements
         feature_alerts: Pour afficher des bandeaux d'alerte
         feature_alumni: Pour présenter les alumni publiquement
@@ -915,7 +933,7 @@ fr:
         feature_portfolio: Pour présenter des projets
         feature_posts: Pour publier des actualités, comme un média
         git_branch: 'Laisser vide pour la branche par défaut'
-        git_endpoint: 'Laisser vide pour les valeurs par défaut (https://github.com ou https://gitlab.com/api/v4)'
+        git_endpoint: 'Laisser vide pour l''instance hébergée proposée par le Fournisseur Git'
         in_production: Cochez cette case une fois le site déployé sur un domaine ou un sous-domaine dédié (pas *.osuny.site).
         languages: 'Si vous sélectionnez une seule langue les urls ne seront pas préfixées. Si vous en sélectionnez plusieurs le site sera considéré comme multilingue et donc toutes les urls seront préfixées avec la langue (/fr, /en)'
         plausible_url: Lien de partage généré selon la <a href="https://plausible.io/docs/shared-links" target="_blank">documentation officielle Plausible</a>.
