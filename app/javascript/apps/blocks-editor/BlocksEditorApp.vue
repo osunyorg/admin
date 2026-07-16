@@ -162,8 +162,7 @@ export default {
         </div>
       </div>
       <DomCount
-        :count="data.about.dom_count"
-        :i18n="i18n" />
+        :count="data.about.dom_count" />
       <OffcanvasShell
         :open="offcanvasState !== 'closed'"
         :title="$t('blocksEditor.offcanvas.title')"
