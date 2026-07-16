@@ -1,5 +1,5 @@
 <script>
-import { CloudDownload, ArrowRight, ArrowLeft } from 'lucide-vue-next';
+import { CloudDownload, ArrowRight, ArrowLeft } from '@lucide/vue';
 
 export default {
     components: {
