@@ -64,7 +64,7 @@ class Communication::Media < ApplicationRecord
     where(collection: collection_id)
   }
 
-  def self.create_from_blob(blob, in_context: nil, origin: :upload, alt: nil, credit: nil)
+  def self.find_or_create_from_blob(blob, in_context: nil, origin: :upload, alt: nil, credit: nil)
     return if blob.nil?
     media = find_or_create_media_from_blob(blob, origin)
     if in_context.present?

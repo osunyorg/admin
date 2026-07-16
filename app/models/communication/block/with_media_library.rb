@@ -16,7 +16,7 @@ module Communication::Block::WithMediaLibrary
       credit = media_blob[:credit]
       next if blob.nil?
       media_blob_ids << blob.id
-      Communication::Media.create_from_blob(
+      Communication::Media.find_or_create_from_blob(
         blob,
         in_context: self,
         origin: :upload,

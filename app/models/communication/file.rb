@@ -35,12 +35,14 @@ class Communication::File < ApplicationRecord
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
-  def self.find_or_create_for_blob(blob)
-    # Si La localisation n'existe pas, 
-    # on cherche un fichier logique ayant une localisation 
-    # avec le même checksum (dans une autre langue)
-    find_by_blob(blob) ||
-    # Si pas de fichier logique trouvé, on le crée
+  # Attention, la création ne fait pas le travail jusqu'au bout,
+  # ça renvoie un file vide, et il faut créer sa localisation.
+  # Concrètement, cette méthode est appelée uniquement par 
+  # Communication::File::Localization.find_or_create_from_blob
+  def self.find_or_create_from_blob(blob)
+    # Soit il y a un fichier (dans n'importe quelle langue), on le renvoie
+    # Soit il n'y en a aucun, on le crée
+    find_by_blob(blob) || 
     create!(university_id: blob.university_id)
   end
 

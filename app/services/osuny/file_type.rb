@@ -30,6 +30,7 @@ class Osuny::FileType
         'application/msword',
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         'text/markdown',
+        'text/plain',
         'application/vnd.oasis.opendocument.text'
       ]
     },
