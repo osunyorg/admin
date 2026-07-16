@@ -30,8 +30,12 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
     @file = @localization.file
   end
 
-  def pick
-    # TODO generic picker
+  def picker
+    @picker = Communication::File::Picker.new(
+      @files,
+      current_language,
+      params
+    )
   end
 
   def edit
