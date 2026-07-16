@@ -105,14 +105,14 @@ en:
           text: "The image sent is far too heavy, it weights {size}MB! osuny manages all images under {max}MB automatically. When your image is bigger than that, you need to reduce them before upload. You might use a tool like <a href=\"https://www.iloveimg.com/fr\" target=\"_blank\" rel=\"noreferrer\">iLoveIMG</a>."
           title: Image too heavy
       medias:
-        button: Choose from media library
+        button: Choose from photo library
         collections: Collections
         next: Next images
         nothing: No results for this search
         placeholder: Type your search here
         previous: Previous images
         search: Search
-        title: Media library
+        title: Photo library
       remove: Remove image
       title: Image
     timeSlots:

@@ -28,9 +28,9 @@
 #
 class Communication::Media::Localization < ApplicationRecord
   include AsLocalization
+  include HasUniversity
   include Initials
   include WithOpenApi
-  include WithUniversity
 
   def to_s
     "#{name}"

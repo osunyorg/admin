@@ -85,7 +85,7 @@ class Osuny::Media::Picker
       },
       key: :about,
       university: university,
-      mandatory_module: WithFeaturedImage
+      mandatory_module: HasFeaturedImage
     )
   end
 

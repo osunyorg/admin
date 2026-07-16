@@ -41,17 +41,18 @@ class Communication::Block < ApplicationRecord
     utilities: [:files, :definitions, :contact, :links, :license, :embed]
   }
 
+  include Accessible
   include AsIndirectObject
   include Filterable
+  include HasUniversity
   include Orderable
-  include WithAccessibility
+  include Sanitizable
+  include WithCommunicationFiles
   include WithHeadingRanks
   include WithHtmlClass
   include WithMediaLibrary
   include WithTemplate
   include WithOpenApi # Must be included after WithTemplate to load template_kinds
-  include WithUniversity
-  include Sanitizable
 
   belongs_to  :about, polymorphic: true
   belongs_to  :communication_website,

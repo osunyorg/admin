@@ -64,14 +64,15 @@ class Communication::Website < ApplicationRecord
   include Favoritable
   include Filterable
   include GeneratesGitFiles
+  include HasAbouts
+  include HasDependencies
+  include HasUniversity
   include Localizable
   include LocalizableOrderByNameScope
   include Searchable
-  include WithAbouts
   include WithConfigs
   include WithConnectedObjects
   include WithContentArchive
-  include WithDependencies
   include WithDeuxfleurs
   include WithDomCount
   include WithFeatureAgenda
@@ -102,7 +103,6 @@ class Communication::Website < ApplicationRecord
   include WithStyle
   include WithTheme
   include WithTimeZone
-  include WithUniversity
 
   enum :git_provider, {
     github: 0,

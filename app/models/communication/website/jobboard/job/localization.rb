@@ -42,19 +42,19 @@
 class Communication::Website::Jobboard::Job::Localization < ApplicationRecord
   acts_as_paranoid
 
+  include Accessible
   include AsLocalization
   include Contentful
+  include HasBlobs
+  include HasFeaturedImage
   include HasGitFiles
+  include HasUniversity
   include HeaderCallToAction
   include Initials
   include Permalinkable # slug_unavailable method overwrite in this file
   include Publishable
   include Sanitizable
   include Shareable
-  include WithAccessibility
-  include WithBlobs
-  include WithFeaturedImage
-  include WithUniversity
 
   belongs_to :website,
               class_name: 'Communication::Website',

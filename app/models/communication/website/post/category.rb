@@ -34,12 +34,12 @@ class Communication::Website::Post::Category < ApplicationRecord
   include AsCategory
   include AsDirectObject
   include GeneratesGitFiles
-  include Localizable
-  include Sanitizable
-  include WithMenuItemTarget
-  include WithOpenApi
   include HasListBlocks
-  include WithUniversity
+  include HasUniversity
+  include Localizable
+  include MenuItemTargetable
+  include Sanitizable
+  include WithOpenApi
 
   belongs_to              :program,
                           class_name: 'Education::Program',

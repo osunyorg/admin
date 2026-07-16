@@ -105,14 +105,14 @@ fr:
           text: "L'image envoyée est beaucoup trop lourde, elle pèse {size} Mo ! Sur osuny, nous traitons automatiquement les images de moins de {max} Mo. Au-delà de ce poids, il est nécessaire de réduire l'image avant de l'envoyer, par exemple en utilisant un outil comme <a href=\"https://www.iloveimg.com/fr\" target=\"_blank\" rel=\"noreferrer\">iLoveIMG</a>."
           title: Image trop lourde
       medias:
-        button: Choisir dans la médiathèque
+        button: Choisir dans la photothèque
         collections: Collections
         next: Images suivantes
         nothing: Aucun résultat pour cette recherche
         placeholder: Tapez votre recherche
         previous: Images précédentes
         search: Chercher
-        title: Médiathèque
+        title: Photothèque
       remove: Supprimer l'image
       title: Image
     timeSlots:

@@ -1,6 +1,6 @@
 class Communication::Block::Component::Base
-  include WithAccessibility
-  include WithDependencies
+  include Accessible
+  include HasDependencies
 
   attr_reader :property, :template
 

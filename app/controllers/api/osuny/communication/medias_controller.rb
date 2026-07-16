@@ -6,7 +6,7 @@ class Api::Osuny::Communication::MediasController < Api::Osuny::ApplicationContr
   end
 
   def create
-    @media = Communication::Media.create_from_blob(@blob)
+    @media = Communication::Media.find_or_create_from_blob(@blob)
     if @media.persisted?
       render :show, status: :created
     else

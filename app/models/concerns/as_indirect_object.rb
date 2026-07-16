@@ -5,13 +5,13 @@ module AsIndirectObject
   extend ActiveSupport::Concern
 
   # Les blocs sont des objets indirects, mais n'ont pas de GitFiles, on n'inclut donc pas HasGitFiles ici
-  include WithDependencies
+  include HasDependencies
 
   included do
     has_many  :connections,
               as: :indirect_object,
               class_name: 'Communication::Website::Connection'
-              # Pas dependent_destroy parce que le processus est plus sophistiqué, et est fait dans la méthode destroy du WithDependencies
+              # Pas dependent_destroy parce que le processus est plus sophistiqué, et est fait dans la méthode destroy du HasDependencies
     has_many  :websites,
               -> { distinct },
               through: :connections

@@ -86,6 +86,13 @@ fr:
         published_at: Date de publication
         slug: Identifiant
         title: Titre
+      communication/file/localization:
+        internal_description: Description interne
+        name: Nom
+        original_byte_size: Poids
+        original_content_type: Type de contenu
+        original_filename: Nom du fichier original
+        original_uploaded_file: Fichier original
       communication/media:
         collection: Collection
         height: Hauteur
@@ -334,6 +341,11 @@ fr:
           attributes:
             published:
               cannot_unpublished_default: ne peut pas être dépubliée (langue par défaut)
+        communication/file/localization:
+          attributes:
+            original_uploaded_file:
+              already_imported: déjà importé dans la bibliothèque de fichiers
+              too_big: trop lourd !
         communication/media:
           attributes:
             original_uploaded_file:
@@ -388,6 +400,15 @@ fr:
       communication/extranet/post/category:
         one: Catégorie
         other: Catégories
+      communication/file:
+        one: Fichier
+        other: Fichiers
+      communication/file/category:
+        one: Catégorie
+        other: Catégories
+      communication/file/context:
+        one: Contexte d'utilisation
+        other: Contextes d'utilisation
       communication/media:
         one: Média
         other: Médias
@@ -701,10 +722,14 @@ fr:
           description: Espaces d'échanges sécurisés dédiés aux utilisateur·rices authentifié·es
           description_non_university: Espaces d'échanges sécurisés dédiés aux utilisateur·rices authentifié·es
           title: Extranets
+        file:
+          description: Bibliothèque de fichiers regroupant l'intégralité des fichiers téléchargeables
+          description_non_university: Bibliothèque de fichiers regroupant l'intégralité des fichiers téléchargeables
+          title: Fichiers
         media:
-          description: Bibliothèque de médias regroupant l'intégralité des fichiers utilisés dans le système
-          description_non_university: Bibliothèque de médias regroupant l'intégralité des fichiers utilisés dans le système
-          title: Médiathèque
+          description: Bibliothèque de photos regroupant l'intégralité des images utilisés dans le système
+          description_non_university: Bibliothèque de photos regroupant l'intégralité des images utilisés dans le système
+          title: Photos
         website:
           description: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
           description_non_university: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
@@ -898,6 +923,8 @@ fr:
         favicon: 'Fichier .png uniquement'
         host: Sans le protocole
         sso_button_label: "Par défaut : Se connecter en SSO"
+      communication_file_localization:
+        internal_description: Description complémentaire du fichier. Vous pouvez donner des informations complémentaires sur le fichier, utiles pour la recherche et indiquer des instructions spécifiques d'usage.
       communication_media_localization:
         internal_description: Description complémentaire de l'image. Vous pouvez donner des informations complémentaires sur l'image, utiles pour la recherche et indiquer des instructions spécifiques d'usage pour les utilisateur·rices de la médiathèque.
       communication_website:

@@ -28,6 +28,6 @@ class University::Person::Involvement::Localization < ApplicationRecord
   acts_as_paranoid
   
   include AsLocalization
+  include HasUniversity
   include Sanitizable
-  include WithUniversity
 end

@@ -44,25 +44,25 @@
 #
 class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   acts_as_paranoid
-
-  include AddableToCalendar
+  
+  include Accessible
   # Needs to be included before Sluggable (which is included by Permalinkable)
   include AsDirectObjectLocalization
   include AsLocalization
   include AsLocalizedTree
+  include Communication::Website::Agenda::AddableToCalendar
   include Contentful
+  include HasBlobs
+  include HasFeaturedImage
   include HasGitFiles
+  include HasUniversity
   include HeaderCallToAction
   include Initials
   include Permalinkable # slug_unavailable method overwrite in this file
   include Publishable
   include Sanitizable
   include Shareable
-  include WithAccessibility
-  include WithBlobs
-  include WithFeaturedImage
   include WithOpenApi
-  include WithUniversity
 
   belongs_to :website,
               class_name: 'Communication::Website',

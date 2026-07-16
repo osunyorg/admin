@@ -42,22 +42,22 @@
 class Communication::Website::Portfolio::Project::Localization < ApplicationRecord
   acts_as_paranoid
 
+  include Accessible
   # Needs to be included before Sluggable (which is included by Permalinkable)
   include AsDirectObjectLocalization
   include AsLocalization
   include Contentful
+  include HasBlobs
+  include HasFeaturedImage
   include HasGitFiles
+  include HasUniversity
   include HeaderCallToAction
   include Initials
   include Permalinkable
   include Publishable
   include Sanitizable
   include Shareable
-  include WithAccessibility
-  include WithBlobs
-  include WithFeaturedImage
   include WithOpenApi
-  include WithUniversity
 
   belongs_to :website,
               class_name: 'Communication::Website',
