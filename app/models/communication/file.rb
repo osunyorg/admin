@@ -34,4 +34,22 @@ class Communication::File < ApplicationRecord
       unaccent(communication_file_localizations.internal_description) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
+
+  def self.find_or_create_for_blob(blob)
+    # Si La localisation n'existe pas, 
+    # on cherche un fichier logique ayant une localisation 
+    # avec le même checksum (dans une autre langue)
+    find_by_blob(blob) ||
+    # Si pas de fichier logique trouvé, on le crée
+    create!(university_id: blob.university_id)
+  end
+
+  def self.find_by_blob(blob)
+    joins(:localizations).where(
+      university_id: blob.university_id,
+      communication_file_localizations: {
+        original_checksum: blob.checksum
+      }
+    ).first
+  end
 end

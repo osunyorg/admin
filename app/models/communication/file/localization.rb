@@ -51,15 +51,7 @@ class Communication::File::Localization < ApplicationRecord
       language_id: language.id,
       original_checksum: blob.checksum
     ).first_or_create do |localization|
-      # La localisation n'existe pas, on cherche un fichier logique ayant une localisation avec le même checksum (dans une autre langue)
-      file = Communication::File.joins(:localizations).where(
-         university_id: blob.university_id,
-         communication_file_localizations: {
-            original_checksum: blob.checksum
-         }
-      ).first
-      # Si pas de fichier logique trouvé, on le crée
-      file ||= Communication::File.create!(university_id: blob.university_id)
+      file = Communication::File.find_or_create_for_blob(blob)
       # On attribue le blob
       localization.original_blob = blob
       # On connecte au fichier
