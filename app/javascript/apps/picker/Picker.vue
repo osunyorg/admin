@@ -1,10 +1,12 @@
 <script>
-import Pagination from './picker/Pagination.vue';
-import Parameters from './picker/Parameters.vue';
+import { File } from '@lucide/vue';
+import Pagination from './components/Pagination.vue';
+import Parameters from './components/Parameters.vue';
 
 export default {
   name: 'Picker',
   components: {
+    File,
     Pagination,
     Parameters,
   },
@@ -28,16 +30,23 @@ export default {
       modal: false,
       url: '',
       parameters: {},
+      pagination: {},
       results: {},
     }
   },
   methods: {
     open() {
+      if (this.modal) {
+        return;
+      }
       this.modal = true;
       document.body.classList.add("modal-open");
       this.search();
     },
     close() {
+      if (!this.modal) {
+        return;
+      }
       this.modal = false;
       document.body.classList.remove("modal-open");
     },
@@ -49,6 +58,7 @@ export default {
         if (xhr.readyState == 4 && xhr.status == 200) {
           data = JSON.parse(xhr.responseText);
           this.parameters = data.parameters;
+          this.pagination = data.pagination;
           this.results = data.results;
         }
       }.bind(this);
@@ -57,8 +67,11 @@ export default {
     },
     buildUrl() {
       this.url = this.endpoint + '?';
-      if (this.parameters.pagination) {
-        this.url += '&page=' + this.parameters.pagination.current_page;
+      if (this.parameters) {
+        this.url += this.parameters.query_parameters;
+      }
+      if (this.pagination) {
+        this.url += this.pagination.query_parameters;
       }
     },
     select(event, object) {
@@ -71,11 +84,14 @@ export default {
 </script>
 
 <template>
-  <section class="vue__picker">
-    <a  class="btn btn-sm"
-        @click="open">
-      Choisir un fichier dans la bibliothèque de fichiers
-    </a>
+  <section
+    class="vue__picker"
+    @keydown.esc="close">
+    <button class="btn btn-sm mx-n2 d-flex align-items-center"
+      @click="open">
+      <File stroke-width="1.5" class="me-1" />
+      Choisir un fichier dans la bibliothèque
+    </button>
     <div  class="modal"
           tabindex="-1"
           role="dialog"
@@ -86,9 +102,10 @@ export default {
             <div class="col-auto d-none d-lg-block ">
               <h5 class="modal-title">Sélecteur de fichiers</h5>
             </div>
-            <button type="button"
-                    class="btn-close"
-                    @click="close">
+            <button
+              type="button"
+              class="btn-close"      
+              @click="close">
             </button>
           </div>
           <div class="modal-body overflow-x-hidden">
@@ -100,7 +117,7 @@ export default {
               </div>
               <div class="col-md-10">
                 <Pagination 
-                  :pagination="parameters.pagination"
+                  :pagination="pagination"
                   @change="search" />
                 <div class="row g-2">
                   <div v-for="object in results">

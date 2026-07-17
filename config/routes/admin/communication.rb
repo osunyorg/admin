@@ -292,7 +292,7 @@ namespace :communication do
     resources :files do
       collection do
         post 'direct-upload' => 'files#direct_upload', as: :direct_upload
-        get 'picker' => 'files#picker', as: :picker, defaults: { format: :json }
+        get 'picker' => 'files#picker', as: :picker
         resources :categories, controller: '/admin/communication/library/files/categories', as: 'file_categories' do
           collection do
             post :reorder

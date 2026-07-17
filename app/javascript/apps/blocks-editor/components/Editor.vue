@@ -6,7 +6,7 @@ import CodeInput from './inputs/CodeInput.vue';
 import UploadInput from './inputs/UploadInput.vue';
 import FileUploadInput from './inputs/FileUploadInput.vue';
 import MultiImageInput from './inputs/MultiImageInput.vue';
-import Picker from '../../components/Picker.vue';
+import Picker from '../../picker/Picker.vue';
 
 // Renders the block-edit form fetched from the server, mounts a fresh inner
 // Vue app on it for reactive v-model bindings, and unmounts on close.

@@ -1,4 +1,5 @@
 json.parameters @picker.parameters
+json.pagination @picker.pagination
 json.results @picker.paginated_objects do |file|
   l10n = file.localized_in(current_language)
   json.data do

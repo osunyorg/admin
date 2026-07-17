@@ -13,13 +13,17 @@ export default {
     'change',
   ],
   methods: {
+    update() {
+      this.pagination.query_parameters = '&page=' + this.pagination.current_page;
+      this.$emit('change')
+    },
     previousPage() {
       this.pagination.current_page = this.pagination.current_page - 1;
-      this.$emit('change')
+      this.update();
     },
     nextPage() {
       this.pagination.current_page = this.pagination.current_page + 1
-      this.$emit('change')
+      this.update();
     },
   }
 };

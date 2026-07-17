@@ -12,7 +12,17 @@ class Communication::File::Picker
       term: term,
       filters: filters,
       sorts: sorts,
-      pagination: pagination
+      query_parameters: '',
+    }
+  end
+
+  def pagination
+    {
+      current_page: paginated_objects.current_page,
+      limit_value: paginated_objects.limit_value,
+      total_count: paginated_objects.total_count,
+      total_pages: paginated_objects.total_pages,
+      query_parameters: "&page=#{paginated_objects.current_page}"
     }
   end
 
@@ -53,15 +63,6 @@ class Communication::File::Picker
         selected: false
       }
     ]
-  end
-
-  def pagination
-    {
-      current_page: paginated_objects.current_page,
-      limit_value:  paginated_objects.limit_value,
-      total_count:  paginated_objects.total_count,
-      total_pages:  paginated_objects.total_pages
-    }
   end
 
 end

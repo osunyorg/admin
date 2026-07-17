@@ -4,6 +4,7 @@ import SsoMappingApp from './sso-mapping/SsoMappingApp.vue';
 import MediaPickerApp from './media-picker/MediaPickerApp.vue';
 import TimeSlotsApp from './time-slots/TimeSlotsApp.vue';
 import BlocksEditorApp from './blocks-editor/BlocksEditorApp.vue';
+import PickerTestApp from './picker/PickerTestApp.vue';
 
 // Messages are precompiled at boot into public/vue/<locale>.json (cf.
 // config/initializers/vue_i18n.rb) and fetched once as a cacheable static file,
@@ -31,6 +32,7 @@ async function boot() {
   mount(MediaPickerApp, '#media-picker-app');
   mount(TimeSlotsApp, '#time-slots-app');
   mount(BlocksEditorApp, '#blocks-editor-app');
+  mount(PickerTestApp, '#picker-test-app');
 }
 
 boot();
