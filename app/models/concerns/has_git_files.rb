@@ -30,8 +30,8 @@ module HasGitFiles
     path
   end
 
-  def mark_git_files_for_update!
-    git_files.each &:mark_for_update!
+  def analyze_git_files!
+    git_files.each &:analyze!
   end
 
 end
