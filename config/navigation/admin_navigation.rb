@@ -8,6 +8,7 @@ SimpleNavigation::Configuration.run do |navigation|
       secondary.item :communication_websites, Communication::Website.model_name.human(count: 2), admin_communication_websites_path
       secondary.item :communication_extranets, Communication::Extranet.model_name.human(count: 2), admin_communication_extranets_path
       secondary.item :communication_media, t('communication.description.parts.media.title'), admin_communication_medias_path
+      secondary.item :communication_files, t('communication.description.parts.file.title'), admin_communication_files_path
       secondary.item :communication_newsletters, 'Lettres d\'information', nil
     end if can?(:read, Communication::Website)
     primary.item :directory, t('university.description.title'), admin_university_root_path, { image: 'admin/university-thumb.jpg' } do |secondary|
