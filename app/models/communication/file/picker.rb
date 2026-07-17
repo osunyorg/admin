@@ -4,12 +4,12 @@ class Communication::File::Picker
   def initialize(objects, language, params)
     @objects = objects
     @language = language
-    @params = params.to_unsafe_hash
+    @params = params
   end
 
   def parameters
     {
-      term: term,
+      search: search,
       filters: filters,
       sorts: sorts,
       query_parameters: '',
@@ -27,15 +27,23 @@ class Communication::File::Picker
   end
 
   def paginated_objects
-    @paginated_objects ||= objects.ordered(language)
+    @paginated_objects ||= objects.filter_by(params[:filters], language)
+                                  .ordered(language)
                                   .page(params[:page])
                                   .per(2)
   end
 
   protected
 
+  def search
+    {
+      term: term,
+      query_parameters: "&filters[for_search_term]=#{term}"
+    }
+  end
+
   def term
-    params[:term]
+    params.dig(:filters, :for_search_term).to_s
   end
 
   def filters

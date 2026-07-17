@@ -8,7 +8,7 @@ export default {
   ],
   methods: {
     update() {
-      this.parameters.query_parameters = "&filters[for_search_term]=" + this.parameters.term;
+      this.parameters.query_parameters = "&filters[for_search_term]=" + this.parameters.search.term;
       this.$emit('change');
     },
   }
@@ -17,14 +17,14 @@ export default {
 
 <template>
   <div class="vue__picker__parameters">
-    <div class="mb-3">
+    <div class="mb-3" v-if="parameters.search">
       <b>Recherche</b>
       <input  type="text"
               name="search"
               class="form-control mb-2"
               placeholder="Tapez le texte"
-              v-model="parameters.term"
-              @keydown.enter.prevent="update">
+              v-model="parameters.search.term"
+              @keyup="update">
     </div>
     <div class="mb-3">
       <b>Filtrer</b>

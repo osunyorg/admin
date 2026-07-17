@@ -100,7 +100,7 @@ export default {
         <div class="modal-content">
           <div class="modal-header">
             <div class="col-auto d-none d-lg-block ">
-              <h5 class="modal-title">Sélecteur de fichiers</h5>
+              <h5 class="modal-title">Bibliothèque de fichiers</h5>
             </div>
             <button
               type="button"
