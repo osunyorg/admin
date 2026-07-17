@@ -74,7 +74,11 @@ class Communication::File::Picker
         id: 'categories',
         name: 'Catégories',
         values: [
-          { id: 'cat-1', name: 'Catégorie 1', selected: false }
+          {
+            id: 'cat-1',
+            name: 'Catégorie 1',
+            selected: false,
+            query_parameters: '&filters[for_category][]=d05ab9f9-a8fb-42e3-8aca-8fe73fa08913' }
         ]
       }
     ]

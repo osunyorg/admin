@@ -98,7 +98,7 @@ export default {
     <div  class="modal"
           tabindex="-1"
           role="dialog"
-          :class="{'d-block': modal}">
+          :class="{'d-block': modalOpened}">
       <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
