@@ -43,7 +43,8 @@ class Communication::Block::Component::File < Communication::Block::Component::B
   def dependencies
     [
       blob,
-      communication_file
+      communication_file,
+      communication_file_localization
     ]
   end
   
@@ -55,14 +56,6 @@ class Communication::Block::Component::File < Communication::Block::Component::B
 
   def data_empty?
     data.nil? || data['communication_file_id'].blank?
-  end
-
-  def university
-    @university ||= template.block.university
-  end
-
-  def language
-    @language ||= template.block.language
   end
 
 end
