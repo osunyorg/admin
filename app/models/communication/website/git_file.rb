@@ -83,7 +83,8 @@ class Communication::Website::GitFile < ApplicationRecord
   def mark_for_update!
     update(
       desynchronized: true,
-      desynchronized_at: Time.zone.now
+      desynchronized_at: Time.zone.now,
+      current_sha: nil
     )
   end
 
