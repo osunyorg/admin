@@ -88,7 +88,7 @@ export default {
     class="vue__picker"
     @keydown.esc="close">
     <button class="btn btn-sm mx-n2 d-flex align-items-center"
-      @click="open">
+      @click.prevent="open">
       <File stroke-width="1.5" class="me-1" />
       Choisir un fichier dans la bibliothèque
     </button>

@@ -6,6 +6,12 @@ export default {
   emits: [
     'change',
   ],
+  methods: {
+    update() {
+      this.parameters.query_parameters = "&filters[for_search_term]=" + this.parameters.term;
+      this.$emit('change');
+    },
+  }
 };
 </script>
 
@@ -18,13 +24,7 @@ export default {
               class="form-control mb-2"
               placeholder="Tapez le texte"
               v-model="parameters.term"
-              @keydown.enter.prevent="$emit('change')">
-      <button type="button"
-              class="btn btn-primary btn-sm mb-2"
-              aria-label="Chercher"
-              @click.prevent="$emit('change')">
-        Chercher
-      </button>
+              @keydown.enter.prevent="update">
     </div>
     <div class="mb-3">
       <b>Filtrer</b>
