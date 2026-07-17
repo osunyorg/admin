@@ -13,6 +13,7 @@ export default {
   props: [
     'modelValue',
     'endpoint',
+    'kind',
   ],
   emits: ['update:modelValue'],
   computed: {
@@ -29,6 +30,7 @@ export default {
     return {
       modal: false,
       url: '',
+      data: {},
       parameters: {},
       pagination: {},
       results: {},
@@ -56,10 +58,10 @@ export default {
       this.buildUrl();
       xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
-          data = JSON.parse(xhr.responseText);
-          this.parameters = data.parameters;
-          this.pagination = data.pagination;
-          this.results = data.results;
+          this.data = JSON.parse(xhr.responseText);
+          this.parameters = this.data.parameters;
+          this.pagination = this.data.pagination;
+          this.results = this.data.results;
         }
       }.bind(this);
       xhr.open("GET", this.url, false);
@@ -90,7 +92,7 @@ export default {
     <button class="btn btn-sm mx-n2 d-flex align-items-center"
       @click.prevent="open">
       <File stroke-width="1.5" class="me-1" />
-      Choisir un fichier dans la bibliothèque
+      {{ $t(`picker.kind.${kind}.button`) }}
     </button>
     <div  class="modal"
           tabindex="-1"
@@ -100,7 +102,7 @@ export default {
         <div class="modal-content">
           <div class="modal-header">
             <div class="col-auto d-none d-lg-block ">
-              <h5 class="modal-title">Bibliothèque de fichiers</h5>
+              <h1 class="h4 modal-title">{{ $t(`picker.kind.${kind}.modal.title`) }}</h1>
             </div>
             <button
               type="button"

@@ -115,6 +115,19 @@ fr:
         title: Photothèque
       remove: Supprimer l'image
       title: Image
+    picker:
+      pagination:
+        next: Page suivante
+        previous: Page précédente
+      parameters:
+        search: Chercher
+        filters: Filtrer
+        sorts: Trier
+      kind:
+        files:
+          button: Choisir un fichier dans la bibliothèque
+          modal:
+            title: Bibliothèque de fichiers
     timeSlots:
       add: Ajouter un créneau horaire
       datetime:

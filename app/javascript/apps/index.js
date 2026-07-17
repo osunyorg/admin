@@ -1,26 +1,13 @@
 import { createApp } from 'vue';
-import { createI18n } from 'vue-i18n';
+import { getI18n } from './i18n';
 import SsoMappingApp from './sso-mapping/SsoMappingApp.vue';
 import MediaPickerApp from './media-picker/MediaPickerApp.vue';
 import TimeSlotsApp from './time-slots/TimeSlotsApp.vue';
 import BlocksEditorApp from './blocks-editor/BlocksEditorApp.vue';
 import PickerTestApp from './picker/PickerTestApp.vue';
 
-// Messages are precompiled at boot into public/vue/<locale>.json (cf.
-// config/initializers/vue_i18n.rb) and fetched once as a cacheable static file,
-// then shared by every app through a single vue-i18n instance.
 async function boot() {
-  const locale = document.documentElement.lang || 'fr';
-  const messages = await fetch(`/vue/${locale}.json`)
-    .then((res) => res.json())
-    .catch(() => ({}));
-  const i18n = createI18n({
-    legacy: false,
-    globalInjection: true,
-    locale,
-    fallbackLocale: 'fr',
-    messages: { [locale]: messages },
-  });
+  const i18n = await getI18n();
 
   const mount = (App, selector) => {
     if (document.querySelector(selector)) {

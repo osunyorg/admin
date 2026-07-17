@@ -1,7 +1,7 @@
 class Communication::File::Picker
   attr_reader :objects, :language, :params
 
-  def initialize(objects, language, params)
+  def initialize(objects:, language:, params:)
     @objects = objects
     @language = language
     @params = params

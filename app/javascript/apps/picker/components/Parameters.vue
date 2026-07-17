@@ -18,7 +18,7 @@ export default {
 <template>
   <div class="vue__picker__parameters">
     <div class="mb-3" v-if="parameters.search">
-      <b>Recherche</b>
+      <b>{{ $t('picker.parameters.search')}}</b>
       <input  type="text"
               name="search"
               class="form-control mb-2"
@@ -27,7 +27,7 @@ export default {
               @keyup="update">
     </div>
     <div class="mb-3">
-      <b>Filtrer</b>
+      <b>{{ $t('picker.parameters.filters')}}</b>
       <div v-for="filter in parameters.filters">
         {{ filter.name }}
         <div v-for="value in filter.values">
@@ -36,7 +36,7 @@ export default {
       </div>
     </div>
     <div class="mb-3">
-      <b>Trier</b>
+      <b>{{ $t('picker.parameters.sorts')}}</b>
       <div v-for="sort in parameters.sorts">
         {{ sort.name }}
         {{ sort.selected }}

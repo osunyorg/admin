@@ -6,6 +6,7 @@ accept ||= '*'
 %>
 <Picker
   v-model="<%= model %>.<%= property %>"
+  kind="files"
   endpoint="<%= picker_admin_communication_files_path(format: :json) %>">
 </Picker>
 <file-upload-input

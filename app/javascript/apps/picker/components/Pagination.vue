@@ -37,9 +37,11 @@ export default {
         <button
           class="btn btn-sm ps-0"
           v-if="pagination?.current_page > 1"
-          @click.prevent="previousPage"
-          title="Page précédente">
+          @click.prevent="previousPage">
           <ArrowLeft stroke-width="1.5" />
+          <span class="sr-only">
+            {{ $t('picker.pagination.previous') }}
+          </span>
         </button>
       </div>
       <p class="m-0">
@@ -49,8 +51,10 @@ export default {
         <button
           class="btn btn-sm pe-0"
           v-if="pagination?.current_page < pagination?.total_pages"
-          @click.prevent="nextPage"
-          title="Page suivante">
+          @click.prevent="nextPage">
+          <span class="sr-only">
+            {{ $t('picker.pagination.next') }}
+          </span>
           <ArrowRight stroke-width="1.5" />
         </button>
       </div>
