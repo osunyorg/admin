@@ -26,6 +26,8 @@ class Communication::File < ApplicationRecord
   include LocalizableOrderByNameScope
   include WithOpenApi
 
+  has_many :contexts, through: :localizations
+
   scope :for_search_term, -> (term, language = nil) {
     joins(:localizations)
     .where(communication_file_localizations: { language_id: language.id })
