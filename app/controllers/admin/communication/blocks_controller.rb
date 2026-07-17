@@ -13,7 +13,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
       block.update_column(:position, index + 1)
       about ||= block.about # Always the same about, doesn't matter
     end
-    about.try(:mark_git_files_for_update!)
+    about.try(:analyze_git_files!)
   end
 
   def new
