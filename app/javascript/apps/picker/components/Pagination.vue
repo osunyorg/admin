@@ -18,7 +18,7 @@ export default {
       this.$emit('change')
     },
     previousPage() {
-      this.pagination.current_page = this.pagination.current_page - 1;
+      this.pagination.current_page = Math.min(1, this.pagination.current_page - 1);
       this.update();
     },
     nextPage() {
