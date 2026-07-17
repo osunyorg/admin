@@ -18,19 +18,19 @@ class Communication::File::Picker
 
   def pagination
     {
-      current_page: paginated_objects.current_page,
-      limit_value: paginated_objects.limit_value,
-      total_count: paginated_objects.total_count,
-      total_pages: paginated_objects.total_pages,
-      query_parameters: "&page=#{paginated_objects.current_page}"
+      current_page: results.current_page,
+      limit_value: results.limit_value,
+      total_count: results.total_count,
+      total_pages: results.total_pages,
+      query_parameters: "&page=#{results.current_page}"
     }
   end
 
-  def paginated_objects
-    @paginated_objects ||= objects.filter_by(params[:filters], language)
-                                  .ordered(language)
-                                  .page(params[:page])
-                                  .per(2)
+  def results
+    @results ||= objects.filter_by(params[:filters], language)
+                        .ordered(language)
+                        .page(params[:page])
+                        .per(2)
   end
 
   protected
@@ -72,5 +72,4 @@ class Communication::File::Picker
       }
     ]
   end
-
 end

@@ -78,8 +78,7 @@ export default {
         this.url += this.pagination.query_parameters;
       }
     },
-    select(event, object) {
-      event.preventDefault();
+    select(object) {
       this.value = object.data;
       this.close();
     },
@@ -121,7 +120,8 @@ export default {
               </div>
               <div class="offset-md-1 col-md-9">
                 <Results
-                  :results="results" />
+                  :results="results"
+                  @select="select" />
                 <Pagination 
                   :pagination="pagination"
                   @change="search" />
