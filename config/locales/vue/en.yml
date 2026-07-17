@@ -115,6 +115,21 @@ en:
         title: Photo library
       remove: Remove image
       title: Image
+    picker:
+      pagination:
+        next: Next page
+        previous: Previous page
+      parameters:
+        search:
+          title: Search
+          placeholder: Type your search here
+        filters: Filter
+        sorts: Sort
+      kind:
+        files:
+          button: Choose a file in the library
+          modal:
+            title: File library
     timeSlots:
       add: Add a time slot
       datetime:

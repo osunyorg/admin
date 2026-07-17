@@ -13,6 +13,14 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
     @feature_nav = 'navigation/admin/communication/files'
   end
 
+  def picker
+    @picker = Communication::File::Picker.new(
+      objects: @files,
+      language: current_language,
+      params: params
+    )
+  end
+
   def show
     @contexts = @l10n.contexts
     breadcrumb
@@ -28,10 +36,6 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
     @blob.update_column(:university_id, current_university&.id)
     @localization = Communication::File::Localization.find_or_create_from_blob(@blob, current_language)
     @file = @localization.file
-  end
-
-  def pick
-    # TODO generic picker
   end
 
   def edit

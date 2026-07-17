@@ -1,11 +1,13 @@
 <script>
 import { createApp, provide, reactive } from 'vue';
 import { VueDraggableNext } from 'vue-draggable-next';
+import { getI18n } from '../../i18n';
 import RichTextInput from './inputs/RichTextInput.vue';
 import CodeInput from './inputs/CodeInput.vue';
 import UploadInput from './inputs/UploadInput.vue';
 import FileUploadInput from './inputs/FileUploadInput.vue';
 import MultiImageInput from './inputs/MultiImageInput.vue';
+import Picker from '../../picker/Picker.vue';
 
 // Renders the block-edit form fetched from the server, mounts a fresh inner
 // Vue app on it for reactive v-model bindings, and unmounts on close.
@@ -54,13 +56,13 @@ export default {
         const root = doc.querySelector('[data-editor-form-root]');
         this.html = root ? root.outerHTML : '';
         await this.$nextTick();
-        this.mountInner();
+        await this.mountInner();
       } finally {
         this.loading = false;
       }
     },
 
-    mountInner() {
+    async mountInner() {
       const container = this.$refs.container;
       if (!container) return;
       const root = container.querySelector('[data-editor-form-root]');
@@ -70,13 +72,14 @@ export default {
       // takes the element's innerHTML as its template, compiles it, then
       // replaces the element's children with the rendered output — any
       // listener attached beforehand would be discarded with the old DOM.
-      this.mountVueApp(root);
+      await this.mountVueApp(root);
       this.wireForm(root);
       this.wireCancelButtons(root);
     },
 
-    mountVueApp(root) {
+    async mountVueApp(root) {
       const payload = JSON.parse(root.dataset.payload);
+      const i18n = await getI18n();
       this.innerApp = createApp({
         setup() {
           // Reactive state + helpers exposed to the server-rendered Vue
@@ -143,12 +146,14 @@ export default {
         },
       });
 
-      this.innerApp.component('draggable', VueDraggableNext);
-      this.innerApp.component('RichTextInput', RichTextInput);
+      this.innerApp.use(i18n);
       this.innerApp.component('CodeInput', CodeInput);
-      this.innerApp.component('UploadInput', UploadInput);
+      this.innerApp.component('draggable', VueDraggableNext);
       this.innerApp.component('FileUploadInput', FileUploadInput);
       this.innerApp.component('MultiImageInput', MultiImageInput);
+      this.innerApp.component('Picker', Picker);
+      this.innerApp.component('RichTextInput', RichTextInput);
+      this.innerApp.component('UploadInput', UploadInput);
 
       this.innerApp.mount(root);
     },
@@ -195,7 +200,7 @@ export default {
           this.cleanup();
           this.html = fresh.outerHTML;
           await this.$nextTick();
-          this.mountInner();
+          await this.mountInner();
         }
       }
     },
