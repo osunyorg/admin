@@ -30,7 +30,7 @@ export default {
 </script>
 
 <template>
-  <div class="vue__picker__pagination">
+  <div class="mt-4">
     <p v-if="pagination?.total_count === 0" >Aucun fichier</p>
     <div v-if="pagination?.total_pages > 1" class="d-flex justify-content-between mb-2">
       <div class="vue__picker__button_container">

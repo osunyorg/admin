@@ -2,6 +2,7 @@
 import { File } from '@lucide/vue';
 import Pagination from './components/Pagination.vue';
 import Parameters from './components/Parameters.vue';
+import Results from './components/Results.vue';
 
 export default {
   name: 'Picker',
@@ -9,6 +10,7 @@ export default {
     File,
     Pagination,
     Parameters,
+    Results,
   },
   props: [
     'modelValue',
@@ -117,15 +119,12 @@ export default {
                   :parameters="parameters"
                   @change="search" />
               </div>
-              <div class="col-md-10">
+              <div class="offset-md-1 col-md-9">
+                <Results
+                  :results="results" />
                 <Pagination 
                   :pagination="pagination"
                   @change="search" />
-                <div class="row g-2">
-                  <div v-for="object in results">
-                    <div v-html="object.snippet" @click="select($event, object)"></div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
