@@ -18,16 +18,16 @@ export default {
 <template>
   <div class="vue__picker__parameters">
     <div class="mb-3" v-if="parameters.search">
-      <b>{{ $t('picker.parameters.search')}}</b>
+      <b>{{ $t('picker.parameters.search.title')}}</b>
       <input  type="text"
               name="search"
               class="form-control mb-2"
-              placeholder="Tapez le texte"
+              :placeholder="$t('picker.parameters.search.placeholder')"
               v-model="parameters.search.term"
               @keyup="update">
     </div>
     <div class="mb-3">
-      <b>{{ $t('picker.parameters.filters')}}</b>
+      <b>{{ $t('picker.parameters.filters') }}</b>
       <div v-for="filter in parameters.filters">
         {{ filter.name }}
         <div v-for="value in filter.values">

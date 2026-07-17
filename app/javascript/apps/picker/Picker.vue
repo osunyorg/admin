@@ -30,7 +30,7 @@ export default {
   },
   data () {
     return {
-      modal: false,
+      modalOpened: false,
       url: '',
       data: {},
       parameters: {},
@@ -40,18 +40,18 @@ export default {
   },
   methods: {
     open() {
-      if (this.modal) {
+      if (this.modalOpened) {
         return;
       }
-      this.modal = true;
+      this.modalOpened = true;
       document.body.classList.add("modal-open");
       this.search();
     },
     close() {
-      if (!this.modal) {
+      if (!this.modalOpened) {
         return;
       }
-      this.modal = false;
+      this.modalOpened = false;
       document.body.classList.remove("modal-open");
     },
     search() {

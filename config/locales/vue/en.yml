@@ -120,7 +120,9 @@ en:
         next: Next page
         previous: Previous page
       parameters:
-        search: Search
+        search:
+          title: Search
+          placeholder: Type your search here
         filters: Filter
         sorts: Sort
       kind:

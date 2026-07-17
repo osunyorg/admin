@@ -18,28 +18,50 @@ class Communication::File::Picker
 
   def pagination
     {
-      current_page: results.current_page,
+      current_page: current_page,
       limit_value: results.limit_value,
       total_count: results.total_count,
       total_pages: results.total_pages,
-      query_parameters: "&page=#{results.current_page}"
+      query_parameters: "&page=#{current_page}"
     }
   end
 
   def results
-    @results ||= objects.filter_by(params[:filters], language)
-                        .ordered(language)
-                        .page(params[:page])
-                        .per(2)
+    @results ||= objects_paginated.any? ? objects_paginated : objects_on_first_page
   end
 
   protected
+
+  # Actions successives 
+  # 1. filter
+  # 2. sort
+  # 3. paginate (avec gestion du retour page 1)
+
+  def objects_filtered
+    @objects_filtered ||= objects.filter_by(params[:filters], language)
+  end
+
+  def objects_sorted
+    @objects_sorted ||= objects_filtered.ordered(language)
+  end
+
+  def objects_paginated
+    @objects_paginated ||= objects_sorted.page(params[:page]).per(2)
+  end
+
+  def objects_on_first_page
+    @objects_on_first_page ||= objects_sorted.page(1).per(2)
+  end
 
   def search
     {
       term: term,
       query_parameters: "&filters[for_search_term]=#{term}"
     }
+  end
+
+  def current_page
+    [results.current_page, results.total_pages].min
   end
 
   def term
