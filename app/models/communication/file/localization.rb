@@ -70,6 +70,14 @@ class Communication::File::Localization < ApplicationRecord
     @icon ||= Osuny::FileType.icon_for(original_content_type)
   end
 
+  def dependencies
+    [original_blob]
+  end
+
+  def references
+    [contexts.map(&:about)]
+  end
+
   def to_s
     "#{name}"
   end

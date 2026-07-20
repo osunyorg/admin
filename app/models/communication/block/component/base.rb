@@ -43,6 +43,10 @@ class Communication::Block::Component::Base
     template.block.university
   end
 
+  def language
+    template.block.language
+  end
+
   def website
     template.block.about&.website
   end
