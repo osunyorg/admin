@@ -20,6 +20,7 @@ class Ability::ProgramManager < Ability
     can :manage, University::Person::Involvement, target_type: "Education::Program", target_id: managed_programs_ids
     can :manage, University::Role, target_type: "Education::Program", target_id: managed_programs_ids
     can :manage, Communication::Media, university_id: @user.university_id
+    can :manage, Communication::File, university_id: @user.university_id
     cannot :destroy, Communication::Website
   end
 
