@@ -76,7 +76,10 @@ class Communication::Website::GitFile < ApplicationRecord
       generate_content if valid?
     elsif persisted?
       # There, but not syncable, so bye bye
-      mark_for_destruction!
+      # If never synced, no previous path, we can destroy the git file,
+      # else we mark it for destruction
+      previous_path.nil?  ? destroy
+                          : mark_for_destruction!
     end
   end
 
@@ -134,6 +137,7 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   def should_generate_content?
+    about.present? &&
     about.try(:can_have_git_file?) &&
     about.try(:should_sync_to?, website)
   end
