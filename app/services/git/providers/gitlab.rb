@@ -16,16 +16,17 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
   end
 
   def update_file(path, previous_path, content)
-    file = find previous_path
-    if file.present? && previous_path != path
+    previous_file = find previous_path
+    file = find path
+    action = file.present? ? 'update' : 'create'
+    if previous_file.present? && previous_path != path
       batch << {
-        action: 'move',
-        file_path: path,
-        previous_path: previous_path
+        action: 'delete',
+        file_path: previous_path
       }
     end
     batch << {
-      action: 'update',
+      action: action,
       file_path: path,
       content: content
     }
@@ -61,6 +62,7 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
 
   def push(commit_message)
     return if !valid? || batch.empty?
+    check_batch_integrity!
     client.create_commit  repository,
                           branch,
                           commit_message,
@@ -106,6 +108,36 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
   end
 
   protected
+
+  def check_batch_integrity!
+    # Delete files first
+    batch.sort_by! { |item| item[:action] == 'delete' ? 0 : 1 }
+    # Use files states to fix actions
+    batch.each do |item|
+      check_batch_item_integrity!(item)
+    end
+    # Reject
+    batch.reject! { |item| item[:action].nil? }
+  end
+
+  def check_batch_item_integrity!(item)
+    action = item[:action]
+    path = item[:file_path]
+    current_state = files_states[path]
+    target_state = action == 'delete' ? 'DELETED' : 'EXISTS'
+
+    if action == 'delete' && current_state == 'DELETED'
+      # No need to delete an already deleted file => skip action
+      item[:action] = nil
+    elsif action == 'update' && current_state == 'DELETED'
+      # Can't update a deleted file => should create
+      item[:action] = 'create'
+    elsif action == 'create' && current_state == 'EXISTS'
+      # Can't create an existing file => should update
+      item[:action] = 'update'
+    end
+    files_states[path] = target_state
+  end
 
   def endpoint
     @endpoint.blank?  ? DEFAULT_ENDPOINT
