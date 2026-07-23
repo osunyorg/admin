@@ -84,7 +84,6 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   def mark_for_destruction!
-    # As there is no previous_path where to delete a file (never synced), we can safely destroy the git file.
     return if current_path.nil? && current_sha.nil?
     now = Time.zone.now
     update(
