@@ -78,7 +78,7 @@ module Communication::Website::WithGitRepository
       begin
         dependency = git_file.about
       rescue NameError
-        depdendency = nil
+        dependency = nil
       end
       # Here, dependency can be nil (object was previously destroyed)
       is_obsolete = dependency.nil? || !dependency.in?(recursive_dependencies_following_direct)
