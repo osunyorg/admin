@@ -1,10 +1,13 @@
-# Load the gem
-require 'brevo'
-
 # Setup authorization
 Brevo.configure do |config|
   config.api_key['api-key'] = ENV['BREVO_API_KEY']
   config.api_key['partner-key'] = ENV['BREVO_API_KEY']
+end if ENV['BREVO_API_KEY'].present?
+
+Brevo.class_eval do
+  def self.active?
+    ENV['BREVO_API_KEY'].present?
+  end
 end
 
 api_instance = Brevo::AccountApi.new

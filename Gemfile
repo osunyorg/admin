@@ -104,6 +104,7 @@ group :development do
   gem "annotaterb"
   gem "better_errors"
   gem "binding_of_caller"
+  gem "letter_opener_web"
   gem "listen", "~> 3.10"
   gem "rack-mini-profiler", "~> 4.0"
   gem "spring"

@@ -9,9 +9,9 @@ class GroupNotificationMailer < ApplicationMailer
       subject = t('mailers.notifications.low_sms_credits.subject', credits: @credits)
       mail(
         from: university.mail_from[:full],
-        bcc: whitelisted_mails,
+        bcc: server_admin_emails,
         subject: subject
-      ) if whitelisted_mails.any?
+      ) if server_admin_emails.any?
     end
   end
 
@@ -22,22 +22,18 @@ class GroupNotificationMailer < ApplicationMailer
       subject = t('mailers.notifications.new_registration.subject', mail: @user.email)
       mail(
         from: university.mail_from[:full],
-        bcc: whitelisted_mails,
+        bcc: server_admin_emails,
         subject: subject
-      ) if whitelisted_mails.any?
+      ) if server_admin_emails.any?
     end
   end
 
   protected
 
-  def whitelisted_mails
-    @whitelisted_mails ||= users_emails.select { |mail| should_send?(mail) }
-  end
-
-  def users_emails
-    admin_users = @university.users.where(role: [:server_admin, :admin])
-    admin_users = admin_users.where.not(id: @user.id) if @user
-    admin_users.pluck(:email)
+  def server_admin_emails
+    @university.users
+               .where(role: [:server_admin])
+               .pluck(:email)
   end
 
 end

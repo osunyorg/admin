@@ -213,6 +213,8 @@ GEM
       caxlsx (>= 4.0)
     cgi (0.5.2)
     chartkick (5.2.1)
+    childprocess (5.1.0)
+      logger (~> 1.5)
     citeproc (1.1.0)
       date
       forwardable
@@ -420,9 +422,20 @@ GEM
     kaminari-core (1.2.2)
     languagetool-widget (8.3.4)
       rails
+    launchy (3.1.1)
+      addressable (~> 2.8)
+      childprocess (~> 5.0)
+      logger (~> 1.6)
     leaflet-rails (1.9.5)
       actionpack (>= 4.2.0)
       railties (>= 4.2.0)
+    letter_opener (1.10.0)
+      launchy (>= 2.2, < 4)
+    letter_opener_web (3.0.0)
+      actionmailer (>= 6.1)
+      letter_opener (~> 1.9)
+      railties (>= 6.1)
+      rexml
     libretranslate (0.1.0)
       json
       net-http
@@ -831,6 +844,7 @@ DEPENDENCIES
   kaminari
   languagetool-widget
   leaflet-rails
+  letter_opener_web
   libretranslate
   listen (~> 3.10)
   lucide-rails

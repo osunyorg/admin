@@ -1,3 +1,5 @@
+return if ENV['BUGSNAG_RUBY_KEY'].blank?
+
 Bugsnag.configure do |config|
   config.api_key = ENV['BUGSNAG_RUBY_KEY']
   config.release_stage = ENV['APPLICATION_ENV']

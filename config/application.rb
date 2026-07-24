@@ -49,15 +49,13 @@ module Osuny
     config.i18n.enforce_available_locales = false
     config.i18n.load_path += Dir["#{Rails.root.to_s}/config/locales/**/*.yml"]
 
-    config.internal_domains = ['@noesya.coop', '@osuny.org'].freeze
-
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
-        address: "smtp-relay.brevo.com",
-        port: 587,
+        address: ENV['SMTP_ADDRESS'].presence || "smtp-relay.brevo.com",
+        port: ENV['SMTP_PORT'].presence&.to_i || 587,
         user_name: ENV['SMTP_USER'],
         password: ENV['SMTP_PASSWORD'],
-        authentication: :plain
+        authentication: ENV['SMTP_AUTHENTICATION'].presence&.to_sym || :plain
     }
 
     # Need for +repage, because of https://github.com/rails/rails/commit/b2ab8dd3a4a184f3115e72b55c237c7b66405bd9

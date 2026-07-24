@@ -1,4 +1,4 @@
-<% unless Rails.env.development? %>
+<% if ENV['BUGSNAG_JAVASCRIPT_KEY'].present? && !Rails.env.development? %>
   <script src="//d2wy8f7a9ursnm.cloudfront.net/v7/bugsnag.min.js"></script>
   <script type="text/javascript" nonce="<%= request.content_security_policy_nonce %>">
     Bugsnag.start({
