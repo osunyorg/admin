@@ -91,7 +91,7 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
     begin
       client.project(repository)
       true
-    rescue Gitlab::Error::Unauthorized
+    rescue Gitlab::Error::Unauthorized, Gitlab::Error::Forbidden
       git_repository.website.invalidate_access_token!
       false
     end
