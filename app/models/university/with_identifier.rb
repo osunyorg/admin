@@ -17,6 +17,10 @@ module University::WithIdentifier
       find_by identifier: extract_identifier_from(host)
     end
 
+    def self.environment_domain
+      self.send("#{ENV['APPLICATION_ENV']}_domain")
+    end
+
     private
 
     # University direct urls (not through website)
@@ -24,7 +28,7 @@ module University::WithIdentifier
     # Staging     osuny.osuny.dev   -> osuny
     # Dev         osuny.osuny       -> osuny
     def self.extract_identifier_from(host)
-      host.remove self.send("#{ENV['APPLICATION_ENV']}_domain")
+      host.remove environment_domain
     end
 
     def self.production_domain
