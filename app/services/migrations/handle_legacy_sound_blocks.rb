@@ -22,7 +22,7 @@ class Migrations::HandleLegacySoundBlocks
   protected
 
   def process_block(block)
-    return if block.data.blank? || block.data['elements'].blank?
+    return if block.data.blank?
 
     @processed_blocks += 1
     puts "Processing block #{block.id} with language #{block.language}"
