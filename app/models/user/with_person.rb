@@ -10,7 +10,6 @@ module User::WithPerson
 
     delegate :experiences, to: :person
 
-    before_validation :assign_email_to_invited_person, if: :invitation
     after_save_commit :sync_person, if: :person
     after_create :find_or_create_person, unless: :server_admin?
   end
@@ -35,6 +34,7 @@ module User::WithPerson
     person = invitation&.person || university.people.where(email: email).first_or_initialize
     person_l10n = person.localizations.find_by(language_id: university.default_language_id)
     person.user = self
+    person.email = email
     person.localizations_attributes = [
       {
         id: person_l10n&.id, language_id: university.default_language_id,
@@ -46,10 +46,5 @@ module User::WithPerson
 
   def sync_person
     User::SyncPersonJob.perform_later(self)
-  end
-
-  def assign_email_to_invited_person
-    # As this is done on before_validation, it will be rollbacked if the save fails
-    invitation.person.update_column(:email, email)
   end
 end
