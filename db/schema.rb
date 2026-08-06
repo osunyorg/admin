@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_16_132522) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_06_085855) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -337,11 +337,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_16_132522) do
     t.uuid "person_id"
     t.string "to_email"
     t.string "to_name"
+    t.string "token"
     t.uuid "university_id"
     t.datetime "updated_at", null: false
     t.uuid "user_id"
     t.index ["extranet_id"], name: "index_communication_extranet_invitations_on_extranet_id"
     t.index ["person_id"], name: "index_communication_extranet_invitations_on_person_id"
+    t.index ["token"], name: "index_communication_extranet_invitations_on_token", unique: true
     t.index ["university_id"], name: "index_communication_extranet_invitations_on_university_id"
     t.index ["user_id"], name: "index_communication_extranet_invitations_on_user_id"
   end

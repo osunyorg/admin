@@ -8,6 +8,7 @@
 #  message       :text
 #  to_email      :string
 #  to_name       :string
+#  token         :string           uniquely indexed
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  extranet_id   :uuid             indexed
@@ -19,6 +20,7 @@
 #
 #  index_communication_extranet_invitations_on_extranet_id    (extranet_id)
 #  index_communication_extranet_invitations_on_person_id      (person_id)
+#  index_communication_extranet_invitations_on_token          (token) UNIQUE
 #  index_communication_extranet_invitations_on_university_id  (university_id)
 #  index_communication_extranet_invitations_on_user_id        (user_id)
 #
@@ -32,6 +34,8 @@
 class Communication::Extranet::Invitation < ApplicationRecord
   include HasUniversity
   include Sanitizable
+
+  has_secure_token :token
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
   belongs_to :user

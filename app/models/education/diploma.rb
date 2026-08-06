@@ -6,7 +6,7 @@
 #  certification :string
 #  deleted_at    :datetime
 #  ects          :integer
-#  level         :integer          default("not_applicable")
+#  level         :integer          default(0)
 #  position      :integer          not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

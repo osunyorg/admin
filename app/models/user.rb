@@ -28,7 +28,7 @@
 #  remember_created_at           :datetime
 #  reset_password_sent_at        :datetime
 #  reset_password_token          :string           uniquely indexed
-#  role                          :integer          default("visitor")
+#  role                          :integer          default(0)
 #  second_factor_attempts_count  :integer          default(0)
 #  session_token                 :string
 #  sign_in_count                 :integer          default(0), not null

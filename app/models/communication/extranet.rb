@@ -17,7 +17,7 @@
 #  sso_cert                   :text
 #  sso_mapping                :jsonb
 #  sso_name_identifier_format :string
-#  sso_provider               :integer          default("saml")
+#  sso_provider               :integer          default(0)
 #  sso_target_url             :string
 #  upper_menu                 :text             default("")
 #  created_at                 :datetime         not null
