@@ -47,7 +47,7 @@ class ExtranetMailer < ApplicationMailer
   def invitation_manual_subject(extranet_l10n)
     extranet_l10n.invitation_manual_subject(
       from_name: @invitation.from_name,
-      from_promotion: @invitation.user.person&.diploma_years_sentence,
+      from_years: @invitation.user.person&.diploma_years_sentence,
       to_name: @invitation.to_name
     )
   end

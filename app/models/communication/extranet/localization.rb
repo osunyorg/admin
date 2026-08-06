@@ -63,21 +63,21 @@ class Communication::Extranet::Localization < ApplicationRecord
     "#{name}"
   end
 
-  def invitation_manual_subject(from_name:, from_promotion:, to_name:)
-    substitute_invitation_placeholders(invitation_message_manual_subject, from_name: from_name, from_promotion: from_promotion, to_name: to_name)
+  def invitation_manual_subject(from_name:, from_years:, to_name:)
+    substitute_invitation_placeholders(invitation_message_manual_subject, from_name: from_name, from_years: from_years, to_name: to_name)
   end
 
-  def invitation_manual_text(from_name:, from_promotion:, to_name:)
-    substitute_invitation_placeholders(invitation_message_manual_text, from_name: from_name, from_promotion: from_promotion, to_name: to_name)
+  def invitation_manual_text(from_name:, from_years:, to_name:)
+    substitute_invitation_placeholders(invitation_message_manual_text, from_name: from_name, from_years: from_years, to_name: to_name)
   end
 
   protected
 
-  def substitute_invitation_placeholders(text, from_name:, from_promotion:, to_name:)
+  def substitute_invitation_placeholders(text, from_name:, from_years:, to_name:)
     substitutions = {
       'name' => to_name,
       'sender_name' => from_name,
-      'sender_promotion' => from_promotion
+      'sender_years' => from_years
     }
     substitutions.each { |key, value| text = text.gsub("{{#{key}}}", value.to_s) }
     text

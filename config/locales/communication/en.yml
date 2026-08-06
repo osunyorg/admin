@@ -536,7 +536,7 @@ en:
           automatic: Automatic message
           automatic_hint: This message will be sent after an alumni import or when clicking on the "send invitation" button on admin, if the alumnus has an email.
           manual: Manual message
-          manual_hint_html: "This message will be sent from the extranet, when a user clicks on the \"invite alumnus\" button, if the user has no email.<br>In these fields you can use the following variables: <ul><li>{{name}}: the name of the alumnus</li><li>{{sender_name}}: the name of the user sending the invitation</li><li>{{sender_promotion}}: the promotion of the user sending the invitation</li></ul>"
+          manual_hint_html: "This message will be sent from the extranet, when a user clicks on the \"invite alumnus\" button, if the user has no email.<br>In these fields you can use the following variables: <ul><li>{{name}}: the name of the alumnus</li><li>{{sender_name}}: the name of the user sending the invitation</li><li>{{sender_years}}: the promotion(s) of the user sending the invitation</li></ul>"
           title: Invitation messages
         languages: Languages
       website:

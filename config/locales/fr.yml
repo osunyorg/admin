@@ -507,8 +507,8 @@ fr:
         manual:
           cta: Rejoindre l'extranet
           signature: Cordialement
-          subject: Invitation de {{sender_name}} (promotion {{sender_promotion}}) à rejoindre l'extranet
-          text: "Bonjour {{name}},\n\n{{sender_name}} vous invite à rejoindre l'extranet des Alumni.\n\nVous y retrouverez notamment l'annuaire de toutes les promotions.\nÀ très bientôt !\n\n{{sender_name}} (promotion {{sender_promotion}})"
+          subject: Invitation de {{sender_name}} (promotion {{sender_years}}) à rejoindre l'extranet
+          text: "Bonjour {{name}},\n\n{{sender_name}} vous invite à rejoindre l'extranet des Alumni.\n\nVous y retrouverez notamment l'annuaire de toutes les promotions.\nÀ très bientôt !\n\n{{sender_name}} (promotion {{sender_years}})"
     notifications:
       gdpr_deletion_incoming:
         subject: "osuny - votre compte va bientôt être supprimé"

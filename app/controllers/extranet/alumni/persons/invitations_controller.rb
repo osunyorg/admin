@@ -56,7 +56,7 @@ class Extranet::Alumni::Persons::InvitationsController < Extranet::Alumni::Appli
   def default_message
     current_extranet_l10n.invitation_manual_text(
       from_name: current_user.to_s,
-      from_promotion: current_user.person&.diploma_years_sentence,
+      from_years: current_user.person&.diploma_years_sentence,
       to_name: @l10n.to_s
     )
   end

@@ -26,7 +26,7 @@ class ExtranetMailerPreview < BaseMailerPreview
       to_email: "guest@noesya.coop",
       message: l10n.invitation_manual_text(
         from_name: user.to_s,
-        from_promotion: '2020',
+        from_years: '2020',
         to_name: person.to_s
       )
     )
