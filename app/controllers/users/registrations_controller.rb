@@ -10,6 +10,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: :update
   before_action :confirm_two_factor_authenticated, except: [:new, :create, :cancel]
 
+  def new
+    super do |resource|
+      prefill_from_invitation(resource)
+    end
+  end
+
   def edit
     # this action is not used anymore, replaced for both universities and extranets.
     # so we redirect to the appropriate profile edition
@@ -22,6 +28,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   protected
+
+  def build_resource(hash = {})
+    super
+    resource.invitation = invitation
+  end
+
+  def prefill_from_invitation(resource)
+    return if invitation.blank?
+    resource.email = invitation.to_email
+    resource.mobile_phone = invitation.person&.phone_mobile
+    person_l10n = invitation.person&.best_localization_for(current_language)
+    resource.first_name = person_l10n&.first_name
+    resource.last_name = person_l10n&.last_name
+  end
+
+  def invitation
+    return @invitation if defined?(@invitation)
+    token = params[:invitation_token]
+    @invitation = token.present? ? current_extranet&.invitations&.find_by(token: token) : nil
+  end
 
   def sign_up(resource_name, resource)
     sign_in(resource, event: :authentication)
