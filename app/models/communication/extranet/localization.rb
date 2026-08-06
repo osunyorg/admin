@@ -90,11 +90,11 @@ class Communication::Extranet::Localization < ApplicationRecord
   end
 
   def set_default_invitation_messages
-    self.invitation_message_automatic_subject = I18n.t('mailers.extranet.invitation_messages.automatic.subject') if self.invitation_message_automatic_subject.blank?
-    self.invitation_message_automatic_text = I18n.t('mailers.extranet.invitation_messages.automatic.text') if self.invitation_message_automatic_text.blank?
-    self.invitation_message_manual_subject = I18n.t('mailers.extranet.invitation_messages.manual.subject') if self.invitation_message_manual_subject.blank?
-    self.invitation_message_manual_text = I18n.t('mailers.extranet.invitation_messages.manual.text') if self.invitation_message_manual_text.blank?
-    self.invitation_message_manual_signature = I18n.t('mailers.extranet.invitation_messages.manual.signature') if self.invitation_message_manual_signature.blank?
+    self.invitation_message_automatic_subject = I18n.t('mailers.extranet.invitation_messages.automatic.subject', locale: language.iso_code) if self.invitation_message_automatic_subject.blank?
+    self.invitation_message_automatic_text = I18n.t('mailers.extranet.invitation_messages.automatic.text', locale: language.iso_code) if self.invitation_message_automatic_text.blank?
+    self.invitation_message_manual_subject = I18n.t('mailers.extranet.invitation_messages.manual.subject', locale: language.iso_code) if self.invitation_message_manual_subject.blank?
+    self.invitation_message_manual_text = I18n.t('mailers.extranet.invitation_messages.manual.text', locale: language.iso_code) if self.invitation_message_manual_text.blank?
+    self.invitation_message_manual_signature = I18n.t('mailers.extranet.invitation_messages.manual.signature', locale: language.iso_code) if self.invitation_message_manual_signature.blank?
   end
 
 end
