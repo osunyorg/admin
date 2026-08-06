@@ -1,13 +1,13 @@
 <% if person.user_id.blank? && person.email.blank? %>
-    <p>
-      <%= t('extranet.alumni.invitations.send.label') %>
-      <br>
-      <% if Communication::Extranet::Invitation.sendable_to?(person) %>
-        <%= link_to t('extranet.alumni.invitations.send.cta', name: l10n), 
-                    alumni_new_invitation_path(person), 
-                    class: 'btn btn-light btn-sm position-relative z-2' %>
-      <% else %>
-        <%= t('extranet.alumni.invitations.send.too_soon') %>
-      <% end %>
-    </p>
-  <% end %>
+  <p>
+    <%= t('extranet.alumni.invitations.send.label') %>
+    <br>
+    <% if Communication::Extranet::Invitation.sendable_to?(person) %>
+      <%= link_to t('extranet.alumni.invitations.send.cta', name: l10n), 
+                  alumni_new_invitation_path(person), 
+                  class: 'btn btn-light btn-sm position-relative z-2' %>
+    <% else %>
+      <%= t('extranet.alumni.invitations.send.too_soon') %>
+    <% end %>
+  </p>
+<% end %>

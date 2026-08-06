@@ -53,9 +53,7 @@ class Communication::Extranet::Invitation < ApplicationRecord
   private
 
   def can_send_to_person
-    unless self.class.sendable_to?(person)
-      errors.add(:to_email, :too_soon)
-    end
+    errors.add(:to_email, :too_soon) unless self.class.sendable_to?(person)
   end
 
   def send_invitation_email

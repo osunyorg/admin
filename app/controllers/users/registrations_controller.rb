@@ -36,11 +36,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def prefill_from_invitation(resource)
     return if invitation.blank?
-    resource.email = invitation.to_email
-    resource.mobile_phone = invitation.person&.phone_mobile
     person_l10n = invitation.person&.best_localization_for(current_language)
-    resource.first_name = person_l10n&.first_name
-    resource.last_name = person_l10n&.last_name
+    resource.assign_attributes(
+      first_name: person_l10n&.first_name,
+      last_name: person_l10n&.last_name,    
+      email: invitation.to_email,
+      mobile_phone: invitation.person&.phone_mobile
+    )
   end
 
   def invitation

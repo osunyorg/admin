@@ -71,7 +71,7 @@ module University::Person::WithAlumnus
     end
   end
 
-  def promotion
+  def diploma_years_sentence
     diploma_years.map(&:year).compact.uniq.sort.join(', ')
   end
 

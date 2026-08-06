@@ -43,7 +43,7 @@ class Extranet::Alumni::Persons::InvitationsController < Extranet::Alumni::Appli
   end
 
   def find_person
-    @person = current_extranet.about.university_person_alumni.find(params[:id])
+    @person = current_extranet.alumni.find(params[:id])
     @l10n = @person.best_localization_for(current_language)
   end
 
@@ -56,7 +56,7 @@ class Extranet::Alumni::Persons::InvitationsController < Extranet::Alumni::Appli
   def default_message
     current_extranet_l10n.invitation_manual_text(
       from_name: current_user.to_s,
-      from_promotion: current_user.person&.promotion,
+      from_promotion: current_user.person&.diploma_years_sentence,
       to_name: @l10n.to_s
     )
   end
