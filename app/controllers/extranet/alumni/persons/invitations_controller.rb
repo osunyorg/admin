@@ -8,7 +8,7 @@ class Extranet::Alumni::Persons::InvitationsController < Extranet::Alumni::Appli
       from_email: current_user.email,
       to_name: @l10n.to_s,
       to_email: @person.email,
-      message: "TODO: Add a default message for the invitation"
+      message: default_message
     )
     breadcrumb
   end
@@ -51,6 +51,14 @@ class Extranet::Alumni::Persons::InvitationsController < Extranet::Alumni::Appli
     unless Communication::Extranet::Invitation.sendable_to?(@person)
       redirect_to [:alumni, @person], alert: t('extranet.alumni.invitations.send.too_soon')
     end
+  end
+
+  def default_message
+    current_extranet_l10n.invitation_manual_text(
+      from_name: current_user.to_s,
+      from_promotion: current_user.person&.promotion,
+      to_name: @l10n.to_s
+    )
   end
   
 end

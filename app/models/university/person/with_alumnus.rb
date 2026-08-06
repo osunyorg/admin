@@ -11,7 +11,7 @@ module University::Person::WithAlumnus
     accepts_nested_attributes_for :cohorts,
                                   reject_if: :all_blank,
                                   allow_destroy: true
-    before_validation :find_cohorts
+    before_validation :find_cohorts, :sync_diploma_denormalizations
     validates_associated :cohorts
 
     # Dénormalisation des liens via cohorts, pour la recherche par facettes
@@ -71,6 +71,10 @@ module University::Person::WithAlumnus
     end
   end
 
+  def promotion
+    diploma_years.map(&:year).compact.uniq.sort.join(', ')
+  end
+
   def find_cohorts
     # based on https://stackoverflow.com/questions/3579924/accepts-nested-attributes-for-with-find-or-create
     cohorts_to_set = []
@@ -85,7 +89,20 @@ module University::Person::WithAlumnus
     self.cohorts = cohorts_to_set
   end
 
+  # Ajoute une cohorte en gardant les dénormalisations à jour
+  def add_cohort(cohort)
+    return if cohort.in?(cohorts)
+    cohorts << cohort
+    sync_diploma_denormalizations
+  end
+
   private
+
+  # Dénormalisation des liens via cohorts, pour la recherche par facettes
+  def sync_diploma_denormalizations
+    self.diploma_years = cohorts.map(&:academic_year).compact.uniq
+    self.diploma_programs = cohorts.map(&:program).compact.uniq
+  end
 
   def find_cohort_for_nested(object)
     academic_year = Administration::AcademicYear.where(university_id: university_id, year: object.year).first_or_create
