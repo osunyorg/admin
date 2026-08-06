@@ -59,8 +59,7 @@ class Communication::Extranet::Invitation < ApplicationRecord
   end
 
   def send_invitation_email
-    # TODO
-    # Communication::Extranet::InvitationMailer.with(invitation: self).invitation_email.deliver_later
+    ExtranetMailer.invitation_message_manual(self).deliver_later
   end
 
 end

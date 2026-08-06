@@ -504,6 +504,7 @@ en:
           with_user_html: You can sign in with your email address <b>%{email}</b> by <a href="%{sign_in_url}">clicking here</a>.
           without_user_html: You can sign up with your email address <b>%{email}</b> by <a href="%{sign_up_url}">clicking here</a>.
         manual:
+          cta: Join the extranet
           signature: Yours
           subject: Invitation from {{sender_name}} (promotion {{sender_promotion}}) to join the extranet
           text: "Hello {{name}},\n\n{{sender_name}} invites you to join the Alumni extranet.\n\nYou will find, in particular, the directory of all promotions.\nSee you soon!\n\n{{sender_name}} (promotion {{sender_promotion}})"

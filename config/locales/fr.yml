@@ -505,6 +505,7 @@ fr:
           with_user_html: Vous pouvez vous y connecter avec votre adresse email <b>%{email}</b> en <a href="%{sign_in_url}">cliquant ici</a>.
           without_user_html: Vous pouvez vous y inscrire avec votre adresse email <b>%{email}</b> en <a href="%{sign_up_url}">cliquant ici</a>.
         manual:
+          cta: Rejoindre l'extranet
           signature: Cordialement
           subject: Invitation de {{sender_name}} (promotion {{sender_promotion}}) à rejoindre l'extranet
           text: "Bonjour {{name}},\n\n{{sender_name}} vous invite à rejoindre l'extranet des Alumni.\n\nVous y retrouverez notamment l'annuaire de toutes les promotions.\nÀ très bientôt !\n\n{{sender_name}} (promotion {{sender_promotion}})"
