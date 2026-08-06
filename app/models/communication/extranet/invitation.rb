@@ -46,7 +46,10 @@ class Communication::Extranet::Invitation < ApplicationRecord
 
   after_create_commit :send_invitation_email
 
+  scope :pending, -> { joins(:person).where(university_people: { user_id: nil }) }
+
   def self.sendable_to?(person)
+    return false if person.user.present?
     self.where(person: person).where('created_at >= ?', University::Person::WithAlumnus::DELAY_FOR_INVITATION.ago).none?
   end
 

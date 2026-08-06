@@ -48,7 +48,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def invitation
     return @invitation if defined?(@invitation)
     token = params[:invitation_token]
-    @invitation = token.present? ? current_extranet&.invitations&.find_by(token: token) : nil
+    @invitation = token.present? ? current_extranet&.invitations&.pending&.find_by(token: token) : nil
   end
 
   def sign_up(resource_name, resource)
