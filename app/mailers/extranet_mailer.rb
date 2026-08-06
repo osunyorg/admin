@@ -27,7 +27,7 @@ class ExtranetMailer < ApplicationMailer
     @university = extranet.university
     language = @invitation.person&.user&.language || @university.default_language
     extranet_l10n = extranet.best_localization_for(language)
-    @signature = extranet_l10n.invitation_message_manual_signature
+    @signature = invitation_manual_signature(extranet_l10n)
     @registration_url = new_user_registration_url(
       host: extranet.host,
       invitation_token: @invitation.token
@@ -45,11 +45,19 @@ class ExtranetMailer < ApplicationMailer
   private
 
   def invitation_manual_subject(extranet_l10n)
-    extranet_l10n.invitation_manual_subject(
+    extranet_l10n.invitation_manual_subject(**invitation_substitutions)
+  end
+
+  def invitation_manual_signature(extranet_l10n)
+    extranet_l10n.invitation_manual_signature(**invitation_substitutions)
+  end
+
+  def invitation_substitutions
+    {
       from_name: @invitation.from_name,
       from_years: @invitation.user.person&.diploma_years_sentence,
       to_name: @invitation.to_name
-    )
+    }
   end
 
 

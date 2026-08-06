@@ -71,6 +71,10 @@ class Communication::Extranet::Localization < ApplicationRecord
     substitute_invitation_placeholders(invitation_message_manual_text, from_name: from_name, from_years: from_years, to_name: to_name)
   end
 
+  def invitation_manual_signature(from_name:, from_years:, to_name:)
+    substitute_invitation_placeholders(invitation_message_manual_signature, from_name: from_name, from_years: from_years, to_name: to_name)
+  end
+
   protected
 
   def substitute_invitation_placeholders(text, from_name:, from_years:, to_name:)
