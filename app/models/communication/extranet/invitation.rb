@@ -30,8 +30,8 @@
 #  fk_rails_e064970cc5  (extranet_id => communication_extranets.id)
 #
 class Communication::Extranet::Invitation < ApplicationRecord
+  include HasUniversity
   include Sanitizable
-  include WithUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
   belongs_to :user

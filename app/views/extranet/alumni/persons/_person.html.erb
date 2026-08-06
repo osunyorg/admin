@@ -1,5 +1,5 @@
 <%
-l10n = person.best_localization_for(person)
+l10n = person.best_localization_for(current_language)
 %>
 <article class="person mb-4">
   <div class="row gx-3">
@@ -16,18 +16,6 @@ l10n = person.best_localization_for(person)
     </div>
     <div class="col-9 col-md-12">
       <%= link_to l10n, [:alumni, person], class: 'stretched-link' %>
-      <% if person.user_id.blank? && person.email.blank? %>
-        <p>
-          <%= t('extranet.alumni.invitations.send.label') %>
-          <br>
-          <% if Communication::Extranet::Invitation.sendable_to?(person) %>
-            <%= link_to t('extranet.alumni.invitations.send.cta', name: l10n), 
-                        alumni_new_invitation_path(person), 
-                        class: 'btn btn-light btn-sm position-relative z-2' %>
-          <% else %>
-            <%= t('extranet.alumni.invitations.send.too_soon') %>
-          <% end %>
-        </p>
-      <% end %>
+      <%= render 'extranet/alumni/persons/invitations/cta', person: person, l10n: l10n %>
     </div>
 </article>
