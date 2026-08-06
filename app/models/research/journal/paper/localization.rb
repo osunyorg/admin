@@ -36,15 +36,15 @@ class Research::Journal::Paper::Localization < ApplicationRecord
   acts_as_paranoid
 
   include AsLocalization
+  include Citable
   include Contentful
+  include HasBlobs
   include HasGitFiles
+  include HasUniversity
   include Initials
   include Permalinkable
   include Publishable
   include Sanitizable
-  include WithBlobs
-  include WithCitations
-  include WithUniversity
 
   alias :paper :about
 

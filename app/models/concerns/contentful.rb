@@ -56,7 +56,24 @@ module Contentful
     about.touch
   end
 
+  def dom_count
+    blocks_dom_count + website_dom_count
+  end
+
   protected
+
+  def blocks_dom_count
+    count = 0
+    blocks.each do |block|
+      next if block.empty?
+      count += block.dom_count
+    end
+    count
+  end
+
+  def website_dom_count
+    websites.first&.dom_count || Communication::Website::DEFAULT_DOM_COUNT
+  end
 
   def generate_block(hash)
     hash[:university] = university

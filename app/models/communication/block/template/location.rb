@@ -29,4 +29,9 @@ class Communication::Block::Template::Location < Communication::Block::Template:
   def children
     selected_locations
   end
+
+  def dom_count
+    5 +
+    children.length * 25
+  end
 end

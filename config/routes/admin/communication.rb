@@ -1,9 +1,5 @@
 namespace :communication do
   resources :authors, only: [:index, :show]
-  scope 'photo-imports' do
-    get 'unsplash' => 'photo_imports#unsplash'
-    get 'pexels' => 'photo_imports#pexels'
-  end
   resources :websites do
     member do
       scope 'settings' do
@@ -274,18 +270,38 @@ namespace :communication do
     end
     resources :jobs, controller: 'extranets/jobs'
   end
-  resources :medias do
-    collection do
-      post 'pick' => 'medias#pick', as: :pick
-      resources :categories, controller: '/admin/communication/medias/categories', as: 'media_categories' do
-        collection do
-          post :reorder
+  scope module: 'library' do
+    resources :medias do
+      collection do
+        post 'pick' => 'medias#pick', as: :pick
+        scope 'photo-imports' do
+          get 'unsplash' => 'medias/photo_imports#unsplash'
+          get 'pexels' => 'medias/photo_imports#pexels'
         end
-        member do
-          get :children
+        resources :categories, controller: '/admin/communication/library/medias/categories', as: 'media_categories' do
+          collection do
+            post :reorder
+          end
+          member do
+            get :children
+          end
+        end
+        resources :collections, controller: '/admin/communication/library/medias/collections', as: 'media_collections'
+      end
+    end
+    resources :files do
+      collection do
+        post 'direct-upload' => 'files#direct_upload', as: :direct_upload
+        post 'pick' => 'files#pick', as: :pick
+        resources :categories, controller: '/admin/communication/library/files/categories', as: 'file_categories' do
+          collection do
+            post :reorder
+          end
+          member do
+            get :children
+          end
         end
       end
-      resources :collections, controller: '/admin/communication/medias/collections', as: 'media_collections'
     end
   end
   root to: 'dashboard#index'

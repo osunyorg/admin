@@ -47,7 +47,7 @@ class University < ApplicationRecord
   include SsoEnabled
   include WithAdministration
   include WithCommunication
-  include WithCountry
+  include HasCountry
   include WithEducation
   include WithGithub
   include WithIdentifier

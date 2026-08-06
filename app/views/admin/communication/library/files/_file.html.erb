@@ -1,0 +1,17 @@
+<%
+l10n = file.best_localization_for(current_language)
+%>
+<div class="<%= osuny_card_classes(horizontal: true) %>">
+  <div class="osuny__thumbnail
+              osuny__thumbnail--small
+              osuny__thumbnail--cropped">
+    <span class="osuny__thumbnail__icon">
+      <i class="<%= l10n.icon %>" title="<%= l10n.original_content_type %>"></i>
+    </span>
+  </div>
+  <div class="card-body">
+    <%= osuny_link_localized  file,
+                              admin_communication_file_path(file),
+                              classes: 'stretched-link' %>
+  </div>
+</div>
