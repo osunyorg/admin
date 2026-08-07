@@ -507,7 +507,15 @@ en:
           cta: Join the extranet
           signature: Yours
           subject: Invitation from {{sender_name}} (promotion {{sender_years}}) to join the extranet
-          text: "Hello {{name}},\n\n{{sender_name}} invites you to join the Alumni extranet.\n\nYou will find, in particular, the directory of all promotions.\nSee you soon!\n\n{{sender_name}} (promotion {{sender_years}})"
+          text: |
+            Hello {{name}},
+            
+            {{sender_name}} invites you to join the Alumni extranet.
+            
+            You will find, in particular, the directory of all promotions.
+            See you soon!
+            
+            {{sender_name}} (promotion {{sender_years}})"
     notifications:
       gdpr_deletion_incoming:
         subject: "osuny - your account will soon be deleted"
