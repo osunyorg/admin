@@ -31,7 +31,7 @@ fr:
               sanitized_notice: Pour des raisons de sécurité, le contenu a été filtré. Les scripts ne sont pas chargés et/ou exécutés, et l'apparence peut être alterée.
           file:
             input:
-              label: Fichier
+              label: Envoyer un fichier (100 Mo max)
               remove: Enlever le fichier
           image:
             alt:
@@ -368,6 +368,8 @@ fr:
               description:
                 label: Description
               element:
+                image:
+                  label: Image d'illustration
                 file:
                   label: Fichier
                 title:

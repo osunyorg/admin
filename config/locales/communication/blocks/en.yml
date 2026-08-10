@@ -368,7 +368,7 @@ en:
                 label: Description
               element:
                 file:
-                  label: File
+                  label: Send a file (max 500 MB)
                 title:
                   label: Title
                   placeholder: Enter title here

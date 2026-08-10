@@ -68,7 +68,7 @@ fr:
             title: Séquoia géant
             text: Cette page est absolument énorme. Si vos statistiques de visite vous indiquent que le temps moyen passé sur la page est de 30 minutes, c'est très bien. Mais dans les autres cas, il faut certainement ranger et découper le contenus en morceaux plus simples, afin de bien répondre aux besoins réels des internautes. Une page bien écoconçue, c'est une page qui répond aux besoins des personnes, ni plus ni moins.
             dom: Plus de 2000 éléments dans le DOM
-      empty: Ce bloc est vide et n'apparaitra pas
+      empty: Ce bloc est vide et n'apparaîtra pas
       offcanvas:
         close: Fermer l'édition du bloc
         title: Édition du bloc

@@ -112,7 +112,7 @@ export default {
     <template v-else>
       <img v-if="kind === 'image'" :src="getImageUrl(modelValue)" class="img-fluid mb-3" />
       <p v-else><b>{{ modelValue.filename }}</b></p>
-      <a class="btn btn-sm text-danger" @click="clear">
+      <a class="btn btn-sm text-danger ps-0" @click="clear">
         <i class="fas fa-times"></i>
         {{ remove }}
       </a>

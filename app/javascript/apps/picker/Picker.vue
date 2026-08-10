@@ -95,7 +95,8 @@ export default {
     class="vue__picker"
     v-if="kind"
     @keydown.esc="close">
-    <button class="btn btn-sm mx-n2 d-flex align-items-center"
+    <button
+      class="btn btn-sm mx-n2 d-flex align-items-center"
       @click.prevent="open">
       <File stroke-width="1.5" class="me-1" />
       {{ $t(`picker.kind.${kind}.button`) }}

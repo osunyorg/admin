@@ -1,13 +1,16 @@
 <script>
 import { useId } from 'vue';
+import { Upload } from '@lucide/vue';
 
 export default {
   name: 'FileUploadInput',
+  components: {
+    Upload,
+  },
   props: {
     modelValue: { type: Object, default: () => ({}) },
     uploadUrl: { type: String, required: true },
     label: { type: String, default: '' },
-    remove: { type: String, default: '' },
     hint: { type: String, default: '' },
     accept: { type: String, default: '*' },
     sizeLimit: { type: [String, Number], default: null },
@@ -84,23 +87,26 @@ export default {
 
 <template>
   <div class="mb-3">
-    <template v-if="!hasValue">
-      <label class="form-label" :for="fieldId">{{ label }}</label>
-      <input
-        type="file"
-        class="form-control"
-        :accept="accept"
-        :id="fieldId"
-        @change="onChange" />
-      <progress v-if="uploading" :value="progress" max="100" style="width: 100%;"></progress>
-      <div v-if="hint" class="form-text" v-html="hint"></div>
-    </template>
-    <template v-else>
-      <p><b>{{ modelValue.filename }}</b></p>
-      <a class="btn btn-sm text-danger" @click="clear">
-        <i class="fas fa-times"></i>
-        {{ remove }}
-      </a>
-    </template>
+    <input
+      hidden
+      ref="file"
+      type="file"
+      class="form-control"
+      :accept="accept"
+      :id="fieldId"
+      @change="onChange" />
+    <button
+      type="button"
+      class="btn btn-sm mx-n2 d-flex align-items-center"
+      @click.prevent="$refs.file.click()">
+      <Upload stroke-width="1.5" class="me-1" />
+      {{ label }}
+    </button>
+    <div class="form-text">{{ hint }}</div>
+    <progress
+      v-if="uploading"
+      :value="progress"
+      max="100"
+      style="width: 100%;"></progress>
   </div>
 </template>
