@@ -75,14 +75,19 @@ fr:
       planMode:
         button: Organiser le plan
         description: Dans le mode “Organiser le plan”, vous ne voyez qu'un petit aperçu de chaque bloc. C'est le mode idéal pour ranger les documents longs.
-    changes:
-      cancel: Annuler
-      save: Enregistrer les modifications
-    cropperModal:
-      cancel: Annuler
-      rotate: Tourner l'image
-      title: Cadrer l'image
-      validate: Valider
+    components:
+      changes:
+        cancel: Annuler
+        save: Enregistrer les modifications
+      cropperModal:
+        cancel: Annuler
+        rotate: Tourner l'image
+        title: Cadrer l'image
+        validate: Valider
+      inputs:
+        fileSelector:
+          remove: Enlever le fichier
+          upload: Envoyer un fichier (100 Mo max)
     mediaPicker:
       alt:
         hint: Ce texte est essentiel pour l'accessibilité. Si l'image donne une information importante, il faut écrire ici cette information. Si l'information est déjà présente ailleurs dans la page, ou si l'image est purement décorative, il faut laisser le texte alternatif vide, pour éviter de polluer la navigation vocale.

@@ -2,11 +2,11 @@
 import { createApp, provide, reactive } from 'vue';
 import { VueDraggableNext } from 'vue-draggable-next';
 import { getI18n } from '../../i18n';
-import RichTextInput from './inputs/RichTextInput.vue';
-import CodeInput from './inputs/CodeInput.vue';
-import UploadInput from './inputs/UploadInput.vue';
-import FileUploadInput from './inputs/FileUploadInput.vue';
-import MultiImageInput from './inputs/MultiImageInput.vue';
+import RichTextInput from '../../components/inputs/RichTextInput.vue';
+import CodeInput from '../../components/inputs/CodeInput.vue';
+import UploadInput from '../../components/inputs/UploadInput.vue';
+import FileSelector from '../../components/inputs/FileSelector.vue';
+import MultiImageInput from '../../components/inputs/MultiImageInput.vue';
 import Picker from '../../picker/Picker.vue';
 
 // Renders the block-edit form fetched from the server, mounts a fresh inner
@@ -14,8 +14,8 @@ import Picker from '../../picker/Picker.vue';
 //
 // The inner app exposes a small reactive surface (data, addElement,
 // deleteElement, getImageUrl) for the ERB-rendered templates, and registers
-// 4 wrapper components (RichTextInput, CodeInput, UploadInput,
-// MultiImageInput) that each own their own DOM lifecycle.
+// the input components that the templates bind to via v-model — each
+// owns its own DOM lifecycle.
 
 export default {
   name: 'Editor',
@@ -149,7 +149,7 @@ export default {
       this.innerApp.use(i18n);
       this.innerApp.component('CodeInput', CodeInput);
       this.innerApp.component('draggable', VueDraggableNext);
-      this.innerApp.component('FileUploadInput', FileUploadInput);
+      this.innerApp.component('FileSelector', FileSelector);
       this.innerApp.component('MultiImageInput', MultiImageInput);
       this.innerApp.component('Picker', Picker);
       this.innerApp.component('RichTextInput', RichTextInput);

@@ -1,21 +1,26 @@
 <script>
 import { useId } from 'vue';
-import { Upload } from '@lucide/vue';
 
 export default {
-  name: 'FileUploadInput',
-  components: {
-    Upload,
-  },
+  name: 'UploadInput',
   props: {
     modelValue: { type: Object, default: () => ({}) },
-    uploadUrl: { type: String, required: true },
+    kind: {
+      type: String,
+      default: 'file',
+      validator: (v) => ['image', 'file'].includes(v),
+    },
     label: { type: String, default: '' },
+    remove: { type: String, default: '' },
     hint: { type: String, default: '' },
     accept: { type: String, default: '*' },
     sizeLimit: { type: [String, Number], default: null },
   },
   emits: ['update:modelValue'],
+  inject: {
+    directUpload: { from: 'directUpload' },
+    getImageUrl: { from: 'getImageUrl', default: null },
+  },
   setup() {
     return { fieldId: useId() };
   },
@@ -27,9 +32,11 @@ export default {
   },
   computed: {
     hasValue() {
-      return Boolean(this.modelValue?.communication_file_id);
+      return Boolean(this.modelValue?.id);
     },
     effectiveSizeLimit() {
+      // The ERB partials always pass an explicit limit; the fallback is just
+      // a safety net for unexpected callsites.
       return parseInt(this.sizeLimit, 10) || (10 * 1024 * 1024);
     },
   },
@@ -51,19 +58,17 @@ export default {
       this.uploading = true;
       this.progress = 0;
 
-      const onProgressUpdate = (percent) => { this.progress = percent; };
+      const onProgressUpdate = (pct) => { this.progress = pct; };
       const delegate = {
         directUploadWillStoreFileWithXHR(xhr) {
           xhr.upload.addEventListener('progress', (event) => {
-            if (event.total) {
-              onProgressUpdate((event.loaded / event.total) * 100);
-            }
+            if (event.total) onProgressUpdate((event.loaded / event.total) * 100);
           });
         },
       };
 
-      new window.ActiveStorage.DirectUpload(file, this.uploadUrl, delegate).create(
-        (error, data) => {
+      new window.ActiveStorage.DirectUpload(file, this.directUpload.url, delegate).create(
+        (error, blob) => {
           this.uploading = false;
           if (error) {
             // eslint-disable-next-line no-console
@@ -71,9 +76,9 @@ export default {
             return;
           }
           this.$emit('update:modelValue', {
-            communication_file_id: data.file.id,
-            communication_file_name: data.file.name,
-            filename: data.file.filename,
+            id: blob.id,
+            signed_id: blob.signed_id,
+            filename: blob.filename,
           });
         },
       );
@@ -87,26 +92,24 @@ export default {
 
 <template>
   <div class="mb-3">
-    <input
-      hidden
-      ref="file"
-      type="file"
-      class="form-control"
-      :accept="accept"
-      :id="fieldId"
-      @change="onChange" />
-    <button
-      type="button"
-      class="btn btn-sm mx-n2 d-flex align-items-center"
-      @click.prevent="$refs.file.click()">
-      <Upload stroke-width="1.5" class="me-1" />
-      {{ label }}
-    </button>
-    <div class="form-text">{{ hint }}</div>
-    <progress
-      v-if="uploading"
-      :value="progress"
-      max="100"
-      style="width: 100%;"></progress>
+    <template v-if="!hasValue">
+      <label class="form-label" :for="fieldId">{{ label }}</label>
+      <input
+        type="file"
+        class="form-control"
+        :accept="accept"
+        :id="fieldId"
+        @change="onChange" />
+      <progress v-if="uploading" :value="progress" max="100" style="width: 100%;"></progress>
+      <div v-if="hint" class="form-text" v-html="hint"></div>
+    </template>
+    <template v-else>
+      <img v-if="kind === 'image'" :src="getImageUrl(modelValue)" class="img-fluid mb-3" />
+      <p v-else><b>{{ modelValue.filename }}</b></p>
+      <a class="btn btn-sm text-danger ps-0" @click="clear">
+        <i class="fas fa-times"></i>
+        {{ remove }}
+      </a>
+    </template>
   </div>
 </template>

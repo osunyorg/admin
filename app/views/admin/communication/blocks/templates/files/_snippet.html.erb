@@ -7,13 +7,11 @@ block.template.elements.each do |element|
   next if l10n.nil?
   image_blob = element.image_component.blob
   %>
-  <div class="row mb-3">
-    <div class="col-1">
-      <p class="h3 mt-1">
+  <div class="row mb-4">
+    <div class="col-9">
+      <p class="h3 float-start me-2">
         <i class="<%= l10n.icon %>"></i>
       </p>
-    </div>
-    <div class="col-8">
       <p class="mb-0"><%= element.title %></p>
       <span class="small"><%= l10n.original_filename %></span>
     </div>

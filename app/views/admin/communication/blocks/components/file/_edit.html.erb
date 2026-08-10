@@ -1,37 +1,10 @@
 <%
-label = t('admin.communication.blocks.components.file.input.label')
-remove = t('admin.communication.blocks.components.file.input.remove')
-accept ||= '*'
 vue_model = "#{model}.#{property}"
 %>
-<div
-  v-if="<%= vue_model %>.communication_file_id"
-  class="mb-3">
-  <a
-    class="btn btn-sm text-danger float-end pe-0"
-    @click="<%= vue_model %> = {}">
-    <i class="fas fa-times"></i>
-    <%= remove %>
-  </a>
-  <p class="mb-0">{{ <%= vue_model %>.filename }}</p>
-</div>
-<div v-if="!<%= vue_model %>.communication_file_id">
-  <div class="row">
-    <div class="col-md-6">
-      <file-upload-input
-        v-model="<%= vue_model %>"
-        upload-url="<%= direct_upload_admin_communication_files_path %>"
-        label="<%= label %>"
-        accept="<%= accept %>"
-        :size-limit="<%= Rails.application.config.default_file_max_size %>">
-      </file-upload-input>
-    </div>
-    <div class="col-md-6">
-      <picker
-        v-model="<%= vue_model %>"
-        kind="files"
-        endpoint="<%= picker_admin_communication_files_path(format: :json) %>">
-      </picker>
-    </div>
-  </div>
-</div>
+<file-selector
+  :model-value="<%= vue_model %>"
+  @update:model-value="<%= vue_model %> = $event; if ($event.communication_file_id) <%= model %>.title = $event.name"
+  upload-url="<%= direct_upload_admin_communication_files_path %>"
+  picker-endpoint="<%= picker_admin_communication_files_path(format: :json) %>"
+  :size-limit="<%= Rails.application.config.default_file_max_size %>">
+</file-selector>

@@ -68,13 +68,13 @@ export default {
             class="btn btn-light vue__changes__cancel"
             @click="cancel()"
             :disabled="savingInProgress">
-      {{ $t('changes.cancel') }}
+      {{ $t('components.changes.cancel') }}
     </button>
     <button type="button"
             class="btn btn-success vue__changes__save"
             @click="save()"
             :disabled="savingInProgress">
-      {{ $t('changes.save') }}
+      {{ $t('components.changes.save') }}
     </button>
   </div>
 </template>

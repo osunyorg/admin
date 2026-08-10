@@ -29,10 +29,6 @@ en:
           code:
             preview:
               sanitized_notice: For security reasons, the content has been filtered. Scripts will not be loaded and/or executed, and the apparence may be altered.
-          file:
-            input:
-              label: File
-              remove: Remove file
           image:
             alt:
               label: Alternative text
