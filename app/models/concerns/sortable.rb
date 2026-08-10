@@ -5,11 +5,15 @@ module Sortable
 
     # key: alpha, date_desc...
     def autosort(key, language)
-      return self if key.blank?
+      return all if key.blank?
       # autosort_by_alpha
       scope_identifier = "autosort_by_#{key}"
       # apply scope
-      public_send(scope_identifier, language)
+      if respond_to?(scope_identifier)
+        public_send(scope_identifier, language)
+      else
+        all
+      end
     end
   end
 end

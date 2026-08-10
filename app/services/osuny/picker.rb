@@ -35,6 +35,7 @@ class Osuny::Picker
     }
   end
 
+  # Si on était sur la page 5, qu'on a reserré la recherche et qu'il n'y a plus de page 5, on revient sur la page 1
   def results
     @results ||= objects_paginated.any? ? objects_paginated : objects_on_first_page
   end
@@ -55,11 +56,11 @@ class Osuny::Picker
   end
 
   def objects_paginated
-    @objects_paginated ||= objects_sorted.page(params[:page])#.per(2)
+    @objects_paginated ||= objects_sorted.page(params[:page])
   end
 
   def objects_on_first_page
-    @objects_on_first_page ||= objects_sorted.page(1).per(2)
+    @objects_on_first_page ||= objects_sorted.page(1)
   end
 
   def search
