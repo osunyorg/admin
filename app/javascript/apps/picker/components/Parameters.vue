@@ -17,7 +17,7 @@ export default {
       this.$emit('change');
     },
     buildQuery() {
-      this.parameters.query_parameters = "&filters[for_search_term]=" + this.parameters.search.term;
+      this.parameters.query_parameters = "&filters[for_search_term]=" + encodeURIComponent(this.parameters.search.term);
       this.parameters.filters.forEach(filter => {
         this.addSelectedValuesToQuery(filter.values);
       });
@@ -55,6 +55,7 @@ export default {
     </div>
     <div
       v-for="filter in parameters.filters"
+      :key="filter.name"
       class="mb-3">
       <b>{{ filter.name }}</b>
       <ValuesInFilter
@@ -71,6 +72,7 @@ export default {
         @change="update">
         <option
           v-for="sort in parameters.sort.values"
+          :key="sort.id"
           :value="sort.id">
           {{ sort.name }}
         </option>

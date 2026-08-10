@@ -1,23 +1,9 @@
 <%
-people = osuny_collection(
-  current_university.people,
-  localized: true,
-  label_method: :to_s_alphabetical
-)
+vue_model = "#{model}.#{property}"
 %>
-<label  class="form-label <%= 'visually-hidden' if label.blank? %>"
-        :for="<%= dom_id.html_safe %>">
-  <%= label %>
-</label>
-<select :id="<%= dom_id.html_safe %>"
-        class="form-select select"
-        v-model="<%= model %>.<%= property %>">
-  <% if placeholder %>
-    <option value="" disabled><%= placeholder %></option>
-  <% end %>
-  <% people.each do |person| %>
-    <option value="<%= person.last %>">
-      <%= person.first %>
-    </option>
-  <% end %>
-</select>
+<person-selector
+  :model-value="<%= vue_model %>"
+  @update:model-value="<%= vue_model %> = $event"
+  picker-endpoint="<%= picker_admin_university_people_path(format: :json) %>"
+  object-endpoint="<%= admin_university_people_path %>">
+</person-selector>

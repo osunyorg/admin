@@ -18,6 +18,7 @@ export default {
 <template>
   <div
     v-for="value in values"
+    :key="value.id"
     class="form-check">
     <input
       type="checkbox"

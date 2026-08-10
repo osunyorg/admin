@@ -40,10 +40,12 @@ export default {
         xhr.setRequestHeader('X-CSRF-Token', this.csrfToken);
         xhr.onreadystatechange = function () {
           if (xhr.readyState != 4) return;
+          this.savingInProgress = false;
           if (xhr.status == 200) {
             this.archive = JSON.parse(xhr.responseText);
             this.value = JSON.parse(xhr.responseText);
-            this.savingInProgress = false;
+          } else {
+            console.error(xhr);
           }
         }.bind(this);
         xhr.send(JSON.stringify(this.modelValue));
@@ -51,7 +53,6 @@ export default {
       },
       cancel() {
         this.value = JSON.parse(JSON.stringify(this.archive));
-        this.needsSaving = false;
       },
     },
     mounted() {

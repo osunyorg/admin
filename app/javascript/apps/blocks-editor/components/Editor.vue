@@ -6,6 +6,7 @@ import RichTextInput from '../../components/inputs/RichTextInput.vue';
 import CodeInput from '../../components/inputs/CodeInput.vue';
 import UploadInput from '../../components/inputs/UploadInput.vue';
 import FileSelector from '../../components/inputs/FileSelector.vue';
+import PersonSelector from '../../components/inputs/PersonSelector.vue';
 import MultiImageInput from '../../components/inputs/MultiImageInput.vue';
 import Picker from '../../picker/Picker.vue';
 
@@ -151,6 +152,7 @@ export default {
       this.innerApp.component('draggable', VueDraggableNext);
       this.innerApp.component('FileSelector', FileSelector);
       this.innerApp.component('MultiImageInput', MultiImageInput);
+      this.innerApp.component('PersonSelector', PersonSelector);
       this.innerApp.component('Picker', Picker);
       this.innerApp.component('RichTextInput', RichTextInput);
       this.innerApp.component('UploadInput', UploadInput);

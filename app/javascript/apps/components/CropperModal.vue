@@ -62,11 +62,13 @@ export default {
         xhr.setRequestHeader('X-CSRF-Token', document.querySelector('[name="csrf-token"]').content);
         xhr.onreadystatechange = function () {
           if (xhr.readyState != 4) return;
+          this.pending = false;
           if (xhr.status == 200) {
             let blob = JSON.parse(xhr.responseText);
             this.$emit('cropped', blob);
-            this.pending = false;
             this.close();
+          } else {
+            console.error(xhr);
           }
         }.bind(this);
         this.pending = true;

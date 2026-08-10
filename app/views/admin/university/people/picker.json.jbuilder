@@ -6,7 +6,6 @@ json.results do
     l10n = person.localized_in(current_language)
     json.data do
       json.id person.id
-      json.name l10n.to_s
     end
     json.snippet render(
         partial: 'admin/university/people/person',

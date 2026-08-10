@@ -1,5 +1,5 @@
 <script>
-import { File } from '@lucide/vue';
+import { CircleDot } from '@lucide/vue';
 import Pagination from './components/Pagination.vue';
 import Parameters from './components/Parameters.vue';
 import Results from './components/Results.vue';
@@ -7,7 +7,7 @@ import Results from './components/Results.vue';
 export default {
   name: 'Picker',
   components: {
-    File,
+    CircleDot,
     Pagination,
     Parameters,
     Results,
@@ -55,32 +55,25 @@ export default {
       this.modalOpened = false;
       document.body.classList.remove("modal-open");
     },
-    search() {
-      var xhr = new XMLHttpRequest(),
-          data;
+    async search() {
       this.buildUrl();
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-          this.loading = false;
-          this.data = JSON.parse(xhr.responseText);
-          this.parameters = this.data.parameters;
-          this.pagination = this.data.pagination;
-          this.results = this.data.results;
-        } else {
-          console.log(xhr);
-        }
-      }.bind(this);
-      xhr.open("GET", this.url, false);
-      xhr.send();
+      try {
+        const res = await fetch(this.url);
+        if (!res.ok) throw new Error(res.statusText);
+        this.data = await res.json();
+        this.parameters = this.data.parameters;
+        this.pagination = this.data.pagination;
+        this.results = this.data.results;
+        this.loading = false;
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error);
+      }
     },
     buildUrl() {
       this.url = this.endpoint + '?';
-      if (this.parameters) {
-        this.url += this.parameters.query_parameters;
-      }
-      if (this.pagination) {
-        this.url += this.pagination.query_parameters;
-      }
+      this.url += this.parameters?.query_parameters || '';
+      this.url += this.pagination?.query_parameters || '';
     },
     select(object) {
       this.value = object.data;
@@ -98,7 +91,7 @@ export default {
     <button
       class="btn btn-sm mx-n2 d-flex align-items-center"
       @click.prevent="open">
-      <File stroke-width="1.5" class="me-1" />
+      <CircleDot stroke-width="1.5" class="me-1" />
       {{ $t(`picker.kind.${kind}.button`) }}
     </button>
     <div  class="modal"

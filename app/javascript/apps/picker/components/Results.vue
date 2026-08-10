@@ -12,7 +12,8 @@ export default {
 <template>
   <div :class="results.classes">
     <div
-      v-for="object in results.list"
+      v-for="(object, index) in results.list"
+      :key="index"
       class="col"
       v-html="object.snippet"
       @click.prevent="$emit('select', object)">
