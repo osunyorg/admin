@@ -81,6 +81,7 @@ class University::Person < ApplicationRecord
               class_name: "User",
               optional: true
   belongs_to :user, optional: true
+  has_many :extranet_invitations, class_name: 'Communication::Extranet::Invitation', dependent: :destroy
 
   validates :email,
             uniqueness: { scope: :university_id },
