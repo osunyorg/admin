@@ -128,6 +128,10 @@ fr:
           button: Choisir un fichier dans la bibliothèque
           modal:
             title: Bibliothèque de fichiers
+        people:
+          button: Choisir une personne
+          modal:
+            title: Personnes
     timeSlots:
       add: Ajouter un créneau horaire
       datetime:

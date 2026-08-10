@@ -15,6 +15,7 @@ namespace :university, path: :directory do
   resources :people do
     collection do
       get :search, defaults: { format: 'json' }
+      get :picker
       resources :categories, controller: 'people/categories', as: 'person_categories' do
         collection do
           post :reorder

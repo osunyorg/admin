@@ -61,7 +61,9 @@ export default {
         :values="filter.values"
         @change="update" />
     </div>
-    <div class="mb-3">
+    <div
+      class="mb-3"
+      v-if="parameters.sort.values.length">
       <b>{{ $t('picker.parameters.sort')}}</b>
       <select
         class="form-select"

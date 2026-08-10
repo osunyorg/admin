@@ -3,7 +3,7 @@ module Sortable
 
   class_methods do
 
-    # alpha
+    # key: alpha, date_desc...
     def autosort(key, language)
       return self if key.blank?
       # autosort_by_alpha

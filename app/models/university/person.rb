@@ -65,6 +65,7 @@ class University::Person < ApplicationRecord
   include MentionableByBlocks
   include Sanitizable
   include Searchable
+  include Sortable
   include WithAlumnus
   include WithFacets
   include WithInvolvements

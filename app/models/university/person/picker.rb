@@ -1,4 +1,4 @@
-class Communication::File::Picker
+class University::Person::Picker
   attr_reader :university, :language, :params
 
   def initialize(university:, language:, params:)
@@ -9,11 +9,11 @@ class Communication::File::Picker
   end
   
   def objects
-    @objects ||= university.communication_files
+    @objects ||= university.university_people
   end
 
   def categories
-    @categories ||= university.communication_file_categories
+    @categories ||= university.university_person_categories
   end
 
   def parameters
@@ -54,11 +54,11 @@ class Communication::File::Picker
   end
 
   def objects_paginated
-    @objects_paginated ||= objects_sorted.page(params[:page])#.per(2)
+    @objects_paginated ||= objects_sorted.page(params[:page])
   end
 
   def objects_on_first_page
-    @objects_on_first_page ||= objects_sorted.page(1).per(2)
+    @objects_on_first_page ||= objects_sorted.page(1)
   end
 
   def search
@@ -119,24 +119,24 @@ class Communication::File::Picker
   end
 
   def sort_initialize
-    sort_add(I18n.t('communication.file.sort.alpha'), 'alpha')
-    sort_add(I18n.t('communication.file.sort.date_desc'), 'date_desc')
-    sort_add(I18n.t('communication.file.sort.date_asc'), 'date_asc')
   end
 
   def sort_add(name, key)
-    sort[:values] <<  {
+    @sort[:values] <<  {
       id: key,
       name: name,
       query_parameters: "&sort=#{key}"
     }
-    sort[:current] = key if sort[:current].blank?
+    @sort[:current] = key if sort[:current].blank?
   end
   
   def sort
-    @sort ||= {
-      current: params.dig(:sort),
-      values: []
-    }
+    unless @sort
+      @sort = {
+        current: params.dig(:sort),
+        values: []
+      }
+    end
+    @sort
   end
 end

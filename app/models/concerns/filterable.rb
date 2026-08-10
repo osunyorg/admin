@@ -15,6 +15,10 @@ module Filterable
 
     def filter_by(params, language)
       return all unless params
+      # TODO
+      # @pabois je ne comprends pas ce que ça fait, 
+      # et je ne vois pas comment ça maintient le filtre sur l'université
+      # Tu peux vérifier que ça n'ignore pas l'instance et l'écrire clair stp ?
       params.to_unsafe_hash.reduce(all) do |scope, (name, value)|
         filter_by_scope(scope, name, value, language)
       end
