@@ -15,7 +15,7 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
 
   def picker
     @picker = Communication::File::Picker.new(
-      objects: @files,
+      university: current_university,
       language: current_language,
       params: params
     )

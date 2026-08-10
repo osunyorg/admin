@@ -1,10 +1,18 @@
 class Communication::File::Picker
-  attr_reader :objects, :language, :params
+  attr_reader :university, :language, :params
 
-  def initialize(objects:, language:, params:)
-    @objects = objects
+  def initialize(university:, language:, params:)
+    @university = university
     @language = language
     @params = params
+  end
+  
+  def objects
+    @objects ||= university.communication_files
+  end
+
+  def categories
+    @categories ||= university.communication_file_categories
   end
 
   def parameters
@@ -68,20 +76,46 @@ class Communication::File::Picker
     params.dig(:filters, :for_search_term).to_s
   end
 
+  # [
+  #   {
+  #     name: 'Catégories',
+  #     values: [
+  #       {
+  #         id: 'cat-1',
+  #         name: 'Catégorie 1',
+  #         selected: false,
+  #         query_parameters: '&filters[for_category][]=d05ab9f9-a8fb-42e3-8aca-8fe73fa08913' }
+  #     ]
+  #   }
+  # ]
   def filters
-    [
-      {
-        id: 'categories',
-        name: 'Catégories',
-        values: [
-          {
-            id: 'cat-1',
-            name: 'Catégorie 1',
-            selected: false,
-            query_parameters: '&filters[for_category][]=d05ab9f9-a8fb-42e3-8aca-8fe73fa08913' }
-        ]
+    filters = []
+    categories.taxonomies.ordered(language).each do |taxonomy|
+      filters << {
+        name: taxonomy.to_s_in(language),
+        values: transform_categories_to_values(taxonomy.children)
       }
-    ]
+    end
+    if categories.free.any?
+      filters << {
+        name: I18n.t('category.title'),
+        values: transform_categories_to_values(categories.free)
+      }
+    end
+    filters
+  end
+
+  def transform_categories_to_values(categories)
+    categories.ordered(language).map do |category|
+      data = {
+        id: category.id,
+        name: category.to_s_in(language),
+        selected: category.id.in?(params.to_s),
+        query_parameters: "&filters[for_category][]=#{category.id}"
+      }
+      data[:values] = transform_categories_to_values(category.children) if category.children.any?
+      data
+    end
   end
   
   def sorts
@@ -89,12 +123,14 @@ class Communication::File::Picker
       {
         id: 'date-desc',
         name: 'Les plus récents d\'abord',
-        selected: true
+        selected: true,
+        query_parameters: "&sorts=date-desc"
       },
       {
         id: 'date-asc',
         name: 'Les plus anciens d\'abord',
-        selected: false
+        selected: false,
+        query_parameters: "&sorts=date-asc"
       }
     ]
   end
