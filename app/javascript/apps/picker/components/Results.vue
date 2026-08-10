@@ -10,13 +10,12 @@ export default {
 </script>
 
 <template>
-  <div class="row g-2">
+  <div :class="results.classes">
     <div
       v-for="object in results.list"
-      :class="results.classes">
-      <div
-        v-html="object.snippet"
-        @click.prevent="$emit('select', object)"></div>
+      class="col"
+      v-html="object.snippet"
+      @click.prevent="$emit('select', object)">
     </div>
   </div>
 </template>
