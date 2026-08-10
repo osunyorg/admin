@@ -5,6 +5,9 @@ module User::WithPerson
     # Original person
     has_one :person, class_name: 'University::Person', dependent: :nullify
 
+    # Set during registration through an extranet invitation
+    attr_accessor :invitation
+
     delegate :experiences, to: :person
 
     after_save_commit :sync_person, if: :person
@@ -28,9 +31,10 @@ module User::WithPerson
   protected
 
   def find_or_create_person
-    person = university.people.where(email: email).first_or_initialize
+    person = invitation&.person || university.people.where(email: email).first_or_initialize
     person_l10n = person.localizations.find_by(language_id: university.default_language_id)
     person.user = self
+    person.email = email
     person.localizations_attributes = [
       {
         id: person_l10n&.id, language_id: university.default_language_id,

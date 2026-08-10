@@ -5,7 +5,7 @@
 #  id                  :uuid             not null, primary key
 #  about_type          :string           indexed => [about_id]
 #  html_class          :string
-#  kind                :integer          default("blank")
+#  kind                :integer          default(0)
 #  position            :integer          not null
 #  position_in_tree    :integer
 #  should_open_new_tab :boolean          default(FALSE)

@@ -28,7 +28,7 @@
 #  remember_created_at           :datetime
 #  reset_password_sent_at        :datetime
 #  reset_password_token          :string           uniquely indexed
-#  role                          :integer          default("visitor")
+#  role                          :integer          default(0)
 #  second_factor_attempts_count  :integer          default(0)
 #  session_token                 :string
 #  sign_in_count                 :integer          default(0), not null
@@ -77,6 +77,7 @@ class User < ApplicationRecord
   belongs_to :language
   has_many :university_people, class_name: 'University::Person', dependent: :nullify
   has_many :imports, class_name: 'Import', dependent: :nullify
+  has_many :extranet_invitations, class_name: 'Communication::Extranet::Invitation', dependent: :destroy
 
   scope :ordered, -> (language = nil) { order("TRIM(LOWER(UNACCENT(last_name))), TRIM(LOWER(UNACCENT(first_name)))") }
   scope :for_university, -> (university_id, language = nil) { where(university_id: university_id) }
