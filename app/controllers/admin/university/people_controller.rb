@@ -33,7 +33,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   end
 
   def picker
-    @picker = University::Person::Picker.new(
+    @picker = Osuny::Picker::University::Person.new(
       university: current_university,
       language: current_language,
       params: params

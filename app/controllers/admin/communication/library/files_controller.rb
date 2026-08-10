@@ -14,7 +14,7 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
   end
 
   def picker
-    @picker = Communication::File::Picker.new(
+    @picker = Osuny::Picker::Communication::File.new(
       university: current_university,
       language: current_language,
       params: params

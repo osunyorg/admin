@@ -1,19 +1,20 @@
-class University::Person::Picker
+class Osuny::Picker
+
   attr_reader :university, :language, :params
 
   def initialize(university:, language:, params:)
     @university = university
     @language = language
     @params = params
-    sort_initialize
+    sorts
   end
   
   def objects
-    @objects ||= university.university_people
+    raise NoMethodError, 'You must implement this method'
   end
 
   def categories
-    @categories ||= university.university_person_categories
+    raise NoMethodError, 'You must implement this method'
   end
 
   def parameters
@@ -54,11 +55,11 @@ class University::Person::Picker
   end
 
   def objects_paginated
-    @objects_paginated ||= objects_sorted.page(params[:page])
+    @objects_paginated ||= objects_sorted.page(params[:page])#.per(2)
   end
 
   def objects_on_first_page
-    @objects_on_first_page ||= objects_sorted.page(1)
+    @objects_on_first_page ||= objects_sorted.page(1).per(2)
   end
 
   def search
@@ -118,25 +119,23 @@ class University::Person::Picker
     end
   end
 
-  def sort_initialize
+  def sorts
+    # Can be overridden to add sorts
   end
 
   def sort_add(name, key)
-    @sort[:values] <<  {
+    sort[:values] <<  {
       id: key,
       name: name,
       query_parameters: "&sort=#{key}"
     }
-    @sort[:current] = key if sort[:current].blank?
+    sort[:current] = key if sort[:current].blank?
   end
   
   def sort
-    unless @sort
-      @sort = {
-        current: params.dig(:sort),
-        values: []
-      }
-    end
-    @sort
+    @sort ||= {
+      current: params.dig(:sort),
+      values: []
+    }
   end
 end
