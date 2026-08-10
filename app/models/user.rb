@@ -77,6 +77,7 @@ class User < ApplicationRecord
   belongs_to :language
   has_many :university_people, class_name: 'University::Person', dependent: :nullify
   has_many :imports, class_name: 'Import', dependent: :nullify
+  has_many :extranet_invitations, class_name: 'Communication::Extranet::Invitation', dependent: :destroy
 
   scope :ordered, -> (language = nil) { order("TRIM(LOWER(UNACCENT(last_name))), TRIM(LOWER(UNACCENT(first_name)))") }
   scope :for_university, -> (university_id, language = nil) { where(university_id: university_id) }
