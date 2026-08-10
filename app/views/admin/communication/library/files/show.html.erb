@@ -2,7 +2,7 @@
 
 <% content_for :title_right do %>
   <%= button_advanced do %>
-    <%# FIXME = destroy_link @file if @file.contexts.none? %>
+    <%= destroy_link @file if @file.contexts.none? %>
   <% end %>
   <%= edit_link @file %>
 <% end %>

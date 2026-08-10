@@ -61,7 +61,9 @@ class Communication::Website::Menu < ApplicationRecord
   end
 
   def should_sync_to?(website)
-    website.id == communication_website_id && website.active_language_ids.include?(language_id) && items.any?
+    website.id == communication_website_id && 
+    website.active_language_ids.include?(language_id) &&
+    items.any?
   end
 
   def template_static

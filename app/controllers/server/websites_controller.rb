@@ -4,8 +4,16 @@ class Server::WebsitesController < Server::ApplicationController
   before_action :load_website, except: [:index, :clean_and_rebuild_all_websites]
 
   def index
-    @websites = @websites.ordered(current_language).page(params[:page])
-    breadcrumb
+    @websites = @websites.ordered(current_language)
+    respond_to do |format|
+      format.html {
+        @websites = @websites.page(params[:page])
+        breadcrumb
+      }
+      format.txt {
+        @websites = @websites.where.not(repository: [nil, ''])
+      }
+    end
   end
 
   def clean_and_rebuild_all_websites
