@@ -121,13 +121,17 @@ fr:
         previous: Page précédente
       parameters:
         search:
-          placeholder: Tapez le texte
+          placeholder: Rechercher
         sort: Tri
       kind:
         files:
           button: Choisir un fichier dans la bibliothèque
           modal:
             title: Bibliothèque de fichiers
+        organizations:
+          button: Choisir une organisation
+          modal:
+            title: Organisations
         people:
           button: Choisir une personne
           modal:

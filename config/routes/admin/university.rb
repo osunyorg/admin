@@ -40,6 +40,7 @@ namespace :university, path: :directory do
   resources :organizations do
     collection do
       get :search, defaults: { format: 'json' }
+      get :picker
       resources :categories, controller: 'organizations/categories', as: 'organization_categories' do
         collection do
           post :reorder

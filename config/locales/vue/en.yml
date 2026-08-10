@@ -121,13 +121,17 @@ en:
         previous: Previous page
       parameters:
         search:
-          placeholder: Type your search here
+          placeholder: Search
         sorts: Sort
       kind:
         files:
           button: Choose a file in the library
           modal:
             title: File library
+        organizations:
+          button: Choose an organization
+          modal:
+            title: Organizations
         people:
           button: Choose a person
           modal:

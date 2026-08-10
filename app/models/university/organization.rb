@@ -49,6 +49,7 @@ class University::Organization < ApplicationRecord
   include MentionableByBlocks
   include Sanitizable
   include Searchable
+  include Sortable
   include WithKind
   include WithOpenApi
 
