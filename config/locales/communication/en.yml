@@ -539,6 +539,8 @@ en:
           manual_hint_html: "This message will be sent from the extranet, when a user clicks on the \"invite alumnus\" button, if the user has no email.<br>In these fields you can use the following variables: <ul><li>{{name}}: the name of the alumnus</li><li>{{sender_name}}: the name of the user sending the invitation</li><li>{{sender_years}}: the promotion(s) of the user sending the invitation</li></ul>"
           title: Invitation messages
         languages: Languages
+        sso:
+          label: SSO
       website:
         agenda:
           event:
