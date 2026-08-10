@@ -16,19 +16,24 @@ export default {
 </script>
 
 <template>
-  <div  v-for="value in values"
-        class="form-check">
-    <input  type="checkbox"
-            :id="value.id"
-            v-model="value.selected"
-            class="form-check-input" 
-            @change="update"/>
-    <label  :for="value.id"
-            class="form-check-label">
+  <div
+    v-for="value in values"
+    class="form-check">
+    <input
+      type="checkbox"
+      class="form-check-input" 
+      :id="value.id"
+      v-model="value.selected"
+      @change="update"/>
+    <label
+      :for="value.id"
+      class="form-check-label">
       {{ value.name }}
     </label>
     <div v-if="value.values">
-      <ValuesInFilter :values="value.values" @change="update" />
+      <ValuesInFilter
+        :values="value.values"
+        @change="update" />
     </div>
   </div>
 </template>

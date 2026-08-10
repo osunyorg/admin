@@ -745,6 +745,11 @@ en:
           draft: Draft
           planned_on: Publication planned on %{date}
           published_on: Published on %{date}
+    file:
+      sort:
+        alpha: Alphabetical
+        date_desc: Most recent first
+        date_asc: Oldest first
     manage_authors: Manage authors
     number_of_posts: Number of posts
     summary:

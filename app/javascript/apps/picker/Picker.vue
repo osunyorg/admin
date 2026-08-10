@@ -30,6 +30,7 @@ export default {
   },
   data () {
     return {
+      loading: true,
       modalOpened: false,
       url: '',
       data: {},
@@ -60,10 +61,13 @@ export default {
       this.buildUrl();
       xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
+          this.loading = false;
           this.data = JSON.parse(xhr.responseText);
           this.parameters = this.data.parameters;
           this.pagination = this.data.pagination;
           this.results = this.data.results;
+        } else {
+          console.log(xhr);
         }
       }.bind(this);
       xhr.open("GET", this.url, false);
@@ -89,6 +93,7 @@ export default {
 <template>
   <section
     class="vue__picker"
+    v-if="kind"
     @keydown.esc="close">
     <button class="btn btn-sm mx-n2 d-flex align-items-center"
       @click.prevent="open">
@@ -111,7 +116,7 @@ export default {
               @click="close">
             </button>
           </div>
-          <div class="modal-body overflow-x-hidden">
+          <div class="modal-body overflow-x-hidden" v-if="!loading">
             <div class="row">
               <div class="col-md-2">
                 <Parameters

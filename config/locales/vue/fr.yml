@@ -121,10 +121,8 @@ fr:
         previous: Page précédente
       parameters:
         search:
-          title: Chercher
           placeholder: Tapez le texte
-        filters: Filtrer
-        sorts: Trier
+        sort: Tri
       kind:
         files:
           button: Choisir un fichier dans la bibliothèque

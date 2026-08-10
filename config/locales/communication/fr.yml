@@ -745,6 +745,11 @@ fr:
           draft: Brouillon
           planned_on: Publication prévue le %{date}
           published_on: Publiée le %{date}
+    file:
+      sort:
+        alpha: Par ordre alphabétique
+        date_desc: Les plus récents d'abord
+        date_asc: Les plus anciens d'abord
     manage_authors: Gérer les auteur·rices
     number_of_posts: Nombre d'actualités
     summary:

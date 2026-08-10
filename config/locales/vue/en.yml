@@ -121,9 +121,7 @@ en:
         previous: Previous page
       parameters:
         search:
-          title: Search
           placeholder: Type your search here
-        filters: Filter
         sorts: Sort
       kind:
         files:

@@ -24,6 +24,7 @@ class Communication::File < ApplicationRecord
   include HasUniversity
   include Localizable
   include LocalizableOrderByNameScope
+  include Sortable
   include WithOpenApi
 
   has_many :contexts, through: :localizations
@@ -35,6 +36,16 @@ class Communication::File < ApplicationRecord
       unaccent(communication_file_localizations.name) ILIKE unaccent(:term) OR
       unaccent(communication_file_localizations.internal_description) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
+  }
+
+  scope :autosort_by_alpha, -> (language) {
+    ordered(language)
+  }
+  scope :autosort_by_date_desc, -> (language) {
+    order(created_at: :desc)
+  }
+  scope :autosort_by_date_asc, -> (language) {
+    order(created_at: :asc)
   }
 
   # Attention, la création ne fait pas le travail jusqu'au bout,

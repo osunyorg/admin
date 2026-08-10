@@ -19,8 +19,7 @@ class Communication::File::Picker
     {
       search: search,
       filters: filters,
-      sorts: sorts,
-      query_parameters: '',
+      sort: sort,
     }
   end
 
@@ -50,11 +49,11 @@ class Communication::File::Picker
   end
 
   def objects_sorted
-    @objects_sorted ||= objects_filtered.ordered(language)
+    @objects_sorted ||= objects_filtered.autosort(params.dig(:sort), language)
   end
 
   def objects_paginated
-    @objects_paginated ||= objects_sorted.page(params[:page]).per(2)
+    @objects_paginated ||= objects_sorted.page(params[:page])#.per(2)
   end
 
   def objects_on_first_page
@@ -117,21 +116,26 @@ class Communication::File::Picker
       data
     end
   end
+
+  def sort_add(name, key)
+    @sort[:values] <<  {
+      id: key,
+      name: name,
+      query_parameters: "&sort=#{key}"
+    }
+    @sort[:current] = key if sort[:current].blank?
+  end
   
-  def sorts
-    [
-      {
-        id: 'date-desc',
-        name: 'Les plus récents d\'abord',
-        selected: true,
-        query_parameters: "&sorts=date-desc"
-      },
-      {
-        id: 'date-asc',
-        name: 'Les plus anciens d\'abord',
-        selected: false,
-        query_parameters: "&sorts=date-asc"
+  def sort
+    unless @sort
+      @sort = {
+        current: params.dig(:sort),
+        values: []
       }
-    ]
+      sort_add(I18n.t('communication.file.sort.alpha'), 'alpha')
+      sort_add(I18n.t('communication.file.sort.date_desc'), 'date_desc')
+      sort_add(I18n.t('communication.file.sort.date_asc'), 'date_asc')
+    end
+    @sort
   end
 end
