@@ -29,7 +29,7 @@ fr:
         feature_documents: Documents
         feature_jobs: Offres d'emploi
         feature_posts: Actualités
-        has_sso: A un SSO ?
+        has_sso: Single sign-on
         host: Domaine
         sass: Style personnalisé (en SASS)
         sso_cert: Certificat
@@ -539,6 +539,8 @@ fr:
           manual_hint_html: "Ce message sera envoyé depuis l'extranet, lorsqu'un utilisateur clique sur le bouton \"inviter un alumnus\", si l'utilisateur n'a pas d'email.<br>Dans ces champs vous pouvez utiliser les variables suivantes : <ul><li>{{name}} : le nom de l'alumnus</li><li>{{sender_name}} : le nom de l'utilisateur qui envoie l'invitation</li><li>{{sender_years}} : la/les promotion(s) de l'utilisateur qui envoie l'invitation</li></ul>"
           title: Messages d'invitation
         languages: Langues
+        sso:
+          label: SSO
       website:
         agenda:
           event:

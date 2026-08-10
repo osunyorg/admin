@@ -29,7 +29,7 @@ en:
         feature_documents: Documents
         feature_jobs: Job board
         feature_posts: News
-        has_sso: Has SSO?
+        has_sso: Single sign-on
         host: Domain
         sass: Custom style (SASS)
         sso_cert: Certificate

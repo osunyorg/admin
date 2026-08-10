@@ -23,6 +23,13 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
   def edit
     breadcrumb
     add_breadcrumb t('admin.subnav.settings')
+    @feature_nav = 'navigation/admin/communication/extranet/settings'
+  end
+
+  def sso
+    breadcrumb
+    add_breadcrumb t('admin.communication.extranet.sso.label')
+    @feature_nav = 'navigation/admin/communication/extranet/settings'
   end
 
   def create

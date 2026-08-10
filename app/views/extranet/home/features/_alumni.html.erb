@@ -28,7 +28,6 @@
                     <br>
                     <%= [l10n&.description, organization_l10n&.to_s].compact_blank.join('-') %>
                   </p>
-                  <%= render 'extranet/alumni/persons/invitations/cta', person: experience.person, l10n: person_l10n %>
                   <small><%= l experience.created_at, format: :date_with_explicit_month %></small>
                 </div>
                 <% if organization_l10n && organization_l10n.logo.attached? %>

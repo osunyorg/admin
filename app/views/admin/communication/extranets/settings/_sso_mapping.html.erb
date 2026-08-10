@@ -1,12 +1,6 @@
 <%
-kind = object.class.name.underscore.gsub('/', '_')
-if kind == 'university'
-  mapping_keys = ['email', 'first_name', 'last_name', 'role', 'mobile_phone', 'language', 'picture_url']
-else
-  mapping_keys = ['email', 'first_name', 'last_name', 'mobile_phone', 'language', 'picture_url']
-end
-
-fieldsPropValue = object.sso_mapping.blank? ? [] : object.sso_mapping
+mapping_keys = ['email', 'first_name', 'last_name', 'mobile_phone', 'language', 'picture_url']
+fieldsPropValue = extranet.sso_mapping.blank? ? [] : extranet.sso_mapping
 keysPropValue = mapping_keys.map { |key| [key, User.human_attribute_name(key)] }.to_h
 %>
 
@@ -50,17 +44,6 @@ keysPropValue = mapping_keys.map { |key| [key, User.human_attribute_name(key)] }
                 </div>
               </div>
             </div>
-            <% if kind == 'university' %>
-              <div v-if="field.internal_key === 'role'">
-                <hr class="mt-4">
-                <% User.roles.keys.each do |role| %>
-                  <div class="form-group">
-                    <label for="" class="form-label"><%= t("activerecord.attributes.user.roles.#{role}") %></label>
-                    <input v-model="field.roles.<%= role %>" type="text" class="form-control">
-                  </div>
-                <% end %>
-              </div>
-            <% end %>
           </div>
         </div>
       </div>
@@ -71,7 +54,7 @@ keysPropValue = mapping_keys.map { |key| [key, User.human_attribute_name(key)] }
     </a>
   </div>
 
-  <textarea name="<%= kind %>[sso_mapping]" id="<%= kind %>_sso_mapping" rows="20" cols="200" class="d-none">
+  <textarea name="communication_extranet[sso_mapping]" id="communication_extranet_sso_mapping" rows="20" cols="200" class="d-none">
     {{ JSON.stringify(fields) }}
   </textarea>
 
