@@ -1,7 +1,7 @@
 json.parameters @picker.parameters
 json.pagination @picker.pagination
 json.results do
-  json.classes 'row g-2'
+  json.classes 'row g-2 row-cols-1'
   json.list @picker.results do |file|
     l10n = file.localized_in(current_language)
     json.data do
