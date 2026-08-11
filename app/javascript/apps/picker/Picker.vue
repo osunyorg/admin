@@ -31,6 +31,8 @@ export default {
   data () {
     return {
       loading: true,
+      searching: false,
+      requestId: 0,
       modalOpened: false,
       url: '',
       data: {},
@@ -59,18 +61,23 @@ export default {
       }
     },
     async search() {
+      // Pour le feedback visuel immédiat
+      this.searching = true;
       this.buildUrl();
       try {
         const res = await fetch(this.url);
         if (!res.ok) throw new Error(res.statusText);
-        this.data = await res.json();
-        this.parameters = this.data.parameters;
-        this.pagination = this.data.pagination;
-        this.results = this.data.results;
+        const data = await res.json();
+        this.data = data;
+        this.parameters = data.parameters;
+        this.pagination = data.pagination;
+        this.results = data.results;
         this.loading = false;
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error(error);
+      } finally {
+        this.searching = false;
       }
     },
     buildUrl() {
@@ -120,13 +127,18 @@ export default {
                   :parameters="parameters"
                   @change="search" />
               </div>
-              <div class="offset-md-1 col-md-9">
-                <Results
-                  :results="results"
-                  @select="select" />
-                <Pagination 
-                  :pagination="pagination"
-                  @change="search" />
+              <div class="offset-md-1 col-md-9 position-relative">
+                <div :class="{'opacity-25': searching}">
+                  <Results
+                    :results="results"
+                    @select="select" />
+                  <Pagination
+                    :pagination="pagination"
+                    @change="search" />
+                </div>
+                <div v-if="searching" class="position-absolute top-0 start-0 ms-3 mt-1">
+                  <span class="spinner-border text-primary" role="status"></span>
+                </div>
               </div>
             </div>
           </div>
