@@ -1,8 +1,9 @@
 <%= osuny_panel @website.feature_portfolio_name(current_language) do %>
   <div class="row g-2 mb-3">
     <% @projects.each do |project| %>
-      <%= render  'admin/communication/websites/portfolio/projects/project_small',
-                  project: project %>
+      <div>
+        <%= render 'admin/communication/websites/portfolio/projects/project_small', project: project %>
+      </div>
     <% end %>
     <%= render 'admin/application/components/all',
                 link: admin_communication_website_portfolio_projects_path(website_id: @website) %>

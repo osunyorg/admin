@@ -1,8 +1,9 @@
 <%= osuny_panel Communication::Website::Page.model_name.human(count: 2) do %>
   <div class="row g-2 mb-3">
     <% @pages.each do |page| %>
-      <%= render  'admin/communication/websites/pages/page_small',
-                  page: page %>
+      <div>
+        <%= render 'admin/communication/websites/pages/page_small', page: page %>
+      </div>
     <% end %>
     <%= render 'admin/application/components/all',
                 link: admin_communication_website_pages_path(website_id: @website) %>

@@ -1,8 +1,9 @@
 <%= osuny_panel Communication::Website::Agenda::Exhibition.model_name.human(count: 2) do %>
   <div class="row g-2 mb-3">
     <% @exhibitions.each do |exhibition| %>
-      <%= render  'admin/communication/websites/agenda/exhibitions/exhibition_small',
-                  exhibition: exhibition %>
+      <div>
+        <%= render 'admin/communication/websites/agenda/exhibitions/exhibition_small', exhibition: exhibition %>
+      </div>
     <% end %>
     <%= render 'admin/application/components/all',
                 link: admin_communication_website_agenda_exhibitions_path(website_id: @website) %>
