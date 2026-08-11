@@ -45,7 +45,7 @@ export default {
         return;
       }
       this.modalOpened = true;
-      document.body.classList.add("modal-open");
+      document.body.classList.add('modal-open');
       this.search();
     },
     close() {
@@ -53,7 +53,10 @@ export default {
         return;
       }
       this.modalOpened = false;
-      document.body.classList.remove("modal-open");
+      // Si l'offcanvas est ouvert, ou laisse tel quel
+      if (!document.body.classList.contains('offcanvas-shell-open')) {
+        document.body.classList.remove('modal-open');
+      }
     },
     async search() {
       this.buildUrl();

@@ -15,12 +15,14 @@ export default {
     open: {
       handler(isOpen) {
         document.body.classList.toggle('modal-open', isOpen);
+        document.body.classList.toggle('offcanvas-shell-open', isOpen);
       },
       immediate: true,
     },
   },
   beforeUnmount() {
     document.body.classList.remove('modal-open');
+    document.body.classList.remove('offcanvas-shell-open');
   },
 };
 </script>
