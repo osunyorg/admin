@@ -1,34 +1,11 @@
-<div class="row g-2 mb-3">
+<div class="row g-2 mb-3 row-cols-lg-4 row-cols-xxl-6">
   <% volumes.each do |volume| %>
-    <% if volume.deleted? %>
-      <div>
-        <div class="<%= osuny_card_classes(horizontal: true) %>">
-          <%= osuny_thumbnail_localized volume %>
-          <div class="card-body">
-            <%= volume.best_localization_for(current_language) %>
-          </div>
-          <% if can?(:restore, volume) %>
-            <div class="card-footer">
-              <%= link_to t('restore'),
-                          restore_admin_research_journal_volume_path(journal_id: @journal, id: volume),
-                          method: :post,
-                          class: button_classes %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    <% else %>
-      <div class="col-lg-3 col-xxl-2">
-        <div class="card">
-          <%= osuny_thumbnail_localized volume, large: true %>
-          <div class="card-body">
-            <%= osuny_published_localized volume %>
-            <%= osuny_link_localized  volume,
-                                      admin_research_journal_volume_path(journal_id: @journal, id: volume),
-                                      classes: 'stretched-link' %>
-          </div>
-        </div>
-      </div>
-    <% end %>
+    <div>
+      <%
+      partial = volume.deleted? ? 'admin/research/journals/volumes/volume_deleted'
+                                : 'admin/research/journals/volumes/volume'
+      %>
+      <%= render partial, volume: volume %>
+    </div>
   <% end %>
 </div>
