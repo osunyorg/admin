@@ -4,7 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  deleted_at               :datetime
-#  kind                     :integer          default("info"), not null
+#  kind                     :integer          default(0), not null
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed

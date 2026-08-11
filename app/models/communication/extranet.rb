@@ -17,7 +17,7 @@
 #  sso_cert                   :text
 #  sso_mapping                :jsonb
 #  sso_name_identifier_format :string
-#  sso_provider               :integer          default("saml")
+#  sso_provider               :integer          default(0)
 #  sso_target_url             :string
 #  upper_menu                 :text             default("")
 #  created_at                 :datetime         not null
@@ -67,6 +67,7 @@ class Communication::Extranet < ApplicationRecord
   has_many :documents
   has_many :document_categories, class_name: 'Communication::Extranet::Document::Category'
   has_many :document_kinds, class_name: 'Communication::Extranet::Document::Kind'
+  has_many :invitations, class_name: 'Communication::Extranet::Invitation', dependent: :destroy
 
   validates :host, presence: true
 

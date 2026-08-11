@@ -9,7 +9,7 @@
 #  country              :string
 #  deleted_at           :datetime
 #  email                :string
-#  kind                 :integer          default("company")
+#  kind                 :integer          default(10)
 #  latitude             :float
 #  longitude            :float
 #  migration_identifier :string

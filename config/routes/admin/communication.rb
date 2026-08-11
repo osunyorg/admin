@@ -244,6 +244,7 @@ namespace :communication do
   end
   resources :extranets, controller: 'extranets' do
     member do
+      get :sso
       get :confirm_localization
       post :do_confirm_localization
     end

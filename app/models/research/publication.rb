@@ -20,7 +20,7 @@
 #  publication_date       :date
 #  ref                    :string
 #  slug                   :string           indexed
-#  source                 :integer          default("osuny")
+#  source                 :integer          default(0)
 #  title                  :string
 #  url                    :string
 #  created_at             :datetime         not null

@@ -11,7 +11,7 @@
 #  migration_identifier     :string
 #  position                 :integer          not null
 #  published                :boolean          default(TRUE)
-#  template_kind            :integer          default(NULL), not null, indexed => [university_id]
+#  template_kind            :integer          default(0), not null, indexed => [university_id]
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null

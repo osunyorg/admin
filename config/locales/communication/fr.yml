@@ -29,7 +29,7 @@ fr:
         feature_documents: Documents
         feature_jobs: Offres d'emploi
         feature_posts: Actualités
-        has_sso: A un SSO ?
+        has_sso: Single sign-on
         host: Domaine
         sass: Style personnalisé (en SASS)
         sso_cert: Certificat
@@ -56,13 +56,21 @@ fr:
         name: Nom
         published: Publié ?
         published_at: Date de publication
+      communication/extranet/invitation:
+        from_email: Votre email
+        from_name: De la part de
+        message: Message
+        to_email: Email de la personne invitée
+        to_name: Pour
       communication/extranet/localization:
         cookies_policy: Politique de cookies
         favicon: Icône de navigateur (favicon)
         home_sentence: Phrase affichée sur la home
-        invitation_message: Message d'invitation automatique
-        invitation_message_subject: Sujet du mail
-        invitation_message_text: Texte du mail
+        invitation_message_automatic_subject: Sujet du mail
+        invitation_message_automatic_text: Texte du mail
+        invitation_message_manual_signature: Signature
+        invitation_message_manual_subject: Sujet du mail
+        invitation_message_manual_text: Texte du mail
         logo: Logo
         name: Nom
         privacy_policy: Politique de confidentialité
@@ -337,6 +345,10 @@ fr:
               unavailable: n'est pas disponible pour ce type d'extranet
             sso_mapping:
               missing_email: ne gère pas l'adresse email
+        communication/extranet/invitation:
+          attributes:
+            to_email:
+              too_soon: a déjà reçu une invitation récemment. Vous pouvez réessayer plus tard.
         communication/extranet/localization:
           attributes:
             published:
@@ -520,7 +532,15 @@ fr:
         confirm_localization:
           text_html: "La création de <i>%{about}</i> en %{language} nécessite la traduction de l'extranet <i>%{extranet}</i> en %{language}."
           title: Confirmation de traduction
+        invitation_messages: 
+          automatic: Message automatique
+          automatic_hint: Ce message sera envoyé après un import d'alumni ou lors du clic sur le bouton "envoyer l'invitation" dans l'admin, si l'alumnus a un email.
+          manual: Message manuel
+          manual_hint_html: "Ce message sera envoyé depuis l'extranet, lorsqu'un utilisateur clique sur le bouton \"inviter un alumnus\", si l'utilisateur n'a pas d'email.<br>Dans ces champs vous pouvez utiliser les variables suivantes : <ul><li>{{name}} : le nom de l'alumnus</li><li>{{sender_name}} : le nom de l'utilisateur qui envoie l'invitation</li><li>{{sender_years}} : la/les promotion(s) de l'utilisateur qui envoie l'invitation</li></ul>"
+          title: Messages d'invitation
         languages: Langues
+        sso:
+          label: SSO
       website:
         agenda:
           event:
