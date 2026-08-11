@@ -64,7 +64,7 @@ export default {
     </div>
     <div
       class="mb-3"
-      v-if="parameters.sort.values.length">
+      v-if="parameters.sort.values.length > 1">
       <b>{{ $t('picker.parameters.sort')}}</b>
       <select
         class="form-select"

@@ -770,6 +770,9 @@ fr:
           legal: Informations légales
           primary: Menu principal
           social: Liens sociaux
+      page:
+        sort:
+          alpha: Par ordre alphabétique
       pages:
         defaults:
           accessibility:

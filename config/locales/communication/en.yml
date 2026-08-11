@@ -770,6 +770,9 @@ en:
           legal: Legal
           primary: Main menu
           social: Social
+      page:
+        sort:
+          alpha: Alphabetical
       pages:
         defaults:
           accessibility:

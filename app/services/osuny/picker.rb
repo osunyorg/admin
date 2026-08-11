@@ -54,7 +54,7 @@ class Osuny::Picker
   end
 
   def objects_sorted
-    @objects_sorted ||= objects_filtered.autosort(params.dig(:sort), language)
+    @objects_sorted ||= objects_filtered.autosort(current_sort, language)
   end
 
   def objects_paginated
@@ -141,5 +141,9 @@ class Osuny::Picker
       current: params.dig(:sort),
       values: []
     }
+  end
+
+  def current_sort
+    params.dig(:sort) || sort[:current]
   end
 end

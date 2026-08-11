@@ -100,6 +100,10 @@ class Communication::Website::Page < ApplicationRecord
   }
   scope :for_full_width, -> (full_width, language = nil) { where(full_width: full_width == 'true') }
 
+  scope :autosort_by_alpha, -> (language) {
+    ordered_by_title(language)
+  }
+
   def dependencies
     localizations.in_languages(website.active_language_ids) +
     categories

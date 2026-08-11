@@ -1,6 +1,10 @@
 <%= osuny_panel Communication::Website::Page.model_name.human(count: 2) do %>
-  <%= render 'admin/communication/websites/pages/list', 
-              pages: @pages, 
-              small: true,
-              link_to_all: true %>
+  <div class="row g-2 mb-3">
+    <% @pages.each do |page| %>
+      <%= render  'admin/communication/websites/pages/page_small',
+                  page: page %>
+    <% end %>
+    <%= render 'admin/application/components/all',
+                link: admin_communication_website_pages_path(website_id: @website) %>
+  </div>
 <% end %>

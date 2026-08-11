@@ -5,10 +5,11 @@ module Autosortable
 
     # key: alpha, date_desc...
     def autosort(key, language)
+      # On ne trie pas s'il n'y a pas de clé de tri
       return all if key.blank?
-      # autosort_by_alpha
+      # Ex: autosort_by_alpha
       scope_identifier = "autosort_by_#{key}"
-      # apply scope
+      # Application du tri si le scope existe
       if respond_to?(scope_identifier)
         public_send(scope_identifier, language)
       else
