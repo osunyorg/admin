@@ -15,13 +15,13 @@ export default {
   watch: {
     id: {
       handler() {
-        this.loadPerson();
+        this.load();
       },
       immediate: true,
     },
   },
   methods: {
-    async loadPerson() {
+    async load() {
       this.loading = true;
       this.person = null;
       try {

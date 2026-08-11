@@ -14,9 +14,9 @@
   <%= block_component_add_element block, t('.selection.add') %>
   <draggable :list="data.elements" handle=".dragHandle">
     <div v-for="(element, index) in data.elements" class="draggable-item">
-      <div class="d-flex mb-n3">
+      <div class="d-flex mb-n3 align-items-center">
         <div>
-          <a class="btn ps-0 pt-0 dragHandle" title="<%= t('admin.communication.block.drag_and_drop') %>">
+          <a class="btn dragHandle ps-0" title="<%= t('admin.communication.block.drag_and_drop') %>">
             <i class="<%= Icon::DRAG %> handle"></i>
           </a>
         </div>
