@@ -125,6 +125,9 @@ fr:
     picker:
       pagination:
         next: Page suivante
+        nothing:
+          title: Il n'y a rien ici, rien du tout.
+          text: "Le carré noir de Robert Fludd représente le néant qui précédait l'univers, dans son ouvrage Utriusque Cosmi (1617). <br>Source: <a href=\"https://pdimagearchive.org/images/6e25e710-eb2a-4fda-8bb5-d87348e14406/\" target=\"_blank\">Public Domain Image Archive</a>"
         previous: Page précédente
       parameters:
         search:

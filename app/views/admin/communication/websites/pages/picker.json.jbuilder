@@ -8,7 +8,7 @@ json.results do
       json.id page.id
     end
     json.snippet render(
-        partial: 'admin/communication/website/pages/page',
+        partial: 'admin/communication/websites/pages/page',
         locals: { page: page },
         formats: [:html]
       )

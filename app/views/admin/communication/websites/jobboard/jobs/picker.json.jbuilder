@@ -8,7 +8,7 @@ json.results do
       json.id job.id
     end
     json.snippet render(
-        partial: 'admin/communication/website/jobboard/jobs/job',
+        partial: 'admin/communication/websites/jobboard/jobs/job',
         locals: { job: job },
         formats: [:html]
       )

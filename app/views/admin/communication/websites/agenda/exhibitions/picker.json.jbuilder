@@ -8,7 +8,7 @@ json.results do
       json.id exhibition.id
     end
     json.snippet render(
-        partial: 'admin/communication/website/agenda/exhibitions/exhibition',
+        partial: 'admin/communication/websites/agenda/exhibitions/exhibition',
         locals: { exhibition: exhibition },
         formats: [:html]
       )

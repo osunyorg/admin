@@ -6,11 +6,7 @@ selectable ||= false
 <% else %>
   <% if selectable %>
     <input type="hidden" name="ids[]" value="">
-    <%= check_box_tag nil,
-                      nil,
-                      false,
-                      class: 'form-check-input',
-                      data: { batch_selectable_role: "select-all" } %>
+    <input type="checkbox" class="form-check-input" data-batch-selectable-role="select-all">
   <% end %>
   <div class="row g-2 mb-3">
     <% events.each do |event| %>
@@ -28,8 +24,7 @@ selectable ||= false
         partial = event.deleted?  ? 'admin/communication/websites/agenda/events/event_deleted'
                                   : 'admin/communication/websites/agenda/events/event'
         %>
-        <%= render  partial,
-                    event: event %>
+        <%= render partial, event: event %>
       </div>
     <% end %>
   </div>

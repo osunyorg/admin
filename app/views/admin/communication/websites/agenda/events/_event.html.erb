@@ -1,9 +1,6 @@
 <div class="<%= osuny_card_classes(horizontal: true) %> align-items-start flex-grow-1">
   <%= osuny_thumbnail_localized event, large: true %>
   <div class="card-body">
-    <%
-    event_l10n = event.best_localization_for(current_language)
-    %>
     <div class="row">
       <div class="col-lg-8">
         <div class="d-flex">
@@ -21,6 +18,9 @@
                                         ),
                                         classes: "stretched-link" %>
             </p>
+            <%
+            event_l10n = event.best_localization_for(current_language)
+            %>
             <% if event_l10n&.subtitle.present? %>
               <p class="text-muted mt-1">
                 <%= event_l10n.subtitle.truncate(100) %>

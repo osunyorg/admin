@@ -1,11 +1,6 @@
 <%
-small ||= false
 hide_badges ||= false
 selectable ||= false
-if small
-  hide_badges = true
-end
-link_to_all ||= false
 %>
 <% if posts.none? %>
   <p><%= t('communication.website.posts.none') %></p>
@@ -14,10 +9,10 @@ link_to_all ||= false
     <input type="hidden" name="ids[]" value="">
   <% end %>
   <div class="table-responsive <%= 'table-selectable' if selectable %>">
-    <table class="table table-borderless table-sm">
-      <thead>
-        <tr>
-          <% if selectable %>
+    <table class="table table-borderless table-sm <%= 'mt-n4' if selectable %>">
+      <% if selectable %>
+        <thead>
+          <tr>
             <th class="border-0">
               <%= check_box_tag nil,
                                 nil,
@@ -25,9 +20,9 @@ link_to_all ||= false
                                 class: 'form-check-input',
                                 data: { batch_selectable_role: "select-all" } if selectable %>
             </th>
-          <% end %>
-        </tr>
-      </thead>
+          </tr>
+        </thead>
+      <% end %>
       <tbody>
         <% posts.each do |post| %>
           <tr>
@@ -47,17 +42,8 @@ link_to_all ||= false
               %>
               <%= render  partial,
                           post: post,
-                          small: small,
                           hide_badges: hide_badges,
                           website: website %>
-            </td>
-          </tr>
-        <% end %>
-        <% if link_to_all %>
-          <tr>
-            <td>
-              <%= render 'admin/application/components/all',
-                          link: admin_communication_website_posts_path(website_id: @website) %>
             </td>
           </tr>
         <% end %>
