@@ -30,6 +30,7 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   acts_as_paranoid
 
   include AsDirectObject
+  include Autosortable
   include Duplicable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories

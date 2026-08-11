@@ -32,6 +32,7 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
   acts_as_paranoid
 
   include AsDirectObject
+  include Autosortable
   include Communication::Website::Agenda::Period::InPeriod
   include Communication::Website::Agenda::WithStatus
   include Duplicable

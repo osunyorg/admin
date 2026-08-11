@@ -36,6 +36,7 @@ class University::Organization < ApplicationRecord
   acts_as_paranoid
 
   include AsIndirectObject
+  include Autosortable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include Duplicable
@@ -49,7 +50,6 @@ class University::Organization < ApplicationRecord
   include MentionableByBlocks
   include Sanitizable
   include Searchable
-  include Sortable
   include WithKind
   include WithOpenApi
 

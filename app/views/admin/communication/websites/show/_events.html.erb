@@ -1,6 +1,10 @@
 <%= osuny_panel @website.feature_agenda_name(current_language) do %>
-  <%= render 'admin/communication/websites/agenda/events/list', 
-              events: @events, 
-              small: true,
-              link_to_all: true %>
+  <div class="row g-2 mb-3">
+    <% @events.each do |event| %>
+      <%= render  'admin/communication/websites/agenda/events/event_small',
+                  event: event%>
+    <% end %>
+    <%= render 'admin/application/components/all',
+                link: admin_communication_website_agenda_events_path(website_id: @website) %>
+  </div>
 <% end %>

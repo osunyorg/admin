@@ -27,6 +27,7 @@
 #  fk_rails_de56e1762f  (university_id => universities.id)
 #
 class Communication::Media < ApplicationRecord
+  include Autosortable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include HasOriginalBlob

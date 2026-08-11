@@ -29,6 +29,7 @@ namespace :education do
           get :static
         end
       end
+      get :picker
       get :tree
     end
     member do

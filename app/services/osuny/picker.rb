@@ -1,11 +1,13 @@
 class Osuny::Picker
 
-  attr_reader :university, :language, :params
+  attr_reader :university, :language, :params, :context
 
-  def initialize(university:, language:, params:)
+  # context peut être un website, un extranet, un journal...
+  def initialize(university:, language:, params:, context: nil)
     @university = university
     @language = language
     @params = params
+    @context = context
     sorts
   end
   
@@ -14,7 +16,7 @@ class Osuny::Picker
   end
 
   def categories
-    raise NoMethodError, 'You must implement this method'
+    nil
   end
 
   def parameters
@@ -92,6 +94,7 @@ class Osuny::Picker
   # ]
   def filters
     filters = []
+    return filters if categories.nil?
     categories.taxonomies.ordered(language).each do |taxonomy|
       filters << {
         name: taxonomy.to_s_in(language),

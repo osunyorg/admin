@@ -16,6 +16,15 @@ class Admin::Communication::Websites::Agenda::ExhibitionsController < Admin::Com
     breadcrumb
   end
 
+  def picker
+    @picker = Osuny::Picker::Communication::Website::Agenda::Exhibition.new(
+      university: current_university,
+      language: current_language,
+      params: params,
+      context: @website
+    )
+  end
+
   def publish
     @l10n.publish!
     redirect_back fallback_location: admin_communication_website_agenda_exhibition_path(@exhibition),

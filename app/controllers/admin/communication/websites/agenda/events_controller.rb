@@ -21,6 +21,15 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     breadcrumb
   end
 
+  def picker
+    @picker = Osuny::Picker::Communication::Website::Agenda::Event.new(
+      university: current_university,
+      language: current_language,
+      params: params,
+      context: @website
+    )
+  end
+
   def move_batch
     # Override to only display parent events
     @filtered = @website.public_send(resource_plural_name)

@@ -1,4 +1,4 @@
-module Sortable
+module Autosortable
   extend ActiveSupport::Concern
 
   class_methods do

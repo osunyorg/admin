@@ -40,6 +40,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   include AsDirectObject
   include AsTree
+  include Autosortable
   include Communication::Website::Agenda::Period::InPeriod
   include Communication::Website::Agenda::WithStatus
   include Duplicable

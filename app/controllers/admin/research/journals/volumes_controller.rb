@@ -14,6 +14,15 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
     breadcrumb
   end
 
+  def picker
+    @picker = Osuny::Picker::Research::Journal::Volume.new(
+      university: current_university,
+      language: current_language,
+      params: params,
+      context: @journal
+    )
+  end
+
   def show
     @papers = @volume.papers.ordered_by_position
     breadcrumb

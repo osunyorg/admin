@@ -17,6 +17,15 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     breadcrumb
   end
 
+  def picker
+    @picker = Osuny::Picker::Communication::Website::Post.new(
+      university: current_university,
+      language: current_language,
+      params: params,
+      context: @website
+    )
+  end
+
   def publish_batch
     ids = params[:ids] || []
     target_posts = @website.posts.where(id: ids)

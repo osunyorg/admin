@@ -131,18 +131,58 @@ fr:
           placeholder: Rechercher
         sort: Tri
       kind:
+        events:
+          button: Choisir un événement
+          modal:
+            title: Événements
+        exhibitions:
+          button: Choisir une exposition
+          modal:
+            title: Expositions
         files:
           button: Choisir un fichier dans la bibliothèque
           modal:
             title: Bibliothèque de fichiers
+        jobs:
+          button: Choisir une offre d'emploi
+          modal:
+            title: Offres d'emploi
+        medias:
+          button: Choisir une photo dans la photothèque
+          modal:
+            title: Photothèque
         organizations:
           button: Choisir une organisation
           modal:
             title: Organisations
+        pages:
+          button: Choisir une page
+          modal:
+            title: Pages
+        papers:
+          button: Choisir un papier
+          modal:
+            title: Papiers
         people:
           button: Choisir une personne
           modal:
             title: Personnes
+        posts:
+          button: Choisir une actualité
+          modal:
+            title: Actualités
+        programs:
+          button: Choisir une formation
+          modal:
+            title: Formation
+        projects:
+          button: Choisir un projet
+          modal:
+            title: Projets
+        volumes:
+          button: Choisir un volume
+          modal:
+            title: Volumes
     timeSlots:
       add: Ajouter un créneau horaire
       datetime:

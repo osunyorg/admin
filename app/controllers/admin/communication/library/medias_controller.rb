@@ -15,6 +15,14 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
     @feature_nav = 'navigation/admin/communication/medias'
   end
 
+  def picker
+    @picker = Osuny::Picker::Communication::Media.new(
+      university: current_university,
+      language: current_language,
+      params: params
+    )
+  end
+
   def show
     @contexts = @media.contexts
     breadcrumb

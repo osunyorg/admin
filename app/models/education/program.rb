@@ -32,6 +32,7 @@ class Education::Program < ApplicationRecord
 
   include AsIndirectObject
   include AsTree
+  include Autosortable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles

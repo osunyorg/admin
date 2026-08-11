@@ -19,12 +19,12 @@
 #  fk_rails_e95d85eee7  (created_by_id => users.id)
 #
 class Communication::File < ApplicationRecord
+  include Autosortable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include HasUniversity
   include Localizable
   include LocalizableOrderByNameScope
-  include Sortable
   include WithOpenApi
 
   has_many :contexts, through: :localizations

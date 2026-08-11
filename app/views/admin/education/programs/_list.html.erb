@@ -1,46 +1,18 @@
 <%
-  hide_diploma ||= false
-  hide_parent ||= false
+hide_diploma ||= false
+hide_parent ||= false
 %>
 <div class="row g-2 mb-3">
-  <%
-  programs.each do |program|
-    parent = program.parent
-    diploma = program.diploma
-    %>
+  <% programs.each do |program| %>
     <div>
-      <div class="<%= osuny_card_classes(horizontal: true) %>">
-        <%= osuny_thumbnail_localized program %>
-        <% if program.deleted? %>
-          <div class="card-body">
-            <%= program.best_localization_for(current_language) %>
-          </div>
-          <% if can?(:restore, program) %>
-            <div class="card-footer mb-n2">
-              <%= link_to t('restore'),
-                          restore_admin_education_program_path(program),
-                          method: :post,
-                          class: button_classes %>
-            </div>
-          <% end %>
-        <% else %>
-          <div class="card-body">
-            <%= osuny_published_localized program %>
-            <%= osuny_link_localized program, [:admin, program], classes: 'stretched-link' %>
-            <% if !hide_parent && parent.present? %>
-              <br>
-              <span class="small text-muted">
-                <%= parent.best_localization_for(current_language) %>
-              </span>
-            <% end %>
-          </div>
-          <% if !hide_diploma && diploma.present? %>
-            <div class="card-footer">
-              <%= diploma.best_localization_for(current_language).short_name %>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
+      <%
+      partial = program.deleted?  ? 'admin/education/programs/program_deleted'
+                                  : 'admin/education/programs/program'
+      %>
+      <%= render  partial,
+                  program: program,
+                  hide_diploma: hide_diploma,
+                  hide_parent: hide_parent %>
     </div>
   <% end %>
 </div>
