@@ -1,10 +1,5 @@
 <%= block_component_edit block, :mode %>
 
-<div class="my-5" v-if="data.mode !== 'category'">
-  <h2 class="h4"><%= t '.main_page.title' %></h2>
-  <%= block_component_edit block, :page_id %>
-</div>
-
 <div class="my-5" v-if="data.mode === 'category'">
   <%= block_component_edit block, :category_id %>
 </div>
@@ -12,7 +7,7 @@
 <div class="my-5" v-if="data.mode === 'selection'">
   <h2 class="h4"><%= t '.selection.title' %></h2>
   <%= block_component_add_element block, t('.selection.add') %>
-  <draggable :list="data.elements" handle=".dragHandle">
+  <draggable :list="data.elements" handle=".dragHandle" class="pb-3">
     <div v-for="(element, index) in data.elements" class="draggable-item">
       <div class="d-flex mb-n3 align-items-center">
         <div>
@@ -36,6 +31,11 @@
   <div v-show="data.elements.length > 2">
     <%= block_component_add_element block, t('.selection.add') %>
   </div>
+</div>
+
+<div class="my-5" v-if="data.mode !== 'category'">
+  <h2 class="h4"><%= t '.main_page.title' %></h2>
+  <%= block_component_edit block, :page_id %>
 </div>
 
 <%= osuny_separator %>
