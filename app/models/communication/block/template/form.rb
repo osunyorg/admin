@@ -30,6 +30,10 @@ class Communication::Block::Template::Form < Communication::Block::Template::Bas
     ]
   end
 
+  def allowed_for_about?
+    !about.respond_to?(:extranet)
+  end
+
   protected
 
   def embed_url
