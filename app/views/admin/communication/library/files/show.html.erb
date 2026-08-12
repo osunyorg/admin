@@ -30,6 +30,12 @@
         <%= osuny_label Communication::File::Localization.human_attribute_name(:original_byte_size) %>
         <p><%= number_to_human_size @l10n.original_byte_size %></p>
       </div>
+      <% if @file.created_by.present? %>
+        <div class="col-lg-6">
+          <%= osuny_label Communication::File.human_attribute_name(:created_by) %>
+          <p><%= @file.created_by %></p>
+        </div>
+      <% end %>
     </div>
 
     <% if @l10n.internal_description.present? %>

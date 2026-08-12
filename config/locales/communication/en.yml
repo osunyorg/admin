@@ -94,6 +94,8 @@ en:
         published_at: Publication date
         slug: Slug
         title: Title
+      communication/file:
+        created_by: Uploaded by
       communication/file/localization:
         internal_description: Internal description
         name: Name

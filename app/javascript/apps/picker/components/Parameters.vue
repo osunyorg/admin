@@ -55,6 +55,7 @@ export default {
     </div>
     <div
       v-for="filter in parameters.filters"
+      v-show="filter.values.length > 0"
       :key="filter.name"
       class="mb-3">
       <p class="form-label mb-1">{{ filter.name }}</p>

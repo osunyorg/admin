@@ -47,17 +47,17 @@ class Communication::File::Localization < ApplicationRecord
 
   before_create :guess_name_from_file
 
-  def self.find_or_create_from_blob(blob, language)
+  def self.find_or_create_from_blob(blob, language, user)
     localization = where(
       university_id: blob.university_id,
       language_id: language.id,
       original_checksum: blob.checksum
     ).first_or_create do |localization|
-      file = Communication::File.find_or_create_from_blob(blob)
+      file = Communication::File.find_or_create_from_blob(blob, user)
       # On attribue le blob
       localization.original_blob = blob
       # On connecte au fichier
-      localization.about_id = file.id
+      localization.about_id = file.id      
     end
     localization
   end

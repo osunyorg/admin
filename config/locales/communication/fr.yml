@@ -94,6 +94,8 @@ fr:
         published_at: Date de publication
         slug: Identifiant
         title: Titre
+      communication/file:
+        created_by: Envoyé par
       communication/file/localization:
         internal_description: Description interne
         name: Nom

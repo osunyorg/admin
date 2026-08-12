@@ -22,6 +22,7 @@ class Communication::File < ApplicationRecord
   include Autosortable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
+  include HasCreator
   include HasUniversity
   include Localizable
   include LocalizableOrderByNameScope
@@ -40,6 +41,10 @@ class Communication::File < ApplicationRecord
       unaccent(communication_file_localizations.name) ILIKE unaccent(:term) OR
       unaccent(communication_file_localizations.internal_description) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
+  }
+
+  scope :for_creator, -> (user_ids, language) {
+    where(created_by_id: user_ids)
   }
 
   scope :autosort_by_alpha, -> (language) {
@@ -64,11 +69,13 @@ class Communication::File < ApplicationRecord
   # ça renvoie un file vide, et il faut créer sa localisation.
   # Concrètement, cette méthode est appelée uniquement par 
   # Communication::File::Localization.find_or_create_from_blob
-  def self.find_or_create_from_blob(blob)
+  def self.find_or_create_from_blob(blob, user)
     # Soit il y a un fichier (dans n'importe quelle langue), on le renvoie
     # Soit il n'y en a aucun, on le crée
     find_by_blob(blob) || 
-    create!(university_id: blob.university_id)
+    create!(university_id: blob.university_id) do |file|
+      file.created_by = user
+    end
   end
 
   def self.find_by_blob(blob)

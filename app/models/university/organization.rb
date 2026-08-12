@@ -43,6 +43,7 @@ class University::Organization < ApplicationRecord
   include GeneratesGitFiles
   include Geolocated
   include HasCountry
+  include HasCreator
   include HasUniversity
   include Lifecyclable
   include Localizable
@@ -54,10 +55,6 @@ class University::Organization < ApplicationRecord
   include WithOpenApi
 
   attr_accessor :created_from_extranet
-
-  belongs_to  :created_by,
-              class_name: "User",
-              optional: true
 
   has_many :experiences,
            class_name: 'University::Person::Experience',

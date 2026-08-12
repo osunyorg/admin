@@ -17,7 +17,15 @@ l10n = file.best_localization_for(current_language)
                               classes: 'stretched-link' %>
   </div>
   <div class="card-footer small text-muted">
-    <%= l file.created_at, format: :date_with_explicit_month unless hide_date %>
-    <%= number_to_human_size l10n.original_byte_size unless hide_size %>
+    <% unless hide_date %>
+      <span class="ms-3">
+        <%= l file.created_at, format: :date_with_explicit_month %>
+      </span>
+    <% end %>
+    <% unless hide_size %>
+      <span class="ms-3">
+        <%= number_to_human_size l10n.original_byte_size %>
+      </span>
+    <% end %>
   </div>
 </div>

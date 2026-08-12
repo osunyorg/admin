@@ -34,7 +34,7 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
   def direct_upload
     @blob = ActiveStorage::Blob.create_before_direct_upload!(**blob_args)
     @blob.update_column(:university_id, current_university&.id)
-    @l10n = Communication::File::Localization.find_or_create_from_blob(@blob, current_language)
+    @l10n = Communication::File::Localization.find_or_create_from_blob(@blob, current_language, current_user)
     @file = @l10n.file
   end
 
@@ -45,6 +45,7 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
   end
 
   def create
+    @file.created_by = current_user
     if @file.save
       redirect_to [:admin, @file], notice: t('admin.successfully_created_html', model: @file.to_s_in(current_language))
     else

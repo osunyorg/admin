@@ -40,6 +40,7 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include HasCreator
   include HasListBlocks
   include HasUniversity
   include Lifecyclable
@@ -48,10 +49,6 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
   include Sanitizable
   include Searchable
   include WithOpenApi
-
-  belongs_to  :created_by,
-              class_name: "User",
-              optional: true
 
   validates :from_day, presence: true
   validates :to_day, presence: true, comparison: { greater_than: :from_day }
