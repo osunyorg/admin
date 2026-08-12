@@ -10,6 +10,7 @@ export default {
   props: {
     modelValue: { type: Object, default: () => ({}) },
     uploadUrl: { type: String, required: true },
+    accept: { type: String, required: true },
     sizeLimit: { type: [String, Number], default: null },
   },
   emits: ['update:modelValue', 'uploading'],
@@ -76,7 +77,7 @@ export default {
       ref="file"
       type="file"
       class="form-control"
-      accept="*"
+      :accept="accept"
       :id="fieldId"
       @change="onChange" />
     <button

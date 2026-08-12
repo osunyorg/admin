@@ -33,6 +33,7 @@
       object-endpoint="<%= admin_communication_files_path %>"
       label="<%= t('admin.communication.blocks.components.file.button') %>"
       title="<%= Communication::File.model_name.human(count: 2) %>"
+      accept="*"
       :size-limit="<%= Rails.application.config.default_file_max_size %>">
     </file-selector>
     <a
@@ -48,13 +49,14 @@
       <%= block_component_edit block, :title, template: @element %>
     </div>
     <div class="col-md-4">
-      <upload-input v-model="element.image"
-                    kind="image"
-                    label="<%= t('admin.communication.blocks.templates.files.edit.element.image.label') %>"
-                    remove="<%= t('admin.communication.blocks.components.image.input.remove') %>"
-                    hint="<%= j images_formats_accepted_hint %>"
-                    accept="<%= default_images_formats_accepted %>"
-                    :size-limit="<%= Rails.application.config.default_image_max_size %>"></upload-input>
+      <upload-input
+        v-model="element.image"
+        label="<%= t('admin.communication.blocks.templates.files.edit.element.image.label') %>"
+        remove="<%= t('admin.communication.blocks.components.image.input.remove') %>"
+        hint="<%= j images_formats_accepted_hint %>"
+        accept="<%= default_images_formats_accepted %>"
+        :size-limit="<%= Rails.application.config.default_image_max_size %>">
+      </upload-input>
     </div>
   </div>
 </div>

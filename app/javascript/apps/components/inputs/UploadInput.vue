@@ -1,4 +1,5 @@
 <script>
+// Deprecated, à remplacer par le sélecteur de fichier ou le sélecteur d'image
 import { useId } from 'vue';
 
 export default {

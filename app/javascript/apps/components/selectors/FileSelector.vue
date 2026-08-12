@@ -12,6 +12,7 @@ export default {
     uploadUrl: { type: String, required: true },
     pickerEndpoint: { type: String, required: true },
     objectEndpoint: { type: String, required: true },
+    accept: { type: String, required: true },
     sizeLimit: { type: [String, Number], default: null },
     label: { type: String, required: true },
     title: { type: String, required: true },
@@ -28,11 +29,6 @@ export default {
     },
     isUploading() {
       return this.uploadProgress !== null;
-    },
-  },
-  methods: {
-    clear() {
-      this.$emit('update:modelValue', {});
     },
   },
 };
@@ -58,6 +54,7 @@ export default {
             @update:model-value="$emit('update:modelValue', $event)"
             @uploading="uploadProgress = $event"
             :upload-url="uploadUrl"
+            :accept="accept"
             :size-limit="sizeLimit" />
         </div>
         <div class="col-md-6">
@@ -67,6 +64,7 @@ export default {
             kind="files"
             :label="label"
             :title="title"
+            :accept="accept"
             :endpoint="pickerEndpoint" />
         </div>
       </div>
