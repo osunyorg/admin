@@ -97,21 +97,35 @@ class Osuny::Picker
   #   }
   # ]
   def filters
-    filters = []
-    return filters if categories.nil?
+    unless @filters
+      @filters = []
+      filters_before_categories
+      filters_categories
+      filters_after_categories
+    end
+    @filters
+  end
+
+  def filters_before_categories
+  end
+
+  def filters_categories
+    return if categories.nil?
     categories.taxonomies.ordered(language).each do |taxonomy|
-      filters << {
+      @filters << {
         name: taxonomy.to_s_in(language),
         values: transform_categories_to_values(taxonomy.children)
       }
     end
     if categories.free.any?
-      filters << {
+      @filters << {
         name: I18n.t('category.title'),
         values: transform_categories_to_values(categories.free)
       }
     end
-    filters
+  end
+
+  def filters_after_categories
   end
 
   def transform_categories_to_values(categories)

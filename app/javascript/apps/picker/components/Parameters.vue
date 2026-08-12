@@ -57,7 +57,7 @@ export default {
       v-for="filter in parameters.filters"
       :key="filter.name"
       class="mb-3">
-      <b>{{ filter.name }}</b>
+      <p class="form-label mb-1">{{ filter.name }}</p>
       <ValuesInFilter
         :values="filter.values"
         @change="update" />
@@ -65,7 +65,7 @@ export default {
     <div
       class="mb-3"
       v-if="parameters.sort.values.length > 1">
-      <b>{{ $t('picker.parameters.sort')}}</b>
+      <p class="form-label">{{ $t('picker.parameters.sort')}}</p>
       <select
         class="form-select"
         v-model="parameters.sort.current"
