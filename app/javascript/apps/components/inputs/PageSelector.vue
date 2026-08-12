@@ -11,6 +11,8 @@ export default {
     modelValue: { type: String, default: '' },
     pickerEndpoint: { type: String, required: true },
     objectEndpoint: { type: String, required: true },
+    label: { type: String, required: true },
+    title: { type: String, required: true },
   },
   emits: ['update:modelValue'],
   computed: {
@@ -40,5 +42,7 @@ export default {
     :model-value="null"
     @update:model-value="select"
     kind="pages"
+    :label="label"
+    :title="title"
     :endpoint="pickerEndpoint" />
 </template>

@@ -1,3 +1,8 @@
+<%
+website_id = block.about.communication_website_id
+picker_endpoint = picker_admin_communication_website_pages_path(website_id: website_id, format: :json)
+object_endpoint = admin_communication_website_pages_path(website_id: website_id)
+%>
 <%= block_component_edit block, :mode %>
 
 <div class="my-5" v-if="data.mode === 'category'">
@@ -6,36 +11,65 @@
 
 <div class="my-5" v-if="data.mode === 'selection'">
   <h2 class="h4"><%= t '.selection.title' %></h2>
-  <%= block_component_add_element block, t('.selection.add') %>
-  <draggable :list="data.elements" handle=".dragHandle" class="pb-3">
-    <div v-for="(element, index) in data.elements" class="draggable-item">
-      <div class="d-flex mb-n3 align-items-center">
-        <div>
-          <a class="btn dragHandle ps-0" title="<%= t('admin.communication.block.drag_and_drop') %>">
-            <i class="<%= Icon::DRAG %> handle"></i>
-          </a>
-        </div>
-        <div class="flex-fill">
-          <%= block_component_edit block, :id, template: @element %>
-        </div>
-        <div>
-          <a  class="btn btn-sm text-danger ms-3"
-              @click="deleteElement(element)"
-              title="<%= t('delete') %>">
-              <i class="<%= Icon::DELETE %>"></i>
-          </a>
-        </div>
-      </div>
+
+  <picker
+    ref="pagesPicker"
+    kind="pages"
+    title="<%= Communication::Website::Page.model_name.human(count: 2) %>"
+    endpoint="<%= picker_endpoint %>"
+    :model-value="null"
+    @update:model-value="data.elements.push({id: $event.id})">
+  </picker>
+
+  <a
+    class="<%= button_classes('mb-4') %>"
+    @click="$refs.pagesPicker.open()">
+    <%= t('.selection.add') %>
+  </a>
+
+  <draggable :list="data.elements" handle=".osuny__thumbnail" class="row g-2 pb-3">
+    <div
+      v-for="(element, index) in data.elements"
+      class="d-flex align-items-center">
+      <selected-page
+        :id="element.id"
+        endpoint="<%= object_endpoint %>"
+        class="flex-fill">
+      </selected-page>
+      <a  class="btn btn-sm text-danger ms-3"
+          @click="deleteElement(element)"
+          title="<%= t('delete') %>">
+          <i class="<%= Icon::DELETE %>"></i>
+      </a>
     </div>
   </draggable>
   <div v-show="data.elements.length > 2">
-    <%= block_component_add_element block, t('.selection.add') %>
+    <a
+      class="<%= button_classes('mb-4') %>"
+      @click="$refs.pagesPicker.open()">
+      <%= t('.selection.add') %>
+    </a>
   </div>
 </div>
 
 <div class="my-5" v-if="data.mode !== 'category'">
   <h2 class="h4"><%= t '.main_page.title' %></h2>
-  <%= block_component_edit block, :page_id %>
+  <div class="d-flex align-items-center">
+    <page-selector
+      :model-value="data.page_id"
+      @update:model-value="data.page_id = $event"
+      picker-endpoint="<%= picker_endpoint %>"
+      object-endpoint="<%= object_endpoint %>"
+      label="<%= t('admin.communication.blocks.components.page.button') %>"
+      title="<%= Communication::Website::Page.model_name.human(count: 2) %>"
+      class="flex-fill">
+    </page-selector>
+    <a  class="btn btn-sm text-danger ms-3"
+        @click="data.page_id = ''"
+        title="<%= t('delete') %>">
+        <i class="<%= Icon::DELETE %>"></i>
+    </a>
+  </div>
 </div>
 
 <%= osuny_separator %>

@@ -29,6 +29,8 @@ en:
           code:
             preview:
               sanitized_notice: For security reasons, the content has been filtered. Scripts will not be loaded and/or executed, and the apparence may be altered.
+          file:
+            button: Choose a file in the library
           image:
             alt:
               label: Alternative text
@@ -44,6 +46,10 @@ en:
             label: Layout
           link:
             target_blank: Open in new window
+          page:
+            button: Choose a page
+          person:
+            button: Choose a person
           text:
             label: Text
             placeholder: Enter text

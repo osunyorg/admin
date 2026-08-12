@@ -5,5 +5,7 @@ vue_model = "#{model}.#{property}"
   :model-value="<%= vue_model %>"
   @update:model-value="<%= vue_model %> = $event"
   picker-endpoint="<%= picker_admin_university_people_path(format: :json) %>"
-  object-endpoint="<%= admin_university_people_path %>">
+  object-endpoint="<%= admin_university_people_path %>"
+  label="<%= t('admin.communication.blocks.components.person.button') %>"
+  title="<%= University::Person.model_name.human(count: 2) %>">
 </person-selector>

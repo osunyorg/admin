@@ -11,6 +11,8 @@ export default {
     uploadUrl: { type: String, required: true },
     pickerEndpoint: { type: String, required: true },
     sizeLimit: { type: [String, Number], default: null },
+    label: { type: String, required: true },
+    title: { type: String, required: true },
   },
   emits: ['update:modelValue'],
   data() {
@@ -61,6 +63,8 @@ export default {
             :model-value="modelValue"
             @update:model-value="$emit('update:modelValue', $event)"
             kind="files"
+            :label="label"
+            :title="title"
             :endpoint="pickerEndpoint" />
         </div>
       </div>

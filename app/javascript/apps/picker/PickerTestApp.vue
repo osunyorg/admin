@@ -6,15 +6,12 @@ export default {
   },
   data () {
     return {
-      endpoint: '',
-      kind: '',
+      dataset: {},
       data: {},
     }
   },
   mounted() {
-    let dataset = document.getElementById('picker-test-app').dataset
-    this.endpoint = dataset.endpoint;
-    this.kind = dataset.kind;
+    this.dataset = document.getElementById('picker-test-app').dataset
   }
 };
 </script>
@@ -22,8 +19,10 @@ export default {
 <template>
   <Picker
     v-model="data"
-    :kind="kind"
-    :endpoint="endpoint" />
+    :kind="dataset.kind"
+    :endpoint="dataset.endpoint"
+    :label="dataset.label" 
+    :title="dataset.title" />
   <div class="bg-light p-3 rounded mt-4">
     <pre><code>{{ data }}</code></pre>
   </div>

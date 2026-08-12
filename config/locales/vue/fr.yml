@@ -144,10 +144,6 @@ fr:
           button: Choisir une exposition
           modal:
             title: Expositions
-        files:
-          button: Choisir un fichier dans la bibliothèque
-          modal:
-            title: Bibliothèque de fichiers
         jobs:
           button: Choisir une offre d'emploi
           modal:
@@ -160,18 +156,10 @@ fr:
           button: Choisir une organisation
           modal:
             title: Organisations
-        pages:
-          button: Choisir une page
-          modal:
-            title: Pages
         papers:
           button: Choisir un papier
           modal:
             title: Papiers
-        people:
-          button: Choisir une personne
-          modal:
-            title: Personnes
         posts:
           button: Choisir une actualité
           modal:

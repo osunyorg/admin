@@ -12,11 +12,13 @@ export default {
     Parameters,
     Results,
   },
-  props: [
-    'modelValue',
-    'endpoint',
-    'kind',
-  ],
+  props: {
+    modelValue: { default: null },
+    endpoint: { type: String, required: true },
+    kind: { type: String, required: true },
+    label: { type: String, default: '' },
+    title: { type: String, default: '' },
+  },
   emits: ['update:modelValue'],
   computed: {
     value: {
@@ -32,7 +34,6 @@ export default {
     return {
       loading: true,
       searching: false,
-      requestId: 0,
       modalOpened: false,
       url: '',
       data: {},
@@ -99,10 +100,11 @@ export default {
     v-if="kind"
     @keydown.esc="close">
     <button
+      v-if="label"
       class="btn btn-sm mx-n2 d-flex align-items-center"
       @click.prevent="open">
       <CircleDot stroke-width="1.5" class="me-1" />
-      {{ $t(`picker.kind.${kind}.button`) }}
+      {{ label }}
     </button>
     <div  class="modal"
           tabindex="-1"
@@ -112,7 +114,7 @@ export default {
         <div class="modal-content">
           <div class="modal-header">
             <div class="col-auto d-none d-lg-block ">
-              <h1 class="h4 modal-title">{{ $t(`picker.kind.${kind}.modal.title`) }}</h1>
+              <h1 class="h4 modal-title">{{ title }}</h1>
             </div>
             <button
               type="button"

@@ -144,10 +144,6 @@ en:
           button: Choose an exhibition
           modal:
             title: Ehibitions
-        files:
-          button: Choose a file in the library
-          modal:
-            title: File library
         jobs:
           button: Choose a job
           modal:
@@ -160,18 +156,10 @@ en:
           button: Choose an organization
           modal:
             title: Organizations
-        pages:
-          button: Choose a page
-          modal:
-            title: Pages
         papers:
           button: Choose a paper
           modal:
             title: Papers
-        people:
-          button: Choose a person
-          modal:
-            title: People
         posts:
           button: Choose a post
           modal:

@@ -6,5 +6,7 @@ vue_model = "#{model}.#{property}"
   :model-value="<%= vue_model %>"
   @update:model-value="<%= vue_model %> = $event"
   picker-endpoint="<%= picker_admin_communication_website_pages_path(website_id: website_id, format: :json) %>"
-  object-endpoint="<%= admin_communication_website_pages_path(website_id: website_id) %>">
+  object-endpoint="<%= admin_communication_website_pages_path(website_id: website_id) %>"
+  label="<%= t('admin.communication.blocks.components.page.button') %>"
+  title="<%= Communication::Website::Page.model_name.human(count: 2) %>">
 </page-selector>
