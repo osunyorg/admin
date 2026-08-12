@@ -135,47 +135,6 @@ en:
         search:
           placeholder: Search
         sorts: Sort
-      kind:
-        events:
-          button: Choose an event
-          modal:
-            title: Events
-        exhibitions:
-          button: Choose an exhibition
-          modal:
-            title: Ehibitions
-        jobs:
-          button: Choose a job
-          modal:
-            title: Jobs
-        medias:
-          button: Choose a photo from the library
-          modal:
-            title: Photos
-        organizations:
-          button: Choose an organization
-          modal:
-            title: Organizations
-        papers:
-          button: Choose a paper
-          modal:
-            title: Papers
-        posts:
-          button: Choose a post
-          modal:
-            title: Posts
-        programs:
-          button: Choose a program
-          modal:
-            title: Programs
-        projects:
-          button: Choose a project
-          modal:
-            title: Projects
-        volumes:
-          button: Choose a volume
-          modal:
-            title: Volumes
     timeSlots:
       add: Add a time slot
       datetime:
