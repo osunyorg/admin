@@ -88,6 +88,7 @@ class VariantService
 
   # Is there a target size set (or maybe 2!) different from blob size?
   def should_resize?
+    blob.variable? &&
     variant_dimensions != blob_size
   end
 
