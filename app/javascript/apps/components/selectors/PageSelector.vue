@@ -1,30 +1,12 @@
 <script>
+import logicMixin from './_mixin.js';
 import SelectedPage from '../selected-objects/SelectedPage.vue';
 import Picker from '../../picker/Picker.vue';
 
 export default {
   name: 'PageSelector',
+  mixins: [logicMixin],
   components: { SelectedPage, Picker },
-  props: {
-    // Le modèle est l'identifiant
-    // Ex: 7da86f39-08cc-490c-bef2-79323b397cf1
-    modelValue: { type: String, default: '' },
-    pickerEndpoint: { type: String, required: true },
-    objectEndpoint: { type: String, required: true },
-    label: { type: String, required: true },
-    title: { type: String, required: true },
-  },
-  emits: ['update:modelValue'],
-  computed: {
-    hasValue() {
-      return this.modelValue !== '';
-    },
-  },
-  methods: {
-    select(person) {
-      this.$emit('update:modelValue', person.id);
-    },
-  },
 };
 </script>
 
