@@ -16,15 +16,16 @@ export default {
     v-else
     class="card card--osuny card--horizontal">
     <div class="osuny__thumbnail osuny__thumbnail--small osuny__thumbnail--cropped">
-      <picture v-if="resource?.featured_image">
-        <img  :src="resource?.featured_image.thumb"
-              loading="lazy"
-              decoding="async"
-              width="140"
-              height="140"
-              class="img-fluid">
-      </picture>
-      <span v-else class="osuny__thumbnail__initials">
+      <img
+        v-if="resource?.featured_image"
+        :src="resource?.featured_image.thumb"
+        loading="lazy"
+        decoding="async"
+        width="70"
+        height="70" />
+      <span
+        v-else
+        class="osuny__thumbnail__initials">
         {{ resource?.initials }}
       </span>
     </div>

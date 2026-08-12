@@ -3,7 +3,7 @@ import logicMixin from './_mixin.js';
 import Placeholder from './Placeholder.vue';
 
 export default {
-  name: 'SelectedOrganization',
+  name: 'SelectedPaper',
   mixins: [logicMixin],
   components: { Placeholder },
 };
@@ -15,22 +15,19 @@ export default {
   <div
     v-else
     class="card card--osuny card--horizontal">
-    <div class="osuny__thumbnail osuny__thumbnail--small osuny__thumbnail--uncropped">
-      <img
-        v-if="resource?.logo"
-        :src="resource?.logo"
-        loading="lazy"
-        decoding="async"
-        width="70"
-        height="70" />
-      <span
-        v-else
-        class="osuny__thumbnail__initials">
+    <div class="osuny__thumbnail osuny__thumbnail--small osuny__thumbnail--cropped">
+      <span class="osuny__thumbnail__initials">
         {{ resource?.initials }}
       </span>
     </div>
     <div class="card-body">
-      {{ resource?.name }}
+      <span
+        class="osuny__published"
+        :class="{
+          'osuny__published--true': resource?.published,
+          'osuny__published--false': !resource?.published
+        }"></span>
+      {{ resource?.title }}
     </div>
   </div>
 </template>

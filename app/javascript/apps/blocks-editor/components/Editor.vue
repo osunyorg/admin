@@ -15,8 +15,13 @@ import PersonSelector         from '../../components/selectors/PersonSelector.vu
 import ProgramSelector        from '../../components/selectors/ProgramSelector.vue';
 // Selected objects
 import SelectedFile           from '../../components/selected-objects/SelectedFile.vue';
+import SelectedMedia          from '../../components/selected-objects/SelectedMedia.vue';
 import SelectedOrganization   from '../../components/selected-objects/SelectedOrganization.vue';
 import SelectedPage           from '../../components/selected-objects/SelectedPage.vue';
+import SelectedPaper          from '../../components/selected-objects/SelectedPaper.vue';
+import SelectedPerson         from '../../components/selected-objects/SelectedPerson.vue';
+import SelectedProgram        from '../../components/selected-objects/SelectedProgram.vue';
+import SelectedVolume         from '../../components/selected-objects/SelectedVolume.vue';
 
 // Renders the block-edit form fetched from the server, mounts a fresh inner
 // Vue app on it for reactive v-model bindings, and unmounts on close.
@@ -156,19 +161,27 @@ export default {
       });
 
       this.innerApp.use(i18n);
-      this.innerApp.component('CodeInput', CodeInput);
       this.innerApp.component('draggable', VueDraggableNext);
-      this.innerApp.component('FileSelector', FileSelector);
+      this.innerApp.component('Picker', Picker);
+      // Inputs
+      this.innerApp.component('CodeInput', CodeInput);
       this.innerApp.component('MultiImageInput', MultiImageInput);
+      this.innerApp.component('RichTextInput', RichTextInput);
+      this.innerApp.component('UploadInput', UploadInput);
+      // Selectors
+      this.innerApp.component('FileSelector', FileSelector);
       this.innerApp.component('PageSelector', PageSelector);
       this.innerApp.component('PersonSelector', PersonSelector);
       this.innerApp.component('ProgramSelector', ProgramSelector);
-      this.innerApp.component('Picker', Picker);
-      this.innerApp.component('RichTextInput', RichTextInput);
+      // Selected objects
       this.innerApp.component('SelectedFile', SelectedFile);
+      this.innerApp.component('SelectedMedia', SelectedMedia);
       this.innerApp.component('SelectedOrganization', SelectedOrganization);
       this.innerApp.component('SelectedPage', SelectedPage);
-      this.innerApp.component('UploadInput', UploadInput);
+      this.innerApp.component('SelectedPaper', SelectedPaper);
+      this.innerApp.component('SelectedPerson', SelectedPerson);
+      this.innerApp.component('SelectedProgram', SelectedProgram);
+      this.innerApp.component('SelectedVolume', SelectedVolume);
 
       this.innerApp.mount(root);
     },

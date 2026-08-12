@@ -3,5 +3,7 @@
 <div
   id="picker-test-app"
   data-kind="papers"
-  data-endpoint="<%= picker_admin_research_journal_papers_path(format: :json) %>">
+  data-endpoint="<%= picker_admin_research_journal_papers_path(format: :json) %>"
+  data-label="Choisir un papier"
+  title="<%= Research::Journal::Paper.model_name.human(count: 2)%>">
 </div>
