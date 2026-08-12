@@ -16,7 +16,7 @@ export default {
     },
     methods: {
         select(object) {
-        this.$emit('update:modelValue', object.id);
-        },
+            this.$emit('update:modelValue', object.id);
+        }
     }
 };
