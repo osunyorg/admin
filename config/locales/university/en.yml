@@ -8,7 +8,7 @@ en:
         country: Country
         default_github_access_token: Default Github access token
         default_language: Default language
-        has_sso: Has SSO?
+        has_sso: Single sign-on
         identifier: Identifier
         invoice_date: Contribution date
         is_really_a_university: Is really a university

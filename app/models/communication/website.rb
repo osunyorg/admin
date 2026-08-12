@@ -24,9 +24,9 @@
 #  git_branch                   :string
 #  git_endpoint                 :string
 #  git_files_analysed_at        :datetime
-#  git_provider                 :integer          default("github")
+#  git_provider                 :integer          default(0)
 #  highlighted_in_showcase      :boolean          default(FALSE)
-#  hosting                      :integer          default("deuxfleurs"), not null
+#  hosting                      :integer          default(1), not null
 #  in_production                :boolean          default(FALSE)
 #  in_production_at             :datetime
 #  in_showcase                  :boolean          default(TRUE)
@@ -64,15 +64,17 @@ class Communication::Website < ApplicationRecord
   include Favoritable
   include Filterable
   include GeneratesGitFiles
+  include HasAbouts
+  include HasDependencies
+  include HasUniversity
   include Localizable
   include LocalizableOrderByNameScope
   include Searchable
-  include WithAbouts
   include WithConfigs
   include WithConnectedObjects
   include WithContentArchive
-  include WithDependencies
   include WithDeuxfleurs
+  include WithDomCount
   include WithFeatureAgenda
   include WithFeatureAlerts
   include WithFeatureAlumni
@@ -101,7 +103,6 @@ class Communication::Website < ApplicationRecord
   include WithStyle
   include WithTheme
   include WithTimeZone
-  include WithUniversity
 
   enum :git_provider, {
     github: 0,

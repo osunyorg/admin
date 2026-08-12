@@ -1,7 +1,7 @@
 <script>
 import Changes from '../components/Changes.vue';
 import Duration from './components/Duration.vue';
-import { Plus, X } from 'lucide-vue-next';
+import { Plus, X } from '@lucide/vue';
 
 export default {
     components: {

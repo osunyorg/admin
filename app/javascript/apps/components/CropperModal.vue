@@ -1,5 +1,5 @@
 <script>
-import { Cropper } from 'vue-advanced-cropper';
+import { Cropper } from 'vue-advanced-cropper';
 
 export default {
     components: {

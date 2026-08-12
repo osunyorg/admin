@@ -26,4 +26,15 @@ Bugsnag.configure do |config|
     next unless user_agent.include?('ChatGPT-User')
     false
   end)
+
+  config.add_on_error(proc do |event|
+    next unless event.metadata.key?(:active_job)
+    ignored_error_classes = [
+      "GoodJob::ActiveJobExtensions::Concurrency::ConcurrencyExceededError",
+      "Communication::Website::LockError"
+    ]
+    error_class = event.exceptions.first[:errorClass]
+    next unless ignored_error_classes.include?(error_class)
+    false
+  end)
 end

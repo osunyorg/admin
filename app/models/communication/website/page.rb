@@ -43,16 +43,16 @@ class Communication::Website::Page < ApplicationRecord
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include HasUniversity
+  include HasListBlocks
   include Lifecyclable
   include Localizable
+  include MenuItemTargetable
   include Sanitizable
   include Searchable
   include WithAutomaticMenus
-  include WithMenuItemTarget
   include WithOpenApi
-  include HasListBlocks
   include WithSpecialPage
-  include WithUniversity
   include Orderable # Must be loaded after WithSpecialPage to use the correct last_ordered_element method
 
   belongs_to :parent,

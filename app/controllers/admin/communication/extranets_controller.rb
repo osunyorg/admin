@@ -23,6 +23,13 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
   def edit
     breadcrumb
     add_breadcrumb t('admin.subnav.settings')
+    @feature_nav = 'navigation/admin/communication/extranet/settings'
+  end
+
+  def sso
+    breadcrumb
+    add_breadcrumb t('admin.communication.extranet.sso.label')
+    @feature_nav = 'navigation/admin/communication/extranet/settings'
   end
 
   def create
@@ -101,8 +108,11 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
       :favicon_delete,
       :home_sentence,
       :id,
-      :invitation_message_subject,
-      :invitation_message_text,
+      :invitation_message_automatic_subject,
+      :invitation_message_automatic_text,
+      :invitation_message_manual_subject,
+      :invitation_message_manual_text,
+      :invitation_message_manual_signature,
       :language_id,
       :logo,
       :logo_delete,

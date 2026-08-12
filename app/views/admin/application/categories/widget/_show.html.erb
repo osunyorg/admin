@@ -1,20 +1,11 @@
 <%
-categories_class = about.categories.klass
-categories_in_university = categories_class.where(university: current_university)
-taxonomies = categories_in_university.taxonomies.ordered
-free_categories = categories_in_university.free
-free_categories_in_use = about.categories.merge(free_categories)
+optimizer = Osuny::Category::Optimizer.new(about)
 columns ||= 1
 classes = "col-lg-#{12/columns}"
 # TODO manage child free categories
 %>
 <div class="row">
-<% 
-# First, taxonomies
-taxonomies.each do |taxonomy|
-  taxons_in_use = about.categories.merge(taxonomy.descendants_and_self)
-  next if taxons_in_use.none?
-  %>
+<% optimizer.groups_by_taxonomy.each do |taxonomy, taxons_in_use| %>
   <div class="<%= classes %> mb-4">
     <%= osuny_label taxonomy.to_s_in(current_language) %>
     <ul class="list-unstyled">
@@ -24,13 +15,11 @@ taxonomies.each do |taxonomy|
     </ul>
   </div>
 <% end %>
-<% 
-# Then, free categories
-if free_categories_in_use.any? %>
+<% if optimizer.free_categories.any? %>
   <div class="<%= classes %> mb-4">
     <%= osuny_label t('category.title') %>
     <ul class="list-unstyled">
-      <% free_categories_in_use.each do |category| %>
+      <% optimizer.free_categories.each do |category| %>
         <li><%= osuny_link_localized_if can?(:read, category), category, [:admin, category] %></li>
       <% end %>
     </ul>

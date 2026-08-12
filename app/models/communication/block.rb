@@ -11,7 +11,7 @@
 #  migration_identifier     :string
 #  position                 :integer          not null
 #  published                :boolean          default(TRUE)
-#  template_kind            :integer          default(NULL), not null, indexed => [university_id]
+#  template_kind            :integer          default(0), not null, indexed => [university_id]
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -41,17 +41,18 @@ class Communication::Block < ApplicationRecord
     utilities: [:form, :files, :definitions, :contact, :links, :license, :embed]
   }
 
+  include Accessible
   include AsIndirectObject
   include Filterable
+  include HasUniversity
   include Orderable
-  include WithAccessibility
+  include Sanitizable
+  include WithCommunicationFiles
   include WithHeadingRanks
   include WithHtmlClass
   include WithMediaLibrary
   include WithTemplate
   include WithOpenApi # Must be included after WithTemplate to load template_kinds
-  include WithUniversity
-  include Sanitizable
 
   belongs_to  :about, polymorphic: true
   belongs_to  :communication_website,
@@ -70,6 +71,8 @@ class Communication::Block < ApplicationRecord
   scope :for_template_kind, -> (template_kind, language = nil) { where(template_kind: template_kind) }
   scope :for_about_type, -> (about_type, language = nil) { where(about_type: about_type) }
   scope :for_university, -> (university, language = nil) { where(university: university) }
+
+  delegate :dom_count, to: :template
 
   # When we set data from json, we pass it to the template.
   # The json we save is first sanitized and prepared by the template.

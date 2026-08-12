@@ -12,6 +12,21 @@ module University::WithCommunication
               dependent: :destroy
     alias_method :extranets, :communication_extranets
 
+    has_many  :communication_files,
+              class_name: 'Communication::File',
+              dependent: :destroy
+    alias_method :files, :communication_files
+
+    has_many  :communication_file_localizations,
+              class_name: 'Communication::File::Localization',
+              dependent: :destroy
+    alias_method :file_localizations, :communication_file_localizations
+
+    has_many  :communication_file_categories,
+              class_name: 'Communication::File::Category',
+              dependent: :destroy
+    alias_method :file_categories, :communication_file_categories
+
     has_many  :communication_medias,
               class_name: 'Communication::Media',
               dependent: :destroy

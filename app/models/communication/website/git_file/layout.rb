@@ -20,7 +20,7 @@
 #  fk_rails_af843490b0  (university_id => universities.id)
 #
 class Communication::Website::GitFile::Layout < ApplicationRecord
-  include WithUniversity
+  include HasUniversity
 
   belongs_to  :website, 
               class_name: 'Communication::Website',

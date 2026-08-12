@@ -15,4 +15,13 @@ class Communication::Block::Template::Testimonial < Communication::Block::Templa
   def top_screen_reader_only
     true
   end
+
+  def children
+    elements
+  end
+
+  def dom_count
+    5 +
+    children.sum(&:dom_count)
+  end
 end

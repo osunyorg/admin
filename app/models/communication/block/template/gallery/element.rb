@@ -25,4 +25,11 @@ class Communication::Block::Template::Gallery::Element < Communication::Block::T
   def empty?
     blob.blank?
   end
+
+  def dom_count
+    image_component.dom_count +
+    alt_component.dom_count +
+    credit_component.dom_count +
+    text_component.dom_count
+  end
 end

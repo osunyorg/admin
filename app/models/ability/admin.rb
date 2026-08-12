@@ -81,6 +81,8 @@ class Ability::Admin < Ability
     can :manage, Communication::Media, university_id: @user.university_id
     can :manage, Communication::Media::Category, university_id: @user.university_id
     can :manage, Communication::Media::Collection, university_id: @user.university_id
+    can :manage, Communication::File, university_id: @user.university_id
+    can :manage, Communication::File::Category, university_id: @user.university_id
     can :read, Communication::Website::GitFile, university_id: @user.university_id
   end
 

@@ -1,5 +1,5 @@
 <script>
-import { Image, ArrowRight, ArrowLeft } from 'lucide-vue-next';
+import { Image, ArrowRight, ArrowLeft } from '@lucide/vue';
 import Taxonomies from './medias/Taxonomies.vue';
 
 export default {

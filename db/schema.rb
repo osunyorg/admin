@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_02_133651) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_06_085855) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -328,13 +328,36 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_02_133651) do
     t.index ["university_id"], name: "index_communication_extranet_documents_on_university_id"
   end
 
+  create_table "communication_extranet_invitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.uuid "extranet_id"
+    t.string "from_email"
+    t.string "from_name"
+    t.text "message"
+    t.uuid "person_id"
+    t.string "to_email"
+    t.string "to_name"
+    t.string "token"
+    t.uuid "university_id"
+    t.datetime "updated_at", null: false
+    t.uuid "user_id"
+    t.index ["extranet_id"], name: "index_communication_extranet_invitations_on_extranet_id"
+    t.index ["person_id"], name: "index_communication_extranet_invitations_on_person_id"
+    t.index ["token"], name: "index_communication_extranet_invitations_on_token", unique: true
+    t.index ["university_id"], name: "index_communication_extranet_invitations_on_university_id"
+    t.index ["user_id"], name: "index_communication_extranet_invitations_on_user_id"
+  end
+
   create_table "communication_extranet_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "about_id"
     t.text "cookies_policy"
     t.datetime "created_at", null: false
     t.text "home_sentence"
-    t.string "invitation_message_subject", default: ""
-    t.text "invitation_message_text", default: ""
+    t.string "invitation_message_automatic_subject", default: ""
+    t.text "invitation_message_automatic_text", default: ""
+    t.text "invitation_message_manual_signature"
+    t.string "invitation_message_manual_subject"
+    t.text "invitation_message_manual_text"
     t.uuid "language_id"
     t.string "name"
     t.text "privacy_policy"
@@ -437,6 +460,86 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_02_133651) do
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["default_language_id"], name: "index_communication_extranets_on_default_language_id"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
+  end
+
+  create_table "communication_file_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "bodyclass"
+    t.datetime "created_at", null: false
+    t.boolean "is_taxonomy", default: false
+    t.uuid "parent_id"
+    t.integer "position", default: 0
+    t.integer "position_in_tree"
+    t.uuid "university_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_communication_file_categories_on_parent_id"
+    t.index ["university_id"], name: "index_communication_file_categories_on_university_id"
+  end
+
+  create_table "communication_file_categories_files", id: false, force: :cascade do |t|
+    t.uuid "category_id", null: false
+    t.uuid "file_id", null: false
+    t.index ["category_id"], name: "index_communication_file_categories_files_on_category_id"
+    t.index ["file_id", "category_id"], name: "file_category"
+    t.index ["file_id"], name: "index_communication_file_categories_files_on_file_id"
+  end
+
+  create_table "communication_file_category_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "about_id"
+    t.datetime "created_at", null: false
+    t.text "featured_image_alt"
+    t.text "featured_image_credit"
+    t.uuid "language_id"
+    t.text "meta_description"
+    t.string "name"
+    t.string "slug"
+    t.text "summary"
+    t.uuid "university_id"
+    t.datetime "updated_at", null: false
+    t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_f3d63b2051", unique: true
+    t.index ["about_id"], name: "index_communication_file_category_localizations_on_about_id"
+    t.index ["language_id"], name: "index_communication_file_category_localizations_on_language_id"
+    t.index ["university_id"], name: "idx_on_university_id_7bebff08b4"
+  end
+
+  create_table "communication_file_contexts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "about_id"
+    t.string "about_type"
+    t.uuid "communication_file_localization_id", null: false
+    t.datetime "created_at", null: false
+    t.uuid "university_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_type", "about_id"], name: "index_communication_file_contexts_on_about"
+    t.index ["communication_file_localization_id"], name: "idx_on_communication_file_localization_id_a9a8fdc48e"
+    t.index ["university_id"], name: "index_communication_file_contexts_on_university_id"
+  end
+
+  create_table "communication_file_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "about_id", null: false
+    t.datetime "created_at", null: false
+    t.text "internal_description"
+    t.uuid "language_id", null: false
+    t.string "name"
+    t.uuid "original_blob_id", null: false
+    t.bigint "original_byte_size"
+    t.string "original_checksum"
+    t.string "original_content_type"
+    t.string "original_filename"
+    t.string "slug"
+    t.uuid "university_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_communication_file_localizations_on_about_id"
+    t.index ["language_id"], name: "index_communication_file_localizations_on_language_id"
+    t.index ["original_blob_id"], name: "index_communication_file_localizations_on_original_blob_id"
+    t.index ["university_id"], name: "index_communication_file_localizations_on_university_id"
+  end
+
+  create_table "communication_files", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.uuid "created_by_id"
+    t.uuid "university_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_communication_files_on_created_by_id"
+    t.index ["university_id"], name: "index_communication_files_on_university_id"
   end
 
   create_table "communication_media_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -2609,6 +2712,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_02_133651) do
   add_foreign_key "communication_extranet_documents", "communication_extranet_document_kinds", column: "kind_id"
   add_foreign_key "communication_extranet_documents", "communication_extranets", column: "extranet_id"
   add_foreign_key "communication_extranet_documents", "universities"
+  add_foreign_key "communication_extranet_invitations", "communication_extranets", column: "extranet_id"
+  add_foreign_key "communication_extranet_invitations", "universities"
+  add_foreign_key "communication_extranet_invitations", "university_people", column: "person_id"
+  add_foreign_key "communication_extranet_invitations", "users"
   add_foreign_key "communication_extranet_localizations", "communication_extranets", column: "about_id"
   add_foreign_key "communication_extranet_localizations", "languages"
   add_foreign_key "communication_extranet_localizations", "universities"
@@ -2628,6 +2735,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_02_133651) do
   add_foreign_key "communication_extranet_posts", "university_people", column: "author_id"
   add_foreign_key "communication_extranets", "languages", column: "default_language_id"
   add_foreign_key "communication_extranets", "universities"
+  add_foreign_key "communication_file_categories", "communication_file_categories", column: "parent_id"
+  add_foreign_key "communication_file_categories", "universities"
+  add_foreign_key "communication_file_categories_files", "communication_file_categories", column: "category_id"
+  add_foreign_key "communication_file_categories_files", "communication_files", column: "file_id"
+  add_foreign_key "communication_file_category_localizations", "communication_file_categories", column: "about_id"
+  add_foreign_key "communication_file_category_localizations", "languages"
+  add_foreign_key "communication_file_category_localizations", "universities"
+  add_foreign_key "communication_file_contexts", "communication_file_localizations"
+  add_foreign_key "communication_file_contexts", "universities"
+  add_foreign_key "communication_file_localizations", "active_storage_blobs", column: "original_blob_id"
+  add_foreign_key "communication_file_localizations", "communication_files", column: "about_id"
+  add_foreign_key "communication_file_localizations", "languages"
+  add_foreign_key "communication_file_localizations", "universities"
+  add_foreign_key "communication_files", "universities"
+  add_foreign_key "communication_files", "users", column: "created_by_id"
   add_foreign_key "communication_media_categories", "communication_media_categories", column: "parent_id"
   add_foreign_key "communication_media_categories", "universities"
   add_foreign_key "communication_media_category_localizations", "communication_media_categories", column: "about_id"

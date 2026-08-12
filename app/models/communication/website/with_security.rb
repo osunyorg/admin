@@ -14,10 +14,10 @@ module Communication::Website::WithSecurity
 
   def allowed_domains_default
     [
-      ENV['KEYCDN_HOST'],           # KeyCDN for assets resize
-      '*.osuny.org',                # osuny for assets resize
-      'osuny.s3.fr-par.scw.cloud',  # Scaleway for direct assets
-      'tile.openstreetmap.org'      # Open Street Map default tiles
+      ENV['KEYCDN_HOST'],                   # KeyCDN for assets resize
+      "*#{University.environment_domain}",  # osuny for assets resize
+      ENV["SCALEWAY_OS_HOST"],              # Scaleway for direct assets
+      'tile.openstreetmap.org'              # Open Street Map default tiles
     ].compact
   end
 

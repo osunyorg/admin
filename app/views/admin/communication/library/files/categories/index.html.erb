@@ -1,0 +1,9 @@
+<% content_for :title, Communication::File::Category.model_name.human(count: 2) %>
+
+<% content_for :title_right do %>
+  <%= create_link Communication::File::Category %>
+<% end %>
+
+<%= render 'admin/application/categories/list', 
+            root_categories: @root_categories, 
+            categories_class: @categories_class %>

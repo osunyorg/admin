@@ -25,7 +25,7 @@
 #  fk_rails_e118e39a97  (university_id => universities.id)
 #
 class Communication::Media::Context < ApplicationRecord
-  include WithUniversity
+  include HasUniversity
 
   belongs_to  :communication_media,
               class_name: 'Communication::Media'

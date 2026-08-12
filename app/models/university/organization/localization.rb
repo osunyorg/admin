@@ -46,16 +46,16 @@ class University::Organization::Localization < ApplicationRecord
   include AsLocalization
   include Backlinkable
   include Contentful
+  include HasBlobs
+  include HasFeaturedImage
   include HasGitFiles
+  include HasUniversity
   include Initials
   include Permalinkable
   include Publishable
   include Sanitizable
   include Shareable
-  include WithBlobs
-  include WithFeaturedImage
   include WithOpenApi
-  include WithUniversity
 
   has_summernote :summary
   has_summernote :text

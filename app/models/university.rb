@@ -23,7 +23,7 @@
 #  sso_cert                    :text
 #  sso_mapping                 :jsonb
 #  sso_name_identifier_format  :string
-#  sso_provider                :integer          default("saml")
+#  sso_provider                :integer          default(0)
 #  sso_target_url              :string
 #  zipcode                     :string
 #  created_at                  :datetime         not null
@@ -47,7 +47,7 @@ class University < ApplicationRecord
   include SsoEnabled
   include WithAdministration
   include WithCommunication
-  include WithCountry
+  include HasCountry
   include WithEducation
   include WithGithub
   include WithIdentifier

@@ -35,19 +35,19 @@ class Education::Program < ApplicationRecord
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include HasUniversity
   include Lifecyclable
   include Localizable
   include LocalizableOrderByNameScope
+  include MenuItemTargetable
   include Sanitizable
   include Searchable
   include WebsitesLinkable
   include WithAlumni
   include WithDiploma
   include WithLocations
-  include WithMenuItemTarget
   include WithSchools
   include WithTeam
-  include WithUniversity
   include WithWebsitesCategories
 
   belongs_to :parent,

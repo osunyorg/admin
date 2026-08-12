@@ -46,13 +46,13 @@ class University::Person::Localization < ApplicationRecord
   include AsLocalization
   include Backlinkable
   include Contentful
+  include HasBlobs
+  include HasFeaturedImage # TODO Arnaud: Future feature of person's cover image
   include HasGitFiles
+  include HasUniversity
   include Permalinkable
   include Publishable
   include Sanitizable
-  include WithBlobs
-  include WithFeaturedImage # TODO Arnaud: Future feature of person's cover image
-  include WithUniversity
 
   delegate :featured_image, to: :person
 
