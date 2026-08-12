@@ -10,12 +10,12 @@ export default {
     },
     emits: ['update:modelValue'],
     computed: {
-        hasValue() {
-        return this.modelValue !== '';
-        },
+        hasValue () {
+            return this.modelValue !== '';
+        }
     },
     methods: {
-        select(object) {
+        select (object) {
             this.$emit('update:modelValue', object.id);
         }
     }
