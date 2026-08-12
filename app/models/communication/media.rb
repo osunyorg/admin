@@ -3,7 +3,7 @@
 # Table name: communication_medias
 #
 #  id                                :uuid             not null, primary key
-#  origin                            :integer          default("upload"), not null
+#  origin                            :integer          default(1), not null
 #  original_byte_size                :bigint
 #  original_checksum                 :string
 #  original_content_type             :string

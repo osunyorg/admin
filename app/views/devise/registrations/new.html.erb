@@ -6,6 +6,8 @@
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
 
+  <%= hidden_field_tag :invitation_token, params[:invitation_token] if params[:invitation_token].present? %>
+
   <div class="row">
     <div class="col-lg-6">
       <%= f.invisible_captcha :osuny_verification %>

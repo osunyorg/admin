@@ -79,6 +79,7 @@ class Git::Providers::Github < Git::Providers::Abstract
 
   def push(commit_message)
     return if !valid? || batch.empty?
+    check_batch_integrity!
     commit = create_commit_from_batch(batch, commit_message)
     client.update_branch repository, default_branch, commit[:sha]
     # The repo changed, invalidate the tree
@@ -126,6 +127,30 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   protected
+
+  def check_batch_integrity!
+    # Delete files first
+    batch.sort_by! { |item| item.has_key?(:sha) && item[:sha].nil? ? 0 : 1 }
+    # Use files states to fix actions
+    batch.each do |item|
+      check_batch_item_integrity!(item)
+    end
+    # Reject
+    batch.reject! { |item| item[:path].nil? }
+  end
+
+  def check_batch_item_integrity!(item)
+    is_deleting_action = item.has_key?(:sha) && item[:sha].nil?
+    path = item[:path]
+    current_state = files_states[path]
+    target_state = is_deleting_action ? 'DELETED' : 'EXISTS'
+
+    if is_deleting_action && current_state == 'DELETED'
+      # No need to delete an already deleted file => nullify path to reject later
+      item[:path] = nil
+    end
+    files_states[path] = target_state
+  end
 
   def client
     @client ||= Octokit::Client.new access_token: access_token

@@ -36,7 +36,7 @@ module Importers
       @connections.uniq.each do |connection|
         extranet = @university.communication_extranets.find(connection[:communication_extranet_id])
         person = @university.people.find(connection[:person_id])
-        ExtranetMailer.invitation_message(extranet, person).deliver_later
+        ExtranetMailer.invitation_message_automatic(extranet, person).deliver_later
         person.update_column(:invitation_sent_at, Time.current)
       end
     end
