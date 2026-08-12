@@ -104,12 +104,18 @@ export default {
       <div v-if="hint" class="form-text" v-html="hint"></div>
     </template>
     <template v-else>
-      <img v-if="kind === 'image'" :src="getImageUrl(modelValue)" class="img-fluid mb-3" />
+      <img
+        v-if="kind === 'image'"
+        :src="getImageUrl(modelValue)"
+        class="mb-3"
+        style="max-width: 200px"/>
       <p v-else><b>{{ modelValue.filename }}</b></p>
-      <a class="btn btn-sm text-danger ps-0" @click="clear">
-        <i class="fas fa-times"></i>
-        {{ remove }}
-      </a>
+      <p>
+        <a class="btn btn-sm text-danger ps-0" @click="clear">
+          <i class="fas fa-times"></i>
+          {{ remove }}
+        </a>
+      </p>
     </template>
   </div>
 </template>
