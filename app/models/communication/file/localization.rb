@@ -75,7 +75,7 @@ class Communication::File::Localization < ApplicationRecord
   end
 
   def references
-    [contexts.map(&:about)]
+    contexts.map(&:about)
   end
 
   def to_s
