@@ -1,10 +1,10 @@
 <script>
-import loadedObjectMixin from './loadedObjectMixin';
+import logicMixin from './_mixin.js';
 import Placeholder from './Placeholder.vue';
 
 export default {
-  name: 'SelectedPerson',
-  mixins: [loadedObjectMixin],
+  name: 'SelectedFile',
+  mixins: [logicMixin],
   components: { Placeholder },
 };
 </script>
@@ -16,17 +16,8 @@ export default {
     v-else
     class="card card--osuny card--horizontal">
     <div class="osuny__thumbnail osuny__thumbnail--small osuny__thumbnail--cropped">
-      <img
-        v-if="resource?.photo"
-        :src="resource.photo.thumb"
-        loading="lazy"
-        decoding="async"
-        width="70"
-        height="70" />
-      <span
-        v-else
-        class="osuny__thumbnail__initials">
-        {{ resource?.initials }}
+      <span class="osuny__thumbnail__icon">
+        <i :class="resource?.icon"></i>
       </span>
     </div>
     <div class="card-body">

@@ -1,10 +1,10 @@
 <script>
-import loadedObjectMixin from './loadedObjectMixin.js';
+import logicMixin from './_mixin.js';
 import Placeholder from './Placeholder.vue';
 
 export default {
   name: 'SelectedOrganization',
-  mixins: [loadedObjectMixin],
+  mixins: [logicMixin],
   components: { Placeholder },
 };
 </script>

@@ -1,6 +1,6 @@
 <script>
-import UploadButton from './primitives/UploadButton.vue';
-import SelectedFile from './primitives/SelectedFile.vue';
+import UploadButton from '../inputs/primitives/UploadButton.vue';
+import SelectedFile from '../selected-objects/SelectedFile.vue';
 import Picker from '../../picker/Picker.vue';
 
 export default {

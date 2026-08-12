@@ -2,17 +2,21 @@
 import { createApp, provide, reactive } from 'vue';
 import { VueDraggableNext } from 'vue-draggable-next';
 import { getI18n } from '../../i18n';
-import RichTextInput from '../../components/inputs/RichTextInput.vue';
-import CodeInput from '../../components/inputs/CodeInput.vue';
-import UploadInput from '../../components/inputs/UploadInput.vue';
-import FileSelector from '../../components/inputs/FileSelector.vue';
-import PageSelector from '../../components/inputs/PageSelector.vue';
-import PersonSelector from '../../components/inputs/PersonSelector.vue';
-import MultiImageInput from '../../components/inputs/MultiImageInput.vue';
-import SelectedFile from '../../components/inputs/primitives/SelectedFile.vue';
-import SelectedOrganization from '../../components/inputs/primitives/SelectedOrganization.vue';
-import SelectedPage from '../../components/inputs/primitives/SelectedPage.vue';
 import Picker from '../../picker/Picker.vue';
+// Inputs
+import CodeInput              from '../../components/inputs/CodeInput.vue';
+import MultiImageInput        from '../../components/inputs/MultiImageInput.vue';
+import RichTextInput          from '../../components/inputs/RichTextInput.vue';
+import UploadInput            from '../../components/inputs/UploadInput.vue';
+// Selectors
+import FileSelector           from '../../components/selectors/FileSelector.vue';
+import PageSelector           from '../../components/selectors/PageSelector.vue';
+import PersonSelector         from '../../components/selectors/PersonSelector.vue';
+import ProgramSelector        from '../../components/selectors/ProgramSelector.vue';
+// Selected objects
+import SelectedFile           from '../../components/selected-objects/SelectedFile.vue';
+import SelectedOrganization   from '../../components/selected-objects/SelectedOrganization.vue';
+import SelectedPage           from '../../components/selected-objects/SelectedPage.vue';
 
 // Renders the block-edit form fetched from the server, mounts a fresh inner
 // Vue app on it for reactive v-model bindings, and unmounts on close.
@@ -158,6 +162,7 @@ export default {
       this.innerApp.component('MultiImageInput', MultiImageInput);
       this.innerApp.component('PageSelector', PageSelector);
       this.innerApp.component('PersonSelector', PersonSelector);
+      this.innerApp.component('ProgramSelector', ProgramSelector);
       this.innerApp.component('Picker', Picker);
       this.innerApp.component('RichTextInput', RichTextInput);
       this.innerApp.component('SelectedFile', SelectedFile);

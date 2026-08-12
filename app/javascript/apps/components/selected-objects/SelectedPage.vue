@@ -1,10 +1,10 @@
 <script>
-import loadedObjectMixin from './loadedObjectMixin';
+import logicMixin from './_mixin.js';
 import Placeholder from './Placeholder.vue';
 
 export default {
   name: 'SelectedPage',
-  mixins: [loadedObjectMixin],
+  mixins: [logicMixin],
   components: { Placeholder },
 };
 </script>

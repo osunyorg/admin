@@ -1,12 +1,12 @@
 <script>
-import SelectedPerson from './primitives/SelectedPerson.vue';
+import SelectedPage from '../selected-objects/SelectedPage.vue';
 import Picker from '../../picker/Picker.vue';
 
 export default {
-  name: 'PersonSelector',
-  components: { SelectedPerson, Picker },
+  name: 'PageSelector',
+  components: { SelectedPage, Picker },
   props: {
-    // Le modèle est l'identifiant de la personne
+    // Le modèle est l'identifiant
     // Ex: 7da86f39-08cc-490c-bef2-79323b397cf1
     modelValue: { type: String, default: '' },
     pickerEndpoint: { type: String, required: true },
@@ -24,24 +24,20 @@ export default {
     select(person) {
       this.$emit('update:modelValue', person.id);
     },
-    clear() {
-      this.$emit('update:modelValue', '');
-    },
   },
 };
 </script>
 
 <template>
-  <SelectedPerson
+  <SelectedPage
     v-if="hasValue"
     :id="modelValue"
-    :endpoint="objectEndpoint"
-    @remove="clear" />
+    :endpoint="objectEndpoint" />
   <Picker
     v-else
     :model-value="null"
     @update:model-value="select"
-    kind="people"
+    kind="pages"
     :label="label"
     :title="title"
     :endpoint="pickerEndpoint" />
