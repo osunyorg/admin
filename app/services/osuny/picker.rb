@@ -37,6 +37,10 @@ class Osuny::Picker
     }
   end
 
+  def current_sort
+    params.dig(:sort) || sort[:current]
+  end
+
   # Si on était sur la page 5, qu'on a reserré la recherche et qu'il n'y a plus de page 5, on revient sur la page 1
   def results
     @results ||= objects_paginated.any? ? objects_paginated : objects_on_first_page
@@ -141,9 +145,5 @@ class Osuny::Picker
       current: params.dig(:sort),
       values: []
     }
-  end
-
-  def current_sort
-    params.dig(:sort) || sort[:current]
   end
 end

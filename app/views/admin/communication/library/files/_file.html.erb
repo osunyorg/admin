@@ -1,4 +1,6 @@
 <%
+hide_date ||= false
+hide_size ||= false
 l10n = file.best_localization_for(current_language)
 %>
 <div class="<%= osuny_card_classes(horizontal: true) %>">
@@ -13,5 +15,9 @@ l10n = file.best_localization_for(current_language)
     <%= osuny_link_localized  file,
                               admin_communication_file_path(file),
                               classes: 'stretched-link' %>
+  </div>
+  <div class="card-footer small text-muted">
+    <%= l file.created_at, format: :date_with_explicit_month unless hide_date %>
+    <%= number_to_human_size l10n.original_byte_size unless hide_size %>
   </div>
 </div>

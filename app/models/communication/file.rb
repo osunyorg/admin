@@ -29,9 +29,13 @@ class Communication::File < ApplicationRecord
 
   has_many :contexts, through: :localizations
 
-  scope :for_search_term, -> (term, language = nil) {
+  scope :with_localizations, -> (language) {
     joins(:localizations)
     .where(communication_file_localizations: { language_id: language.id })
+  }
+
+  scope :for_search_term, -> (term, language = nil) {
+    with_localizations(language)
     .where("
       unaccent(communication_file_localizations.name) ILIKE unaccent(:term) OR
       unaccent(communication_file_localizations.internal_description) ILIKE unaccent(:term)
@@ -46,6 +50,14 @@ class Communication::File < ApplicationRecord
   }
   scope :autosort_by_date_asc, -> (language) {
     order(created_at: :asc)
+  }
+  scope :autosort_by_size_desc, -> (language) {
+    with_localizations(language)
+    .order(communication_file_localizations: { original_byte_size: :desc })
+  }
+  scope :autosort_by_size_asc, -> (language) {
+    with_localizations(language)
+    .order(communication_file_localizations: { original_byte_size: :asc })
   }
 
   # Attention, la création ne fait pas le travail jusqu'au bout,

@@ -770,6 +770,8 @@ en:
         alpha: Alphabetical
         date_desc: Most recent first
         date_asc: Oldest first
+        size_desc: Heaviest first
+        size_asc: Lightest first
     manage_authors: Manage authors
     number_of_posts: Number of posts
     summary:
