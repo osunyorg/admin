@@ -18,6 +18,10 @@ class Communication::Block::Template::Sound < Communication::Block::Template::Ba
     title_component.dom_count +
     transcription_component.dom_count
   end
+
+  def communication_files
+    [file_component.communication_file]
+  end
   
   protected
 

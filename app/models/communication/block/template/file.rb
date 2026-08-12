@@ -6,4 +6,9 @@ class Communication::Block::Template::File < Communication::Block::Template::Bas
   def communication_files
     @communication_files ||= elements.map(&:communication_file).compact
   end
+
+  def dom_count
+    5 +
+    elements.length * 10
+  end
 end

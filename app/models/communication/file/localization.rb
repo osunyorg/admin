@@ -40,9 +40,6 @@ class Communication::File::Localization < ApplicationRecord
   has_many    :contexts,
               foreign_key: :communication_file_localization_id,
               dependent: :destroy
-  has_many    :blobs,
-              through: :contexts,
-              source: :active_storage_blob
   alias :file :about
 
   before_create :guess_name_from_file
