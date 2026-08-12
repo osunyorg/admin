@@ -40,6 +40,7 @@ module Communication::Block::WithTemplate
       volumes: 3310,
       jobs: 3400,
       categories: 3500,
+      form: 4041,
       license: 4040,
       links: 4050
     }, prefix: :template
