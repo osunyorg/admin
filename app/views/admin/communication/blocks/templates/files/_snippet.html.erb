@@ -8,15 +8,17 @@ block.template.elements.each do |element|
   image_blob = element.image_component.blob
   %>
   <div class="row mb-4">
-    <div class="col-9">
+    <div class="<%= image_blob ? 'col-9' : 'col' %>">
       <p class="h3 float-start me-2">
         <i class="<%= l10n.icon %>"></i>
       </p>
       <p class="mb-0"><%= element.title %></p>
       <span class="small"><%= l10n.original_filename %></span>
     </div>
-    <div class="col-3">
-      <%= kamifusen_tag image_blob, width: 200, class: 'img-fluid' if image_blob %>
-    </div>
+    <% if image_blob %>
+      <div class="col-3">
+        <%= kamifusen_tag image_blob, width: 200, class: 'img-fluid' %>
+      </div>
+    <% end %>
   </div>
 <% end %>

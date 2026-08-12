@@ -22,7 +22,26 @@
 </div>
 
 <div v-for="(element, index) in data.elements" class="pb-5 mb-5">
-  <%= block_component_edit block, :file, template: @element %>
+  <div class="d-flex align-items-center mb-3">
+    <file-selector
+      class="flex-fill"
+      :model-value="element.file"
+      @update:model-value="element.file = $event; if ($event.communication_file_id) element.title = $event.name"
+      upload-url="<%= direct_upload_admin_communication_files_path %>"
+      picker-endpoint="<%= picker_admin_communication_files_path(format: :json) %>"
+      object-endpoint="<%= admin_communication_files_path %>"
+      label="<%= t('admin.communication.blocks.components.file.button') %>"
+      title="<%= Communication::File.model_name.human(count: 2) %>"
+      :size-limit="<%= Rails.application.config.default_file_max_size %>">
+    </file-selector>
+    <a
+      class="btn btn-sm text-danger ms-3"
+      v-if="element.file.communication_file_id"
+      @click="element.file = {}"
+      title="<%= t('delete') %>">
+      <i class="<%= Icon::DELETE %>"></i>
+    </a>
+  </div>
   <div class="row" v-if="element.file.communication_file_id">  
     <div class="col-md-8">
       <%= block_component_edit block, :title, template: @element %>

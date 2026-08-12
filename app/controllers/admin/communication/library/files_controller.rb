@@ -34,8 +34,8 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
   def direct_upload
     @blob = ActiveStorage::Blob.create_before_direct_upload!(**blob_args)
     @blob.update_column(:university_id, current_university&.id)
-    @localization = Communication::File::Localization.find_or_create_from_blob(@blob, current_language)
-    @file = @localization.file
+    @l10n = Communication::File::Localization.find_or_create_from_blob(@blob, current_language)
+    @file = @l10n.file
   end
 
   def edit

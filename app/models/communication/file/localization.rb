@@ -45,6 +45,8 @@ class Communication::File::Localization < ApplicationRecord
               source: :active_storage_blob
   alias :file :about
 
+  before_create :guess_name_from_file
+
   def self.find_or_create_from_blob(blob, language)
     localization = where(
       university_id: blob.university_id,
@@ -56,8 +58,6 @@ class Communication::File::Localization < ApplicationRecord
       localization.original_blob = blob
       # On connecte au fichier
       localization.about_id = file.id
-      # On prend le nom du fichier comme nom par défaut (c'est mieux que rien)
-      localization.name = blob.filename.to_s
     end
     localization
   end
@@ -80,5 +80,13 @@ class Communication::File::Localization < ApplicationRecord
 
   def to_s
     "#{name}"
+  end
+
+  protected
+
+  def guess_name_from_file
+    filename = original_blob.filename
+    filename_without_extension = File.basename(filename, File.extname(filename))
+    self.name = filename_without_extension.humanize
   end
 end

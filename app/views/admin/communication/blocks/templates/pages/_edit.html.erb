@@ -22,12 +22,15 @@ object_endpoint = admin_communication_website_pages_path(website_id: website_id)
   </picker>
 
   <a
-    class="<%= button_classes('mb-4') %>"
+    class="<%= button_classes %>"
     @click="$refs.pagesPicker.open()">
     <%= t('.selection.add') %>
   </a>
 
-  <draggable :list="data.elements" handle=".osuny__thumbnail" class="row g-2 pb-3">
+  <draggable
+    :list="data.elements"
+    handle=".osuny__thumbnail"
+    class="row g-2 mb-2">
     <div
       v-for="(element, index) in data.elements"
       class="d-flex align-items-center">
@@ -64,10 +67,12 @@ object_endpoint = admin_communication_website_pages_path(website_id: website_id)
       title="<%= Communication::Website::Page.model_name.human(count: 2) %>"
       class="flex-fill">
     </page-selector>
-    <a  class="btn btn-sm text-danger ms-3"
-        @click="data.page_id = ''"
-        title="<%= t('delete') %>">
-        <i class="<%= Icon::DELETE %>"></i>
+    <a
+      class="btn btn-sm text-danger ms-3"
+      v-if="data.page_id"
+      @click="data.page_id = ''"
+      title="<%= t('delete') %>">
+      <i class="<%= Icon::DELETE %>"></i>
     </a>
   </div>
 </div>

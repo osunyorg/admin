@@ -24,9 +24,6 @@ export default {
     select(person) {
       this.$emit('update:modelValue', person.id);
     },
-    clear() {
-      this.$emit('update:modelValue', '');
-    },
   },
 };
 </script>
@@ -35,8 +32,7 @@ export default {
   <SelectedPage
     v-if="hasValue"
     :id="modelValue"
-    :endpoint="objectEndpoint" 
-    @remove="clear" />
+    :endpoint="objectEndpoint" />
   <Picker
     v-else
     :model-value="null"

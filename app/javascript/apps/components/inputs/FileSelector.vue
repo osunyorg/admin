@@ -10,6 +10,7 @@ export default {
     modelValue: { type: Object, default: () => ({}) },
     uploadUrl: { type: String, required: true },
     pickerEndpoint: { type: String, required: true },
+    objectEndpoint: { type: String, required: true },
     sizeLimit: { type: [String, Number], default: null },
     label: { type: String, required: true },
     title: { type: String, required: true },
@@ -40,15 +41,15 @@ export default {
   <div style="min-height: 50px">
     <SelectedFile
       v-if="hasValue"
-      :filename="modelValue.filename"
-      @remove="clear" />
+      :id="modelValue.communication_file_id"
+      :endpoint="objectEndpoint" />
     <template v-else>
       <progress
         v-show="isUploading"
         class="mt-2"
         :value="uploadProgress"
         max="100"
-        style="width: 100%;"></progress>
+        style="width: 100%;" />
       <div v-show="!isUploading" class="row">
         <div class="col-md-6">
           <UploadButton

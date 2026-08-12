@@ -35,7 +35,7 @@ export default {
   <SelectedPerson
     v-if="hasValue"
     :id="modelValue"
-    :endpoint="objectEndpoint" 
+    :endpoint="objectEndpoint"
     @remove="clear" />
   <Picker
     v-else
