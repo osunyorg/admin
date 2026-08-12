@@ -47,6 +47,16 @@ class Communication::File < ApplicationRecord
     where(created_by_id: user_ids)
   }
 
+  scope :for_website, -> (website_ids, language) {
+    with_localizations(language)
+    .joins(:contexts)
+    .where(
+      communication_file_contexts: {
+        communication_website_id: website_ids
+      }
+    )
+  }
+
   scope :autosort_by_alpha, -> (language) {
     ordered(language)
   }

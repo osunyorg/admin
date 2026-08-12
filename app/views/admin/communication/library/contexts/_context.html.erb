@@ -5,7 +5,9 @@ key = context.about_type.underscore.remove('/localization')
 partial = "admin/communication/library/contexts/#{key}"
 %>
 <% begin %>
-  <%= render partial, about: context.about %>
+  <%= render  partial,
+              context: context,
+              about: context.about %>
 <% rescue %>
   <%
   object = context.about

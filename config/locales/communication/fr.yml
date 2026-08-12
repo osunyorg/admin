@@ -96,6 +96,8 @@ fr:
         title: Titre
       communication/file:
         created_by: Envoyé par
+      communication/file/context:
+        about_type: Type
       communication/file/localization:
         internal_description: Description interne
         name: Nom
