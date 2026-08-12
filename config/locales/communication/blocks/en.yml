@@ -534,6 +534,7 @@ en:
             description: A list of organizations with logo, name and website.
             edit:
               add_organization: Add organization
+              add_organization_unregistered: Add unregistered organization
               alphabetical:
                 label: Alphabetical order
               category_id:

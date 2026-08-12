@@ -537,6 +537,7 @@ fr:
             description: Une liste d'organisations, avec leur logo, leur site et leur nom.
             edit:
               add_organization: Ajouter une organisation
+              add_organization_unregistered: Ajouter une organisation non enregistrée
               alphabetical:
                 label: Ordre alphabétique
               category_id:
