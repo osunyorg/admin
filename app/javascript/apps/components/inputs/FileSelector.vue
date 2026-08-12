@@ -7,6 +7,7 @@ export default {
   name: 'FileSelector',
   components: { UploadButton, SelectedFile, Picker },
   props: {
+    // Le modèle est un objet composite, pour gérer la migration facilement
     modelValue: { type: Object, default: () => ({}) },
     uploadUrl: { type: String, required: true },
     pickerEndpoint: { type: String, required: true },

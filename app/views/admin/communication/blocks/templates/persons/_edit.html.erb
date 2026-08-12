@@ -31,7 +31,9 @@ object_endpoint = admin_university_people_path
     :list="data.elements"
     handle=".osuny__thumbnail"
     class="row g-2 mb-2">
-    <div v-for="(element, index) in data.elements" class="d-flex align-items-center">
+    <div
+      v-for="(element, index) in data.elements"
+      class="d-flex align-items-center">
       <div class="flex-fill">
         <div class="row align-items-center">
           <div class="col-sm-6">
