@@ -33,7 +33,7 @@ module HasDependencies
     # 2. on laisse la méthode destroy normale faire son travail
     # 3. PUIS on demande aux websites stockés de nettoyer leurs connexions et leurs git files (et on synchronise les potentielles sources directes)
     transaction do
-      references_before_destroy = references.compact
+      references_before_destroy = references.flatten.compact
       website_ids_before_destroy = websites_to_clean_ids
       super
       references_before_destroy.each &:touch
