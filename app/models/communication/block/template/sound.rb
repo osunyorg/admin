@@ -8,8 +8,16 @@ class Communication::Block::Template::Sound < Communication::Block::Template::Ba
     !about.respond_to?(:extranet)
   end
 
+  def blob
+    file_component.blob
+  end
+
+  def communication_file
+    file_component.communication_file
+  end
+
   def empty?
-    file_component.blob.nil?
+    blob.nil?
   end
 
   def dom_count
@@ -20,7 +28,7 @@ class Communication::Block::Template::Sound < Communication::Block::Template::Ba
   end
 
   def communication_files
-    [file_component.communication_file]
+    communication_file.nil? ? [] : [communication_file]
   end
   
   protected
