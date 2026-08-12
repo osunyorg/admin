@@ -16,12 +16,10 @@ import ProgramSelector        from '../../components/selectors/ProgramSelector.v
 // Selected objects
 import SelectedFile           from '../../components/selected-objects/SelectedFile.vue';
 import SelectedMedia          from '../../components/selected-objects/SelectedMedia.vue';
+import SelectedObject         from '../../components/selected-objects/SelectedObject.vue';
 import SelectedOrganization   from '../../components/selected-objects/SelectedOrganization.vue';
-import SelectedPage           from '../../components/selected-objects/SelectedPage.vue';
-import SelectedPaper          from '../../components/selected-objects/SelectedPaper.vue';
 import SelectedPerson         from '../../components/selected-objects/SelectedPerson.vue';
 import SelectedProgram        from '../../components/selected-objects/SelectedProgram.vue';
-import SelectedVolume         from '../../components/selected-objects/SelectedVolume.vue';
 
 // Renders the block-edit form fetched from the server, mounts a fresh inner
 // Vue app on it for reactive v-model bindings, and unmounts on close.
@@ -176,12 +174,10 @@ export default {
       // Selected objects
       this.innerApp.component('SelectedFile', SelectedFile);
       this.innerApp.component('SelectedMedia', SelectedMedia);
+      this.innerApp.component('SelectedObject', SelectedObject);
       this.innerApp.component('SelectedOrganization', SelectedOrganization);
-      this.innerApp.component('SelectedPage', SelectedPage);
-      this.innerApp.component('SelectedPaper', SelectedPaper);
       this.innerApp.component('SelectedPerson', SelectedPerson);
       this.innerApp.component('SelectedProgram', SelectedProgram);
-      this.innerApp.component('SelectedVolume', SelectedVolume);
 
       this.innerApp.mount(root);
     },

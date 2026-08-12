@@ -1,4 +1,5 @@
 <script>
+// L'organisation a un nom, pas un titre, et son image est un logo (pas de crop !)
 import logicMixin from './_mixin.js';
 import Placeholder from './Placeholder.vue';
 

@@ -38,11 +38,11 @@ object_endpoint = admin_research_journal_papers_path(journal_id: journal_id)
     <div
       v-for="(element, index) in data.elements"
       class="d-flex align-items-center">
-      <selected-paper
+      <selected-object
         :id="element.id"
         endpoint="<%= object_endpoint %>"
         class="flex-fill">
-      </selected-paper>
+      </selected-object>
       <a  class="btn btn-sm text-danger ms-3"
           @click="deleteElement(element)"
           title="Supprimer">

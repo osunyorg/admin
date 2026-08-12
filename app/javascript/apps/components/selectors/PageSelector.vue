@@ -1,17 +1,17 @@
 <script>
 import logicMixin from './_mixin.js';
-import SelectedPage from '../selected-objects/SelectedPage.vue';
+import SelectedObject from '../selected-objects/SelectedObject.vue';
 import Picker from '../../picker/Picker.vue';
 
 export default {
   name: 'PageSelector',
   mixins: [logicMixin],
-  components: { SelectedPage, Picker },
+  components: { SelectedObject, Picker },
 };
 </script>
 
 <template>
-  <SelectedPage
+  <SelectedObject
     v-if="hasValue"
     :id="modelValue"
     :endpoint="objectEndpoint" />

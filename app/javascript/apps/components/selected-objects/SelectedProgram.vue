@@ -1,4 +1,5 @@
 <script>
+// Le programme a un nom
 import logicMixin from './_mixin.js';
 import Placeholder from './Placeholder.vue';
 

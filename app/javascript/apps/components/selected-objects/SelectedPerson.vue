@@ -1,4 +1,5 @@
 <script>
+// La personne a un nom (et un prénom), et son image est une photo
 import logicMixin from './_mixin.js';
 import Placeholder from './Placeholder.vue';
 
