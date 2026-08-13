@@ -24,12 +24,34 @@ class Osuny::Picker::Communication::Library::File < Osuny::Picker::Communication
 
   protected
 
-  # TODO
   def filters_filetypes
     @filters << {
-      name: 'Types de fichiers',
-      values: []
+      name: I18n.t('admin.communication.file_types.title', locale: language.iso_code),
+      values: present_filetypes.map { |filetype|
+        {
+          id: filetype,
+          name: I18n.t("admin.communication.file_types.#{filetype}", locale: language.iso_code),
+          selected: filetype.to_s.in?(params.to_s),
+          query_parameters: "&filters[for_filetype][]=#{filetype}"
+        }
+      }
     }
+  end
+
+  # Récupère seulement les types de fichiers vraiment présents dans la sélection d'objets
+  def present_filetypes
+    ::Communication::File::FILE_TYPES.keys.select { |filetype|
+      all_content_types_for_filetype = ::Communication::File.content_types_for(filetype)
+      intersected = all_content_types_for_filetype & present_content_types
+      intersected.any?
+    }
+  end
+
+  def present_content_types
+    @present_content_types ||= objects.joins(:localizations)
+                                      .distinct
+                                      .pluck(:original_content_type)
+                                      .compact
   end
 
   def filters_websites

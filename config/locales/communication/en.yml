@@ -536,7 +536,7 @@ en:
         confirm_localization:
           text_html: "The creation of <i>%{about}</i> in %{language} requires the localization of the extranet <i>%{extranet}</i> in %{language}."
           title: Localization confirmation
-        invitation_messages: 
+        invitation_messages:
           automatic: Automatic message
           automatic_hint: This message will be sent after an alumni import or when clicking on the "send invitation" button on admin, if the alumnus has an email.
           manual: Manual message
@@ -545,6 +545,8 @@ en:
         languages: Languages
         sso:
           label: SSO
+      file:
+        replacement_file_hint: Add a file only if you want to change it.
       file_types:
         archive: Archive
         audio: Audio
@@ -553,6 +555,7 @@ en:
         presentation: Presentation
         spreadsheet: Spreadsheet
         text: Text
+        title: File type
         video: Video
       website:
         agenda:

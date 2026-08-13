@@ -47,6 +47,7 @@ class Communication::File::Localization < ApplicationRecord
   alias :file :about
 
   before_create :guess_name_from_file
+  after_commit :touch_references, on: :update, if: :saved_change_to_original_blob_id
 
   def self.find_or_create_from_blob(blob, language, user)
     localization = where(
@@ -58,7 +59,7 @@ class Communication::File::Localization < ApplicationRecord
       # On attribue le blob
       localization.original_blob = blob
       # On connecte au fichier
-      localization.about_id = file.id      
+      localization.about_id = file.id
     end
     localization
   end
@@ -82,6 +83,12 @@ class Communication::File::Localization < ApplicationRecord
 
   def icon
     @icon ||= Communication::File.icon_for(original_content_type)
+  end
+
+  # 'Image (image/jpeg)', ou juste 'image/jpeg' si le type est inconnu
+  def human_content_type
+    human_filetype = Communication::File.human_filetype_for(original_content_type)
+    human_filetype ? "#{human_filetype} (#{original_content_type})" : original_content_type
   end
 
   def dependencies
