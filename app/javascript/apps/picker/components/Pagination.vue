@@ -31,21 +31,6 @@ export default {
 
 <template>
   <div class="mt-4">
-    <div v-if="pagination?.total_count === 0" >
-      <div class="row align-items-center">
-        <div class="col-lg-4">
-          <img
-            src="/vue/nothing.jpg"
-            alt=""
-            class="img-fluid mb-4"
-            loading="lazy" />
-        </div>
-        <div class="offset-lg-1 col-lg-4">
-          <p class="lead mb-3">{{ $t('picker.pagination.nothing.title') }}</p>
-          <p class="text-muted small" v-html="$t('picker.pagination.nothing.text')"></p>
-        </div>
-      </div>
-    </div>
     <div v-if="pagination?.total_pages > 1" class="d-flex justify-content-between mb-2">
       <div class="vue__picker__button_container">
         <button
