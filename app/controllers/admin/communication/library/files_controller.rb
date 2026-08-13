@@ -60,6 +60,7 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
 
   def update
     if @file.update(file_params)
+      @file.localization_for(current_language).update_column(:last_updated_by_id, current_user.id)
       redirect_to [:admin, @file], notice: t('admin.successfully_updated_html', model: @file.to_s_in(current_language))
     else
       load_invalid_localization
