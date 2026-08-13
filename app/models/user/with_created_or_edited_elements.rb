@@ -1,7 +1,8 @@
-module User::WithCreatedElements
+module User::WithCreatedOrEditedElements
   extend ActiveSupport::Concern
 
   included do
+
     has_many :created_communication_website_agenda_events,
              class_name: "Communication::Website::Agenda::Event",
              foreign_key: "created_by_id",
@@ -31,5 +32,21 @@ module User::WithCreatedElements
              class_name: "University::Person",
              foreign_key: "created_by_id",
              dependent: :nullify
+
+    has_many :created_communication_files,
+             class_name: "Communication::File",
+             foreign_key: "created_by_id",
+             dependent: :nullify
+
+    has_many  :research_journal_papers,
+              class_name: "Research::Journal::Paper",
+              foreign_key: :updated_by_id,
+              dependent: :nullify
+
+    has_many  :last_updated_communication_file_localizations,
+              class_name: "Communication::File::Localization",
+              foreign_key: :last_updated_by_id,
+              dependent: :nullify
+
   end
 end

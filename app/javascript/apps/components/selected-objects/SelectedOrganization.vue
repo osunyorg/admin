@@ -1,5 +1,8 @@
 <script>
-// L'organisation a un nom, pas un titre, et son image est un logo (pas de crop !)
+// L'organisation a :
+// - un nom, pas un titre
+// - son image est un logo (pas de crop !)
+// - elle est utilisé petit, donc pas d'état de publication
 import logicMixin from './_mixin.js';
 import Placeholder from './Placeholder.vue';
 

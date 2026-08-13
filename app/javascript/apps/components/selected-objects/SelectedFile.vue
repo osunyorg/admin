@@ -1,11 +1,15 @@
 <script>
 import logicMixin from './_mixin.js';
 import Placeholder from './Placeholder.vue';
+import PublicationState from './PublicationState.vue';
 
 export default {
   name: 'SelectedFile',
   mixins: [logicMixin],
-  components: { Placeholder },
+  components: {
+    Placeholder,
+    PublicationState
+  },
 };
 </script>
 
@@ -30,6 +34,7 @@ export default {
       </span>
     </div>
     <div class="card-body">
+      <PublicationState :published="resource?.published" />
       {{ resource?.name }}
     </div>
   </div>

@@ -6,9 +6,10 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
   include Admin::Localizable
 
   def index
-    @files = @files.filter_by(params[:filters], current_language)
-                   .ordered(current_language)
-                   .page(params[:page])
+    @filtered = @files.filter_by(params[:filters], current_language)
+    @files = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                      .ordered(current_language)
+                      .page(params[:page])
     @categories = categories.root
     breadcrumb
     @feature_nav = 'navigation/admin/communication/files'
@@ -59,6 +60,7 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
 
   def update
     if @file.update(file_params)
+      @file.localization_for(current_language).update_column(:last_updated_by_id, current_user.id)
       redirect_to [:admin, @file], notice: t('admin.successfully_updated_html', model: @file.to_s_in(current_language))
     else
       load_invalid_localization
@@ -85,7 +87,7 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
           .permit(
             category_ids: [],
             localizations_attributes: [
-              :id, :name, :alt, :credit, :internal_description, :meta_description,
+              :id, :name, :alt, :credit, :internal_description, :meta_description, :published,
               :original_uploaded_file, :language_id
             ]
           )

@@ -2,11 +2,15 @@
 // Objet standard, à utiliser s'il n'y a rien de spécial
 import logicMixin from './_mixin.js';
 import Placeholder from './Placeholder.vue';
+import PublicationState from './PublicationState.vue';
 
 export default {
   name: 'SelectedObject',
   mixins: [logicMixin],
-  components: { Placeholder },
+  components: {
+    Placeholder,
+    PublicationState
+  },
 };
 </script>
 
@@ -31,12 +35,7 @@ export default {
       </span>
     </div>
     <div class="card-body">
-      <span
-        class="osuny__published"
-        :class="{
-          'osuny__published--true': resource?.published,
-          'osuny__published--false': !resource?.published
-        }"></span>
+      <PublicationState :published="resource?.published" />
       {{ resource?.title }}
     </div>
   </div>

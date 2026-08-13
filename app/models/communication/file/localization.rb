@@ -3,6 +3,7 @@
 # Table name: communication_file_localizations
 #
 #  id                    :uuid             not null, primary key
+#  deleted_at            :datetime
 #  internal_description  :text
 #  meta_description      :text
 #  name                  :string
@@ -18,23 +19,26 @@
 #  updated_at            :datetime         not null
 #  about_id              :uuid             not null, indexed
 #  language_id           :uuid             not null, indexed
+#  last_updated_by_id    :uuid             indexed
 #  original_blob_id      :uuid             not null, indexed
 #  published_by_id       :uuid             indexed
 #  university_id         :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_communication_file_localizations_on_about_id          (about_id)
-#  index_communication_file_localizations_on_language_id       (language_id)
-#  index_communication_file_localizations_on_original_blob_id  (original_blob_id)
-#  index_communication_file_localizations_on_published_by_id   (published_by_id)
-#  index_communication_file_localizations_on_university_id     (university_id)
+#  index_communication_file_localizations_on_about_id            (about_id)
+#  index_communication_file_localizations_on_language_id         (language_id)
+#  index_communication_file_localizations_on_last_updated_by_id  (last_updated_by_id)
+#  index_communication_file_localizations_on_original_blob_id    (original_blob_id)
+#  index_communication_file_localizations_on_published_by_id     (published_by_id)
+#  index_communication_file_localizations_on_university_id       (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_2caf77cf04  (original_blob_id => active_storage_blobs.id)
 #  fk_rails_38de4b5d8a  (language_id => languages.id)
 #  fk_rails_6f750651f5  (about_id => communication_files.id)
+#  fk_rails_ad6002e199  (last_updated_by_id => users.id)
 #  fk_rails_beb53a5697  (published_by_id => users.id)
 #  fk_rails_fcfa27eb47  (university_id => universities.id)
 #
@@ -44,8 +48,13 @@ class Communication::File::Localization < ApplicationRecord
   include HasOriginalBlob
   include HasUniversity
   include Permalinkable
+  include Publishable
   include Sanitizable
   include WithOpenApi
+
+  belongs_to  :last_updated_by,
+              class_name: 'User',
+              optional: true
 
   has_many    :contexts,
               foreign_key: :communication_file_localization_id,

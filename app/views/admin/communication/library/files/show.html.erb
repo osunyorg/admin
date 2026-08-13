@@ -36,7 +36,14 @@
           <p><%= @file.created_by %></p>
         </div>
       <% end %>
+      <% if @l10n.last_updated_by.present? %>
+        <div class="col-lg-6">
+          <%= osuny_label Communication::File::Localization.human_attribute_name(:last_updated_by) %>
+          <p><%= @l10n.last_updated_by %></p>
+        </div>
+      <% end %>
     </div>
+    <%= render 'admin/application/property/publication', about: @l10n %>
 
     <% if @l10n.internal_description.present? %>
       <%= osuny_label Communication::File::Localization.human_attribute_name(:internal_description) %>
@@ -52,3 +59,7 @@
     <%= render 'admin/communication/library/contexts/list', contexts: @contexts %>
   </div>
 </div>
+
+<% content_for :server_admin_only do %>
+  <%= static_link static_admin_communication_file_path(@file) %>
+<% end %>

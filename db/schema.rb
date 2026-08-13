@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_13_140000) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_13_141646) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -518,8 +518,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_13_140000) do
   create_table "communication_file_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "about_id", null: false
     t.datetime "created_at", null: false
+    t.datetime "deleted_at"
     t.text "internal_description"
     t.uuid "language_id", null: false
+    t.uuid "last_updated_by_id"
     t.text "meta_description"
     t.string "name"
     t.uuid "original_blob_id", null: false
@@ -536,6 +538,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_13_140000) do
     t.datetime "updated_at", null: false
     t.index ["about_id"], name: "index_communication_file_localizations_on_about_id"
     t.index ["language_id"], name: "index_communication_file_localizations_on_language_id"
+    t.index ["last_updated_by_id"], name: "index_communication_file_localizations_on_last_updated_by_id"
     t.index ["original_blob_id"], name: "index_communication_file_localizations_on_original_blob_id"
     t.index ["published_by_id"], name: "index_communication_file_localizations_on_published_by_id"
     t.index ["university_id"], name: "index_communication_file_localizations_on_university_id"
@@ -544,6 +547,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_13_140000) do
   create_table "communication_files", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.uuid "created_by_id"
+    t.datetime "deleted_at"
     t.uuid "university_id", null: false
     t.datetime "updated_at", null: false
     t.index ["created_by_id"], name: "index_communication_files_on_created_by_id"
@@ -2758,6 +2762,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_13_140000) do
   add_foreign_key "communication_file_localizations", "communication_files", column: "about_id"
   add_foreign_key "communication_file_localizations", "languages"
   add_foreign_key "communication_file_localizations", "universities"
+  add_foreign_key "communication_file_localizations", "users", column: "last_updated_by_id"
   add_foreign_key "communication_file_localizations", "users", column: "published_by_id"
   add_foreign_key "communication_files", "universities"
   add_foreign_key "communication_files", "users", column: "created_by_id"

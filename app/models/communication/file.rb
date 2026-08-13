@@ -3,6 +3,7 @@
 # Table name: communication_files
 #
 #  id            :uuid             not null, primary key
+#  deleted_at    :datetime
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  created_by_id :uuid             indexed
@@ -19,12 +20,15 @@
 #  fk_rails_e95d85eee7  (created_by_id => users.id)
 #
 class Communication::File < ApplicationRecord
+  acts_as_paranoid
+
   include AsIndirectObject
   include Autosortable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include HasCreator
   include HasUniversity
+  include Lifecyclable
   include Localizable
   include LocalizableOrderByNameScope
   include WithFileTypes

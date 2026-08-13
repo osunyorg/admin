@@ -100,6 +100,7 @@ fr:
         about_type: Type
       communication/file/localization:
         internal_description: Description interne
+        last_updated_by: Dernière modification par
         name: Nom
         original_byte_size: Poids
         original_content_type: Type de contenu
@@ -550,6 +551,9 @@ fr:
           label: SSO
       file:
         replacement_file_hint: Renseignez un fichier uniquement si vous souhaitez le changer.
+        localizations:
+          draft: Brouillon
+          published: Publié
       file_types:
         archive: Archive
         audio: Audio

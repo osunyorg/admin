@@ -12,6 +12,7 @@ l10n = file.best_localization_for(current_language)
     </span>
   </div>
   <div class="card-body">
+    <%= osuny_published_localized file %>
     <%= osuny_link_localized  file,
                               admin_communication_file_path(file),
                               classes: 'stretched-link' %>
