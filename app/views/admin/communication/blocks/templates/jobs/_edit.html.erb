@@ -21,10 +21,8 @@ object_endpoint = admin_communication_website_jobboard_jobs_path(website_id: web
   class="mb-5">
   <picker
     ref="picker"
-    kind="jobs"
     title="<%= Communication::Website::Jobboard::Job.model_name.human(count: 2) %>"
     endpoint="<%= picker_endpoint %>"
-    :model-value="null"
     @update:model-value="data.elements.push({id: $event.id})">
   </picker>
   <a

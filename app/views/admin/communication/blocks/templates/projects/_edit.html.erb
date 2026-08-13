@@ -16,10 +16,8 @@ object_endpoint = admin_communication_website_portfolio_projects_path(website_id
 <div v-if="data.mode === 'selection'">
   <picker
     ref="picker"
-    kind="posts"
     title="<%= Communication::Website::Portfolio::Project.model_name.human(count: 2) %>"
     endpoint="<%= picker_endpoint %>"
-    :model-value="null"
     @update:model-value="data.elements.push({id: $event.id})">
   </picker>
   <a

@@ -18,10 +18,8 @@ object_endpoint = admin_research_journal_papers_path(journal_id: journal_id)
 
   <picker
     ref="picker"
-    kind="papers"
     title="<%= picker_title %>"
     endpoint="<%= picker_endpoint %>"
-    :model-value="null"
     @update:model-value="data.elements.push({id: $event.id})">
   </picker>
 

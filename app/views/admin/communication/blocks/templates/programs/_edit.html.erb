@@ -6,10 +6,8 @@ object_endpoint = admin_education_programs_path
 
 <picker
   ref="picker"
-  kind="programs"
   title="<%= picker_title %>"
   endpoint="<%= picker_endpoint %>"
-  :model-value="null"
   @update:model-value="data.elements.push({id: $event.id})">
 </picker>
 

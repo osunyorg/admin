@@ -18,9 +18,7 @@ export default {
     @remove="clear" />
   <Picker
     v-else
-    :model-value="null"
     @update:model-value="select"
-    kind="people"
     :label="label"
     :title="title"
     :endpoint="pickerEndpoint" />

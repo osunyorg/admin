@@ -61,7 +61,6 @@ export default {
           <Picker
             :model-value="modelValue"
             @update:model-value="$emit('update:modelValue', $event)"
-            kind="files"
             :label="label"
             :title="title"
             :accept="accept"

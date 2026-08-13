@@ -10,7 +10,7 @@ export default {
       data: {},
     }
   },
-  mounted() {
+  beforeMount() {
     this.dataset = document.getElementById('picker-test-app').dataset
   }
 };
@@ -19,7 +19,6 @@ export default {
 <template>
   <Picker
     v-model="data"
-    :kind="dataset.kind"
     :endpoint="dataset.endpoint"
     :label="dataset.label" 
     :title="dataset.title" />

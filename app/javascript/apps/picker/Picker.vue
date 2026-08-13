@@ -17,8 +17,6 @@ export default {
     // Chemin des données JSON
     // /admin/fr/communication/medias/picker.json
     endpoint: { type: String, required: true },
-    // FIXME enlever les kind, ce n'est plus utilisé
-    kind: { type: String, required: true },
     // Texte du bouton, si vide, pas de bouton
     label: { type: String, default: '' },
     // Texte de la fenêtre
@@ -106,7 +104,6 @@ export default {
 <template>
   <section
     class="vue__picker"
-    v-if="kind"
     @keydown.esc="close">
     <button
       v-if="label"

@@ -14,10 +14,8 @@ object_endpoint = admin_university_people_path
 
   <picker
     ref="picker"
-    kind="files"
     title="<%= University::Person.model_name.human(count: 2) %>"
     endpoint="<%= picker_endpoint %>"
-    :model-value="null"
     @update:model-value="data.elements.push({id: $event.id})">
   </picker>
 

@@ -17,9 +17,7 @@ export default {
     :endpoint="objectEndpoint" />
   <Picker
     v-else
-    :model-value="null"
     @update:model-value="select"
-    kind="programs"
     :label="label"
     :title="title"
     :endpoint="pickerEndpoint" />
