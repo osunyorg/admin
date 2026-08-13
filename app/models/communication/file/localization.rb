@@ -51,7 +51,8 @@ class Communication::File::Localization < ApplicationRecord
               dependent: :destroy
   alias :file :about
 
-  before_create :guess_name_from_file
+  validates :name, presence: true
+
   after_commit :touch_references, on: :update, if: :saved_change_to_original_blob_id
 
   def self.find_or_create_from_blob(blob, language, user)
@@ -63,6 +64,10 @@ class Communication::File::Localization < ApplicationRecord
       file = Communication::File.find_or_create_from_blob(blob, user)
       # On attribue le blob
       localization.original_blob = blob
+      # On attribue le nom
+      blob_filename = blob.filename
+      blob_filename_without_extension = File.basename(blob_filename, File.extname(blob_filename))
+      localization.name = blob_filename_without_extension.humanize
       # On connecte au fichier
       localization.about_id = file.id
     end
@@ -108,11 +113,4 @@ class Communication::File::Localization < ApplicationRecord
     "#{name}"
   end
 
-  protected
-
-  def guess_name_from_file
-    filename = original_blob.filename
-    filename_without_extension = File.basename(filename, File.extname(filename))
-    self.name = filename_without_extension.humanize
-  end
 end
