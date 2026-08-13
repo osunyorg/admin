@@ -4,6 +4,7 @@
 #
 #  id                    :uuid             not null, primary key
 #  internal_description  :text
+#  meta_description      :text
 #  name                  :string
 #  original_byte_size    :bigint
 #  original_checksum     :string
