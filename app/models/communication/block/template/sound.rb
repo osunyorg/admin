@@ -27,6 +27,7 @@ class Communication::Block::Template::Sound < Communication::Block::Template::Ba
     transcription_component.dom_count
   end
 
+  # Permet de gérer les contextes
   def communication_files
     communication_file.nil? ? [] : [communication_file]
   end
