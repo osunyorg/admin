@@ -3,6 +3,7 @@
 # Table name: communication_file_localizations
 #
 #  id                    :uuid             not null, primary key
+#  deleted_at            :datetime
 #  internal_description  :text
 #  meta_description      :text
 #  name                  :string
@@ -44,6 +45,7 @@ class Communication::File::Localization < ApplicationRecord
   include HasOriginalBlob
   include HasUniversity
   include Permalinkable
+  include Publishable
   include Sanitizable
   include WithOpenApi
 

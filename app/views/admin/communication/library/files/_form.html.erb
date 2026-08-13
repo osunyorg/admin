@@ -4,6 +4,7 @@
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
     <%= lf.hidden_field :language_id, value: current_language.id %>
 
+    <%= render 'admin/application/publication/form', f: lf, about: file %>
     <div class="row">
       <div class="col-lg-4">
         <%= lf.input  :original_uploaded_file,

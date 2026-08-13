@@ -550,6 +550,9 @@ fr:
           label: SSO
       file:
         replacement_file_hint: Renseignez un fichier uniquement si vous souhaitez le changer.
+        localizations:
+          draft: Brouillon
+          published: Publié
       file_types:
         archive: Archive
         audio: Audio

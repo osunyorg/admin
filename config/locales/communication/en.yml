@@ -550,6 +550,9 @@ en:
           label: SSO
       file:
         replacement_file_hint: Add a file only if you want to change it.
+        localizations:
+          draft: Draft
+          published: Published
       file_types:
         archive: Archive
         audio: Audio

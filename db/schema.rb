@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_13_140000) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_13_141646) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -518,6 +518,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_13_140000) do
   create_table "communication_file_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "about_id", null: false
     t.datetime "created_at", null: false
+    t.datetime "deleted_at"
     t.text "internal_description"
     t.uuid "language_id", null: false
     t.text "meta_description"
@@ -544,6 +545,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_13_140000) do
   create_table "communication_files", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.uuid "created_by_id"
+    t.datetime "deleted_at"
     t.uuid "university_id", null: false
     t.datetime "updated_at", null: false
     t.index ["created_by_id"], name: "index_communication_files_on_created_by_id"
