@@ -54,7 +54,7 @@ class Communication::File::Localization < ApplicationRecord
 
   validates :name, presence: true
 
-  after_commit :touch_references, on: :update, if: :saved_change_to_original_blob_id
+  after_commit :touch_references, on: :update
 
   def self.find_or_create_from_blob(blob, language, user)
     localization = where(
