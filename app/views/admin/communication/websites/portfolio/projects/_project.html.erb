@@ -1,29 +1,9 @@
-<div class="<%= osuny_card_classes(horizontal: true) %> align-items-start">
-  <%= osuny_thumbnail_localized project, large: true %>
-  <div class="card-body d-flex">
-    <div class="me-2">
-      <%= osuny_published_localized project %>
-    </div>
-    <div>
-      <p class="mb-1">
-        <%= osuny_link_localized  project,
-                                  admin_communication_website_portfolio_project_path(
-                                    website_id: project.website.id,
-                                    id: project.id
-                                  ),
-                                  classes: "stretched-link" %>
-      </p>
-      <%
-      project_l10n = project.best_localization_for(current_language)
-      %>
-      <% if project_l10n&.subtitle.present? %>
-        <p class="text-muted mt-1">
-          <%= project_l10n.subtitle.truncate(100) %>
-        </p>
-      <% end %>
-    </div>
-  </div>
-  <div class="card-footer small text-muted">
-    <%= project.year %>
-  </div>
-</div>
+<%
+if project.deleted?
+  partial_name = 'deleted'
+else
+  partial_name = 'default'
+end
+%>
+<%= render "admin/communication/websites/portfolio/projects/project/#{partial_name}",
+            project: project %>

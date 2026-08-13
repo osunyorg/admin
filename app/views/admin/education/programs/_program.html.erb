@@ -1,24 +1,11 @@
 <%
-hide_diploma ||= false
-hide_parent ||= false
-parent = program.parent
-diploma = program.diploma
+if program.deleted?
+  partial_name = 'deleted'
+else
+  partial_name = 'default'
+end
 %>
-<div class="<%= osuny_card_classes(horizontal: true) %>">
-  <%= osuny_thumbnail_localized program %>
-  <div class="card-body">
-    <%= osuny_published_localized program %>
-    <%= osuny_link_localized program, [:admin, program], classes: 'stretched-link' %>
-    <% if !hide_parent && parent.present? %>
-      <br>
-      <span class="small text-muted">
-        <%= parent.best_localization_for(current_language) %>
-      </span>
-    <% end %>
-  </div>
-  <% if !hide_diploma && diploma.present? %>
-    <div class="card-footer">
-      <%= diploma.best_localization_for(current_language).short_name %>
-    </div>
-  <% end %>
-</div>
+<%= render "admin/education/programs/program/#{partial_name}",
+            program: program,
+            hide_diploma: hide_diploma,
+            hide_parent: hide_parent %>

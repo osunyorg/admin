@@ -20,15 +20,8 @@ selectable ||= false
                               data: { batch_selectable_role: "select-single" } %>
           </div>
         <% end %>
-        <%
-        partial = 'admin/communication/websites/agenda/events/event'
-        if event.deleted?
-          partial = 'admin/communication/websites/agenda/events/event_deleted'
-        elsif event.is_template?
-          partial = 'admin/communication/websites/agenda/events/event_template'
-        end
-        %>
-        <%= render partial, event: event %>
+        <%= render 'admin/communication/websites/agenda/events/event',
+                    event: event %>
       </div>
     <% end %>
   </div>

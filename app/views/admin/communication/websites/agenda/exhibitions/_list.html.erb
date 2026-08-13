@@ -2,16 +2,10 @@
   <p><%= t('admin.communication.website.agenda.exhibitions.none') %></p>
 <% else %>
   <div class="row g-2 mb-3">
-    <%
-    exhibitions.each do |exhibition|
-      exhibition_l10n = exhibition.best_localization_for(current_language)
-      %>
+    <% exhibitions.each do |exhibition| %>
       <div>
-        <%
-        partial = exhibition.deleted? ? 'admin/communication/websites/agenda/exhibitions/exhibition_deleted'
-                                      : 'admin/communication/websites/agenda/exhibitions/exhibition'
-        %>
-        <%= render partial, exhibition: exhibition %>  
+        <%= render 'admin/communication/websites/agenda/exhibitions/exhibition',
+                    exhibition: exhibition %>  
       </div>
     <% end %>
   </div>

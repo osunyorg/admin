@@ -1,11 +1,8 @@
 <div class="row g-2 mb-3 row-cols-lg-4 row-cols-xxl-6">
   <% volumes.each do |volume| %>
     <div>
-      <%
-      partial = volume.deleted? ? 'admin/research/journals/volumes/volume_deleted'
-                                : 'admin/research/journals/volumes/volume'
-      %>
-      <%= render partial, volume: volume %>
+      <%= render 'admin/research/journals/volumes/volume',
+                  volume: volume %>
     </div>
   <% end %>
 </div>

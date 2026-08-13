@@ -1,11 +1,9 @@
-<div class="<%= osuny_card_classes %>">
-  <%= render 'admin/university/organizations/thumbnail',
-              organization: organization,
-              large: true %>
-  <div class="card-body">
-    <%= osuny_published_localized organization %>
-    <%= osuny_link_localized  organization,
-                              admin_university_organization_path(organization),
-                              classes: 'stretched-link' %>
-  </div>
-</div>
+<%
+if organization.deleted?
+  partial_name = 'deleted'
+else
+  partial_name = 'default'
+end
+%>
+<%= render "admin/university/organizations/organization/#{partial_name}",
+            organization: organization %>

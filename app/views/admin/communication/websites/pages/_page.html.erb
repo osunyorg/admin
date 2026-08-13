@@ -1,21 +1,9 @@
-<div class="<%= osuny_card_classes(horizontal: true) %>">
-  <%= osuny_thumbnail_localized page %>
-  <div class="card-body">
-    <%= osuny_published_localized page %>
-    <%= osuny_link_localized  page,
-                              admin_communication_website_page_path(website_id: page.website.id, id: page.id),
-                              classes: "stretched-link" %>
-  </div>
-  <div class="card-footer">
-    <% if page.full_width %>
-      <span class="badge text-bg-secondary">
-        <%= Communication::Website::Page.human_attribute_name('full_width') %>
-      </span>
-    <% end %>
-    <% if page.is_special_page? %>
-      <span class="badge text-bg-secondary">
-        <%= t("communication.website.pages.defaults.#{page.type_key}.title") %>
-      </span>
-    <% end %>
-  </div>
-</div>
+<%
+if page.deleted?
+  partial_name = 'deleted'
+else
+  partial_name = 'default'
+end
+%>
+<%= render "admin/communication/websites/pages/page/#{partial_name}",
+            page: page %>

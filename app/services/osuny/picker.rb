@@ -2,11 +2,11 @@ class Osuny::Picker
 
   attr_reader :university, :language, :params, :context
 
-  # context peut être un website, un extranet, un journal...
   def initialize(university:, language:, params:, context: nil)
     @university = university
     @language = language
     @params = params
+    # context peut être un website, un extranet, un journal...
     @context = context
     sorts
   end

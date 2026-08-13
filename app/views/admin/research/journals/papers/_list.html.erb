@@ -1,11 +1,8 @@
 <div class="row g-2 mb-3">
   <% papers.each do |paper| %>
     <div>
-      <%
-      partial = paper.deleted?  ? 'admin/research/journals/papers/paper_deleted'
-                                : 'admin/research/journals/papers/paper'
-      %>
-      <%= render partial, paper: paper %>
+      <%= render 'admin/research/journals/papers/paper',
+                  paper: paper %>
     </div>
   <% end %>
 </div>

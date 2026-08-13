@@ -1,11 +1,8 @@
 <div class="row g-2 mb-2">
   <% pages.each do |page| %>
     <div>
-      <%
-      partial = page.deleted? ? 'admin/communication/websites/pages/page_deleted'
-                              : 'admin/communication/websites/pages/page'
-      %>
-      <%= render partial, page: page %>
+      <%= render 'admin/communication/websites/pages/page',
+                  page: page %>
     </div>
   <% end %>
 </div>

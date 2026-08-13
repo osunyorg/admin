@@ -3,7 +3,7 @@ class Osuny::Picker::Communication::Library::Base < Osuny::Picker
   protected
 
   def accept
-    @accept ||= params.dig(:accept)
+    @accept ||= params.dig(:accept) || '*'
   end
 
   def accept_restricted?

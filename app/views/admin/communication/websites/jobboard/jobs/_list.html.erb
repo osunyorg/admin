@@ -4,11 +4,8 @@
   <div class="row g-2 mb-3">
     <% jobs.each do |job| %>
       <div>
-        <%
-        partial = job.deleted?  ? 'admin/communication/websites/jobboard/jobs/job_deleted'
-                                : 'admin/communication/websites/jobboard/jobs/job'
-        %>
-        <%= render partial, job: job %>
+        <%= render 'admin/communication/websites/jobboard/jobs/job',
+                    job: job %>
       </div>
     <% end %>
   </div>

@@ -2,7 +2,7 @@
   <div class="row g-2 mb-3">
     <% @events.each do |event| %>
       <div>
-        <%= render 'admin/communication/websites/agenda/events/event_small', event: event%>
+        <%= render 'admin/communication/websites/agenda/events/event/small', event: event%>
       </div>
     <% end %>
     <%= render 'admin/application/components/all',

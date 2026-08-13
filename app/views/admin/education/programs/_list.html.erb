@@ -5,11 +5,7 @@ hide_parent ||= false
 <div class="row g-2 mb-3">
   <% programs.each do |program| %>
     <div>
-      <%
-      partial = program.deleted?  ? 'admin/education/programs/program_deleted'
-                                  : 'admin/education/programs/program'
-      %>
-      <%= render  partial,
+      <%= render  'admin/education/programs/program',
                   program: program,
                   hide_diploma: hide_diploma,
                   hide_parent: hide_parent %>

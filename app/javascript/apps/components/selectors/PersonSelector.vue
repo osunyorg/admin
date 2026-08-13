@@ -14,8 +14,7 @@ export default {
   <SelectedPerson
     v-if="hasValue"
     :id="modelValue"
-    :endpoint="objectEndpoint"
-    @remove="clear" />
+    :endpoint="objectEndpoint" />
   <Picker
     v-else
     @update:model-value="select"

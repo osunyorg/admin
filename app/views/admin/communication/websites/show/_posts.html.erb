@@ -2,7 +2,7 @@
   <div class="row g-2 mb-3">
     <% @posts.each do |post| %>
       <div>
-        <%= render 'admin/communication/websites/posts/post_small', post: post %>
+        <%= render 'admin/communication/websites/posts/post/small', post: post %>
       </div>
     <% end %>
     <%= render 'admin/application/components/all',

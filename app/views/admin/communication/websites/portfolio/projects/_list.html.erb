@@ -4,11 +4,8 @@
   <div class="row g-2 mb-2">
     <% projects.each do |project| %>
       <div>
-        <%
-        partial = project.deleted?  ? 'admin/communication/websites/portfolio/projects/project_deleted'
-                                    : 'admin/communication/websites/portfolio/projects/project'
-        %>
-        <%= render  partial, project: project %>
+        <%= render 'admin/communication/websites/portfolio/projects/project',
+                    project: project %>
       </div>
     <% end %>
   </div>

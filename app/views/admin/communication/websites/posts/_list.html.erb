@@ -36,11 +36,7 @@ selectable ||= false
               </td>
             <% end %>
             <td>
-              <%
-              partial = post.deleted? ? 'admin/communication/websites/posts/post_deleted'
-                                      : 'admin/communication/websites/posts/post'
-              %>
-              <%= render  partial,
+              <%= render  'admin/communication/websites/posts/post',
                           post: post,
                           hide_badges: hide_badges,
                           website: website %>

@@ -1,11 +1,7 @@
 <div class="row g-3">
   <% people.each do |person| %>
     <div class="col-lg-3 col-xxl-2">
-      <%
-      partial = person.deleted? ? 'admin/university/people/person_deleted'
-                                : 'admin/university/people/person'
-      %>
-      <%= render partial, person: person %>
+      <%= render 'admin/university/people/person', person: person %>
     </div>
   <% end %>
 </div>

@@ -1,12 +1,9 @@
 <%
-l10n = person.best_localization_for(current_language)
+if person.deleted?
+  partial_name = 'deleted'
+else
+  partial_name = 'default'
+end
 %>
-<div class="<%= osuny_card_classes %>">
-  <%= osuny_thumbnail_localized person, large: true %>
-  <div class="card-body">
-    <%= osuny_published_localized person %>
-    <%= osuny_link_localized  person,
-                              admin_university_person_path(person),
-                              classes: 'stretched-link'  %>
-  </div>
-</div>
+<%= render "admin/university/people/person/#{partial_name}",
+            person: person %>
