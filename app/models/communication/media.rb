@@ -7,6 +7,7 @@
 #  original_byte_size                :bigint
 #  original_checksum                 :string
 #  original_content_type             :string
+#  original_extension                :string           default("")
 #  original_filename                 :string
 #  created_at                        :datetime         not null
 #  updated_at                        :datetime         not null
@@ -65,7 +66,7 @@ class Communication::Media < ApplicationRecord
     where(collection: collection_id)
   }
   scope :for_extension, -> (extensions, language) {
-    # TODO
+    where(original_extension: extensions)
   }
 
   def self.find_or_create_from_blob(blob, in_context: nil, origin: :upload, alt: nil, credit: nil)

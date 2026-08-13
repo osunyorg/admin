@@ -7,9 +7,15 @@ module HasOriginalBlob
 
     attr_accessor :original_uploaded_file
 
-    before_validation :create_original_blob_from_upload, on: :create, if: :original_uploaded_file
+    before_validation :create_original_blob_from_upload,
+                      on: :create,
+                      if: :original_uploaded_file
+    before_save :denormalize_extension
 
-    validates :original_uploaded_file, presence: true, on: :create, unless: :original_blob
+    validates :original_uploaded_file,
+              presence: true,
+              on: :create,
+              unless: :original_blob
   end
 
   # TODO Quand on voudra généraliser l'usage (pas seulement les featured_images)
@@ -96,5 +102,9 @@ module HasOriginalBlob
       filename: original_uploaded_file.original_filename,
       content_type: original_uploaded_file.content_type
     )
+  end
+
+  def denormalize_extension
+    self.original_extension = File.extname(original_filename)
   end
 end

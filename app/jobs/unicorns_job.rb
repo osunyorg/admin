@@ -3,6 +3,8 @@ class UnicornsJob < ApplicationJob
   queue_as :unicorns
 
   def perform
-    Migrations::HandleFileContexts.migrate
+    Migrations::DenormalizeWebsitesInFileContexts.migrate
+    Migrations::DenormalizeFileExtensions.migrate
+    Migrations::DenormalizeMediaExtensions.migrate
   end
 end
