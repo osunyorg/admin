@@ -1,4 +1,4 @@
-class Osuny::Picker::Communication::File < Osuny::Picker
+class Osuny::Picker::Communication::Library::File < Osuny::Picker::Communication::Library::Base
 
   def objects
     @objects ||= university.communication_files
@@ -9,7 +9,7 @@ class Osuny::Picker::Communication::File < Osuny::Picker
   end
 
   def filters_after_categories
-    filters_filetypes
+    filters_filetypes unless accept_restricted?
     filters_websites
     filters_creators
   end

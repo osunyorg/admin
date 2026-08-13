@@ -8,6 +8,7 @@
 #  original_byte_size    :bigint
 #  original_checksum     :string
 #  original_content_type :string
+#  original_extension    :string           default("")
 #  original_filename     :string
 #  slug                  :string
 #  created_at            :datetime         not null
@@ -43,6 +44,7 @@ class Communication::File::Localization < ApplicationRecord
   alias :file :about
 
   before_create :guess_name_from_file
+  before_save :denormalize_extension
 
   def self.find_or_create_from_blob(blob, language, user)
     localization = where(
@@ -85,5 +87,9 @@ class Communication::File::Localization < ApplicationRecord
     filename = original_blob.filename
     filename_without_extension = File.basename(filename, File.extname(filename))
     self.name = filename_without_extension.humanize
+  end
+
+  def denormalize_extension
+    self.original_extension = File.extname(original_filename)
   end
 end

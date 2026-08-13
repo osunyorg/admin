@@ -14,10 +14,19 @@ export default {
   },
   props: {
     modelValue: { default: null },
+    // Chemin des données JSON
+    // /admin/fr/communication/medias/picker.json
     endpoint: { type: String, required: true },
+    // FIXME enlever les kind, ce n'est plus utilisé
     kind: { type: String, required: true },
+    // Texte du bouton, si vide, pas de bouton
     label: { type: String, default: '' },
+    // Texte de la fenêtre
     title: { type: String, default: '' },
+    // Concerne les fichiers et photos, 
+    // permet de bloquer le choix sur un groupe d'extensions
+    // en partant du paramètre accept de l'input file
+    accept: { type: String, default: '*' },
   },
   emits: ['update:modelValue'],
   computed: {
@@ -82,7 +91,7 @@ export default {
       }
     },
     buildUrl() {
-      this.url = this.endpoint + '?';
+      this.url = this.endpoint + '?accept=' + this.accept;
       this.url += this.parameters?.query_parameters || '';
       this.url += this.pagination?.query_parameters || '';
     },

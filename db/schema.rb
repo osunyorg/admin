@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_12_190002) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_13_052336) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -525,6 +525,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_12_190002) do
     t.bigint "original_byte_size"
     t.string "original_checksum"
     t.string "original_content_type"
+    t.string "original_extension", default: ""
     t.string "original_filename"
     t.string "slug"
     t.uuid "university_id", null: false

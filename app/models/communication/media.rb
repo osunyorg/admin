@@ -64,6 +64,9 @@ class Communication::Media < ApplicationRecord
   scope :for_collection, -> (collection_id, language = nil) {
     where(collection: collection_id)
   }
+  scope :for_extension, -> (extensions, language) {
+    # TODO
+  }
 
   def self.find_or_create_from_blob(blob, in_context: nil, origin: :upload, alt: nil, credit: nil)
     return if blob.nil?

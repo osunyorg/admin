@@ -1,4 +1,4 @@
-class Osuny::Picker::Communication::Media < Osuny::Picker
+class Osuny::Picker::Communication::Library::Media < Osuny::Picker::Communication::Library::Base
 
   def objects
     @objects ||= university.communication_medias

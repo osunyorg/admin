@@ -42,11 +42,9 @@ class Communication::File < ApplicationRecord
       unaccent(communication_file_localizations.internal_description) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
-
   scope :for_creator, -> (user_ids, language) {
     where(created_by_id: user_ids)
   }
-
   scope :for_website, -> (website_ids, language) {
     with_localizations(language)
     .joins(:contexts)
@@ -55,6 +53,12 @@ class Communication::File < ApplicationRecord
         communication_website_id: website_ids
       }
     )
+  }
+  scope :for_extension, -> (extensions, language) {
+    with_localizations(language)
+    .where(communication_file_localizations: {
+      original_extension: extensions 
+    })
   }
 
   scope :autosort_by_alpha, -> (language) {

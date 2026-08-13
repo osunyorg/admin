@@ -16,7 +16,7 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
   end
 
   def picker
-    @picker = Osuny::Picker::Communication::Media.new(
+    @picker = Osuny::Picker::Communication::Library::Media.new(
       university: current_university,
       language: current_language,
       params: params
