@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_13_060009) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_13_125843) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -527,12 +527,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_13_060009) do
     t.string "original_content_type"
     t.string "original_extension", default: ""
     t.string "original_filename"
+    t.boolean "published", default: false
+    t.datetime "published_at"
+    t.uuid "published_by_id"
     t.string "slug"
     t.uuid "university_id", null: false
     t.datetime "updated_at", null: false
     t.index ["about_id"], name: "index_communication_file_localizations_on_about_id"
     t.index ["language_id"], name: "index_communication_file_localizations_on_language_id"
     t.index ["original_blob_id"], name: "index_communication_file_localizations_on_original_blob_id"
+    t.index ["published_by_id"], name: "index_communication_file_localizations_on_published_by_id"
     t.index ["university_id"], name: "index_communication_file_localizations_on_university_id"
   end
 
@@ -2753,6 +2757,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_13_060009) do
   add_foreign_key "communication_file_localizations", "communication_files", column: "about_id"
   add_foreign_key "communication_file_localizations", "languages"
   add_foreign_key "communication_file_localizations", "universities"
+  add_foreign_key "communication_file_localizations", "users", column: "published_by_id"
   add_foreign_key "communication_files", "universities"
   add_foreign_key "communication_files", "users", column: "created_by_id"
   add_foreign_key "communication_media_categories", "communication_media_categories", column: "parent_id"
