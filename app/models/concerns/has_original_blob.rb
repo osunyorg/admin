@@ -8,7 +8,6 @@ module HasOriginalBlob
     attr_accessor :original_uploaded_file
 
     before_validation :create_original_blob_from_upload,
-                      on: :create,
                       if: :original_uploaded_file
     before_save :denormalize_extension
 
@@ -83,7 +82,7 @@ module HasOriginalBlob
 
   def exists_for_blob_checksum?(blob)
     objects = self.class.where(university_id: university.id)
-    if objects.where(original_checksum: blob.checksum).any?
+    if objects.where(original_checksum: blob.checksum).where.not(id: self.id).any?
       errors.add :original_uploaded_file, :already_imported
       true
     else

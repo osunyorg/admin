@@ -536,7 +536,7 @@ fr:
         confirm_localization:
           text_html: "La création de <i>%{about}</i> en %{language} nécessite la traduction de l'extranet <i>%{extranet}</i> en %{language}."
           title: Confirmation de traduction
-        invitation_messages: 
+        invitation_messages:
           automatic: Message automatique
           automatic_hint: Ce message sera envoyé après un import d'alumni ou lors du clic sur le bouton "envoyer l'invitation" dans l'admin, si l'alumnus a un email.
           manual: Message manuel
@@ -545,6 +545,8 @@ fr:
         languages: Langues
         sso:
           label: SSO
+      file:
+        replacement_file_hint: Renseignez un fichier uniquement si vous souhaitez le changer.
       website:
         agenda:
           event:
