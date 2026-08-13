@@ -24,14 +24,11 @@ object_endpoint = admin_education_programs_path
   <div
     v-for="(element, index) in data.elements"
     class="d-flex align-items-center">
-    <program-selector
-      :model-value="element.id"
-      @update:model-value="element.id = $event"
-      picker-endpoint="<%= picker_endpoint %>"
-      object-endpoint="<%= object_endpoint %>"
-      title="<%= picker_title %>"
+    <selected-program
+      :id="element.id"
+      endpoint="<%= object_endpoint %>"
       class="flex-fill">
-    </program-selector>
+    </selected-program>
     <a  class="btn btn-sm text-danger ms-3"
         @click="deleteElement(element)"
         title="Supprimer">

@@ -1,14 +1,12 @@
 <%
 hide_diploma ||= false
-hide_parent ||= false
 %>
 <div class="row g-2 mb-3">
   <% programs.each do |program| %>
     <div>
       <%= render  'admin/education/programs/program',
                   program: program,
-                  hide_diploma: hide_diploma,
-                  hide_parent: hide_parent %>
+                  hide_diploma: hide_diploma %>
     </div>
   <% end %>
 </div>

@@ -10,9 +10,6 @@ import RichTextInput          from '../../components/inputs/RichTextInput.vue';
 import UploadInput            from '../../components/inputs/UploadInput.vue';
 // Selectors
 import FileSelector           from '../../components/selectors/FileSelector.vue';
-import PageSelector           from '../../components/selectors/PageSelector.vue';
-import PersonSelector         from '../../components/selectors/PersonSelector.vue';
-import ProgramSelector        from '../../components/selectors/ProgramSelector.vue';
 // Selected objects
 import SelectedFile           from '../../components/selected-objects/SelectedFile.vue';
 import SelectedMedia          from '../../components/selected-objects/SelectedMedia.vue';
@@ -168,9 +165,6 @@ export default {
       this.innerApp.component('UploadInput', UploadInput);
       // Selectors
       this.innerApp.component('FileSelector', FileSelector);
-      this.innerApp.component('PageSelector', PageSelector);
-      this.innerApp.component('PersonSelector', PersonSelector);
-      this.innerApp.component('ProgramSelector', ProgramSelector);
       // Selected objects
       this.innerApp.component('SelectedFile', SelectedFile);
       this.innerApp.component('SelectedMedia', SelectedMedia);
