@@ -5,22 +5,10 @@ object_endpoint = admin_communication_files_path
 
 <%= block_component_edit block, :description, summernote_config: 'mini' %>
 
-<file-input
-  class="flex-fill"
-  @update:model-value="data.elements.push({ file: { communication_file_id: $event.communication_file_id } })"
-  upload-url="<%= direct_upload_admin_communication_files_path %>"
-  picker-endpoint="<%= picker_endpoint %>"
-  object-endpoint="<%= object_endpoint %>"
-  label="<%= t('admin.communication.blocks.components.file.button') %>"
-  title="<%= Communication::File.model_name.human(count: 2) %>"
-  accept="*"
-  :size-limit="<%= Rails.application.config.default_file_max_size %>">
-</file-input>
-
 <draggable
   :list="data.elements"
   handle=".osuny__thumbnail"
-  class="row g-2 mb-2">
+  class="row g-2 mb-4">
   <div
     v-for="(element, index) in data.elements"
     class="d-flex align-items-center">
@@ -36,3 +24,14 @@ object_endpoint = admin_communication_files_path
     </a>
   </div>
 </draggable>
+
+<file-input
+  @update:model-value="data.elements.push({ file: { communication_file_id: $event.communication_file_id } })"
+  upload-url="<%= direct_upload_admin_communication_files_path %>"
+  picker-endpoint="<%= picker_endpoint %>"
+  object-endpoint="<%= object_endpoint %>"
+  label="<%= t('admin.communication.blocks.components.file.button') %>"
+  title="<%= Communication::File.model_name.human(count: 2) %>"
+  accept="*"
+  :size-limit="<%= Rails.application.config.default_file_max_size %>">
+</file-input>
