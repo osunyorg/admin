@@ -3,12 +3,17 @@ class Communication::Block::Template::File < Communication::Block::Template::Bas
   has_elements
   has_component :description, :rich_text
 
+  def selected_files
+    @selected_files ||= elements.map(&:communication_file).compact
+  end
+
+  # Permet de gérer les contextes
   def communication_files
     selected_files
   end
 
-  def selected_files
-    @selected_files ||= elements.map(&:communication_file).compact
+  def dependencies
+    selected_files
   end
 
   def dom_count
