@@ -5,21 +5,21 @@ fr:
       templates:
         embed:
           title_missing:
-            text_html: L'intégration HTML n'a pas de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle le contenu intégré, comme expliqué dans le <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">critère 4.7 du RGAA</a>. Merci d'ajouter une balise <b>title</b> explicite à votre iframe.
+            text_html: L'intégration HTML n'a pas de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle le contenu intégré, comme expliqué dans le <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#4" target="_blank">thématique 4 du RGAA</a>. Merci d'ajouter une balise <b>title</b> explicite à votre iframe.
             title: Pas de titre de cadre
           transcription_missing:
             text_html: Le cadre HTML n'est pas accompagné d'une transcription textuelle pour les personnes malvoyantes, ou pour les situations de faible débit qui empêcheraient la lecture.
             title: Pas de transcription
         sound:
           title_missing:
-            text_html: Ni le bloc ni le fichier audio n'ont de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle l'enregistrement, comme expliqué dans le <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">critère 4.7 du RGAA</a>. Merci d'ajouter un titre à l'enregistrement.
+            text_html: Ni le bloc ni le fichier audio n'ont de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle l'enregistrement, comme expliqué dans le <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#4" target="_blank">thématique 4 du RGAA</a>. Merci d'ajouter un titre à l'enregistrement.
             title: Pas de titre
           transcription_missing:
             text_html: L'enregistrement n'est pas accompagné d'une transcription textuelle pour les personnes malvoyantes, ou pour les situations de faible débit qui empêcheraient la lecture.
             title: Pas de transcription
         video:
           title_missing:
-            text_html: Ni le bloc ni la vidéo n'ont de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle la vidéo, comme expliqué dans le <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">critère 4.7 du RGAA</a>. Merci d'ajouter un titre à la vidéo.
+            text_html: Ni le bloc ni la vidéo n'ont de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle la vidéo, comme expliqué dans le <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#4" target="_blank">thématique 4 du RGAA</a>. Merci d'ajouter un titre à la vidéo.
             title: Pas de titre
           transcription_missing:
             text_html: La vidéo n'est pas accompagnée d'une transcription textuelle pour les personnes malvoyantes, ou pour les situations de faible débit qui empêcheraient la lecture.
