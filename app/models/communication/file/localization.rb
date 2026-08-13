@@ -73,6 +73,9 @@ class Communication::File::Localization < ApplicationRecord
       localization.name = blob_filename_without_extension.humanize
       # On connecte au fichier
       localization.about_id = file.id
+      # Here, we auto-publish the localization
+      localization.published = true
+      localization.published_at = Time.current
     end
     localization
   end
@@ -83,7 +86,8 @@ class Communication::File::Localization < ApplicationRecord
 
   def should_sync_to?(website)
     website.active_language_ids.include?(language_id) &&
-    website.has_connected_object?(self)
+    website.has_connected_object?(self) &&
+    published?
   end
 
   def template_static
