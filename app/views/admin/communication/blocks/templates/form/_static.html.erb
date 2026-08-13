@@ -1,0 +1,11 @@
+<%= block_component_static block, :url %>
+<%= block_component_static block, :form_title %>
+<% if block.template.url.present? %>
+      form: 
+        platform: "<%= block.template.platform %>"
+        identifier: "<%= block.template.identifier %>"
+        iframe: >-
+          <%= raw block.template.iframe %>
+        script: >-
+          <%= raw block.template.script %>
+<% end %>
