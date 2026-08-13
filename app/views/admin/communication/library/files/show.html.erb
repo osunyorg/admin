@@ -36,6 +36,12 @@
           <p><%= @file.created_by %></p>
         </div>
       <% end %>
+      <% if @l10n.last_updated_by.present? %>
+        <div class="col-lg-6">
+          <%= osuny_label Communication::File::Localization.human_attribute_name(:last_updated_by) %>
+          <p><%= @l10n.last_updated_by %></p>
+        </div>
+      <% end %>
     </div>
 
     <% if @l10n.internal_description.present? %>
