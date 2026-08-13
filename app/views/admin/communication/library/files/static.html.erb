@@ -5,10 +5,8 @@ file = @l10n.about
 <%= render 'admin/application/static/core', about: @l10n %>
 <%= osuny_static_text 'meta_description', @l10n.meta_description %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
-<%
-original_blob = @l10n.original_blob
-if original_blob.present?
-%>
+<%= render 'admin/application/images/featured/static', about: @l10n %>
+<% if @l10n.original_blob.present? %>
 original_blob:
   id: "<%= @l10n.original_blob_id %>"
 <% end %>

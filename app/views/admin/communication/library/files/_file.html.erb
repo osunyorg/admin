@@ -4,13 +4,17 @@ hide_size ||= false
 l10n = file.best_localization_for(current_language)
 %>
 <div class="<%= osuny_card_classes(horizontal: true) %>">
-  <div class="osuny__thumbnail
-              osuny__thumbnail--small
-              osuny__thumbnail--cropped">
-    <span class="osuny__thumbnail__icon">
-      <i class="<%= l10n.icon %>" title="<%= l10n.original_content_type %>"></i>
-    </span>
-  </div>
+  <% if l10n.featured_image.attached? %>
+    <%= osuny_thumbnail l10n %>
+  <% else %>
+    <div class="osuny__thumbnail
+                osuny__thumbnail--small
+                osuny__thumbnail--cropped">
+      <span class="osuny__thumbnail__icon">
+        <i class="<%= l10n.icon %>" title="<%= l10n.original_content_type %>"></i>
+      </span>
+    </div>
+  <% end %>
   <div class="card-body">
     <%= osuny_published_localized file %>
     <%= osuny_link_localized  file,

@@ -4,6 +4,8 @@
 #
 #  id                    :uuid             not null, primary key
 #  deleted_at            :datetime
+#  featured_image_alt    :string
+#  featured_image_credit :text
 #  internal_description  :text
 #  meta_description      :text
 #  name                  :string
@@ -44,9 +46,11 @@
 #
 class Communication::File::Localization < ApplicationRecord
   include AsLocalization
+  include HasFeaturedImage
   include HasGitFiles
   include HasOriginalBlob
   include HasUniversity
+  include Initials
   include Permalinkable
   include Publishable
   include Sanitizable
@@ -116,7 +120,10 @@ class Communication::File::Localization < ApplicationRecord
   end
 
   def dependencies
-    [original_blob]
+    [
+      original_blob,
+      featured_image&.blob,
+    ]
   end
 
   def references
