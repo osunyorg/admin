@@ -105,6 +105,9 @@ en:
         original_content_type: Content type
         original_filename: Original filename
         original_uploaded_file: Original file
+        published: Published?
+        published_at: Publication date
+        published_by: Published by
       communication/media:
         collection: Collection
         height: Height
