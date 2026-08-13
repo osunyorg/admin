@@ -1,6 +1,6 @@
 <p><%= t('admin.communication.blocks.templates.sound.edit.file.label')%></p>
 <div class="d-flex align-items-center mb-3">
-  <file-selector
+  <file-input
     class="flex-fill"
     :model-value="data.file"
     @update:model-value="data.file = $event"
@@ -11,7 +11,7 @@
     title="<%= Communication::File.model_name.human(count: 2) %>"
     accept="<%= default_audio_formats_accepted %>"
     :size-limit="<%= Rails.application.config.default_file_max_size %>">
-  </file-selector>
+  </file-input>
   <a
     class="btn btn-sm text-danger ms-3"
     v-if="data.file.communication_file_id"

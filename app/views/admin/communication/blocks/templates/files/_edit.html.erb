@@ -24,7 +24,7 @@
 
 <div v-for="(element, index) in data.elements" class="pb-5 mb-5">
   <div class="d-flex align-items-center mb-3">
-    <file-selector
+    <file-input
       class="flex-fill"
       :model-value="element.file"
       @update:model-value="element.file = $event; if ($event.communication_file_id) element.title = $event.name"
@@ -35,7 +35,7 @@
       title="<%= Communication::File.model_name.human(count: 2) %>"
       accept="*"
       :size-limit="<%= Rails.application.config.default_file_max_size %>">
-    </file-selector>
+    </file-input>
     <a
       class="btn btn-sm text-danger ms-3"
       v-if="element.file.communication_file_id"

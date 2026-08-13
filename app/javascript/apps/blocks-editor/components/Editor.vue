@@ -5,14 +5,10 @@ import { getI18n } from '../../i18n';
 import Picker from '../../picker/Picker.vue';
 // Inputs
 import CodeInput              from '../../components/inputs/CodeInput.vue';
+import FileInput              from '../../components/inputs/FileInput.vue';
 import MultiImageInput        from '../../components/inputs/MultiImageInput.vue';
 import RichTextInput          from '../../components/inputs/RichTextInput.vue';
 import UploadInput            from '../../components/inputs/UploadInput.vue';
-// Selectors
-import FileSelector           from '../../components/selectors/FileSelector.vue';
-import PageSelector           from '../../components/selectors/PageSelector.vue';
-import PersonSelector         from '../../components/selectors/PersonSelector.vue';
-import ProgramSelector        from '../../components/selectors/ProgramSelector.vue';
 // Selected objects
 import SelectedFile           from '../../components/selected-objects/SelectedFile.vue';
 import SelectedMedia          from '../../components/selected-objects/SelectedMedia.vue';
@@ -163,14 +159,10 @@ export default {
       this.innerApp.component('Picker', Picker);
       // Inputs
       this.innerApp.component('CodeInput', CodeInput);
+      this.innerApp.component('FileInput', FileInput);
       this.innerApp.component('MultiImageInput', MultiImageInput);
       this.innerApp.component('RichTextInput', RichTextInput);
       this.innerApp.component('UploadInput', UploadInput);
-      // Selectors
-      this.innerApp.component('FileSelector', FileSelector);
-      this.innerApp.component('PageSelector', PageSelector);
-      this.innerApp.component('PersonSelector', PersonSelector);
-      this.innerApp.component('ProgramSelector', ProgramSelector);
       // Selected objects
       this.innerApp.component('SelectedFile', SelectedFile);
       this.innerApp.component('SelectedMedia', SelectedMedia);

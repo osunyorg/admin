@@ -35,14 +35,10 @@ object_endpoint = admin_university_people_path
       <div class="flex-fill">
         <div class="row align-items-center">
           <div class="col-sm-6">
-            <person-selector
-              :model-value="element.id"
-              @update:model-value="element.id = $event"
-              picker-endpoint="<%= picker_endpoint %>"
-              object-endpoint="<%= object_endpoint %>"
-              label="<%= t('admin.communication.blocks.components.person.button') %>"
-              title="<%= University::Person.model_name.human(count: 2) %>">
-            </person-selector>
+            <selected-person
+              :id="element.id"
+              endpoint="<%= object_endpoint %>">
+            </selected-object>
           </div>
           <div class="col-sm-6 mb-n3">
             <%= block_component_edit block, :role, template: @element, label: '' %>

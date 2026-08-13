@@ -547,6 +547,16 @@ fr:
           label: SSO
       file:
         replacement_file_hint: Renseignez un fichier uniquement si vous souhaitez le changer.
+      file_types:
+        archive: Archive
+        audio: Audio
+        image: Image
+        pdf: PDF
+        presentation: Présentation
+        spreadsheet: Tableur
+        text: Texte
+        title: Type de fichier
+        video: Vidéo
       website:
         agenda:
           event:

@@ -55,19 +55,23 @@ object_endpoint = admin_communication_website_pages_path(website_id: website_id)
 
 <div class="my-5" v-if="data.mode !== 'category'">
   <h2 class="h4"><%= t '.main_page.title' %></h2>
-  <div class="d-flex align-items-center">
-    <page-selector
-      :model-value="data.page_id"
-      @update:model-value="data.page_id = $event"
-      picker-endpoint="<%= picker_endpoint %>"
-      object-endpoint="<%= object_endpoint %>"
-      label="<%= t('admin.communication.blocks.components.page.button') %>"
-      title="<%= Communication::Website::Page.model_name.human(count: 2) %>"
+  <picker
+    v-if="!data.page_id"
+    @update:model-value="data.page_id = $event.id"
+    label="<%= t('admin.communication.blocks.components.page.button') %>"
+    title="<%= Communication::Website::Page.model_name.human(count: 2) %>"
+    endpoint="<%= picker_endpoint %>">
+  </picker>
+  <div
+    v-if="data.page_id"
+    class="d-flex align-items-center">
+    <selected-object
+      :id="data.page_id"
+      endpoint="<%= object_endpoint %>"
       class="flex-fill">
-    </page-selector>
+    </selected-object>
     <a
       class="btn btn-sm text-danger ms-3"
-      v-if="data.page_id"
       @click="data.page_id = ''"
       title="<%= t('delete') %>">
       <i class="<%= Icon::DELETE %>"></i>

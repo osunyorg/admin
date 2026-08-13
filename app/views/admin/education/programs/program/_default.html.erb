@@ -1,8 +1,5 @@
 <%
 hide_diploma ||= false
-hide_parent ||= false
-parent = program.parent
-diploma = program.diploma
 %>
 <div class="<%= osuny_card_classes(horizontal: true) %>">
   <%= osuny_thumbnail_localized program %>
@@ -12,17 +9,17 @@ diploma = program.diploma
     </div>
     <div>
       <%= osuny_link_localized program, [:admin, program], classes: 'stretched-link' %>
-      <% if !hide_parent && parent.present? %>
+      <% if program.parent.present? %>
         <br>
         <span class="small text-muted">
-          <%= parent.best_localization_for(current_language) %>
+          <%= program.parent.best_localization_for(current_language) %>
         </span>
       <% end %>
     </div>
   </div>
-  <% if !hide_diploma && diploma.present? %>
-    <div class="card-footer">
-      <%= diploma.best_localization_for(current_language).short_name %>
+  <% if !hide_diploma && program.diploma.present? %>
+    <div class="card-footer small text-muted">
+      <%= program.diploma.best_localization_for(current_language).short_name %>
     </div>
   <% end %>
 </div>

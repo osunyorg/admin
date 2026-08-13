@@ -1,10 +1,10 @@
 <script>
-import UploadButton from '../inputs/primitives/UploadButton.vue';
+import UploadButton from './primitives/UploadButton.vue';
 import SelectedFile from '../selected-objects/SelectedFile.vue';
 import Picker from '../../picker/Picker.vue';
 
 export default {
-  name: 'FileSelector',
+  name: 'FileInput',
   components: { UploadButton, SelectedFile, Picker },
   props: {
     // Le modèle est un objet composite, pour gérer la migration facilement
@@ -12,7 +12,7 @@ export default {
     uploadUrl: { type: String, required: true },
     pickerEndpoint: { type: String, required: true },
     objectEndpoint: { type: String, required: true },
-    accept: { type: String, required: true },
+    accept: { type: String, default: '*' },
     sizeLimit: { type: [String, Number], default: null },
     label: { type: String, required: true },
     title: { type: String, required: true },

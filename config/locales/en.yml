@@ -5,21 +5,21 @@ en:
       templates:
         embed:
           title_missing:
-            text_html: The HTML embedding has not title. This will prevent blind people from knowing what the integrated content is about, as mentioned in <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterion 4.7 of RGAA</a>. Please add a title to the iframe.
+            text_html: The HTML embedding has not title. This will prevent blind people from knowing what the integrated content is about, as mentioned in <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#4" target="_blank">topic 4 of RGAA</a>. Please add a title to the iframe.
             title: No frame title
           transcription_missing:
             text_html: The HTML iframe has no text transcription for blind people, for people with low bandwidth or no javascript enabled. Please add a text transcription.
             title: No transcription
         sound:
           title_missing:
-            text_html: Neither the block, neither the recording have a title. It will prevent blind people from knowing what the recording is about, as mentioned in <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterion 4.7 of RGAA</a>. Please add a title to the recording.
+            text_html: Neither the block, neither the recording have a title. It will prevent blind people from knowing what the recording is about, as mentioned in <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#4" target="_blank">topic 4 of RGAA</a>. Please add a title to the recording.
             title: No title
           transcription_missing:
             text_html: The recording has no text transcription for blind people, or for users with a low bitrate connection who could not read the recording properly. Please add a text transcription.
             title: No transcription
         video:
           title_missing:
-            text_html: Neither the block, neither the video have a title. It will prevent blind people from knowing what the video is about, as mentioned in <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterion 4.7 of RGAA</a>. Please add a title to the video.
+            text_html: Neither the block, neither the video have a title. It will prevent blind people from knowing what the video is about, as mentioned in <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#4" target="_blank">topic 4 of RGAA</a>. Please add a title to the video.
             title: No title
           transcription_missing:
             text_html: The video has no text transcription for blind people, or for users with a low bitrate connection who could not read the video properly. Please add a text transcription.

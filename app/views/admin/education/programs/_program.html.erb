@@ -1,4 +1,5 @@
 <%
+hide_diploma ||= false
 if program.deleted?
   partial_name = 'deleted'
 else
@@ -7,5 +8,4 @@ end
 %>
 <%= render "admin/education/programs/program/#{partial_name}",
             program: program,
-            hide_diploma: hide_diploma,
-            hide_parent: hide_parent %>
+            hide_diploma: hide_diploma %>
