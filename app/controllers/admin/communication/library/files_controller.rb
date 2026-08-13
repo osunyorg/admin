@@ -84,7 +84,7 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
           .permit(
             category_ids: [],
             localizations_attributes: [
-              :id, :name, :alt, :credit, :internal_description,
+              :id, :name, :alt, :credit, :internal_description, :meta_description,
               :original_uploaded_file, :language_id
             ]
           )

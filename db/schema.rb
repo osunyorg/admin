@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_13_125843) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_13_140000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -520,6 +520,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_13_125843) do
     t.datetime "created_at", null: false
     t.text "internal_description"
     t.uuid "language_id", null: false
+    t.text "meta_description"
     t.string "name"
     t.uuid "original_blob_id", null: false
     t.bigint "original_byte_size"

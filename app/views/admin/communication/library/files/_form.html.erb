@@ -14,6 +14,7 @@
         <%= lf.input :name %>
         <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
         <%= lf.input :internal_description, hint: t('simple_form.hints.communication_file_localization.internal_description') %>
+        <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
       </div>
     </div>
     <% content_for :action_bar_right do %>

@@ -3,6 +3,7 @@ file = @l10n.about
 %>
 ---
 <%= render 'admin/application/static/core', about: @l10n %>
+<%= osuny_static_text 'meta_description', @l10n.meta_description %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design', about: project, l10n: @l10n %>
 ---

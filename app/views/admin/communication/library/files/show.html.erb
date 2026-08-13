@@ -43,6 +43,11 @@
       <p><%= @l10n.internal_description %></p>
     <% end %>
 
+    <% if @l10n.meta_description.present? %>
+      <%= osuny_label t('admin.meta_description.label') %>
+      <p><%= @l10n.meta_description %></p>
+    <% end %>
+
     <%= render 'admin/application/categories/widget/show', about: @file %>
     <%= render 'admin/communication/library/contexts/list', contexts: @contexts %>
   </div>
