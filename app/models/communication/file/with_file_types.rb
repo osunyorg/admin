@@ -1,4 +1,4 @@
-module Communication::File::WithIcons
+module Communication::File::WithFileTypes
   extend ActiveSupport::Concern
 
   included do
@@ -77,6 +77,13 @@ module Communication::File::WithIcons
     }
 
     GENERIC_FILE_TYPE_ICON = 'bi bi-file-earmark'
+
+    scope :for_filetype, -> (filetypes, language) {
+      with_localizations(language)
+      .where(communication_file_localizations: {
+        original_content_type: content_types_for(filetypes)
+      })
+    }
   end
 
   class_methods do
@@ -85,6 +92,27 @@ module Communication::File::WithIcons
         return file_type[:icon] if content_type.in?(file_type[:content_types])
       end
       GENERIC_FILE_TYPE_ICON
+    end
+
+    # 'application/pdf' => :pdf
+    def filetype_for(content_type)
+      FILE_TYPES.find { |_filetype, data|
+        content_type.in?(data[:content_types])
+      }&.first
+    end
+
+    # 'image/jpeg' => 'Image'
+    def human_filetype_for(content_type)
+      filetype = filetype_for(content_type)
+      return if filetype.nil?
+      I18n.t("admin.communication.file_types.#{filetype}")
+    end
+
+    # [:pdf, :image] => ['application/pdf', 'image/jpeg', ...]
+    def content_types_for(filetypes)
+      Array(filetypes).flat_map { |filetype|
+        FILE_TYPES.dig(filetype.to_sym, :content_types)
+      }.compact
     end
   end
 end

@@ -553,6 +553,7 @@ fr:
         presentation: Présentation
         spreadsheet: Tableur
         text: Texte
+        title: Type de fichier
         video: Vidéo
       website:
         agenda:

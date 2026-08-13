@@ -68,6 +68,12 @@ class Communication::File::Localization < ApplicationRecord
     @icon ||= Communication::File.icon_for(original_content_type)
   end
 
+  # 'Image (image/jpeg)', ou juste 'image/jpeg' si le type est inconnu
+  def human_content_type
+    human_filetype = Communication::File.human_filetype_for(original_content_type)
+    human_filetype ? "#{human_filetype} (#{original_content_type})" : original_content_type
+  end
+
   def dependencies
     [original_blob]
   end
