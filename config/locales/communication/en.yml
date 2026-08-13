@@ -545,6 +545,15 @@ en:
         languages: Languages
         sso:
           label: SSO
+      file_types:
+        archive: Archive
+        audio: Audio
+        image: Image
+        pdf: PDF
+        presentation: Presentation
+        spreadsheet: Spreadsheet
+        text: Text
+        video: Video
       website:
         agenda:
           event:

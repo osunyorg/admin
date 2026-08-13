@@ -26,6 +26,7 @@ class Communication::File < ApplicationRecord
   include HasUniversity
   include Localizable
   include LocalizableOrderByNameScope
+  include WithIcons
   include WithOpenApi
 
   has_many :contexts, through: :localizations
