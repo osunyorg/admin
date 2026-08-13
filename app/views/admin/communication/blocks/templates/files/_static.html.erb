@@ -1,14 +1,6 @@
 <%= block_component_static block, :description %>
-      files:
-<%
-block.template.elements.each do |element|
-  next unless element.blob %>
-        -
-          id: "<%= element.blob.id %>"<%# TODO legacy to remove %>
-<%= osuny_static_text :title, element.title, depth: 6 %>
-          file:
-            id: "<%= element.blob.id %>"<%# TODO legacy to remove %>
-            blob_id: "<%= element.blob.id %>"
-            communication_file_id: "<%= element.communication_file.id %>"
-<%= block_component_static block, :image, template: element, depth: 5 %>
-<% end %>
+<%= render 'admin/application/static/hugo/collection',
+            key: :files,
+            depth: 3,
+            collection: block.template.selected_files,
+            language: block.language %>

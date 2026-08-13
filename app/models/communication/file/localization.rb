@@ -34,8 +34,11 @@
 #
 class Communication::File::Localization < ApplicationRecord
   include AsLocalization
+  include HasGitFiles
   include HasOriginalBlob
   include HasUniversity
+  include Permalinkable
+  include Sanitizable
   include WithOpenApi
 
   has_many    :contexts,
@@ -58,6 +61,19 @@ class Communication::File::Localization < ApplicationRecord
       localization.about_id = file.id      
     end
     localization
+  end
+
+  def git_path_relative
+    "files/#{created_at.year}/#{slug}.html"
+  end
+
+  def should_sync_to?(website)
+    website.active_language_ids.include?(language_id) &&
+    website.has_connected_object?(self)
+  end
+
+  def template_static
+    "admin/communication/files/static"
   end
 
   def max_file_size
