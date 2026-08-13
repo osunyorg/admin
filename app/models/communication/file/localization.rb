@@ -74,7 +74,7 @@ class Communication::File::Localization < ApplicationRecord
   end
 
   def template_static
-    "admin/communication/files/static"
+    "admin/communication/library/files/static"
   end
 
   def max_file_size

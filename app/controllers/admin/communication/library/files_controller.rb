@@ -2,6 +2,7 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
   load_and_authorize_resource class: Communication::File,
                               through: :current_university
 
+  include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
