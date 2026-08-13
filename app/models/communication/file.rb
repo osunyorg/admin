@@ -19,6 +19,7 @@
 #  fk_rails_e95d85eee7  (created_by_id => users.id)
 #
 class Communication::File < ApplicationRecord
+  include AsIndirectObject
   include Autosortable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
@@ -58,7 +59,7 @@ class Communication::File < ApplicationRecord
   scope :for_extension, -> (extensions, language) {
     with_localizations(language)
     .where(communication_file_localizations: {
-      original_extension: extensions 
+      original_extension: extensions
     })
   }
 
@@ -82,12 +83,12 @@ class Communication::File < ApplicationRecord
 
   # Attention, la création ne fait pas le travail jusqu'au bout,
   # ça renvoie un file vide, et il faut créer sa localisation.
-  # Concrètement, cette méthode est appelée uniquement par 
+  # Concrètement, cette méthode est appelée uniquement par
   # Communication::File::Localization.find_or_create_from_blob
   def self.find_or_create_from_blob(blob, user)
     # Soit il y a un fichier (dans n'importe quelle langue), on le renvoie
     # Soit il n'y en a aucun, on le crée
-    find_by_blob(blob) || 
+    find_by_blob(blob) ||
     create!(university_id: blob.university_id) do |file|
       file.created_by = user
     end
@@ -100,5 +101,10 @@ class Communication::File < ApplicationRecord
         original_checksum: blob.checksum
       }
     ).first
+  end
+
+  def dependencies
+    super +
+    localizations
   end
 end

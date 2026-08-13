@@ -1,12 +1,8 @@
 namespace :app do
   desc 'Fix things'
   task fix: :environment do
-    Communication::Block.where(
-      communication_website_id: nil,
-      about_type: "Communication::Website::Localization"
-    ).each do |block|
-      block.update_column :communication_website_id,
-                          block.about.communication_website_id
+    Communication::File::Localization.includes(:original_blob).where(slug: nil).find_each do |file_l10n|
+      file_l10n.save
     end
   end
 

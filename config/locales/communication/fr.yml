@@ -646,6 +646,11 @@ fr:
                 zero: Cette page est une page spéciale, qui présente nativement les expositions du site.
                 one: Cette page est une page spéciale, qui présente nativement les expositions du site. Pour l'instant, il y a 1 exposition publiée.
                 other: Cette page est une page spéciale, qui présente nativement les %{count} expositions publiées.
+            communication_file:
+              native:
+                zero: Cette page est une page spéciale, qui présente nativement les fichiers liés au site. Pour l'instant, il n'y a aucun fichier dans le site.
+                one: Cette page est une page spéciale, qui présente nativement les fichiers liés au site. Pour l'instant, il y a 1 fichier.
+                other: Cette page est une page spéciale, qui présente nativement les %{count} fichiers liés au site.
             communication_jobboard:
               native:
                 zero: Cette page est une page spéciale, qui présente nativement les offres d'emploi du site.
@@ -844,6 +849,9 @@ fr:
           communication_agenda_exhibition_archive:
             slug: archives-expositions
             title: Archives des expositions
+          communication_file:
+            slug: fichiers
+            title: Fichiers
           communication_jobboard:
             slug: offres-d-emploi
             title: Offres d'emploi

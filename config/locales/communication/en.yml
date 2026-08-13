@@ -646,6 +646,11 @@ en:
                 zero: This page is a special page, which natively presents the site's exhibitions.
                 one: This page is a special page, which natively presents the site's exhibitions. For now, there's a single exhibition published.
                 other: This page is a special page, which natively presents the %{count} published exhibitions.
+            communication_file:
+              native:
+                zero: This page is a special page, which natively presents the site's files.
+                one: This page is a special page, which natively presents the site's files. For the moment, there's a single published file.
+                other: This page is a special page, which natively presents the %{count} published files.
             communication_jobboard:
               native:
                 zero: This page is a special page, which natively presents the site's job offers.
@@ -844,6 +849,9 @@ en:
           communication_agenda_exhibition_archive:
             slug: exhibitions-archives
             title: Exhibitions' archives
+          communication_file:
+            slug: files
+            title: Files
           communication_jobboard:
             slug: job-offers
             title: Job offers
