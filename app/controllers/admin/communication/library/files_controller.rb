@@ -2,6 +2,7 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
   load_and_authorize_resource class: Communication::File,
                               through: :current_university
 
+  include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
@@ -84,7 +85,7 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
           .permit(
             category_ids: [],
             localizations_attributes: [
-              :id, :name, :alt, :credit, :internal_description,
+              :id, :name, :alt, :credit, :internal_description, :meta_description,
               :original_uploaded_file, :language_id
             ]
           )

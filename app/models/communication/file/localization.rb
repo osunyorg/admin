@@ -4,6 +4,7 @@
 #
 #  id                    :uuid             not null, primary key
 #  internal_description  :text
+#  meta_description      :text
 #  name                  :string
 #  original_byte_size    :bigint
 #  original_checksum     :string
@@ -84,7 +85,7 @@ class Communication::File::Localization < ApplicationRecord
   end
 
   def template_static
-    "admin/communication/files/static"
+    "admin/communication/library/files/static"
   end
 
   def max_file_size

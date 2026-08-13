@@ -317,6 +317,9 @@ namespace :communication do
           end
         end
       end
+      member do
+        get :static
+      end
     end
   end
   root to: 'dashboard#index'
