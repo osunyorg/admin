@@ -65,7 +65,7 @@ class Communication::File::Localization < ApplicationRecord
   end
 
   def icon
-    @icon ||= Osuny::FileType.icon_for(original_content_type)
+    @icon ||= Communication::File.icon_for(original_content_type)
   end
 
   def dependencies
