@@ -87,7 +87,7 @@ module HasDependencies
   end
 
   def touch_references
-    references.flatten.compact.each &:touch
+    references.to_a.flatten.compact.each &:touch
   end
 
   protected
