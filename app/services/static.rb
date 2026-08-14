@@ -15,9 +15,9 @@ class Static
     if clean_path.end_with?('.html')
       # For redirections based on old websites
       # We don't do anything
-    else
+    elsif !clean_path.end_with?('/')
       # Trailing slash for consistency
-      clean_path += '/' unless clean_path.end_with?('/')
+      clean_path += '/'
     end
     clean_path.gsub('//', '/')
   end
