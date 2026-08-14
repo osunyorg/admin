@@ -14,7 +14,7 @@ module Sluggable
   end
 
   def set_slug
-    self.slug = to_s.parameterize if self.slug.blank?
+    self.slug = generate_slug_from_to_s if self.slug.blank?
     adjust_slug_length
     current_slug = self.slug
     n = 0
@@ -25,6 +25,11 @@ module Sluggable
   end
 
   protected
+
+  def generate_slug_from_to_s
+    slug = to_s.to_slug.normalize.to_s
+    Romaji.kana2romaji(slug)
+  end
 
   def adjust_slug_length
     return unless self.slug.length > SLUG_MAX_LENGTH
