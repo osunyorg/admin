@@ -12,8 +12,13 @@ class Static
     clean_path = path.dup
     # Leading slash for absolute path
     clean_path = "/#{clean_path}" unless clean_path.start_with?('/')
-    # Trailing slash for consistency
-    clean_path += '/' unless clean_path.end_with?('/')
+    if clean_path.end_with?('.html')
+      # For redirections based on old websites
+      # We don't do anything
+    else
+      # Trailing slash for consistency
+      clean_path += '/' unless clean_path.end_with?('/')
+    end
     clean_path.gsub('//', '/')
   end
 
