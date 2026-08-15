@@ -31,8 +31,8 @@ class Admin::Communication::Websites::PermalinksController < Admin::Communicatio
     @permalink.destroy
     respond_to do |format|
       format.html {
-        redirect_to redirects_admin_communication_website_path(id: params[:website_id], website_id: nil),
-                    notice: t('admin.successfully_destroyed_html', model: @permalink.to_s)
+        redirect_back fallback_location: redirects_admin_communication_website_path(id: params[:website_id], website_id: nil),
+                      notice: t('admin.successfully_destroyed_html', model: @permalink.to_s)
       }
       format.js
     end
