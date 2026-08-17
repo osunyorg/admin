@@ -4,16 +4,6 @@ current = {
   featured_media_id: about.featured_media_id.to_s,
   featured_media_alt: about.featured_media_alt.to_s
 }
-cloud = {
-  unsplash: {
-    logo: asset_path('communication/photo_imports/unsplash.svg'),
-    endpoint: unsplash_admin_communication_medias_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
-  },
-  pexels: {
-    logo: asset_path('communication/photo_imports/pexels.png'),
-    endpoint: pexels_admin_communication_medias_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
-  },
-}
 
 # Endpoints
 default_settings = {
@@ -22,6 +12,8 @@ default_settings = {
   journal_id: nil
 }
 upload_endpoint = direct_upload_admin_communication_medias_path(**default_settings)
+cloud_unsplash_endpoint = unsplash_admin_communication_medias_path(**default_settings)
+cloud_pexels_endpoint = pexels_admin_communication_medias_path(**default_settings)
 cloud_select_endpoint = cloud_select_admin_communication_medias_path(**default_settings)
 picker_endpoint = picker_admin_communication_medias_path(**default_settings, format: :json)
 object_endpoint = admin_communication_medias_path(**default_settings)
@@ -36,8 +28,9 @@ changes_endpoint = set_featured_admin_communication_medias_path(
   data-current="<%= current.to_json %>"
   data-upload-endpoint="<%= upload_endpoint %>"
   data-upload-hint="<%= images_formats_accepted_hint %>"
-  data-search-term="<%= about.to_s %>"
-  data-cloud="<%= cloud.to_json %>"
+  data-cloud-query="<%= about.to_s %>"
+  data-cloud-unsplash-endpoint="<%= cloud_unsplash_endpoint %>"
+  data-cloud-pexels-endpoint="<%= cloud_pexels_endpoint %>"
   data-cloud-select-endpoint="<%= cloud_select_endpoint %>"
   data-picker-endpoint="<%= picker_endpoint %>"
   data-object-endpoint="<%= object_endpoint %>"

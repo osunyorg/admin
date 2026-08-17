@@ -6,6 +6,8 @@ default_settings = {
   journal_id: nil
 }
 upload_endpoint = direct_upload_admin_communication_medias_path(**default_settings)
+cloud_unsplash_endpoint = unsplash_admin_communication_medias_path(**default_settings)
+cloud_pexels_endpoint = pexels_admin_communication_medias_path(**default_settings)
 cloud_select_endpoint = cloud_select_admin_communication_medias_path(**default_settings)
 picker_endpoint = picker_admin_communication_medias_path(**default_settings, format: :json)
 object_endpoint = admin_communication_medias_path(**default_settings)
@@ -16,6 +18,9 @@ object_endpoint = admin_communication_medias_path(**default_settings)
   size-limit="<%= Rails.application.config.default_image_max_size %>"
   object-endpoint="<%= object_endpoint %>"
   upload-endpoint="<%= upload_endpoint %>"
+  cloud-query="<%= %>"
+  cloud-unsplash-endpoint="<%= cloud_unsplash_endpoint %>"
+  cloud-pexels-endpoint="<%= cloud_pexels_endpoint %>"
   cloud-select-endpoint="<%= cloud_select_endpoint %>"
   picker-endpoint="<%= picker_endpoint %>"
   upload-hint="<%= images_formats_accepted_hint %>"

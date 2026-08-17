@@ -11,7 +11,9 @@ export default {
       'selected'
     ],
     props: {
-      endpoint: { type: String, required: true },
+      unsplashEndpoint: { type: String, required: true },
+      pexelsEndpoint: { type: String, required: true },
+      selectEndpoint: { type: String, required: true },
     },
     data () {
       return {
@@ -46,18 +48,20 @@ export default {
         document.body.classList.remove("modal-open");
       },
       search() {
-        this.searchUnsplash();
-        this.searchPexels();
+        if (this.modal) {
+          this.searchUnsplash();
+          this.searchPexels();
+        }
       },
       searchUnsplash() {
-        let url = this.settings.unsplash.endpoint
+        let url = this.unsplashEndpoint
                     + '?query=' + encodeURIComponent(this.query)
                     + '&page=' + this.unsplash.page
                     + '&per_page=12&lang=' + this.lang;
         this.loadSearchResults(url, this.unsplash);
       },
       searchPexels() {
-        let url = this.settings.pexels.endpoint
+        let url = this.pexelsEndpoint
                     + '?query=' + encodeURIComponent(this.query)
                     + '&page=' + this.pexels.page
                     + '&per_page=12&lang=' + this.lang;
@@ -87,7 +91,7 @@ export default {
       },
       upload(origin, data) {
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", this.endpoint, false);
+        xhr.open("POST", this.selectEndpoint, false);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.setRequestHeader('X-CSRF-Token', document.querySelector('[name="csrf-token"]').content);
         xhr.onreadystatechange = function() {
@@ -108,10 +112,7 @@ export default {
       },
     },
     beforeMount() {
-      const dataset = document.getElementById('featured-media-app').dataset;
       this.lang = document.documentElement.lang;
-      this.query = dataset.searchTerm;
-      this.settings = JSON.parse(dataset.cloud);
     },
 };
 </script>
@@ -238,8 +239,8 @@ export default {
             </div>
           </div>
           <div class="modal-footer d-block d-flex justify-content-between">
-            <img :src="settings.unsplash.logo" width="100" alt="Unsplash" />
-            <img :src="settings.pexels.logo" width="100" alt="Pexels" />
+            <img src="/vue/unsplash.svg" width="100" alt="Unsplash" />
+            <img src="/vue/pexels.png" width="100" alt="Pexels" />
           </div>
         </div>
       </div>

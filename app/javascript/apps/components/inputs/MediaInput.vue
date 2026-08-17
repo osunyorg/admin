@@ -17,6 +17,9 @@ export default {
     accept: { type: String, default: '*' },
     uploadHint: { type: String, default: '' },
     uploadEndpoint: { type: String, required: true },
+    cloudQuery: { type: String, required: true },
+    cloudUnsplashEndpoint: { type: String, required: true },
+    cloudPexelsEndpoint: { type: String, required: true },
     cloudSelectEndpoint: { type: String, required: true },
     objectEndpoint: { type: String, required: true },
     pickerEndpoint: { type: String, required: true },
@@ -98,7 +101,10 @@ export default {
         @uploaded="mediaSelected" />
       <div class="d-flex flex-wrap justify-content-between">
         <Cloud
-          :endpoint="cloudSelectEndpoint"
+          :query="cloudQuery"
+          :unsplash-endpoint="cloudUnsplashEndpoint"
+          :pexels-endpoint="cloudPexelsEndpoint"
+          :select-endpoint="cloudSelectEndpoint"
           @selected="mediaSelected" />
         <Picker
           :endpoint="pickerEndpoint"
