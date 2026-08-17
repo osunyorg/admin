@@ -1,16 +1,18 @@
 <script>
 import Changes from '../components/Changes.vue';
 import Cloud from './components/Cloud.vue';
-import Medias from './components/Medias.vue';
 import ImageUploader from './components/ImageUploader.vue';
+import Medias from './components/Medias.vue';
+import Picker from '../picker/Picker.vue';
 import Summernote from '../components/Summernote.vue';
 
 export default {
     components: {
       Changes,
       Cloud,
-      Medias,
       ImageUploader,
+      Medias,
+      Picker,
       Summernote,
     },
     data () {
@@ -46,12 +48,12 @@ export default {
         this.current.image.credit = image.credit;
         this.current.image.url = image.preview;
       },
-      mediaSelected(image) {
+      mediaSelected(media) {
         this.resetOrigin();
-        this.current.origin.medias.id = image.id;
-        this.current.image.credit = image.credit;
-        this.current.image.alt = image.alt;
-        this.current.image.url = image.thumb;
+        this.current.origin.medias.id = media.id;
+        this.current.image.credit = media.credit;
+        this.current.image.alt = media.alt;
+        this.current.image.url = media.thumb;
       }
     },
     beforeMount() {
@@ -74,9 +76,14 @@ export default {
       <div v-if="!current.image.url" class="vue__media-picker__selector">
         <ImageUploader @uploaded="uploaded" />
         <div class="d-flex flex-wrap justify-content-between">
-          <Cloud  @unsplashSelected="unsplashSelected"
-                  @pexelsSelected="pexelsSelected" />
+          <Cloud
+            @unsplashSelected="unsplashSelected"
+            @pexelsSelected="pexelsSelected" />
           <Medias @mediaSelected="mediaSelected" />
+          <Picker
+            :endpoint="dataset.pickerEndpoint"
+            @picked="mediaSelected"
+            :label="$t('mediaPicker.medias.button')" />
         </div>
       </div>
       <div v-if="current.image.url">

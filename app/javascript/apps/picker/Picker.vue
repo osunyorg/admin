@@ -26,13 +26,17 @@ export default {
     // en partant du paramètre accept de l'input file
     accept: { type: String, default: '*' },
   },
-  emits: ['update:modelValue'],
+  emits: [
+    'picked',
+    'update:modelValue'
+  ],
   computed: {
     value: {
       get() {
         return this.modelValue;
       },
       set(value) {
+        this.$emit('picked', value);
         this.$emit('update:modelValue', value);
       }
     }

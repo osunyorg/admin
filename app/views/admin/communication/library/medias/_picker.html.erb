@@ -23,5 +23,6 @@ cloud = {
       data-cloud="<%= cloud.to_json %>"
       data-keycdn="<%= ENV["KEYCDN_HOST"] %>"
       data-media-endpoint="<%= admin_communication_medias_url(website_id: nil, extranet_id: nil, journal_id: nil, format: :json) %>"
+      data-picker-endpoint="<%= picker_admin_communication_medias_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json) %>"
       >
 </div>
