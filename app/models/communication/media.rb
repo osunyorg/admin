@@ -12,18 +12,21 @@
 #  created_at                        :datetime         not null
 #  updated_at                        :datetime         not null
 #  communication_media_collection_id :uuid             indexed
+#  created_by_id                     :uuid             indexed
 #  original_blob_id                  :uuid             not null, indexed
 #  university_id                     :uuid             not null, indexed
 #
 # Indexes
 #
 #  idx_on_communication_media_collection_id_6cace98319  (communication_media_collection_id)
+#  index_communication_medias_on_created_by_id          (created_by_id)
 #  index_communication_medias_on_original_blob_id       (original_blob_id)
 #  index_communication_medias_on_university_id          (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_44f0fb11c6  (original_blob_id => active_storage_blobs.id)
+#  fk_rails_4c33acbe5f  (created_by_id => users.id)
 #  fk_rails_abfb984e30  (communication_media_collection_id => communication_media_collections.id)
 #  fk_rails_de56e1762f  (university_id => universities.id)
 #
@@ -31,6 +34,7 @@ class Communication::Media < ApplicationRecord
   include Autosortable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
+  include HasCreator
   include HasOriginalBlob
   include HasUniversity
   include Localizable

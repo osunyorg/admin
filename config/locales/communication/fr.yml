@@ -111,6 +111,7 @@ fr:
         published_by: Publié par
       communication/media:
         collection: Collection
+        created_by: Envoyée par
         height: Hauteur
         origin: Provenance
         original_byte_size: Poids

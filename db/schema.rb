@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_17_070628) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_17_072458) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -651,6 +651,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_17_070628) do
   create_table "communication_medias", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "communication_media_collection_id"
     t.datetime "created_at", null: false
+    t.uuid "created_by_id"
     t.integer "origin", default: 1, null: false
     t.uuid "original_blob_id", null: false
     t.bigint "original_byte_size"
@@ -661,6 +662,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_17_070628) do
     t.uuid "university_id", null: false
     t.datetime "updated_at", null: false
     t.index ["communication_media_collection_id"], name: "idx_on_communication_media_collection_id_6cace98319"
+    t.index ["created_by_id"], name: "index_communication_medias_on_created_by_id"
     t.index ["original_blob_id"], name: "index_communication_medias_on_original_blob_id"
     t.index ["university_id"], name: "index_communication_medias_on_university_id"
   end
@@ -2807,6 +2809,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_17_070628) do
   add_foreign_key "communication_medias", "active_storage_blobs", column: "original_blob_id"
   add_foreign_key "communication_medias", "communication_media_collections"
   add_foreign_key "communication_medias", "universities"
+  add_foreign_key "communication_medias", "users", column: "created_by_id"
   add_foreign_key "communication_website_agenda_categories", "communication_website_agenda_categories", column: "parent_id"
   add_foreign_key "communication_website_agenda_categories", "communication_websites"
   add_foreign_key "communication_website_agenda_categories", "education_programs", column: "program_id"

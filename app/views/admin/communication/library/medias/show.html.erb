@@ -36,6 +36,12 @@
         <%= osuny_label Communication::Media.human_attribute_name(:original_byte_size) %>
         <p><%= number_to_human_size @media.original_byte_size %></p>
       </div>
+      <% if @media.created_by.present? %>
+        <div class="col-lg-6">
+          <%= osuny_label Communication::Media.human_attribute_name(:created_by) %>
+          <p><%= link_to @media.created_by, [:admin, @media.created_by] %></p>
+        </div>
+      <% end %>
       <% if @media.width.present? %>
         <div class="col-lg-6">
           <%= osuny_label Communication::Media.human_attribute_name(:width) %>
