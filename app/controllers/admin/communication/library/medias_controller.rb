@@ -43,16 +43,17 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
 
   def set_featured
     @media = current_university.communication_medias
-                               .find(params[:media])
-    # FIXME
+                               .find(params[:featured_media_id])
+    return if @media.nil?
     @about = PolymorphicObjectFinder.find(
       params,
       key: :about,
       university: current_university
     )
+    return if @about.nil?
     @about.featured_media = @media
+    @about.featured_media_alt = params[:featured_media_alt]
     @about.save
-    render :ok
   end
 
   def edit
