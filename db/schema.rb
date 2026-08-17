@@ -2402,6 +2402,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_085855) do
     t.uuid "created_by_id"
     t.datetime "deleted_at"
     t.string "email"
+    t.boolean "is_laboratory", default: false
+    t.boolean "is_location", default: false
+    t.boolean "is_school", default: false
     t.integer "kind", default: 10
     t.float "latitude"
     t.float "longitude"
@@ -2623,6 +2626,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_085855) do
     t.index ["user_id"], name: "index_user_favorites_on_user_id"
   end
 
+  create_table "user_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "role", null: false
+    t.uuid "scope_id"
+    t.string "scope_type"
+    t.uuid "university_id", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "user_id", null: false
+    t.index ["scope_type", "scope_id"], name: "index_user_roles_on_scope"
+    t.index ["university_id"], name: "index_user_roles_on_university_id"
+    t.index ["user_id", "role", "scope_type", "scope_id"], name: "index_user_roles_uniqueness", unique: true
+    t.index ["user_id"], name: "index_user_roles_on_user_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.integer "brevo_contact_id"
     t.datetime "confirmation_sent_at", precision: nil
@@ -2654,6 +2671,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_085855) do
     t.string "reset_password_token"
     t.integer "role", default: 0
     t.integer "second_factor_attempts_count", default: 0
+    t.boolean "server_admin", default: false
     t.string "session_token"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "totp_timestamp", precision: nil
@@ -3025,6 +3043,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_085855) do
   add_foreign_key "university_role_localizations", "university_roles", column: "about_id"
   add_foreign_key "university_roles", "universities"
   add_foreign_key "user_favorites", "users"
+  add_foreign_key "user_roles", "universities"
+  add_foreign_key "user_roles", "users"
   add_foreign_key "users", "languages"
   add_foreign_key "users", "universities"
 end
