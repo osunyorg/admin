@@ -21,9 +21,9 @@ export default {
       resetOrigin() {
         this.current.origin = JSON.parse(JSON.stringify(this.previous.origin));
       },
-      removeImage() {
+      remove() {
         this.resetOrigin();
-        this.current.image.url = "";
+        this.current.media = '';
         this.current.origin.blob.delete = true;
       },
     },
@@ -60,7 +60,7 @@ export default {
       <div v-if="current.media">
         <div class="text-end">
           <a  class="btn btn-sm text-danger pe-0"
-              @click="removeImage()">
+              @click="remove">
             <i class="<%= Icon::DELETE %>"></i>
             {{ $t('featuredImage.remove') }}
           </a>
