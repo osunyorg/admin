@@ -51,9 +51,9 @@ export default {
       },
       searchUnsplash() {
         let url = this.settings.unsplash.endpoint
-                      + '?query=' + encodeURIComponent(this.query)
-                      + '&page=' + this.unsplash.page
-                      + '&per_page=12&lang=' + this.lang;
+                    + '?query=' + encodeURIComponent(this.query)
+                    + '&page=' + this.unsplash.page
+                    + '&per_page=12&lang=' + this.lang;
         this.loadSearchResults(url, this.unsplash);
       },
       searchPexels() {
@@ -129,28 +129,33 @@ export default {
         <div class="modal-content">
           <div class="modal-header">
             <div class="col-auto d-none d-lg-block">
-              <h5 class="modal-title">{{ $t('components.inputs.mediaInput.cloud.title') }}</h5>
+              <h5 class="modal-title">
+                {{ $t('components.inputs.mediaInput.cloud.title') }}
+              </h5>
             </div>
             <div class="col-auto d-flex flex-fill mx-lg-5">
               <div class="input-group">
-                <input  type="text"
-                        name="search"
-                        class="form-control ms-auto"
-                        :placeholder="$t('components.inputs.mediaInput.cloud.placeholder')"
-                        v-model="query"
-                        @keyup.enter="search">
-                <button type="button"
-                        class="btn btn-primary me-auto"
-                        @click="search"
-                        :aria-label="$t('components.inputs.mediaInput.cloud.search')">
+                <input
+                  type="text"
+                  name="search"
+                  class="form-control ms-auto"
+                  :placeholder="$t('components.inputs.mediaInput.cloud.placeholder')"
+                  v-model="query"
+                  @keyup.enter="search">
+                <button
+                  type="button"
+                  class="btn btn-primary me-auto"
+                  @click="search"
+                  :aria-label="$t('components.inputs.mediaInput.cloud.search')">
                   {{ $t('components.inputs.mediaInput.cloud.search') }}
                 </button>
               </div>
             </div>
             <div class="col-auto">
-              <button type="button"
-                      class="btn-close"
-                      @click="close()">
+              <button
+                type="button"
+                class="btn-close"
+                @click="close()">
               </button>
             </div>
           </div>
@@ -160,7 +165,9 @@ export default {
                 <p v-if="unsplash.data.results.length === 0" >
                   {{ $t('components.inputs.mediaInput.cloud.nothing') }}
                 </p>
-                <div v-if="unsplash.data.total_pages" class="d-flex justify-content-between mb-2">
+                <div
+                  v-if="unsplash.data.total_pages"
+                  class="d-flex justify-content-between mb-2">
                   <div class="vue__media-picker__button_container">
                     <button
                       class="btn btn-sm ps-0"
@@ -195,7 +202,9 @@ export default {
                 <p v-if="pexels.data.results.length === 0" >
                   {{ $t('components.inputs.mediaInput.cloud.nothing') }}
                 </p>
-                <div v-if="pexels.data.total_pages" class="d-flex justify-content-between mb-2">
+                <div
+                  v-if="pexels.data.total_pages"
+                  class="d-flex justify-content-between mb-2">
                   <div class="vue__media-picker__button_container">
                     <button
                       class="btn btn-sm ps-0"
