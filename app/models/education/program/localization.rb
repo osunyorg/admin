@@ -9,8 +9,8 @@
 #  deleted_at             :datetime
 #  duration               :string
 #  evaluation             :text
-#  featured_image_alt     :string
 #  featured_image_credit  :text
+#  featured_media_alt     :string
 #  meta_description       :text
 #  name                   :string
 #  objectives             :text
@@ -37,20 +37,23 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  about_id               :uuid             uniquely indexed => [language_id], indexed
+#  featured_media_id      :uuid             indexed
 #  language_id            :uuid             uniquely indexed => [about_id], indexed
 #  university_id          :uuid             indexed
 #
 # Indexes
 #
-#  idx_on_about_id_language_id_9b56b45e58                  (about_id,language_id) UNIQUE
-#  index_education_program_localizations_on_about_id       (about_id)
-#  index_education_program_localizations_on_language_id    (language_id)
-#  index_education_program_localizations_on_university_id  (university_id)
+#  idx_on_about_id_language_id_9b56b45e58                      (about_id,language_id) UNIQUE
+#  index_education_program_localizations_on_about_id           (about_id)
+#  index_education_program_localizations_on_featured_media_id  (featured_media_id)
+#  index_education_program_localizations_on_language_id        (language_id)
+#  index_education_program_localizations_on_university_id      (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_3e759230aa  (about_id => education_programs.id)
 #  fk_rails_66267db4ba  (language_id => languages.id)
+#  fk_rails_c59b2050d6  (featured_media_id => communication_medias.id) ON DELETE => nullify
 #  fk_rails_e375f2df91  (university_id => universities.id)
 #
 class Education::Program::Localization < ApplicationRecord
@@ -61,7 +64,7 @@ class Education::Program::Localization < ApplicationRecord
   include AsLocalizedTree # ordered scope is overridden below
   include Contentful
   include HasBlobs
-  include HasFeaturedImage
+  include HasFeaturedMedia
   include HasGitFiles
   include HasUniversity
   include Initials
@@ -123,16 +126,16 @@ class Education::Program::Localization < ApplicationRecord
     3
   end
 
-  def best_featured_image_source(fallback: true)
-    return self if featured_image.attached?
-    best_source = parent&.best_featured_image_source(fallback: false)
+  def best_featured_media_source(fallback: true)
+    return self if featured_media.present?
+    best_source = parent&.best_featured_media_source(fallback: false)
     best_source ||= self if fallback
     best_source
   end
 
   def explicit_blob_ids
     super.concat [
-      featured_image&.blob_id,
+      featured_media&.original_blob_id,
       shared_image&.blob_id,
       downloadable_summary&.blob_id,
       logo&.blob_id
@@ -140,7 +143,7 @@ class Education::Program::Localization < ApplicationRecord
   end
 
   def inherited_blob_ids
-    [best_featured_image&.blob_id]
+    [best_featured_media&.original_blob_id]
   end
 
   def diploma

@@ -249,8 +249,8 @@ en:
   category:
     breadcrumb_title: Title in breadcrumbs
     children: Sub-categories
-    featured_image: Featured image
-    featured_image_alt: Alternative text
+    featured_media: Featured image
+    featured_media_alt: Alternative text
     free: Free categories (without taxonomy)
     header_text: Title displayed in header
     is_taxonomy: Is a taxonomy (a family of categories)?

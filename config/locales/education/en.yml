@@ -46,8 +46,8 @@ en:
         downloadable_summary: Downloadable summary
         duration: Duration
         evaluation: Evaluation method
-        featured_image: Featured image
-        featured_image_alt: Alt text
+        featured_media: Featured image
+        featured_media_alt: Alt text
         is_draft: Draft
         is_published: Published
         logo: Program logo

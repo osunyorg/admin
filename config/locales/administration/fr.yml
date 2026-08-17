@@ -23,7 +23,7 @@ fr:
       administration/location/localization:
         address_additional: Complément d'adresse
         address_name: Nom de l'adresse
-        featured_image: Image à la une
+        featured_media: Image à la une
         name: Nom
         url: Site Web
       administration/qualiopi/criterion:

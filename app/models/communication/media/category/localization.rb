@@ -3,8 +3,8 @@
 # Table name: communication_media_category_localizations
 #
 #  id                    :uuid             not null, primary key
-#  featured_image_alt    :text
 #  featured_image_credit :text
+#  featured_media_alt    :text
 #  meta_description      :text
 #  name                  :string
 #  slug                  :string
@@ -12,18 +12,21 @@
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  about_id              :uuid             uniquely indexed => [language_id], indexed
+#  featured_media_id     :uuid             indexed
 #  language_id           :uuid             uniquely indexed => [about_id], indexed
 #  university_id         :uuid             indexed
 #
 # Indexes
 #
 #  idx_on_about_id_language_id_b290ff1c8d                        (about_id,language_id) UNIQUE
+#  idx_on_featured_media_id_c6035bfebf                           (featured_media_id)
 #  idx_on_language_id_b744f004d4                                 (language_id)
 #  idx_on_university_id_0e75cba3b7                               (university_id)
 #  index_communication_media_category_localizations_on_about_id  (about_id)
 #
 # Foreign Keys
 #
+#  fk_rails_22314e1c02  (featured_media_id => communication_medias.id) ON DELETE => nullify
 #  fk_rails_d356e586b9  (about_id => communication_media_categories.id)
 #  fk_rails_d37936c983  (university_id => universities.id)
 #  fk_rails_ff7bdfc3a7  (language_id => languages.id)

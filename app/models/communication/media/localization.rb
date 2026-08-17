@@ -32,6 +32,8 @@ class Communication::Media::Localization < ApplicationRecord
   include Initials
   include WithOpenApi
 
+  has_summernote :credit
+
   def to_s
     "#{name}"
   end

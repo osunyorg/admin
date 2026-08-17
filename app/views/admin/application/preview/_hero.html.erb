@@ -4,8 +4,8 @@
 @summary = @l10n.summary
 
 hero_classes = "hero"
-if @l10n.featured_image.present? && @l10n.featured_image.attached?
-  format = ActiveStorage::Utils.format(@l10n.featured_image)
+if @l10n.featured_blob.present?
+  format = ActiveStorage::Utils.format(@l10n.featured_blob)
   hero_classes += " hero--with-image hero--image-#{format}" if format.present?
 end
 %>

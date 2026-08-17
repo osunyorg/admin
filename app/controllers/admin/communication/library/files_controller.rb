@@ -88,7 +88,6 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
             category_ids: [],
             localizations_attributes: [
               :id, :name, :alt, :credit, :internal_description, :meta_description, :published,
-              :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
               :original_uploaded_file, :language_id
             ]
           )

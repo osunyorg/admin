@@ -86,9 +86,8 @@ en:
       communication/extranet/post/category/localization:
         name: Name
       communication/extranet/post/localization:
-        featured_image: Featured image
-        featured_image_alt: Alt text
-        featured_image_credit: Credit
+        featured_media: Featured image
+        featured_media_alt: Alt text
         pinned: Pinned
         published: Published?
         published_at: Publication date
@@ -196,7 +195,7 @@ en:
         time_zone: Time zone
         to_day: To day
       communication/website/agenda/event/localization:
-        featured_image: Featured image
+        featured_media: Featured image
         notes: Notes
         published: Published
         subtitle: Subtitle
@@ -215,7 +214,7 @@ en:
         time_zone: Time zone
         to_day: To day
       communication/website/agenda/exhibition/localization:
-        featured_image: Featured image
+        featured_media: Featured image
         notes: Notes
         place: Place
         published: Published
@@ -245,7 +244,7 @@ en:
         from_day: Publication date
         to_day: End date
       communication/website/jobboard/job/localization:
-        featured_image: Featured image
+        featured_media: Featured image
         published: Published
         subtitle: Subtitle
         title: Title
@@ -298,8 +297,8 @@ en:
         website: Website
       communication/website/page/localization:
         breadcrumb_title: Title in breadcrumbs
-        featured_image: Featured image
-        featured_image_alt: Alt text
+        featured_media: Featured image
+        featured_media_alt: Alt text
         header_text: Title displayed in header
         path: Path
         published: Published?
@@ -318,7 +317,7 @@ en:
         full_width: Full width
         year: Year
       communication/website/portfolio/project/localization:
-        featured_image: Featured image
+        featured_media: Featured image
         published: Published
         subtitle: Subtitle
         title: Title
@@ -330,9 +329,8 @@ en:
       communication/website/post/localization:
         category: Category
         date: Date
-        featured_image: Featured image
-        featured_image_alt: Alt text
-        featured_image_credit: Credit
+        featured_media: Featured image
+        featured_media_alt: Alt text
         pinned: Pinned
         published: Published?
         published_at: Publication date

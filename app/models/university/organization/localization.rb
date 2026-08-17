@@ -6,8 +6,8 @@
 #  address_additional    :string
 #  address_name          :string
 #  deleted_at            :datetime
-#  featured_image_alt    :string
 #  featured_image_credit :text
+#  featured_media_alt    :string
 #  linkedin              :string
 #  long_name             :string
 #  mastodon              :string
@@ -24,12 +24,14 @@
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  about_id              :uuid             uniquely indexed => [language_id], indexed
+#  featured_media_id     :uuid             indexed
 #  language_id           :uuid             uniquely indexed => [about_id], indexed
 #  university_id         :uuid             indexed
 #
 # Indexes
 #
 #  idx_on_about_id_language_id_eb921fd47b                        (about_id,language_id) UNIQUE
+#  idx_on_featured_media_id_e0a6e6cb52                           (featured_media_id)
 #  index_university_organization_localizations_on_about_id       (about_id)
 #  index_university_organization_localizations_on_language_id    (language_id)
 #  index_university_organization_localizations_on_university_id  (university_id)
@@ -37,6 +39,7 @@
 # Foreign Keys
 #
 #  fk_rails_19fb4f0718  (about_id => university_organizations.id)
+#  fk_rails_2c81d3a360  (featured_media_id => communication_medias.id) ON DELETE => nullify
 #  fk_rails_4b46ee9073  (language_id => languages.id)
 #  fk_rails_ba221edb00  (university_id => universities.id)
 #
@@ -47,7 +50,7 @@ class University::Organization::Localization < ApplicationRecord
   include Backlinkable
   include Contentful
   include HasBlobs
-  include HasFeaturedImage
+  include HasFeaturedMedia
   include HasGitFiles
   include HasUniversity
   include Initials
@@ -90,7 +93,7 @@ class University::Organization::Localization < ApplicationRecord
     [
       logo&.blob_id,
       logo_on_dark_background&.blob_id,
-      featured_image&.blob_id,
+      featured_media&.original_blob_id,
       shared_image&.blob_id
     ]
   end

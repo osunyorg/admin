@@ -1,7 +1,7 @@
 <%
 hero_classes = "hero"
-if @l10n.featured_image.present? && @l10n.featured_image.attached?
-  format = ActiveStorage::Utils.format(@l10n.featured_image)
+if @l10n.featured_blob.present?
+  format = ActiveStorage::Utils.format(@l10n.featured_blob)
   hero_classes += " hero--with-image hero--image-#{format}" if format.present?
 end
 %>
@@ -202,7 +202,7 @@ end
                           <% end %>
                         </div>
                         <div class="media">
-                          <%= kamifusen_tag event_l10n.featured_image, width: 1280 %>
+                          <%= kamifusen_tag event_l10n.featured_blob, width: 1280 %>
                         </div>
                       </article>
                     </li>
@@ -230,9 +230,9 @@ end
             <div class="event-description" itemprop="description"><%= sanitize parent_l10n.summary %></div>
             <p class="more meta" aria-hidden="true">En savoir plus</p>
           </div>
-          <% if parent_l10n.featured_image.attached? %>
+          <% if parent_l10n.featured_blob.present? %>
             <div class="media">
-              <%= kamifusen_tag parent_l10n.featured_image %>
+              <%= kamifusen_tag parent_l10n.featured_blob %>
             </div>
           <% end %>
         </article>
