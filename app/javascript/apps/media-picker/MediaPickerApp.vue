@@ -2,7 +2,6 @@
 import Changes from '../components/Changes.vue';
 import Cloud from './components/Cloud.vue';
 import ImageUploader from './components/ImageUploader.vue';
-import Medias from './components/Medias.vue';
 import Picker from '../picker/Picker.vue';
 import Summernote from '../components/Summernote.vue';
 
@@ -11,7 +10,6 @@ export default {
       Changes,
       Cloud,
       ImageUploader,
-      Medias,
       Picker,
       Summernote,
     },
@@ -79,11 +77,11 @@ export default {
           <Cloud
             @unsplashSelected="unsplashSelected"
             @pexelsSelected="pexelsSelected" />
-          <Medias @mediaSelected="mediaSelected" />
           <Picker
             :endpoint="dataset.pickerEndpoint"
             @picked="mediaSelected"
-            :label="$t('mediaPicker.medias.button')" />
+            :label="$t('mediaPicker.medias.button')"
+            :title="$t('mediaPicker.medias.title')" />
         </div>
       </div>
       <div v-if="current.image.url">

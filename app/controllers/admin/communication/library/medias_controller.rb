@@ -48,7 +48,6 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
   end
 
   def create
-    @media.created_by = current_user
     if @media.save
       redirect_to [:admin, @media], notice: t('admin.successfully_created_html', model: @media.to_s_in(current_language))
     else

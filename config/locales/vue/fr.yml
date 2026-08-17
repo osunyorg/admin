@@ -115,12 +115,6 @@ fr:
           title: Image trop lourde
       medias:
         button: Choisir dans la photothèque
-        collections: Collections
-        next: Images suivantes
-        nothing: Aucun résultat pour cette recherche
-        placeholder: Tapez votre recherche
-        previous: Images précédentes
-        search: Chercher
         title: Photothèque
       remove: Supprimer l'image
       title: Image
