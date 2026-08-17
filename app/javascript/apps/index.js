@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import { getI18n } from './i18n';
 import SsoMappingApp from './sso-mapping/SsoMappingApp.vue';
-import MediaPickerApp from './media-picker/MediaPickerApp.vue';
+import FeaturedImageApp from './featured-image/FeaturedImageApp.vue';
 import TimeSlotsApp from './time-slots/TimeSlotsApp.vue';
 import BlocksEditorApp from './blocks-editor/BlocksEditorApp.vue';
 import PickerTestApp from './picker/PickerTestApp.vue';
@@ -15,11 +15,11 @@ async function boot() {
     }
   };
 
-  mount(SsoMappingApp, '#sso-mapping-app');
-  mount(MediaPickerApp, '#media-picker-app');
-  mount(TimeSlotsApp, '#time-slots-app');
   mount(BlocksEditorApp, '#blocks-editor-app');
+  mount(FeaturedImageApp, '#featured-image-app');
   mount(PickerTestApp, '#picker-test-app');
+  mount(SsoMappingApp, '#sso-mapping-app');
+  mount(TimeSlotsApp, '#time-slots-app');
 }
 
 boot();

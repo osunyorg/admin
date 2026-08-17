@@ -13,16 +13,17 @@ cloud = {
   },
 }
 %>
-<div  id="media-picker-app"
+<div  id="featured-image-app"
       data-lang="<%= lang %>"
       data-current="<%= picker.to_json %>"
       data-summernote-lang="<%= summernote_lang %>"
       data-changes-endpoint="<%= pick_admin_communication_medias_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json) %>"
+      data-size-limit="<%= Rails.application.config.default_image_max_size %>"
       data-formats-accepted="<%= default_images_formats_accepted %>"
       data-formats-accepted-hint="<%= images_formats_accepted_hint %>"
       data-cloud="<%= cloud.to_json %>"
       data-keycdn="<%= ENV["KEYCDN_HOST"] %>"
-      data-media-endpoint="<%= admin_communication_medias_url(website_id: nil, extranet_id: nil, journal_id: nil, format: :json) %>"
       data-picker-endpoint="<%= picker_admin_communication_medias_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json) %>"
+      data-object-endpoint="<%= admin_communication_medias_path(website_id: nil, extranet_id: nil, journal_id: nil) %>"
       >
 </div>

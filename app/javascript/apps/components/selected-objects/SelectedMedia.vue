@@ -1,19 +1,19 @@
 <script>
+import logicMixin from './_mixin.js';
+import Placeholder from './Placeholder.vue';
 export default {
   name: 'SelectedMedia',
-  props: {
-    imageUrl: { type: String, default: '' },
+  mixins: [logicMixin],
+  components: {
+    Placeholder
   },
-  emits: ['remove'],
 };
 </script>
 
 <template>
-  <div class="mb-3">
-    <img :src="imageUrl" class="img-fluid mb-2" />
-    <a class="btn btn-sm text-danger ps-0" @click="$emit('remove')">
-      <i class="fas fa-times"></i>
-      {{ $t('mediaPicker.remove') }}
-    </a>
-  </div>
+  <img
+    :src="resource?.thumb"
+    loading="lazy"
+    decoding="async"
+    class="img-fluid" />
 </template>

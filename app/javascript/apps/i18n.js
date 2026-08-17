@@ -20,6 +20,7 @@ export function getI18n() {
       return createI18n({
         legacy: false,
         globalInjection: true,
+        warnHtmlMessage: false,
         locale,
         fallbackLocale: 'fr',
         messages: { [locale]: messages },

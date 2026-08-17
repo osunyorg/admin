@@ -92,7 +92,7 @@ en:
           upload: Send file (max 100MB)
         personSelector:
           remove: Disconnect person
-    mediaPicker:
+    featuredImage:
       alt:
         hint: This text is important for accessibility. If the image conveys important information, it must be written here. If the information is already written somewhere else in the page, or if the image is purely decorative, the field must be left empty. Otherwise, it would pollute voice navigation.
         label: Alternative text
@@ -115,12 +115,6 @@ en:
           title: Image too heavy
       medias:
         button: Choose from photo library
-        collections: Collections
-        next: Next images
-        nothing: No results for this search
-        placeholder: Type your search here
-        previous: Previous images
-        search: Search
         title: Photo library
       remove: Remove image
       title: Image
