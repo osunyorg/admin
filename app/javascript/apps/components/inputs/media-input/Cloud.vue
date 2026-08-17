@@ -89,7 +89,7 @@ export default {
       },
     },
     beforeMount() {
-      const dataset = document.getElementById('media-picker-app').dataset;
+      const dataset = document.getElementById('featured-image-app').dataset;
       this.lang = dataset.lang;
       this.query = JSON.parse(dataset.current).about.name;
       this.settings = JSON.parse(dataset.cloud);

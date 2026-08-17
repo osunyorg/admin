@@ -1,21 +1,20 @@
 <script>
 import Changes from '../components/Changes.vue';
-import Cloud from './components/Cloud.vue';
-import ImageUploader from './components/ImageUploader.vue';
+import MediaInput from '../components/inputs/MediaInput.vue';
 import Picker from '../picker/Picker.vue';
 import Summernote from '../components/Summernote.vue';
 
 export default {
     components: {
       Changes,
-      Cloud,
-      ImageUploader,
+      MediaInput,
       Picker,
       Summernote,
     },
     data () {
       return {
         current: {},
+        previous: {},
       }
     },
     methods: {
@@ -27,35 +26,9 @@ export default {
         this.current.image.url = "";
         this.current.origin.blob.delete = true;
       },
-      uploaded(blob) {
-        this.resetOrigin();
-        this.current.origin.blob = blob;
-        this.current.image.url = this.current.origin.blob.url;
-      },
-      unsplashSelected(image) {
-        this.resetOrigin();
-        this.current.origin.cloud.unsplash.id = image.id;
-        this.current.origin.cloud.unsplash.url = image.preview;
-        this.current.image.credit = image.credit;
-        this.current.image.url = image.preview;
-      },
-      pexelsSelected(image) {
-        this.resetOrigin();
-        this.current.origin.cloud.pexels.id = image.id;
-        this.current.origin.cloud.pexels.url = image.preview;
-        this.current.image.credit = image.credit;
-        this.current.image.url = image.preview;
-      },
-      mediaSelected(media) {
-        this.resetOrigin();
-        this.current.origin.medias.id = media.id;
-        this.current.image.credit = media.credit;
-        this.current.image.alt = media.alt;
-        this.current.image.url = media.thumb;
-      }
     },
     beforeMount() {
-      this.dataset = document.getElementById('media-picker-app').dataset
+      this.dataset = document.getElementById('featured-image-app').dataset
       this.summernoteLang = this.dataset.summernoteLang;
       this.current = JSON.parse(this.dataset.current);
     },
@@ -68,24 +41,23 @@ export default {
 <template>
   <section class="vue__media-picker">
     <div class="d-lg-flex me-4 mb-0">
-      <label class="form-label">{{ $t('mediaPicker.title') }}</label>
+      <label class="form-label">
+        {{ $t('mediaPicker.title') }}
+      </label>
     </div>
     <div class="app-content">
-      <div v-if="!current.image.url" class="vue__media-picker__selector">
-        <ImageUploader @uploaded="uploaded" />
-        <div class="d-flex flex-wrap justify-content-between">
-          <Cloud
-            @unsplashSelected="unsplashSelected"
-            @pexelsSelected="pexelsSelected" />
-          <Picker
-            :endpoint="dataset.pickerEndpoint"
-            @picked="mediaSelected"
-            :label="$t('mediaPicker.medias.button')"
-            :title="$t('mediaPicker.medias.title')" />
-        </div>
+      <div class="vue__media-picker__selector">
+        <MediaInput
+          v-model="current.media"
+          :objectEndpoint="dataset.objectEndpoint"
+          :pickerEndpoint="dataset.pickerEndpoint"
+          :pickerLabel="$t('mediaPicker.medias.button')"
+          :pickerTitle="$t('mediaPicker.medias.title')" 
+          :accept="dataset.formatsAccepted"
+          :size-limit="dataset.sizeLimit" 
+          />
       </div>
-      <div v-if="current.image.url">
-        <img :src="current.image.url" class="img-fluid" />
+      <div v-if="current.media">
         <div class="text-end">
           <a  class="btn btn-sm text-danger pe-0"
               @click="removeImage()">

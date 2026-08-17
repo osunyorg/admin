@@ -17,6 +17,7 @@ class Osuny::Media::Picker
         id: about.id,
         name: about.to_s,
       },
+      media: '',
       image: {
         alt: alt,
         credit: credit,

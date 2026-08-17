@@ -1,6 +1,6 @@
 <script>
 import { Upload } from '@lucide/vue';
-import CropperModal from '../../components/CropperModal.vue';
+import CropperModal from '../../CropperModal.vue';
 
 export default {
   components: {
@@ -111,7 +111,7 @@ export default {
     },
   },
   beforeMount() {
-    const dataset = document.getElementById('media-picker-app').dataset
+    const dataset = document.getElementById('featured-image-app').dataset
     if (dataset.keycdn !== '') {
       this.keycdnUrl = "https://" + dataset.keycdn;
     }
