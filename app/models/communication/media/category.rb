@@ -24,8 +24,8 @@
 #
 class Communication::Media::Category < ApplicationRecord
   include AsCategory
+  include HasUniversity
   include Localizable
-  include WithUniversity
 
   has_and_belongs_to_many :medias
   alias                   :category_objects :medias

@@ -6,7 +6,7 @@
 #  certification :string
 #  deleted_at    :datetime
 #  ects          :integer
-#  level         :integer          default("not_applicable")
+#  level         :integer          default(0)
 #  position      :integer          not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -27,12 +27,12 @@ class Education::Diploma < ApplicationRecord
 
   include AsIndirectObject
   include GeneratesGitFiles
+  include HasUniversity
   include Lifecyclable
   include Localizable
   include Orderable
   include Sanitizable
   include Searchable
-  include WithUniversity
 
   enum :level, {
     not_applicable: 0,

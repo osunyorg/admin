@@ -34,11 +34,11 @@ class Communication::Website::Portfolio::Category < ApplicationRecord
   include AsCategory
   include AsDirectObject
   include GeneratesGitFiles
+  include HasUniversity
   include Localizable
+  include MenuItemTargetable
   include Sanitizable
-  include WithMenuItemTarget
   include WithOpenApi
-  include WithUniversity
 
   belongs_to              :program,
                           class_name: 'Education::Program',

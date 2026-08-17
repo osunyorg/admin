@@ -59,6 +59,12 @@ class Git::Providers::Abstract
     @batch ||= []
   end
 
+  # Keep track of the file states while generating the batch
+  # { "/path/to/file1" => "EXISTS", "/path/to/file1" => "DELETED" }
+  def files_states
+    @files_states ||= {}
+  end
+
   def current_theme_sha
     @current_theme_sha ||= Osuny::ThemeInfo.get_current_sha
   end

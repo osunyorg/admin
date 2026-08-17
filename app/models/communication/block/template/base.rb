@@ -1,7 +1,7 @@
 class Communication::Block::Template::Base
-  include WithAccessibility
+  include Accessible
+  include HasDependencies
   include WithData
-  include WithDependencies
   include WithTop
 
   class_attribute :components_descriptions,
@@ -91,6 +91,10 @@ class Communication::Block::Template::Base
 
   def media_blobs
     []
+  end
+
+  def communication_files
+    Communication::File.none
   end
 
   def dom_count

@@ -8,6 +8,14 @@ fr:
       logout: Déconnexion
       my: Mon compte
       updated: Mise à jour effectuée
+    alumni:
+      invitations:
+        created: Invitation envoyée avec succès
+        send:
+          cta: Inviter %{name} à rejoindre les alumni
+          label: Vous connaissez son email ? Vous pouvez l’inviter.
+          too_soon: Une invitation a déjà été envoyée à cette personne récemment. Vous pouvez réessayer plus tard.
+        title: Inviter
     contacts:
       organizations:
         people: Membres de cette organisation

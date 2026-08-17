@@ -37,6 +37,7 @@
 #
 class University::Person::Category::Localization < ApplicationRecord
   include AsCategoryLocalization
+  include HasUniversity
 
   def git_path_relative
     "persons_categories/#{slug_with_ancestors_slugs}/_index.html"

@@ -373,6 +373,19 @@ en:
                   label: Title
                   placeholder: Enter title here
               remove_file: Remove a file
+          form:
+            description: A form, so users can send data or ask questions.
+            edit:
+              form_title:
+                hint: Helps people with disabilities
+                label: Form title
+                placeholder: Type the form title
+              url:
+                hint: |
+                  Ex: https://tally.so/r/jaY00R
+                label: Form URL
+                placeholder: Enter the form URL
+              warning_html: This block lets you integrate <a href="https://tally.so" target="_blank">Tally</a> forms.
           gallery:
             description: A gallery of images, with an accessible description, a text and a credit for each image.
             edit:
@@ -916,6 +929,7 @@ en:
           exhibitions: Exhibitions
           features: Features
           files: Files
+          form: Form
           gallery: Gallery
           image: Image
           jobs: Job offers

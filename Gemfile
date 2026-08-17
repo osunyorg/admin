@@ -1,13 +1,14 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "4.0.5"
+ruby "4.0.6"
 
 gem "activestorage-scaleway-service"#, path: "../activestorage-scaleway-service"
 gem "active_hashcash"
 gem "active_storage_validations", "~> 1"
 gem "add_to_calendar"
 gem "aws-sdk-s3"
+gem "babosa", "~> 2.1"
 gem "bootstrap"
 gem "bootsnap", "~> 1", require: false
 gem "bootstrap5-kaminari-views"
@@ -73,6 +74,7 @@ gem "rails-autocomplete", "~> 2"
 gem "rails-i18n"
 gem "rbnacl", "~> 7.1"
 gem "redis", "~> 5.4"
+gem "romaji", "~> 0.3.0"
 gem "roo", "~> 2"
 gem "rorvswild"
 gem "rswag", "~> 2"
@@ -88,6 +90,7 @@ gem "summernote-rails", git: "https://github.com/noesya/summernote-rails.git", b
 # gem "summernote-rails", path: "../../noesya/summernote-rails"
 gem "two_factor_authentication", git: "https://github.com/noesya/two_factor_authentication.git"
 # gem "two_factor_authentication", path: "../two_factor_authentication"
+gem "tzinfo-data", platforms: [:windows, :jruby]
 # gem "unsplash", "~> 3"
 gem "unsplash", git: "https://github.com/SebouChu/unsplash_rb.git", branch: 'ruby-4-compatibility'
 gem "vimeo"
@@ -117,5 +120,3 @@ group :test do
   gem "webdrivers"
   gem "simplecov", require: false
 end
-
-gem "tzinfo-data", platforms: [:windows, :jruby]

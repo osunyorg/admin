@@ -59,6 +59,7 @@ coverage
 
 # Ignore editors
 .vscode
+mise.toml
 
 # Instruments IAc
 AGENTS.md

@@ -11,7 +11,7 @@
 #  migration_identifier     :string
 #  position                 :integer          not null
 #  published                :boolean          default(TRUE)
-#  template_kind            :integer          default(NULL), not null, indexed => [university_id]
+#  template_kind            :integer          default(0), not null, indexed => [university_id]
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -38,20 +38,21 @@ class Communication::Block < ApplicationRecord
     basic: [:title, :chapter, :image, :video, :sound, :datatable],
     storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
     references: [:pages, :posts, :persons, :organizations, :agenda, :exhibitions, :programs, :locations, :projects, :papers, :volumes, :jobs, :categories],
-    utilities: [:files, :definitions, :contact, :links, :license, :embed]
+    utilities: [:form, :files, :definitions, :contact, :links, :license, :embed]
   }
 
+  include Accessible
   include AsIndirectObject
   include Filterable
+  include HasUniversity
   include Orderable
-  include WithAccessibility
+  include Sanitizable
+  include WithCommunicationFiles
   include WithHeadingRanks
   include WithHtmlClass
   include WithMediaLibrary
   include WithTemplate
   include WithOpenApi # Must be included after WithTemplate to load template_kinds
-  include WithUniversity
-  include Sanitizable
 
   belongs_to  :about, polymorphic: true
   belongs_to  :communication_website,

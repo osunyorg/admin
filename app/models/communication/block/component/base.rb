@@ -1,6 +1,6 @@
 class Communication::Block::Component::Base
-  include WithAccessibility
-  include WithDependencies
+  include Accessible
+  include HasDependencies
 
   attr_reader :property, :template
 
@@ -41,6 +41,10 @@ class Communication::Block::Component::Base
 
   def university
     template.block.university
+  end
+
+  def language
+    template.block.language
   end
 
   def website

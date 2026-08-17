@@ -5,21 +5,21 @@ en:
       templates:
         embed:
           title_missing:
-            text_html: The HTML embedding has not title. This will prevent blind people from knowing what the integrated content is about, as mentioned in <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterion 4.7 of RGAA</a>. Please add a title to the iframe.
+            text_html: The HTML embedding has not title. This will prevent blind people from knowing what the integrated content is about, as mentioned in <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#4" target="_blank">topic 4 of RGAA</a>. Please add a title to the iframe.
             title: No frame title
           transcription_missing:
             text_html: The HTML iframe has no text transcription for blind people, for people with low bandwidth or no javascript enabled. Please add a text transcription.
             title: No transcription
         sound:
           title_missing:
-            text_html: Neither the block, neither the recording have a title. It will prevent blind people from knowing what the recording is about, as mentioned in <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterion 4.7 of RGAA</a>. Please add a title to the recording.
+            text_html: Neither the block, neither the recording have a title. It will prevent blind people from knowing what the recording is about, as mentioned in <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#4" target="_blank">topic 4 of RGAA</a>. Please add a title to the recording.
             title: No title
           transcription_missing:
             text_html: The recording has no text transcription for blind people, or for users with a low bitrate connection who could not read the recording properly. Please add a text transcription.
             title: No transcription
         video:
           title_missing:
-            text_html: Neither the block, neither the video have a title. It will prevent blind people from knowing what the video is about, as mentioned in <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterion 4.7 of RGAA</a>. Please add a title to the video.
+            text_html: Neither the block, neither the video have a title. It will prevent blind people from knowing what the video is about, as mentioned in <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#4" target="_blank">topic 4 of RGAA</a>. Please add a title to the video.
             title: No title
           transcription_missing:
             text_html: The video has no text transcription for blind people, or for users with a low bitrate connection who could not read the video properly. Please add a text transcription.
@@ -497,11 +497,25 @@ en:
   look_feel: Look & feel
   mailers:
     extranet:
-      invitation_message:
-        subject: Welcome to your extranet
-        text: You now have access to the extranet.
-        with_user_html: You can sign in with your email address <b>%{email}</b> by <a href="%{sign_in_url}">clicking here</a>.
-        without_user_html: You can sign up with your email address <b>%{email}</b> by <a href="%{sign_up_url}">clicking here</a>.
+      invitation_messages:
+        automatic:
+          subject: Welcome to your extranet
+          text: You now have access to the extranet.
+          with_user_html: You can sign in with your email address <b>%{email}</b> by <a href="%{sign_in_url}">clicking here</a>.
+          without_user_html: You can sign up with your email address <b>%{email}</b> by <a href="%{sign_up_url}">clicking here</a>.
+        manual:
+          cta: Join the extranet
+          signature: Yours
+          subject: Invitation from {{sender_name}} (promotion {{sender_years}}) to join the extranet
+          text: |
+            Hello {{name}},
+            
+            {{sender_name}} invites you to join the Alumni extranet.
+            
+            You will find, in particular, the directory of all promotions.
+            See you soon!
+            
+            {{sender_name}} (promotion {{sender_years}})"
     notifications:
       gdpr_deletion_incoming:
         subject: "osuny - your account will soon be deleted"

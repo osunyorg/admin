@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_07_071953) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_06_085855) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -328,13 +328,36 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_07_071953) do
     t.index ["university_id"], name: "index_communication_extranet_documents_on_university_id"
   end
 
+  create_table "communication_extranet_invitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.uuid "extranet_id"
+    t.string "from_email"
+    t.string "from_name"
+    t.text "message"
+    t.uuid "person_id"
+    t.string "to_email"
+    t.string "to_name"
+    t.string "token"
+    t.uuid "university_id"
+    t.datetime "updated_at", null: false
+    t.uuid "user_id"
+    t.index ["extranet_id"], name: "index_communication_extranet_invitations_on_extranet_id"
+    t.index ["person_id"], name: "index_communication_extranet_invitations_on_person_id"
+    t.index ["token"], name: "index_communication_extranet_invitations_on_token", unique: true
+    t.index ["university_id"], name: "index_communication_extranet_invitations_on_university_id"
+    t.index ["user_id"], name: "index_communication_extranet_invitations_on_user_id"
+  end
+
   create_table "communication_extranet_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "about_id"
     t.text "cookies_policy"
     t.datetime "created_at", null: false
     t.text "home_sentence"
-    t.string "invitation_message_subject", default: ""
-    t.text "invitation_message_text", default: ""
+    t.string "invitation_message_automatic_subject", default: ""
+    t.text "invitation_message_automatic_text", default: ""
+    t.text "invitation_message_manual_signature"
+    t.string "invitation_message_manual_subject"
+    t.text "invitation_message_manual_text"
     t.uuid "language_id"
     t.string "name"
     t.text "privacy_policy"
@@ -2707,6 +2730,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_07_071953) do
   add_foreign_key "communication_extranet_documents", "communication_extranet_document_kinds", column: "kind_id"
   add_foreign_key "communication_extranet_documents", "communication_extranets", column: "extranet_id"
   add_foreign_key "communication_extranet_documents", "universities"
+  add_foreign_key "communication_extranet_invitations", "communication_extranets", column: "extranet_id"
+  add_foreign_key "communication_extranet_invitations", "universities"
+  add_foreign_key "communication_extranet_invitations", "university_people", column: "person_id"
+  add_foreign_key "communication_extranet_invitations", "users"
   add_foreign_key "communication_extranet_localizations", "communication_extranets", column: "about_id"
   add_foreign_key "communication_extranet_localizations", "languages"
   add_foreign_key "communication_extranet_localizations", "universities"
