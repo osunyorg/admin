@@ -42,9 +42,12 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
   end
 
   def set_featured
-    @media = current_university.communication_medias
-                               .find(params[:featured_media_id])
-    return if @media.nil?
+    featured_media_id = params.dig(:featured_media_id)
+    @media = nil
+    if featured_media_id.present?
+      @media = current_university.communication_medias
+                                 .find(params[:featured_media_id])
+    end
     @about = PolymorphicObjectFinder.find(
       params,
       key: :about,

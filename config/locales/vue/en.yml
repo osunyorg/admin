@@ -85,25 +85,19 @@ en:
         title: Frame image
         validate: Validate
       inputs:
-        pageSelector:
-          remove: Disconnect page
-        fileSelector:
-          remove: Disconnect file
-          upload: Send file (max 100MB)
-        personSelector:
-          remove: Disconnect person
+        mediaInput:
+          cloud:
+            button: Import (Unsplash & Pexels)
+            next: Next images
+            nothing: No results for this search
+            placeholder: Type your search here
+            previous: Previous images
+            search: Search
+            title: Photo search
     featuredMedia:
       alt:
         hint: This text is important for accessibility. If the image conveys important information, it must be written here. If the information is already written somewhere else in the page, or if the image is purely decorative, the field must be left empty. Otherwise, it would pollute voice navigation.
         label: Alternative text
-      cloud:
-        button: Import (Unsplash & Pexels)
-        next: Next images
-        nothing: No results for this search
-        placeholder: Type your search here
-        previous: Previous images
-        search: Search
-        title: Photo search
       credit:
         hint: The credit must be present according to copyright or copyleft licenses.
         label: Credit

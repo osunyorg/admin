@@ -109,7 +109,7 @@ export default {
     },
     beforeMount() {
       const dataset = document.getElementById('featured-media-app').dataset;
-      this.lang = dataset.lang;
+      this.lang = document.documentElement.lang;
       this.query = dataset.searchTerm;
       this.settings = JSON.parse(dataset.cloud);
     },
@@ -122,28 +122,28 @@ export default {
           class="btn btn-sm ms-n2"
           @click="open()">
       <CloudDownload stroke-width="1.5" />
-      {{ $t('featuredMedia.cloud.button') }}
+      {{ $t('components.inputs.mediaInput.cloud.button') }}
     </button>
     <div class="modal" tabindex="-1" role="dialog" :class="{'d-block': modal}">
       <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
             <div class="col-auto d-none d-lg-block">
-              <h5 class="modal-title">{{ $t('featuredMedia.cloud.title') }}</h5>
+              <h5 class="modal-title">{{ $t('components.inputs.mediaInput.cloud.title') }}</h5>
             </div>
             <div class="col-auto d-flex flex-fill mx-lg-5">
               <div class="input-group">
                 <input  type="text"
                         name="search"
                         class="form-control ms-auto"
-                        :placeholder="$t('featuredMedia.cloud.placeholder')"
+                        :placeholder="$t('components.inputs.mediaInput.cloud.placeholder')"
                         v-model="query"
                         @keyup.enter="search">
                 <button type="button"
                         class="btn btn-primary me-auto"
                         @click="search"
-                        :aria-label="$t('featuredMedia.cloud.search')">
-                  {{ $t('featuredMedia.cloud.search') }}
+                        :aria-label="$t('components.inputs.mediaInput.cloud.search')">
+                  {{ $t('components.inputs.mediaInput.cloud.search') }}
                 </button>
               </div>
             </div>
@@ -158,7 +158,7 @@ export default {
             <div class="row">
               <div class="col-lg-6">
                 <p v-if="unsplash.data.results.length === 0" >
-                  {{ $t('featuredMedia.cloud.nothing') }}
+                  {{ $t('components.inputs.mediaInput.cloud.nothing') }}
                 </p>
                 <div v-if="unsplash.data.total_pages" class="d-flex justify-content-between mb-2">
                   <div class="vue__media-picker__button_container">
@@ -166,7 +166,7 @@ export default {
                       class="btn btn-sm ps-0"
                       v-if="unsplash.page > 1"
                       @click="unsplash.page = unsplash.page - 1"
-                      :title="$t('featuredMedia.cloud.previous')">
+                      :title="$t('components.inputs.mediaInput.cloud.previous')">
                       <ArrowLeft stroke-width="1.5" />
                     </button>
                   </div>
@@ -178,7 +178,7 @@ export default {
                       class="btn btn-sm pe-0"
                       v-if="unsplash.page < unsplash.data.total_pages"
                       @click="unsplash.page = unsplash.page + 1"
-                      :title="$t('featuredMedia.cloud.next')">
+                      :title="$t('components.inputs.mediaInput.cloud.next')">
                       <ArrowRight stroke-width="1.5" />
                     </button>
                   </div>
@@ -193,7 +193,7 @@ export default {
               </div>
               <div class="col-lg-6">
                 <p v-if="pexels.data.results.length === 0" >
-                  {{ $t('featuredMedia.cloud.nothing') }}
+                  {{ $t('components.inputs.mediaInput.cloud.nothing') }}
                 </p>
                 <div v-if="pexels.data.total_pages" class="d-flex justify-content-between mb-2">
                   <div class="vue__media-picker__button_container">
@@ -201,7 +201,7 @@ export default {
                       class="btn btn-sm ps-0"
                       v-if="pexels.page > 1"
                       @click="pexels.page = pexels.page - 1"
-                      :title="$t('featuredMedia.cloud.previous')">
+                      :title="$t('components.inputs.mediaInput.cloud.previous')">
                       <ArrowLeft stroke-width="1.5" />
                     </button>
                   </div>
@@ -213,7 +213,7 @@ export default {
                       class="btn btn-sm pe-0"
                       v-if="pexels.page < pexels.data.total_pages"
                       @click="pexels.page = pexels.page + 1"
-                      :title="$t('featuredMedia.cloud.next')">
+                      :title="$t('components.inputs.mediaInput.cloud.next')">
                       <ArrowRight stroke-width="1.5" />
                     </button>
                   </div>
