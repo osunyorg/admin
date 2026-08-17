@@ -16,6 +16,10 @@ class Osuny::Picker::Communication::Library::Media < Osuny::Picker::Communicatio
     filters_collections
   end
 
+  def filters_after_categories
+    filters_websites
+  end
+
   protected
 
   def filters_collections
@@ -31,5 +35,32 @@ class Osuny::Picker::Communication::Library::Media < Osuny::Picker::Communicatio
       }
     }
   end
+
+  def filters_websites
+    @filters << {
+      name: ::Communication::Website.model_name.human(count: 2, locale: language.iso_code),
+      values: websites.map { |website| 
+        {
+          id: website.id,
+          name: website.to_s_in(language),
+          selected: website.id.in?(params.to_s),
+          query_parameters: "&filters[for_website][]=#{website.id}"
+        }
+      }
+    }
+  end
+
+  def websites
+    ::Communication::Website.where(university: university,id: website_ids)
+                            .ordered(language)
+  end
+
+  def website_ids
+    ::Communication::File::Context.where(university: university)
+                                  .pluck(:communication_website_id)
+                                  .compact_blank
+                                  .uniq
+  end
+
 
 end

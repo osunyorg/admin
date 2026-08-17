@@ -10,7 +10,7 @@ export default {
 </script>
 
 <template>
-  <div :class="results.classes">
+  <div :class="results.classes" v-if="results.list.length > 0" >
     <div
       v-for="(object, index) in results.list"
       :key="index"

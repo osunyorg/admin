@@ -65,6 +65,17 @@ class Communication::Media < ApplicationRecord
   scope :for_collection, -> (collection_id, language = nil) {
     where(collection: collection_id)
   }
+  scope :for_creator, -> (user_ids, language) {
+    where(created_by_id: user_ids)
+  }
+  scope :for_website, -> (website_ids, language) {
+    joins(:contexts)
+    .where(
+      communication_media_contexts: {
+        communication_website_id: website_ids
+      }
+    )
+  }
   scope :for_extension, -> (extensions, language) {
     where(original_extension: extensions)
   }

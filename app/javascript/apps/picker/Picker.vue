@@ -135,7 +135,7 @@ export default {
                   :parameters="parameters"
                   @change="search" />
               </div>
-              <div class="offset-md-1 col-md-9 position-relative">
+              <div class="offset-md-1 col-md-9">
                 <div :class="{'opacity-25': searching}">
                   <Results
                     :results="results"
