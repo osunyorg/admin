@@ -18,6 +18,7 @@ class Osuny::Picker::Communication::Library::Media < Osuny::Picker::Communicatio
 
   def filters_after_categories
     filters_websites
+    filters_creators
   end
 
   protected
@@ -62,5 +63,27 @@ class Osuny::Picker::Communication::Library::Media < Osuny::Picker::Communicatio
                                   .uniq
   end
 
+  def filters_creators
+    @filters << {
+      name: ::Communication::Media.human_attribute_name(:created_by, locale: language.iso_code),
+      values: creators.map { |user|
+        {
+          id: user.id,
+          name: user.to_s,
+          selected: user.id.in?(params.to_s),
+          query_parameters: "&filters[for_creator][]=#{user.id}"
+        }
+      }
+    }
+  end
+
+  def creators
+    User.where(university: university, id: creator_ids)
+        .ordered
+  end
+
+  def creator_ids
+    objects.pluck(:created_by_id).compact_blank.uniq
+  end
 
 end
