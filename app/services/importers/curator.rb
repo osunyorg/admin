@@ -63,7 +63,8 @@ module Importers
 
     def attach_image!
       return if page.image.blank?
-      ActiveStorage::Utils.attach_from_url(@l10n.featured_image, page.image)
+      media = Communication::Media.find_or_create_from_url(page.image, in_context: @l10n)
+      @l10n.update_column(:featured_media_id, media.id) if media.present?
     rescue
       puts "Attach image failed"
     end

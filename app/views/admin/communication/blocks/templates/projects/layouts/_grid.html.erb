@@ -28,8 +28,8 @@
         </div>
       </div>
       <div class="media">
-        <% if project_l10n.featured_image.attached? %>
-          <%= kamifusen_tag project_l10n.featured_image %>
+        <% if project_l10n.featured_blob.present? %>
+          <%= kamifusen_tag project_l10n.featured_blob %>
         <% end %>
       </div>
     </article>

@@ -1,5 +1,5 @@
 class Osuny::Media::Picker
-  attr_accessor :university, :language, :params, :about, :key
+  attr_accessor :university, :language, :params, :about
 
   def initialize(about: nil)
     @about = about unless about.nil?
@@ -31,42 +31,31 @@ class Osuny::Media::Picker
     to_hash.to_json
   end
 
-  def key
-    @key ||= :featured_image
+  def media
+    @media ||= about.featured_media
   end
 
-  def image_property
-    @image_property ||= key
-  end
-
-  def image
-    @image ||= about.public_send(image_property)
-  end
-
-  def image_reset!
-    @image = nil
+  def media=(value)
+    about.update_column(:featured_media_id, value&.id)
+    @media = nil
     @url = nil
     about.reload
   end
 
-  def alt_property
-    @alt_property ||= "#{key}_alt".to_sym
+  def blob
+    media&.original_blob
   end
 
   def alt
-    @alt ||= about.public_send(alt_property)
-  end
-
-  def credit_property
-    @credit_property ||= "#{key}_credit".to_sym
+    @alt ||= about.featured_media_alt
   end
 
   def credit
-    @credit ||= about.public_send(credit_property)
+    @credit ||= about.featured_media_credit
   end
 
   def url
-    return unless image.attached?
+    return if blob.nil?
     @url ||= (ENV['KEYCDN_HOST'].present? ? keycdn_url : medium_url)
   end
 
@@ -86,25 +75,32 @@ class Osuny::Media::Picker
       },
       key: :about,
       university: university,
-      mandatory_module: HasFeaturedImage
+      mandatory_module: HasFeaturedMedia
     )
   end
 
   protected
 
   def keycdn_url
-    "https://#{ENV['KEYCDN_HOST']}/#{image.blob.key}?width=800"
+    "https://#{ENV['KEYCDN_HOST']}/#{blob.key}?width=800"
   end
 
   def medium_url
-    "/media/#{image.signed_id}/preview_800x.png"
+    "/media/#{blob.signed_id}/preview_800x.png"
   end
 
   def import_from_params
-    about.update_column(alt_property, params.dig(:image, :alt))
-    about.update_column(credit_property, params.dig(:image, :credit))
+    about.update_column(:featured_media_alt, params.dig(:image, :alt))
     origins.import
+    import_credit
     about.touch
+  end
+
+  # Credit is not localized on the object, it belongs to the media itself
+  def import_credit
+    media_localization = about.featured_media_localization
+    return if media_localization.nil?
+    media_localization.update(credit: params.dig(:image, :credit))
   end
 
   def origins

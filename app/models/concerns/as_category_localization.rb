@@ -11,7 +11,7 @@ module AsCategoryLocalization
   include Sanitizable
   include Shareable
   include HasBlobs
-  include HasFeaturedImage
+  include HasFeaturedMedia
   include HasUniversity
 
   included do
@@ -48,11 +48,11 @@ module AsCategoryLocalization
   protected
 
   def explicit_blob_ids
-    super.concat [featured_image&.blob_id]
+    super.concat [featured_media&.original_blob_id]
   end
 
   def inherited_blob_ids
-    [featured_image&.blob_id]
+    [featured_media&.original_blob_id]
   end
 
   def hugo_slug_in_website(website)

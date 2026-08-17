@@ -37,8 +37,8 @@ en:
       research/journal/volume:
         number: Number
       research/journal/volume/localization:
-        featured_image: Cover
-        featured_image_alt: Alt text
+        featured_media: Cover
+        featured_media_alt: Alt text
         keywords: Keywords
         published: Published?
         published_at: Published at

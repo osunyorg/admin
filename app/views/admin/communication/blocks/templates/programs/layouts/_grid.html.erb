@@ -16,9 +16,9 @@
           <% end %>
         <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.programs.layouts.grid.more' %></p>
       </div>
-      <% if l10n.featured_image.attached? %>
+      <% if l10n.featured_blob.present? %>
         <div class="media">
-          <%= kamifusen_tag l10n.featured_image %>
+          <%= kamifusen_tag l10n.featured_blob %>
         </div>
       <% end %>
     </article>

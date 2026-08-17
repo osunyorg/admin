@@ -1,6 +1,6 @@
 class Osuny::Media::Picker::Origins
   attr_reader :picker
-  delegate  :params, :university, :about, :image, :image_property, :alt, :credit,
+  delegate  :params, :university, :about, :media, :alt, :credit,
             to: :picker
 
   def initialize(picker)
@@ -33,7 +33,6 @@ class Osuny::Media::Picker::Origins
 
   def import
     return if nothing_changed?
-    clean_previous_blob
     if blob_id.present?
       import_blob
     elsif cloud_unsplash_id.present?
@@ -42,6 +41,8 @@ class Osuny::Media::Picker::Origins
       import_cloud_pexels
     elsif media_id.present?
       import_medias
+    elsif delete?
+      remove_media
     end
   end
 
@@ -79,8 +80,8 @@ class Osuny::Media::Picker::Origins
     @media_id ||= params.dig(:origin, :medias, :id)
   end
 
-  def media
-    @media ||= Communication::Media.find_by(university: university, id: media_id)
+  def selected_media
+    @selected_media ||= Communication::Media.find_by(university: university, id: media_id)
   end
 
   def delete?
@@ -88,8 +89,7 @@ class Osuny::Media::Picker::Origins
   end
 
   def import_blob
-    find_or_create_media_with_checksum(blob.checksum, :upload)
-    attach_media_to_about
+    set_media find_or_create_media_from_blob(:upload)
   end
 
   def import_cloud_unsplash
@@ -97,61 +97,61 @@ class Osuny::Media::Picker::Origins
     filename = "#{cloud_unsplash.slug}.jpg"
     create_blob_from_url(url, filename)
     cloud_unsplash.track_download
-    find_or_create_media_with_checksum(blob.checksum, :unsplash)
-    attach_media_to_about
+    set_media find_or_create_media_from_blob(:unsplash)
   end
 
   def import_cloud_pexels
     url = "#{cloud_pexels.src['original']}?auto=compress&cs=tinysrgb&w=2048"
     filename = "#{cloud_pexels.id}.png"
     create_blob_from_url(url, filename)
-    find_or_create_media_with_checksum(blob.checksum, :pexels)
-    attach_media_to_about
+    set_media find_or_create_media_from_blob(:pexels)
   end
 
   def import_medias
-    attach_media_to_about
+    set_media selected_media
+  end
+
+  def remove_media
+    clean_context
+    picker.media = nil
   end
 
   # Utilities
 
-  def clean_previous_blob
-    # Delete context
+  # The object keeps a link to the media, and the media keeps a context,
+  # to know where it is used.
+  def set_media(new_media)
+    return if new_media.nil?
+    clean_context
+    Communication::Media.create_context(new_media, new_media.original_blob, about)
+    picker.media = new_media
+  end
+
+  def clean_context
     Communication::Media::Context.where(
       university: university,
       about: about,
-      active_storage_blob: image.blob
+      communication_media: media
     ).destroy_all
-    # Detach image (attachment)
-    attachment = image.attachment
-    image.detach
-    attachment.really_destroy! if attachment
   end
-  
-  def find_or_create_media_with_checksum(checksum, origin)
-    if Communication::Media.where(university: university, original_checksum: checksum).exists?
-      @media = Communication::Media.find_by(
-        university: university, 
-        original_checksum: checksum
-      )
-    else
-      @media = Communication::Media.find_or_create_from_blob(
-        blob, 
-        in_context: about,
-        origin: origin,
-        alt: alt, 
-        credit: credit
-      )
-    end
+
+  def find_or_create_media_from_blob(origin)
+    Communication::Media.where(
+      university: university,
+      original_checksum: blob.checksum
+    ).first ||
+    Communication::Media.find_or_create_from_blob(
+      blob,
+      in_context: about,
+      origin: origin,
+      alt: alt,
+      credit: credit
+    )
   end
 
   def create_blob_from_url(url, filename)
-    ActiveStorage::Utils.attach_from_url(image, url, filename: filename)
-    @blob = image.blob
-  end
-
-  def attach_media_to_about
-    media.attach(about, image_property)
-    picker.image_reset!
+    @blob = ActiveStorage::Utils.blob_from_url(url, filename: filename)
+    @blob&.update_column(:university_id, university.id)
+    @blob
   end
 end

@@ -4,8 +4,8 @@
 #
 #  id                       :uuid             not null, primary key
 #  deleted_at               :datetime
-#  featured_image_alt       :string
 #  featured_image_credit    :text
+#  featured_media_alt       :string
 #  header_cta               :boolean          default(FALSE)
 #  header_cta_label         :string
 #  header_cta_url           :string
@@ -23,6 +23,7 @@
 #  updated_at               :datetime         not null
 #  about_id                 :uuid             uniquely indexed => [language_id], indexed
 #  communication_website_id :uuid             indexed
+#  featured_media_id        :uuid             indexed
 #  language_id              :uuid             uniquely indexed => [about_id], indexed
 #  publication_job_id       :uuid             indexed
 #  university_id            :uuid             indexed
@@ -32,6 +33,7 @@
 #
 #  idx_on_about_id_language_id_57307f7184                         (about_id,language_id) UNIQUE
 #  idx_on_communication_website_id_f6354f61f0                     (communication_website_id)
+#  idx_on_featured_media_id_3f383f239a                            (featured_media_id)
 #  idx_on_publication_job_id_790971fcf1                           (publication_job_id)
 #  idx_on_university_id_a3a3f1e954                                (university_id)
 #  idx_on_unpublication_job_id                                    (unpublication_job_id)
@@ -43,6 +45,7 @@
 #  fk_rails_20680ef99a            (language_id => languages.id)
 #  fk_rails_4a9d8c6ad1            (communication_website_id => communication_websites.id)
 #  fk_rails_6869f5c4a8            (publication_job_id => good_jobs.id) ON DELETE => nullify
+#  fk_rails_6bec68b6fd            (featured_media_id => communication_medias.id) ON DELETE => nullify
 #  fk_rails_b4db91ebe4            (about_id => communication_website_posts.id)
 #  fk_rails_db7d7c515c            (university_id => universities.id)
 #  fk_rails_unpublication_job_id  (unpublication_job_id => good_jobs.id) ON DELETE => nullify
@@ -56,7 +59,7 @@ class Communication::Website::Post::Localization < ApplicationRecord
   include AsLocalization
   include Contentful
   include HasBlobs
-  include HasFeaturedImage
+  include HasFeaturedMedia
   include HasGitFiles
   include HasUniversity
   include HeaderCallToAction
@@ -144,7 +147,7 @@ class Communication::Website::Post::Localization < ApplicationRecord
 
   def explicit_blob_ids
     super.concat [
-      featured_image&.blob_id,
+      featured_media&.original_blob_id,
       shared_image&.blob_id
     ]
   end

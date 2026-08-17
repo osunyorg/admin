@@ -4,8 +4,8 @@
 #
 #  id                    :uuid             not null, primary key
 #  deleted_at            :datetime
-#  featured_image_alt    :string
 #  featured_image_credit :text
+#  featured_media_alt    :string
 #  internal_description  :text
 #  meta_description      :text
 #  name                  :string
@@ -20,6 +20,7 @@
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  about_id              :uuid             not null, indexed
+#  featured_media_id     :uuid             indexed
 #  language_id           :uuid             not null, indexed
 #  last_updated_by_id    :uuid             indexed
 #  original_blob_id      :uuid             not null, indexed
@@ -29,6 +30,7 @@
 # Indexes
 #
 #  index_communication_file_localizations_on_about_id            (about_id)
+#  index_communication_file_localizations_on_featured_media_id   (featured_media_id)
 #  index_communication_file_localizations_on_language_id         (language_id)
 #  index_communication_file_localizations_on_last_updated_by_id  (last_updated_by_id)
 #  index_communication_file_localizations_on_original_blob_id    (original_blob_id)
@@ -41,12 +43,13 @@
 #  fk_rails_38de4b5d8a  (language_id => languages.id)
 #  fk_rails_6f750651f5  (about_id => communication_files.id)
 #  fk_rails_ad6002e199  (last_updated_by_id => users.id)
+#  fk_rails_ba8efac626  (featured_media_id => communication_medias.id) ON DELETE => nullify
 #  fk_rails_beb53a5697  (published_by_id => users.id)
 #  fk_rails_fcfa27eb47  (university_id => universities.id)
 #
 class Communication::File::Localization < ApplicationRecord
   include AsLocalization
-  include HasFeaturedImage
+  include HasFeaturedMedia
   include HasGitFiles
   include HasOriginalBlob
   include HasUniversity
@@ -122,7 +125,7 @@ class Communication::File::Localization < ApplicationRecord
   def dependencies
     [
       original_blob,
-      featured_image&.blob,
+      featured_blob,
     ]
   end
 

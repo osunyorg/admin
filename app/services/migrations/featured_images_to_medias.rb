@@ -1,0 +1,26 @@
+class Migrations::FeaturedImagesToMedias
+  def self.migrate
+    ActiveStorage::Attachment.where(name: 'featured_image').find_each do |attachment|
+      migrate_attachment(attachment)
+    end
+  end
+
+  def self.migrate_attachment(attachment)
+    l10n = attachment.record
+    blob = attachment.blob
+    return if l10n.nil? || blob.nil? || !l10n.respond_to?(:featured_media_id)
+
+    if l10n.featured_media_id.nil?
+      media = Communication::Media.find_or_create_from_blob(
+        blob,
+        in_context: l10n,
+        alt: l10n.featured_media_alt,
+        credit: l10n.featured_image_credit
+      )
+      l10n.update_column(:featured_media_id, media.id)
+    end
+
+    # delete, and not destroy, to keep the blob used by the media
+    attachment.delete
+  end
+end

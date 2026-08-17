@@ -6,7 +6,7 @@ class Importers::Api::Osuny::Communication::Website::Agenda::Event < Importers::
     import_params
     import_blocks
     import_categories
-    import_featured_image
+    import_featured_media
   end
 
   def object
@@ -36,12 +36,13 @@ class Importers::Api::Osuny::Communication::Website::Agenda::Event < Importers::
     end
   end
 
-  def import_featured_image
+  def import_featured_media
     image = params['image']
     return if image.blank?
     # Not twice
-    return if object.featured_image.attached?
-    ActiveStorage::Utils.attach_from_url(object.featured_image, image)
+    return if object.featured_media.present?
+    media = Communication::Media.find_or_create_from_url(image, in_context: object)
+    object.update_column(:featured_media_id, media.id) if media.present?
   end
 
   def find_or_create_category(data)

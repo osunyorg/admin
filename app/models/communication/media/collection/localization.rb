@@ -3,31 +3,34 @@
 # Table name: communication_media_collection_localizations
 #
 #  id                    :uuid             not null, primary key
-#  featured_image_alt    :text
 #  featured_image_credit :text
+#  featured_media_alt    :text
 #  name                  :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  about_id              :uuid             not null, uniquely indexed => [language_id], indexed
+#  featured_media_id     :uuid             indexed
 #  language_id           :uuid             not null, uniquely indexed => [about_id], indexed
 #  university_id         :uuid             not null, indexed
 #
 # Indexes
 #
 #  idx_on_about_id_language_id_378eb970df                          (about_id,language_id) UNIQUE
+#  idx_on_featured_media_id_93012a8f51                             (featured_media_id)
 #  idx_on_language_id_bb72607fc6                                   (language_id)
 #  idx_on_university_id_8e25b8c926                                 (university_id)
 #  index_communication_media_collection_localizations_on_about_id  (about_id)
 #
 # Foreign Keys
 #
+#  fk_rails_3612c13e3d  (featured_media_id => communication_medias.id) ON DELETE => nullify
 #  fk_rails_3ba8e7512d  (language_id => languages.id)
 #  fk_rails_60122437f3  (university_id => universities.id)
 #  fk_rails_90d53633e4  (about_id => communication_media_collections.id)
 #
 class Communication::Media::Collection::Localization < ApplicationRecord
   include AsLocalization
-  include HasFeaturedImage
+  include HasFeaturedMedia
   include HasUniversity
   include Initials
 

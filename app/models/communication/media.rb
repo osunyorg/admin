@@ -97,6 +97,16 @@ class Communication::Media < ApplicationRecord
     media
   end
 
+  def self.find_or_create_from_url(url, in_context:, filename: nil)
+    blob = ActiveStorage::Utils.blob_from_url(url, filename: filename)
+    return if blob.nil?
+    blob.update(
+      university_id: in_context.university_id,
+      metadata: blob.metadata.merge(source_url: url)
+    )
+    find_or_create_from_blob(blob, in_context: in_context)
+  end
+
   def self.create_context(object, blob, about)
     object.contexts.where(
       about: about,
