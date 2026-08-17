@@ -12,7 +12,6 @@ export default {
     SelectedMedia,
     Picker
   },
-  emits: ['mediaSelected'],
   props: {
     modelValue: { type: String, default: '' },
     accept: { type: String, default: '*' },

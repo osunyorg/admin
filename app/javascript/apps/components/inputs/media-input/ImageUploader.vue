@@ -10,7 +10,7 @@ export default {
   computed: {
     sizeWarningSentence: {
       get() {
-        return this.$t('mediaPicker.imageUploader.size.text', {
+        return this.$t('featuredImage.imageUploader.size.text', {
           size: this.file.size.mo,
           max: this.size.max.mo,
         });
@@ -135,7 +135,7 @@ export default {
               class="btn"
               @click.prevent="$refs.file.click()">
         <Upload stroke-width="1.5" />
-        {{ $t('mediaPicker.imageUploader.button') }}
+        {{ $t('featuredImage.imageUploader.button') }}
       </button>
       <div class="form-text">{{ formats.hint }}</div>
     </div>
@@ -150,7 +150,7 @@ export default {
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">{{ $t('mediaPicker.imageUploader.size.title') }}</h5>
+            <h5 class="modal-title">{{ $t('featuredImage.imageUploader.size.title') }}</h5>
             <button type="button"
                     class="btn-close"
                     @click="closeAlert()">
@@ -162,7 +162,7 @@ export default {
             <button type="button"
                     class="btn btn-sm btn-secondary ms-auto"
                     @click="closeAlert()">
-              {{ $t('mediaPicker.imageUploader.size.close') }}
+              {{ $t('featuredImage.imageUploader.size.close') }}
             </button>
           </div>
         </div>

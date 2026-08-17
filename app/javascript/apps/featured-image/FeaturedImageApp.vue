@@ -42,7 +42,7 @@ export default {
   <section class="vue__media-picker">
     <div class="d-lg-flex me-4 mb-0">
       <label class="form-label">
-        {{ $t('mediaPicker.title') }}
+        {{ $t('featuredImage.title') }}
       </label>
     </div>
     <div class="app-content">
@@ -51,8 +51,8 @@ export default {
           v-model="current.media"
           :objectEndpoint="dataset.objectEndpoint"
           :pickerEndpoint="dataset.pickerEndpoint"
-          :pickerLabel="$t('mediaPicker.medias.button')"
-          :pickerTitle="$t('mediaPicker.medias.title')" 
+          :pickerLabel="$t('featuredImage.medias.button')"
+          :pickerTitle="$t('featuredImage.medias.title')" 
           :accept="dataset.formatsAccepted"
           :size-limit="dataset.sizeLimit" 
           />
@@ -62,28 +62,38 @@ export default {
           <a  class="btn btn-sm text-danger pe-0"
               @click="removeImage()">
             <i class="<%= Icon::DELETE %>"></i>
-            {{ $t('mediaPicker.remove') }}
+            {{ $t('featuredImage.remove') }}
           </a>
         </div>
         <div class="mb-3">
-          <label class="form-label" :aria-label="$t('mediaPicker.alt.label')" for="alt">
-            {{ $t('mediaPicker.alt.label') }}
+          <label
+            class="form-label"
+            :aria-label="$t('featuredImage.alt.label')"
+            for="alt">
+            {{ $t('featuredImage.alt.label') }}
           </label>
           <input  id="alt"
                   class="form-control"
                   data-translatable="true"
                   v-model="current.image.alt"
                   type="text">
-          <div class="form-text">{{ $t('mediaPicker.alt.hint') }}</div>
+          <div class="form-text">
+            {{ $t('featuredImage.alt.hint') }}
+          </div>
         </div>
         <div class="mb-3 summernote">
-          <label class="form-label" :aria-label="$t('mediaPicker.credit.label')" for="credit">
-            {{ $t('mediaPicker.credit.label') }}
+          <label
+            class="form-label"
+            :aria-label="$t('featuredImage.credit.label')"
+            for="credit">
+            {{ $t('featuredImage.credit.label') }}
           </label>
           <Summernote id="credit"
                       :lang="summernoteLang"
                       v-model="current.image.credit" />
-          <div class="form-text">{{ $t('mediaPicker.credit.hint') }}</div>
+          <div class="form-text">
+            {{ $t('featuredImage.credit.hint') }}
+          </div>
         </div>
       </div>
     </div>
