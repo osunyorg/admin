@@ -3,6 +3,9 @@ export default {
     id: { type: String, required: true },
     endpoint: { type: String, required: true },
   },
+  emits: [
+    'loaded'
+  ],
   data() {
     return {
       resource: null,
@@ -28,6 +31,7 @@ export default {
         console.error(error);
       } finally {
         this.loading = false;
+        this.$emit('loaded', this.resource);
       }
     },
   },

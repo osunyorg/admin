@@ -18,6 +18,9 @@ export default {
     },
   },
   methods: {
+    mediaLoaded(data) {
+      this.current.featured_media_alt = data.alt;
+    },
     remove() {
       this.current.featured_media_id = '';
     },
@@ -50,7 +53,8 @@ export default {
           :pickerLabel="$t('featuredMedia.medias.button')"
           :pickerTitle="$t('featuredMedia.medias.title')" 
           :accept="dataset.formatsAccepted"
-          :size-limit="dataset.sizeLimit" 
+          :size-limit="dataset.sizeLimit"
+          @mediaLoaded="mediaLoaded"
           />
       </div>
       <div v-if="hasValue">

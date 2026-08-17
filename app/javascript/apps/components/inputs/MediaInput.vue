@@ -24,11 +24,12 @@ export default {
     sizeLimit: { type: [String, Number], default: null },
   },
   emits: [
-    'update:modelValue'
+    'update:modelValue',
+    'mediaLoaded',
   ],
   data() {
     return {
-      uploadProgress: null,
+      uploadProgress: null
     };
   },
   computed: {
@@ -54,6 +55,9 @@ export default {
     selectionFromPicker(media) {
       this.mediaSelected(media.id);
     },
+    mediaLoaded(data) {
+      this.$emit('mediaLoaded', data);
+    }
   },
 };
 </script>
@@ -63,6 +67,7 @@ export default {
     <SelectedMedia
       v-if="hasValue"
       :id="value"
+      @loaded="mediaLoaded"
       :endpoint="objectEndpoint" />
     <div v-else>
       <progress
