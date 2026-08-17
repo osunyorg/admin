@@ -38,6 +38,11 @@ module User::WithCreatedOrEditedElements
              foreign_key: "created_by_id",
              dependent: :nullify
 
+    has_many :created_communication_medias,
+             class_name: "Communication::Media",
+             foreign_key: "created_by_id",
+             dependent: :nullify
+
     has_many  :research_journal_papers,
               class_name: "Research::Journal::Paper",
               foreign_key: :updated_by_id,

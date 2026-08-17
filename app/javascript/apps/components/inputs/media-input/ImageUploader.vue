@@ -7,6 +7,12 @@ export default {
     Upload,
     CropperModal,
   },
+  props: {
+    endpoint: { type: String, required: true },
+  },
+  emits: [
+    'uploaded'
+  ],
   computed: {
     sizeWarningSentence: {
       get() {
@@ -19,7 +25,6 @@ export default {
   },
   data () {
     return {
-      endpoint: "/rails/active_storage/direct_uploads",
       input: {
         field: null,
         object: null,
@@ -70,18 +75,19 @@ export default {
     },
     uploadFile() {
       this.directUpload = new ActiveStorage.DirectUpload(this.input.object, this.endpoint, this);
-      this.directUpload.create(function (error, blob) {
+      this.directUpload.create(function (error, data) {
         if (error) {
           console.error(error);
           return;
         }
-
-        this.setBlob(blob);
-        if (this.isResizable(this.input.object)) {
-          this.$refs.cropper.launch(this.blob);
-        } else {
-          this.$emit('uploaded', this.blob);
-        }
+        this.$emit('uploaded', data.media);
+        // TODO 
+        // this.setBlob(blob);
+        // if (this.isResizable(this.input.object)) {
+        //   this.$refs.cropper.launch(this.blob);
+        // } else {
+        //   this.$emit('uploaded', this.blob);
+        // }
       }.bind(this));
     },
     setBlob(blob) {
@@ -111,7 +117,7 @@ export default {
     },
   },
   beforeMount() {
-    const dataset = document.getElementById('featured-image-app').dataset
+    const dataset = document.getElementById('featured-media-app').dataset
     if (dataset.keycdn !== '') {
       this.keycdnUrl = "https://" + dataset.keycdn;
     }

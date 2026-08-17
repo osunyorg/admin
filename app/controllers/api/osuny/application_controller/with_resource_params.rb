@@ -40,6 +40,7 @@ module Api::Osuny::ApplicationController::WithResourceParams
     if featured_image_data[:blob_id].present?
       # If we send a blob_id, we use the media made from this blob
       blob = current_university.active_storage_blobs.find_by(id: featured_image_data[:blob_id])
+      # TODO refactor
       media = Communication::Media.find_or_create_from_blob(
         blob,
         in_context: l10n,

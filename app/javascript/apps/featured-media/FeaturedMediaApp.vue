@@ -24,11 +24,10 @@ export default {
       remove() {
         this.resetOrigin();
         this.current.media = '';
-        this.current.origin.blob.delete = true;
       },
     },
     beforeMount() {
-      this.dataset = document.getElementById('featured-image-app').dataset
+      this.dataset = document.getElementById('featured-media-app').dataset
       this.summernoteLang = this.dataset.summernoteLang;
       this.current = JSON.parse(this.dataset.current);
     },
@@ -39,6 +38,7 @@ export default {
 </script>
 
 <template>
+  {{ current.media }}
   <section class="vue__media-picker">
     <div class="d-lg-flex me-4 mb-0">
       <label class="form-label">
@@ -49,6 +49,8 @@ export default {
       <div class="vue__media-picker__selector">
         <MediaInput
           v-model="current.media"
+          :uploadEndpoint="dataset.uploadEndpoint"
+          :cloudSelectEndpoint="dataset.cloudSelectEndpoint"
           :objectEndpoint="dataset.objectEndpoint"
           :pickerEndpoint="dataset.pickerEndpoint"
           :pickerLabel="$t('featuredImage.medias.button')"
@@ -79,20 +81,6 @@ export default {
                   type="text">
           <div class="form-text">
             {{ $t('featuredImage.alt.hint') }}
-          </div>
-        </div>
-        <div class="mb-3 summernote">
-          <label
-            class="form-label"
-            :aria-label="$t('featuredImage.credit.label')"
-            for="credit">
-            {{ $t('featuredImage.credit.label') }}
-          </label>
-          <Summernote id="credit"
-                      :lang="summernoteLang"
-                      v-model="current.image.credit" />
-          <div class="form-text">
-            {{ $t('featuredImage.credit.hint') }}
           </div>
         </div>
       </div>

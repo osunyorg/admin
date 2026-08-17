@@ -3,6 +3,7 @@ class Osuny::Media::Picker
 
   def initialize(about: nil)
     @about = about unless about.nil?
+    byebug
   end
 
   def params=(value)
@@ -13,9 +14,8 @@ class Osuny::Media::Picker
   def to_hash
     {
       about: {
-        type: about.class.polymorphic_name,
-        id: about.id,
-        name: about.to_s,
+        about_type: about.class.polymorphic_name,
+        about_id: about.id
       },
       media: '',
       image: {

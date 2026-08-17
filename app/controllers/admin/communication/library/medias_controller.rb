@@ -33,12 +33,26 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
     breadcrumb
   end
 
-  def pick
-    picker = Osuny::Media::Picker.new
-    picker.university = current_university
-    picker.language = current_language
-    picker.params = params.to_unsafe_hash
-    render json: picker.to_json
+  def direct_upload
+    @blob = ActiveStorage::Blob.create_before_direct_upload!(**blob_args)
+    @blob.update_column(:university_id, current_university&.id)
+    # Le blob est sur le média
+    @media = Communication::Media.find_or_create_from_blob(@blob, user: current_user)
+    @media.find_or_create_localization(current_language)
+  end
+
+  def set_featured
+    @media = current_university.communication_medias
+                               .find(params[:media])
+    # FIXME
+    @about = PolymorphicObjectFinder.find(
+      params,
+      key: :about,
+      university: current_university
+    )
+    @about.featured_media = @media
+    @about.save
+    render :ok
   end
 
   def edit
@@ -77,6 +91,10 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
   end
 
   protected
+
+  def blob_args
+    params.require(:blob).permit(:filename, :byte_size, :checksum, :content_type, metadata: {}).to_h.symbolize_keys
+  end
 
   def media_params
     params.require(:communication_media)

@@ -7,6 +7,12 @@ export default {
       ArrowRight,
       ArrowLeft
     },
+    emits: [
+      'selected'
+    ],
+    props: {
+      endpoint: { type: String, required: true },
+    },
     data () {
       return {
         modal: false,
@@ -44,14 +50,14 @@ export default {
         this.searchPexels();
       },
       searchUnsplash() {
-        var url = this.settings.unsplash.endpoint
+        let url = this.settings.unsplash.endpoint
                       + '?query=' + encodeURIComponent(this.query)
                       + '&page=' + this.unsplash.page
                       + '&per_page=12&lang=' + this.lang;
         this.loadSearchResults(url, this.unsplash);
       },
       searchPexels() {
-        var url = this.settings.pexels.endpoint
+        let url = this.settings.pexels.endpoint
                     + '?query=' + encodeURIComponent(this.query)
                     + '&page=' + this.pexels.page
                     + '&per_page=12&lang=' + this.lang;
@@ -61,23 +67,36 @@ export default {
         if (!this.query) {
           return null;
         }
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", url, false);
         xhr.onreadystatechange = function() {
           if (xhr.readyState == 4 && xhr.status == 200) {
             source.data.results = [];
             source.data = JSON.parse(xhr.responseText);
           }
         }.bind(this);
-        xhr.open("GET", url, false);
         xhr.send();
       },
-      selectUnsplash(image) {
-        this.$emit('unsplashSelected', image);
+      selectUnsplash(data) {
         this.close();
+        this.upload('unsplash', data)
       },
-      selectPexels(image) {
-        this.$emit('pexelsSelected', image);
+      selectPexels(data) {
         this.close();
+        this.upload('pexels', data)
+      },
+      upload(origin, data) {
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", this.endpoint, false);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('X-CSRF-Token', document.querySelector('[name="csrf-token"]').content);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            this.$emit('selected', xhr.responseText);
+          }
+        }.bind(this);
+        data.origin = origin;
+        xhr.send(JSON.stringify(data));
       },
     },
     watch: {
@@ -89,7 +108,7 @@ export default {
       },
     },
     beforeMount() {
-      const dataset = document.getElementById('featured-image-app').dataset;
+      const dataset = document.getElementById('featured-media-app').dataset;
       this.lang = dataset.lang;
       this.query = JSON.parse(dataset.current).about.name;
       this.settings = JSON.parse(dataset.cloud);

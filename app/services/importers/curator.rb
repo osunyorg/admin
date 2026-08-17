@@ -63,7 +63,7 @@ module Importers
 
     def attach_image!
       return if page.image.blank?
-      media = Communication::Media.find_or_create_from_url(page.image, in_context: @l10n)
+      media = Communication::Media.find_or_create_from_url(page.image, university_id: @l10n.university_id, origin: :curator)
       @l10n.update_column(:featured_media_id, media.id) if media.present?
     rescue
       puts "Attach image failed"

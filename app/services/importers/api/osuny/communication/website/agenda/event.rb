@@ -41,7 +41,9 @@ class Importers::Api::Osuny::Communication::Website::Agenda::Event < Importers::
     return if image.blank?
     # Not twice
     return if object.featured_media.present?
-    media = Communication::Media.find_or_create_from_url(image, in_context: object)
+    media = Communication::Media.find_or_create_from_url(image, university_id: object.university_id, origin: :api)
+    # TODO soit c'est obsolète (https://github.com/osunyorg/admin/issues/4248)
+    # Soit on a cassé les contextes
     object.update_column(:featured_media_id, media.id) if media.present?
   end
 

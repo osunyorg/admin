@@ -84,27 +84,27 @@ class Communication::Media < ApplicationRecord
     where(original_extension: extensions)
   }
 
-  def self.find_or_create_from_blob(blob, in_context: nil, origin: :upload, alt: nil, credit: nil)
+  def self.find_or_create_from_blob(blob, user: nil, origin: :upload)
     return if blob.nil?
-    media = find_or_create_media_from_blob(blob, origin)
-    if in_context.present?
-      create_context(media, blob, in_context)
-      find_or_create_media_l10n(media, in_context.language, alt, credit)
-    else
-      university = University.find_by(id: blob.university_id)
-      find_or_create_media_l10n(media, university.default_language, alt, credit)
+    media = Communication::Media.where(
+        university: blob.university_id,
+        original_checksum: blob.checksum,
+    ).first_or_create do |media|
+      media.origin = origin
+      media.original_blob = blob
+      media.created_by = user
     end
     media
   end
 
-  def self.find_or_create_from_url(url, in_context:, filename: nil)
-    blob = ActiveStorage::Utils.blob_from_url(url, filename: filename)
+  def self.find_or_create_from_url(url, user: nil, university_id:, origin:)
+    blob = ActiveStorage::Utils.blob_from_url(url)
     return if blob.nil?
     blob.update(
-      university_id: in_context.university_id,
+      university_id: university_id,
       metadata: blob.metadata.merge(source_url: url)
     )
-    find_or_create_from_blob(blob, in_context: in_context)
+    find_or_create_from_blob(blob, user: user, origin: origin)
   end
 
   def self.create_context(object, blob, about)
@@ -132,26 +132,18 @@ class Communication::Media < ApplicationRecord
     Rails.application.config.default_image_max_size
   end
 
-  protected
-
-  def self.find_or_create_media_from_blob(blob, origin)
-    Communication::Media.where(
-        university: blob.university_id,
-        original_checksum: blob.checksum,
-    ).first_or_create do |media|
-      # On creation, we set the original blob, so we can find variants afterwards
-      media.origin = origin
-      media.original_blob = blob
-    end
+  def add_context!(about)
+    contexts.where(
+      about: about,
+      university_id: blob.university_id
+    ).first_or_create
   end
 
-  def self.find_or_create_media_l10n(media, language, alt, credit)
-    l10n = media.localizations.where(
-      language: language
-    ).first_or_initialize
-    l10n.name = File.basename(media.original_filename, ".*").humanize
-    l10n.alt = alt
-    l10n.credit = credit
-    l10n.save
+  def find_or_create_localization(language, alt: nil, credit: nil)
+    localizations.where(language: language)
+                .first_or_create do |l10n|
+      l10n.alt = alt
+      l10n.credit = credit
+    end
   end
 end

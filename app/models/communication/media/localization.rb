@@ -32,9 +32,21 @@ class Communication::Media::Localization < ApplicationRecord
   include Initials
   include WithOpenApi
 
+  before_validation :guess_name
+
   has_summernote :credit
 
   def to_s
     "#{name}"
+  end
+
+  protected
+
+  def guess_name
+    self.name = name_from_filename if self.name.blank?
+  end
+
+  def name_from_filename
+    File.basename(about.original_filename, ".*").humanize
   end
 end

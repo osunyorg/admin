@@ -13,9 +13,10 @@ class Api::CreateFeaturedMediaFromUrlJob < ApplicationJob
     end
 
     return unless media_uri.is_a?(URI::HTTP)
-    media = Communication::Media.find_or_create_from_url(media_url, in_context: object)
+    media = Communication::Media.find_or_create_from_url(media_url, university_id: object.university_id)
     return if media.nil?
     object.featured_media = media
     object.save
+    media.add_context!(object)
   end
 end

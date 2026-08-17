@@ -13,10 +13,11 @@ class Migrations::FeaturedImagesToMedias
     if l10n.featured_media_id.nil?
       media = Communication::Media.find_or_create_from_blob(
         blob,
-        in_context: l10n,
+        language: l10n.language,
         alt: l10n.featured_media_alt,
         credit: l10n.featured_image_credit
       )
+      media.add_context!(l10n)
       l10n.update_column(:featured_media_id, media.id)
     end
 

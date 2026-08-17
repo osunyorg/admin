@@ -15,6 +15,8 @@ export default {
   props: {
     modelValue: { type: String, default: '' },
     accept: { type: String, default: '*' },
+    uploadEndpoint: { type: String, required: true },
+    cloudSelectEndpoint: { type: String, required: true },
     objectEndpoint: { type: String, required: true },
     pickerEndpoint: { type: String, required: true },
     pickerLabel: { type: String, required: true },
@@ -22,8 +24,7 @@ export default {
     sizeLimit: { type: [String, Number], default: null },
   },
   emits: [
-    'update:modelValue',
-    'mediaSelected'
+    'update:modelValue'
   ],
   data() {
     return {
@@ -47,26 +48,12 @@ export default {
     },
   },
   methods: {
-      uploaded(blob) {
-        this.current.origin.blob = blob;
-        this.current.image.url = this.current.origin.blob.url;
-      },
-      unsplashSelected(image) {
-        this.current.origin.cloud.unsplash.id = image.id;
-        this.current.origin.cloud.unsplash.url = image.preview;
-        this.current.image.credit = image.credit;
-        this.current.image.url = image.preview;
-      },
-      pexelsSelected(image) {
-        this.current.origin.cloud.pexels.id = image.id;
-        this.current.origin.cloud.pexels.url = image.preview;
-        this.current.image.credit = image.credit;
-        this.current.image.url = image.preview;
-      },
-      mediaSelected(media) {
-        this.$emit('update:modelValue', media.id);
-        this.$emit('mediaSelected', media);
-      }
+    mediaSelected(mediaId) {
+      this.$emit('update:modelValue', mediaId);
+    },
+    selectionFromPicker(media) {
+      this.mediaSelected(media.id);
+    },
   },
 };
 </script>
@@ -84,14 +71,16 @@ export default {
         :value="uploadProgress"
         max="100"
         style="width: 100%;" />
-      <ImageUploader @uploaded="uploaded" />
+      <ImageUploader
+        :endpoint="uploadEndpoint"
+        @uploaded="mediaSelected" />
       <div class="d-flex flex-wrap justify-content-between">
         <Cloud
-          @unsplashSelected="unsplashSelected"
-          @pexelsSelected="pexelsSelected" />
+          :endpoint="cloudSelectEndpoint"
+          @selected="mediaSelected" />
         <Picker
           :endpoint="pickerEndpoint"
-          @picked="mediaSelected"
+          @picked="selectionFromPicker"
           :label="pickerLabel"
           :title="pickerTitle"
           :accept="accept" />

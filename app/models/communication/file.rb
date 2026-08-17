@@ -89,7 +89,7 @@ class Communication::File < ApplicationRecord
   # ça renvoie un file vide, et il faut créer sa localisation.
   # Concrètement, cette méthode est appelée uniquement par
   # Communication::File::Localization.find_or_create_from_blob
-  def self.find_or_create_from_blob(blob, user)
+  def self.find_or_create_from_blob(blob, user:)
     # Soit il y a un fichier (dans n'importe quelle langue), on le renvoie
     # Soit il n'y en a aucun, on le crée
     find_by_blob(blob) ||

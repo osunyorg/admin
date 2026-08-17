@@ -19,7 +19,8 @@ export default {
       this.loading = true;
       this.resource = null;
       try {
-        const res = await fetch(`${this.endpoint}/${this.id}.json`);
+        const url = this.endpoint + '/' + this.id + '.json';
+        const res = await fetch(url);
         if (!res.ok) throw new Error(res.statusText);
         this.resource = await res.json();
       } catch (error) {
