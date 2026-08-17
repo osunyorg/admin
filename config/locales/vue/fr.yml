@@ -94,24 +94,21 @@ fr:
             previous: Images précédentes
             search: Chercher
             title: Recherche d'image
+          imageUploader:
+            button: Envoyer une image
+            size:
+              close: Fermer
+              text: "L'image envoyée est beaucoup trop lourde, elle pèse {size} Mo ! Sur osuny, nous traitons automatiquement les images de moins de {max} Mo. Au-delà de ce poids, il est nécessaire de réduire l'image avant de l'envoyer, par exemple en utilisant un outil comme <a href=\"https://www.iloveimg.com/fr\" target=\"_blank\" rel=\"noreferrer\">iLoveIMG</a>."
+              title: Image trop lourde
+          picker:
+            button: Choisir dans la photothèque
+            title: Photothèque
+          remove: Supprimer l'image
+          title: Image
     featuredMedia:
       alt:
         hint: Ce texte est essentiel pour l'accessibilité. Si l'image donne une information importante, il faut écrire ici cette information. Si l'information est déjà présente ailleurs dans la page, ou si l'image est purement décorative, il faut laisser le texte alternatif vide, pour éviter de polluer la navigation vocale.
         label: Texte alternatif
-      credit:
-        hint: Le crédit photo doit être indiqué, dans le respect du droit d'auteur.
-        label: Crédit
-      imageUploader:
-        button: Envoyer une image
-        size:
-          close: Fermer
-          text: "L'image envoyée est beaucoup trop lourde, elle pèse {size} Mo ! Sur osuny, nous traitons automatiquement les images de moins de {max} Mo. Au-delà de ce poids, il est nécessaire de réduire l'image avant de l'envoyer, par exemple en utilisant un outil comme <a href=\"https://www.iloveimg.com/fr\" target=\"_blank\" rel=\"noreferrer\">iLoveIMG</a>."
-          title: Image trop lourde
-      medias:
-        button: Choisir dans la photothèque
-        title: Photothèque
-      remove: Supprimer l'image
-      title: Image
     picker:
       pagination:
         next: Page suivante

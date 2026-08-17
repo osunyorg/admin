@@ -94,24 +94,21 @@ en:
             previous: Previous images
             search: Search
             title: Photo search
+          imageUploader:
+            button: Upload an image
+            size:
+              close: Close
+              text: "The image sent is far too heavy, it weights {size}MB! osuny manages all images under {max}MB automatically. When your image is bigger than that, you need to reduce them before upload. You might use a tool like <a href=\"https://www.iloveimg.com/fr\" target=\"_blank\" rel=\"noreferrer\">iLoveIMG</a>."
+              title: Image too heavy
+            picker:
+              button: Choose from photo library
+              title: Photo library
+          remove: Remove image
+          title: Image
     featuredMedia:
       alt:
         hint: This text is important for accessibility. If the image conveys important information, it must be written here. If the information is already written somewhere else in the page, or if the image is purely decorative, the field must be left empty. Otherwise, it would pollute voice navigation.
         label: Alternative text
-      credit:
-        hint: The credit must be present according to copyright or copyleft licenses.
-        label: Credit
-      imageUploader:
-        button: Upload an image
-        size:
-          close: Close
-          text: "The image sent is far too heavy, it weights {size}MB! osuny manages all images under {max}MB automatically. When your image is bigger than that, you need to reduce them before upload. You might use a tool like <a href=\"https://www.iloveimg.com/fr\" target=\"_blank\" rel=\"noreferrer\">iLoveIMG</a>."
-          title: Image too heavy
-      medias:
-        button: Choose from photo library
-        title: Photo library
-      remove: Remove image
-      title: Image
     picker:
       pagination:
         next: Next page

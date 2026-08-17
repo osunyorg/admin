@@ -123,9 +123,18 @@ class Communication::Media < ApplicationRecord
     original_blob.metadata.dig(:height)
   end
 
-  def keycdn_thumb_url
+  def thumb_url
+    ENV['KEYCDN_HOST'].present? ? thumb_url_keycdn
+                                : thumb_url_rails
+  end
+
+  def thumb_url_keycdn
     return unless ENV['KEYCDN_HOST'].present?
-    "https://#{ENV['KEYCDN_HOST']}/#{original_blob.key}?width=600"
+    "https://#{ENV['KEYCDN_HOST']}/#{original_blob.key}?width=800"
+  end
+
+  def thumb_url_rails
+    Rails.routes.helpers.url_for(@media.original_blob.variant(resize_to_fit: [800, nil]))
   end
 
   def max_file_size

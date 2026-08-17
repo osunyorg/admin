@@ -9,6 +9,8 @@ export default {
   },
   props: {
     endpoint: { type: String, required: true },
+    accept: { type: String, default: '*' },
+    hint: { type: String, default: '' },
   },
   emits: [
     'uploaded'
@@ -16,7 +18,7 @@ export default {
   computed: {
     sizeWarningSentence: {
       get() {
-        return this.$t('featuredMedia.imageUploader.size.text', {
+        return this.$t('components.inputs.mediaInput.imageUploader.size.text', {
           size: this.file.size.mo,
           max: this.size.max.mo,
         });
@@ -81,50 +83,11 @@ export default {
           return;
         }
         this.$emit('uploaded', data.media);
-        // TODO 
-        // this.setBlob(blob);
-        // if (this.isResizable(this.input.object)) {
-        //   this.$refs.cropper.launch(this.blob);
-        // } else {
-        //   this.$emit('uploaded', this.blob);
-        // }
       }.bind(this));
-    },
-    setBlob(blob) {
-      this.blob.id = blob.id;
-      this.blob.key = blob.key;
-      this.blob.signed_id = blob.signed_id;
-      this.blob.checksum = blob.checksum;
-      this.setBlobUrl();
-    },
-    setBlobUrl() {
-      if (this.keycdnUrl) {
-        this.blob.url = this.keycdnUrl + '/' + this.blob.key;
-      } else {
-        // png to manage transparency, even if image is a jpg (it's just a preview)
-        this.blob.url = "/media/" + this.blob.signed_id + "/preview.png";
-      }
-    },
-    cropped(blob) {
-      this.setBlob(blob);
-      this.$emit('uploaded', this.blob);
-    },
-    isResizable (file) {
-      return (/^image\/(png|jpeg)+$/).test(file.type);
     },
     closeAlert() {
       this.size.alert = false;
     },
-  },
-  beforeMount() {
-    const dataset = document.getElementById('featured-media-app').dataset
-    if (dataset.keycdn !== '') {
-      this.keycdnUrl = "https://" + dataset.keycdn;
-    }
-    this.formats = {
-      accepted: dataset.formatsAccepted,
-      hint: dataset.formatsAcceptedHint,
-    };
   },
 };
 </script>
@@ -132,43 +95,52 @@ export default {
 <template>
   <div>
     <div class="vue__media-picker__selector__viewport">
-      <input  hidden
-              ref="file"
-              type="file"
-              :accept="formats.accepted"
-              @change="uploadInputChanged($event)">
-      <button type="button"
-              class="btn"
-              @click.prevent="$refs.file.click()">
+      <input
+        hidden
+        ref="file"
+        type="file"
+        :accept="accept"
+        @change="uploadInputChanged">
+      <button
+        type="button"
+        class="btn"
+        @click.prevent="$refs.file.click()">
         <Upload stroke-width="1.5" />
-        {{ $t('featuredMedia.imageUploader.button') }}
+        {{ $t('components.inputs.mediaInput.imageUploader.button') }}
       </button>
-      <div class="form-text">{{ formats.hint }}</div>
+      <div class="form-text">{{ hint }}</div>
     </div>
+    <!--
     <CropperModal
       ref="cropper"
       @cropped="cropped"
       />
-    <div  class="modal"
-          tabindex="-1"
-          role="dialog"
-          :class="{'d-block': (size.alert === true)}">
+    -->
+    <div
+      class="modal"
+      tabindex="-1"
+      role="dialog"
+      :class="{'d-block': (size.alert === true)}">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">{{ $t('featuredMedia.imageUploader.size.title') }}</h5>
-            <button type="button"
-                    class="btn-close"
-                    @click="closeAlert()">
+            <h5 class="modal-title">{{ $t('components.inputs.mediaInput.imageUploader.size.title') }}</h5>
+            <button
+              type="button"
+              class="btn-close"
+              @click="closeAlert()">
             </button>
           </div>
-          <div class="modal-body" v-html="sizeWarningSentence">
+          <div
+            class="modal-body"
+            v-html="sizeWarningSentence">
           </div>
           <div class="modal-footer">
-            <button type="button"
-                    class="btn btn-sm btn-secondary ms-auto"
-                    @click="closeAlert()">
-              {{ $t('featuredMedia.imageUploader.size.close') }}
+            <button
+              type="button"
+              class="btn btn-sm btn-secondary ms-auto"
+              @click="closeAlert()">
+              {{ $t('components.inputs.mediaInput.imageUploader.size.close') }}
             </button>
           </div>
         </div>

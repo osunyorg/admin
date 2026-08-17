@@ -6,6 +6,7 @@ import Picker from '../../picker/Picker.vue';
 // Inputs
 import CodeInput              from '../../components/inputs/CodeInput.vue';
 import FileInput              from '../../components/inputs/FileInput.vue';
+import MediaInput             from '../../components/inputs/MediaInput.vue';
 import MultiImageInput        from '../../components/inputs/MultiImageInput.vue';
 import RichTextInput          from '../../components/inputs/RichTextInput.vue';
 import UploadInput            from '../../components/inputs/UploadInput.vue';
@@ -160,6 +161,7 @@ export default {
       // Inputs
       this.innerApp.component('CodeInput', CodeInput);
       this.innerApp.component('FileInput', FileInput);
+      this.innerApp.component('MediaInput', MediaInput);
       this.innerApp.component('MultiImageInput', MultiImageInput);
       this.innerApp.component('RichTextInput', RichTextInput);
       this.innerApp.component('UploadInput', UploadInput);

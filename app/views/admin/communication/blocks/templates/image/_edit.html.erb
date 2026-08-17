@@ -1,4 +1,27 @@
-<%= block_component_edit  block, :image %>
+<%
+# Endpoints
+default_settings = {
+  website_id: nil,
+  extranet_id: nil,
+  journal_id: nil
+}
+upload_endpoint = direct_upload_admin_communication_medias_path(**default_settings)
+cloud_select_endpoint = cloud_select_admin_communication_medias_path(**default_settings)
+picker_endpoint = picker_admin_communication_medias_path(**default_settings, format: :json)
+object_endpoint = admin_communication_medias_path(**default_settings)
+%>
+<media-input
+  v-model="data.featured_media_id"
+  accept="<%= default_images_formats_accepted %>"
+  size-limit="<%= Rails.application.config.default_image_max_size %>"
+  object-endpoint="<%= object_endpoint %>"
+  upload-endpoint="<%= upload_endpoint %>"
+  cloud-select-endpoint="<%= cloud_select_endpoint %>"
+  picker-endpoint="<%= picker_endpoint %>"
+  upload-hint="<%= images_formats_accepted_hint %>"
+  @media-loaded="data.alt = $event.alt"
+  >
+</media-input>
 <%= block_component_edit  block, :alt,
                           label: t('admin.communication.blocks.components.image.alt.label'),
                           placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>

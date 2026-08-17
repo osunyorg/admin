@@ -21,9 +21,6 @@ export default {
     mediaLoaded(data) {
       this.current.featured_media_alt = data.alt;
     },
-    remove() {
-      this.current.featured_media_id = '';
-    },
   },
   beforeMount() {
     this.dataset = document.getElementById('featured-media-app').dataset
@@ -37,34 +34,21 @@ export default {
 
 <template>
   <section class="vue__media-picker">
-    <div class="d-lg-flex me-4 mb-0">
-      <label class="form-label">
-        {{ $t('featuredMedia.title') }}
-      </label>
-    </div>
     <div class="app-content">
       <div class="vue__media-picker__selector">
         <MediaInput
           v-model="current.featured_media_id"
-          :uploadEndpoint="dataset.uploadEndpoint"
-          :cloudSelectEndpoint="dataset.cloudSelectEndpoint"
-          :objectEndpoint="dataset.objectEndpoint"
-          :pickerEndpoint="dataset.pickerEndpoint"
-          :pickerLabel="$t('featuredMedia.medias.button')"
-          :pickerTitle="$t('featuredMedia.medias.title')" 
+          :upload-endpoint="dataset.uploadEndpoint"
+          :upload-hint="dataset.uploadHint"
+          :cloud-select-endpoint="dataset.cloudSelectEndpoint"
+          :object-endpoint="dataset.objectEndpoint"
+          :picker-endpoint="dataset.pickerEndpoint"
           :accept="dataset.formatsAccepted"
           :size-limit="dataset.sizeLimit"
           @mediaLoaded="mediaLoaded"
           />
       </div>
       <div v-if="hasValue">
-        <div class="text-end">
-          <a  class="btn btn-sm text-danger pe-0"
-              @click="remove">
-            <i class="<%= Icon::DELETE %>"></i>
-            {{ $t('featuredMedia.remove') }}
-          </a>
-        </div>
         <div class="mb-3">
           <label
             class="form-label"

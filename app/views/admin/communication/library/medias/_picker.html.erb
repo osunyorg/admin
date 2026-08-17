@@ -1,18 +1,9 @@
 <%
-default_settings = {
-  website_id: nil,
-  extranet_id: nil,
-  journal_id: nil
-}
+# Données
 current = {
   featured_media_id: about.featured_media_id.to_s,
   featured_media_alt: about.featured_media_alt.to_s
 }
-changes_path = set_featured_admin_communication_medias_path(
-  **default_settings,
-  about_id: about.id, 
-  about_type: about.class.polymorphic_name
-)
 cloud = {
   unsplash: {
     logo: asset_path('communication/photo_imports/unsplash.svg'),
@@ -23,19 +14,35 @@ cloud = {
     endpoint: pexels_admin_communication_medias_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
   },
 }
+
+# Endpoints
+default_settings = {
+  website_id: nil,
+  extranet_id: nil,
+  journal_id: nil
+}
+upload_endpoint = direct_upload_admin_communication_medias_path(**default_settings)
+cloud_select_endpoint = cloud_select_admin_communication_medias_path(**default_settings)
+picker_endpoint = picker_admin_communication_medias_path(**default_settings, format: :json)
+object_endpoint = admin_communication_medias_path(**default_settings)
+changes_endpoint = set_featured_admin_communication_medias_path(
+  **default_settings,
+  about_id: about.id, 
+  about_type: about.class.polymorphic_name
+)
 %>
 <div
   id="featured-media-app"
   data-current="<%= current.to_json %>"
+  data-upload-endpoint="<%= upload_endpoint %>"
+  data-upload-hint="<%= images_formats_accepted_hint %>"
   data-search-term="<%= about.to_s %>"
-  data-upload-endpoint="<%= direct_upload_admin_communication_medias_path(**default_settings) %>"
-  data-cloud-select-endpoint="<%= cloud_select_admin_communication_medias_path(**default_settings) %>"
-  data-picker-endpoint="<%= picker_admin_communication_medias_path(**default_settings, format: :json) %>"
-  data-object-endpoint="<%= admin_communication_medias_path(**default_settings) %>"
-  data-changes-endpoint="<%= changes_path %>"
+  data-cloud="<%= cloud.to_json %>"
+  data-cloud-select-endpoint="<%= cloud_select_endpoint %>"
+  data-picker-endpoint="<%= picker_endpoint %>"
+  data-object-endpoint="<%= object_endpoint %>"
+  data-changes-endpoint="<%= changes_endpoint %>"
   data-size-limit="<%= Rails.application.config.default_image_max_size %>"
   data-formats-accepted="<%= default_images_formats_accepted %>"
-  data-formats-accepted-hint="<%= images_formats_accepted_hint %>"
-  data-cloud="<%= cloud.to_json %>"
   >
 </div>

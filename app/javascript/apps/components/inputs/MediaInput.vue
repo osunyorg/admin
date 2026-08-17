@@ -15,12 +15,11 @@ export default {
   props: {
     modelValue: { type: String, default: '' },
     accept: { type: String, default: '*' },
+    uploadHint: { type: String, default: '' },
     uploadEndpoint: { type: String, required: true },
     cloudSelectEndpoint: { type: String, required: true },
     objectEndpoint: { type: String, required: true },
     pickerEndpoint: { type: String, required: true },
-    pickerLabel: { type: String, required: true },
-    pickerTitle: { type: String, required: true },
     sizeLimit: { type: [String, Number], default: null },
   },
   emits: [
@@ -57,18 +56,34 @@ export default {
     },
     mediaLoaded(data) {
       this.$emit('mediaLoaded', data);
-    }
+    },
+    remove() {
+      this.$emit('update:modelValue', '');
+    },
   },
 };
 </script>
 
 <template>
   <div style="min-height: 50px">
-    <SelectedMedia
-      v-if="hasValue"
-      :id="value"
-      @loaded="mediaLoaded"
-      :endpoint="objectEndpoint" />
+    <div class="d-lg-flex me-4 mb-0">
+      <label class="form-label">
+        {{ $t('components.inputs.mediaInput.title') }}
+      </label>
+    </div>
+    <div v-if="hasValue">
+      <SelectedMedia
+        :id="value"
+        @loaded="mediaLoaded"
+        :endpoint="objectEndpoint" />
+      <div class="text-end">
+        <a  class="btn btn-sm text-danger pe-0"
+            @click="remove">
+          <i class="<%= Icon::DELETE %>"></i>
+          {{ $t('components.inputs.mediaInput.remove') }}
+        </a>
+      </div>
+    </div>
     <div v-else>
       <progress
         v-show="isUploading"
@@ -78,6 +93,8 @@ export default {
         style="width: 100%;" />
       <ImageUploader
         :endpoint="uploadEndpoint"
+        :accept="accept"
+        :hint="uploadHint"
         @uploaded="mediaSelected" />
       <div class="d-flex flex-wrap justify-content-between">
         <Cloud
@@ -86,8 +103,8 @@ export default {
         <Picker
           :endpoint="pickerEndpoint"
           @picked="selectionFromPicker"
-          :label="pickerLabel"
-          :title="pickerTitle"
+          :label="$t('components.inputs.mediaInput.picker.button')"
+          :title="$t('components.inputs.mediaInput.picker.title')"
           :accept="accept" />
       </div>
     </div>
