@@ -22,10 +22,10 @@ export default {
   ],
   data () {
     return {
+      draggingFileAbove: false,
       fileUploaded: null,
       sizeTooBig: false,
       uploadProgress: null,
-      draggingFileAbove: false,
     }
   },
   computed: {
@@ -102,7 +102,7 @@ export default {
       const files = $event.dataTransfer ? [...$event.dataTransfer.files] : [...$event.target.files]
       this.fileUploaded = files?.[0];
       this.checkSize();
-    },  
+    },
   },
 };
 </script>
