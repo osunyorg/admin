@@ -36,8 +36,8 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
   def direct_upload
     @blob = ActiveStorage::Blob.create_before_direct_upload!(**blob_args)
     @blob.update_column(:university_id, current_university&.id)
-    # Le blob est sur le média
-    @media = Communication::Media.find_or_create_from_blob(@blob, user: current_user)
+    # Le blob est sur le média, pas sur la loca (contrairement aux files)
+    @media = Communication::Media.find_or_create_media_from_blob(@blob, user: current_user)
     @media.find_or_create_localization(current_language)
   end
 

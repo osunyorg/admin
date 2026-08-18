@@ -118,7 +118,7 @@ export default {
     beforeMount() {
       this.lang = document.documentElement.lang;
     },
-    beforeMount() {
+    mounted() {
       this.query = this.defaultQuery;
     },
 };

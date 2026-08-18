@@ -1,24 +1,26 @@
 <script>
+import { useId } from 'vue';
 import { Upload } from '@lucide/vue';
-import CropperModal from '../../CropperModal.vue';
 import Warning from '../primitives/Warning.vue';
 
 export default {
+  name: 'UploadButton',
   components: {
-    CropperModal,
     Upload,
     Warning,
   },
   props: {
     endpoint: { type: String, required: true },
-    accept: { type: String, default: '*' },
-    hint: { type: String, default: '' },
+    accept: { type: String, required: true },
     sizeLimit: { type: Number, required: true },
   },
   emits: [
     'uploading',
     'uploaded',
   ],
+  setup() {
+    return { fieldId: useId() };
+  },
   computed: {
     sizeWarningSentence: {
       get() {
@@ -35,7 +37,7 @@ export default {
       }
     },
   },
-  data () {
+  data() {
     return {
       input: {
         field: null,
@@ -78,45 +80,37 @@ export default {
             console.error(error);
             return;
           } else {
-            this.$emit('uploaded', data.media);
+            this.$emit('uploaded', data.file);
           }
         },
       );
-    },
-    closeAlert() {
-      this.size.alert = false;
     },
   },
 };
 </script>
 
 <template>
-  <div class="vue__media-picker__selector__viewport">
+  <div class="mb-3">
     <input
       hidden
       ref="file"
       type="file"
+      class="form-control"
       :accept="accept"
-      @change="uploadInputChanged">
+      :id="fieldId"
+      @change="uploadInputChanged" />
     <button
       type="button"
-      class="btn"
+      class="btn btn-sm mx-n2 d-flex align-items-center"
       @click.prevent="$refs.file.click()">
-      <Upload stroke-width="1.5" />
-      {{ $t('components.inputs.mediaInput.imageUploader.button') }}
+      <Upload stroke-width="1.5" class="me-1" />
+      {{ $t('components.inputs.fileInput.fileUploader.upload') }}
     </button>
-    <div class="form-text">{{ hint }}</div>
   </div>
-  <!--
-  <CropperModal
-    ref="cropper"
-    @cropped="cropped"
-    />
-  -->
   <Warning
     :active="sizeTooBig"
-    :title="$t('components.inputs.mediaInput.imageUploader.size.title')"
+    :title="$t('components.inputs.fileInput.fileUploader.size.title')"
     :text="sizeWarningSentence" 
-    :close="$t('components.inputs.mediaInput.imageUploader.size.close')" 
+    :close="$t('components.inputs.fileInput.fileUploader.size.close')" 
     />
 </template>

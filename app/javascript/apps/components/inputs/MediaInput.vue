@@ -13,21 +13,22 @@ export default {
     Picker
   },
   props: {
-    modelValue: { type: String, default: '' },
     accept: { type: String, default: '*' },
-    uploadHint: { type: String, default: '' },
-    uploadEndpoint: { type: String, required: true },
     cloudDefaultQuery: { type: String, default: '' },
     cloudUnsplashEndpoint: { type: String, required: true },
     cloudPexelsEndpoint: { type: String, required: true },
     cloudSelectEndpoint: { type: String, required: true },
+    modelValue: { type: String, default: '' },
     objectEndpoint: { type: String, required: true },
     pickerEndpoint: { type: String, required: true },
-    sizeLimit: { type: [String, Number], default: null },
+    uploaderHint: { type: String, default: '' },
+    uploaderEndpoint: { type: String, required: true },
+    uploaderSizeLimit: { type: Number, required: true },
   },
   emits: [
     'update:modelValue',
-    'mediaLoaded',
+    'uploading',
+    'loaded',
   ],
   data() {
     return {
@@ -37,10 +38,10 @@ export default {
   computed: {
     value: {
       get() {
-        return this.modelValue
+        return this.modelValue;
       },
       set(value) {
-        this.$emit('update:modelValue', value)
+        this.$emit('update:modelValue', value);
       }
     },
     hasValue() {
@@ -51,17 +52,24 @@ export default {
     },
   },
   methods: {
-    mediaSelected(mediaId) {
-      this.$emit('update:modelValue', mediaId);
+    uploading(percent) {
+      this.uploadProgress = percent;
+      this.$emit('uploading', percent);
     },
-    selectionFromPicker(media) {
-      this.mediaSelected(media.id);
+    uploaded(id) {
+      this.value = id;
     },
-    mediaLoaded(data) {
-      this.$emit('mediaLoaded', data);
+    selected(id) {
+      this.value = id;
+    },
+    picked(object) {
+      this.value = object.id;
+    },
+    loaded(data) {
+      this.$emit('loaded', data);
     },
     remove() {
-      this.$emit('update:modelValue', '');
+      this.value = '';
     },
   },
 };
@@ -77,8 +85,9 @@ export default {
     <div v-if="hasValue">
       <SelectedMedia
         :id="value"
-        @loaded="mediaLoaded"
-        :endpoint="objectEndpoint" />
+        :endpoint="objectEndpoint"
+        @loaded="loaded"
+        />
       <div class="text-end">
         <a  class="btn btn-sm text-danger pe-0"
             @click="remove">
@@ -89,30 +98,39 @@ export default {
     </div>
     <div v-else>
       <progress
-        v-show="isUploading"
         class="mt-2"
-        :value="uploadProgress"
         max="100"
-        style="width: 100%;" />
-      <ImageUploader
-        :endpoint="uploadEndpoint"
-        :accept="accept"
-        :hint="uploadHint"
-        @uploaded="mediaSelected" />
-      <div class="d-flex flex-wrap justify-content-between">
-        <Cloud
-          :default-query="cloudDefaultQuery"
-          :unsplash-endpoint="cloudUnsplashEndpoint"
-          :pexels-endpoint="cloudPexelsEndpoint"
-          :select-endpoint="cloudSelectEndpoint"
-          @selected="mediaSelected" />
-        <Picker
-          :endpoint="pickerEndpoint"
-          @picked="selectionFromPicker"
-          :label="$t('components.inputs.mediaInput.picker.button')"
-          :title="$t('components.inputs.mediaInput.picker.title')"
-          :accept="accept" />
-      </div>
+        style="width: 100%;"
+        :value="uploadProgress"
+        v-show="isUploading"
+        />
+      <div v-show="!isUploading">
+        <ImageUploader
+          :accept="accept"
+          :endpoint="uploaderEndpoint"
+          :hint="uploaderHint"
+          :size-limit="uploaderSizeLimit"
+          @uploaded="uploaded"
+          @uploading="uploading"
+          />
+        <div class="d-flex flex-wrap justify-content-between">
+          <Cloud
+            :default-query="cloudDefaultQuery"
+            :pexels-endpoint="cloudPexelsEndpoint"
+            :select-endpoint="cloudSelectEndpoint"
+            :unsplash-endpoint="cloudUnsplashEndpoint"
+            @selected="selected"
+            />
+          <Picker
+            :accept="accept"
+            :endpoint="pickerEndpoint"
+            :label="$t('components.inputs.mediaInput.picker.button')"
+            :title="$t('components.inputs.mediaInput.picker.title')"
+            @picked="picked"
+            />
+        </div>
+      </div>  
+
     </div>
   </div>
 </template>

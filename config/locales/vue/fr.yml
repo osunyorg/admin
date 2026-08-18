@@ -85,6 +85,13 @@ fr:
         title: Cadrer l'image
         validate: Valider
       inputs:
+        fileInput:
+          fileUploader:
+            size:
+              close: Fermer
+              text: "Le fichier envoyé est trop lourd, il pèse {size} Mo. Sur osuny, nous acceptons automatiquement les fichiers de moins de {max} Mo. Au-delà de ce poids, il est nécessaire d'utiliser un service dédié aux fichiers lourds."
+              title: Fichier trop lourd
+            upload: Envoyer un fichier (100 Mo max)
         mediaInput:
           cloud:
             button: Importer (Unsplash & Pexels)

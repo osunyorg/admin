@@ -36,8 +36,8 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
   def direct_upload
     @blob = ActiveStorage::Blob.create_before_direct_upload!(**blob_args)
     @blob.update_column(:university_id, current_university&.id)
-    # Le blob est sur la localisation
-    @l10n = Communication::File::Localization.find_or_create_from_blob(
+    # Le blob est sur la localisation, contrairement aux médias
+    @l10n = Communication::File::Localization.find_or_create_file_localization_from_blob(
       @blob,
       language: current_language,
       user: current_user

@@ -5,9 +5,7 @@ json.results do
   json.list @picker.results do |file|
     l10n = file.localized_in(current_language)
     json.data do
-      json.communication_file_id file.id
-      json.filename l10n.original_filename
-      json.name l10n.name
+      json.id file.id
     end
     json.snippet render(
         partial: 'admin/communication/library/files/file',

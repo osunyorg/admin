@@ -50,7 +50,6 @@ class Communication::Block < ApplicationRecord
   include WithCommunicationFiles
   include WithHeadingRanks
   include WithHtmlClass
-  include WithMediaLibrary
   include WithTemplate
   include WithOpenApi # Must be included after WithTemplate to load template_kinds
 

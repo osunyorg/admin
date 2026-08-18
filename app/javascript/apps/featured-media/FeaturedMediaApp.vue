@@ -37,17 +37,17 @@ export default {
     <div class="app-content">
       <div class="vue__media-picker__selector">
         <MediaInput
-          v-model="current.featured_media_id"
-          :upload-endpoint="dataset.uploadEndpoint"
-          :upload-hint="dataset.uploadHint"
+          :accept="dataset.formatsAccepted"
           :cloud-default-query="dataset.cloudDefaultQuery"
           :cloud-unsplash-endpoint="dataset.cloudUnsplashEndpoint"
           :cloud-pexels-endpoint="dataset.cloudPexelsEndpoint"
           :cloud-select-endpoint="dataset.cloudSelectEndpoint"
           :object-endpoint="dataset.objectEndpoint"
           :picker-endpoint="dataset.pickerEndpoint"
-          :accept="dataset.formatsAccepted"
-          :size-limit="dataset.sizeLimit"
+          :uploader-endpoint="dataset.uploadEndpoint"
+          :uploader-hint="dataset.uploadHint"
+          :uploader-size-limit="Number(dataset.sizeLimit)"
+          v-model="current.featured_media_id"
           @mediaLoaded="mediaLoaded"
           />
       </div>

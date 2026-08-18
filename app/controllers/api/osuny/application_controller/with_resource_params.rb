@@ -40,14 +40,15 @@ module Api::Osuny::ApplicationController::WithResourceParams
     if featured_image_data[:blob_id].present?
       # If we send a blob_id, we use the media made from this blob
       blob = current_university.active_storage_blobs.find_by(id: featured_image_data[:blob_id])
-      # TODO refactor
-      media = Communication::Media.find_or_create_from_blob(
-        blob,
-        in_context: l10n,
-        alt: featured_image_data[:alt],
-        credit: featured_image_data[:credit]
-      ) if blob.present?
-      l10n_params[:featured_media_id] = media.id if media.present?
+      if blob.present?
+        media = Communication::Media.find_or_create_media_from_blob(
+          blob,
+          alt: featured_image_data[:alt],
+          credit: featured_image_data[:credit]
+        ) 
+        media.add_context!(l10n)
+        l10n_params[:featured_media_id] = media.id if media.present?
+      end
     end
     # Set the image URL so that the object can delay the import if needed
     l10n_params[:featured_media_new_url] = featured_image_data[:url]

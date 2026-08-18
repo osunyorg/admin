@@ -11,7 +11,7 @@ class Migrations::FeaturedImagesToMedias
     return if l10n.nil? || blob.nil? || !l10n.respond_to?(:featured_media_id)
 
     if l10n.featured_media_id.nil?
-      media = Communication::Media.find_or_create_from_blob(
+      media = Communication::Media.find_or_create_media_from_blob(
         blob,
         language: l10n.language,
         alt: l10n.featured_media_alt,

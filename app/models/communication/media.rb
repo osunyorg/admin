@@ -84,7 +84,9 @@ class Communication::Media < ApplicationRecord
     where(original_extension: extensions)
   }
 
-  def self.find_or_create_from_blob(blob, user: nil, origin: :upload)
+  after_create_commit :analyze_blob
+
+  def self.find_or_create_media_from_blob(blob, user: nil, origin: :upload)
     return if blob.nil?
     media = Communication::Media.where(
         university: blob.university_id,
@@ -104,7 +106,11 @@ class Communication::Media < ApplicationRecord
       university_id: university_id,
       metadata: blob.metadata.merge(source_url: url)
     )
-    find_or_create_from_blob(blob, user: user, origin: origin)
+    find_or_create_media_from_blob(
+      blob,
+      user: user,
+      origin: origin
+    )
   end
 
   def self.create_context(object, blob, about)
@@ -154,5 +160,11 @@ class Communication::Media < ApplicationRecord
       l10n.alt = alt
       l10n.credit = credit
     end
+  end
+
+  protected
+  
+  def analyze_blob
+    original_blob.analyze_later
   end
 end

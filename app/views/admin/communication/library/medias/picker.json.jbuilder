@@ -7,8 +7,6 @@ json.results do
     json.data do
       json.id media.id
       json.alt l10n.alt
-      json.credit l10n.credit
-      json.thumb media.thumb_url
     end
     json.snippet render(
         partial: 'admin/communication/library/medias/media',

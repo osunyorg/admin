@@ -85,6 +85,13 @@ en:
         title: Frame image
         validate: Validate
       inputs:
+        fileInput:
+          fileUploader:
+            size:
+              close: Close
+              text: "The file sent is too heavy, it weights {size}MB. osuny accepts files up to {max}MB. Above, you should use a system dedicated to heavy files."
+              title: File too heavy
+            upload: Send file (max 100MB)
         mediaInput:
           cloud:
             button: Import (Unsplash & Pexels)

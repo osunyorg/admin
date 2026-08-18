@@ -72,13 +72,13 @@ class Communication::File::Localization < ApplicationRecord
 
   after_commit :touch_references, on: :update
 
-  def self.find_or_create_from_blob(blob, language:, user: nil)
+  def self.find_or_create_file_localization_from_blob(blob, language:, user: nil)
     localization = where(
       university_id: blob.university_id,
       language_id: language.id,
       original_checksum: blob.checksum
     ).first_or_create do |localization|
-      file = Communication::File.find_or_create_from_blob(blob, user: user)
+      file = Communication::File.find_or_create_file_from_blob(blob, user: user)
       # On attribue le blob
       localization.original_blob = blob
       # On attribue le nom
