@@ -1,25 +1,11 @@
-<%
-# Endpoints
-default_settings = {
-  website_id: nil,
-  extranet_id: nil,
-  journal_id: nil
-}
-upload_endpoint = direct_upload_admin_communication_medias_path(**default_settings)
-cloud_unsplash_endpoint = unsplash_admin_communication_medias_path(**default_settings)
-cloud_pexels_endpoint = pexels_admin_communication_medias_path(**default_settings)
-cloud_select_endpoint = cloud_select_admin_communication_medias_path(**default_settings)
-picker_endpoint = picker_admin_communication_medias_path(**default_settings, format: :json)
-object_endpoint = admin_communication_medias_path(**default_settings)
-%>
 <media-input
   accept="<%= default_images_formats_accepted %>"
-  cloud-pexels-endpoint="<%= cloud_pexels_endpoint %>"
-  cloud-select-endpoint="<%= cloud_select_endpoint %>"
-  cloud-unsplash-endpoint="<%= cloud_unsplash_endpoint %>"
-  object-endpoint="<%= object_endpoint %>"
-  picker-endpoint="<%= picker_endpoint %>"
-  uploader-endpoint="<%= upload_endpoint %>"
+  cloud-pexels-endpoint="<%= pexels_admin_communication_medias_path(**reset_context) %>"
+  cloud-select-endpoint="<%= cloud_select_admin_communication_medias_path(**reset_context) %>"
+  cloud-unsplash-endpoint="<%= unsplash_admin_communication_medias_path(**reset_context) %>"
+  object-endpoint="<%= admin_communication_medias_path(**reset_context) %>"
+  picker-endpoint="<%= picker_admin_communication_medias_path(**reset_context, format: :json) %>"
+  uploader-endpoint="<%= direct_upload_admin_communication_medias_path(**reset_context) %>"
   uploader-hint="<%= images_formats_accepted_hint %>"
   :uploader-size-limit="Number(<%= Rails.application.config.default_file_max_size %>)"
   v-model="data.image.communication_media_id"

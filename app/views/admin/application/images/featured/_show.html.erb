@@ -1,1 +1,22 @@
-<%= render 'admin/communication/library/medias/picker', about: about %>
+<%
+current = {
+  featured_media_id: about.featured_media_id.to_s,
+  featured_media_alt: about.featured_media_alt.to_s
+}
+%>
+<div
+  id="featured-media-app"
+  data-current="<%= current.to_json %>"
+  data-upload-endpoint="<%= direct_upload_admin_communication_medias_path(**reset_context) %>"
+  data-upload-hint="<%= images_formats_accepted_hint %>"
+  data-cloud-default-query="<%= about.to_s %>"
+  data-cloud-pexels-endpoint="<%= pexels_admin_communication_medias_path(**reset_context) %>"
+  data-cloud-select-endpoint="<%= cloud_select_admin_communication_medias_path(**reset_context) %>"
+  data-cloud-unsplash-endpoint="<%= unsplash_admin_communication_medias_path(**reset_context) %>"
+  data-picker-endpoint="<%= picker_admin_communication_medias_path(**reset_context, format: :json) %>"
+  data-object-endpoint="<%= admin_communication_medias_path(**reset_context) %>"
+  data-changes-endpoint="<%= set_featured_admin_communication_medias_path(**reset_context, about_id: about.id, about_type: about.class.polymorphic_name) %>"
+  data-size-limit="<%= Rails.application.config.default_image_max_size %>"
+  data-formats-accepted="<%= default_images_formats_accepted %>"
+  >
+</div>
