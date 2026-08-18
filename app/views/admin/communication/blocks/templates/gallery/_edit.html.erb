@@ -1,5 +1,20 @@
 <%= block_component_edit block, :description, summernote_config: 'mini' %>
 
+<media-input
+  accept="<%= default_images_formats_accepted %>"
+  cloud-pexels-endpoint="<%= pexels_admin_communication_medias_path(**reset_context) %>"
+  cloud-select-endpoint="<%= cloud_select_admin_communication_medias_path(**reset_context) %>"
+  cloud-unsplash-endpoint="<%= unsplash_admin_communication_medias_path(**reset_context) %>"
+  object-endpoint="<%= admin_communication_medias_path(**reset_context) %>"
+  picker-endpoint="<%= picker_admin_communication_medias_path(**reset_context, format: :json) %>"
+  uploader-endpoint="<%= direct_upload_admin_communication_medias_path(**reset_context) %>"
+  uploader-hint="<%= images_formats_accepted_hint %>"
+  :uploader-size-limit="Number(<%= Rails.application.config.default_file_max_size %>)"
+  v-model="data.temporary_communication_media_id"
+  @loaded="data.elements.push({ image: { communication_media_id: $event.id }, alt: $event.alt }); data.temporary_communication_media_id = '';"
+  >
+</media-input>
+
 <p><%= t('.send_multiple_images') %></p>
 <multi-image-input :elements="data.elements"
                    :default-element="defaultElement"
@@ -14,12 +29,18 @@
 <draggable :list="data.elements" class="row">
   <div v-for="(element, index) in data.elements" class="col-2 mb-4">
     <div class="card">
-      <div class="card-header p-1 text-center">
-        <i class="<%= Icon::MOVE %>"></i>
+      <div class="card-header d-flex align-items-center justify-content-between p-1">
+        <i class="<%= Icon::MOVE %> ps-2"></i>
+        <a  class="btn btn-sm text-danger"
+            @click="deleteElement(element)"
+            title="<%= t 'admin.communication.blocks.templates.gallery.edit.remove_image' %>">
+            <i class="<%= Icon::DELETE %>"></i>
+        </a>
       </div>
-      <div v-if="element.image.id">
-        <img :src="getImageUrl(element.image)" class="img-fluid" />
-      </div>
+      <selected-media
+        :id="element.image.communication_media_id"
+        endpoint="<%= admin_communication_medias_path(**reset_context) %>">
+      </selected-media>
     </div>
   </div>
 </draggable>
@@ -37,25 +58,14 @@
           <i class="<%= Icon::DELETE %>"></i>
       </a>
     </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <%= block_component_edit block, :image,
-              template: @element,
-              label: t('admin.communication.blocks.components.image.input.label'),
-              placeholder: t('admin.communication.blocks.components.image.input.placeholder') %>
-      </div>
-      <div class="col-sm-6">
-        <%= block_component_edit block, :alt,
-              template: @element,
-              label: t('admin.communication.blocks.components.image.alt.label'),
-              placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
-        <%= block_component_edit block, :credit,
-              template: @element,
-              label: t('admin.communication.blocks.components.image.credit.label'),
-              placeholder: t('admin.communication.blocks.components.image.credit.placeholder'),
-              summernote_config: 'mini' %>
-      </div>
-    </div>
+    <%= block_component_edit block, :image,
+          template: @element,
+          label: t('admin.communication.blocks.components.image.input.label'),
+          placeholder: t('admin.communication.blocks.components.image.input.placeholder') %>
+    <%= block_component_edit block, :alt,
+          template: @element,
+          label: t('admin.communication.blocks.components.image.alt.label'),
+          placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
     <%= block_component_edit block, :text,
           template: @element,
           summernote_config: 'mini' %>
