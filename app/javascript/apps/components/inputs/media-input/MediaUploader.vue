@@ -20,11 +20,19 @@ export default {
     'uploading',
     'uploaded',
   ],
+  data () {
+    return {
+      fileUploaded: null,
+      sizeTooBig: false,
+      uploadProgress: null,
+      draggingFileAbove: false,
+    }
+  },
   computed: {
     sizeWarningSentence: {
       get() {
-        if (this.input.object) {
-          const size = Math.round(this.input.object.size / 1024 / 1024);
+        if (this.fileUploaded) {
+          const size = Math.round(this.fileUploaded.size / 1024 / 1024);
           const max = this.sizeLimit / 1024 / 1024;
           return this.$t('components.inputs.mediaInput.imageUploader.size.text', {
             size: size,
@@ -39,31 +47,19 @@ export default {
       return this.uploadProgress !== null;
     },
   },
-  data () {
-    return {
-      input: {
-        field: null,
-        object: null,
-      },
-      sizeTooBig: false,
-      uploadProgress: null
-    }
-  },
   methods: {
     uploadInputChanged(event) {
       if (this.isUploading) {
         return;
       }
-      this.input.field = event.target;
-      this.input.object = event.target.files?.[0];
+      this.fileUploaded = event.target.files?.[0];
       this.checkSize();
-      if (!this.sizeTooBig) {
-        this.uploadFile();
-      }
     },
     checkSize() {
-      if (this.input.object.size > this.sizeLimit) {
+      if (this.fileUploaded.size > this.sizeLimit) {
         this.sizeTooBig = true;
+      } else {
+        this.uploadFile();
       }
     },
     directUploadWillStoreFileWithXHR(xhr) {
@@ -79,7 +75,7 @@ export default {
     uploadFile() {
       this.uploadProgress = 0
       this.$emit('uploading', 0);
-      this.directUpload = new window.ActiveStorage.DirectUpload(this.input.object, this.endpoint, this)
+      this.directUpload = new window.ActiveStorage.DirectUpload(this.fileUploaded, this.endpoint, this)
       this.directUpload.create(
         (error, data) => {
           this.$emit('uploading', null);
@@ -94,15 +90,32 @@ export default {
         },
       );
     },
-    closeAlert() {
-      this.size.alert = false;
+    // Drop files
+    draggingStart() {
+      this.draggingFileAbove = true;
     },
+    draggingStop() {
+      this.draggingFileAbove = false;
+    },
+    drop($event) {
+      this.draggingStop();
+      const files = $event.dataTransfer ? [...$event.dataTransfer.files] : [...$event.target.files]
+      this.fileUploaded = files?.[0];
+      this.checkSize();
+    },  
   },
 };
 </script>
 
 <template>
-  <div class="vue__media-input__uploader">
+  <div
+    class="vue__media-input__uploader"
+    :class="{ 'vue__media-input__uploader--dragging': draggingFileAbove }"
+    @dragenter.prevent="draggingStart"
+    @dragover.prevent="draggingStart"
+    @dragleave.prevent="draggingStop"
+    @drop.prevent.stop="drop($event)"
+    >
     <div
       class="vue__media-input__uploader__progress"
       ref="progress"
