@@ -1,8 +1,7 @@
 <%
 hero_classes = "hero"
 if @l10n.featured_blob.present?
-  format = ActiveStorage::Utils.format(@l10n.featured_blob)
-  hero_classes += " hero--with-image hero--image-#{format}" if format.present?
+  hero_classes += " hero--with-image hero--image-#{blob.format}" if blob.format.present?
 end
 %>
 <main id="main" class="page-with-blocks">

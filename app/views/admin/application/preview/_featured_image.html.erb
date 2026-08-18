@@ -1,9 +1,9 @@
 <%
-if l10n.featured_blob.present? 
-  format = ActiveStorage::Utils.format(l10n.featured_blob)
+if l10n.featured_blob.present?
+  blob = l10n.featured_blob
 %>
-  <figure class="featured-image image-<%= format %>">
-    <%= kamifusen_tag l10n.featured_blob, alt: l10n.featured_media_alt %>
+  <figure class="featured-image image-<%= blob.format %>">
+    <%= kamifusen_tag blob, alt: l10n.featured_media_alt %>
     <% if l10n.featured_media_credit.present? %>
       <figcaption>
         <div class="credit">

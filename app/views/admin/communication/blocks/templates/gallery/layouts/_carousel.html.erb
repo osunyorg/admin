@@ -5,9 +5,8 @@
       block.template.elements.each do |element|
         blob = element.blob
         next if blob.nil?
-        format = ActiveStorage::Utils.format(blob)
         %>
-        <figure class="image-<%= format %> slider-slide">
+        <figure class="image-<%= blob.format %> slider-slide">
           <%= kamifusen_tag blob, height: 800, class: 'img-fluid mb-1', alt: element.alt.presence %>
           <% if element.text.present? || element.credit.present? %>
             <figcaption>

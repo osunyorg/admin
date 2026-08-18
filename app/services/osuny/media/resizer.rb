@@ -64,8 +64,8 @@ class Osuny::Media::Resizer
 
   def params_would_cause_a_change?
     [rotation, left, top].any? { |param| param != 0 } ||
-    width != blob.metadata.dig(:width) ||
-    height != blob.metadata.dig(:height)
+    width != blob.width ||
+    height != blob.height
   end
 
   def transformations

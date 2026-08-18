@@ -84,8 +84,6 @@ class Communication::Media < ApplicationRecord
     where(original_extension: extensions)
   }
 
-  after_create_commit :analyze_blob
-
   def self.find_or_create_media_from_blob(blob, user: nil, origin: :upload)
     return if blob.nil?
     media = Communication::Media.where(
@@ -120,13 +118,12 @@ class Communication::Media < ApplicationRecord
       university_id: blob.university_id
     ).first_or_create
   end
-
   def width
-    original_blob.metadata.dig(:width)
+    original_blob.width
   end
 
   def height
-    original_blob.metadata.dig(:height)
+    original_blob.height
   end
 
   def thumb_url
@@ -162,9 +159,4 @@ class Communication::Media < ApplicationRecord
     end
   end
 
-  protected
-  
-  def analyze_blob
-    original_blob.analyze_later
-  end
 end

@@ -3,7 +3,7 @@
   if @l10n.featured_blob.present?
     image_classes = 'col-md-3 offset-2'
     image_width = 400
-    width, height = @l10n.featured_blob.metadata.values_at('width', 'height')
+    width, height = @l10n.featured_blob.width, @l10n.featured_blob.height
     ratio = width.present? && height.present? ? (width.to_f / height.to_f) : nil
     if ratio && ratio > 1
       image_classes = 'col-md-5'

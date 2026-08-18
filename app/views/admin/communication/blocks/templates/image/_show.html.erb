@@ -2,7 +2,6 @@
 media = block.template.image_component.communication_media 
 media_l10n = block.template.image_component.communication_media_localization
 blob = media&.original_blob
-format = ActiveStorage::Utils.format(blob) unless blob.nil?
 %>
 <% if blob.present? %>
   <div class="<%= block_html_class(block) %>">
@@ -12,7 +11,7 @@ format = ActiveStorage::Utils.format(blob) unless blob.nil?
                     block: block,
                     without_description: true %>
         <% if block.template.image.present? %>
-          <figure class="image-<%= format %> lightbox-figure" role="figure">
+          <figure class="image-<%= blob.format %> lightbox-figure" role="figure">
             <%= kamifusen_tag blob,
                               width: 1024,
                               alt: block.template.alt %>
