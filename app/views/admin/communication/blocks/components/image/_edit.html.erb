@@ -1,13 +1,14 @@
-<%
-label = t('admin.communication.blocks.components.image.input.label')
-remove = t('admin.communication.blocks.components.image.input.remove')
-hint = images_formats_accepted_hint
-%>
-<upload-input
-  v-model="<%= model %>.<%= property %>"
-  label="<%= label %>"
-  remove="<%= remove %>"
-  hint="<%= j hint %>"
+<media-input
   accept="<%= default_images_formats_accepted %>"
-  :size-limit="<%= Rails.application.config.default_image_max_size %>">
-</upload-input>
+  cloud-pexels-endpoint="<%= pexels_admin_communication_medias_path(**reset_context) %>"
+  cloud-select-endpoint="<%= cloud_select_admin_communication_medias_path(**reset_context) %>"
+  cloud-unsplash-endpoint="<%= unsplash_admin_communication_medias_path(**reset_context) %>"
+  object-endpoint="<%= admin_communication_medias_path(**reset_context) %>"
+  picker-endpoint="<%= picker_admin_communication_medias_path(**reset_context, format: :json) %>"
+  uploader-endpoint="<%= direct_upload_admin_communication_medias_path(**reset_context) %>"
+  uploader-hint="<%= images_formats_accepted_hint %>"
+  :uploader-size-limit="Number(<%= Rails.application.config.default_file_max_size %>)"
+  v-model="<%= model %>.<%= property %>.communication_media_id"
+  @loaded="<%= model %>.alt = $event.alt"
+  >
+</media-input>
