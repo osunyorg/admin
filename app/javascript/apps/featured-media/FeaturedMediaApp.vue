@@ -18,8 +18,13 @@ export default {
     },
   },
   methods: {
-    mediaLoaded(data) {
-      this.current.featured_media_alt = data.alt;
+    loaded(data) {
+      if (this.current.featured_media_alt == '') {
+        this.current.featured_media_alt = data.alt;
+      }
+    },
+    unselected() {
+      this.current.featured_media_alt = '';
     },
   },
   beforeMount() {
@@ -48,7 +53,8 @@ export default {
           :uploader-hint="dataset.uploadHint"
           :uploader-size-limit="Number(dataset.sizeLimit)"
           v-model="current.featured_media_id"
-          @mediaLoaded="mediaLoaded"
+          @loaded="loaded"
+          @unselected="unselected"
           />
       </div>
       <div v-if="hasValue">
@@ -62,8 +68,9 @@ export default {
           <input  id="alt"
                   class="form-control"
                   data-translatable="true"
+                  type="text"
                   v-model="current.featured_media_alt"
-                  type="text">
+                  >
           <div class="form-text">
             {{ $t('featuredMedia.alt.hint') }}
           </div>

@@ -1,16 +1,16 @@
 <script>
 import Cloud from './media-input/Cloud.vue';
-import ImageUploader from './media-input/ImageUploader.vue';
-import SelectedMedia from '../selected-objects/SelectedMedia.vue';
+import MediaUploader from './media-input/MediaUploader.vue';
 import Picker from '../../picker/Picker.vue';
+import SelectedMedia from '../selected-objects/SelectedMedia.vue';
 
 export default {
   name: 'MediaInput',
   components: {
     Cloud, 
-    ImageUploader,
+    MediaUploader,
+    Picker,
     SelectedMedia,
-    Picker
   },
   props: {
     accept: { type: String, default: '*' },
@@ -29,6 +29,7 @@ export default {
     'update:modelValue',
     'uploading',
     'loaded',
+    'unselected',
   ],
   data() {
     return {
@@ -70,6 +71,7 @@ export default {
     },
     remove() {
       this.value = '';
+      this.$emit('unselected');
     },
   },
 };
@@ -105,7 +107,7 @@ export default {
         v-show="isUploading"
         />
       <div v-show="!isUploading">
-        <ImageUploader
+        <MediaUploader
           :accept="accept"
           :endpoint="uploaderEndpoint"
           :hint="uploaderHint"
@@ -129,8 +131,7 @@ export default {
             @picked="picked"
             />
         </div>
-      </div>  
-
+      </div>
     </div>
   </div>
 </template>

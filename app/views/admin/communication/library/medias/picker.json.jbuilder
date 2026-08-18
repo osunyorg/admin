@@ -6,7 +6,7 @@ json.results do
     l10n = media.localized_in(current_language)
     json.data do
       json.id media.id
-      json.alt l10n.alt
+      json.alt l10n.alt.to_s
     end
     json.snippet render(
         partial: 'admin/communication/library/medias/media',

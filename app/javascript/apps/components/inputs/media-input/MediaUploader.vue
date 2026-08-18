@@ -4,6 +4,7 @@ import CropperModal from '../../CropperModal.vue';
 import Warning from '../primitives/Warning.vue';
 
 export default {
+  name: 'MediaUploader',
   components: {
     CropperModal,
     Upload,

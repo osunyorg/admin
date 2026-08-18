@@ -14,16 +14,16 @@ object_endpoint = admin_communication_medias_path(**default_settings)
 %>
 <media-input
   accept="<%= default_images_formats_accepted %>"
-  cloud-unsplash-endpoint="<%= cloud_unsplash_endpoint %>"
   cloud-pexels-endpoint="<%= cloud_pexels_endpoint %>"
   cloud-select-endpoint="<%= cloud_select_endpoint %>"
+  cloud-unsplash-endpoint="<%= cloud_unsplash_endpoint %>"
   object-endpoint="<%= object_endpoint %>"
   picker-endpoint="<%= picker_endpoint %>"
   uploader-endpoint="<%= upload_endpoint %>"
   uploader-hint="<%= images_formats_accepted_hint %>"
-  :uploader-size-limit="Number(<%= Rails.application.config.default_file_max_size %>)">
+  :uploader-size-limit="Number(<%= Rails.application.config.default_file_max_size %>)"
   v-model="data.image.communication_media_id"
-  @media-loaded="data.alt = $event.alt"
+  @loaded="data.alt = $event.alt"
   >
 </media-input>
 <%= block_component_edit  block, :alt,

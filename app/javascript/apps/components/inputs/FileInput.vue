@@ -40,7 +40,7 @@ export default {
       }
     },
     hasValue() {
-      return Boolean(this.modelValue);
+      return this.modelValue != '';
     },
     isUploading() {
       return this.uploadProgress !== null;
@@ -49,12 +49,12 @@ export default {
   methods: {
     uploading(percent) {
       this.uploadProgress = percent;
+      this.$emit('uploading', percent);
     },
     uploaded(id) {
       this.value = id;
     },
     picked(object) {
-      console.log(object);
       this.value = object.id;
     },
     loaded(data) {
@@ -72,37 +72,33 @@ export default {
       :endpoint="objectEndpoint"
       @loaded="loaded"
       />
-    <template v-else>
+    <div v-else>
       <progress
         class="mt-2"
         max="100"
         style="width: 100%;"
-        v-show="isUploading"
         :value="uploadProgress"
+        v-show="isUploading"
         />
       <div 
         v-show="!isUploading"
-        class="row"
+        class="d-flex flex-wrap justify-content-between"
         >
-        <div class="col-md-6">
-          <FileUploader
-            :accept="accept"
-            :endpoint="uploaderEndpoint"
-            :size-limit="uploaderSizeLimit"
-            @uploaded="uploaded"
-            @uploading="uploading"
-            />
-        </div>
-        <div class="col-md-6">
-          <Picker
-            :accept="accept"
-            :endpoint="pickerEndpoint"
-            :label="pickerLabel"
-            :title="pickerTitle"
-            @picked="picked"
-            />
-        </div>
+        <FileUploader
+          :accept="accept"
+          :endpoint="uploaderEndpoint"
+          :size-limit="uploaderSizeLimit"
+          @uploaded="uploaded"
+          @uploading="uploading"
+          />
+        <Picker
+          :accept="accept"
+          :endpoint="pickerEndpoint"
+          :label="pickerLabel"
+          :title="pickerTitle"
+          @picked="picked"
+          />
       </div>
-    </template>
+    </div>
   </div>
 </template>
