@@ -13,12 +13,11 @@ picker_endpoint = picker_admin_communication_medias_path(**default_settings, for
 object_endpoint = admin_communication_medias_path(**default_settings)
 %>
 <media-input
-  v-model="data.featured_media_id"
+  v-model="data.image.communication_media_id"
   accept="<%= default_images_formats_accepted %>"
   size-limit="<%= Rails.application.config.default_image_max_size %>"
   object-endpoint="<%= object_endpoint %>"
   upload-endpoint="<%= upload_endpoint %>"
-  cloud-query="<%= %>"
   cloud-unsplash-endpoint="<%= cloud_unsplash_endpoint %>"
   cloud-pexels-endpoint="<%= cloud_pexels_endpoint %>"
   cloud-select-endpoint="<%= cloud_select_endpoint %>"
@@ -30,9 +29,5 @@ object_endpoint = admin_communication_medias_path(**default_settings)
 <%= block_component_edit  block, :alt,
                           label: t('admin.communication.blocks.components.image.alt.label'),
                           placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
-<%= block_component_edit  block, :credit,
-                          label: t('admin.communication.blocks.components.image.credit.label'),
-                          placeholder: t('admin.communication.blocks.components.image.credit.placeholder'),
-                          summernote_config: 'mini' %>
 <%= block_component_edit  block, :text,
                           summernote_config: 'mini' %>

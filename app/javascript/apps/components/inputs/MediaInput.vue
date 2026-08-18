@@ -17,7 +17,7 @@ export default {
     accept: { type: String, default: '*' },
     uploadHint: { type: String, default: '' },
     uploadEndpoint: { type: String, required: true },
-    cloudQuery: { type: String, required: true },
+    cloudDefaultQuery: { type: String, default: '' },
     cloudUnsplashEndpoint: { type: String, required: true },
     cloudPexelsEndpoint: { type: String, required: true },
     cloudSelectEndpoint: { type: String, required: true },
@@ -68,7 +68,7 @@ export default {
 </script>
 
 <template>
-  <div style="min-height: 50px">
+  <div class="mb-4">
     <div class="d-lg-flex me-4 mb-0">
       <label class="form-label">
         {{ $t('components.inputs.mediaInput.title') }}
@@ -101,7 +101,7 @@ export default {
         @uploaded="mediaSelected" />
       <div class="d-flex flex-wrap justify-content-between">
         <Cloud
-          :query="cloudQuery"
+          :default-query="cloudDefaultQuery"
           :unsplash-endpoint="cloudUnsplashEndpoint"
           :pexels-endpoint="cloudPexelsEndpoint"
           :select-endpoint="cloudSelectEndpoint"

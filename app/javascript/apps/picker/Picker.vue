@@ -111,6 +111,7 @@ export default {
     @keydown.esc="close">
     <button
       v-if="label"
+      type="button"
       class="btn btn-sm mx-n2 d-flex align-items-center"
       @click.prevent="open">
       <CircleDot stroke-width="1.5" class="me-1" />

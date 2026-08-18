@@ -40,7 +40,7 @@ export default {
           v-model="current.featured_media_id"
           :upload-endpoint="dataset.uploadEndpoint"
           :upload-hint="dataset.uploadHint"
-          :cloud-query="dataset.cloudQuery"
+          :cloud-default-query="dataset.cloudDefaultQuery"
           :cloud-unsplash-endpoint="dataset.cloudUnsplashEndpoint"
           :cloud-pexels-endpoint="dataset.cloudPexelsEndpoint"
           :cloud-select-endpoint="dataset.cloudSelectEndpoint"

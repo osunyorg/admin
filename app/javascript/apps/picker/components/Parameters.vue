@@ -51,6 +51,7 @@ export default {
         class="form-control mb-2"
         :placeholder="$t('picker.parameters.search.placeholder')"
         v-model="parameters.search.term"
+        @keydown.enter.prevent
         @keyup="update">
     </div>
     <div

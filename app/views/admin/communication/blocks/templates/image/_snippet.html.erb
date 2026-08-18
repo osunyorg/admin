@@ -1,10 +1,18 @@
-<% blob = block.template.image_component.blob %>
-<%= kamifusen_tag blob, width: 1024, alt: block.template.alt, class: 'img-fluid mb-2' if blob %>
-<div class="row">
-  <div class="col-sm-8">
-    <%= block_component_snippet block, :text %>
-  </div>
-  <div class="col-sm-4 text-end small">
-    <%= block_component_snippet block, :credit %>
-  </div>
-</div>
+<%
+media = block.template.image_component.communication_media 
+media_l10n = block.template.image_component.communication_media_localization
+blob = media&.original_blob
+credit = strip_tags media_l10n&.credit
+%>
+<% if blob.present? %>
+  <%= kamifusen_tag blob,
+                    width: 1024,
+                    alt: block.template.alt,
+                    class: 'img-fluid mb-2' %>
+  <%= block_component_snippet block, :text %>
+  <% if credit.present? %>
+    <div class="small text-muted">
+      © <%= credit %>
+    </div>
+  <% end %>
+<% end %>
