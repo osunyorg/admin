@@ -38,46 +38,41 @@ export default {
 </script>
 
 <template>
-  <section class="vue__media-picker">
-    <div class="app-content">
-      <div class="vue__media-picker__selector">
-        <MediaInput
-          :accept="dataset.formatsAccepted"
-          :cloud-default-query="dataset.cloudDefaultQuery"
-          :cloud-unsplash-endpoint="dataset.cloudUnsplashEndpoint"
-          :cloud-pexels-endpoint="dataset.cloudPexelsEndpoint"
-          :cloud-select-endpoint="dataset.cloudSelectEndpoint"
-          :object-endpoint="dataset.objectEndpoint"
-          :picker-endpoint="dataset.pickerEndpoint"
-          :uploader-endpoint="dataset.uploadEndpoint"
-          :uploader-hint="dataset.uploadHint"
-          :uploader-size-limit="Number(dataset.sizeLimit)"
-          v-model="current.featured_media_id"
-          @loaded="loaded"
-          @unselected="unselected"
-          />
+  <MediaInput
+    :accept="dataset.formatsAccepted"
+    :cloud-default-query="dataset.cloudDefaultQuery"
+    :cloud-unsplash-endpoint="dataset.cloudUnsplashEndpoint"
+    :cloud-pexels-endpoint="dataset.cloudPexelsEndpoint"
+    :cloud-select-endpoint="dataset.cloudSelectEndpoint"
+    :object-endpoint="dataset.objectEndpoint"
+    :picker-endpoint="dataset.pickerEndpoint"
+    :uploader-endpoint="dataset.uploadEndpoint"
+    :uploader-hint="dataset.uploadHint"
+    :uploader-size-limit="Number(dataset.sizeLimit)"
+    v-model="current.featured_media_id"
+    @loaded="loaded"
+    @unselected="unselected"
+    />
+  <div
+    v-if="hasValue"
+    class="mb-3">
+      <label
+        class="form-label"
+        :aria-label="$t('featuredMedia.alt.label')"
+        for="alt">
+        {{ $t('featuredMedia.alt.label') }}
+      </label>
+      <input  id="alt"
+              class="form-control"
+              data-translatable="true"
+              type="text"
+              v-model="current.featured_media_alt"
+              >
+      <div class="form-text">
+        {{ $t('featuredMedia.alt.hint') }}
       </div>
-      <div v-if="hasValue">
-        <div class="mb-3">
-          <label
-            class="form-label"
-            :aria-label="$t('featuredMedia.alt.label')"
-            for="alt">
-            {{ $t('featuredMedia.alt.label') }}
-          </label>
-          <input  id="alt"
-                  class="form-control"
-                  data-translatable="true"
-                  type="text"
-                  v-model="current.featured_media_alt"
-                  >
-          <div class="form-text">
-            {{ $t('featuredMedia.alt.hint') }}
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <Changes  v-model="current"
-            :endpoint="dataset.changesEndpoint" />
+  </div>
+  <Changes
+    v-model="current"
+    :endpoint="dataset.changesEndpoint" />
 </template>

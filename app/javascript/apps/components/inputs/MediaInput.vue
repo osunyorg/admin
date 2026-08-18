@@ -33,7 +33,7 @@ export default {
   ],
   data() {
     return {
-      uploadProgress: null
+      uploadProgress: null,
     };
   },
   computed: {
@@ -99,14 +99,7 @@ export default {
       </div>
     </div>
     <div v-else>
-      <progress
-        class="mt-2"
-        max="100"
-        style="width: 100%;"
-        :value="uploadProgress"
-        v-show="isUploading"
-        />
-      <div v-show="!isUploading">
+      <div>
         <MediaUploader
           :accept="accept"
           :endpoint="uploaderEndpoint"
@@ -115,7 +108,9 @@ export default {
           @uploaded="uploaded"
           @uploading="uploading"
           />
-        <div class="d-flex flex-wrap justify-content-between">
+        <div
+          class="d-flex flex-wrap justify-content-between"
+          v-if="!isUploading">
           <Cloud
             :default-query="cloudDefaultQuery"
             :pexels-endpoint="cloudPexelsEndpoint"

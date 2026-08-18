@@ -149,7 +149,7 @@ export default {
                     :pagination="pagination"
                     @change="search" />
                 </div>
-                <div v-if="searching" class="position-absolute top-0 start-0 ms-3 mt-1">
+                <div v-if="searching" class="position-absolute top-0 end-0 me-4 mt-4">
                   <span class="spinner-border text-primary" role="status"></span>
                 </div>
               </div>

@@ -175,7 +175,7 @@ export default {
               <div
                 v-if="unsplash.data.total_pages"
                 class="d-flex justify-content-between mb-2">
-                <div class="vue__media-picker__button_container">
+                <div class="vue__media-input__cloud__button_container">
                   <button
                     class="btn btn-sm ps-0"
                     v-if="unsplash.page > 1"
@@ -187,7 +187,7 @@ export default {
                 <p class="m-0">
                   {{ unsplash.page }} / {{ unsplash.data.total_pages }}
                 </p>
-                <div class="vue__media-picker__button_container text-end">
+                <div class="vue__media-input__cloud__button_container text-end">
                   <button
                     class="btn btn-sm pe-0"
                     v-if="unsplash.page < unsplash.data.total_pages"
@@ -197,10 +197,10 @@ export default {
                   </button>
                 </div>
               </div>
-              <div class="vue__media-picker__results">
+              <div class="vue__media-input__cloud__results">
                 <img  :src="image.thumb"
                       :alt="image.alt"
-                      class="vue__media-picker__results__result"
+                      class="vue__media-input__cloud__results__result"
                       v-for="image in unsplash.data.results"
                       @click="selectUnsplash(image)">
               </div>
@@ -212,7 +212,7 @@ export default {
               <div
                 v-if="pexels.data.total_pages"
                 class="d-flex justify-content-between mb-2">
-                <div class="vue__media-picker__button_container">
+                <div class="vue__media-input__cloud__button_container">
                   <button
                     class="btn btn-sm ps-0"
                     v-if="pexels.page > 1"
@@ -224,7 +224,7 @@ export default {
                 <p class="m-0">
                   {{ pexels.page }} / {{ pexels.data.total_pages }}
                 </p>
-                <div class="vue__media-picker__button_container text-end">
+                <div class="vue__media-input__cloud__button_container text-end">
                   <button
                     class="btn btn-sm pe-0"
                     v-if="pexels.page < pexels.data.total_pages"
@@ -234,10 +234,10 @@ export default {
                   </button>
                 </div>
               </div>
-              <div class="vue__media-picker__results">
+              <div class="vue__media-input__cloud__results">
                 <img  :src="image.thumb"
                       :alt="image.alt"
-                      class="vue__media-picker__results__result"
+                      class="vue__media-input__cloud__results__result"
                       v-for="image in pexels.data.results"
                       @click="selectPexels(image)">
               </div>

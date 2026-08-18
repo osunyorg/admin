@@ -14,7 +14,7 @@ export default {
     endpoint: { type: String, required: true },
     accept: { type: String, default: '*' },
     hint: { type: String, default: '' },
-    sizeLimit: { type: Number, required: true },
+    sizeLimit: { type: Number, required: true }
   },
   emits: [
     'uploading',
@@ -35,6 +35,9 @@ export default {
         }
       }
     },
+    isUploading() {
+      return this.uploadProgress !== null;
+    },
   },
   data () {
     return {
@@ -43,10 +46,14 @@ export default {
         object: null,
       },
       sizeTooBig: false,
+      uploadProgress: null
     }
   },
   methods: {
     uploadInputChanged(event) {
+      if (this.isUploading) {
+        return;
+      }
       this.input.field = event.target;
       this.input.object = event.target.files?.[0];
       this.checkSize();
@@ -64,11 +71,13 @@ export default {
       xhr.upload.addEventListener('progress', (event) => {
         if (event.total) {
           const percent = ((event.loaded / event.total) * 100);
+          this.uploadProgress = percent;
           this.$emit('uploading', percent);
         }
       });
     },
     uploadFile() {
+      this.uploadProgress = 0
       this.$emit('uploading', 0);
       this.directUpload = new window.ActiveStorage.DirectUpload(this.input.object, this.endpoint, this)
       this.directUpload.create(
@@ -80,6 +89,7 @@ export default {
             return;
           } else {
             this.$emit('uploaded', data.media);
+            this.uploadProgress = null;
           }
         },
       );
@@ -92,21 +102,32 @@ export default {
 </script>
 
 <template>
-  <div class="vue__media-picker__selector__viewport">
-    <input
-      hidden
-      ref="file"
-      type="file"
-      :accept="accept"
-      @change="uploadInputChanged">
-    <button
-      type="button"
-      class="btn"
-      @click.prevent="$refs.file.click()">
-      <Upload stroke-width="1.5" />
-      {{ $t('components.inputs.mediaInput.imageUploader.button') }}
-    </button>
-    <div class="form-text">{{ hint }}</div>
+  <div class="vue__media-input__uploader">
+    <div
+      class="vue__media-input__uploader__progress"
+      ref="progress"
+      :style="{ 'height': uploadProgress + '%' }">
+    </div>
+    <span
+      v-show="isUploading"
+      class="spinner-border spinner-border-sm" role="status">
+    </span>
+    <div v-show="!isUploading">
+      <input
+        hidden
+        ref="file"
+        type="file"
+        :accept="accept"
+        @change="uploadInputChanged">
+      <button
+        type="button"
+        class="btn"
+        @click.prevent="$refs.file.click()">
+        <Upload stroke-width="1.5" />
+        {{ $t('components.inputs.mediaInput.imageUploader.button') }}
+      </button>
+      <div class="form-text">{{ hint }}</div>
+    </div>
   </div>
   <!--
   <CropperModal
