@@ -86,8 +86,6 @@ fr:
       communication/extranet/post/category/localization:
         name: Nom
       communication/extranet/post/localization:
-        featured_media: Image à la une
-        featured_media_alt: Texte alternatif
         pinned: Mis en avant
         published: Publié ?
         published_at: Date de publication
@@ -195,7 +193,6 @@ fr:
         time_zone: Fuseau horaire
         to_day: Jour de fin
       communication/website/agenda/event/localization:
-        featured_media: Image à la une
         notes: Notes
         published: Publié
         subtitle: Sous-titre
@@ -214,7 +211,6 @@ fr:
         time_zone: Fuseau horaire
         to_day: Jour de fin
       communication/website/agenda/exhibition/localization:
-        featured_media: Image à la une
         notes: Notes
         place: Lieu
         published: Publié
@@ -244,7 +240,6 @@ fr:
         from_day: Date de publication
         to_day: Date de clôture
       communication/website/jobboard/job/localization:
-        featured_media: Image à la une
         published: Publiée
         subtitle: Sous-titre
         title: Titre
@@ -297,8 +292,6 @@ fr:
         website: Site Web
       communication/website/page/localization:
         breadcrumb_title: Nom affiché dans le fil d'ariane
-        featured_media: Image à la une
-        featured_media_alt: Texte alternatif
         header_text: Titre affiché en haut de page
         path: Chemin
         published: Publié ?
@@ -317,7 +310,6 @@ fr:
         full_width: Pleine largeur
         year: Année
       communication/website/portfolio/project/localization:
-        featured_media: Image à la une
         published: Publié
         subtitle: Sous-titre
         title: Titre
@@ -329,8 +321,6 @@ fr:
       communication/website/post/localization:
         category: Catégorie
         date: Date
-        featured_media: Image à la une
-        featured_media_alt: Texte alternatif
         pinned: Mis en avant
         published: Publié ?
         published_at: Date de publication

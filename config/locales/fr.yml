@@ -250,8 +250,6 @@ fr:
   category:
     breadcrumb_title: Nom affiché dans le fil d'ariane
     children: Sous-catégories
-    featured_media: Image à la une
-    featured_media_alt: Texte alternatif
     free: Catégories libres (sans taxonomie)
     header_text: Titre affiché en haut de page
     is_taxonomy: Est une taxonomie (une famille de catégories)
@@ -425,7 +423,7 @@ fr:
         pending: En cours de traitement
   export: Exporter (xlsx)
   false: Non
-  featured_image:
+  featured_media:
     alt:
       hint: Ce texte est essentiel pour l'accessibilité. Si l'image donne une information importante, il faut écrire ici cette information. Si l'information est déjà présente ailleurs dans la page, ou si l'image est purement décorative, il faut laisser le texte alternatif vide, pour éviter de polluer la navigation vocale.
       label: Texte alternatif

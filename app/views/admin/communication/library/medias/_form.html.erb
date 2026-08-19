@@ -30,8 +30,8 @@
         </div>
         <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
         <%= lf.input :alt,
-                      label: t('featured_image.alt.label'),
-                      hint: t('featured_image.alt.hint'),
+                      label: t('featured_media.alt.label'),
+                      hint: t('featured_media.alt.hint'),
                       input_html: {
                         data: {
                           translatable: true
@@ -39,8 +39,8 @@
                       } %>
         <%= lf.input :credit,
                       as: :summernote,
-                      label: t('featured_image.credit.label'),
-                      hint: t('featured_image.credit.hint'),
+                      label: t('featured_media.credit.label'),
+                      hint: t('featured_media.credit.hint'),
                       input_html: {
                         data: {
                           translatable: true,

@@ -35,12 +35,6 @@ en:
             alt:
               label: Alternative text
               placeholder: Enter alternative text
-            credit:
-              label: Credit
-              placeholder: Enter credit
-            input:
-              label: Image
-              remove: Remove image
           layouts:
             button: Choose the layout
             label: Layout

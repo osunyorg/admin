@@ -35,12 +35,6 @@ fr:
             alt:
               label: Texte alternatif
               placeholder: Entrer la description textuelle
-            credit:
-              label: Crédit
-              placeholder: Entrer le crédit
-            input:
-              label: Image
-              remove: Enlever l'image
           layouts:
             button: Choisir la mise en page
             label: Mise en page
