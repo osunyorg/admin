@@ -2,6 +2,7 @@
 media = block.template.image_component.communication_media 
 media_l10n = block.template.image_component.communication_media_localization
 blob = media&.original_blob
+credit = media_l10n&.credit
 %>
 <% if blob.present? %>
   <div class="<%= block_html_class(block) %>">
@@ -20,9 +21,11 @@ blob = media&.original_blob
               <div>
                 <%= block_component_snippet block, :text %>
               </div>
+              <% if credit %>
               <div class="credit">
-                <%= sanitize media_l10n.credit %>
+                <%= sanitize credit %>
               </div>
+              <% end %>
             </figcaption>
           </figure>
         <% end %>

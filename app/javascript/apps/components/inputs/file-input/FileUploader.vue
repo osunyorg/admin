@@ -23,8 +23,9 @@ export default {
   },
   data() {
     return {
-      draggingFileAbove: false,
+      dragging: false,
       fileUploaded: null,
+      filesSelected: [],
       sizeTooBig: false,
       uploadProgress: null,
     }
@@ -44,11 +45,36 @@ export default {
         }
       }
     },
+    isUploading() {
+      return this.uploadProgress !== null;
+    },
   },
   methods: {
+    // File input
     uploadInputChanged(event) {
-      this.fileUploaded = event.target.files?.[0];
-      this.checkSize();
+      if (this.isUploading) {
+        return;
+      }
+      this.filesSelected = [...event.target.files];
+      this.upload();
+    },
+
+    // Drop files
+    drop($event) {
+      this.dragging = false;
+      if (this.isUploading) {
+        return;
+      }
+      this.filesSelected = [...$event.dataTransfer.files];
+      this.upload();
+    },
+
+    // Direct upload
+    upload() {
+      this.fileUploaded = this.filesSelected.shift();
+      if (this.fileUploaded) {
+        this.checkSize();
+      }
     },
     checkSize() {
       if (this.fileUploaded.size > this.sizeLimit) {
@@ -62,15 +88,18 @@ export default {
       xhr.upload.addEventListener('progress', (event) => {
         if (event.total) {
           const percent = ((event.loaded / event.total) * 100);
+          this.uploadProgress = percent;
           this.$emit('uploading', percent);
         }
       });
     },
     uploadFile() {
+      this.uploadProgress = 0;
       this.$emit('uploading', 0);
       this.directUpload = new window.ActiveStorage.DirectUpload(this.fileUploaded, this.endpoint, this)
       this.directUpload.create(
         (error, data) => {
+          this.uploadProgress = null;
           this.$emit('uploading', null);
           if (error) {
             // eslint-disable-next-line no-console
@@ -82,19 +111,6 @@ export default {
         },
       );
     },
-    // Drop files
-    draggingStart() {
-      this.draggingFileAbove = true;
-    },
-    draggingStop() {
-      this.draggingFileAbove = false;
-    },
-    drop($event) {
-      this.draggingStop();
-      const files = $event.dataTransfer ? [...$event.dataTransfer.files] : [...$event.target.files]
-      this.fileUploaded = files?.[0];
-      this.checkSize();
-    },
   },
 };
 </script>
@@ -102,9 +118,9 @@ export default {
 <template>
   <div
     class="mb-3"
-    @dragenter.prevent="draggingStart"
-    @dragover.prevent="draggingStart"
-    @dragleave.prevent="draggingStop"
+    @dragenter.prevent="dragging = true;"
+    @dragover.prevent="dragging = true;"
+    @dragleave.prevent="dragging = false"
     @drop.prevent.stop="drop($event)"
     >
     <input
@@ -118,7 +134,7 @@ export default {
     <button
       type="button"
       class="btn btn-sm mx-n2 d-flex align-items-center"
-      :class="{ 'fw-bold': draggingFileAbove }"
+      :class="{ 'fw-bold': dragging }"
       @click.prevent="$refs.file.click()">
       <Upload stroke-width="1.5" class="me-1" />
       {{ $t('components.inputs.fileInput.fileUploader.upload') }}

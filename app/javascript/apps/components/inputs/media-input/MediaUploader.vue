@@ -25,8 +25,8 @@ export default {
   data () {
     return {
       dragging: false,
-      filesSelected: [],
       fileUploaded: null,
+      filesSelected: [],
       sizeTooBig: false,
       uploadProgress: null,
     }
@@ -68,14 +68,11 @@ export default {
     },
 
     // Drop files
-    draggingStart() {
-      this.dragging = true;
-    },
-    draggingStop() {
-      this.dragging = false;
-    },
     drop($event) {
-      this.draggingStop();
+      this.dragging = false;
+      if (this.isUploading) {
+        return;
+      }
       this.filesSelected = [...$event.dataTransfer.files];
       this.upload();
     },
@@ -135,9 +132,9 @@ export default {
   <div
     class="vue__media-input__uploader"
     :class="{ 'vue__media-input__uploader--dragging': dragging }"
-    @dragenter.prevent="draggingStart"
-    @dragover.prevent="draggingStart"
-    @dragleave.prevent="draggingStop"
+    @dragenter.prevent="dragging = true"
+    @dragover.prevent="dragging = true"
+    @dragleave.prevent="dragging = false"
     @drop.prevent.stop="drop($event)"
     >
     <div

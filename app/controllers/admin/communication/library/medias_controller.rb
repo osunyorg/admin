@@ -43,20 +43,19 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
 
   def set_featured
     featured_media_id = params.dig(:featured_media_id)
-    @media = nil
-    if featured_media_id.present?
-      @media = current_university.communication_medias
-                                 .find(params[:featured_media_id])
-    end
-    @about = PolymorphicObjectFinder.find(
+    return if featured_media_id.nil?
+    media = current_university.communication_medias.find(params[:featured_media_id])
+    return if media.nil?
+    @l10n = PolymorphicObjectFinder.find(
       params,
       key: :about,
       university: current_university
     )
-    return if @about.nil?
-    @about.featured_media = @media
-    @about.featured_media_alt = params[:featured_media_alt]
-    @about.save
+    return if @l10n.nil?
+    raise unless can?(:update, @l10n.about)
+    @l10n.featured_media = media
+    @l10n.featured_media_alt = params[:featured_media_alt]
+    @l10n.save
   end
 
   def edit
@@ -68,7 +67,8 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
   def create
     @media.created_by = current_user
     if @media.save
-      redirect_to [:admin, @media], notice: t('admin.successfully_created_html', model: @media.to_s_in(current_language))
+      redirect_to [:admin, @media],
+                  notice: t('admin.successfully_created_html', model: @media.to_s_in(current_language))
     else
       load_invalid_localization
       @categories = categories
@@ -79,7 +79,8 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
 
   def update
     if @media.update(media_params)
-      redirect_to [:admin, @media], notice: t('admin.successfully_updated_html', model: @media.to_s_in(current_language))
+      redirect_to [:admin, @media],
+                  notice: t('admin.successfully_updated_html', model: @media.to_s_in(current_language))
     else
       load_invalid_localization
       @categories = categories
@@ -91,7 +92,8 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
 
   def destroy
     @media.destroy
-    redirect_to admin_communication_medias_url, notice: t('admin.successfully_destroyed_html', model: @media.to_s_in(current_language))
+    redirect_to admin_communication_medias_url,
+                notice: t('admin.successfully_destroyed_html', model: @media.to_s_in(current_language))
   end
 
   protected

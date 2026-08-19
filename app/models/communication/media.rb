@@ -111,13 +111,6 @@ class Communication::Media < ApplicationRecord
     )
   end
 
-  def self.create_context(object, blob, about)
-    object.contexts.where(
-      about: about,
-      active_storage_blob: blob, # absent dans les files
-      university_id: blob.university_id
-    ).first_or_create
-  end
   def width
     original_blob.width
   end
@@ -137,18 +130,27 @@ class Communication::Media < ApplicationRecord
   end
 
   def thumb_url_rails
-    Rails.routes.helpers.url_for(@media.original_blob.variant(resize_to_fit: [800, nil]))
+    Rails.routes.helpers.url_for(
+      original_blob.variant(resize_to_fit: [800, nil])
+    )
   end
 
   def max_file_size
     Rails.application.config.default_image_max_size
   end
 
-  def add_context!(about)
+  def context_add(about)
     contexts.where(
       about: about,
-      university_id: blob.university_id
+      university_id: university_id
     ).first_or_create
+  end
+
+  def context_remove(about)
+    contexts.where(
+      about: about,
+      university_id: university_id
+    ).destroy_all
   end
 
   def find_or_create_localization(language, alt: nil, credit: nil)

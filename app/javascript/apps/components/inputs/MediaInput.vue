@@ -57,8 +57,8 @@ export default {
     uploading(percent) {
       this.uploadProgress = percent;
     },
-    uploaded(media) {
-      this.value = media.id;
+    uploaded(id) {
+      this.value = id;
     },
     uploadedOne(id) {
       this.multipleTarget.push({ 
