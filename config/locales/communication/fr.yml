@@ -792,13 +792,6 @@ fr:
           draft: Brouillon
           planned_on: Publication prévue le %{date}
           published_on: Publiée le %{date}
-    file:
-      sort:
-        alpha: Par ordre alphabétique
-        date_desc: Les plus récents d'abord
-        date_asc: Les plus anciens d'abord
-        size_desc: Les plus lourds d'abord
-        size_asc: Les plus légers d'abord
     library:
       context:
         in_block: Dans le bloc %{position}
@@ -822,9 +815,6 @@ fr:
           legal: Informations légales
           primary: Menu principal
           social: Liens sociaux
-      page:
-        sort:
-          alpha: Par ordre alphabétique
       pages:
         defaults:
           accessibility:

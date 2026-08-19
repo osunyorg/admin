@@ -5,7 +5,7 @@ class Osuny::Picker::Communication::Website::Post < Osuny::Picker
   end
 
   def objects
-    @objects ||= website.posts
+    @objects ||= website.posts.ordered(language)
   end
 
   def categories

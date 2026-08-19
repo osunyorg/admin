@@ -145,10 +145,10 @@ class Osuny::Picker
     # Can be overridden to add sorts
   end
 
-  def sort_add(name, key)
+  def sort_add(key)
     sort[:values] <<  {
       id: key,
-      name: name,
+      name: I18n.t("picker.sort.#{key}"),
       query_parameters: "&sort=#{key}"
     }
     sort[:current] = key if sort[:current].blank?

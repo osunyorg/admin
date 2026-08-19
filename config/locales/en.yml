@@ -553,6 +553,13 @@ en:
   move: Move
   open: Open
   organize: Organize
+  picker:
+    sort:
+      alpha: Alphabetical
+      date_desc: Most recent first
+      date_asc: Oldest first
+      size_desc: Heaviest first
+      size_asc: Lightest first
   please_confirm:
     deletion: Are you sure you want to delete?
     duplication: Are you sure you want to duplicate?

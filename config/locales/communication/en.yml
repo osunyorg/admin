@@ -792,13 +792,6 @@ en:
           draft: Draft
           planned_on: Publication planned on %{date}
           published_on: Published on %{date}
-    file:
-      sort:
-        alpha: Alphabetical
-        date_desc: Most recent first
-        date_asc: Oldest first
-        size_desc: Heaviest first
-        size_asc: Lightest first
     library:
       context:
         in_block: In block %{position}
@@ -822,9 +815,6 @@ en:
           legal: Legal
           primary: Main menu
           social: Social
-      page:
-        sort:
-          alpha: Alphabetical
       pages:
         defaults:
           accessibility:
