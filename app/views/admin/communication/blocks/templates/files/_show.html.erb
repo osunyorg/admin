@@ -10,16 +10,19 @@
           l10n = element.communication_file_l10n
           next unless element.file && l10n
           %>
-          <li>
+          <li<% if l10n.featured_blob.present? %> class="with-image"<% end %>>
             <figure>
-              <a href="<%= l10n.original_blob.url %>" target="_blank" title="<%= l10n.name %>">
-                <%= element.title %>
+              <a href="" target="_blank" title="<%= l10n.name %>">
+                <%= l10n.name %>
                 <figcaption>
                   <abbr title=""><%= l10n.original_extension.sub('.', '').upcase %></abbr>
                   - <abbr title=""><%= number_to_human_size l10n.original_byte_size %></abbr>
                 </figcaption>
               </a>
             </figure>
+            <% if l10n.featured_blob %>
+              <%= kamifusen_tag l10n.featured_blob, width: 300, class: 'img-fluid' %>
+            <% end %>
           </li>
         <% end %>
       </ul>

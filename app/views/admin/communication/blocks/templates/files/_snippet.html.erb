@@ -5,19 +5,18 @@ block.template.elements.each do |element|
   next if file.nil?
   l10n = element.communication_file_l10n
   next if l10n.nil?
-  # TODO image in file
-  image_blob = element.image_component.blob
+  image_blob = l10n.featured_blob
   %>
   <div class="row mb-4">
     <div class="col-2">
-      <% if image_blob %>
-        <%= kamifusen_tag image_blob, width: 200, class: 'img-fluid' %>
+      <% if l10n.featured_blob %>
+        <%= kamifusen_tag l10n.featured_blob, width: 200, class: 'img-fluid' %>
       <% else %>
-      <div class="osuny__thumbnail osuny__thumbnail--small" style="width: 100%">
-        <span class="osuny__thumbnail__icon">
-          <i class="<%= l10n.icon %>"></i>
-        </span>
-      </div>
+        <div class="osuny__thumbnail osuny__thumbnail--small" style="width: 100%">
+          <span class="osuny__thumbnail__icon">
+            <i class="<%= l10n.icon %>"></i>
+          </span>
+        </div>
       <% end %>
     </div>
     <div class="col-10">
