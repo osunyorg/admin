@@ -135,7 +135,8 @@ export default {
       <button
         type="button"
         class="btn"
-        @click.prevent="$refs.file.click()">
+        @click.prevent="$refs.file.click()"
+        >
         <Upload stroke-width="1.5" />
         {{ $t('components.inputs.mediaInput.imageUploader.button') }}
       </button>
