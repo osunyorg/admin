@@ -20,7 +20,7 @@ module HasFeaturedMedia
     featured_media.best_localization_for(language)
   end
 
-  def set_featured_media!(id, alt, language)
+  def set_featured_media!(id: '', alt: '', language:)
     Communication::Media::Context.remove(self)
     # On récupère le média, qui peut être une absence de média.
     # Si l'id est vide, le media sera nil, et on réinitialise proprement.

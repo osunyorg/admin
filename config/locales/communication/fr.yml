@@ -919,10 +919,12 @@ fr:
     error: Erreur lors de la curation, veillez à utiliser une URL valide
     label: URL de l'article à importer
     placeholder: https://...
+    warning: Attention aux droits d'auteurs sur les contenus ! Les textes comme les images peuvent être protégés par le droit d'auteur, et l'import via cet outil de curation engage votre responsabilité.
   enums:
     communication:
       media:
         origin:
+          curator: Système de curation
           pexels: Photothèque Pexels
           unsplash: Photothèque Unsplash
           upload: Envoi direct de fichier

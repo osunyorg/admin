@@ -51,9 +51,9 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
     # On vérifie les droits sur le Post ou la Page
     raise unless can?(:update, @l10n.about)
     @l10n.set_featured_media!(
-      params.dig(:featured_media_id),
-      params.dig(:featured_media_alt),
-      current_language
+      id: params.dig(:featured_media_id),
+      alt: params.dig(:featured_media_alt),
+      language: current_language
     )
   end
 

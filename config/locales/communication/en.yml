@@ -919,10 +919,12 @@ en:
     error: Import error, be sure to use a valid URL
     label: URL of the post to import
     placeholder: https://...
+    warning: Please be aware of copyright issues relating to content! Both text and images may be protected by copyright, and importing content via this curation tool makes you liable.
   enums:
     communication:
       media:
         origin:
+          curator: Curation system
           pexels: Pexels photo library
           unsplash: Unsplash photo library
           upload: Direct file upload
