@@ -20,6 +20,20 @@ module HasFeaturedMedia
     featured_media.best_localization_for(language)
   end
 
+  def set_featured_media!(id, alt, language)
+    Communication::Media::Context.remove(self)
+    # On récupère le média, qui peut être une absence de média.
+    # Si l'id est vide, le media sera nil, et on réinitialise proprement.
+    if id.present?
+      media = university.communication_medias.find(id)
+      media.find_or_create_localization(language)
+      media.context_add(self)
+    end
+    self.featured_media = media
+    self.featured_media_alt = alt
+    save
+  end
+
   # Gestion des héritages, à ranger (méthodes best_*)
   # A priori c'est nécessaire uniquement pour les formations (Program), mais il faut vérifier.
   # Si ça se vérifie, il faut les sortir du concern et les mettre dans Program.
