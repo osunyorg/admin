@@ -33,7 +33,7 @@ export default {
   <div
     v-if="pagination?.total_pages > 1"
     class="d-flex justify-content-between mt-4">
-    <div>
+    <div style="min-width: 50px">
       <button
         class="btn btn-sm ps-0"
         v-if="pagination?.current_page > 1"
@@ -47,7 +47,7 @@ export default {
     <p class="m-0">
       {{ pagination?.current_page }} / {{ pagination?.total_pages }}
     </p>
-    <div>
+    <div style="min-width: 50px">
       <button
         class="text-end btn btn-sm pe-0"
         v-if="pagination?.current_page < pagination?.total_pages"
