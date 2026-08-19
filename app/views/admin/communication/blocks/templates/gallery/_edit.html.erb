@@ -5,23 +5,15 @@
   cloud-pexels-endpoint="<%= pexels_admin_communication_medias_path(**reset_context) %>"
   cloud-select-endpoint="<%= cloud_select_admin_communication_medias_path(**reset_context) %>"
   cloud-unsplash-endpoint="<%= unsplash_admin_communication_medias_path(**reset_context) %>"
+  :multiple="true"
+  :multiple-target="data.elements"
   object-endpoint="<%= admin_communication_medias_path(**reset_context) %>"
   picker-endpoint="<%= picker_admin_communication_medias_path(**reset_context, format: :json) %>"
   uploader-endpoint="<%= direct_upload_admin_communication_medias_path(**reset_context) %>"
   uploader-hint="<%= images_formats_accepted_hint %>"
-  :uploader-size-limit="Number(<%= Rails.application.config.default_file_max_size %>)"
-  v-model="data.temporary_communication_media_id"
-  @loaded="data.elements.push({ image: { communication_media_id: $event.id }, alt: $event.alt }); data.temporary_communication_media_id = '';"
+  :uploader-size-limit="Number(<%= Rails.application.config.default_image_max_size %>)"
   >
 </media-input>
-
-<p><%= t('.send_multiple_images') %></p>
-<multi-image-input :elements="data.elements"
-                   :default-element="defaultElement"
-                   target-key="image"
-                   accept="<%= default_images_formats_accepted %>"
-                   :size-limit="<%= Rails.application.config.default_image_max_size %>"
-                   hint="<%= j images_formats_accepted_hint %>"></multi-image-input>
 
 <%= osuny_separator %>
 

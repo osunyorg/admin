@@ -19,6 +19,8 @@ export default {
     cloudPexelsEndpoint: { type: String, required: true },
     cloudSelectEndpoint: { type: String, required: true },
     modelValue: { type: String, default: '' },
+    multiple: { type: Boolean, default: false },
+    multipleTarget: { type: Array, default: [] },
     objectEndpoint: { type: String, required: true },
     pickerEndpoint: { type: String, required: true },
     uploaderHint: { type: String, default: '' },
@@ -27,7 +29,6 @@ export default {
   },
   emits: [
     'update:modelValue',
-    'uploading',
     'loaded',
     'unselected',
   ],
@@ -55,10 +56,17 @@ export default {
   methods: {
     uploading(percent) {
       this.uploadProgress = percent;
-      this.$emit('uploading', percent);
     },
-    uploaded(id) {
-      this.value = id;
+    uploaded(media) {
+      this.value = media.id;
+    },
+    uploadedOne(id) {
+      this.multipleTarget.push({ 
+        image: { 
+          communication_media_id: id 
+        },
+        alt: ''
+      });
     },
     selected(id) {
       this.value = id;
@@ -104,8 +112,10 @@ export default {
           :accept="accept"
           :endpoint="uploaderEndpoint"
           :hint="uploaderHint"
+          :multiple="multiple"
           :size-limit="uploaderSizeLimit"
           @uploaded="uploaded"
+          @uploadedOne="uploadedOne"
           @uploading="uploading"
           />
         <div

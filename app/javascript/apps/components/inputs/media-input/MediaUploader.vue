@@ -14,15 +14,18 @@ export default {
     endpoint: { type: String, required: true },
     accept: { type: String, default: '*' },
     hint: { type: String, default: '' },
+    multiple: { type: Boolean, default: false },
     sizeLimit: { type: Number, required: true }
   },
   emits: [
     'uploading',
     'uploaded',
+    'uploadedOne',
   ],
   data () {
     return {
-      draggingFileAbove: false,
+      dragging: false,
+      filesSelected: [],
       fileUploaded: null,
       sizeTooBig: false,
       uploadProgress: null,
@@ -46,14 +49,43 @@ export default {
     isUploading() {
       return this.uploadProgress !== null;
     },
+    buttonKey() {
+      if (this.multiple) {
+        return 'components.inputs.mediaInput.imageUploader.buttonMultiple';
+      } else {
+        return 'components.inputs.mediaInput.imageUploader.button';
+      }
+    },
   },
   methods: {
+    // File input
     uploadInputChanged(event) {
       if (this.isUploading) {
         return;
       }
-      this.fileUploaded = event.target.files?.[0];
-      this.checkSize();
+      this.filesSelected = [...event.target.files];
+      this.upload();
+    },
+
+    // Drop files
+    draggingStart() {
+      this.dragging = true;
+    },
+    draggingStop() {
+      this.dragging = false;
+    },
+    drop($event) {
+      this.draggingStop();
+      this.filesSelected = [...$event.dataTransfer.files];
+      this.upload();
+    },
+
+    // Direct upload
+    upload() {
+      this.fileUploaded = this.filesSelected.shift();
+      if (this.fileUploaded) {
+        this.checkSize();
+      }
     },
     checkSize() {
       if (this.fileUploaded.size > this.sizeLimit) {
@@ -73,35 +105,27 @@ export default {
       });
     },
     uploadFile() {
-      this.uploadProgress = 0
+      this.uploadProgress = 0;
       this.$emit('uploading', 0);
       this.directUpload = new window.ActiveStorage.DirectUpload(this.fileUploaded, this.endpoint, this)
       this.directUpload.create(
         (error, data) => {
+          this.uploadProgress = null;
           this.$emit('uploading', null);
           if (error) {
             // eslint-disable-next-line no-console
             console.error(error);
             return;
           } else {
-            this.$emit('uploaded', data.media);
-            this.uploadProgress = null;
+            if (this.multiple) {
+              this.$emit('uploadedOne', data.media);
+              this.upload();
+            } else {
+              this.$emit('uploaded', data.media);
+            }
           }
         },
       );
-    },
-    // Drop files
-    draggingStart() {
-      this.draggingFileAbove = true;
-    },
-    draggingStop() {
-      this.draggingFileAbove = false;
-    },
-    drop($event) {
-      this.draggingStop();
-      const files = $event.dataTransfer ? [...$event.dataTransfer.files] : [...$event.target.files]
-      this.fileUploaded = files?.[0];
-      this.checkSize();
     },
   },
 };
@@ -110,7 +134,7 @@ export default {
 <template>
   <div
     class="vue__media-input__uploader"
-    :class="{ 'vue__media-input__uploader--dragging': draggingFileAbove }"
+    :class="{ 'vue__media-input__uploader--dragging': dragging }"
     @dragenter.prevent="draggingStart"
     @dragover.prevent="draggingStart"
     @dragleave.prevent="draggingStop"
@@ -119,7 +143,9 @@ export default {
     <div
       class="vue__media-input__uploader__progress"
       ref="progress"
-      :style="{ 'height': uploadProgress + '%' }">
+      :style="{ 'height': uploadProgress + '%' }"
+      v-show="isUploading"
+      >
     </div>
     <span
       v-show="isUploading"
@@ -130,15 +156,17 @@ export default {
         hidden
         ref="file"
         type="file"
+        :multiple="multiple"
         :accept="accept"
-        @change="uploadInputChanged">
+        @change="uploadInputChanged"
+        >
       <button
         type="button"
         class="btn"
         @click.prevent="$refs.file.click()"
         >
         <Upload stroke-width="1.5" />
-        {{ $t('components.inputs.mediaInput.imageUploader.button') }}
+        {{ $t(buttonKey) }}
       </button>
       <div class="form-text">{{ hint }}</div>
     </div>

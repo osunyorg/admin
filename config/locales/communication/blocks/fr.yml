@@ -410,7 +410,6 @@ fr:
               move_images: Déplacer les images ci-dessous pour les mettre dans l'ordre souhaité
               remove_image: Enlever l'image
               send_and_edit_images: Envoyer les images et saisir les textes ci-dessous
-              send_multiple_images: Envoyer plusieurs images
             layouts:
               carousel:
                 description: Les images sont présentées en grand, toutes de la même hauteur.

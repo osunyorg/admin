@@ -103,6 +103,7 @@ en:
             title: Photo search
           imageUploader:
             button: Upload an image
+            buttonMultiple: Upload images
             size:
               close: Close
               text: "The image sent is far too heavy, it weights {size}MB! osuny manages all images under {max}MB automatically. When your image is bigger than that, you need to reduce them before upload. You might use a tool like <a href=\"https://www.iloveimg.com/fr\" target=\"_blank\" rel=\"noreferrer\">iLoveIMG</a>."

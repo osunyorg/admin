@@ -407,7 +407,6 @@ en:
               move_images: Move images below to define the order
               remove_image: Remove image
               send_and_edit_images: Send the images and enter the text below
-              send_multiple_images: Send multiple images
             layouts:
               carousel:
                 description: Images are big, with a previous / next navigation and a constant height.

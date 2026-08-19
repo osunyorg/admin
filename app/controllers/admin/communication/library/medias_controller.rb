@@ -38,7 +38,7 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
     @blob.update_column(:university_id, current_university&.id)
     # Le blob est sur le média, pas sur la loca (contrairement aux files)
     @media = Communication::Media.find_or_create_media_from_blob(@blob, user: current_user)
-    @media.find_or_create_localization(current_language)
+    @l10n = @media.find_or_create_localization(current_language)
   end
 
   def set_featured
