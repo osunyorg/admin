@@ -11,13 +11,23 @@ export default {
   emits: [
     'change',
   ],
+  data() {
+    return {
+      term: '',
+      searchDebounceTimeout: null,
+    };
+  },
   methods: {
     update() {
       this.buildQuery();
       this.$emit('change');
     },
+    updateDebounced() {
+      clearTimeout(this.searchDebounceTimeout);
+      this.searchDebounceTimeout = setTimeout(this.update, 300);
+    },
     buildQuery() {
-      this.parameters.query_parameters = "&filters[for_search_term]=" + encodeURIComponent(this.parameters.search.term);
+      this.parameters.query_parameters = "&filters[for_search_term]=" + encodeURIComponent(this.term);
       this.parameters.filters.forEach(filter => {
         this.addSelectedValuesToQuery(filter.values);
       });
@@ -44,15 +54,15 @@ export default {
 
 <template>
   <div class="vue__picker__parameters">
-    <div class="mb-3" v-if="parameters.search">
+    <div class="mb-3">
       <input 
         type="text"
         name="search"
         class="form-control mb-2"
         :placeholder="$t('picker.parameters.search.placeholder')"
-        v-model="parameters.search.term"
+        v-model="term"
         @keydown.enter.prevent
-        @keyup="update">
+        @keyup="updateDebounced">
     </div>
     <div
       v-for="filter in parameters.filters"
