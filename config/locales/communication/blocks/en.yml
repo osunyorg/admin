@@ -404,9 +404,9 @@ en:
                 text:
                   label: Image label
                   placeholder: Enter text
+              edit_texts: Edit the texts describing the images below
               move_images: Move images below to define the order
               remove_image: Remove image
-              send_and_edit_images: Send the images and enter the text below
             layouts:
               carousel:
                 description: Images are big, with a previous / next navigation and a constant height.

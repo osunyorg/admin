@@ -20,7 +20,6 @@ export default {
   emits: [
     'uploading',
     'uploaded',
-    'uploadedOne',
   ],
   data () {
     return {
@@ -114,11 +113,9 @@ export default {
             console.error(error);
             return;
           } else {
+            this.$emit('uploaded', data.media);
             if (this.multiple) {
-              this.$emit('uploadedOne', data.media);
               this.upload();
-            } else {
-              this.$emit('uploaded', data.media);
             }
           }
         },

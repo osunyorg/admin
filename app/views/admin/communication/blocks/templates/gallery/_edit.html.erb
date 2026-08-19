@@ -15,45 +15,34 @@
   >
 </media-input>
 
-<%= osuny_separator %>
+<div v-show="data.elements.length > 0">
+  <%= osuny_separator %>
 
-<p><%= t('.move_images') %></p>
-<draggable :list="data.elements" class="row">
-  <div v-for="(element, index) in data.elements" class="col-2 mb-4">
-    <div class="card">
-      <div class="card-header d-flex align-items-center justify-content-between p-1">
-        <i class="<%= Icon::MOVE %> ps-2"></i>
-        <a  class="btn btn-sm text-danger"
-            @click="deleteElement(element)"
-            title="<%= t 'admin.communication.blocks.templates.gallery.edit.remove_image' %>">
-            <i class="<%= Icon::DELETE %>"></i>
-        </a>
+  <p><%= t('.move_images') %></p>
+  <draggable :list="data.elements" class="row">
+    <div v-for="(element, index) in data.elements" class="col-2 mb-4">
+      <div class="card">
+        <div class="card-header d-flex align-items-center justify-content-between p-1">
+          <i class="<%= Icon::MOVE %> ps-2"></i>
+          <a  class="btn btn-sm text-danger"
+              @click="deleteElement(element)"
+              title="<%= t 'admin.communication.blocks.templates.gallery.edit.remove_image' %>">
+              <i class="<%= Icon::DELETE %>"></i>
+          </a>
+        </div>
+        <selected-media
+          :id="element.image.communication_media_id"
+          endpoint="<%= admin_communication_medias_path(**reset_context) %>">
+        </selected-media>
       </div>
-      <selected-media
-        :id="element.image.communication_media_id"
-        endpoint="<%= admin_communication_medias_path(**reset_context) %>">
-      </selected-media>
     </div>
-  </div>
-</draggable>
+  </draggable>
 
-<%= osuny_separator %>
+  <%= osuny_separator %>
 
-<p><%= t('.send_and_edit_images') %></p>
-
-<div v-for="(element, index) in data.elements" class="mb-5">
-  <%= osuny_panel 'Image' do %>
-    <div class="text-end">
-      <a  class="btn btn-sm text-danger mt-n4"
-          @click="deleteElement(element)"
-          title="<%= t 'admin.communication.blocks.templates.gallery.edit.remove_image' %>">
-          <i class="<%= Icon::DELETE %>"></i>
-      </a>
-    </div>
-    <%= block_component_edit block, :image,
-          template: @element,
-          label: t('admin.communication.blocks.components.image.input.label'),
-          placeholder: t('admin.communication.blocks.components.image.input.placeholder') %>
+  <p><%= t('.edit_texts') %></p>
+  <div v-for="(element, index) in data.elements" class="mb-5">
+    <%= block_component_edit block, :image, template: @element %>
     <%= block_component_edit block, :alt,
           template: @element,
           label: t('admin.communication.blocks.components.image.alt.label'),
@@ -61,9 +50,8 @@
     <%= block_component_edit block, :text,
           template: @element,
           summernote_config: 'mini' %>
-  <% end %>
+  </div>
 </div>
-<%= block_component_add_element block, t('.add_image') %>
 
 <%= osuny_separator %>
 <%= osuny_small_panel t('admin.communication.blocks.components.layouts.label') do %>

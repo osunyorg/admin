@@ -407,9 +407,9 @@ fr:
                 text:
                   label: Légende de l'image
                   placeholder: Entrer le texte
+              edit_texts: Éditer les textes décrivant les images ci-dessous
               move_images: Déplacer les images ci-dessous pour les mettre dans l'ordre souhaité
               remove_image: Enlever l'image
-              send_and_edit_images: Envoyer les images et saisir les textes ci-dessous
             layouts:
               carousel:
                 description: Les images sont présentées en grand, toutes de la même hauteur.

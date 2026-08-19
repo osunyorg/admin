@@ -21,6 +21,9 @@ export default {
     async load() {
       this.loading = true;
       this.resource = null;
+      if (this.id == '') {
+        return;
+      }
       try {
         const url = this.endpoint + '/' + this.id + '.json';
         const res = await fetch(url);

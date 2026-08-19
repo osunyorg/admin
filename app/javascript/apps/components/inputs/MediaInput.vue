@@ -57,22 +57,26 @@ export default {
     uploading(percent) {
       this.uploadProgress = percent;
     },
-    uploaded(id) {
-      this.value = id;
+    manage(id) {
+      if (this.multiple) {
+        this.multipleTarget.push({ 
+          image: { 
+            communication_media_id: id 
+          },
+          alt: ''
+        });
+      } else {
+        this.value = id;
+      }
     },
-    uploadedOne(id) {
-      this.multipleTarget.push({ 
-        image: { 
-          communication_media_id: id 
-        },
-        alt: ''
-      });
+    uploaded(id) {
+      this.manage(id);
     },
     selected(id) {
-      this.value = id;
+      this.manage(id);
     },
     picked(object) {
-      this.value = object.id;
+      this.manage(object.id);
     },
     loaded(data) {
       this.$emit('loaded', data);
@@ -115,7 +119,6 @@ export default {
           :multiple="multiple"
           :size-limit="uploaderSizeLimit"
           @uploaded="uploaded"
-          @uploadedOne="uploadedOne"
           @uploading="uploading"
           />
         <div
