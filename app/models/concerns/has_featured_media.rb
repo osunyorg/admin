@@ -11,7 +11,18 @@ module HasFeaturedMedia
     after_commit :create_featured_media_from_url_later, on: [:create, :update]
   end
 
-  # Can be overwrite to get featured media from associated objects (ex: parents)
+  def featured_blob
+    featured_media&.original_blob
+  end
+
+  def featured_media_localization
+    return if featured_media.nil?
+    featured_media.best_localization_for(language)
+  end
+
+  # Gestion des héritages, à ranger (méthodes best_*)
+  # A priori c'est nécessaire uniquement pour les formations (Program), mais il faut vérifier.
+  # Si ça se vérifie, il faut les sortir du concern et les mettre dans Program.
   def best_featured_media_source(fallback: true)
     self
   end
@@ -33,18 +44,10 @@ module HasFeaturedMedia
     featured_media_localization&.credit
   end
 
-  def featured_blob
-    featured_media&.original_blob
-  end
-
   def best_featured_blob
     best_featured_media&.original_blob
   end
 
-  def featured_media_localization
-    return if featured_media.nil?
-    featured_media.best_localization_for(language)
-  end
 
   protected
 

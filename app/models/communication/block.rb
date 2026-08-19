@@ -48,6 +48,7 @@ class Communication::Block < ApplicationRecord
   include Orderable
   include Sanitizable
   include WithCommunicationFiles
+  include WithCommunicationMedias
   include WithHeadingRanks
   include WithHtmlClass
   include WithTemplate

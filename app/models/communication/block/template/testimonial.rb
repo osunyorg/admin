@@ -20,6 +20,11 @@ class Communication::Block::Template::Testimonial < Communication::Block::Templa
     elements
   end
 
+  # Permet de gérer les contextes
+  def communication_medias
+    elements.map(&:communication_media).compact_blank
+  end
+
   def dom_count
     5 +
     children.sum(&:dom_count)

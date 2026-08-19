@@ -799,6 +799,9 @@ en:
         date_asc: Oldest first
         size_desc: Heaviest first
         size_asc: Lightest first
+    library:
+      context:
+        in_block: In block %{position}
     manage_authors: Manage authors
     number_of_posts: Number of posts
     summary:

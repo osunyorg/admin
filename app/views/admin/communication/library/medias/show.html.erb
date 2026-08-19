@@ -7,7 +7,7 @@
   <%= edit_link @media %>
 <% end %>
 
-<div class="row">
+<div class="row mb-5">
   <div class="col-lg-4">
     <% if @media.original_blob.representable? %>
       <div>
@@ -79,6 +79,7 @@
     <% end %>
     
     <%= render 'admin/application/categories/widget/show', about: @media %>
-    <%= render 'admin/communication/library/contexts/list', contexts: @contexts %>
   </div>
 </div>
+
+<%= render 'admin/communication/library/contexts/list', contexts: @contexts %>

@@ -16,4 +16,9 @@ class Communication::Block::Template::Feature < Communication::Block::Template::
   def children
     elements
   end
+
+  # Permet de gérer les contextes
+  def communication_medias
+    elements.map(&:communication_media).compact_blank
+  end
 end

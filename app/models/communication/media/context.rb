@@ -37,10 +37,25 @@ class Communication::Media::Context < ApplicationRecord
   belongs_to  :active_storage_blob,
               class_name: 'ActiveStorage::Blob'
   alias       :blob :active_storage_blob
+
+  belongs_to  :communication_website,
+              class_name: 'Communication::Website',
+              optional: true
+  alias       :website :communication_website
  
   belongs_to :about, polymorphic: true
 
+  scope :ordered, -> (language) { order(:about_type) }
+
   before_save :denormalize_website
+
+  def self.remove(about)
+    where(university: about.university, about: about).delete_all  
+  end
+
+  def about_block?
+    about_type == 'Communication::Block'
+  end
 
   protected
   

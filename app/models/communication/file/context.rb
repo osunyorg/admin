@@ -38,7 +38,13 @@ class Communication::File::Context < ApplicationRecord
               optional: true
   alias       :website :communication_website
 
+  scope :ordered, -> (language) { order(:about_type) }
+
   before_save :denormalize_website
+
+  def about_block?
+    about_type == 'Communication::Block'
+  end
 
   protected
   

@@ -14,4 +14,9 @@ class Communication::Block::Template::Link < Communication::Block::Template::Bas
     !about.respond_to?(:extranet)
   end
   
+  # Permet de gérer les contextes
+  def communication_medias
+    elements.map(&:communication_media).compact_blank
+  end
+
 end

@@ -42,20 +42,29 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
   end
 
   def set_featured
-    featured_media_id = params.dig(:featured_media_id)
-    return if featured_media_id.nil?
-    media = current_university.communication_medias.find(params[:featured_media_id])
-    return if media.nil?
-    @l10n = PolymorphicObjectFinder.find(
+    l10n = PolymorphicObjectFinder.find(
       params,
       key: :about,
       university: current_university
     )
-    return if @l10n.nil?
-    raise unless can?(:update, @l10n.about)
-    @l10n.featured_media = media
-    @l10n.featured_media_alt = params[:featured_media_alt]
-    @l10n.save
+    return if l10n.nil?
+    # On vérifie les droits sur le Post ou la Page
+    raise unless can?(:update, l10n.about)
+    # Suppression du contexte précédent
+    Communication::Media::Context.remove(l10n)
+    # On récupère le média, qui peut être une absence de média
+    @featured_media_id = params.dig(:featured_media_id)
+    @featured_media_alt = params.dig(:featured_media_alt).to_s
+    if @featured_media_id.present?
+      media = current_university.communication_medias.find(@featured_media_id)
+      media.context_add(l10n)
+      media_l10n = media.find_or_create_localization(current_language)
+      @featured_media_id = media.id
+      @featured_media_alt = params.dig(:featured_media_alt).to_s
+    end
+    l10n.featured_media_id = @featured_media_id
+    l10n.featured_media_alt = @featured_media_alt
+    l10n.save
   end
 
   def edit

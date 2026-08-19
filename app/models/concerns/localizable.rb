@@ -87,6 +87,10 @@ module Localizable
   end
   alias :localized_in? :exists_in_language?
 
+  def create_localization_if_missing!(language)
+    localize_in!(language) unless exists_in_language?(language)
+  end
+
   def published_in?(language)
     l10n = localization_for(language)
     if l10n.respond_to?(:published?)

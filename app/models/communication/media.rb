@@ -143,14 +143,9 @@ class Communication::Media < ApplicationRecord
     contexts.where(
       about: about,
       university_id: university_id
-    ).first_or_create
-  end
-
-  def context_remove(about)
-    contexts.where(
-      about: about,
-      university_id: university_id
-    ).destroy_all
+    ).first_or_create do |context|
+      context.active_storage_blob_id = original_blob_id
+    end
   end
 
   def find_or_create_localization(language, alt: nil, credit: nil)

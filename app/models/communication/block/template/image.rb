@@ -5,19 +5,17 @@ class Communication::Block::Template::Image < Communication::Block::Template::Ba
   has_component :credit, :rich_text
   has_component :text, :rich_text
 
-  def media_blobs
-    return [] unless image_component.blob.present?
-    [
-      {
-        blob: image_component.blob,
-        alt: alt,
-        credit: credit
-      }
-    ]
+  def empty?
+    media.nil?
   end
 
-  def empty?
-    image_component.blob.nil?
+  def media
+    image_component.communication_media
+  end
+
+  # Permet de gérer les contextes
+  def communication_medias
+    [media].compact_blank
   end
 
   protected

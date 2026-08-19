@@ -799,6 +799,9 @@ fr:
         date_asc: Les plus anciens d'abord
         size_desc: Les plus lourds d'abord
         size_asc: Les plus légers d'abord
+    library:
+      context:
+        in_block: Dans le bloc %{position}
     manage_authors: Gérer les auteur·rices
     number_of_posts: Nombre d'actualités
     summary:
