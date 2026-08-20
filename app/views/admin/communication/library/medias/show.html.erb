@@ -56,13 +56,13 @@
       <% end %>
       <% if @l10n.alt.present? %>
         <div class="col-lg-6">
-          <%= osuny_label t('featured_media.alt.label') %>
+          <%= osuny_label t('admin.communication.media.alt.label') %>
           <p><%= @l10n.alt %></p>
         </div>
       <% end %>
       <% if @l10n.credit.present? %>
         <div class="col-lg-6">
-          <%= osuny_label t('featured_media.credit.label') %>
+          <%= osuny_label t('admin.communication.media.credit.label') %>
           <div><%= sanitize @l10n.credit %></div>
         </div>
       <% end %>
