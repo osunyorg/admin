@@ -30,14 +30,9 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
         breadcrumb
       end
       format.json do
-        context_id = params.dig(:context_id)
+        @l10n = @media.find_or_create_localization(current_language)
         context_about_gid = params.dig(:context_about_gid)
-        if context_id.present?
-          # On peut avoir un contexte déjà créé, par exemple pour featured_media
-          @context = Communication::Media::Context.find(params[:context_id])
-        elsif context_about_gid.present?
-          # On peut aussi avoir un gid, par exemple pour un bloc
-          # Est-ce qu'on ne devrait pas faire tout le temps avec le gid ?
+        if context_about_gid.present?
           context_about = GlobalID::Locator.locate(context_about_gid)
           @context = @media.context_for(context_about)
         end
@@ -72,7 +67,7 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
       crop_settings: params.dig(:crop_settings)&.to_unsafe_hash,
       language: current_language
     )
-    @context = @media.context_for(@l10n)
+    @context = @media&.context_for(@l10n)
   end
 
   def edit

@@ -3,7 +3,6 @@ import { Crop } from '@lucide/vue';
 import { Preview } from 'vue-advanced-cropper';
 import logicMixin from './_mixin.js';
 import CropperModal from '../CropperModal.vue';
-import Placeholder from './Placeholder.vue';
 
 export default {
   name: 'SelectedMedia',
@@ -11,7 +10,6 @@ export default {
   components: {
     Crop,
     CropperModal,
-    Placeholder,
     Preview,
   },
   emits: [

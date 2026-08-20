@@ -19,7 +19,7 @@ export default {
       :key="index"
       class="col"
       v-html="object.snippet"
-      @click.prevent="$emit('select', object)">
+      @click.stop.prevent="$emit('select', object)">
     </div>
   </div>
   <div v-if="results.list.length === 0" >
