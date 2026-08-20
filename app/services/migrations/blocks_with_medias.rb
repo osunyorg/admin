@@ -17,15 +17,16 @@ class Migrations::BlocksWithMedias
     TEMPLATES.each do |template_kind|
       Communication::Block.where(template_kind: template_kind).with_deleted.find_each do |block|
         data = block.data.dup
-        blob_id = data.dig('image', 'id')
-        # Rien à migrer
+        image = data['image']
+        next unless image.is_a?(Hash)
+        blob_id = image['id']
         next unless blob_id.present?
         # Déjà migré
-        next if data.dig('image', 'communication_media_id')
+        next if image['communication_media_id']
         media = blob_to_media(block, blob_id, data.dig('alt'), data.dig('credit'))
         # Pas de blob, donc pas de média
         next if media.nil?
-        data['image']['communication_media_id'] = media.id
+        image['communication_media_id'] = media.id
         block.data = data
         block.save
         puts "Block #{block.id} migrated"
@@ -36,17 +37,18 @@ class Migrations::BlocksWithMedias
         data = block.data.dup
         something_to_migrate = false
         data['elements'].each do |element|
-          next if element.is_a?(String)
-          blob_id = element.dig('image', 'id')
-          # Rien à migrer
+          next unless element.is_a?(Hash)
+          image = element['image']
+          next unless image.is_a?(Hash)
+          blob_id = image['id']
           next unless blob_id.present?
           # Déjà migré
-          next if element.dig('image', 'communication_media_id')
+          next if image['communication_media_id']
           media = blob_to_media(block, blob_id, element.dig('alt'), element.dig('credit'))
           # Pas de blob, donc pas de média
           next if media.nil?
           something_to_migrate = true
-          element['image']['communication_media_id'] = media.id
+          image['communication_media_id'] = media.id
         end
         next unless something_to_migrate
         block.data = data
@@ -58,8 +60,10 @@ class Migrations::BlocksWithMedias
         data = block.data.dup
         something_to_migrate = false
         data['elements'].each do |element|
-          blob_id = element.dig('photo', 'id')
-          # Rien à migrer
+          next unless element.is_a?(Hash)
+          photo = element['photo']
+          next unless photo.is_a?(Hash)
+          blob_id = photo['id']
           next unless blob_id.present?
           # Déjà migré
           next if element.dig('photo', 'communication_media_id')
@@ -67,7 +71,7 @@ class Migrations::BlocksWithMedias
           # Pas de blob, donc pas de média
           next if media.nil?
           something_to_migrate = true
-          element['image']['communication_media_id'] = media.id
+          element['photo']['communication_media_id'] = media.id
         end
         next unless something_to_migrate
         block.data = data
