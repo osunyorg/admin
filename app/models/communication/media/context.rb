@@ -63,7 +63,11 @@ class Communication::Media::Context < ApplicationRecord
   def apply_crop_settings!(crop_settings)
     self.update_column :crop_settings,
                         crop_settings.presence || {}
-    crop_blob_if_necessary
+    @cropper = nil
+    if cropper_blob_different?
+      self.update_column :active_storage_blob_id, cropped_blob.id
+      reload
+    end
   end
 
   def cropped?
@@ -92,12 +96,14 @@ class Communication::Media::Context < ApplicationRecord
     @cropper ||= Osuny::Media::Cropper.new(media.original_blob, crop_settings)
   end
 
-  def crop_blob_if_necessary
-    cropped_blob = cropper.cropped_blob
-    if cropped_blob.id != active_storage_blob_id
-      self.update_column :active_storage_blob_id, cropped_blob.id
-    end
+  def cropped_blob
+    cropper.cropped_blob
   end
+
+  def cropper_blob_different?
+    cropped_blob.id != active_storage_blob_id
+  end
+
 
   def denormalize_website
     self.communication_website_id = about.try(:website)&.id

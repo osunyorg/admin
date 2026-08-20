@@ -14,21 +14,23 @@ export default {
       url: '',
       loading: true,
       data: {
-        height: null,
-        left: null,
-        rotation: 0,
         top: null,
+        left: null,
         width: null,
+        height: null,
+        rotation: 0,
       },
       preview: null,
     }
   },
   methods: {
     launch(url, data) {
-      this.url = url;
+      if (url != this.url) {
+        this.loading = true;
+        this.url = url;
+      }
       this.data = data;
       this.preview = null;
-      this.loading = true;
       this.modalOpened = true;
     },
     close() {
@@ -38,10 +40,10 @@ export default {
       this.loading = false;
       if (this.data.width && this.data.height) {
         this.$refs.cropper.setCoordinates({
-          height: this.data.height,
-          left: this.data.left,
           top: this.data.top,
+          left: this.data.left,
           width: this.data.width,
+          height: this.data.height,
         }, { transitions: false });
       }
       if (this.data.rotation) {
@@ -64,11 +66,11 @@ export default {
       const image = this.$refs.cropper.image;
       const imageTransforms = this.$refs.cropper.imageTransforms;
       const coordinates = this.$refs.cropper.coordinates;
-      this.data.height = Math.round(coordinates.height);
-      this.data.left = Math.round(coordinates.left);
-      this.data.rotation = Math.round(imageTransforms.rotate);
       this.data.top = Math.round(coordinates.top);
+      this.data.left = Math.round(coordinates.left);
       this.data.width = Math.round(coordinates.width);
+      this.data.height = Math.round(coordinates.height);
+      this.data.rotation = Math.round(imageTransforms.rotate);
       this.preview = {
         coordinates: coordinates,
         image: image,
