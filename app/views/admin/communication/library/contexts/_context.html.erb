@@ -58,6 +58,9 @@ end
               <%= t('communication.library.context.in_block', position: block.position) %>
             </p>
           <% end %>
+          <% if context.try(:cropped?) %>
+            <%= lucide_icon(:crop)%>
+          <% end %>
         </div>
         <div class="col-lg-2 text-muted">
           <%= osuny_label Communication::File::Context.human_attribute_name(:about_type) %><br>

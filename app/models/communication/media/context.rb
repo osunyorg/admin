@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  about_type               :string           indexed => [about_id]
+#  crop_settings            :jsonb
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  about_id                 :uuid             indexed => [about_type]
@@ -49,16 +50,55 @@ class Communication::Media::Context < ApplicationRecord
 
   before_save :denormalize_website
 
-  def self.remove(about)
-    where(university: about.university, about: about).delete_all  
+  def self.remove(about, except: nil)
+    where(university: about.university, about: about)
+    .where.not(id: except&.id)
+    .delete_all  
   end
 
   def about_block?
     about_type == 'Communication::Block'
   end
 
+  def apply_crop_settings!(crop_settings)
+    self.update_column :crop_settings,
+                        crop_settings.presence || {}
+    resize_blob_if_necessary
+  end
+
+  def cropped?
+    resizer.should_resize?
+  end
+
+  def thumb_url
+    ENV['KEYCDN_HOST'].present? ? thumb_url_keycdn
+                                : thumb_url_rails
+  end
+
+  def thumb_url_keycdn
+    return unless ENV['KEYCDN_HOST'].present?
+    "https://#{ENV['KEYCDN_HOST']}/#{active_storage_blob.key}?width=800"
+  end
+
+  def thumb_url_rails
+    Rails.routes.helpers.url_for(
+      active_storage_blob.variant(resize_to_fit: [800, nil])
+    )
+  end
+
   protected
-  
+
+  def resizer
+    @resizer ||= Osuny::Media::Resizer.new(media.original_blob, crop_settings)
+  end
+
+  def resize_blob_if_necessary
+    resized_blob = resizer.resized_blob
+    if resized_blob.id != active_storage_blob_id
+      self.update_column :active_storage_blob_id, resized_blob.id
+    end
+  end
+
   def denormalize_website
     self.communication_website_id = about.try(:website)&.id
   end

@@ -139,6 +139,7 @@ class Communication::Media < ApplicationRecord
     Rails.application.config.default_image_max_size
   end
 
+  # Le nom est un peu faux, ça pourrait être context_first_or_create, mais c'est long
   def context_add(about)
     contexts.where(
       about: about,
@@ -146,6 +147,13 @@ class Communication::Media < ApplicationRecord
     ).first_or_create do |context|
       context.active_storage_blob_id = original_blob_id
     end
+  end
+
+  def context_for(about)
+    contexts.find_by(
+      about: about,
+      university_id: university_id
+    )
   end
 
   def find_or_create_localization(language, alt: nil, credit: nil)

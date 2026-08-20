@@ -23,6 +23,9 @@ export default {
         this.current.featured_media_alt = data.alt;
       }
     },
+    cropped(data) {
+      this.current.crop_settings = data;
+    },
     unselected() {
       this.current.featured_media_alt = '';
     },
@@ -44,6 +47,8 @@ export default {
     :cloud-unsplash-endpoint="dataset.cloudUnsplashEndpoint"
     :cloud-pexels-endpoint="dataset.cloudPexelsEndpoint"
     :cloud-select-endpoint="dataset.cloudSelectEndpoint"
+    :context-about-gid="dataset.contextAboutGid"
+    :crop-settings="current.crop_settings"
     :object-endpoint="dataset.objectEndpoint"
     :picker-endpoint="dataset.pickerEndpoint"
     :uploader-endpoint="dataset.uploadEndpoint"
@@ -51,6 +56,7 @@ export default {
     :uploader-size-limit="Number(dataset.sizeLimit)"
     v-model="current.featured_media_id"
     @loaded="loaded"
+    @cropped="cropped"
     @unselected="unselected"
     />
   <div

@@ -1,12 +1,10 @@
 <script>
 import { Upload } from '@lucide/vue';
-import CropperModal from '../../CropperModal.vue';
 import Warning from '../primitives/Warning.vue';
 
 export default {
   name: 'MediaUploader',
   components: {
-    CropperModal,
     Upload,
     Warning,
   },
@@ -165,12 +163,6 @@ export default {
       <div class="form-text">{{ hint }}</div>
     </div>
   </div>
-  <!--
-  <CropperModal
-    ref="cropper"
-    @cropped="cropped"
-    />
-  -->
   <Warning
     :active="sizeTooBig"
     :title="$t('components.inputs.mediaInput.imageUploader.size.title')"

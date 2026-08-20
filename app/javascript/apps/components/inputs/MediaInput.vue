@@ -18,6 +18,8 @@ export default {
     cloudUnsplashEndpoint: { type: String, required: true },
     cloudPexelsEndpoint: { type: String, required: true },
     cloudSelectEndpoint: { type: String, required: true },
+    contextAboutGid: { type: String, default: '' },
+    cropSettings: { type: Object, default: () => ({}) },
     modelValue: { type: String, default: '' },
     multiple: { type: Boolean, default: false },
     multipleTarget: { type: Array, default: [] },
@@ -30,6 +32,7 @@ export default {
   emits: [
     'update:modelValue',
     'loaded',
+    'cropped',
     'unselected',
   ],
   data() {
@@ -81,8 +84,12 @@ export default {
     loaded(data) {
       this.$emit('loaded', data);
     },
+    cropped(data) {
+      this.$emit('cropped', data);
+    },
     remove() {
       this.value = '';
+      // TODO reset crop settings
       this.$emit('unselected');
     },
   },
@@ -99,8 +106,11 @@ export default {
     <div v-if="hasValue">
       <SelectedMedia
         :id="value"
+        :contextAboutGid="contextAboutGid"
+        :cropSettings="cropSettings"
         :endpoint="objectEndpoint"
         @loaded="loaded"
+        @cropped="cropped"
         />
       <div class="text-end">
         <a  class="btn btn-sm text-danger pe-0"

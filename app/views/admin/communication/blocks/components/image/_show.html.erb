@@ -4,7 +4,7 @@ return unless blob
 is_carousel = block.template.is_a?(Communication::Block::Template::Gallery) && block.template.layout == "carousel"
 media_l10n = component.communication_media_localization
 credit = media_l10n.credit
-classes = "image-#{blob.format}"
+classes = "image-#{blob.orientation}"
 classes += " splide__slide" if is_carousel
 %>
 <figure class="<%= classes %>">

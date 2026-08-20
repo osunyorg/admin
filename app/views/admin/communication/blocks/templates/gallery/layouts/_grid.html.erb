@@ -4,7 +4,7 @@
     blob = element.blob
     next if blob.nil?
     %>
-    <figure class="image-<%= blob.format %>">
+    <figure class="image-<%= blob.orientation %>">
       <%= kamifusen_tag blob, width: 600, class: 'img-fluid mb-1', alt: element.alt.presence %>
       <% if element.text.present? || element.credit.present? %>
         <figcaption>

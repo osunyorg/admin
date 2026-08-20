@@ -20,18 +20,20 @@ module HasFeaturedMedia
     featured_media.best_localization_for(language)
   end
 
-  def set_featured_media!(id: '', alt: '', language:)
-    Communication::Media::Context.remove(self)
+  def set_featured_media!(id: '', alt: '', language:, crop_settings: {})
     # On récupère le média, qui peut être une absence de média.
     # Si l'id est vide, le media sera nil, et on réinitialise proprement.
     if id.present?
       media = university.communication_medias.find(id)
       media.find_or_create_localization(language)
-      media.context_add(self)
+      context = media.context_add(self)
+      context.apply_crop_settings!(crop_settings)
     end
+    Communication::Media::Context.remove(self, except: context)
     self.featured_media = media
     self.featured_media_alt = alt
     save
+    media
   end
 
   # Gestion des héritages, à ranger (méthodes best_*)

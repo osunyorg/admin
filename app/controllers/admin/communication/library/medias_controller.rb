@@ -24,8 +24,25 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
   end
 
   def show
-    @contexts = @media.contexts
-    breadcrumb
+    respond_to do |format|
+      format.html do
+        @contexts = @media.contexts
+        breadcrumb
+      end
+      format.json do
+        context_id = params.dig(:context_id)
+        context_about_gid = params.dig(:context_about_gid)
+        if context_id.present?
+          # On peut avoir un contexte déjà créé, par exemple pour featured_media
+          @context = Communication::Media::Context.find(params[:context_id])
+        elsif context_about_gid.present?
+          # On peut aussi avoir un gid, par exemple pour un bloc
+          # Est-ce qu'on ne devrait pas faire tout le temps avec le gid ?
+          context_about = GlobalID::Locator.locate(context_about_gid)
+          @context = @media.context_for(context_about)
+        end
+      end
+    end
   end
 
   def new
@@ -48,13 +65,14 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
       university: current_university
     )
     return if @l10n.nil?
-    # On vérifie les droits sur le Post ou la Page
     raise unless can?(:update, @l10n.about)
-    @l10n.set_featured_media!(
+    @media = @l10n.set_featured_media!(
       id: params.dig(:featured_media_id),
       alt: params.dig(:featured_media_alt),
+      crop_settings: params.dig(:crop_settings)&.to_unsafe_hash,
       language: current_language
     )
+    @context = @media.context_for(@l10n)
   end
 
   def edit

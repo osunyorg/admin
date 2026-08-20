@@ -107,7 +107,8 @@ Rails.application.config.to_prepare do
       ActiveStorage::Utils.ratio(self)
     end
 
-    def format
+    # format is used when resizing
+    def orientation
       ActiveStorage::Utils.format(self)
     end
 

@@ -12,7 +12,7 @@ credit = media_l10n&.credit
                     block: block,
                     without_description: true %>
         <% if block.template.image.present? %>
-          <figure class="image-<%= blob.format %> lightbox-figure" role="figure">
+          <figure class="image-<%= blob.orientation %> lightbox-figure" role="figure">
             <%= kamifusen_tag blob,
                               width: 1024,
                               alt: block.template.alt %>

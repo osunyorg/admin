@@ -81,6 +81,7 @@ en:
         save: Save changes
       cropperModal:
         cancel: Cancel
+        reset: Reset
         rotate: Rotate image
         title: Frame image
         validate: Validate

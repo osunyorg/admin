@@ -17,7 +17,11 @@ class Communication::Block::Component::Image < Communication::Block::Component::
 
   def blob
     return if data_empty?
-    @blob ||= communication_media.original_blob
+    @blob ||= communication_media_context.active_storage_blob
+  end
+
+  def communication_media_context
+    @communication_media_context ||= commmunication_media.context_for(block)
   end
 
   def communication_media_id
@@ -42,11 +46,7 @@ class Communication::Block::Component::Image < Communication::Block::Component::
   end
 
   def dependencies
-    [
-      blob,
-      communication_media,
-      communication_media_localization
-    ]
+    [blob]
   end
 
   def dom_count

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_17_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_19_212606) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -635,6 +635,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_17_090000) do
     t.uuid "communication_media_id", null: false
     t.uuid "communication_website_id"
     t.datetime "created_at", null: false
+    t.jsonb "crop_settings"
     t.uuid "university_id", null: false
     t.datetime "updated_at", null: false
     t.index ["about_type", "about_id"], name: "index_communication_media_contexts_on_about"

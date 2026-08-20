@@ -12,6 +12,11 @@ export default {
       loading: true,
     };
   },
+  computed: {
+    url() {
+      return this.endpoint + '/' + this.id + '.json';
+    }
+  },
   watch: {
     id() {
       this.load();
@@ -25,8 +30,7 @@ export default {
         return;
       }
       try {
-        const url = this.endpoint + '/' + this.id + '.json';
-        const res = await fetch(url);
+        const res = await fetch(this.url);
         if (!res.ok) throw new Error(res.statusText);
         this.resource = await res.json();
       } catch (error) {

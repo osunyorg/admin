@@ -2,7 +2,7 @@
 if l10n.featured_blob.present?
   blob = l10n.featured_blob
 %>
-  <figure class="featured-image image-<%= blob.format %>">
+  <figure class="featured-image image-<%= blob.orientation %>">
     <%= kamifusen_tag blob, alt: l10n.featured_media_alt %>
     <% if l10n.featured_media_credit.present? %>
       <figcaption>
