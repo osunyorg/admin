@@ -28,6 +28,7 @@ export default {
       this.url = url;
       this.data = data;
       this.preview = null;
+      this.loading = true;
       this.modalOpened = true;
     },
     close() {

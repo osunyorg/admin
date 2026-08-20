@@ -62,14 +62,15 @@ export default {
     },
     manage(id) {
       if (this.multiple) {
-        this.multipleTarget.push({ 
-          image: { 
-            communication_media_id: id 
+        this.multipleTarget.push({
+          image: {
+            communication_media_id: id
           },
           alt: ''
         });
       } else {
         this.value = id;
+        this.$emit('cropped', {});
       }
     },
     uploaded(id) {
@@ -89,7 +90,7 @@ export default {
     },
     remove() {
       this.value = '';
-      // TODO reset crop settings
+      this.$emit('cropped', {});
       this.$emit('unselected');
     },
   },

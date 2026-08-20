@@ -58,7 +58,7 @@ class Osuny::Media::Cropper
   def transformations
     transformations = {}
     # Handle rotation
-    transformations[:rotate] = rotation if rotation.present?
+    transformations[:rotate] = rotation if rotation != 0
     # Handle cropping
     transformations[:crop] = [left, top, width, height]
     transformations
