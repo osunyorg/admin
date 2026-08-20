@@ -12,7 +12,7 @@ Rails.application.config.to_prepare do
     def record
       return if record_type.nil?
       record_class = record_type.safe_constantize
-      if recort_class.nil?
+      if record_class.nil?
         self.delete
         return
       end
