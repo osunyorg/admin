@@ -36,7 +36,7 @@ class Migrations::BlocksWithMedias
         data = block.data.dup
         something_to_migrate = false
         data['elements'].each do |element|
-          next unless element.respond_to?(:dig)
+          next if element.is_a?(String)
           blob_id = element.dig('image', 'id')
           # Rien à migrer
           next unless blob_id.present?
@@ -58,7 +58,6 @@ class Migrations::BlocksWithMedias
         data = block.data.dup
         something_to_migrate = false
         data['elements'].each do |element|
-          next unless element.respond_to?(:dig)
           blob_id = element.dig('photo', 'id')
           # Rien à migrer
           next unless blob_id.present?
