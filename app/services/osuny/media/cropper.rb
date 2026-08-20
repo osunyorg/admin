@@ -1,6 +1,6 @@
-# Resize a blob, coming from Vue advanced cropper
+# Crop a blob, coming from Vue advanced cropper
 # answers with another blob (or the same if untouched)
-class Osuny::Media::Resizer
+class Osuny::Media::Cropper
   attr_reader :blob, :params
 
   def initialize(blob, params)
@@ -8,10 +8,10 @@ class Osuny::Media::Resizer
     @params = params&.symbolize_keys
   end
 
-  def resized_blob
-    @resized_blob ||= begin
-      if should_resize?
-        create_resized_blob
+  def cropped_blob
+    @cropped_blob ||= begin
+      if should_crop?
+        create_cropped_blob
       else
         blob
       end
@@ -23,7 +23,7 @@ class Osuny::Media::Resizer
     width > 0 && height > 0
   end
 
-  def should_resize?
+  def should_crop?
     params_valid? && params_would_cause_a_change?
   end
 
@@ -64,7 +64,7 @@ class Osuny::Media::Resizer
     transformations
   end
 
-  def create_resized_blob
+  def create_cropped_blob
     variation = ActiveStorage::Variation.new(transformations)
     blob.open do |file|
       variation.transform(file) do |output|
@@ -72,8 +72,8 @@ class Osuny::Media::Resizer
           io: output,
           filename: "#{blob.filename.base}.#{variation.format}",
           content_type: variation.content_type
-        ).tap do |resized_blob|
-          resized_blob.update_column :university_id, blob.university_id
+        ).tap do |cropped_blob|
+          cropped_blob.update_column :university_id, blob.university_id
         end
       end
     end

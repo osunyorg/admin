@@ -63,11 +63,11 @@ class Communication::Media::Context < ApplicationRecord
   def apply_crop_settings!(crop_settings)
     self.update_column :crop_settings,
                         crop_settings.presence || {}
-    resize_blob_if_necessary
+    crop_blob_if_necessary
   end
 
   def cropped?
-    resizer.should_resize?
+    cropper.should_crop?
   end
 
   def thumb_url
@@ -88,14 +88,14 @@ class Communication::Media::Context < ApplicationRecord
 
   protected
 
-  def resizer
-    @resizer ||= Osuny::Media::Resizer.new(media.original_blob, crop_settings)
+  def cropper
+    @cropper ||= Osuny::Media::Cropper.new(media.original_blob, crop_settings)
   end
 
-  def resize_blob_if_necessary
-    resized_blob = resizer.resized_blob
-    if resized_blob.id != active_storage_blob_id
-      self.update_column :active_storage_blob_id, resized_blob.id
+  def crop_blob_if_necessary
+    cropped_blob = cropper.cropped_blob
+    if cropped_blob.id != active_storage_blob_id
+      self.update_column :active_storage_blob_id, cropped_blob.id
     end
   end
 
