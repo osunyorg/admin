@@ -11,7 +11,11 @@ Rails.application.config.to_prepare do
     # As we use paranoid on records, we may need to access the record even if it soft deleted
     def record
       return if record_type.nil?
-      record_class = record_type.constantize
+      record_class = record_type.safe_constantize
+      if recort_class.nil?
+        self.delete
+        return
+      end
       record_class.unscoped { super }
     end
 
