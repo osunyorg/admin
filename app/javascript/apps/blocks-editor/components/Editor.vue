@@ -1,5 +1,5 @@
 <script>
-import { createApp, provide, reactive } from 'vue';
+import { createApp, provide, reactive, ref } from 'vue';
 import { VueDraggableNext } from 'vue-draggable-next';
 import { getI18n } from '../../i18n';
 import Picker from '../../picker/Picker.vue';
@@ -30,7 +30,10 @@ export default {
   props: {
     url: { type: String, required: true },
   },
-  emits: ['save', 'close'],
+  emits: [
+    'save',
+    'close'
+  ],
   data() {
     return {
       html: null,
@@ -88,13 +91,16 @@ export default {
     async mountVueApp(root) {
       const payload = JSON.parse(root.dataset.payload);
       const i18n = await getI18n();
+      // Défini à l'extérieur du setup pour pouvoir y accéder après.
+      this.saving = ref(false);
       this.innerApp = createApp({
-        setup() {
+        setup: () => {
           // Reactive state + helpers exposed to the server-rendered Vue
           // templates inside the block's edit form. The templates reference
           // `data.title`, `data.elements`, `addElement()`, `deleteElement()`,
           // `getImageUrl()`, `defaultElement` at top-level scope.
           const data = reactive(payload.data);
+          const saving = this.saving;
           const defaultElement = payload.defaultElement;
           const directUpload = {
             url: payload.directUploadUrl,
@@ -112,20 +118,23 @@ export default {
             if (!image?.signed_id) return '';
             const parts = image.filename.split('.');
             const extension = parts[parts.length - 1];
-            // Substitute :signed_id and :filename in the blob URL template
-            // we got from the server (medium_url helper, see edit.html.erb).
             return directUpload.blobUrlTemplate
               .replace(':signed_id', image.signed_id)
               .replace(':filename', `image_1024x.${extension}`);
           }
 
-          // The input wrappers reach for these via inject() instead of
-          // prop-drilling them through every server-rendered partial.
           provide('directUpload', directUpload);
           provide('getImageUrl', getImageUrl);
           provide('summernoteLocale', payload.summernoteLocale);
 
-          return { data, defaultElement, deleteElement, addElement, getImageUrl };
+          return {
+            data,
+            saving,
+            defaultElement,
+            deleteElement,
+            addElement,
+            getImageUrl,
+          };
         },
         mounted() {
           // LanguageTool grammar checker — LTAssistant is a global from a
@@ -192,7 +201,10 @@ export default {
       event.preventDefault();
       const form = event.target;
       const submit = form.querySelector('[type=submit]');
-      if (submit) submit.disabled = true;
+      if (submit) {
+        submit.disabled = true;
+        this.saving.value = true;
+      }
 
       const res = await fetch(form.action, {
         method: form.method.toUpperCase(),
@@ -205,8 +217,10 @@ export default {
         return;
       }
 
-      // Re-enable submit on error so the user can retry.
-      if (submit) submit.disabled = false;
+      if (submit) {
+        submit.disabled = false;
+        this.saving.value = false;
+      }
       if (res.status === 422) {
         // Server re-rendered the form with errors — swap it in and re-mount.
         const text = await res.text();
@@ -226,6 +240,7 @@ export default {
         try { this.innerApp.unmount(); } catch (_) { /* noop */ }
         this.innerApp = null;
       }
+      this.saving = null;
       this.html = null;
     },
   },

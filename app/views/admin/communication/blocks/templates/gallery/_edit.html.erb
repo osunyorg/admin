@@ -32,7 +32,11 @@
         </div>
         <selected-media
           :id="element.image.communication_media_id"
-          endpoint="<%= admin_communication_medias_path(**reset_context) %>">
+          context-about-gid="<%= block.to_gid %>"
+          :crop-settings="element.image.crop_settings"
+          :cropper-button="false"
+          endpoint="<%= admin_communication_medias_path(**reset_context) %>"
+          >
         </selected-media>
       </div>
     </div>

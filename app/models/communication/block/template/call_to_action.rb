@@ -28,6 +28,10 @@ class Communication::Block::Template::CallToAction < Communication::Block::Templ
     [media].compact_blank
   end
 
+  def crop_settings_for(media)
+    data.dig('image', 'crop_settings')
+  end
+
   protected
 
   def check_accessibility

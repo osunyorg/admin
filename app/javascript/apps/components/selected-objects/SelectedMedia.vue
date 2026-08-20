@@ -20,6 +20,7 @@ export default {
   props: {
     contextAboutGid: { type: String, default: '' },
     cropSettings: { type: Object, default: () => ({}) },
+    cropperButton: { type: Boolean, default: true },
   },
   data() {
     return {
@@ -69,10 +70,11 @@ export default {
 
 <template>
   <div
-    class="position-relative"
     v-if="resource"
+    class="position-relative"
     >
     <div
+      v-if="cropperButton"
       class="vue__cropper__button"
       @click="openCropper"
       >

@@ -17,6 +17,10 @@ class Communication::Block::Template::Chapter < Communication::Block::Template::
     [media].compact_blank
   end
 
+  def crop_settings_for(media)
+    data.dig('image', 'crop_settings')
+  end
+
   def dom_count
     5 +
     text_component.dom_count +

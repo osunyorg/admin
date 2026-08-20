@@ -29,4 +29,12 @@ class Communication::Block::Template::Testimonial < Communication::Block::Templa
     5 +
     children.sum(&:dom_count)
   end
+
+  def crop_settings_for(media)
+    data['elements'].each do |element|
+      media_id = element.dig('photo', 'communication_media_id')
+      next if media_id != media.id
+      return element.dig('photo', 'crop_settings')
+    end
+  end
 end

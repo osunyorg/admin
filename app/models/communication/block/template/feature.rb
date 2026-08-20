@@ -21,4 +21,13 @@ class Communication::Block::Template::Feature < Communication::Block::Template::
   def communication_medias
     elements.map(&:communication_media).compact_blank
   end
+
+  def crop_settings_for(media)
+    data['elements'].each do |element|
+      media_id = element.dig('image', 'communication_media_id')
+      next if media_id != media.id
+      return element.dig('image', 'crop_settings')
+    end
+  end
+
 end
