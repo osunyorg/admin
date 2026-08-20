@@ -21,7 +21,8 @@ class Communication::Block::Component::Image < Communication::Block::Component::
   end
 
   def communication_media_context
-    @communication_media_context ||= commmunication_media.context_for(block)
+    return if data_empty?
+    @communication_media_context ||= communication_media.context_for(template.block)
   end
 
   def communication_media_id
