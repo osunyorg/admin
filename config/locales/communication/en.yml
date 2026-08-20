@@ -553,6 +553,13 @@ en:
         text: Text
         title: File type
         video: Video
+      media:
+        alt:
+          hint: This text is important for accessibility. If the image conveys important information, it must be written here. If the information is already written somewhere else in the page, or if the image is purely decorative, the field must be left empty. Otherwise, it would pollute voice navigation.
+          label: Alternative text
+        credit:
+          hint: The credit must be present according to copyright or copyleft licenses.
+          label: Credit
       website:
         agenda:
           event:
