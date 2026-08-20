@@ -18,6 +18,10 @@ class Communication::Block::Template::Image < Communication::Block::Template::Ba
     [media].compact_blank
   end
 
+  def crop_settings_for(media)
+    data.dig('image', 'crop_settings')
+  end
+
   protected
 
   def check_accessibility

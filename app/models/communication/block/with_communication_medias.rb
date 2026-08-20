@@ -18,14 +18,14 @@ module Communication::Block::WithCommunicationMedias
     communication_medias.each do |media|
       context = media.context_add(self)
       crop_settings = crop_settings_for(media)
+      next if crop_settings.nil?
       context.apply_crop_settings!(crop_settings)
     end
     destroy_obsolete_media_contexts
   end
 
   def crop_settings_for(media)
-    byebug
-    # Trouver dans les data les crop_settings qui correspondent
+    template.crop_settings_for(media)
   end
 
   def first_or_create_media_context_for(media)

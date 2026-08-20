@@ -4,6 +4,7 @@
   cloud-select-endpoint="<%= cloud_select_admin_communication_medias_path(**reset_context) %>"
   cloud-unsplash-endpoint="<%= unsplash_admin_communication_medias_path(**reset_context) %>"
   context-about-gid="<%= block.to_gid %>"
+  :crop-settings="<%= model %>.<%= property %>.crop_settings"
   object-endpoint="<%= admin_communication_medias_path(**reset_context) %>"
   picker-endpoint="<%= picker_admin_communication_medias_path(**reset_context, format: :json) %>"
   uploader-endpoint="<%= direct_upload_admin_communication_medias_path(**reset_context) %>"

@@ -1,7 +1,7 @@
 <%
-media = block.template.image_component.communication_media 
+media = block.template.image_component.communication_media
 media_l10n = block.template.image_component.communication_media_localization
-blob = media&.original_blob
+blob = block.template.image_component.blob
 credit = strip_tags media_l10n&.credit
 %>
 <% if blob.present? %>

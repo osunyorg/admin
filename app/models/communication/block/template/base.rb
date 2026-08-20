@@ -97,6 +97,10 @@ class Communication::Block::Template::Base
     Communication::Media.none
   end
 
+  def crop_settings_for(media)
+    nil
+  end
+
   def dom_count
     1
   end
