@@ -193,9 +193,9 @@
   integrity sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==
 
 "@lucide/vue@^1.21.0":
-  version "1.31.0"
-  resolved "https://registry.yarnpkg.com/@lucide/vue/-/vue-1.31.0.tgz#5b1693314fccaa0b82b97a73722f718df42670d6"
-  integrity sha512-NtjEHhcAa7umPh40wrRmlESJqNGdnpc7LziBKFnW3fmlrW0g2xMCDpdWU7WeEHRSl3xOpxbqiFTLKxoK3CoVCg==
+  version "1.33.0"
+  resolved "https://registry.yarnpkg.com/@lucide/vue/-/vue-1.33.0.tgz#63638bfcef23c7872e750ff40d06f514c8db7402"
+  integrity sha512-8d3HnIIglHnosvsnm+IWNy8XhYYJvkf4YEgQqb74HnY3ihzdz+7XX4MxMZoyKdw7pbKOGno2HoaHTq7DH/v5AA==
 
 "@vue/compiler-core@3.5.41":
   version "3.5.41"

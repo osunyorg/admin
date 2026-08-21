@@ -61,18 +61,5 @@ module User::WithCreatedOrEditedElements
               class_name: "Research::Journal::Paper",
               foreign_key: :updated_by_id,
               dependent: :nullify
-
-    # Publications
-
-    has_many  :published_communication_file_localizations,
-              class_name: "Communication::File::Localization",
-              foreign_key: :published_by_id,
-              dependent: :nullify
-
-    has_many  :published_communication_media_localizations,
-              class_name: "Communication::Media::Localization",
-              foreign_key: :published_by_id,
-              dependent: :nullify
-    
   end
 end
