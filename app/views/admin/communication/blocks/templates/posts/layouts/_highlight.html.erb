@@ -26,8 +26,8 @@ highlight_permalink = highlight_post_l10n.current_permalink_url_in_website(@webs
       </div>
       <% if block.template.option_image %>
         <div class="media">
-          <% if highlight_post_l10n.best_featured_image.attached? %>
-            <%= kamifusen_tag highlight_post_l10n.best_featured_image %>
+          <% if highlight_post_l10n.best_featured_blob.present? %>
+            <%= kamifusen_tag highlight_post_l10n.best_featured_blob %>
           <% end %>
         </div>
       <% end %>
@@ -62,8 +62,8 @@ highlight_permalink = highlight_post_l10n.current_permalink_url_in_website(@webs
         </div>
         <% if block.template.option_image %>
           <div class="media">
-            <% if post_l10n.best_featured_image.attached? %>
-              <%= kamifusen_tag post_l10n.best_featured_image %>
+            <% if post_l10n.best_featured_blob.present? %>
+              <%= kamifusen_tag post_l10n.best_featured_blob %>
             <% end %>
           </div>
         <% end %>

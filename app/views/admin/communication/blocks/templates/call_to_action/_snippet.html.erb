@@ -7,3 +7,10 @@ block.template.elements.each_with_index do |element, index|
     <%= block_component_snippet block, :title, template: element %>
   </a>
 <% end %>
+<% if block.template.image.present? %>
+  <div class="row mt-4">
+    <div class="col-6">
+      <%= block_component_snippet block, :image %>
+    </div>
+  </div>
+<% end %>

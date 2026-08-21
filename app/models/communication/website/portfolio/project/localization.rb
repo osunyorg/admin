@@ -4,8 +4,8 @@
 #
 #  id                       :uuid             not null, primary key
 #  deleted_at               :datetime
-#  featured_image_alt       :string
 #  featured_image_credit    :text
+#  featured_media_alt       :string
 #  header_cta               :boolean          default(FALSE)
 #  header_cta_label         :string
 #  header_cta_url           :string
@@ -21,6 +21,7 @@
 #  updated_at               :datetime         not null
 #  about_id                 :uuid             indexed, uniquely indexed => [language_id]
 #  communication_website_id :uuid             indexed
+#  featured_media_id        :uuid             indexed
 #  language_id              :uuid             uniquely indexed => [about_id], indexed
 #  university_id            :uuid             indexed
 #
@@ -29,12 +30,14 @@
 #  idx_on_about_id_a668ef6090                  (about_id)
 #  idx_on_about_id_language_id_84c7b116b5      (about_id,language_id) UNIQUE
 #  idx_on_communication_website_id_e653b6273a  (communication_website_id)
+#  idx_on_featured_media_id_4b4222125b         (featured_media_id)
 #  idx_on_language_id_25a0c1e472               (language_id)
 #  idx_on_university_id_f01fc2c686             (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_3145135b3c  (communication_website_id => communication_websites.id)
+#  fk_rails_59ee792a78  (featured_media_id => communication_medias.id) ON DELETE => nullify
 #  fk_rails_be29689be2  (language_id => languages.id)
 #  fk_rails_c1a10dcae3  (university_id => universities.id)
 #  fk_rails_fbc92c5948  (about_id => communication_website_portfolio_projects.id)
@@ -48,7 +51,7 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
   include AsLocalization
   include Contentful
   include HasBlobs
-  include HasFeaturedImage
+  include HasFeaturedMedia
   include HasGitFiles
   include HasUniversity
   include HeaderCallToAction
@@ -108,7 +111,7 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
 
   def explicit_blob_ids
     super.concat [
-      featured_image&.blob_id,
+      featured_media&.original_blob_id,
       shared_image&.blob_id
     ]
   end

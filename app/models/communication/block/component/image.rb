@@ -8,6 +8,7 @@ class Communication::Block::Component::Image < Communication::Block::Component::
     {
       properties: {
         id: { type: :string, format: :uuid, nullable: true },
+        communication_media_id: { type: :string, format: :uuid, nullable: true },
         filename: { type: :string, nullable: true },
         signed_id: { type: :string, nullable: true }
       }
@@ -15,16 +16,37 @@ class Communication::Block::Component::Image < Communication::Block::Component::
   end
 
   def blob
-    return if data.nil? || data['id'].blank?
-    @blob ||= template.block
-                      .university
-                      .active_storage_blobs
-                      .find_by id: data['id']
+    return if data_empty? || !published?
+    @blob ||= communication_media_context.active_storage_blob
+  end
+
+  def communication_media_context
+    return if data_empty?
+    @communication_media_context ||= communication_media.context_for(template.block)
+  end
+
+  def communication_media_id
+    data['communication_media_id']
+  end
+
+  def communication_media
+    return if data_empty?
+    @communication_media ||= university.communication_medias.find_by(id: communication_media_id)
+  end
+
+  def communication_media_localization
+    return if data_empty?
+    @communication_media_localization ||= communication_media.localization_for(language)
+  end
+
+  def published?
+    communication_media_localization&.published
   end
 
   def default_data
     {
-      'id' => ''
+      'id' => '', # Legacy active storage blob id
+      'communication_media_id' => '' # New media id
     }
   end
 
@@ -35,4 +57,11 @@ class Communication::Block::Component::Image < Communication::Block::Component::
   def dom_count
     9
   end
+
+  protected
+
+  def data_empty?
+    data.nil? || data['communication_media_id'].blank?
+  end
+
 end

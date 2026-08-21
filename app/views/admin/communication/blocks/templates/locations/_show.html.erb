@@ -20,8 +20,8 @@
               <% end %>
             </div>
             <div class="media">
-              <% if location_l10n.featured_image.attached? %>
-                <%= kamifusen_tag location_l10n.featured_image %>
+              <% if location_l10n.featured_blob.present? %>
+                <%= kamifusen_tag location_l10n.featured_blob %>
               <% end %>
             </div>
           </article>

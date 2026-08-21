@@ -35,12 +35,6 @@ fr:
             alt:
               label: Texte alternatif
               placeholder: Entrer la description textuelle
-            credit:
-              label: Crédit
-              placeholder: Entrer le crédit
-            input:
-              label: Image
-              remove: Enlever l'image
           layouts:
             button: Choisir la mise en page
             label: Mise en page
@@ -407,10 +401,9 @@ fr:
                 text:
                   label: Légende de l'image
                   placeholder: Entrer le texte
+              edit_texts: Éditer les textes décrivant les images ci-dessous
               move_images: Déplacer les images ci-dessous pour les mettre dans l'ordre souhaité
               remove_image: Enlever l'image
-              send_and_edit_images: Envoyer les images et saisir les textes ci-dessous
-              send_multiple_images: Envoyer plusieurs images
             layouts:
               carousel:
                 description: Les images sont présentées en grand, toutes de la même hauteur.

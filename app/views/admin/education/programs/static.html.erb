@@ -7,6 +7,7 @@ teacher_involvements = program.university_person_involvements
 administrator_involvements = program.involvements_through_roles
                                    .includes(:person)
                                    .ordered_by_name(language)
+downloadable_summary_l10n = @l10n.downloadable_summary
 %>---
 <%= render 'admin/application/static/core', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
@@ -21,8 +22,8 @@ administrator_involvements = program.involvements_through_roles
             categories: program.university.program_categories,
             key: :programs_categories %>
 
-<% if @l10n.downloadable_summary.attached? %>
-downloadable_summary: <%= @l10n.downloadable_summary.blob_id %>
+<% if downloadable_summary_l10n.present? && downloadable_summary_l10n.published %>
+downloadable_summary: "<%= downloadable_summary_l10n.original_blob_id %>"
 <% end %>
 <%= osuny_static_text 'website_url', @l10n.url %>
 <%= osuny_static_text 'registration_url', @l10n.registration_url %>

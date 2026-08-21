@@ -20,8 +20,21 @@ class Communication::Block::Template::Testimonial < Communication::Block::Templa
     elements
   end
 
+  # Permet de gérer les contextes
+  def communication_medias
+    elements.map(&:communication_media).compact_blank
+  end
+
   def dom_count
     5 +
     children.sum(&:dom_count)
+  end
+
+  def crop_settings_for(media)
+    data['elements'].each do |element|
+      media_id = element.dig('photo', 'communication_media_id')
+      next if media_id != media.id
+      return element.dig('photo', 'crop_settings')
+    end
   end
 end

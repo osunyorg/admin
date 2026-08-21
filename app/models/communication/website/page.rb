@@ -103,6 +103,12 @@ class Communication::Website::Page < ApplicationRecord
   scope :autosort_by_alpha, -> (language) {
     ordered_by_title(language)
   }
+  scope :autosort_by_date_desc, -> (language) {
+    order(created_at: :desc)
+  }
+  scope :autosort_by_date_asc, -> (language) {
+    order(created_at: :asc)
+  }
 
   def dependencies
     localizations.in_languages(website.active_language_ids) +

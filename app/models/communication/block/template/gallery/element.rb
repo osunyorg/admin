@@ -8,13 +8,12 @@ class Communication::Block::Template::Gallery::Element < Communication::Block::T
     image_component.blob
   end
 
-  def media_blob
-    return unless image_component.blob.present?
-    {
-      blob: image_component.blob,
-      alt: alt,
-      credit: credit
-    }
+  def communication_media
+    image_component.communication_media
+  end
+
+  def communication_media_l10n
+    communication_media.localization_for(block.language)
   end
 
   def check_accessibility

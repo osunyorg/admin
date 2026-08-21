@@ -19,6 +19,7 @@ class Osuny::Picker::Communication::Library::Media < Osuny::Picker::Communicatio
   def filters_after_categories
     filters_websites
     filters_creators
+    filters_origins
   end
 
   protected
@@ -84,6 +85,20 @@ class Osuny::Picker::Communication::Library::Media < Osuny::Picker::Communicatio
 
   def creator_ids
     objects.pluck(:created_by_id).compact_blank.uniq
+  end
+
+  def filters_origins
+    @filters << {
+      name: ::Communication::Media.human_attribute_name(:origin, locale: language.iso_code),
+      values: ::Communication::Media::origins.keys.map { |origin|
+        {
+          id: origin,
+          name: I18n.t("enums.communication.media.origin.#{origin}", locale: language.iso_code),
+          selected: origin.to_s.in?(params.to_s),
+          query_parameters: "&filters[for_origin][]=#{origin}"
+        }
+      }
+    }
   end
 
 end

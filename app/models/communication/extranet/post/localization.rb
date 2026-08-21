@@ -3,8 +3,8 @@
 # Table name: communication_extranet_post_localizations
 #
 #  id                    :uuid             not null, primary key
-#  featured_image_alt    :string
 #  featured_image_credit :text
+#  featured_media_alt    :string
 #  pinned                :boolean          default(FALSE)
 #  published             :boolean          default(FALSE)
 #  published_at          :datetime
@@ -15,12 +15,14 @@
 #  updated_at            :datetime         not null
 #  about_id              :uuid             uniquely indexed => [language_id], indexed
 #  extranet_id           :uuid             indexed
+#  featured_media_id     :uuid             indexed
 #  language_id           :uuid             uniquely indexed => [about_id], indexed
 #  university_id         :uuid             indexed
 #
 # Indexes
 #
 #  idx_on_about_id_language_id_01f6523e84                          (about_id,language_id) UNIQUE
+#  idx_on_featured_media_id_6785ae4278                             (featured_media_id)
 #  idx_on_university_id_28188e2217                                 (university_id)
 #  index_communication_extranet_post_localizations_on_about_id     (about_id)
 #  index_communication_extranet_post_localizations_on_extranet_id  (extranet_id)
@@ -30,6 +32,7 @@
 #
 #  fk_rails_17187381a3  (extranet_id => communication_extranets.id)
 #  fk_rails_3d930f21f1  (about_id => communication_extranet_posts.id)
+#  fk_rails_449cbf6085  (featured_media_id => communication_medias.id) ON DELETE => nullify
 #  fk_rails_5753a1409d  (university_id => universities.id)
 #  fk_rails_587ccae541  (language_id => languages.id)
 #
@@ -37,7 +40,7 @@ class Communication::Extranet::Post::Localization < ApplicationRecord
   include Accessible
   include AsLocalization
   include Contentful
-  include HasFeaturedImage
+  include HasFeaturedMedia
   include HasUniversity
   include Initials
   include Publishable

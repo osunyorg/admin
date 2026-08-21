@@ -15,7 +15,7 @@ class Communication::Block::Component::File < Communication::Block::Component::B
   end
 
   def blob
-    return if data_empty?
+    return if data_empty? || !published?
     @blob ||= communication_file_localization&.original_blob
   end
 
@@ -31,6 +31,10 @@ class Communication::Block::Component::File < Communication::Block::Component::B
   def communication_file_localization
     return if data_empty?
     @communication_file_localization ||= communication_file.localization_for(language)
+  end
+
+  def published?
+    communication_file_localization&.published
   end
 
   def default_data

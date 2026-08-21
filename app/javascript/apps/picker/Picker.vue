@@ -26,13 +26,17 @@ export default {
     // en partant du paramètre accept de l'input file
     accept: { type: String, default: '*' },
   },
-  emits: ['update:modelValue'],
+  emits: [
+    'picked',
+    'update:modelValue'
+  ],
   computed: {
     value: {
       get() {
         return this.modelValue;
       },
       set(value) {
+        this.$emit('picked', value);
         this.$emit('update:modelValue', value);
       }
     }
@@ -107,6 +111,7 @@ export default {
     @keydown.esc="close">
     <button
       v-if="label"
+      type="button"
       class="btn btn-sm mx-n2 d-flex align-items-center"
       @click.prevent="open">
       <CircleDot stroke-width="1.5" class="me-1" />
@@ -144,7 +149,7 @@ export default {
                     :pagination="pagination"
                     @change="search" />
                 </div>
-                <div v-if="searching" class="position-absolute top-0 start-0 ms-3 mt-1">
+                <div v-if="searching" class="position-absolute top-0 end-0 me-4 mt-4">
                   <span class="spinner-border text-primary" role="status"></span>
                 </div>
               </div>

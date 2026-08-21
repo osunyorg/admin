@@ -1,12 +1,13 @@
 module Importers
   class Curator
-    attr_reader :website, :user, :language, :url, :post, :l10n
+    attr_reader :website, :user, :language, :url, :university, :post, :l10n, :chapter
 
     def initialize(website, user, language, url)
       @website = website
       @user = user
       @language = language
       @url = url
+      @university = website.university
       unless slug_already_exists?
         create_post!
         set_post_author!
@@ -23,53 +24,54 @@ module Importers
 
     def valid?
       # if nothing exists valid? is "nil" and not "false"
-      (@post&.valid? && @l10n&.valid? && @chapter&.valid?) == true
+      (post&.valid? && l10n&.valid? && chapter&.valid?) == true
     end
 
     protected
 
     def create_post!
       @post = website.posts.create(
-        university: website.university
+        university: university
       )
     end
 
     def set_post_author!
-      @post.authors << @user.person if @user.person.present?
+      post.authors << user.person if user.person.present?
     end
 
     def create_localization!
-      @l10n = @post.localizations.create(
+      @l10n = post.localizations.create(
         language_id: @language.id,
-        title: page.title,
-        slug: page.title.parameterize,
+        title: curated_page.title,
+        slug: curated_page.title.parameterize,
         published_at: Time.now
       )
     end
 
     def create_chapter!
-      @chapter = @l10n.blocks.create(
+      @chapter = l10n.blocks.create(
         university: website.university,
         template_kind: :chapter,
         published: true,
         position: 0
       )
-      text = Importers::Cleaner.clean_html("#{page.text}<p><a href=\"#{@url}\" target=\"_blank\">Source</a></p>")
-      data = @chapter.data.deep_dup
+      text = Importers::Cleaner.clean_html("#{curated_page.text}<p><a href=\"#{url}\" target=\"_blank\">Source</a></p>")
+      data = chapter.data.deep_dup
       data['text'] = text
-      @chapter.data = data
-      @chapter.save
+      chapter.data = data
+      chapter.save
     end
 
     def attach_image!
-      return if page.image.blank?
-      ActiveStorage::Utils.attach_from_url(@l10n.featured_image, page.image)
+      return if curated_page.image.blank?
+      media = Communication::Media.find_or_create_from_url(curated_page.image, university_id: l10n.university_id, origin: :curator)
+      l10n.set_featured_media!(id: media.id, language: language)
     rescue
       puts "Attach image failed"
     end
 
     def slug
-      @slug ||= page.title.parameterize
+      @slug ||= curated_page.title.parameterize
     end
 
     def slug_already_exists?
@@ -80,8 +82,8 @@ module Importers
       ).any?
     end
 
-    def page
-      @page ||= Curation::Page.new(@url)
+    def curated_page
+      @curated_page ||= Curation::Page.new(url)
     end
   end
 end

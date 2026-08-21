@@ -5,8 +5,8 @@
 #  id                       :uuid             not null, primary key
 #  add_to_calendar_urls     :jsonb
 #  deleted_at               :datetime
-#  featured_image_alt       :string
 #  featured_image_credit    :text
+#  featured_media_alt       :string
 #  header_cta               :boolean
 #  header_cta_label         :string
 #  header_cta_url           :string
@@ -25,6 +25,7 @@
 #  updated_at               :datetime         not null
 #  about_id                 :uuid             not null, indexed, uniquely indexed => [language_id]
 #  communication_website_id :uuid             not null, indexed
+#  featured_media_id        :uuid             indexed
 #  language_id              :uuid             not null, uniquely indexed => [about_id], indexed
 #  university_id            :uuid             not null, indexed
 #
@@ -33,11 +34,13 @@
 #  idx_on_about_id_a6e772a338                  (about_id)
 #  idx_on_about_id_language_id_635cd53cee      (about_id,language_id) UNIQUE
 #  idx_on_communication_website_id_8261badeaa  (communication_website_id)
+#  idx_on_featured_media_id_417d0c7071         (featured_media_id)
 #  idx_on_language_id_a2de6ce8d0               (language_id)
 #  idx_on_university_id_64ba331f7d             (university_id)
 #
 # Foreign Keys
 #
+#  fk_rails_1d3c02a79d  (featured_media_id => communication_medias.id) ON DELETE => nullify
 #  fk_rails_2d099939f6  (communication_website_id => communication_websites.id)
 #  fk_rails_ee1c77929d  (about_id => communication_website_agenda_exhibitions.id)
 #  fk_rails_f684b71a8c  (university_id => universities.id)
@@ -51,7 +54,7 @@ class Communication::Website::Agenda::Exhibition::Localization < ApplicationReco
   include AsLocalization
   include Contentful
   include HasBlobs
-  include HasFeaturedImage
+  include HasFeaturedMedia
   include HasGitFiles
   include HasUniversity
   include HeaderCallToAction
@@ -137,7 +140,7 @@ class Communication::Website::Agenda::Exhibition::Localization < ApplicationReco
 
   def explicit_blob_ids
     super.concat [
-      featured_image&.blob_id,
+      featured_media&.original_blob_id,
       shared_image&.blob_id
     ]
   end

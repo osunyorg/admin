@@ -10,6 +10,18 @@ class Communication::Block::Template::Feature::Element < Communication::Block::T
     title.blank? && description.blank?
   end
 
+  def blob
+    image_component.blob
+  end
+
+  def communication_media
+    image_component.communication_media
+  end
+
+  def communication_media_l10n
+    communication_media.localization_for(block.language)
+  end
+
   def dom_count
     2 + 
     description_component.dom_count +

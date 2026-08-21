@@ -103,7 +103,7 @@ RSpec.describe 'Communication::Website::Page' do
           assert_difference ->{ Communication::Website::Page.count } => 1,
                             ->{ Communication::Website::Page::Localization.count } => 1,
                             ->{ Communication::Website::Permalink.count } => 1 do
-            assert_enqueued_jobs 1, only: Api::AttachFeaturedImageFromUrlJob do
+            assert_enqueued_jobs 1, only: Api::CreateFeaturedMediaFromUrlJob do
               submit_request(example.metadata)
               assert_response_matches_metadata(example.metadata)
             end
@@ -272,7 +272,7 @@ RSpec.describe 'Communication::Website::Page' do
       response '200', 'Successful upsertion' do
         it 'creates a page and updates another with their localizations', rswag: true do |example|
           assert_difference ->{ Communication::Website::Page.count } => 1, ->{ Communication::Website::Page::Localization.count } => 1 do
-            assert_enqueued_jobs 1, only: Api::AttachFeaturedImageFromUrlJob do
+            assert_enqueued_jobs 1, only: Api::CreateFeaturedMediaFromUrlJob do
               submit_request(example.metadata)
               assert_response_matches_metadata(example.metadata)
             end

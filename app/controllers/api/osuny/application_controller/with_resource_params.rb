@@ -24,7 +24,7 @@ module Api::Osuny::ApplicationController::WithResourceParams
       ) if resource&.persisted?
       l10n_permitted_params[:id] = existing_resource_l10n.id if existing_resource_l10n.present?
 
-      set_featured_image_to_l10n_params(l10n_permitted_params, l10n: existing_resource_l10n)
+      set_featured_media_to_l10n_params(l10n_permitted_params, l10n: existing_resource_l10n)
       set_blocks_attributes_to_l10n_params(l10n_permitted_params, l10n: existing_resource_l10n)
       set_aliases_attributes_to_l10n_params(l10n_permitted_params, l10n: existing_resource_l10n)
 
@@ -32,20 +32,27 @@ module Api::Osuny::ApplicationController::WithResourceParams
     end
   end
 
-  def set_featured_image_to_l10n_params(l10n_params, l10n: nil)
+  def set_featured_media_to_l10n_params(l10n_params, l10n: nil)
     featured_image_data = l10n_params.delete(:featured_image)
     return unless featured_image_data.present?
-    l10n_params[:featured_image_alt] = featured_image_data[:alt] if featured_image_data.has_key?(:alt)
-    l10n_params[:featured_image_credit] = featured_image_data[:credit] if featured_image_data.has_key?(:credit)
-    l10n_params[:featured_image_delete] = '1' if featured_image_data[:_destroy]
+    l10n_params[:featured_media_alt] = featured_image_data[:alt] if featured_image_data.has_key?(:alt)
+    l10n_params[:featured_media_id] = nil if featured_image_data[:_destroy]
     if featured_image_data[:blob_id].present?
-      # If we send a blob_id, we attach it to the localization
+      # If we send a blob_id, we use the media made from this blob
       blob = current_university.active_storage_blobs.find_by(id: featured_image_data[:blob_id])
-      l10n_params[:featured_image] = blob if blob.present?
+      if blob.present?
+        media = Communication::Media.find_or_create_media_from_blob(
+          blob,
+          alt: featured_image_data[:alt],
+          credit: featured_image_data[:credit]
+        ) 
+        media.context_add(l10n)
+        l10n_params[:featured_media_id] = media.id if media.present?
+      end
     end
-    # Set the image URL so that the object can delay the upload if needed
-    l10n_params[:featured_image_new_url] = featured_image_data[:url]
-    # We also force the updated_at to change, as changing on the featured_image does not trigger the save
+    # Set the image URL so that the object can delay the import if needed
+    l10n_params[:featured_media_new_url] = featured_image_data[:url]
+    # We also force the updated_at to change, as changing the media does not trigger the save
     l10n_params[:updated_at] = Time.current
   end
 

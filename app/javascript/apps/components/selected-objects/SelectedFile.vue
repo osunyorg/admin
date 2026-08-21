@@ -19,17 +19,24 @@ export default {
   <div
     v-else
     class="card card--osuny card--horizontal">
-    <div class="osuny__thumbnail osuny__thumbnail--small osuny__thumbnail--uncropped">
+    <div 
+      v-if="resource?.featured_media"
+      class="osuny__thumbnail osuny__thumbnail--small osuny__thumbnail--cropped"
+      >
       <img
-        v-if="resource?.featured_image"
-        :src="resource?.featured_image.thumb"
+        v-if="resource?.featured_media"
+        :src="resource?.featured_media"
         loading="lazy"
         decoding="async"
         width="70"
-        height="70" />
-      <span
-        v-else
-        class="osuny__thumbnail__icon">
+        height="70" 
+        />
+    </div>
+    <div
+      v-else
+      class="osuny__thumbnail osuny__thumbnail--small osuny__thumbnail--uncropped"
+      >
+      <span class="osuny__thumbnail__icon">
         <i :class="resource?.icon"></i>
       </span>
     </div>

@@ -12,8 +12,7 @@ module Communication::Block::WithCommunicationFiles
     # As many files as localizations, no need to check
     return if commmunication_file_ids.size == commmunication_file_localization_ids.size
     communication_files.each do |file|
-      file_l10n = file.localizations.find_by(language_id: language.id)
-      file.original_localization.localize_in!(language) unless file_l10n
+      file.create_localization_if_missing!(language)
     end
   end
 

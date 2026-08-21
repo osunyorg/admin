@@ -96,6 +96,13 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
                 notice: t('admin.successfully_restored_html', model: @program.to_s_in(current_language))
   end
 
+  def set_downloadable_summary
+    @program.set_downloadable_summary!(
+      id: params[:downloadable_summary_id],
+      language: current_language
+    )
+  end
+
   protected
 
   def prepare_preview
@@ -147,12 +154,10 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
               :meta_description, :summary, :published,
               :qualiopi_text,
               :logo, :logo_delete,
-              :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
               :shared_image, :shared_image_delete,
               :prerequisites, :objectives, :presentation, :registration, :pedagogy, :content, :registration_url,
               :evaluation, :accessibility, :contacts, :opportunities, :results, :other, :main_information,
               :pricing, :pricing_apprenticeship, :pricing_continuing, :pricing_initial, :duration,
-              :downloadable_summary, :downloadable_summary_delete,
             ]
           )
           .merge(

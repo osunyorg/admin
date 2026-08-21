@@ -4,8 +4,8 @@
 #
 #  id                    :uuid             not null, primary key
 #  breadcrumb_title      :string
-#  featured_image_alt    :text
 #  featured_image_credit :text
+#  featured_media_alt    :text
 #  header_cta            :boolean          default(FALSE)
 #  header_cta_label      :string
 #  header_cta_url        :string
@@ -19,6 +19,7 @@
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  about_id              :uuid             indexed, uniquely indexed => [language_id]
+#  featured_media_id     :uuid             indexed
 #  language_id           :uuid             uniquely indexed => [about_id], indexed
 #  university_id         :uuid             indexed
 #
@@ -26,6 +27,7 @@
 #
 #  idx_on_about_id_f5fce0a0b7                                    (about_id)
 #  idx_on_about_id_language_id_a3c481c2fd                        (about_id,language_id) UNIQUE
+#  idx_on_featured_media_id_41b368667a                           (featured_media_id)
 #  idx_on_language_id_8e479f2339                                 (language_id)
 #  idx_on_university_id_2aaf668550                               (university_id)
 #  index_university_organization_category_localizations_on_slug  (slug)
@@ -34,6 +36,7 @@
 #
 #  fk_rails_72f43eab36  (about_id => university_organization_categories.id)
 #  fk_rails_d162c90661  (university_id => universities.id)
+#  fk_rails_dc1c87d0f0  (featured_media_id => communication_medias.id) ON DELETE => nullify
 #  fk_rails_dca0802d2f  (language_id => languages.id)
 #
 class University::Organization::Category::Localization < ApplicationRecord

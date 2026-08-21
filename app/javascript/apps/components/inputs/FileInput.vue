@@ -1,34 +1,64 @@
 <script>
-import UploadButton from './primitives/UploadButton.vue';
-import SelectedFile from '../selected-objects/SelectedFile.vue';
+import FileUploader from './file-input/FileUploader.vue';
 import Picker from '../../picker/Picker.vue';
+import SelectedFile from '../selected-objects/SelectedFile.vue';
 
 export default {
   name: 'FileInput',
-  components: { UploadButton, SelectedFile, Picker },
-  props: {
-    // Le modèle est un objet composite, pour gérer la migration facilement
-    modelValue: { type: Object, default: () => ({}) },
-    uploadUrl: { type: String, required: true },
-    pickerEndpoint: { type: String, required: true },
-    objectEndpoint: { type: String, required: true },
-    accept: { type: String, default: '*' },
-    sizeLimit: { type: [String, Number], default: null },
-    label: { type: String, required: true },
-    title: { type: String, required: true },
+  components: {
+    FileUploader,
+    Picker,
+    SelectedFile,
   },
-  emits: ['update:modelValue'],
+  props: {
+    accept: { type: String, default: '*' },
+    modelValue: { type: String, default: '' },
+    objectEndpoint: { type: String, required: true },
+    pickerEndpoint: { type: String, required: true },
+    pickerLabel: { type: String, default: '' },
+    pickerTitle: { type: String, required: true },
+    uploaderEndpoint: { type: String, required: true },
+    uploaderSizeLimit: { type: Number, required: true },
+  },
+  emits: [
+    'update:modelValue',
+    'uploading',
+    'loaded',
+  ],
   data() {
     return {
       uploadProgress: null,
     };
   },
   computed: {
+    value: {
+      get() {
+        return this.modelValue;
+      },
+      set(value) {
+        this.$emit('update:modelValue', value);
+      }
+    },
     hasValue() {
-      return Boolean(this.modelValue?.communication_file_id);
+      return this.modelValue != '';
     },
     isUploading() {
       return this.uploadProgress !== null;
+    },
+  },
+  methods: {
+    uploading(percent) {
+      this.uploadProgress = percent;
+      this.$emit('uploading', percent);
+    },
+    uploaded(id) {
+      this.value = id;
+    },
+    picked(object) {
+      this.value = object.id;
+    },
+    loaded(data) {
+      this.$emit('loaded', data);
     },
   },
 };
@@ -38,35 +68,37 @@ export default {
   <div style="min-height: 50px">
     <SelectedFile
       v-if="hasValue"
-      :id="modelValue.communication_file_id"
-      :endpoint="objectEndpoint" />
-    <template v-else>
+      :id="value"
+      :endpoint="objectEndpoint"
+      @loaded="loaded"
+      />
+    <div v-else>
       <progress
-        v-show="isUploading"
         class="mt-2"
-        :value="uploadProgress"
         max="100"
-        style="width: 100%;" />
-      <div v-show="!isUploading" class="row">
-        <div class="col-md-6">
-          <UploadButton
-            :model-value="modelValue"
-            @update:model-value="$emit('update:modelValue', $event)"
-            @uploading="uploadProgress = $event"
-            :upload-url="uploadUrl"
-            :accept="accept"
-            :size-limit="sizeLimit" />
-        </div>
-        <div class="col-md-6">
-          <Picker
-            :model-value="modelValue"
-            @update:model-value="$emit('update:modelValue', $event)"
-            :label="label"
-            :title="title"
-            :accept="accept"
-            :endpoint="pickerEndpoint" />
-        </div>
+        style="width: 100%;"
+        :value="uploadProgress"
+        v-show="isUploading"
+        />
+      <div 
+        v-show="!isUploading"
+        class="d-flex flex-wrap justify-content-between mb-4"
+        >
+        <FileUploader
+          :accept="accept"
+          :endpoint="uploaderEndpoint"
+          :size-limit="uploaderSizeLimit"
+          @uploaded="uploaded"
+          @uploading="uploading"
+          />
+        <Picker
+          :accept="accept"
+          :endpoint="pickerEndpoint"
+          :label="pickerLabel"
+          :title="pickerTitle"
+          @picked="picked"
+          />
       </div>
-    </template>
+    </div>
   </div>
 </template>

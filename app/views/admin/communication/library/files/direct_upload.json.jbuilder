@@ -8,8 +8,4 @@ json.direct_upload do
   json.url @blob.service_url_for_direct_upload
   json.headers @blob.service_headers_for_direct_upload
 end
-json.file do
-  json.id @file.id
-  json.filename @l10n.original_filename
-  json.name @l10n.name
-end
+json.file @file.id

@@ -10,13 +10,16 @@ export default {
 </script>
 
 <template>
-  <div :class="results.classes" v-if="results.list.length > 0" >
+  <div
+    :class="results.classes"
+    v-if="results.list.length > 0"
+    >
     <div
       v-for="(object, index) in results.list"
       :key="index"
       class="col"
       v-html="object.snippet"
-      @click.prevent="$emit('select', object)">
+      @click.stop.prevent="$emit('select', object)">
     </div>
   </div>
   <div v-if="results.list.length === 0" >

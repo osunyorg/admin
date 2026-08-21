@@ -17,23 +17,6 @@ module HasOriginalBlob
               unless: :original_blob
   end
 
-  # TODO Quand on voudra généraliser l'usage (pas seulement les featured_images)
-  # il faudra ajouter la clé au contexte (le même média peut être utilisé pour 2 clés différentes).
-  def attach(about, key)
-    # Création du nouveau contexte
-    contexts.where(
-      university: university,
-      active_storage_blob: original_blob,
-      about: about
-    ).first_or_create
-    # Attachement du nouveau blob
-    ActiveStorage::Attachment.where(
-      name: key,
-      blob: original_blob,
-      record: about
-    ).first_or_create
-  end
-
   def original_blob=(value)
     super(value)
     return if value.blank?
@@ -43,12 +26,17 @@ module HasOriginalBlob
     self.original_byte_size = value.byte_size
   end
 
+  def original_guessed_name
+    File.basename(original_filename, ".*").humanize
+  end
+
   def max_file_size
     raise NotImplementedError, "You must implement max_file_size in the including class"
   end
 
   protected
 
+  # Utile pour les envois directs, via la photothèque ou la bibliothèque de fichiers
   def create_original_blob_from_upload
     return if wrong_uploaded_file? || file_size_too_big?
     original_uploaded_file_io = original_uploaded_file.open

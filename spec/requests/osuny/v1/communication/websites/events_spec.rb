@@ -114,7 +114,7 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
                             ->{ Communication::Website::Agenda::Event::TimeSlot.count } => 1,
                             ->{ Communication::Website::Agenda::Event::TimeSlot::Localization.count } => 1,
                             ->{ Communication::Website::Permalink.count } => 1 do
-            assert_enqueued_jobs 1, only: Api::AttachFeaturedImageFromUrlJob do
+            assert_enqueued_jobs 1, only: Api::CreateFeaturedMediaFromUrlJob do
               submit_request(example.metadata)
               assert_response_matches_metadata(example.metadata)
             end
@@ -326,7 +326,7 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
                             ->{ Communication::Website::Agenda::Event::Localization.count } => 1,
                             ->{ Communication::Website::Agenda::Event::TimeSlot.count } => 1,
                             ->{ Communication::Website::Agenda::Event::TimeSlot::Localization.count } => 1 do
-            assert_enqueued_jobs 1, only: Api::AttachFeaturedImageFromUrlJob do
+            assert_enqueued_jobs 1, only: Api::CreateFeaturedMediaFromUrlJob do
               submit_request(example.metadata)
               assert_response_matches_metadata(example.metadata)
             end

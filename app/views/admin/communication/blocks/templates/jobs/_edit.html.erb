@@ -66,7 +66,7 @@ object_endpoint = admin_communication_website_jobboard_jobs_path(website_id: web
   <%= osuny_label t('admin.communication.blocks.display_options.title') %>
   <div class="row">
     <div class="col-sm-6">
-      <%= block_component_edit block, :option_image, label: Communication::Website::Jobboard::Job::Localization.human_attribute_name(:featured_image) %>
+      <%= block_component_edit block, :option_image, label: Communication::Website::Jobboard::Job::Localization.human_attribute_name(:featured_media) %>
       <%= block_component_edit block, :option_subtitle, label: Communication::Website::Jobboard::Job::Localization.human_attribute_name(:subtitle) %>
       <%= block_component_edit block, :option_summary, label: t('admin.summary.label') %>
     </div>

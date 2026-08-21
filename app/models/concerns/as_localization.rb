@@ -47,8 +47,6 @@ module AsLocalization
     # Localized should not be published immediately
     l10n.published = false if respond_to?(:published)
 
-    # Handle featured image if object has one, and other attachments
-    localize_attachment(l10n, :featured_image) if try(:featured_image)&.attached?
     localize_other_attachments(l10n)
 
     # Blocks need an about, so we save before localizing blocks
