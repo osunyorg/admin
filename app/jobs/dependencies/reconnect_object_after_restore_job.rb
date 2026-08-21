@@ -3,6 +3,6 @@ class Dependencies::ReconnectObjectAfterRestoreJob < ApplicationJob
 
   def perform(object)
     object.touch
-    object.touch_references
+    object.references.to_a.flatten.compact.each &:touch
   end
 end
