@@ -10,7 +10,7 @@ class Migrations::DownloadableSummaryToFiles
 
   def self.migrate_attachment(attachment)
       program_l10n = Education::Program::Localization.find_by(id: attachment.record_id)
-      next if program_l10n.nil?
+      return if program_l10n.nil?
       program = program_l10n.about
       file_l10n = Communication::File::Localization.find_or_create_file_localization_from_blob(
         attachment.blob,
