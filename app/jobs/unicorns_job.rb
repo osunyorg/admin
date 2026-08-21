@@ -8,6 +8,7 @@ class UnicornsJob < ApplicationJob
     Migrations::DenormalizeMediaExtensions.migrate
     Migrations::DenormalizeMediaContexts.migrate
     Migrations::FeaturedImagesToMedias.migrate
+    Migrations::DownloadableSummaryToFiles.migrate
     Migrations::BlocksWithMedias.migrate
   end
 end

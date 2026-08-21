@@ -77,7 +77,6 @@ class Education::Program::Localization < ApplicationRecord
 
   has_summernote :summary
   has_summernote :presentation
-  has_one_attached_deletable :downloadable_summary
   has_one_attached_deletable :logo
   rich_text_areas_with_inheritance  :accessibility,
                                     :contacts,
@@ -96,7 +95,6 @@ class Education::Program::Localization < ApplicationRecord
                                     :results
 
   validates :name, presence: true
-  validates :downloadable_summary, size: { less_than: 50.megabytes }
   validates :logo, size: { less_than: 5.megabytes }
 
   scope :ordered, -> (language = nil) { order(:slug) }
@@ -119,7 +117,10 @@ class Education::Program::Localization < ApplicationRecord
   def dependencies
     active_storage_blobs +
     contents_dependencies +
-    [diploma]
+    [
+      diploma,
+      downloadable_summary
+    ]
   end
 
   def blocks_heading_rank_base
@@ -137,13 +138,18 @@ class Education::Program::Localization < ApplicationRecord
     super.concat [
       featured_media&.original_blob_id,
       shared_image&.blob_id,
-      downloadable_summary&.blob_id,
+      downloadable_summary&.original_blob_id,
       logo&.blob_id
     ]
   end
 
   def inherited_blob_ids
     [best_featured_media&.original_blob_id]
+  end
+
+  def downloadable_summary
+    return if about.downloadable_summary.nil?
+    about.downloadable_summary.best_localization_for(language)
   end
 
   def diploma

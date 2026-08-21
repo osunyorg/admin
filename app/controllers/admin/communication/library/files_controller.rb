@@ -24,8 +24,15 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
   end
 
   def show
-    @contexts = @l10n.contexts
-    breadcrumb
+    respond_to do |format|
+      format.html do
+        @contexts = @l10n.contexts
+        breadcrumb
+      end
+      format.json do
+        @l10n = @file.create_localization_if_missing!(current_language)
+      end
+    end
   end
 
   def new

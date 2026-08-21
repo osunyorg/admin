@@ -26,6 +26,10 @@ module HasOriginalBlob
     self.original_byte_size = value.byte_size
   end
 
+  def original_guessed_name
+    File.basename(original_filename, ".*").humanize
+  end
+
   def max_file_size
     raise NotImplementedError, "You must implement max_file_size in the including class"
   end

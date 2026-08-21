@@ -67,6 +67,8 @@ class Communication::File::Localization < ApplicationRecord
               dependent: :destroy
   alias :file :about
 
+  before_validation :guess_name
+
   validates :name, presence: true
 
   after_commit :touch_references, on: :update
@@ -77,20 +79,27 @@ class Communication::File::Localization < ApplicationRecord
       language_id: language.id,
       original_checksum: blob.checksum
     ).first_or_create do |localization|
-      file = Communication::File.find_or_create_file_from_blob(blob, user: user)
-      # On attribue le blob
+      localization.about = Communication::File.find_or_create_file_from_blob(blob, user: user)
       localization.original_blob = blob
-      # On attribue le nom
-      blob_filename = blob.filename
-      blob_filename_without_extension = File.basename(blob_filename, File.extname(blob_filename))
-      localization.name = blob_filename_without_extension.humanize
-      # On connecte au fichier
-      localization.about_id = file.id
-      # Here, we auto-publish the localization
+      # Les fichiers créés par cette méthode sont autopubliés.
+      # Ceux qui sont envoyés via la file library ne le sont pas.
       localization.published = true
-      localization.published_at = Time.current
     end
     localization
+  end
+
+  def context_add(about)
+    contexts.where(
+      about: about,
+      university_id: university_id
+    ).first_or_create
+  end
+
+  def context_for(about)
+    contexts.find_by(
+      about: about,
+      university_id: university_id
+    )
   end
 
   def git_path_relative
@@ -123,7 +132,7 @@ class Communication::File::Localization < ApplicationRecord
 
   def dependencies
     [
-      original_blob,
+      original_blob, # FIXME original_blob ou blob? Gestion de la publication
       featured_blob,
     ]
   end
@@ -134,6 +143,13 @@ class Communication::File::Localization < ApplicationRecord
 
   def to_s
     "#{name}"
+  end
+
+  protected
+
+  def guess_name
+    return if self.name.present?
+    self.name = original_guessed_name
   end
 
 end

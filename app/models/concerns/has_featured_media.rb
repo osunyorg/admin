@@ -12,6 +12,7 @@ module HasFeaturedMedia
   end
 
   def featured_blob
+     # FIXME[files] original_blob ou blob? Gestion de la publication
     featured_media&.original_blob
   end
 

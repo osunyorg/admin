@@ -82,7 +82,7 @@ export default {
         />
       <div 
         v-show="!isUploading"
-        class="d-flex flex-wrap justify-content-between"
+        class="d-flex flex-wrap justify-content-between mb-4"
         >
         <FileUploader
           :accept="accept"

@@ -42,6 +42,12 @@ class Communication::File::Context < ApplicationRecord
 
   before_save :denormalize_website
 
+  def self.remove(about, except: nil)
+    where(university: about.university, about: about)
+    .where.not(id: except&.id)
+    .delete_all
+  end
+
   def about_block?
     about_type == 'Communication::Block'
   end

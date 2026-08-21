@@ -43,6 +43,7 @@ namespace :education do
       get :preview
       get :static
       post :restore
+      post 'set-downloadable-summary' => 'programs#set_downloadable_summary', as: :set_downloadable_summary
     end
   end
   resources :schools do

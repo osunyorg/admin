@@ -117,7 +117,7 @@ export default {
 
 <template>
   <div
-    class="mb-3"
+    class="mb-2"
     @dragenter.prevent="dragging = true;"
     @dragover.prevent="dragging = true;"
     @dragleave.prevent="dragging = false"

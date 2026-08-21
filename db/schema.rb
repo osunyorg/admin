@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_21_114959) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_21_150733) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -1823,12 +1823,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_21_114959) do
     t.datetime "created_at", null: false
     t.datetime "deleted_at"
     t.uuid "diploma_id"
+    t.uuid "downloadable_summary_id"
     t.boolean "initial"
     t.uuid "parent_id"
     t.boolean "qualiopi_certified", default: false
     t.uuid "university_id", null: false
     t.datetime "updated_at", null: false
     t.index ["diploma_id"], name: "index_education_programs_on_diploma_id"
+    t.index ["downloadable_summary_id"], name: "index_education_programs_on_downloadable_summary_id"
     t.index ["parent_id"], name: "index_education_programs_on_parent_id"
     t.index ["university_id"], name: "index_education_programs_on_university_id"
   end
@@ -3027,6 +3029,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_21_114959) do
   add_foreign_key "education_program_localizations", "education_programs", column: "about_id"
   add_foreign_key "education_program_localizations", "languages"
   add_foreign_key "education_program_localizations", "universities"
+  add_foreign_key "education_programs", "communication_files", column: "downloadable_summary_id", on_delete: :nullify
   add_foreign_key "education_programs", "education_programs", column: "parent_id"
   add_foreign_key "education_programs", "universities"
   add_foreign_key "education_school_localizations", "education_schools", column: "about_id"

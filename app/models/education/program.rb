@@ -2,29 +2,32 @@
 #
 # Table name: education_programs
 #
-#  id                 :uuid             not null, primary key
-#  apprenticeship     :boolean
-#  bodyclass          :string
-#  capacity           :integer
-#  continuing         :boolean
-#  deleted_at         :datetime
-#  initial            :boolean
-#  qualiopi_certified :boolean          default(FALSE)
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  diploma_id         :uuid             indexed
-#  parent_id          :uuid             indexed
-#  university_id      :uuid             not null, indexed
+#  id                      :uuid             not null, primary key
+#  apprenticeship          :boolean
+#  bodyclass               :string
+#  capacity                :integer
+#  continuing              :boolean
+#  deleted_at              :datetime
+#  initial                 :boolean
+#  qualiopi_certified      :boolean          default(FALSE)
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  diploma_id              :uuid             indexed
+#  downloadable_summary_id :uuid             indexed
+#  parent_id               :uuid             indexed
+#  university_id           :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_education_programs_on_diploma_id     (diploma_id)
-#  index_education_programs_on_parent_id      (parent_id)
-#  index_education_programs_on_university_id  (university_id)
+#  index_education_programs_on_diploma_id               (diploma_id)
+#  index_education_programs_on_downloadable_summary_id  (downloadable_summary_id)
+#  index_education_programs_on_parent_id                (parent_id)
+#  index_education_programs_on_university_id            (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_08b351087c  (university_id => universities.id)
+#  fk_rails_b7145474b4  (downloadable_summary_id => communication_files.id) ON DELETE => nullify
 #  fk_rails_ec1f16f607  (parent_id => education_programs.id)
 #
 class Education::Program < ApplicationRecord
@@ -53,6 +56,10 @@ class Education::Program < ApplicationRecord
 
   belongs_to :parent,
              class_name: 'Education::Program',
+             optional: true
+
+  belongs_to :downloadable_summary,
+             class_name: 'Communication::File',
              optional: true
 
   has_many   :children,
@@ -147,6 +154,20 @@ class Education::Program < ApplicationRecord
 
   def hugo_body_class
     'programs__section'
+  end
+
+  # Cf HasFeaturedMedia#set_featured_media!, qui fait la même chose pour les médias.
+  def set_downloadable_summary!(id: '', language:)
+    if id.present?
+      file = university.communication_files.find(id)
+      file_l10n = file.create_localization_if_missing!(language)
+      program_l10n = localization_for(language)
+      context = file_l10n.context_add(program_l10n)
+    end
+    self.downloadable_summary = file
+    save!
+    Communication::File::Context.remove(self, except: context)
+    file
   end
 
   protected

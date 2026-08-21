@@ -57,10 +57,8 @@ class Communication::Media::Localization < ApplicationRecord
   protected
 
   def guess_name
-    self.name = name_from_filename if self.name.blank?
+    return if self.name.present?
+    self.name = media.original_guessed_name
   end
 
-  def name_from_filename
-    File.basename(about.original_filename, ".*").humanize
-  end
 end
