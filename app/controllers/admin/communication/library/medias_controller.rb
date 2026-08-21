@@ -5,9 +5,10 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
   include Admin::Localizable
 
   def index
-    @medias = @medias.filter_by(params[:filters], current_language)
-                      .ordered(current_language)
-                      .page(params[:page])
+    @filtered = @medias.filter_by(params[:filters], current_language)
+    @medias = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                       .ordered(current_language)
+                       .page(params[:page])
     @collections = current_university.communication_media_collections
                                      .ordered(current_language)
     @categories = categories.root
@@ -91,6 +92,8 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
 
   def update
     if @media.update(media_params)
+      @media.localization_for(current_language)
+            .update_column(:updated_by_id, current_user.id)
       redirect_to [:admin, @media],
                   notice: t('admin.successfully_updated_html', model: @media.to_s_in(current_language))
     else
@@ -119,7 +122,7 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
           .permit(
             :communication_media_collection_id, :original_uploaded_file, category_ids: [],
             localizations_attributes: [
-              :id, :name, :alt, :credit, :internal_description, :language_id
+              :id, :name, :alt, :credit, :internal_description, :language_id, :published,
             ]
           )
           .merge(university_id: current_university.id)

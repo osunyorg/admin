@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_19_212606) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_21_114959) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -530,7 +530,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_19_212606) do
     t.uuid "featured_media_id"
     t.text "internal_description"
     t.uuid "language_id", null: false
-    t.uuid "last_updated_by_id"
     t.text "meta_description"
     t.string "name"
     t.uuid "original_blob_id", null: false
@@ -541,17 +540,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_19_212606) do
     t.string "original_filename"
     t.boolean "published", default: false
     t.datetime "published_at"
-    t.uuid "published_by_id"
     t.string "slug"
     t.uuid "university_id", null: false
     t.datetime "updated_at", null: false
+    t.uuid "updated_by_id"
     t.index ["about_id"], name: "index_communication_file_localizations_on_about_id"
     t.index ["featured_media_id"], name: "index_communication_file_localizations_on_featured_media_id"
     t.index ["language_id"], name: "index_communication_file_localizations_on_language_id"
-    t.index ["last_updated_by_id"], name: "index_communication_file_localizations_on_last_updated_by_id"
     t.index ["original_blob_id"], name: "index_communication_file_localizations_on_original_blob_id"
-    t.index ["published_by_id"], name: "index_communication_file_localizations_on_published_by_id"
     t.index ["university_id"], name: "index_communication_file_localizations_on_university_id"
+    t.index ["updated_by_id"], name: "index_communication_file_localizations_on_updated_by_id"
   end
 
   create_table "communication_files", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -650,21 +648,28 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_19_212606) do
     t.text "alt"
     t.datetime "created_at", null: false
     t.text "credit"
+    t.datetime "deleted_at"
     t.text "internal_description"
     t.uuid "language_id", null: false
     t.string "name"
+    t.boolean "published", default: false
+    t.datetime "published_at"
     t.uuid "university_id", null: false
     t.datetime "updated_at", null: false
+    t.uuid "updated_by_id"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_fec28c8838", unique: true
     t.index ["about_id"], name: "index_communication_media_localizations_on_about_id"
+    t.index ["deleted_at"], name: "index_communication_media_localizations_on_deleted_at"
     t.index ["language_id"], name: "index_communication_media_localizations_on_language_id"
     t.index ["university_id"], name: "index_communication_media_localizations_on_university_id"
+    t.index ["updated_by_id"], name: "index_communication_media_localizations_on_updated_by_id"
   end
 
   create_table "communication_medias", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "communication_media_collection_id"
     t.datetime "created_at", null: false
     t.uuid "created_by_id"
+    t.datetime "deleted_at"
     t.integer "origin", default: 1, null: false
     t.uuid "original_blob_id", null: false
     t.bigint "original_byte_size"
@@ -676,6 +681,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_19_212606) do
     t.datetime "updated_at", null: false
     t.index ["communication_media_collection_id"], name: "idx_on_communication_media_collection_id_6cace98319"
     t.index ["created_by_id"], name: "index_communication_medias_on_created_by_id"
+    t.index ["deleted_at"], name: "index_communication_medias_on_deleted_at"
     t.index ["original_blob_id"], name: "index_communication_medias_on_original_blob_id"
     t.index ["university_id"], name: "index_communication_medias_on_university_id"
   end
@@ -2821,8 +2827,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_19_212606) do
   add_foreign_key "communication_file_localizations", "communication_medias", column: "featured_media_id", on_delete: :nullify
   add_foreign_key "communication_file_localizations", "languages"
   add_foreign_key "communication_file_localizations", "universities"
-  add_foreign_key "communication_file_localizations", "users", column: "last_updated_by_id"
-  add_foreign_key "communication_file_localizations", "users", column: "published_by_id"
+  add_foreign_key "communication_file_localizations", "users", column: "updated_by_id"
   add_foreign_key "communication_files", "universities"
   add_foreign_key "communication_files", "users", column: "created_by_id"
   add_foreign_key "communication_media_categories", "communication_media_categories", column: "parent_id"
@@ -2843,6 +2848,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_19_212606) do
   add_foreign_key "communication_media_localizations", "communication_medias", column: "about_id"
   add_foreign_key "communication_media_localizations", "languages"
   add_foreign_key "communication_media_localizations", "universities"
+  add_foreign_key "communication_media_localizations", "users", column: "updated_by_id"
   add_foreign_key "communication_medias", "active_storage_blobs", column: "original_blob_id"
   add_foreign_key "communication_medias", "communication_media_collections"
   add_foreign_key "communication_medias", "universities"

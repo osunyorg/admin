@@ -3,6 +3,7 @@
 # Table name: communication_medias
 #
 #  id                                :uuid             not null, primary key
+#  deleted_at                        :datetime         indexed
 #  origin                            :integer          default(1), not null
 #  original_byte_size                :bigint
 #  original_checksum                 :string
@@ -20,6 +21,7 @@
 #
 #  idx_on_communication_media_collection_id_6cace98319  (communication_media_collection_id)
 #  index_communication_medias_on_created_by_id          (created_by_id)
+#  index_communication_medias_on_deleted_at             (deleted_at)
 #  index_communication_medias_on_original_blob_id       (original_blob_id)
 #  index_communication_medias_on_university_id          (university_id)
 #
@@ -31,12 +33,15 @@
 #  fk_rails_de56e1762f  (university_id => universities.id)
 #
 class Communication::Media < ApplicationRecord
+  acts_as_paranoid
+
   include Autosortable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include HasCreator
   include HasOriginalBlob
   include HasUniversity
+  include Lifecyclable
   include Localizable
   include LocalizableOrderByNameScope
   include WithOrigin # Must be loaded before WithOpenApi

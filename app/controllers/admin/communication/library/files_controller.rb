@@ -54,7 +54,8 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
   def create
     @file.created_by = current_user
     if @file.save
-      redirect_to [:admin, @file], notice: t('admin.successfully_created_html', model: @file.to_s_in(current_language))
+      redirect_to [:admin, @file],
+                  notice: t('admin.successfully_created_html', model: @file.to_s_in(current_language))
     else
       load_invalid_localization
       @categories = categories
@@ -65,8 +66,10 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
 
   def update
     if @file.update(file_params)
-      @file.localization_for(current_language).update_column(:last_updated_by_id, current_user.id)
-      redirect_to [:admin, @file], notice: t('admin.successfully_updated_html', model: @file.to_s_in(current_language))
+      @file.localization_for(current_language)
+           .update_column(:updated_by_id, current_user.id)
+      redirect_to [:admin, @file],
+                  notice: t('admin.successfully_updated_html', model: @file.to_s_in(current_language))
     else
       load_invalid_localization
       @categories = categories
@@ -78,7 +81,8 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
 
   def destroy
     @file.destroy
-    redirect_to admin_communication_files_url, notice: t('admin.successfully_destroyed_html', model: @file.to_s_in(current_language))
+    redirect_to admin_communication_files_url,
+                notice: t('admin.successfully_destroyed_html', model: @file.to_s_in(current_language))
   end
 
   protected

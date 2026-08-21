@@ -21,6 +21,7 @@ image = media.original_blob
     <% end %>
   </div>
   <div class="card-body">
+    <%= osuny_published_localized media %>
     <%= osuny_link_localized  media,
                               admin_communication_media_path(media),
                               classes: 'small stretched-link' %>

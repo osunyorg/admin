@@ -1,0 +1,15 @@
+.vue__selected-media
+    container-type: inline-size
+    position: relative
+    &__publication
+        position: absolute
+        left: 10px
+        @container (width > 200px)
+            background: white
+            border-radius: $border-radius
+            bottom: 10px
+            padding: 2px 8px
+        @container (width < 200px)
+            bottom: 3px
+            .vue__selected-media__label
+                display: none

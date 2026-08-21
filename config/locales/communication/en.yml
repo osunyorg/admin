@@ -97,7 +97,6 @@ en:
         about_type: Type
       communication/file/localization:
         internal_description: Internal description
-        last_updated_by: Last updated by
         name: Name
         original_byte_size: Size
         original_content_type: Content type
@@ -105,7 +104,7 @@ en:
         original_uploaded_file: Original file
         published: Published?
         published_at: Publication date
-        published_by: Published by
+        updated_by: Last update
       communication/media:
         collection: Collection
         created_by: Envoyée par
@@ -121,6 +120,8 @@ en:
       communication/media/localization:
         internal_description: Internal description
         name: Name
+        published_at: Publication date
+        updated_by: Last update
       communication/website:
         about: About
         about_: Independent website

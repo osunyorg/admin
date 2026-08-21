@@ -97,7 +97,6 @@ fr:
         about_type: Type
       communication/file/localization:
         internal_description: Description interne
-        last_updated_by: Dernière modification par
         name: Nom
         original_byte_size: Poids
         original_content_type: Type de contenu
@@ -105,10 +104,10 @@ fr:
         original_uploaded_file: Fichier original
         published: Publié ?
         published_at: Date de publication
-        published_by: Publié par
+        updated_by: Dernière modification
       communication/media:
         collection: Collection
-        created_by: Envoyée par
+        created_by: Création
         height: Hauteur
         origin: Provenance
         original_byte_size: Poids
@@ -121,6 +120,8 @@ fr:
       communication/media/localization:
         internal_description: Description interne
         name: Nom
+        published_at: Publication
+        updated_by: Dernière modification
       communication/website:
         about: Sujet du site
         about_: Site indépendant

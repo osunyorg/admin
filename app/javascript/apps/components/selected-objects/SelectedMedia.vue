@@ -69,8 +69,17 @@ export default {
 <template>
   <div
     v-if="resource"
-    class="position-relative"
+    class="vue__selected-media"
     >
+    <div
+      v-if="!resource?.published"
+      class="vue__selected-media__publication"
+      >
+      <span class="osuny__published osuny__published--false"></span>
+      <span class="vue__selected-media__label small">
+        {{ $t('components.selectedObjects.selectedMedia.draft') }}
+      </span>
+    </div>
     <div
       v-if="cropperButton"
       class="vue__cropper__button"

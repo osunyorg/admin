@@ -16,7 +16,7 @@ class Communication::Block::Component::Image < Communication::Block::Component::
   end
 
   def blob
-    return if data_empty?
+    return if data_empty? || !published?
     @blob ||= communication_media_context.active_storage_blob
   end
 
@@ -37,6 +37,10 @@ class Communication::Block::Component::Image < Communication::Block::Component::
   def communication_media_localization
     return if data_empty?
     @communication_media_localization ||= communication_media.localization_for(language)
+  end
+
+  def published?
+    communication_media_localization&.published
   end
 
   def default_data
