@@ -1,3 +1,8 @@
+<%
+website_id = block.about.communication_website_id
+picker_endpoint = picker_admin_communication_website_posts_path(website_id: website_id, format: :json)
+object_endpoint = admin_communication_website_posts_path(website_id: website_id)
+%>
 <%= block_component_edit block, :mode %>
 
 <div class="row mt-5">
@@ -9,25 +14,44 @@
   </div>
 </div>
 <div v-if="data.mode === 'selection'">
-  <%= block_component_add_element block, t('.add_post') %>
-  <draggable :list="data.elements" handle=".dragHandle">
-    <div v-for="(element, index) in data.elements" class="d-flex draggable-item">
-      <a class="btn ps-0 dragHandle" title="<%= t('admin.communication.block.drag_and_drop') %>">
-        <i class="<%= Icon::DRAG %> handle"></i>
-      </a>
-      <div class="flex-fill">
-        <%= block_component_edit block, :id, template: @element %>
-      </div>
-      <a  class="btn text-danger ms-3"
-          @click="deleteElement(element)"
-          title="<%= t('delete') %>">
-          <i class="<%= Icon::DELETE %>"></i>
+  <picker
+    ref="picker"
+    title="<%= Communication::Website::Post.model_name.human(count: 2) %>"
+    endpoint="<%= picker_endpoint %>"
+    @update:model-value="data.elements.push({id: $event.id})">
+  </picker>
+  <a
+    class="<%= button_classes %>"
+    @click="$refs.picker.open()">
+    <%= t('.add_post') %>
+  </a>
+  <draggable
+    :list="data.elements"
+    handle=".osuny__thumbnail"
+    class="row g-2 mb-2">
+    <div
+      v-for="(element, index) in data.elements"
+      class="d-flex align-items-center">
+      <selected-object
+        :id="element.id"
+        endpoint="<%= object_endpoint %>"
+        class="flex-fill">
+      </selected-object>
+      <a
+        class="btn text-danger ms-3"
+        @click="deleteElement(element)"
+        title="<%= t('delete') %>">
+        <i class="<%= Icon::DELETE %>"></i>
       </a>
     </div>
   </draggable>
-</div>
-<div v-show="data.elements.length > 2">
-  <%= block_component_add_element block, t('.add_post') %>
+  <div v-show="data.elements.length > 2">
+    <a
+      class="<%= button_classes %>"
+      @click="$refs.picker.open()">
+      <%= t('.add_post') %>
+    </a>
+  </div>
 </div>
 
 <div v-if="data.mode !== 'categories'">

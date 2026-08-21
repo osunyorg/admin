@@ -8,6 +8,7 @@ target ||= ''
 link = "#{path}#{target}"
 %>
 <%= render 'admin/communication/library/contexts/default',
+            context: context,
             localization: localization,
             link: link,
             type: Communication::Website::Post.model_name.human %>

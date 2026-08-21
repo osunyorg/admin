@@ -39,6 +39,7 @@ class Communication::Website::Page < ApplicationRecord
 
   include AsDirectObject
   include AsTree
+  include Autosortable
   include Duplicable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
@@ -98,6 +99,10 @@ class Communication::Website::Page < ApplicationRecord
       ", term: "%#{sanitize_sql_like(term)}%")
   }
   scope :for_full_width, -> (full_width, language = nil) { where(full_width: full_width == 'true') }
+
+  scope :autosort_by_alpha, -> (language) {
+    ordered_by_title(language)
+  }
 
   def dependencies
     localizations.in_languages(website.active_language_ids) +

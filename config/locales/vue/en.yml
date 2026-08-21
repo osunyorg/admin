@@ -75,14 +75,23 @@ en:
       planMode:
         button: Plan mode
         description: In "Plan mode" mode, you only see a small preview of each block. This is the ideal mode for organizing long documents.
-    changes:
-      cancel: Cancel
-      save: Save changes
-    cropperModal:
-      cancel: Cancel
-      rotate: Rotate image
-      title: Frame image
-      validate: Validate
+    components:
+      changes:
+        cancel: Cancel
+        save: Save changes
+      cropperModal:
+        cancel: Cancel
+        rotate: Rotate image
+        title: Frame image
+        validate: Validate
+      inputs:
+        pageSelector:
+          remove: Disconnect page
+        fileSelector:
+          remove: Disconnect file
+          upload: Send file (max 100MB)
+        personSelector:
+          remove: Disconnect person
     mediaPicker:
       alt:
         hint: This text is important for accessibility. If the image conveys important information, it must be written here. If the information is already written somewhere else in the page, or if the image is purely decorative, the field must be left empty. Otherwise, it would pollute voice navigation.
@@ -115,6 +124,18 @@ en:
         title: Photo library
       remove: Remove image
       title: Image
+    picker:
+      pagination:
+        next: Next page
+        previous: Previous page
+      parameters:
+        search:
+          placeholder: Search
+        sorts: Sort
+      results:
+        nothing: 
+          title: There is nothing here, nothing at all. 
+          text: "Robert Fludd’s black square representing the nothingness that was prior to the universe, from his Utriusque Cosmi (1617). <br>Source: <a href=\"https://pdimagearchive.org/images/6e25e710-eb2a-4fda-8bb5-d87348e14406/\" target=\"_blank\">Public Domain Image Archive</a>"
     timeSlots:
       add: Add a time slot
       datetime:

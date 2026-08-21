@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_06_085855) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_17_072458) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -505,37 +505,51 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_085855) do
     t.uuid "about_id"
     t.string "about_type"
     t.uuid "communication_file_localization_id", null: false
+    t.uuid "communication_website_id"
     t.datetime "created_at", null: false
     t.uuid "university_id", null: false
     t.datetime "updated_at", null: false
     t.index ["about_type", "about_id"], name: "index_communication_file_contexts_on_about"
     t.index ["communication_file_localization_id"], name: "idx_on_communication_file_localization_id_a9a8fdc48e"
+    t.index ["communication_website_id"], name: "index_communication_file_contexts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_file_contexts_on_university_id"
   end
 
   create_table "communication_file_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "about_id", null: false
     t.datetime "created_at", null: false
+    t.datetime "deleted_at"
+    t.string "featured_image_alt"
+    t.text "featured_image_credit"
     t.text "internal_description"
     t.uuid "language_id", null: false
+    t.uuid "last_updated_by_id"
+    t.text "meta_description"
     t.string "name"
     t.uuid "original_blob_id", null: false
     t.bigint "original_byte_size"
     t.string "original_checksum"
     t.string "original_content_type"
+    t.string "original_extension", default: ""
     t.string "original_filename"
+    t.boolean "published", default: false
+    t.datetime "published_at"
+    t.uuid "published_by_id"
     t.string "slug"
     t.uuid "university_id", null: false
     t.datetime "updated_at", null: false
     t.index ["about_id"], name: "index_communication_file_localizations_on_about_id"
     t.index ["language_id"], name: "index_communication_file_localizations_on_language_id"
+    t.index ["last_updated_by_id"], name: "index_communication_file_localizations_on_last_updated_by_id"
     t.index ["original_blob_id"], name: "index_communication_file_localizations_on_original_blob_id"
+    t.index ["published_by_id"], name: "index_communication_file_localizations_on_published_by_id"
     t.index ["university_id"], name: "index_communication_file_localizations_on_university_id"
   end
 
   create_table "communication_files", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.uuid "created_by_id"
+    t.datetime "deleted_at"
     t.uuid "university_id", null: false
     t.datetime "updated_at", null: false
     t.index ["created_by_id"], name: "index_communication_files_on_created_by_id"
@@ -607,12 +621,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_085855) do
     t.string "about_type"
     t.uuid "active_storage_blob_id", null: false
     t.uuid "communication_media_id", null: false
+    t.uuid "communication_website_id"
     t.datetime "created_at", null: false
     t.uuid "university_id", null: false
     t.datetime "updated_at", null: false
     t.index ["about_type", "about_id"], name: "index_communication_media_contexts_on_about"
     t.index ["active_storage_blob_id"], name: "index_communication_media_contexts_on_active_storage_blob_id"
     t.index ["communication_media_id"], name: "index_communication_media_contexts_on_communication_media_id"
+    t.index ["communication_website_id"], name: "index_communication_media_contexts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_media_contexts_on_university_id"
   end
 
@@ -635,15 +651,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_085855) do
   create_table "communication_medias", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "communication_media_collection_id"
     t.datetime "created_at", null: false
+    t.uuid "created_by_id"
     t.integer "origin", default: 1, null: false
     t.uuid "original_blob_id", null: false
     t.bigint "original_byte_size"
     t.string "original_checksum"
     t.string "original_content_type"
+    t.string "original_extension", default: ""
     t.string "original_filename"
     t.uuid "university_id", null: false
     t.datetime "updated_at", null: false
     t.index ["communication_media_collection_id"], name: "idx_on_communication_media_collection_id_6cace98319"
+    t.index ["created_by_id"], name: "index_communication_medias_on_created_by_id"
     t.index ["original_blob_id"], name: "index_communication_medias_on_original_blob_id"
     t.index ["university_id"], name: "index_communication_medias_on_university_id"
   end
@@ -2402,6 +2421,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_085855) do
     t.uuid "created_by_id"
     t.datetime "deleted_at"
     t.string "email"
+    t.boolean "is_laboratory", default: false
+    t.boolean "is_location", default: false
+    t.boolean "is_school", default: false
     t.integer "kind", default: 10
     t.float "latitude"
     t.float "longitude"
@@ -2623,6 +2645,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_085855) do
     t.index ["user_id"], name: "index_user_favorites_on_user_id"
   end
 
+  create_table "user_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "role", null: false
+    t.uuid "scope_id"
+    t.string "scope_type"
+    t.uuid "university_id", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "user_id", null: false
+    t.index ["scope_type", "scope_id"], name: "index_user_roles_on_scope"
+    t.index ["university_id"], name: "index_user_roles_on_university_id"
+    t.index ["user_id", "role", "scope_type", "scope_id"], name: "index_user_roles_uniqueness", unique: true
+    t.index ["user_id"], name: "index_user_roles_on_user_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.integer "brevo_contact_id"
     t.datetime "confirmation_sent_at", precision: nil
@@ -2654,6 +2690,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_085855) do
     t.string "reset_password_token"
     t.integer "role", default: 0
     t.integer "second_factor_attempts_count", default: 0
+    t.boolean "server_admin", default: false
     t.string "session_token"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "totp_timestamp", precision: nil
@@ -2743,11 +2780,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_085855) do
   add_foreign_key "communication_file_category_localizations", "languages"
   add_foreign_key "communication_file_category_localizations", "universities"
   add_foreign_key "communication_file_contexts", "communication_file_localizations"
+  add_foreign_key "communication_file_contexts", "communication_websites"
   add_foreign_key "communication_file_contexts", "universities"
   add_foreign_key "communication_file_localizations", "active_storage_blobs", column: "original_blob_id"
   add_foreign_key "communication_file_localizations", "communication_files", column: "about_id"
   add_foreign_key "communication_file_localizations", "languages"
   add_foreign_key "communication_file_localizations", "universities"
+  add_foreign_key "communication_file_localizations", "users", column: "last_updated_by_id"
+  add_foreign_key "communication_file_localizations", "users", column: "published_by_id"
   add_foreign_key "communication_files", "universities"
   add_foreign_key "communication_files", "users", column: "created_by_id"
   add_foreign_key "communication_media_categories", "communication_media_categories", column: "parent_id"
@@ -2761,6 +2801,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_085855) do
   add_foreign_key "communication_media_collections", "universities"
   add_foreign_key "communication_media_contexts", "active_storage_blobs"
   add_foreign_key "communication_media_contexts", "communication_medias"
+  add_foreign_key "communication_media_contexts", "communication_websites"
   add_foreign_key "communication_media_contexts", "universities"
   add_foreign_key "communication_media_localizations", "communication_medias", column: "about_id"
   add_foreign_key "communication_media_localizations", "languages"
@@ -2768,6 +2809,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_085855) do
   add_foreign_key "communication_medias", "active_storage_blobs", column: "original_blob_id"
   add_foreign_key "communication_medias", "communication_media_collections"
   add_foreign_key "communication_medias", "universities"
+  add_foreign_key "communication_medias", "users", column: "created_by_id"
   add_foreign_key "communication_website_agenda_categories", "communication_website_agenda_categories", column: "parent_id"
   add_foreign_key "communication_website_agenda_categories", "communication_websites"
   add_foreign_key "communication_website_agenda_categories", "education_programs", column: "program_id"
@@ -3025,6 +3067,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_085855) do
   add_foreign_key "university_role_localizations", "university_roles", column: "about_id"
   add_foreign_key "university_roles", "universities"
   add_foreign_key "user_favorites", "users"
+  add_foreign_key "user_roles", "universities"
+  add_foreign_key "user_roles", "users"
   add_foreign_key "users", "languages"
   add_foreign_key "users", "universities"
 end

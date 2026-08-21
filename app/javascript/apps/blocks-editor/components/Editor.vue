@@ -1,19 +1,29 @@
 <script>
 import { createApp, provide, reactive } from 'vue';
 import { VueDraggableNext } from 'vue-draggable-next';
-import RichTextInput from './inputs/RichTextInput.vue';
-import CodeInput from './inputs/CodeInput.vue';
-import UploadInput from './inputs/UploadInput.vue';
-import FileUploadInput from './inputs/FileUploadInput.vue';
-import MultiImageInput from './inputs/MultiImageInput.vue';
+import { getI18n } from '../../i18n';
+import Picker from '../../picker/Picker.vue';
+// Inputs
+import CodeInput              from '../../components/inputs/CodeInput.vue';
+import FileInput              from '../../components/inputs/FileInput.vue';
+import MultiImageInput        from '../../components/inputs/MultiImageInput.vue';
+import RichTextInput          from '../../components/inputs/RichTextInput.vue';
+import UploadInput            from '../../components/inputs/UploadInput.vue';
+// Selected objects
+import SelectedFile           from '../../components/selected-objects/SelectedFile.vue';
+import SelectedMedia          from '../../components/selected-objects/SelectedMedia.vue';
+import SelectedObject         from '../../components/selected-objects/SelectedObject.vue';
+import SelectedOrganization   from '../../components/selected-objects/SelectedOrganization.vue';
+import SelectedPerson         from '../../components/selected-objects/SelectedPerson.vue';
+import SelectedProgram        from '../../components/selected-objects/SelectedProgram.vue';
 
 // Renders the block-edit form fetched from the server, mounts a fresh inner
 // Vue app on it for reactive v-model bindings, and unmounts on close.
 //
 // The inner app exposes a small reactive surface (data, addElement,
 // deleteElement, getImageUrl) for the ERB-rendered templates, and registers
-// 4 wrapper components (RichTextInput, CodeInput, UploadInput,
-// MultiImageInput) that each own their own DOM lifecycle.
+// the input components that the templates bind to via v-model — each
+// owns its own DOM lifecycle.
 
 export default {
   name: 'Editor',
@@ -54,13 +64,13 @@ export default {
         const root = doc.querySelector('[data-editor-form-root]');
         this.html = root ? root.outerHTML : '';
         await this.$nextTick();
-        this.mountInner();
+        await this.mountInner();
       } finally {
         this.loading = false;
       }
     },
 
-    mountInner() {
+    async mountInner() {
       const container = this.$refs.container;
       if (!container) return;
       const root = container.querySelector('[data-editor-form-root]');
@@ -70,13 +80,14 @@ export default {
       // takes the element's innerHTML as its template, compiles it, then
       // replaces the element's children with the rendered output — any
       // listener attached beforehand would be discarded with the old DOM.
-      this.mountVueApp(root);
+      await this.mountVueApp(root);
       this.wireForm(root);
       this.wireCancelButtons(root);
     },
 
-    mountVueApp(root) {
+    async mountVueApp(root) {
       const payload = JSON.parse(root.dataset.payload);
+      const i18n = await getI18n();
       this.innerApp = createApp({
         setup() {
           // Reactive state + helpers exposed to the server-rendered Vue
@@ -143,12 +154,22 @@ export default {
         },
       });
 
+      this.innerApp.use(i18n);
       this.innerApp.component('draggable', VueDraggableNext);
-      this.innerApp.component('RichTextInput', RichTextInput);
+      this.innerApp.component('Picker', Picker);
+      // Inputs
       this.innerApp.component('CodeInput', CodeInput);
-      this.innerApp.component('UploadInput', UploadInput);
-      this.innerApp.component('FileUploadInput', FileUploadInput);
+      this.innerApp.component('FileInput', FileInput);
       this.innerApp.component('MultiImageInput', MultiImageInput);
+      this.innerApp.component('RichTextInput', RichTextInput);
+      this.innerApp.component('UploadInput', UploadInput);
+      // Selected objects
+      this.innerApp.component('SelectedFile', SelectedFile);
+      this.innerApp.component('SelectedMedia', SelectedMedia);
+      this.innerApp.component('SelectedObject', SelectedObject);
+      this.innerApp.component('SelectedOrganization', SelectedOrganization);
+      this.innerApp.component('SelectedPerson', SelectedPerson);
+      this.innerApp.component('SelectedProgram', SelectedProgram);
 
       this.innerApp.mount(root);
     },
@@ -195,7 +216,7 @@ export default {
           this.cleanup();
           this.html = fresh.outerHTML;
           await this.$nextTick();
-          this.mountInner();
+          await this.mountInner();
         }
       }
     },

@@ -10,6 +10,6 @@ json.direct_upload do
 end
 json.file do
   json.id @file.id
-  json.filename @localization.original_filename
-  json.name @localization.name
+  json.filename @l10n.original_filename
+  json.name @l10n.name
 end

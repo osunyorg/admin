@@ -33,6 +33,14 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
                                        .ordered(current_language)
   end
 
+  def picker
+    @picker = Osuny::Picker::University::Organization.new(
+      university: current_university,
+      language: current_language,
+      params: params
+    )
+  end
+
   def show
     breadcrumb
   end

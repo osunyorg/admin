@@ -1,6 +1,11 @@
 <%= osuny_panel @website.feature_jobboard_name(current_language) do %>
-  <%= render 'admin/communication/websites/jobboard/jobs/list', 
-              jobs: @jobs, 
-              small: true,
-              link_to_all: true %>
+  <div class="row g-2 mb-3">
+    <% @jobs.each do |job| %>
+      <div>
+        <%= render 'admin/communication/websites/jobboard/jobs/job/small', job: job %>
+      </div>
+    <% end %>
+    <%= render 'admin/application/components/all',
+                link: admin_communication_website_jobboard_jobs_path(website_id: @website) %>
+  </div>
 <% end %>

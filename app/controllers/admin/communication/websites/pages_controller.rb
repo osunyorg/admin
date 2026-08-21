@@ -30,6 +30,15 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     add_breadcrumb t('admin.communication.website.pages.as_list')
   end
 
+  def picker
+    @picker = Osuny::Picker::Communication::Website::Page.new(
+      university: current_university,
+      language: current_language,
+      params: params,
+      context: @website
+    )
+  end
+
   def reorder
     result = @website.reorder_pages(
       item_id: params[:itemId],

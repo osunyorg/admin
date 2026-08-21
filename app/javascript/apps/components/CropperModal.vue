@@ -62,11 +62,13 @@ export default {
         xhr.setRequestHeader('X-CSRF-Token', document.querySelector('[name="csrf-token"]').content);
         xhr.onreadystatechange = function () {
           if (xhr.readyState != 4) return;
+          this.pending = false;
           if (xhr.status == 200) {
             let blob = JSON.parse(xhr.responseText);
             this.$emit('cropped', blob);
-            this.pending = false;
             this.close();
+          } else {
+            console.error(xhr);
           }
         }.bind(this);
         this.pending = true;
@@ -89,7 +91,7 @@ export default {
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">{{ $t('cropperModal.title') }}</h5>
+            <h5 class="modal-title">{{ $t('components.cropperModal.title') }}</h5>
             <button type="button"
                     class="btn-close"
                     @click="close()">
@@ -110,7 +112,7 @@ export default {
           <div class="modal-footer justify-content-between">
             <button type="button"
                     class="btn btn-sm"
-                    :aria-label="$t('cropperModal.rotate')"
+                    :aria-label="$t('components.cropperModal.rotate')"
                     @click="rotate(90)">
               <i class="bi bi-arrow-clockwise"></i>
             </button>
@@ -119,13 +121,13 @@ export default {
                       class="btn btn-sm btn-secondary me-2"
                       :disabled="pending"
                       @click="close()">
-                {{ $t('cropperModal.cancel') }}
+                {{ $t('components.cropperModal.cancel') }}
               </button>
               <button type="button"
                       class="btn btn-sm btn-primary"
                       :disabled="pending"
                       @click="crop()">
-                {{ $t('cropperModal.validate') }}
+                {{ $t('components.cropperModal.validate') }}
               </button>
             </div>
           </div>

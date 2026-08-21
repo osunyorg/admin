@@ -1,0 +1,16 @@
+<div class="<%= osuny_card_classes %>">
+  <%= render 'admin/university/organizations/thumbnail',
+              organization: organization,
+              large: true %>
+  <div class="card-body">
+    <%= organization.best_localization_for(current_language) %>
+  </div>
+  <% if can?(:restore, organization) %>
+    <div class="card-footer mb-n2">
+      <%= link_to t('restore'),
+                  restore_admin_university_organization_path(organization),
+                  method: :post,
+                  class: button_classes %>
+    </div>
+  <% end %>
+</div>

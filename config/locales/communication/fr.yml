@@ -94,15 +94,24 @@ fr:
         published_at: Date de publication
         slug: Identifiant
         title: Titre
+      communication/file:
+        created_by: Envoyé par
+      communication/file/context:
+        about_type: Type
       communication/file/localization:
         internal_description: Description interne
+        last_updated_by: Dernière modification par
         name: Nom
         original_byte_size: Poids
         original_content_type: Type de contenu
         original_filename: Nom du fichier original
         original_uploaded_file: Fichier original
+        published: Publié ?
+        published_at: Date de publication
+        published_by: Publié par
       communication/media:
         collection: Collection
+        created_by: Envoyée par
         height: Hauteur
         origin: Provenance
         original_byte_size: Poids
@@ -532,7 +541,7 @@ fr:
         confirm_localization:
           text_html: "La création de <i>%{about}</i> en %{language} nécessite la traduction de l'extranet <i>%{extranet}</i> en %{language}."
           title: Confirmation de traduction
-        invitation_messages: 
+        invitation_messages:
           automatic: Message automatique
           automatic_hint: Ce message sera envoyé après un import d'alumni ou lors du clic sur le bouton "envoyer l'invitation" dans l'admin, si l'alumnus a un email.
           manual: Message manuel
@@ -541,6 +550,21 @@ fr:
         languages: Langues
         sso:
           label: SSO
+      file:
+        replacement_file_hint: Renseignez un fichier uniquement si vous souhaitez le changer.
+        localizations:
+          draft: Brouillon
+          published: Publié
+      file_types:
+        archive: Archive
+        audio: Audio
+        image: Image
+        pdf: PDF
+        presentation: Présentation
+        spreadsheet: Tableur
+        text: Texte
+        title: Type de fichier
+        video: Vidéo
       website:
         agenda:
           event:
@@ -626,6 +650,11 @@ fr:
                 zero: Cette page est une page spéciale, qui présente nativement les expositions du site.
                 one: Cette page est une page spéciale, qui présente nativement les expositions du site. Pour l'instant, il y a 1 exposition publiée.
                 other: Cette page est une page spéciale, qui présente nativement les %{count} expositions publiées.
+            communication_file:
+              native:
+                zero: Cette page est une page spéciale, qui présente nativement les fichiers liés au site. Pour l'instant, il n'y a aucun fichier dans le site.
+                one: Cette page est une page spéciale, qui présente nativement les fichiers liés au site. Pour l'instant, il y a 1 fichier.
+                other: Cette page est une page spéciale, qui présente nativement les %{count} fichiers liés au site.
             communication_jobboard:
               native:
                 zero: Cette page est une page spéciale, qui présente nativement les offres d'emploi du site.
@@ -765,6 +794,13 @@ fr:
           draft: Brouillon
           planned_on: Publication prévue le %{date}
           published_on: Publiée le %{date}
+    file:
+      sort:
+        alpha: Par ordre alphabétique
+        date_desc: Les plus récents d'abord
+        date_asc: Les plus anciens d'abord
+        size_desc: Les plus lourds d'abord
+        size_asc: Les plus légers d'abord
     manage_authors: Gérer les auteur·rices
     number_of_posts: Nombre d'actualités
     summary:
@@ -785,6 +821,9 @@ fr:
           legal: Informations légales
           primary: Menu principal
           social: Liens sociaux
+      page:
+        sort:
+          alpha: Par ordre alphabétique
       pages:
         defaults:
           accessibility:
@@ -814,6 +853,9 @@ fr:
           communication_agenda_exhibition_archive:
             slug: archives-expositions
             title: Archives des expositions
+          communication_file:
+            slug: fichiers
+            title: Fichiers
           communication_jobboard:
             slug: offres-d-emploi
             title: Offres d'emploi

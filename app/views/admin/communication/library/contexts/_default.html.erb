@@ -2,10 +2,21 @@
   <div class="<%= osuny_card_classes(horizontal: true) %>">
     <%= osuny_thumbnail localization %>
     <div class="card-body">
-      <%= osuny_link localization, link, classes: "stretched-link" %>
-    </div>
-    <div class="card-footer text-muted">
-      <%= type %>
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <%= osuny_link localization, link, classes: "stretched-link" %>
+        </div>
+        <div class="col-lg-3 text-muted">
+          <% if context.respond_to?(:website) %>
+            <%= osuny_label Communication::Website.model_name.human %> : 
+            <span class="small"><%= context.website %></span>
+          <% end %>
+        </div>
+        <div class="col-lg-3 text-muted">
+          <%= osuny_label Communication::File::Context.human_attribute_name(:about_type) %> : 
+          <span class="small"><%= type %></span>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -30,9 +30,7 @@ fr:
             preview:
               sanitized_notice: Pour des raisons de sécurité, le contenu a été filtré. Les scripts ne sont pas chargés et/ou exécutés, et l'apparence peut être alterée.
           file:
-            input:
-              label: Fichier
-              remove: Enlever le fichier
+            button: Choisir un fichier dans la bibliothèque
           image:
             alt:
               label: Texte alternatif
@@ -48,6 +46,10 @@ fr:
             label: Mise en page
           link:
             target_blank: Ouvrir dans une nouvelle fenêtre
+          page:
+            button: Choisir une page
+          person:
+            button: Choisir une personne
           text:
             label: Texte
             placeholder: Entrer le texte
@@ -368,6 +370,8 @@ fr:
               description:
                 label: Description
               element:
+                image:
+                  label: Image d'illustration
                 file:
                   label: Fichier
                 title:
@@ -546,6 +550,7 @@ fr:
             description: Une liste d'organisations, avec leur logo, leur site et leur nom.
             edit:
               add_organization: Ajouter une organisation
+              add_organization_unregistered: Ajouter une organisation non enregistrée
               alphabetical:
                 label: Ordre alphabétique
               category_id:

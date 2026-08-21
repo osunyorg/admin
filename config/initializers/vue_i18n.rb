@@ -1,13 +1,15 @@
-# Génère les fichiers de traduction statiques des apps Vue dans
-# public/vue/<locale>.json. Ils servent de messages à vue-i18n (cf.
-# app/javascript/apps/index.js) et sont chargés une seule fois, en statique
-# cacheable, plutôt que sérialisés dans chaque page.
+# Génère les messages de traduction des apps Vue dans app/assets/builds/vue/,
+# aux côtés de vue-apps.js (cf. app/assets/config/manifest.js: link_tree
+# ../builds). Sprockets les prend donc en charge comme n'importe quel asset :
+# digest de cache-busting et far-future cache-control automatiques, servis via
+# asset_path("vue/#{locale}.json") (cf. layout admin et app/javascript/apps/i18n.js).
 #
-# after_initialize garantit que tous les config/locales/**/*.yml sont bien
-# ajoutés à I18n.load_path. En dev, redémarrer le serveur régénère les fichiers
-# après modification d'une traduction.
 Rails.application.config.after_initialize do
-  output_dir = Rails.root.join('public', 'vue')
+  # after_initialize garantit que tous les config/locales/**/*.yml sont bien
+  # ajoutés à I18n.load_path, et s'exécute avant assets:precompile (jsbundling-rails
+  # le fait dépendre de la tâche `environment`). En dev, redémarrer le serveur
+  # régénère les fichiers après modification d'une traduction.
+  output_dir = Rails.root.join('app', 'assets', 'builds', 'vue')
   FileUtils.mkdir_p(output_dir)
   I18n.available_locales.each do |locale|
     translations = I18n.t('vue', locale: locale, default: {})

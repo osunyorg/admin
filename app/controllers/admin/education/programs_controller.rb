@@ -23,6 +23,14 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
     add_breadcrumb t('.title')
   end
 
+  def picker
+    @picker = Osuny::Picker::Education::Program.new(
+      university: current_university,
+      language: current_language,
+      params: params
+    )
+  end
+
   def children
     if request.xhr?
       @children = @program.children.ordered(current_language)

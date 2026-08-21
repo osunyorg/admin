@@ -2,15 +2,25 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
   load_and_authorize_resource class: Communication::File,
                               through: :current_university
 
+  include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
-    @files = @files.filter_by(params[:filters], current_language)
-                   .ordered(current_language)
-                   .page(params[:page])
+    @filtered = @files.filter_by(params[:filters], current_language)
+    @files = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                      .ordered(current_language)
+                      .page(params[:page])
     @categories = categories.root
     breadcrumb
     @feature_nav = 'navigation/admin/communication/files'
+  end
+
+  def picker
+    @picker = Osuny::Picker::Communication::Library::File.new(
+      university: current_university,
+      language: current_language,
+      params: params
+    )
   end
 
   def show
@@ -26,12 +36,8 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
   def direct_upload
     @blob = ActiveStorage::Blob.create_before_direct_upload!(**blob_args)
     @blob.update_column(:university_id, current_university&.id)
-    @localization = Communication::File::Localization.find_or_create_from_blob(@blob, current_language)
-    @file = @localization.file
-  end
-
-  def pick
-    # TODO generic picker
+    @l10n = Communication::File::Localization.find_or_create_from_blob(@blob, current_language, current_user)
+    @file = @l10n.file
   end
 
   def edit
@@ -41,6 +47,7 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
   end
 
   def create
+    @file.created_by = current_user
     if @file.save
       redirect_to [:admin, @file], notice: t('admin.successfully_created_html', model: @file.to_s_in(current_language))
     else
@@ -53,6 +60,7 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
 
   def update
     if @file.update(file_params)
+      @file.localization_for(current_language).update_column(:last_updated_by_id, current_user.id)
       redirect_to [:admin, @file], notice: t('admin.successfully_updated_html', model: @file.to_s_in(current_language))
     else
       load_invalid_localization
@@ -79,7 +87,8 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
           .permit(
             category_ids: [],
             localizations_attributes: [
-              :id, :name, :alt, :credit, :internal_description,
+              :id, :name, :alt, :credit, :internal_description, :meta_description, :published,
+              :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
               :original_uploaded_file, :language_id
             ]
           )

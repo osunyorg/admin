@@ -68,21 +68,30 @@ fr:
             title: Séquoia géant
             text: Cette page est absolument énorme. Si vos statistiques de visite vous indiquent que le temps moyen passé sur la page est de 30 minutes, c'est très bien. Mais dans les autres cas, il faut certainement ranger et découper le contenus en morceaux plus simples, afin de bien répondre aux besoins réels des internautes. Une page bien écoconçue, c'est une page qui répond aux besoins des personnes, ni plus ni moins.
             dom: Plus de 2000 éléments dans le DOM
-      empty: Ce bloc est vide et n'apparaitra pas
+      empty: Ce bloc est vide et n'apparaîtra pas
       offcanvas:
         close: Fermer l'édition du bloc
         title: Édition du bloc
       planMode:
         button: Organiser le plan
         description: Dans le mode “Organiser le plan”, vous ne voyez qu'un petit aperçu de chaque bloc. C'est le mode idéal pour ranger les documents longs.
-    changes:
-      cancel: Annuler
-      save: Enregistrer les modifications
-    cropperModal:
-      cancel: Annuler
-      rotate: Tourner l'image
-      title: Cadrer l'image
-      validate: Valider
+    components:
+      changes:
+        cancel: Annuler
+        save: Enregistrer les modifications
+      cropperModal:
+        cancel: Annuler
+        rotate: Tourner l'image
+        title: Cadrer l'image
+        validate: Valider
+      inputs:
+        fileSelector:
+          remove: Déconnecter le fichier
+          upload: Envoyer un fichier (100 Mo max)
+        pageSelector:
+          remove: Déconnecter la page
+        personSelector:
+          remove: Déconnecter la personne
     mediaPicker:
       alt:
         hint: Ce texte est essentiel pour l'accessibilité. Si l'image donne une information importante, il faut écrire ici cette information. Si l'information est déjà présente ailleurs dans la page, ou si l'image est purement décorative, il faut laisser le texte alternatif vide, pour éviter de polluer la navigation vocale.
@@ -115,6 +124,18 @@ fr:
         title: Photothèque
       remove: Supprimer l'image
       title: Image
+    picker:
+      pagination:
+        next: Page suivante
+        previous: Page précédente
+      parameters:
+        search:
+          placeholder: Rechercher
+        sort: Tri
+      results:
+        nothing:
+          title: Il n'y a rien ici, rien du tout.
+          text: "Le carré noir de Robert Fludd représente le néant qui précédait l'univers, dans son ouvrage Utriusque Cosmi (1617). <br>Source: <a href=\"https://pdimagearchive.org/images/6e25e710-eb2a-4fda-8bb5-d87348e14406/\" target=\"_blank\">Public Domain Image Archive</a>"
     timeSlots:
       add: Ajouter un créneau horaire
       datetime:

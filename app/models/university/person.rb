@@ -53,12 +53,14 @@ class University::Person < ApplicationRecord
   acts_as_paranoid
 
   include AsIndirectObject
+  include Autosortable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include Duplicable
   include GeneratesGitFiles
   include HasBlobs
   include HasCountry
+  include HasCreator
   include HasUniversity
   include Lifecyclable
   include Localizable
@@ -77,9 +79,6 @@ class University::Person < ApplicationRecord
 
   enum :gender, { male: 0, female: 1, non_binary: 2 }
 
-  belongs_to  :created_by,
-              class_name: "User",
-              optional: true
   belongs_to :user, optional: true
   has_many :extranet_invitations, class_name: 'Communication::Extranet::Invitation', dependent: :destroy
 

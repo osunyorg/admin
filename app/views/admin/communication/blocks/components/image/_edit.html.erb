@@ -3,10 +3,11 @@ label = t('admin.communication.blocks.components.image.input.label')
 remove = t('admin.communication.blocks.components.image.input.remove')
 hint = images_formats_accepted_hint
 %>
-<upload-input v-model="<%= model %>.<%= property %>"
-              kind="image"
-              label="<%= label %>"
-              remove="<%= remove %>"
-              hint="<%= j hint %>"
-              accept="<%= default_images_formats_accepted %>"
-              :size-limit="<%= Rails.application.config.default_image_max_size %>"></upload-input>
+<upload-input
+  v-model="<%= model %>.<%= property %>"
+  label="<%= label %>"
+  remove="<%= remove %>"
+  hint="<%= j hint %>"
+  accept="<%= default_images_formats_accepted %>"
+  :size-limit="<%= Rails.application.config.default_image_max_size %>">
+</upload-input>
