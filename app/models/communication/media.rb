@@ -166,6 +166,7 @@ class Communication::Media < ApplicationRecord
                 .first_or_create do |l10n|
       l10n.alt = alt
       l10n.credit = credit
+      l10n.published = true
     end
   end
 
