@@ -93,7 +93,7 @@ class University::Organization::Localization < ApplicationRecord
     [
       logo&.blob_id,
       logo_on_dark_background&.blob_id,
-      featured_media&.original_blob_id,
+      featured_blob_id,
       shared_image&.blob_id
     ]
   end

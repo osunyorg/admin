@@ -127,16 +127,9 @@ class Education::Program::Localization < ApplicationRecord
     3
   end
 
-  def best_featured_media_source(fallback: true)
-    return self if featured_media.present?
-    best_source = parent&.best_featured_media_source(fallback: false)
-    best_source ||= self if fallback
-    best_source
-  end
-
   def explicit_blob_ids
     super.concat [
-      featured_media&.original_blob_id,
+      featured_blob_id,
       shared_image&.blob_id,
       downloadable_summary&.original_blob_id,
       logo&.blob_id
@@ -144,7 +137,7 @@ class Education::Program::Localization < ApplicationRecord
   end
 
   def inherited_blob_ids
-    [best_featured_media&.original_blob_id]
+    [featured_blob&.id]
   end
 
   def downloadable_summary

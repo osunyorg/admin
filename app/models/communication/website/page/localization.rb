@@ -157,13 +157,9 @@ class Communication::Website::Page::Localization < ApplicationRecord
 
   def explicit_blob_ids
     super.concat [
-      featured_media&.original_blob_id,
+      featured_blob_id,
       shared_image&.blob_id
     ]
-  end
-
-  def inherited_blob_ids
-    [best_featured_media&.original_blob_id]
   end
 
   def localize_other_attachments(localization)

@@ -47,6 +47,9 @@
 class Communication::File::Localization < ApplicationRecord
   acts_as_paranoid
 
+  # Doit passer avant le Permalinkable, pour permettre la création correcte du slug
+  before_validation :guess_name
+
   include AsLocalization
   include HasFeaturedMedia
   include HasGitFiles
@@ -67,8 +70,6 @@ class Communication::File::Localization < ApplicationRecord
               dependent: :destroy
   alias :file :about
 
-  before_validation :guess_name
-
   validates :name, presence: true
 
   after_commit :touch_references, on: :update
@@ -84,8 +85,18 @@ class Communication::File::Localization < ApplicationRecord
       # Les fichiers créés par cette méthode sont autopubliés.
       # Ceux qui sont envoyés via la file library ne le sont pas.
       localization.published = true
+      byebug
     end
+    byebug
     localization
+  end
+
+  def blob
+    original_blob
+  end
+
+  def blob_if_published
+    blob if published?
   end
 
   def context_add(about)

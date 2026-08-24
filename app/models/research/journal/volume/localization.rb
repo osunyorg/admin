@@ -83,11 +83,9 @@ class Research::Journal::Volume::Localization < ApplicationRecord
   protected
 
   def explicit_blob_ids
-    super.concat [featured_media&.original_blob_id]
-  end
-
-  def inherited_blob_ids
-    [best_featured_media&.original_blob_id]
+    super.concat [
+      featured_blob_id
+    ]
   end
 
   def hugo_slug

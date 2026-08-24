@@ -1,9 +1,6 @@
-<%
-best_featured_blob = about.best_featured_blob
-if best_featured_blob.present?
-%>
+<% if about.featured_blob.present? %>
 image:
-  id: "<%= best_featured_blob.id %>"
-  alt: "<%= about.best_featured_media_alt %>"
-<%= osuny_static_html 'credit', about.best_featured_media_credit, depth: 2 %>
+  id: "<%= about.featured_blob.id %>"
+  alt: "<%= about.featured_media_alt %>"
+<%= osuny_static_html 'credit', about.featured_media_credit, depth: 2 %>
 <% end %>

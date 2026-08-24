@@ -12,8 +12,11 @@ module HasFeaturedMedia
   end
 
   def featured_blob
-     # FIXME[files] original_blob ou blob? Gestion de la publication
-    featured_media&.original_blob
+    featured_media_localization&.blob_if_published
+  end
+
+  def featured_blob_id
+    featured_blob&.id
   end
 
   def featured_media_localization
@@ -37,34 +40,10 @@ module HasFeaturedMedia
     media
   end
 
-  # Gestion des héritages, à ranger (méthodes best_*)
-  # A priori c'est nécessaire uniquement pour les formations (Program), mais il faut vérifier.
-  # Si ça se vérifie, il faut les sortir du concern et les mettre dans Program.
-  def best_featured_media_source(fallback: true)
-    self
-  end
-
-  def best_featured_media
-    best_featured_media_source.featured_media
-  end
-
-  def best_featured_media_alt
-    best_featured_media_source.featured_media_alt
-  end
-
-  def best_featured_media_credit
-    best_featured_media_source.featured_media_credit
-  end
-
   # Credit is not localized on the object, it belongs to the media itself
   def featured_media_credit
     featured_media_localization&.credit
   end
-
-  def best_featured_blob
-    best_featured_media&.original_blob
-  end
-
 
   protected
 

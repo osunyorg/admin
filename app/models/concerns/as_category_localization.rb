@@ -48,11 +48,9 @@ module AsCategoryLocalization
   protected
 
   def explicit_blob_ids
-    super.concat [featured_media&.original_blob_id]
-  end
-
-  def inherited_blob_ids
-    [featured_media&.original_blob_id]
+    super.concat [
+      featured_blob&.id
+    ]
   end
 
   def hugo_slug_in_website(website)

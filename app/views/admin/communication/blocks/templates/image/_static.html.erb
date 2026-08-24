@@ -1,12 +1,11 @@
 <%
 component = block.template.image_component
-media = component.communication_media
-media_l10n = component.communication_media_localization
 blob = component.blob
 %>
 <%= osuny_static_text :text,
                       block.template.text,
                       depth: 4 %>
+<% if blob %>
       image:
         id: "<%= blob.id %>"
 <%= osuny_static_text :alt,
@@ -15,3 +14,4 @@ blob = component.blob
 <%= osuny_static_text :credit,
                       media_l10n&.credit,
                       depth: 5 %>
+<% end %>

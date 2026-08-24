@@ -213,7 +213,7 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   def explicit_blob_ids
     super.concat [
-      featured_media&.original_blob_id,
+      featured_blob_id,
       shared_image&.blob_id
     ]
   end

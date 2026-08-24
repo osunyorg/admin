@@ -15,8 +15,8 @@ class Communication::Block::Component::File < Communication::Block::Component::B
   end
 
   def blob
-    return if data_empty? || !published?
-    @blob ||= communication_file_localization&.original_blob
+    return if data_empty?
+    @blob ||= communication_file_localization&.blob_if_published
   end
 
   def communication_file_id

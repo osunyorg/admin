@@ -137,7 +137,7 @@ class University::Person::Localization < ApplicationRecord
   def explicit_blob_ids
     [
       picture&.blob_id,
-      featured_media&.original_blob_id
+      featured_blob&.id
     ]
   end
 
