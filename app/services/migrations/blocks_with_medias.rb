@@ -89,7 +89,6 @@ class Migrations::BlocksWithMedias
     media = Communication::Media.find_or_create_media_from_blob(blob)
     media_l10n = media.find_or_create_localization(block.language, alt: alt, credit: credit)
     media.context_add(block)
-    byebug if media.nil?
     media
   end
 
