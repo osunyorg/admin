@@ -85,7 +85,6 @@ class Communication::File::Localization < ApplicationRecord
       # Les fichiers créés par cette méthode sont autopubliés.
       # Ceux qui sont envoyés via la file library ne le sont pas.
       localization.published = true
-      byebug
     end
     byebug
     localization
