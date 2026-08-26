@@ -250,4 +250,21 @@ class Communication::Website::PermalinkTest < ActiveSupport::TestCase
     assert_equal "/new-parent/moved/", moved_l10n.reload.current_permalink_in_website(website).path
     assert_equal "/new-parent/moved/child/", child_l10n.reload.current_permalink_in_website(website).path
   end
+
+  def test_website_manager_can_manage_permalink
+    website = website_with_github
+    manager = User.create!(
+      university: default_university,
+      email: "website-manager@example.com",
+      first_name: "Site",
+      last_name: "Manager",
+      role: :website_manager,
+      language: french,
+      websites_to_manage: [website]
+    )
+
+    permalink = website.permalinks.create!(university_id: default_university.id, path: "/some-path/")
+
+    assert Ability::WebsiteManager.new(manager).can?(:manage, permalink)
+  end
 end
