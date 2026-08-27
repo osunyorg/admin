@@ -4,6 +4,8 @@ namespace :app do
     Communication::File::Localization.includes(:original_blob).where(slug: nil).find_each do |file_l10n|
       file_l10n.save
     end
+    Communication::Media::Localization.update_all(published: true, published_at: Time.current)
+    Communication::File::Localization.update_all(published: true, published_at: Time.current)
   end
 
   namespace :search do

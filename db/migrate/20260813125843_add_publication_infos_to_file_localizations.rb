@@ -3,8 +3,5 @@ class AddPublicationInfosToFileLocalizations < ActiveRecord::Migration[8.1]
     add_column :communication_file_localizations, :published, :boolean, default: false
     add_column :communication_file_localizations, :published_at, :datetime
     add_reference :communication_file_localizations, :published_by, foreign_key: { to_table: :users }, type: :uuid
-
-    Communication::File::Localization.reset_column_information
-    Communication::File::Localization.update_all(published: true, published_at: Time.current)
   end
 end
