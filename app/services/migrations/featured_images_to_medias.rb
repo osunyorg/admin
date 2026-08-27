@@ -17,7 +17,7 @@ class Migrations::FeaturedImagesToMedias
       alt: l10n.featured_media_alt,
       credit: l10n.featured_image_credit
     )
-    media.context_add(l10n)
+    media.add_context(l10n)
     l10n.update_column(:featured_media_id, media.id)
   end
 end

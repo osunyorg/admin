@@ -12,7 +12,7 @@ module Communication::Block::WithCommunicationMedias
 
   def restore_media_contexts
     communication_medias.each do |media|
-      media.context_add(self)
+      media.add_context(self)
     end
   end
 
@@ -26,7 +26,7 @@ module Communication::Block::WithCommunicationMedias
 
   def manage_media_contexts
     communication_medias.each do |media|
-      context = media.context_add(self)
+      context = media.add_context(self)
       crop_settings = crop_settings_for(media)
       next if crop_settings.nil?
       context.apply_crop_settings!(crop_settings)

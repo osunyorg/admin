@@ -46,7 +46,7 @@ module Api::Osuny::ApplicationController::WithResourceParams
           alt: featured_image_data[:alt],
           credit: featured_image_data[:credit]
         ) 
-        media.context_add(l10n)
+        media.add_context(l10n)
         l10n_params[:featured_media_id] = media.id if media.present?
       end
     end

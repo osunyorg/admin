@@ -97,11 +97,18 @@ class Communication::File::Localization < ApplicationRecord
     blob if published?
   end
 
-  def context_add(about)
+  def add_context(about)
     contexts.where(
       about: about,
       university_id: university_id
     ).first_or_create
+  end
+
+  def remove_context(about)
+    contexts.where(
+      about: about,
+      university_id: university_id
+    ).delete_all
   end
 
   def context_for(about)

@@ -48,10 +48,6 @@ class Communication::File::Context < ApplicationRecord
     .delete_all
   end
 
-  def about_block?
-    about_type == 'Communication::Block'
-  end
-
   protected
   
   def denormalize_website
