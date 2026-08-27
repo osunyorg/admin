@@ -9,6 +9,8 @@ module HasFeaturedMedia
                 optional: true
 
     after_commit :create_featured_media_from_url_later, on: [:create, :update]
+    after_destroy :destroy_featured_media_context
+    after_restore :restore_featured_media_context if respond_to?(:after_restore)
   end
 
   def featured_blob
@@ -56,5 +58,13 @@ module HasFeaturedMedia
     Api::CreateFeaturedMediaFromUrlJob.perform_later(self, featured_media_new_url)
   ensure
     self.featured_media_new_url = nil
+  end
+
+  def destroy_featured_media_context
+    featured_media&.context_remove(self)
+  end
+
+  def restore_featured_media_context
+    featured_media&.context_add(self)
   end
 end

@@ -154,6 +154,13 @@ class Communication::Media < ApplicationRecord
     end
   end
 
+  def context_remove(about)
+    contexts.where(
+      about: about,
+      university_id: university_id
+    ).delete_all
+  end
+
   def context_for(about)
     contexts.find_by(
       about: about,
