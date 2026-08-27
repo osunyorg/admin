@@ -4,6 +4,7 @@ module Communication::Block::WithCommunicationMedias
   included do
     after_create :check_if_all_media_are_localized
     after_save :manage_media_contexts
+    after_destroy :destroy_media_contexts
   end
 
   def destroy_media_contexts

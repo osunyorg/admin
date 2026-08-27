@@ -4,6 +4,7 @@ module Communication::Block::WithCommunicationFiles
   included do
     after_create :check_if_all_files_are_localized
     after_save :manage_file_contexts
+    after_destroy :destroy_file_contexts
   end
 
   def destroy_file_contexts
