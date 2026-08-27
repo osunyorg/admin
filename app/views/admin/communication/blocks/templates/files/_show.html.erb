@@ -3,13 +3,7 @@
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
       <ul class="files">
-        <%
-        block.template.elements.each do |element|
-          file = element.file
-          next if file.nil?
-          l10n = element.communication_file_l10n
-          next unless element.file && l10n
-          %>
+        <% block.template.communication_file_localizations_published.each do |l10n| %>
           <li<% if l10n.featured_blob.present? %> class="with-image"<% end %>>
             <figure>
               <a href="" target="_blank" title="<%= l10n.name %>">
