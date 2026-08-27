@@ -13,29 +13,26 @@ export default {
       modalOpened: false,
       url: '',
       loading: true,
-      data: {
-        top: null,
-        left: null,
-        width: null,
-        height: null,
-        rotation: 0,
-      },
+      data: this.defaultData(),
       preview: null,
     }
   },
   methods: {
-    launch(url, data) {
-      if (url != this.url) {
-        this.loading = true;
-        this.url = url;
-      }
-      this.data = data || {
+    defaultData() {
+      return {
         top: null,
         left: null,
         width: null,
         height: null,
         rotation: 0,
       };
+    },
+    launch(url, data) {
+      if (url != this.url) {
+        this.loading = true;
+        this.url = url;
+      }
+      this.data = data || this.defaultData();
       this.preview = null;
       this.modalOpened = true;
     },
