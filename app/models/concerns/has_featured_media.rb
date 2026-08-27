@@ -32,7 +32,7 @@ module HasFeaturedMedia
     if id.present?
       media = university.communication_medias.find(id)
       media.find_or_create_localization(language)
-      context = media.context_add(self)
+      context = media.add_context(self)
       context.apply_crop_settings!(crop_settings)
     end
     Communication::Media::Context.remove(self, except: context)
@@ -61,10 +61,10 @@ module HasFeaturedMedia
   end
 
   def destroy_featured_media_context
-    featured_media&.context_remove(self)
+    featured_media&.remove_context(self)
   end
 
   def restore_featured_media_context
-    featured_media&.context_add(self)
+    featured_media&.add_context(self)
   end
 end

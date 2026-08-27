@@ -49,6 +49,7 @@ class Education::Program < ApplicationRecord
   include WebsitesLinkable
   include WithAlumni
   include WithDiploma
+  include WithDownloadableSummary
   include WithLocations
   include WithSchools
   include WithTeam
@@ -56,10 +57,6 @@ class Education::Program < ApplicationRecord
 
   belongs_to :parent,
              class_name: 'Education::Program',
-             optional: true
-
-  belongs_to :downloadable_summary,
-             class_name: 'Communication::File',
              optional: true
 
   has_many   :children,
@@ -154,20 +151,6 @@ class Education::Program < ApplicationRecord
 
   def hugo_body_class
     'programs__section'
-  end
-
-  # Cf HasFeaturedMedia#set_featured_media!, qui fait la même chose pour les médias.
-  def set_downloadable_summary!(id: '', language:)
-    if id.present?
-      file = university.communication_files.find(id)
-      file_l10n = file.create_localization_if_missing!(language)
-      program_l10n = localization_for(language)
-      context = file_l10n.context_add(program_l10n)
-    end
-    self.downloadable_summary = file
-    save!
-    Communication::File::Context.remove(self, except: context)
-    file
   end
 
   protected

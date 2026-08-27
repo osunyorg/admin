@@ -1,12 +1,15 @@
 <%
-if context.about_block?
+if context.about_type == 'Communication::Block'
   block = context.about
   l10n = block.about
+  object = l10n.about
+elsif context.about_type == 'Education::Program'
+  object = context.about
+  l10n = object.best_localization_for(current_language)
 else
   l10n = context.about
+  object = l10n.about
 end
-
-object = l10n.about
 
 # website, extranet, journal
 general_context = object.try(:website) || object.try(:extranet) || object.try(:journal) 

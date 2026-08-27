@@ -12,7 +12,7 @@ module Communication::Block::WithCommunicationFiles
 
   def restore_file_contexts
     communication_file_localizations.each do |file_l10n|
-      file_l10n.context_add(self)
+      file_l10n.add_context(self)
     end
   end
 

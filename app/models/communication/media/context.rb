@@ -56,10 +56,6 @@ class Communication::Media::Context < ApplicationRecord
     .delete_all  
   end
 
-  def about_block?
-    about_type == 'Communication::Block'
-  end
-
   def apply_crop_settings!(crop_settings)
     self.update_column :crop_settings,
                         crop_settings.presence || {}

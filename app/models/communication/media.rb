@@ -145,7 +145,7 @@ class Communication::Media < ApplicationRecord
   end
 
   # Le nom est un peu faux, ça pourrait être context_first_or_create, mais c'est long
-  def context_add(about)
+  def add_context(about)
     contexts.where(
       about: about,
       university_id: university_id
@@ -154,7 +154,7 @@ class Communication::Media < ApplicationRecord
     end
   end
 
-  def context_remove(about)
+  def remove_context(about)
     contexts.where(
       about: about,
       university_id: university_id
