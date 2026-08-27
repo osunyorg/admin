@@ -10,5 +10,6 @@ class UnicornsJob < ApplicationJob
     Migrations::FeaturedImagesToMedias.migrate
     Migrations::DownloadableSummaryToFiles.migrate
     Migrations::BlocksWithMedias.migrate
+    Migrations::BlockTitlesToFiles.migrate
   end
 end
