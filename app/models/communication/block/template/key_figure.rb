@@ -6,18 +6,17 @@ class Communication::Block::Template::KeyFigure < Communication::Block::Template
   def allowed_for_about?
     !about.respond_to?(:extranet)
   end
-  
+
   # Permet de gérer les contextes
   def communication_medias
     elements.map(&:communication_media).compact_blank
   end
 
   def crop_settings_for(media)
-    data['elements'].each do |element|
-      media_id = element.dig('image', 'communication_media_id')
-      next if media_id != media.id
-      return element.dig('image', 'crop_settings')
-    end
+    element_with_media = data['elements'].detect { |element|
+      element.dig('image', 'communication_media_id') == media.id
+    }
+    element_with_media.dig('image', 'crop_settings') if element_with_media
   end
 
 end

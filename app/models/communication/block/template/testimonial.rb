@@ -11,7 +11,7 @@ class Communication::Block::Template::Testimonial < Communication::Block::Templa
   def allowed_for_about?
     !about.respond_to?(:extranet)
   end
-  
+
   def top_screen_reader_only
     true
   end
@@ -31,10 +31,9 @@ class Communication::Block::Template::Testimonial < Communication::Block::Templa
   end
 
   def crop_settings_for(media)
-    data['elements'].each do |element|
-      media_id = element.dig('photo', 'communication_media_id')
-      next if media_id != media.id
-      return element.dig('photo', 'crop_settings')
-    end
+    element_with_media = data['elements'].detect { |element|
+      element.dig('photo', 'communication_media_id') == media.id
+    }
+    element_with_media.dig('photo', 'crop_settings') if element_with_media
   end
 end
