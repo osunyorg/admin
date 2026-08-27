@@ -80,7 +80,7 @@ class Communication::File::Localization < ApplicationRecord
       language_id: language.id,
       original_checksum: blob.checksum
     ).first_or_create do |localization|
-      localization.about = Communication::File.find_or_create_file_from_blob(blob, user: user)
+      localization.about = find_or_create_file_from_blob(blob, user: user)
       localization.original_blob = blob
       # Les fichiers créés par cette méthode sont autopubliés.
       # Ceux qui sont envoyés via la file library ne le sont pas.
@@ -162,6 +162,19 @@ class Communication::File::Localization < ApplicationRecord
   end
 
   protected
+
+  # Attention, la création ne fait pas le travail jusqu'au bout,
+  # ça renvoie un file vide afin de créer le File::Localization derrière.
+  # On casse un peu le principe d'encapsulation, afin de ne pas exposer une méthode qui renvoie un objet instable.
+  # Concrètement, cette méthode est appelée uniquement par "find_or_create_file_localization_from_blob" au-dessus.
+  def self.find_or_create_file_from_blob(blob, user:)
+    # Soit il y a un fichier (dans n'importe quelle langue), on le renvoie
+    Communication::File.find_by_blob(blob) ||
+    # Soit il n'y en a aucun, on le crée
+    Communication::File.create!(university_id: blob.university_id) do |file|
+      file.created_by = user
+    end
+  end
 
   def guess_name
     return if self.name.present?
