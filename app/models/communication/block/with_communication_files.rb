@@ -6,6 +6,16 @@ module Communication::Block::WithCommunicationFiles
     after_save :manage_file_contexts
   end
 
+  def destroy_file_contexts
+    communication_file_contexts.delete_all
+  end
+
+  def restore_file_contexts
+    communication_file_localizations.each do |file_l10n|
+      file_l10n.context_add(self)
+    end
+  end
+
   protected
 
   def check_if_all_files_are_localized
@@ -57,11 +67,9 @@ module Communication::Block::WithCommunicationFiles
   end
 
   def communication_file_contexts
-    Communication::File::Context
-      .where(
-        university_id: university_id,
-        about_id: self.id,
-        about_type: self.class.polymorphic_name
-      )
+    Communication::File::Context.where(
+      university_id: university_id,
+      about: self
+    )
   end
 end

@@ -6,6 +6,16 @@ module Communication::Block::WithCommunicationMedias
     after_save :manage_media_contexts
   end
 
+  def destroy_media_contexts
+    communication_media_contexts.delete_all
+  end
+
+  def restore_media_contexts
+    communication_medias.each do |media|
+      media.context_add(self)
+    end
+  end
+
   protected
 
   def check_if_all_media_are_localized
@@ -49,6 +59,9 @@ module Communication::Block::WithCommunicationMedias
   end
 
   def communication_media_contexts
-    Communication::Media::Context.where(university: university_id, about: self)
+    Communication::Media::Context.where(
+      university: university_id,
+      about: self
+    )
   end
 end
