@@ -29,7 +29,13 @@ export default {
         this.loading = true;
         this.url = url;
       }
-      this.data = data;
+      this.data = data || {
+        top: null,
+        left: null,
+        width: null,
+        height: null,
+        rotation: 0,
+      };
       this.preview = null;
       this.modalOpened = true;
     },
