@@ -15,11 +15,11 @@ class Osuny::Picker::Communication::Library::File < Osuny::Picker::Communication
   end
 
   def sorts
-    sort_add(I18n.t('communication.file.sort.alpha'), 'alpha')
-    sort_add(I18n.t('communication.file.sort.date_desc'), 'date_desc')
-    sort_add(I18n.t('communication.file.sort.date_asc'), 'date_asc')
-    sort_add(I18n.t('communication.file.sort.size_desc'), 'size_desc')
-    sort_add(I18n.t('communication.file.sort.size_asc'), 'size_asc')
+    sort_add(:alpha)
+    sort_add(:date_desc)
+    sort_add(:date_asc)
+    sort_add(:size_desc)
+    sort_add(:size_asc)
   end
 
   protected

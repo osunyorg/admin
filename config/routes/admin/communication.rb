@@ -287,11 +287,13 @@ namespace :communication do
   scope module: 'library' do
     resources :medias do
       collection do
+        post 'direct-upload' => 'medias#direct_upload', as: :direct_upload
         get :picker
-        post 'pick' => 'medias#pick', as: :pick
+        post 'set-featured' => 'medias#set_featured', as: :set_featured
         scope 'photo-imports' do
           get 'unsplash' => 'medias/photo_imports#unsplash'
           get 'pexels' => 'medias/photo_imports#pexels'
+          post 'select' => 'medias/photo_imports#select', as: :cloud_select
         end
         resources :categories, controller: '/admin/communication/library/medias/categories', as: 'media_categories' do
           collection do

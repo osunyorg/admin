@@ -9,7 +9,7 @@
           </hgroup>
         </div>
         <figure class="image-square lightbox-figure">
-          <%= kamifusen_tag @person.featured_image if @person.featured_image.present? && @person.featured_image.attached? %>
+          <%= kamifusen_tag @person.best_picture if @person.best_picture.attached? %>
         </figure>
       </div>
     </div>

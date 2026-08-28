@@ -11,7 +11,11 @@ Rails.application.config.to_prepare do
     # As we use paranoid on records, we may need to access the record even if it soft deleted
     def record
       return if record_type.nil?
-      record_class = record_type.constantize
+      record_class = record_type.safe_constantize
+      if record_class.nil?
+        self.delete
+        return
+      end
       record_class.unscoped { super }
     end
 
@@ -86,4 +90,38 @@ Rails.application.config.to_prepare do
   end
 
   ActiveStorage::Blob.include ActiveStorageMediaLibrary
+
+  # Les blobs créés en JavaScript, via direcgt_upload, sont créés sans le fichier réel.
+  # Le fichier est envoyé ensuite directement sur l'espace de stockage.
+  # Il manque donc l'analyse du blob, qui est faite en lazy load.
+  module ActiveStorageAnalyzedDimensions
+    extend ActiveSupport::Concern
+
+    def width
+      analyze_if_needed
+      metadata.dig(:width)
+    end
+
+    def height
+      analyze_if_needed
+      metadata.dig(:height)
+    end
+
+    def ratio
+      ActiveStorage::Utils.ratio(self)
+    end
+
+    # format is used when resizing
+    def orientation
+      ActiveStorage::Utils.format(self)
+    end
+
+    private
+
+    def analyze_if_needed
+      analyze unless analyzed?
+    end
+  end
+
+  ActiveStorage::Blob.include ActiveStorageAnalyzedDimensions
 end

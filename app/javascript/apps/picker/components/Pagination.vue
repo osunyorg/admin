@@ -30,33 +30,33 @@ export default {
 </script>
 
 <template>
-  <div class="mt-4">
-    <div v-if="pagination?.total_pages > 1" class="d-flex justify-content-between mb-2">
-      <div class="vue__picker__button_container">
-        <button
-          class="btn btn-sm ps-0"
-          v-if="pagination?.current_page > 1"
-          @click.prevent="previousPage">
-          <ArrowLeft stroke-width="1.5" />
-          <span class="sr-only">
-            {{ $t('picker.pagination.previous') }}
-          </span>
-        </button>
-      </div>
-      <p class="m-0">
-        {{ pagination?.current_page }} / {{ pagination?.total_pages }}
-      </p>
-      <div class="vue__media-picker__button_container text-end">
-        <button
-          class="btn btn-sm pe-0"
-          v-if="pagination?.current_page < pagination?.total_pages"
-          @click.prevent="nextPage">
-          <span class="sr-only">
-            {{ $t('picker.pagination.next') }}
-          </span>
-          <ArrowRight stroke-width="1.5" />
-        </button>
-      </div>
+  <div
+    v-if="pagination?.total_pages > 1"
+    class="d-flex justify-content-between mt-4">
+    <div style="min-width: 50px">
+      <button
+        class="btn btn-sm ps-0"
+        v-if="pagination?.current_page > 1"
+        @click.prevent="previousPage">
+        <ArrowLeft stroke-width="1.5" />
+        <span class="sr-only">
+          {{ $t('picker.pagination.previous') }}
+        </span>
+      </button>
+    </div>
+    <p class="m-0">
+      {{ pagination?.current_page }} / {{ pagination?.total_pages }}
+    </p>
+    <div style="min-width: 50px">
+      <button
+        class="text-end btn btn-sm pe-0"
+        v-if="pagination?.current_page < pagination?.total_pages"
+        @click.prevent="nextPage">
+        <span class="sr-only">
+          {{ $t('picker.pagination.next') }}
+        </span>
+        <ArrowRight stroke-width="1.5" />
+      </button>
     </div>
   </div>
 </template>

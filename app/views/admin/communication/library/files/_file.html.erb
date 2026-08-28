@@ -4,7 +4,7 @@ hide_size ||= false
 l10n = file.best_localization_for(current_language)
 %>
 <div class="<%= osuny_card_classes(horizontal: true) %>">
-  <% if l10n.featured_image.attached? %>
+  <% if l10n.featured_blob.present? %>
     <%= osuny_thumbnail l10n %>
   <% else %>
     <div class="osuny__thumbnail

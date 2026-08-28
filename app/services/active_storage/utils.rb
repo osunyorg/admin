@@ -6,10 +6,9 @@ module ActiveStorage
     FORMAT_SQUARE = 'square'
 
     def self.ratio(blob)
-      width, height = blob.metadata.values_at('width', 'height')
       # No width or height, default ratio
-      return 1 if width.nil? || height.nil?
-      width.to_f / height.to_f
+      return 1 if blob.width.nil? || blob.height.nil?
+      blob.width.to_f / blob.height.to_f
     end
 
     def self.format(blob)

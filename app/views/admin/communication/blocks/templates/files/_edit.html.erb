@@ -26,12 +26,13 @@ object_endpoint = admin_communication_files_path
 </draggable>
 
 <file-input
-  @update:model-value="data.elements.push({ file: { communication_file_id: $event.communication_file_id } })"
-  upload-url="<%= direct_upload_admin_communication_files_path %>"
-  picker-endpoint="<%= picker_endpoint %>"
-  object-endpoint="<%= object_endpoint %>"
-  label="<%= t('admin.communication.blocks.components.file.button') %>"
-  title="<%= Communication::File.model_name.human(count: 2) %>"
   accept="*"
-  :size-limit="<%= Rails.application.config.default_file_max_size %>">
+  object-endpoint="<%= object_endpoint %>"
+  picker-endpoint="<%= picker_endpoint %>"
+  picker-label="<%= t('admin.communication.blocks.components.file.button') %>"
+  picker-title="<%= Communication::File.model_name.human(count: 2) %>"
+  uploader-endpoint="<%= direct_upload_admin_communication_files_path %>"
+  :uploader-size-limit="Number(<%= Rails.application.config.default_file_max_size %>)"
+  @update:model-value="data.elements.push({ file: { communication_file_id: $event } })"
+  >
 </file-input>

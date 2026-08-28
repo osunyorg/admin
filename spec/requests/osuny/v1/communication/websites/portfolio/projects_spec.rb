@@ -98,7 +98,7 @@ RSpec.describe 'Communication::Website::Portfolio::Project' do
           assert_difference ->{ Communication::Website::Portfolio::Project.count } => 1,
                             ->{ Communication::Website::Portfolio::Project::Localization.count } => 1,
                             ->{ Communication::Website::Permalink.count } => 1 do
-            assert_enqueued_jobs 1, only: Api::AttachFeaturedImageFromUrlJob do
+            assert_enqueued_jobs 1, only: Api::CreateFeaturedMediaFromUrlJob do
               submit_request(example.metadata)
               assert_response_matches_metadata(example.metadata)
             end
@@ -248,7 +248,7 @@ RSpec.describe 'Communication::Website::Portfolio::Project' do
       response '200', 'Successful upsertion' do
         it 'creates a project and updates another with their localizations', rswag: true do |example|
           assert_difference ->{ Communication::Website::Portfolio::Project.count } => 1, ->{ Communication::Website::Portfolio::Project::Localization.count } => 1 do
-            assert_enqueued_jobs 1, only: Api::AttachFeaturedImageFromUrlJob do
+            assert_enqueued_jobs 1, only: Api::CreateFeaturedMediaFromUrlJob do
               submit_request(example.metadata)
               assert_response_matches_metadata(example.metadata)
             end

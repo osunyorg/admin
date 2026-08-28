@@ -9,6 +9,14 @@ class Communication::Block::Template::KeyFigure::Element < Communication::Block:
     image_component.blob
   end
 
+  def communication_media
+    image_component.communication_media
+  end
+
+  def communication_media_l10n
+    communication_media.localization_for(block.language)
+  end
+
   def dom_count
     5 +
     image_component.dom_count

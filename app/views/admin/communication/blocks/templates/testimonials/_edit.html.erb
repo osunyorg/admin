@@ -26,18 +26,13 @@
   <%= osuny_separator %>
 </div>
 
-<div  v-for="(element, index) in data.elements" 
-      class="pb-5 mb-5">
-  <div class="row">
-    <div class="col-lg-6">
-      <%= block_component_edit block, :text, template: @element, summernote_config: 'mini' %>
-    </div>
-    <div class="col-lg-6">
-      <%= block_component_edit block, :author, template: @element %>
-      <%= block_component_edit block, :job, template: @element %>
-      <%= block_component_edit block, :photo, template: @element %>
-    </div>
-  </div>
+<div
+  v-for="(element, index) in data.elements">
+  <%= block_component_edit block, :text, template: @element, summernote_config: 'mini' %>
+  <%= block_component_edit block, :author, template: @element %>
+  <%= block_component_edit block, :job, template: @element %>
+  <%= block_component_edit block, :photo, template: @element %>
+  <%= osuny_separator %>
 </div>
 
 <%= osuny_separator %>

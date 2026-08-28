@@ -22,8 +22,8 @@ export default {
     class="card card--osuny card--horizontal">
     <div class="osuny__thumbnail osuny__thumbnail--small osuny__thumbnail--cropped">
       <img
-        v-if="resource?.featured_image"
-        :src="resource?.featured_image.thumb"
+        v-if="resource?.featured_media"
+        :src="resource?.featured_media"
         loading="lazy"
         decoding="async"
         width="70"

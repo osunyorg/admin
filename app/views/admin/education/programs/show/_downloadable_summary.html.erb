@@ -1,6 +1,18 @@
-<% if downloadable_summary.attached? %>
-  <%= osuny_label Education::Program::Localization.human_attribute_name('downloadable_summary') %>
-  <p><%= link_to "#{downloadable_summary.filename} (#{ number_to_human_size downloadable_summary.blob.byte_size })",
-                  url_for(downloadable_summary),
-                  target: :_blank %></p>
-<% end %>
+<%
+current = {
+  downloadable_summary_id: program.downloadable_summary_id.to_s,
+}
+%>
+<%= osuny_label Education::Program::Localization.human_attribute_name('downloadable_summary') %>
+<div
+  id="downloadable-summary-app"
+  data-changes-endpoint="<%= set_downloadable_summary_admin_education_program_path(program) %>"
+  data-current="<%= current.to_json %>"
+  data-object-endpoint="<%= admin_communication_files_path %>"
+  data-picker-endpoint="<%= picker_admin_communication_files_path(format: :json) %>"
+  data-picker-label="<%= t('admin.communication.blocks.components.file.button') %>"
+  data-picker-title="<%= Communication::File.model_name.human(count: 2) %>"
+  data-uploader-endpoint="<%= direct_upload_admin_communication_files_path %>"
+  data-uploader-size-limit="<%= Rails.application.config.default_file_max_size %>"
+  >
+</div>

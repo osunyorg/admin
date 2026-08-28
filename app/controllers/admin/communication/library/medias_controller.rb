@@ -5,9 +5,10 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
   include Admin::Localizable
 
   def index
-    @medias = @medias.filter_by(params[:filters], current_language)
-                      .ordered(current_language)
-                      .page(params[:page])
+    @filtered = @medias.filter_by(params[:filters], current_language)
+    @medias = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                       .ordered(current_language)
+                       .page(params[:page])
     @collections = current_university.communication_media_collections
                                      .ordered(current_language)
     @categories = categories.root
@@ -24,8 +25,20 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
   end
 
   def show
-    @contexts = @media.contexts
-    breadcrumb
+    respond_to do |format|
+      format.html do
+        @contexts = @media.contexts
+        breadcrumb
+      end
+      format.json do
+        @l10n = @media.find_or_create_localization(current_language)
+        context_about_gid = params.dig(:context_about_gid)
+        if context_about_gid.present?
+          context_about = GlobalID::Locator.locate(context_about_gid)
+          @context = @media.context_for(context_about)
+        end
+      end
+    end
   end
 
   def new
@@ -33,12 +46,29 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
     breadcrumb
   end
 
-  def pick
-    picker = Osuny::Media::Picker.new
-    picker.university = current_university
-    picker.language = current_language
-    picker.params = params.to_unsafe_hash
-    render json: picker.to_json
+  def direct_upload
+    @blob = ActiveStorage::Blob.create_before_direct_upload!(**blob_args)
+    @blob.update_column(:university_id, current_university&.id)
+    # Le blob est sur le média, pas sur la loca (contrairement aux files)
+    @media = Communication::Media.find_or_create_media_from_blob(@blob, user: current_user)
+    @l10n = @media.find_or_create_localization(current_language)
+  end
+
+  def set_featured
+    @l10n = PolymorphicObjectFinder.find(
+      params,
+      key: :about,
+      university: current_university
+    )
+    return if @l10n.nil?
+    raise unless can?(:update, @l10n.about)
+    @media = @l10n.set_featured_media!(
+      id: params.dig(:featured_media_id),
+      alt: params.dig(:featured_media_alt),
+      crop_settings: params.dig(:crop_settings)&.to_unsafe_hash,
+      language: current_language
+    )
+    @context = @media&.context_for(@l10n)
   end
 
   def edit
@@ -50,7 +80,8 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
   def create
     @media.created_by = current_user
     if @media.save
-      redirect_to [:admin, @media], notice: t('admin.successfully_created_html', model: @media.to_s_in(current_language))
+      redirect_to [:admin, @media],
+                  notice: t('admin.successfully_created_html', model: @media.to_s_in(current_language))
     else
       load_invalid_localization
       @categories = categories
@@ -61,7 +92,10 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
 
   def update
     if @media.update(media_params)
-      redirect_to [:admin, @media], notice: t('admin.successfully_updated_html', model: @media.to_s_in(current_language))
+      @media.localization_for(current_language)
+            .update_column(:updated_by_id, current_user.id)
+      redirect_to [:admin, @media],
+                  notice: t('admin.successfully_updated_html', model: @media.to_s_in(current_language))
     else
       load_invalid_localization
       @categories = categories
@@ -73,17 +107,22 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
 
   def destroy
     @media.destroy
-    redirect_to admin_communication_medias_url, notice: t('admin.successfully_destroyed_html', model: @media.to_s_in(current_language))
+    redirect_to admin_communication_medias_url,
+                notice: t('admin.successfully_destroyed_html', model: @media.to_s_in(current_language))
   end
 
   protected
+
+  def blob_args
+    params.require(:blob).permit(:filename, :byte_size, :checksum, :content_type, metadata: {}).to_h.symbolize_keys
+  end
 
   def media_params
     params.require(:communication_media)
           .permit(
             :communication_media_collection_id, :original_uploaded_file, category_ids: [],
             localizations_attributes: [
-              :id, :name, :alt, :credit, :internal_description, :language_id
+              :id, :name, :alt, :credit, :internal_description, :language_id, :published,
             ]
           )
           .merge(university_id: current_university.id)

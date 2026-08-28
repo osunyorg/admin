@@ -2,29 +2,32 @@
 #
 # Table name: education_programs
 #
-#  id                 :uuid             not null, primary key
-#  apprenticeship     :boolean
-#  bodyclass          :string
-#  capacity           :integer
-#  continuing         :boolean
-#  deleted_at         :datetime
-#  initial            :boolean
-#  qualiopi_certified :boolean          default(FALSE)
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  diploma_id         :uuid             indexed
-#  parent_id          :uuid             indexed
-#  university_id      :uuid             not null, indexed
+#  id                      :uuid             not null, primary key
+#  apprenticeship          :boolean
+#  bodyclass               :string
+#  capacity                :integer
+#  continuing              :boolean
+#  deleted_at              :datetime
+#  initial                 :boolean
+#  qualiopi_certified      :boolean          default(FALSE)
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  diploma_id              :uuid             indexed
+#  downloadable_summary_id :uuid             indexed
+#  parent_id               :uuid             indexed
+#  university_id           :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_education_programs_on_diploma_id     (diploma_id)
-#  index_education_programs_on_parent_id      (parent_id)
-#  index_education_programs_on_university_id  (university_id)
+#  index_education_programs_on_diploma_id               (diploma_id)
+#  index_education_programs_on_downloadable_summary_id  (downloadable_summary_id)
+#  index_education_programs_on_parent_id                (parent_id)
+#  index_education_programs_on_university_id            (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_08b351087c  (university_id => universities.id)
+#  fk_rails_b7145474b4  (downloadable_summary_id => communication_files.id) ON DELETE => nullify
 #  fk_rails_ec1f16f607  (parent_id => education_programs.id)
 #
 class Education::Program < ApplicationRecord
@@ -46,6 +49,7 @@ class Education::Program < ApplicationRecord
   include WebsitesLinkable
   include WithAlumni
   include WithDiploma
+  include WithDownloadableSummary
   include WithLocations
   include WithSchools
   include WithTeam

@@ -1,39 +1,85 @@
 <%
-# communication/website/post
-key = context.about_type.underscore.remove('/localization')
-# admin/communication/library/contexts/communication/website/post
-partial = "admin/communication/library/contexts/#{key}"
-%>
-<% begin %>
-  <%= render  partial,
-              context: context,
-              about: context.about %>
-<% rescue %>
-  <%
+if context.about_type == 'Communication::Block'
+  block = context.about
+  l10n = block.about
+  object = l10n.about
+elsif context.about_type == 'Education::Program'
   object = context.about
-  if object.present?
-    object = object.about if object.is_a?(Communication::Block)
-    # If it's a localization, get real object
-    if object.respond_to?(:about)
-      object = object.about
-    end
-    begin
-      # TODO fix special pages
-      title = osuny_link_localized object, [:admin, object], classes: "stretched-link"
-    rescue
-      title = object.to_s_in(current_language)
-    end
-  %>
-  <div>
-    <div class="<%= osuny_card_classes(horizontal: true) %>">
-      <%= osuny_thumbnail_localized object %>
-      <div class="card-body">
-        <%= title %>
-      </div>
-      <div class="card-footer text-muted">
-        <%= object.class.model_name.human %>
+  l10n = object.best_localization_for(current_language)
+else
+  l10n = context.about
+  object = l10n.about
+end
+
+# website, extranet, journal
+general_context = object.try(:website) || object.try(:extranet) || object.try(:journal) 
+
+path = nil
+case l10n.class.polymorphic_name
+when 'Administration::Location::Localization'
+  path = admin_administration_location_path(object.id)
+when 'Education::Program::Localization'
+  path = admin_education_program_path(object.id)
+when 'Communication::File::Localization'
+  path = admin_communication_file_path(id: object.id)
+when 'Communication::Extranet::Post::Localization'
+  path = admin_communication_extranet_post_path(extranet_id: object.extranet.id, id: object.id)
+when 'Communication::Website::Agenda::Event::Localization'
+  path = admin_communication_website_agenda_event_path(website_id: object.website.id, id: object.id)
+when 'Communication::Website::Agenda::Exhibition::Localization'
+  path = admin_communication_website_agenda_exhibition_path(website_id: object.website.id, id: object.id)
+when 'Communication::Website::Jobboard::Job::Localization'
+  path = admin_communication_website_jobboard_job_path(website_id: object.website.id, id: object.id)
+when 'Communication::Website::Page::Localization'
+  path = admin_communication_website_page_path(website_id: object.website.id, id: object.id)
+when 'Communication::Website::Portfolio::Project::Localization'
+  path = admin_communication_website_portfolio_project_path(website_id: object.website.id, id: object.id)
+when 'Communication::Website::Post::Localization'
+  path = admin_communication_website_post_path(website_id: object.website.id, id: object.id)
+when 'Research::Journal::Volume::Localization'
+  path = admin_research_journal_volume_path(journal_id: object.research_journal_id, id: object.id)
+when 'University::Organization::Localization'
+  path = admin_university_organization_path(object)
+end
+%>
+<div>
+  <div class="<%= osuny_card_classes(horizontal: true) %> align-items-start position-relative">
+    <%= osuny_thumbnail l10n, large: true %>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-6">
+          <p>
+            <% if path && can?(:read, object) %>
+              <%= osuny_link l10n, path, classes: 'stretched-link' %>
+            <% else %>
+              <%= l10n %>
+            <% end %>
+          </p>
+          <% if block.present? %>
+            <p class="small">
+              <i class="bi bi-arrow-right"></i>
+              <%= t('communication.library.context.in_block', position: block.position) %>
+            </p>
+          <% end %>
+          <% if context.try(:cropped?) %>
+            <%= lucide_icon(:crop)%>
+          <% end %>
+        </div>
+        <div class="col-lg-2 text-muted">
+          <%= osuny_label Communication::File::Context.human_attribute_name(:about_type) %><br>
+          <p><%= object.class.model_name.human %><p>
+        </div>
+        <div class="col-lg-2 text-muted">
+          <%= osuny_label Language.model_name.human %><br>
+          <p><%= l10n.language %><p>
+        </div>
+        <div class="col-lg-2 text-muted">
+          <% if general_context.present? %>
+            <%= osuny_label general_context.class.model_name.human %><br>
+            <p><%= general_context.to_s_in(current_language) %></p>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-  <% end %>
-<% end %>
+</div>

@@ -2,102 +2,114 @@
 import { Cropper } from 'vue-advanced-cropper';
 
 export default {
-    components: {
-      Cropper,
-    },
-    data () {
+  components: {
+    Cropper,
+  },
+  emits: [
+    'cropped',
+  ],
+  data() {
+    return {
+      modalOpened: false,
+      url: '',
+      loading: true,
+      data: this.defaultData(),
+      preview: null,
+    }
+  },
+  methods: {
+    defaultData() {
       return {
-        modal: false,
-        endpoint: "/media/resize/", // signed_id will be added
-        pending: false,
-        blob: {
-          id: null,
-          signed_id: null,
-          checksum: null,
-          url: null
-        },
-        data: {
-          rotation: 0,
-          left: null,
-          top: null,
-          width: null,
-          height: null,
-        },
+        top: null,
+        left: null,
+        width: null,
+        height: null,
+        rotation: 0,
+      };
+    },
+    launch(url, data) {
+      if (url != this.url) {
+        this.loading = true;
+        this.url = url;
+      }
+      this.data = data || this.defaultData();
+      this.preview = null;
+      this.modalOpened = true;
+    },
+    close() {
+      this.modalOpened = false;
+    },
+    ready() {
+      this.loading = false;
+      if (this.data.width && this.data.height) {
+        this.$refs.cropper.setCoordinates({
+          top: this.data.top,
+          left: this.data.left,
+          width: this.data.width,
+          height: this.data.height,
+        }, { transitions: false });
+      }
+      if (this.data.rotation) {
+        this.$refs.cropper.rotate(this.data.rotation, { transitions: false });
       }
     },
-    methods: {
-      launch(blob) {
-        this.blob = blob;
-        this.modal = true;
-      },
-      open() {
-        this.modal = true;
-        document.body.classList.add("modal-open");
-      },
-      close() {
-        this.modal = false;
-        document.body.classList.remove("modal-open");
-      },
-      defaultSize({ imageSize }) {
-        return {
-          width: imageSize.width,
-          height: imageSize.height,
-        };
-      },
-      change({ coordinates }) {
-        this.data.left = coordinates.left;
-        this.data.top = coordinates.top;
-        this.data.width = coordinates.width;
-        this.data.height = coordinates.height;
-      },
-      rotate(angle) {
-        this.data.rotation += angle;
-        this.$refs.cropper.rotate(angle);
-      },
-      crop() {
-        let xhr = new XMLHttpRequest();
-        let url = this.endpoint + this.blob.signed_id;
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.setRequestHeader('X-CSRF-Token', document.querySelector('[name="csrf-token"]').content);
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState != 4) return;
-          this.pending = false;
-          if (xhr.status == 200) {
-            let blob = JSON.parse(xhr.responseText);
-            this.$emit('cropped', blob);
-            this.close();
-          } else {
-            console.error(xhr);
-          }
-        }.bind(this);
-        this.pending = true;
-        xhr.send(JSON.stringify(this.data));
-      },
+    rotate(angle) {
+      this.$refs.cropper.rotate(angle);
     },
+    reset() {
+      this.$refs.cropper.reset();
+    },
+		defaultSize({ imageSize, visibleArea }) {
+			return {
+				width: (visibleArea || imageSize).width,
+				height: (visibleArea || imageSize).height,
+			};
+		},
+    extractDataFromCropper() {
+      const image = this.$refs.cropper.image;
+      const imageTransforms = this.$refs.cropper.imageTransforms;
+      const coordinates = this.$refs.cropper.coordinates;
+      this.data.top = Math.round(coordinates.top);
+      this.data.left = Math.round(coordinates.left);
+      this.data.width = Math.round(coordinates.width);
+      this.data.height = Math.round(coordinates.height);
+      this.data.rotation = Math.round(imageTransforms.rotate);
+      this.preview = {
+        coordinates: coordinates,
+        image: image,
+      };
+    },
+    confirm() {
+      this.extractDataFromCropper();
+      this.$emit('cropped', this.data, this.preview);
+      this.close();
+    },
+  },
 };
-
 // On utilise canvas=false et check-orientation=false pour éviter les problèmes de CORS
 // https://github.com/advanced-cropper/vue-advanced-cropper/issues/44#issuecomment-648254767
-
 </script>
 
 <template>
   <div>
-    <div  class="modal vue__cropper"
-          tabindex="-1"
-          role="dialog"
-          :class="{'d-block': modal}">
-      <div class="modal-dialog modal-lg">
+    <div
+      class="modal vue__cropper"
+      tabindex="-1"
+      role="dialog"
+      :class="{'d-block': modalOpened}"
+      >
+      <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">{{ $t('components.cropperModal.title') }}</h5>
-            <button type="button"
-                    class="btn-close"
-                    @click="close()">
-                  </button>
+            <button
+              type="button"
+              class="btn-close"
+              @click="close"
+              >
+            </button>
           </div>
-          <div class="modal-body bg-black">
+          <div class="modal-body">
             <Cropper
               ref="cropper"
               :canvas="false"
@@ -105,28 +117,50 @@ export default {
               :default-size="defaultSize"
               :minWidth="600"
               :resizeImage="{ wheel: false }"
-              :src="blob.url"
-              @change="change"
+              :src="url"
+              @ready="ready"
               />
+            <div
+              class="position-absolute top-50 end-50"
+              v-if="loading"
+              >
+              <span class="spinner-border text-white" role="status"></span>
+            </div>
           </div>
           <div class="modal-footer justify-content-between">
-            <button type="button"
-                    class="btn btn-sm"
-                    :aria-label="$t('components.cropperModal.rotate')"
-                    @click="rotate(90)">
-              <i class="bi bi-arrow-clockwise"></i>
-            </button>
             <div>
-              <button type="button"
-                      class="btn btn-sm btn-secondary me-2"
-                      :disabled="pending"
-                      @click="close()">
+              <button
+                type="button"
+                class="btn btn-sm"
+                :aria-label="$t('components.cropperModal.rotate')"
+                @click="rotate(90)"
+                >
+                <i class="bi bi-arrow-clockwise"></i>
+                {{ $t('components.cropperModal.rotate') }}
+              </button>
+              <button
+                type="button"
+                class="btn btn-sm"
+                :aria-label="$t('components.cropperModal.rotate')"
+                @click="reset"
+                >
+                <i class="bi bi-arrows-fullscreen"></i>
+                {{ $t('components.cropperModal.reset') }}
+              </button>
+            </div>
+            <div>
+              <button
+                type="button"
+                class="btn btn-sm btn-secondary me-2"
+                @click="close"
+                >
                 {{ $t('components.cropperModal.cancel') }}
               </button>
-              <button type="button"
-                      class="btn btn-sm btn-primary"
-                      :disabled="pending"
-                      @click="crop()">
+              <button
+                type="button"
+                class="btn btn-sm btn-primary"
+                @click="confirm"
+                >
                 {{ $t('components.cropperModal.validate') }}
               </button>
             </div>
@@ -134,6 +168,5 @@ export default {
         </div>
       </div>
     </div>
-    <div class="modal-backdrop show" :class="{'d-none': !modal}"></div>
   </div>
 </template>

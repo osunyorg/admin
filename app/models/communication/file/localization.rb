@@ -4,8 +4,8 @@
 #
 #  id                    :uuid             not null, primary key
 #  deleted_at            :datetime
-#  featured_image_alt    :string
 #  featured_image_credit :text
+#  featured_media_alt    :string
 #  internal_description  :text
 #  meta_description      :text
 #  name                  :string
@@ -20,33 +20,38 @@
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  about_id              :uuid             not null, indexed
+#  featured_media_id     :uuid             indexed
 #  language_id           :uuid             not null, indexed
-#  last_updated_by_id    :uuid             indexed
 #  original_blob_id      :uuid             not null, indexed
-#  published_by_id       :uuid             indexed
 #  university_id         :uuid             not null, indexed
+#  updated_by_id         :uuid             indexed
 #
 # Indexes
 #
-#  index_communication_file_localizations_on_about_id            (about_id)
-#  index_communication_file_localizations_on_language_id         (language_id)
-#  index_communication_file_localizations_on_last_updated_by_id  (last_updated_by_id)
-#  index_communication_file_localizations_on_original_blob_id    (original_blob_id)
-#  index_communication_file_localizations_on_published_by_id     (published_by_id)
-#  index_communication_file_localizations_on_university_id       (university_id)
+#  index_communication_file_localizations_on_about_id           (about_id)
+#  index_communication_file_localizations_on_featured_media_id  (featured_media_id)
+#  index_communication_file_localizations_on_language_id        (language_id)
+#  index_communication_file_localizations_on_original_blob_id   (original_blob_id)
+#  index_communication_file_localizations_on_university_id      (university_id)
+#  index_communication_file_localizations_on_updated_by_id      (updated_by_id)
 #
 # Foreign Keys
 #
 #  fk_rails_2caf77cf04  (original_blob_id => active_storage_blobs.id)
 #  fk_rails_38de4b5d8a  (language_id => languages.id)
 #  fk_rails_6f750651f5  (about_id => communication_files.id)
-#  fk_rails_ad6002e199  (last_updated_by_id => users.id)
-#  fk_rails_beb53a5697  (published_by_id => users.id)
+#  fk_rails_ad6002e199  (updated_by_id => users.id)
+#  fk_rails_ba8efac626  (featured_media_id => communication_medias.id) ON DELETE => nullify
 #  fk_rails_fcfa27eb47  (university_id => universities.id)
 #
 class Communication::File::Localization < ApplicationRecord
+  acts_as_paranoid
+
+  # Doit passer avant le Permalinkable, pour permettre la création correcte du slug
+  before_validation :guess_name
+
   include AsLocalization
-  include HasFeaturedImage
+  include HasFeaturedMedia
   include HasGitFiles
   include HasOriginalBlob
   include HasUniversity
@@ -56,7 +61,7 @@ class Communication::File::Localization < ApplicationRecord
   include Sanitizable
   include WithOpenApi
 
-  belongs_to  :last_updated_by,
+  belongs_to  :updated_by,
               class_name: 'User',
               optional: true
 
@@ -69,26 +74,48 @@ class Communication::File::Localization < ApplicationRecord
 
   after_commit :touch_references, on: :update
 
-  def self.find_or_create_from_blob(blob, language, user)
+  def self.find_or_create_file_localization_from_blob(blob, language:, user: nil)
     localization = where(
       university_id: blob.university_id,
       language_id: language.id,
       original_checksum: blob.checksum
     ).first_or_create do |localization|
-      file = Communication::File.find_or_create_from_blob(blob, user)
-      # On attribue le blob
+      localization.about = find_or_create_file_from_blob(blob, user: user)
       localization.original_blob = blob
-      # On attribue le nom
-      blob_filename = blob.filename
-      blob_filename_without_extension = File.basename(blob_filename, File.extname(blob_filename))
-      localization.name = blob_filename_without_extension.humanize
-      # On connecte au fichier
-      localization.about_id = file.id
-      # Here, we auto-publish the localization
+      # Les fichiers créés par cette méthode sont autopubliés.
+      # Ceux qui sont envoyés via la file library ne le sont pas.
       localization.published = true
-      localization.published_at = Time.current
     end
     localization
+  end
+
+  def blob
+    original_blob
+  end
+
+  def blob_if_published
+    blob if published?
+  end
+
+  def add_context(about)
+    contexts.where(
+      about: about,
+      university_id: university_id
+    ).first_or_create
+  end
+
+  def remove_context(about)
+    contexts.where(
+      about: about,
+      university_id: university_id
+    ).delete_all
+  end
+
+  def context_for(about)
+    contexts.find_by(
+      about: about,
+      university_id: university_id
+    )
   end
 
   def git_path_relative
@@ -121,8 +148,8 @@ class Communication::File::Localization < ApplicationRecord
 
   def dependencies
     [
-      original_blob,
-      featured_image&.blob,
+      original_blob, # FIXME original_blob ou blob? Gestion de la publication
+      featured_blob,
     ]
   end
 
@@ -132,6 +159,26 @@ class Communication::File::Localization < ApplicationRecord
 
   def to_s
     "#{name}"
+  end
+
+  protected
+
+  # Attention, la création ne fait pas le travail jusqu'au bout,
+  # ça renvoie un file vide afin de créer le File::Localization derrière.
+  # On casse un peu le principe d'encapsulation, afin de ne pas exposer une méthode qui renvoie un objet instable.
+  # Concrètement, cette méthode est appelée uniquement par "find_or_create_file_localization_from_blob" au-dessus.
+  def self.find_or_create_file_from_blob(blob, user:)
+    # Soit il y a un fichier (dans n'importe quelle langue), on le renvoie
+    Communication::File.find_by_blob(blob) ||
+    # Soit il n'y en a aucun, on le crée
+    Communication::File.create!(university_id: blob.university_id) do |file|
+      file.created_by = user
+    end
+  end
+
+  def guess_name
+    return if self.name.present?
+    self.name = original_guessed_name
   end
 
 end

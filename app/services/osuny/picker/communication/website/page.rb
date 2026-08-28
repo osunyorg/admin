@@ -5,7 +5,7 @@ class Osuny::Picker::Communication::Website::Page < Osuny::Picker
   end
 
   def objects
-    @objects ||= website.pages.ordered(language)
+    @objects ||= website.pages
   end
 
   def categories
@@ -13,7 +13,9 @@ class Osuny::Picker::Communication::Website::Page < Osuny::Picker
   end
 
   def sorts
-    sort_add(I18n.t('communication.website.page.sort.alpha'), 'alpha')
+    sort_add(:alpha)
+    sort_add(:date_asc)
+    sort_add(:date_desc)
   end
 
 end

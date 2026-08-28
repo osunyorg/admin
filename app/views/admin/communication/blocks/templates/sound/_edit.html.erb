@@ -1,16 +1,17 @@
 <p><%= t('admin.communication.blocks.templates.sound.edit.file.label')%></p>
 <div class="d-flex align-items-center mb-3">
   <file-input
-    class="flex-fill"
-    :model-value="data.file"
-    @update:model-value="data.file = $event"
-    upload-url="<%= direct_upload_admin_communication_files_path %>"
-    picker-endpoint="<%= picker_admin_communication_files_path(format: :json) %>"
-    object-endpoint="<%= admin_communication_files_path %>"
-    label="<%= t('admin.communication.blocks.components.file.button') %>"
-    title="<%= Communication::File.model_name.human(count: 2) %>"
     accept="<%= default_audio_formats_accepted %>"
-    :size-limit="<%= Rails.application.config.default_file_max_size %>">
+    class="flex-fill"
+    object-endpoint="<%= admin_communication_files_path %>"
+    picker-endpoint="<%= picker_admin_communication_files_path(format: :json) %>"
+    picker-label="<%= t('admin.communication.blocks.components.file.button') %>"
+    picker-title="<%= Communication::File.model_name.human(count: 2) %>"
+    uploader-endpoint="<%= direct_upload_admin_communication_files_path %>"
+    uplader-size-limit="<%= Rails.application.config.default_file_max_size %>"
+    v-model="data.file"
+    @update:model-value="data.file = $event"
+    >
   </file-input>
   <a
     class="btn btn-sm text-danger ms-3"

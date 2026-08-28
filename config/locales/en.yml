@@ -249,8 +249,6 @@ en:
   category:
     breadcrumb_title: Title in breadcrumbs
     children: Sub-categories
-    featured_image: Featured image
-    featured_image_alt: Alternative text
     free: Free categories (without taxonomy)
     header_text: Title displayed in header
     is_taxonomy: Is a taxonomy (a family of categories)?
@@ -424,13 +422,6 @@ en:
         pending: Pending
   export: Export (xlsx)
   false: No
-  featured_image:
-    alt:
-      hint: This text is important for accessibility. If the image conveys important information, it must be written here. If the information is already written somewhere else in the page, or if the image is purely decorative, the field must be left empty. Otherwise, it would pollute voice navigation.
-      label: Alternative text
-    credit:
-      hint: The credit must be present according to copyright or copyleft licenses.
-      label: Credit
   file_hint_with_formats: "%{formats} files only. %{filesize} max."
   file_hint_without_formats: "%{filesize} max"
   filters:
@@ -553,6 +544,13 @@ en:
   move: Move
   open: Open
   organize: Organize
+  picker:
+    sort:
+      alpha: Alphabetical
+      date_desc: Most recent first
+      date_asc: Oldest first
+      size_desc: Heaviest first
+      size_asc: Lightest first
   please_confirm:
     deletion: Are you sure you want to delete?
     duplication: Are you sure you want to duplicate?

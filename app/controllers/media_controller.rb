@@ -37,11 +37,6 @@ class MediaController < ApplicationController
             content_type: "text/plain; charset=utf-8"
   end
 
-  def resize
-    resizer = Osuny::Media::Resizer.new(@blob, params)
-    render json: resizer.to_json
-  end
-
   protected
 
   def load_blob

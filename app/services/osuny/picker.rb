@@ -21,7 +21,6 @@ class Osuny::Picker
 
   def parameters
     {
-      search: search,
       filters: filters,
       sort: sort,
     }
@@ -69,19 +68,8 @@ class Osuny::Picker
     @objects_on_first_page ||= objects_sorted.page(1)
   end
 
-  def search
-    {
-      term: term,
-      query_parameters: "&filters[for_search_term]=#{term}"
-    }
-  end
-
   def current_page
     [results.current_page, results.total_pages].min
-  end
-
-  def term
-    params.dig(:filters, :for_search_term).to_s
   end
 
   # [
@@ -145,10 +133,10 @@ class Osuny::Picker
     # Can be overridden to add sorts
   end
 
-  def sort_add(name, key)
+  def sort_add(key)
     sort[:values] <<  {
       id: key,
-      name: name,
+      name: I18n.t("picker.sort.#{key}"),
       query_parameters: "&sort=#{key}"
     }
     sort[:current] = key if sort[:current].blank?

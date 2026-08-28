@@ -86,9 +86,6 @@ en:
       communication/extranet/post/category/localization:
         name: Name
       communication/extranet/post/localization:
-        featured_image: Featured image
-        featured_image_alt: Alt text
-        featured_image_credit: Credit
         pinned: Pinned
         published: Published?
         published_at: Publication date
@@ -100,7 +97,6 @@ en:
         about_type: Type
       communication/file/localization:
         internal_description: Internal description
-        last_updated_by: Last updated by
         name: Name
         original_byte_size: Size
         original_content_type: Content type
@@ -108,7 +104,7 @@ en:
         original_uploaded_file: Original file
         published: Published?
         published_at: Publication date
-        published_by: Published by
+        updated_by: Last update
       communication/media:
         collection: Collection
         created_by: Envoyée par
@@ -124,6 +120,8 @@ en:
       communication/media/localization:
         internal_description: Internal description
         name: Name
+        published_at: Publication date
+        updated_by: Last update
       communication/website:
         about: About
         about_: Independent website
@@ -196,7 +194,6 @@ en:
         time_zone: Time zone
         to_day: To day
       communication/website/agenda/event/localization:
-        featured_image: Featured image
         notes: Notes
         published: Published
         subtitle: Subtitle
@@ -215,7 +212,6 @@ en:
         time_zone: Time zone
         to_day: To day
       communication/website/agenda/exhibition/localization:
-        featured_image: Featured image
         notes: Notes
         place: Place
         published: Published
@@ -245,7 +241,6 @@ en:
         from_day: Publication date
         to_day: End date
       communication/website/jobboard/job/localization:
-        featured_image: Featured image
         published: Published
         subtitle: Subtitle
         title: Title
@@ -298,8 +293,6 @@ en:
         website: Website
       communication/website/page/localization:
         breadcrumb_title: Title in breadcrumbs
-        featured_image: Featured image
-        featured_image_alt: Alt text
         header_text: Title displayed in header
         path: Path
         published: Published?
@@ -318,7 +311,6 @@ en:
         full_width: Full width
         year: Year
       communication/website/portfolio/project/localization:
-        featured_image: Featured image
         published: Published
         subtitle: Subtitle
         title: Title
@@ -330,9 +322,6 @@ en:
       communication/website/post/localization:
         category: Category
         date: Date
-        featured_image: Featured image
-        featured_image_alt: Alt text
-        featured_image_credit: Credit
         pinned: Pinned
         published: Published?
         published_at: Publication date
@@ -565,6 +554,13 @@ en:
         text: Text
         title: File type
         video: Video
+      media:
+        alt:
+          hint: This text is important for accessibility. If the image conveys important information, it must be written here. If the information is already written somewhere else in the page, or if the image is purely decorative, the field must be left empty. Otherwise, it would pollute voice navigation.
+          label: Alternative text
+        credit:
+          hint: The credit must be present according to copyright or copyleft licenses.
+          label: Credit
       website:
         agenda:
           event:
@@ -794,13 +790,9 @@ en:
           draft: Draft
           planned_on: Publication planned on %{date}
           published_on: Published on %{date}
-    file:
-      sort:
-        alpha: Alphabetical
-        date_desc: Most recent first
-        date_asc: Oldest first
-        size_desc: Heaviest first
-        size_asc: Lightest first
+    library:
+      context:
+        in_block: In block %{position}
     manage_authors: Manage authors
     number_of_posts: Number of posts
     summary:
@@ -821,9 +813,6 @@ en:
           legal: Legal
           primary: Main menu
           social: Social
-      page:
-        sort:
-          alpha: Alphabetical
       pages:
         defaults:
           accessibility:
@@ -928,10 +917,12 @@ en:
     error: Import error, be sure to use a valid URL
     label: URL of the post to import
     placeholder: https://...
+    warning: Please be aware of copyright issues relating to content! Both text and images may be protected by copyright, and importing content via this curation tool makes you liable.
   enums:
     communication:
       media:
         origin:
+          curator: Curation system
           pexels: Pexels photo library
           unsplash: Unsplash photo library
           upload: Direct file upload

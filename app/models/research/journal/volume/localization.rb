@@ -4,8 +4,8 @@
 #
 #  id                    :uuid             not null, primary key
 #  deleted_at            :datetime
-#  featured_image_alt    :string
 #  featured_image_credit :text
+#  featured_media_alt    :string
 #  keywords              :text
 #  meta_description      :text
 #  published             :boolean          default(FALSE)
@@ -17,12 +17,14 @@
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  about_id              :uuid             uniquely indexed => [language_id], indexed
+#  featured_media_id     :uuid             indexed
 #  language_id           :uuid             uniquely indexed => [about_id], indexed
 #  university_id         :uuid             indexed
 #
 # Indexes
 #
 #  idx_on_about_id_language_id_adf437eb06                        (about_id,language_id) UNIQUE
+#  idx_on_featured_media_id_2ac8ff2d6b                           (featured_media_id)
 #  index_research_journal_volume_localizations_on_about_id       (about_id)
 #  index_research_journal_volume_localizations_on_language_id    (language_id)
 #  index_research_journal_volume_localizations_on_university_id  (university_id)
@@ -31,6 +33,7 @@
 #
 #  fk_rails_09d13500b6  (university_id => universities.id)
 #  fk_rails_1e53ec2dc5  (language_id => languages.id)
+#  fk_rails_893778b156  (featured_media_id => communication_medias.id) ON DELETE => nullify
 #  fk_rails_f071a0b35b  (about_id => research_journal_volumes.id)
 #
 class Research::Journal::Volume::Localization < ApplicationRecord
@@ -38,7 +41,7 @@ class Research::Journal::Volume::Localization < ApplicationRecord
 
   include AsLocalization
   include HasBlobs
-  include HasFeaturedImage
+  include HasFeaturedMedia
   include HasGitFiles
   include HasUniversity
   include Initials
@@ -80,11 +83,9 @@ class Research::Journal::Volume::Localization < ApplicationRecord
   protected
 
   def explicit_blob_ids
-    super.concat [featured_image&.blob_id]
-  end
-
-  def inherited_blob_ids
-    [best_featured_image&.blob_id]
+    super.concat [
+      featured_blob_id
+    ]
   end
 
   def hugo_slug

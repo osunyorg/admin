@@ -35,6 +35,26 @@ class Admin::Communication::Library::Medias::PhotoImportsController < Admin::Com
     end
   end
 
+  def select
+    origin = params[:origin]
+
+    @media = Communication::Media.find_or_create_from_url(
+      params[:source],
+      university_id: current_university.id,
+      user: current_user,
+      origin: origin
+    )
+    @media.find_or_create_localization(current_language, credit: params[:credit])
+
+    if origin == 'unsplash'
+      # Tracking légal Unsplash
+      unsplash_photo = Unsplash::Photo.find(params[:id])
+      unsplash_photo.track_download
+    end
+
+    render json: @media.id
+  end
+
   protected
 
   def prepare

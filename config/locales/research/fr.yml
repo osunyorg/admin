@@ -37,8 +37,6 @@ fr:
       research/journal/volume:
         number: Numéro
       research/journal/volume/localization:
-        featured_image: Couverture
-        featured_image_alt: Texte alternatif
         keywords: Mots clés
         published: Publié ?
         published_at: Publié le
