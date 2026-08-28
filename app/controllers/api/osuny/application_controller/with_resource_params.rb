@@ -41,12 +41,12 @@ module Api::Osuny::ApplicationController::WithResourceParams
       # If we send a blob_id, we use the media made from this blob
       blob = current_university.active_storage_blobs.find_by(id: featured_image_data[:blob_id])
       if blob.present?
-        media = Communication::Media.find_or_create_media_from_blob(
-          blob,
+        media = Communication::Media.find_or_create_media_from_blob(blob)
+        media.find_or_create_localization(
+          current_university.default_language,
           alt: featured_image_data[:alt],
           credit: featured_image_data[:credit]
         )
-        media.find_or_create_localization(current_university.default_language)
         media.add_context(l10n) if l10n.present?
         l10n_params[:featured_media_id] = media.id if media.present?
       end

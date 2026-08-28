@@ -1,4 +1,4 @@
-json.extract! l10n, :id, :migration_identifier, :name, :breadcrumb_title
+json.extract! l10n, :id, :migration_identifier, :name, :breadcrumb_title, :featured_media_id
 json.featured_image do
   json.blob_id l10n.featured_blob&.id
   json.alt l10n.featured_media_alt
