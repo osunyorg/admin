@@ -46,6 +46,8 @@ class Communication::Media::Localization < ApplicationRecord
               class_name: 'User',
               optional: true
 
+  alias :media :about
+
   before_validation :guess_name
 
   has_summernote :credit

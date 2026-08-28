@@ -5,7 +5,7 @@ RSpec.describe 'Communication::Media' do
 
   path '/communication/medias' do
     post 'Create a media' do
-      tags 'Communication::Website::Media'
+      tags 'Communication::Media'
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
