@@ -31,7 +31,7 @@ module HasFeaturedMedia
     # Si l'id est vide, le media sera nil, et on réinitialise proprement.
     if id.present?
       media = university.communication_medias.find(id)
-      media.find_or_create_localization(language)
+      media.find_or_create_localization(language, alt: alt)
       context = media.add_context(self)
       context.apply_crop_settings!(crop_settings)
     end

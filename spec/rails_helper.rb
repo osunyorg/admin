@@ -35,6 +35,7 @@ RSpec.configure do |config|
   config.fixture_paths = [
     Rails.root.join('test/fixtures')
   ]
+  config.file_fixture_path = "test/fixtures/files"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false

@@ -11,6 +11,8 @@ module Communication::Media::Localization::WithOpenApi
         alt: { type: :string, nullable: true },
         credit: { type: :string, nullable: true },
         internal_description: { type: :string, nullable: true },
+        published: { type: :boolean },
+        published_at: { type: :string, format: 'date-time', nullable: true },
         created_at: { type: :string, format: "date-time" },
         updated_at: { type: :string, format: "date-time" }
       }

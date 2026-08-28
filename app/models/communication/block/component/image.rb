@@ -59,6 +59,13 @@ class Communication::Block::Component::Image < Communication::Block::Component::
     9
   end
 
+  def before_validation
+    # Handle data having a blob ID but not the media ID
+    if data.present? && data["id"].present? && data["communication_media_id"].blank?
+      data["communication_media_id"] = university.communication_medias.find_by(original_blob_id: data["id"])&.id
+    end
+  end
+
   protected
 
   def data_empty?
