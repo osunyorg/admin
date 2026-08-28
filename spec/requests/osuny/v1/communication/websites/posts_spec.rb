@@ -173,6 +173,64 @@ RSpec.describe 'Communication::Website::Post' do
         end
       end
 
+      response '201', 'Successful creation with image block' do
+        let(:communication_website_post) {
+          {
+            post: {
+              migration_identifier: 'post-from-api-1',
+              full_width: false,
+              localizations: {
+                fr: {
+                  migration_identifier: 'post-from-api-1-fr',
+                  title: 'Ma nouvelle actualité',
+                  meta_description: 'Une nouvelle actualité depuis l\'API',
+                  pinned: false,
+                  published: true,
+                  published_at: '2024-11-29T16:49:00Z',
+                  slug: 'ma-nouvelle-actualite',
+                  subtitle: 'Une nouvelle actualité',
+                  summary: 'Ceci est une nouvelle actualité créée depuis l\'API.',
+                  blocks: [
+                    {
+                      migration_identifier: 'post-from-api-1-fr-block-1',
+                      template_kind: 'image',
+                      title: 'Mon premier chapitre',
+                      position: 1,
+                      published: true,
+                      data: {
+                        image: {
+                          id: active_storage_blobs(:dan_gold).id,
+                          filename: active_storage_blobs(:dan_gold).filename.to_s,
+                          signed_id: active_storage_blobs(:dan_gold).signed_id
+                        },
+                        alt: "Texte alternatif",
+                        credit: "Crédit de l'image",
+                        text: "Description de l'image"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+
+        it 'creates a post and its localization', rswag: true do |example|
+          assert_difference ->{ Communication::Website::Post.count } => 1,
+                            ->{ Communication::Website::Post::Localization.count } => 1 do
+            submit_request(example.metadata)
+            assert_response_matches_metadata(example.metadata)
+            new_post = Communication::Website::Post.find_by(migration_identifier: 'post-from-api-1')
+            assert(new_post)
+            new_post_l10n = new_post.localizations.find_by(migration_identifier: 'post-from-api-1-fr')
+            assert(new_post_l10n)
+            block = new_post_l10n.blocks.first
+            assert block.data["image"]
+            assert_equal communication_medias(:dan_gold).id, block.data["image"]["communication_media_id"]
+          end
+        end
+      end
+
       response '201', 'Successful creation' do
         it 'creates a post and its localization', rswag: true, vcr: true do |example|
           assert_difference ->{ Communication::Website::Post.count } => 1,

@@ -87,6 +87,8 @@ class Communication::Block::Template::Base
   # Called before block validation
   # Has an override in some templates (video)
   def before_validation
+    components.each(&:before_validation)
+    elements.each(&:before_validation)
   end
 
   def communication_files

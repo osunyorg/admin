@@ -155,6 +155,7 @@ class Communication::Block < ApplicationRecord
 
   def execute_template_before_validation
     template.before_validation
+    self.data = template.data
   end
 
   def check_accessibility
