@@ -50,4 +50,29 @@ RSpec.describe 'Communication::Media' do
       end
     end
   end
+
+  path '/communication/medias/{id}' do
+    get 'Shows a media' do
+      tags 'Communication::Media'
+      security [{ api_key: [] }]
+      let("X-Osuny-Token") { university_apps(:default_app).token }
+
+      parameter name: :id, in: :path, type: :string, description: 'Media identifier'
+      let(:id) { communication_medias(:dan_gold).id }
+
+      response '200', 'Successful operation' do
+        run_test!
+      end
+
+      response '401', 'Unauthorized. Please make sure you provide a valid API key.' do
+        let("X-Osuny-Token") { 'fake-token' }
+        run_test!
+      end
+
+      response '404', 'Media not found' do
+        let(:id) { 'fake-id' }
+        run_test!
+      end
+    end
+  end
 end
