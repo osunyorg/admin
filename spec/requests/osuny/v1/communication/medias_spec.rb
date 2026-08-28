@@ -35,7 +35,7 @@ RSpec.describe 'Communication::Media' do
       end
 
       response '201', 'Successful creation from file' do
-        let(:file) { fixture_file_upload('dan-gold.jpeg', 'image/jpeg') }
+        let(:file) { fixture_file_upload('ahmet-yuksek.jpeg', 'image/jpeg') }
         it 'creates a media and its localization from file', vcr: true, rswag: true do |example|
           assert_difference ->{ Communication::Media.count } => 1, ->{ Communication::Media::Localization.count } => 1 do
             submit_request(example.metadata)
