@@ -65,6 +65,7 @@ module Importers
     def attach_image!
       return if curated_page.image.blank?
       media = Communication::Media.find_or_create_from_url(curated_page.image, university_id: l10n.university_id, origin: :curator)
+      media.find_or_create_localization(@language)
       l10n.set_featured_media!(id: media.id, language: language)
     rescue
       puts "Attach image failed"

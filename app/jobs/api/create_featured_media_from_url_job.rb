@@ -15,6 +15,8 @@ class Api::CreateFeaturedMediaFromUrlJob < ApplicationJob
     return unless media_uri.is_a?(URI::HTTP)
     media = Communication::Media.find_or_create_from_url(media_url, university_id: object.university_id)
     return if media.nil?
+    media.find_or_create_localization(media.university.default_language)
+
     object.featured_media = media
     object.save
     media.add_context(object)
