@@ -174,7 +174,7 @@ RSpec.describe 'Communication::Website::Post' do
       end
 
       response '201', 'Successful creation' do
-        it 'creates a post and its localization', rswag: true do |example|
+        it 'creates a post and its localization', rswag: true, vcr: true do |example|
           assert_difference ->{ Communication::Website::Post.count } => 1,
                             ->{ Communication::Website::Post::Localization.count } => 1,
                             ->{ Communication::Website::Permalink.count } => 1 do
@@ -187,6 +187,12 @@ RSpec.describe 'Communication::Website::Post' do
               assert(new_post_l10n)
               permalink = Communication::Website::Permalink.find_by(about: new_post_l10n, path: '/fr/actus/nouvelle-actu/')
               assert(permalink)
+            end
+            assert_difference ->{ Communication::Media.count } => 1,
+                              ->{ Communication::Media::Localization.count } => 1 do
+              perform_enqueued_jobs only: Api::CreateFeaturedMediaFromUrlJob
+              media = Communication::Media.find_by(original_filename: "photo-1703923633616-254e78f6e9df")
+              assert(media)
             end
           end
         end
