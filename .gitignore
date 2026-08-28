@@ -64,3 +64,4 @@ mise.toml
 # Instruments IAc
 AGENTS.md
 .clinerules/
+.claude
