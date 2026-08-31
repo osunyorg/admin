@@ -14,11 +14,17 @@ module HasFeaturedMedia
   end
 
   def featured_blob
-    featured_media_localization&.blob_if_published
+    return unless featured_media_localization&.published?
+    @featured_blob ||= featured_media_context.blob
   end
 
   def featured_blob_id
     featured_blob&.id
+  end
+
+  def featured_media_context
+    return if featured_media.nil?
+    @featured_media_context ||= featured_media.context_for(self)
   end
 
   def featured_media_localization

@@ -45,8 +45,12 @@ export default {
       }
       return url;
     },
+    hasCropSettings() {
+      const settings = this.cropSettings;
+      return Boolean(settings && settings.width && settings.height);
+    },
     src() {
-      if (this.resource?.context) {
+      if (this.resource?.context && this.hasCropSettings) {
         return this.resource?.context.thumb;
       } else {
         return this.resource?.media.thumb;
