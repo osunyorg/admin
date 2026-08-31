@@ -25,6 +25,15 @@ class Video::Provider::Instagram < Video::Provider::Default
     "<script async src=\"https://www.instagram.com/embed.js\"></script>"
   end
 
+  def title
+    html = URI.parse(video_url).open.read
+    # <meta name="twitter:title" content="User name (@nickname) • Instagram photos and videos">
+    meta_twitter_title = Nokogiri::HTML5(html).css("meta[name='twitter:title']").first
+    meta_twitter_title["content"] if meta_twitter_title
+  rescue
+    nil
+  end
+
   protected
 
   def blockquote
