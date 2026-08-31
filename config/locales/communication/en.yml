@@ -309,7 +309,7 @@ en:
       communication/website/portfolio/project:
         categories: Categories
         full_width: Full width
-        year: Year
+        from_day: Date
       communication/website/portfolio/project/localization:
         published: Published
         subtitle: Subtitle

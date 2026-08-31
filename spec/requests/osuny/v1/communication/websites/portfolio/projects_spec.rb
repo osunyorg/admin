@@ -101,6 +101,8 @@ RSpec.describe 'Communication::Website::Portfolio::Project' do
             assert_enqueued_jobs 1, only: Api::CreateFeaturedMediaFromUrlJob do
               submit_request(example.metadata)
               assert_response_matches_metadata(example.metadata)
+              project = Communication::Website::Portfolio::Project.find_by(migration_identifier: "project-from-api-1")
+              assert_equal Date.new(2026), project.from_day
             end
           end
         end
