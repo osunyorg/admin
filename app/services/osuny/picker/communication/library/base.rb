@@ -12,7 +12,7 @@ class Osuny::Picker::Communication::Library::Base < Osuny::Picker
 
   # .mp3, .wav => ['.mp3', '.wav']
   def extensions
-    @extensions ||= accept.sub(', ', ',').split(',')
+    @extensions ||= accept.gsub(', ', ',').split(',')
   end
 
   def objects_filtered
