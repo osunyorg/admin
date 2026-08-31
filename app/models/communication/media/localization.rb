@@ -61,7 +61,7 @@ class Communication::Media::Localization < ApplicationRecord
   end
 
   def references
-    contexts.map(&:about)
+    media.contexts.map(&:about)
   end
 
   def to_s
