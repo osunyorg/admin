@@ -15,11 +15,11 @@ class Osuny::Picker::Communication::Library::File < Osuny::Picker::Communication
   end
 
   def sorts
-    sort_add(:alpha)
     sort_add(:date_desc)
     sort_add(:date_asc)
     sort_add(:size_desc)
     sort_add(:size_asc)
+    sort_add(:alpha)
   end
 
   protected
