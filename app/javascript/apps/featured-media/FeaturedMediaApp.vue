@@ -18,7 +18,9 @@ export default {
     },
   },
   methods: {
-    loaded(data) {
+    mediaSelected(data) {
+      // on pré-remplit l'alt seulement s'il est vide, pour ne pas
+      // reproposer un alt que l'utilisateur avait volontairement vidé
       if (this.current.featured_media_alt == '') {
         this.current.featured_media_alt = data.alt;
       }
@@ -55,7 +57,7 @@ export default {
     :uploader-hint="dataset.uploadHint"
     :uploader-size-limit="Number(dataset.sizeLimit)"
     v-model="current.featured_media_id"
-    @loaded="loaded"
+    @media-selected="mediaSelected"
     @cropped="cropped"
     @unselected="unselected"
     />

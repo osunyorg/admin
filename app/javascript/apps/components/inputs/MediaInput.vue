@@ -32,12 +32,14 @@ export default {
   emits: [
     'update:modelValue',
     'loaded',
+    'media-selected',
     'cropped',
     'unselected',
   ],
   data() {
     return {
       uploadProgress: null,
+      pendingSelection: false,
     };
   },
   computed: {
@@ -69,6 +71,7 @@ export default {
           alt: ''
         });
       } else {
+        this.pendingSelection = true;
         this.value = id;
         this.$emit('cropped', {});
       }
@@ -84,6 +87,10 @@ export default {
     },
     loaded(data) {
       this.$emit('loaded', data);
+      if (this.pendingSelection) {
+        this.pendingSelection = false;
+        this.$emit('media-selected', data);
+      }
     },
     cropped(data) {
       this.$emit('cropped', data);

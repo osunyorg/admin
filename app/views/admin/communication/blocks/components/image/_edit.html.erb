@@ -11,7 +11,7 @@
   uploader-hint="<%= images_formats_accepted_hint %>"
   :uploader-size-limit="Number(<%= Rails.application.config.default_image_max_size %>)"
   v-model="<%= model %>.<%= property %>.communication_media_id"
-  @loaded="<%= model %>.alt = $event.alt"
+  @media-selected="<%= model %>.alt = $event.alt"
   @cropped="<%= model %>.<%= property %>.crop_settings = $event"
   >
 </media-input>
