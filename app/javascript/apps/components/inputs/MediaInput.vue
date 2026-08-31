@@ -31,15 +31,14 @@ export default {
   },
   emits: [
     'update:modelValue',
+    'picked',
     'loaded',
-    'media-selected',
     'cropped',
     'unselected',
   ],
   data() {
     return {
       uploadProgress: null,
-      pendingSelection: false,
     };
   },
   computed: {
@@ -71,10 +70,12 @@ export default {
           alt: ''
         });
       } else {
-        this.pendingSelection = true;
         this.value = id;
-        this.$emit('cropped', {});
+        this.resetCrop();
       }
+    },
+    resetCrop() {
+      this.$emit('cropped', {});
     },
     uploaded(id) {
       this.manage(id);
@@ -84,13 +85,10 @@ export default {
     },
     picked(object) {
       this.manage(object.id);
+      this.$emit('picked', object);
     },
     loaded(data) {
       this.$emit('loaded', data);
-      if (this.pendingSelection) {
-        this.pendingSelection = false;
-        this.$emit('media-selected', data);
-      }
     },
     cropped(data) {
       this.$emit('cropped', data);
