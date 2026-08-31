@@ -58,10 +58,10 @@ class Osuny::Picker::Communication::Library::Media < Osuny::Picker::Communicatio
   end
 
   def website_ids
-    ::Communication::File::Context.where(university: university)
-                                  .pluck(:communication_website_id)
-                                  .compact_blank
-                                  .uniq
+    ::Communication::Media::Context.where(university: university)
+                                   .pluck(:communication_website_id)
+                                   .compact_blank
+                                   .uniq
   end
 
   def filters_creators
