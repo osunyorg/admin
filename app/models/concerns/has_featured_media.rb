@@ -34,6 +34,9 @@ module HasFeaturedMedia
       media.find_or_create_localization(language, alt: alt)
       context = media.add_context(self)
       context.apply_crop_settings!(crop_settings)
+    else
+      media = nil
+      context = nil
     end
     Communication::Media::Context.remove(self, except: context)
     self.featured_media = media
