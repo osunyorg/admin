@@ -112,10 +112,10 @@ class Communication::Media < ApplicationRecord
     media
   end
 
-  def self.find_or_create_from_url(url, university_id: nil, user: nil, origin: :upload)
+  def self.find_or_create_from_url(url, filename: nil, university_id: nil, user: nil, origin: :upload)
     raise ArgumentError.new("Missing university_id") if university_id.nil?
 
-    blob = ActiveStorage::Utils.blob_from_url(url)
+    blob = ActiveStorage::Utils.blob_from_url(url, filename: filename)
     return if blob.nil?
     blob.update(
       university_id: university_id,

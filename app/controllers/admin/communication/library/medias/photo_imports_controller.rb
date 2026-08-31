@@ -38,8 +38,15 @@ class Admin::Communication::Library::Medias::PhotoImportsController < Admin::Com
   def select
     origin = params[:origin]
 
+    if origin == 'unsplash'
+      # https://images.unsplash.com/photo-1740393068492-53e82b121535?crop=...
+      # => photo-1740393068492-53e82b121535.jpeg
+      filename = URI.parse(params[:source]).path.split('/').last.to_s + ".jpeg"
+    end
+
     @media = Communication::Media.find_or_create_from_url(
       params[:source],
+      filename: filename,
       university_id: current_university.id,
       user: current_user,
       origin: origin
