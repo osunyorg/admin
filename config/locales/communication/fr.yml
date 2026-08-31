@@ -792,7 +792,9 @@ fr:
           published_on: Publiée le %{date}
     library:
       context:
-        in_block: Dans le bloc %{position}
+        cropped: photo recadrée
+        featured_media: en image à la une
+        in_block: dans le bloc %{position}
     manage_authors: Gérer les auteur·rices
     number_of_posts: Nombre d'actualités
     summary:

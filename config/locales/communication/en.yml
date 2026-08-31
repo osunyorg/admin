@@ -792,7 +792,9 @@ en:
           published_on: Published on %{date}
     library:
       context:
-        in_block: In block %{position}
+        cropped: cropped photo
+        featured_media: as featured media
+        in_block: in block %{position}
     manage_authors: Manage authors
     number_of_posts: Number of posts
     summary:

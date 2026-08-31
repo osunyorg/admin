@@ -54,14 +54,19 @@ end
               <%= l10n %>
             <% end %>
           </p>
-          <% if block.present? %>
-            <p class="small mb-0">
-              <i class="bi bi-arrow-right"></i>
+          <p class="small mb-0">
+            <i class="bi bi-arrow-right" style="margin-right: 2px"></i>
+            <% if block.present? %>
               <%= t('communication.library.context.in_block', position: block.position) %>
-            </p>
-          <% end %>
+            <% else %>
+              <%= t('communication.library.context.featured_media') %>
+            <% end %>
+          </p>
           <% if context.try(:cropped?) %>
-            <%= lucide_icon(:crop, width: 16)%>
+            <p class="small mb-0">
+              <%= lucide_icon(:crop, width: 16)%>
+              <%= t('communication.library.context.cropped') %>
+            </p>
           <% end %>
         </div>
         <div class="col-lg-2 text-muted">
