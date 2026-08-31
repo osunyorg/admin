@@ -11,5 +11,6 @@ class UnicornsJob < ApplicationJob
     Migrations::DownloadableSummaryToFiles.migrate
     Migrations::BlocksWithMedias.migrate
     Migrations::BlockTitlesToFiles.migrate
+    Migrations::CleanOrphanAttachments.migrate
   end
 end

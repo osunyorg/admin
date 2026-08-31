@@ -12,10 +12,10 @@ Rails.application.config.to_prepare do
     def record
       return if record_type.nil?
       record_class = record_type.safe_constantize
-      if record_class.nil?
-        self.delete
-        return
-      end
+      # Le record_type ne correspond plus à une classe existante : pièce jointe
+      # orpheline. On renvoie nil (pas d'effet de bord destructeur dans un reader).
+      # Le nettoyage effectif est fait par Migrations::CleanOrphanAttachments.
+      return if record_class.nil?
       record_class.unscoped { super }
     end
 
