@@ -52,14 +52,6 @@ class Communication::Media::Localization < ApplicationRecord
 
   has_summernote :credit
 
-  def blob
-    about.original_blob
-  end
-
-  def blob_if_published
-    blob if published?
-  end
-
   def references
     media.contexts.map(&:about)
   end
