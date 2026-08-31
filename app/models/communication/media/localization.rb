@@ -50,6 +50,8 @@ class Communication::Media::Localization < ApplicationRecord
 
   before_validation :guess_name
 
+  after_save :synchronize_media_contexts_abouts
+
   has_summernote :credit
 
   def blob
@@ -58,10 +60,6 @@ class Communication::Media::Localization < ApplicationRecord
 
   def blob_if_published
     blob if published?
-  end
-
-  def references
-    media.contexts.map(&:about)
   end
 
   def to_s
@@ -73,6 +71,10 @@ class Communication::Media::Localization < ApplicationRecord
   def guess_name
     return if self.name.present?
     self.name = media.original_guessed_name
+  end
+
+  def synchronize_media_contexts_abouts
+    Communication::Media::SynchronizeContextsAboutsJob.perform_later(media)
   end
 
 end
