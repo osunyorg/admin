@@ -60,6 +60,10 @@ class Communication::Media::Localization < ApplicationRecord
     blob if published?
   end
 
+  def references
+    contexts.map(&:about)
+  end
+
   def to_s
     "#{name}"
   end
