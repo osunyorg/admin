@@ -70,7 +70,7 @@ class Communication::Media::Localization < ApplicationRecord
   end
 
   def localize_specific_data(localization)
-    localization.published = true
+    localization.published = published
     localization.save
   end
 
