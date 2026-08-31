@@ -52,6 +52,9 @@ module AsLocalization
     # Blocks need an about, so we save before localizing blocks
     l10n.save
 
+    # After save, we can manage crop settings
+    localize_featured_media(l10n) if respond_to?(:featured_media)
+
     # Handle blocks if object has any
     localize_contents!(l10n) if respond_to?(:contents)
 
@@ -82,6 +85,16 @@ module AsLocalization
     blocks.ordered.each do |block|
       block.localize_for!(localization)
     end
+  end
+
+  def localize_featured_media(localization)
+    return unless featured_media_id
+    localization.set_featured_media!(
+      id: featured_media_id,
+      alt: featured_media_alt,
+      language: localization.language,
+      crop_settings: featured_media_context&.crop_settings
+    )
   end
 
   # Utility method to duplicate attachments

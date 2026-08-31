@@ -181,4 +181,8 @@ class Communication::File::Localization < ApplicationRecord
     self.name = original_guessed_name
   end
 
+  def localize_specific_data(localization)
+    localization.published = true
+    localization.save
+  end
 end

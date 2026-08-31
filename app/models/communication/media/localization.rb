@@ -69,4 +69,9 @@ class Communication::Media::Localization < ApplicationRecord
     Communication::Media::SynchronizeContextsAboutsJob.perform_later(media)
   end
 
+  def localize_specific_data(localization)
+    localization.published = true
+    localization.save
+  end
+
 end

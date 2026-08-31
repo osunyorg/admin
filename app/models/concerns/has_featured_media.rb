@@ -15,7 +15,7 @@ module HasFeaturedMedia
 
   def featured_blob
     return unless featured_media_localization&.published?
-    @featured_blob ||= featured_media_context.blob
+    @featured_blob ||= featured_media_context&.blob
   end
 
   def featured_blob_id
