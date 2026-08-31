@@ -89,6 +89,9 @@ export default {
     },
     loaded(data) {
       this.$emit('loaded', data);
+      if (data.context) {
+        this.$emit('cropped', data.context.crop_settings);
+      }
     },
     cropped(data) {
       this.$emit('cropped', data);
