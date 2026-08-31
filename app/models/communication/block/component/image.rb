@@ -17,8 +17,8 @@ class Communication::Block::Component::Image < Communication::Block::Component::
 
   # Attention, il s'agit du blob croppé !
   def blob
-    return if data_empty? || !communication_media_localization.published?
-    @blob ||= communication_media_context.active_storage_blob
+    return unless published?
+    @blob ||= communication_media_context&.active_storage_blob
   end
 
   def communication_media_context
@@ -37,7 +37,7 @@ class Communication::Block::Component::Image < Communication::Block::Component::
 
   def communication_media_localization
     return if data_empty?
-    @communication_media_localization ||= communication_media.localization_for(language)
+    @communication_media_localization ||= communication_media&.localization_for(language)
   end
 
   def published?
