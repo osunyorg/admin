@@ -48,6 +48,7 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
               class_name: 'User',
               optional: true
 
+  before_validation :set_from_day_from_year, if: -> { from_day.blank? && year.present? }
   validates :from_day, presence: true
 
   scope :ordered, -> (language) {
@@ -100,6 +101,10 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
 
   def list_blocks_template_kind
     :projects
+  end
+
+  def set_from_day_from_year
+    self.from_day = Date.new(year)
   end
 
 end
