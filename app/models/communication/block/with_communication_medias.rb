@@ -39,12 +39,6 @@ module Communication::Block::WithCommunicationMedias
     template.crop_settings_for(media)
   end
 
-  def first_or_create_media_context_for(media)
-    communication_media_contexts.where(
-      communication_media_id: media.id
-    ).first_or_create!
-  end
-
   def destroy_obsolete_media_contexts
     communication_media_contexts.where.not(
       communication_media_id: commmunication_media_ids
