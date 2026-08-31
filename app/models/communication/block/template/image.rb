@@ -6,7 +6,11 @@ class Communication::Block::Template::Image < Communication::Block::Template::Ba
   has_component :text, :rich_text
 
   def empty?
-    media.nil?
+    blob.nil?
+  end
+
+  def blob
+    image_component.blob
   end
 
   def media

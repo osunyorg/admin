@@ -79,7 +79,9 @@
       <%= osuny_label Communication::Media::Localization.human_attribute_name(:collection) %>
       <p><%= osuny_link_localized @media.collection, admin_communication_media_collection_path(@media.collection) %><p>
     <% end %>
-      </div>
+  </div>
 </div>
+
+<%= render 'admin/application/l10n/widget', about: @media, l10n: @l10n %>
 
 <%= render 'admin/communication/library/contexts/list', contexts: @contexts %>

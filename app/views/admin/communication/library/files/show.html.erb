@@ -68,6 +68,8 @@
   </div>
 </div>
 
+<%= render 'admin/application/l10n/widget', about: @file, l10n: @l10n %>  
+
 <%= render 'admin/communication/library/contexts/list', contexts: @contexts %>
 
 <% content_for :server_admin_only do %>
