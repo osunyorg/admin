@@ -95,6 +95,11 @@ module AsLocalization
       language: localization.language,
       crop_settings: featured_media_context&.crop_settings
     )
+    media_l10n = featured_media.localization_for(localization.language)
+    # Si on vient de le créer, il manque le crédit
+    if featured_media_credit.present? && media_l10n.credit.blank?
+      media_l10n.update_column :credit, featured_media_credit
+    end
   end
 
   # Utility method to duplicate attachments
