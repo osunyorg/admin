@@ -12,8 +12,14 @@ class Communication::Media::SynchronizeContextsAboutsJob < ApplicationJob
 
   def abouts(media)
     media.contexts
-          .map { |context| context.about }
+          .map { |context| real_about(context) }
+          .compact_blank
           .uniq
+  end
+
+  def real_about(context)
+    context.about.is_a?(Communication::Block) ? context.about.about
+                                              : context.about
   end
 
 end
