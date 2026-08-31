@@ -16,6 +16,9 @@ module Education::Program::WithDownloadableSummary
       file = university.communication_files.find(id)
       file_l10n = file.create_localization_if_missing!(language)
       context = file_l10n.add_context(self)
+    else
+      file = nil
+      context = nil
     end
     self.downloadable_summary = file
     save!
