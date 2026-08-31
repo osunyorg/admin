@@ -143,12 +143,12 @@ class Communication::Media < ApplicationRecord
 
   def thumb_url_keycdn
     return unless ENV['KEYCDN_HOST'].present?
-    "https://#{ENV['KEYCDN_HOST']}/#{original_blob.key}?width=800"
+    "https://#{ENV['KEYCDN_HOST']}/#{original_blob.key}?width=900"
   end
 
   def thumb_url_rails
     Rails.routes.helpers.url_for(
-      original_blob.variant(resize_to_fit: [800, nil])
+      original_blob.variant(resize_to_fit: [900, nil])
     )
   end
 
