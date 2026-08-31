@@ -8,7 +8,7 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
   def index
     @filtered = @files.filter_by(params[:filters], current_language)
     @files = @filtered.at_lifecycle(params[:lifecycle], current_language)
-                      .ordered(current_language)
+                      .order(created_at: :desc)
                       .page(params[:page])
     @categories = categories.root
     breadcrumb

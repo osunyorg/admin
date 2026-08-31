@@ -89,6 +89,16 @@ class Communication::Media < ApplicationRecord
     where(original_extension: extensions)
   }
 
+  scope :autosort_by_alpha, -> (language) {
+    ordered(language)
+  }
+  scope :autosort_by_date_desc, -> (language) {
+    order(created_at: :desc)
+  }
+  scope :autosort_by_date_asc, -> (language) {
+    order(created_at: :asc)
+  }
+
   def self.find_or_create_media_from_blob(blob, user: nil, origin: :upload)
     return if blob.nil?
     media = Communication::Media.where(

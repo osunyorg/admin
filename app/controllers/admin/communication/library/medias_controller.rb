@@ -7,7 +7,7 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
   def index
     @filtered = @medias.filter_by(params[:filters], current_language)
     @medias = @filtered.at_lifecycle(params[:lifecycle], current_language)
-                       .ordered(current_language)
+                       .order(created_at: :desc)
                        .page(params[:page])
     @collections = current_university.communication_media_collections
                                      .ordered(current_language)

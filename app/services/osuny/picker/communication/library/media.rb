@@ -22,6 +22,12 @@ class Osuny::Picker::Communication::Library::Media < Osuny::Picker::Communicatio
     filters_origins
   end
 
+  def sorts
+    sort_add(:alpha)
+    sort_add(:date_desc)
+    sort_add(:date_asc)
+  end
+
   protected
 
   def filters_collections
