@@ -48,8 +48,9 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
               class_name: 'User',
               optional: true
 
-  before_validation :set_from_day_from_year, if: -> { from_day.blank? && year.present? }
   validates :from_day, presence: true
+
+  before_validation :set_from_day_from_year, if: -> { from_day.blank? && year.present? }
 
   scope :ordered, -> (language) {
     localization_title_select = <<-SQL
