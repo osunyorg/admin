@@ -13,12 +13,13 @@ class Migrations::DownloadableSummaryToFiles
       return if program_l10n.nil?
       program = program_l10n.about
       return if program.nil?
+      language = program_l10n.language
       file_l10n = Communication::File::Localization.find_or_create_file_localization_from_blob(
         attachment.blob,
-        language: program_l10n.language
+        language: language
       )
-      program.update_column :downloadable_summary_id, file_l10n.file.id
-      attachment.delete
+      file = file_l10n.about
+      program.set_downloadable_summary!(id: file.id, language:language)
   end
 end
 
