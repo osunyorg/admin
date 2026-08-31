@@ -3,6 +3,8 @@ project = @l10n.about
 %>
 ---
 <%= render 'admin/application/static/core', about: @l10n, skip_date: true %>
+year: <%= project.from_day.year %>
+date: <%= project.from_day %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design', about: project, l10n: @l10n %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
@@ -11,8 +13,6 @@ project = @l10n.about
 <%= osuny_static_text 'meta_description', @l10n.meta_description %>
 <%= osuny_static_html 'summary', @l10n.summary %>
 <%= render 'admin/application/header_cta/static', about: @l10n %>
-year: <%= project.year %>
-date: <%= project.year %>
 <%= render 'admin/application/categories/widget/static',
             about: project,
             l10n: @l10n,
