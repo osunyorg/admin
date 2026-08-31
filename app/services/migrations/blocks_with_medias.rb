@@ -36,7 +36,7 @@ class Migrations::BlocksWithMedias
       Communication::Block.where(template_kind: template_kind).with_deleted.find_each do |block|
         data = block.data.dup
         something_to_migrate = false
-        data['elements'].each do |element|
+        (data['elements'] || []).each do |element|
           next unless element.is_a?(Hash)
           image = element['image']
           next unless image.is_a?(Hash)
@@ -59,7 +59,7 @@ class Migrations::BlocksWithMedias
     Communication::Block.where(template_kind: :testimonial).with_deleted.find_each do |block|
         data = block.data.dup
         something_to_migrate = false
-        data['elements'].each do |element|
+        (data['elements'] || []).each do |element|
           next unless element.is_a?(Hash)
           photo = element['photo']
           next unless photo.is_a?(Hash)
