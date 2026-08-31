@@ -13,7 +13,7 @@ class Communication::Block::Template::File < Communication::Block::Template::Bas
       @communication_file_localizations_published = []
       communication_files.each do |file|
         l10n = file.localization_for(block.language)
-        next unless l10n.published?
+        next unless l10n&.published?
         @communication_file_localizations_published << l10n
       end
     end
