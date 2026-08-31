@@ -130,7 +130,7 @@ en:
       parameters:
         search:
           placeholder: Search
-        sorts: Sort
+        sort: Sort
       results:
         nothing: 
           title: There is nothing here, nothing at all. 
