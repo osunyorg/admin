@@ -164,7 +164,7 @@ class Communication::Block < ApplicationRecord
 
   def touch_about
     return if Osuny::BulkOperation.in_progress?
-    about.touch
+    about&.touch
   end
 
   def connect_to_websites
