@@ -793,6 +793,7 @@ en:
     library:
       context:
         cropped: cropped photo
+        downloadable_summary: as program downloadable summary
         featured_media: as featured media
         in_block: in block %{position}
     manage_authors: Manage authors

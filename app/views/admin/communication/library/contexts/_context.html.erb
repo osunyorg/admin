@@ -58,6 +58,8 @@ end
             <i class="bi bi-arrow-right" style="margin-right: 2px"></i>
             <% if block.present? %>
               <%= t('communication.library.context.in_block', position: block.position) %>
+            <% elsif context.about_type == 'Education::Program' %>
+              <%= t('communication.library.context.downloadable_summary') %>
             <% else %>
               <%= t('communication.library.context.featured_media') %>
             <% end %>
