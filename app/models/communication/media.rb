@@ -147,8 +147,9 @@ class Communication::Media < ApplicationRecord
   end
 
   def thumb_url_rails
-    Rails.routes.helpers.url_for(
-      original_blob.variant(resize_to_fit: [900, nil])
+    Rails.application.routes.url_helpers.rails_representation_path(
+      original_blob.variant(resize_to_fit: [900, nil]),
+      only_path: true
     )
   end
 
