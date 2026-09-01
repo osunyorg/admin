@@ -56,9 +56,10 @@ module Communication::Block::WithCommunicationFiles
   end
 
   def communication_file_localizations
+    l = language || university.default_language
     Communication::File::Localization.where(
       university_id: university_id,
-      language_id: language.id,
+      language_id: l.id,
       about_id: commmunication_file_ids
     )
   end
