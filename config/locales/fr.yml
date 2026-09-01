@@ -433,6 +433,7 @@ fr:
       facet: Filtrer par responsabilité
       kind: Filtrer par type
       role: Filtrer par rôle
+      website: Filtrer par site
     buttons:
       close: Fermer
       expand: Rechercher et filtrer

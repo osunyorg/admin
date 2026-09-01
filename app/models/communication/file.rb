@@ -59,6 +59,7 @@ class Communication::File < ApplicationRecord
         communication_website_id: website_ids
       }
     )
+    .distinct
   }
   scope :for_extension, -> (extensions, language) {
     with_localizations(language)

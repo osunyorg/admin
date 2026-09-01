@@ -9,8 +9,8 @@
     picker-title="<%= Communication::File.model_name.human(count: 2) %>"
     uploader-endpoint="<%= direct_upload_admin_communication_files_path %>"
     uplader-size-limit="<%= Rails.application.config.default_file_max_size %>"
-    v-model="data.file"
-    @update:model-value="data.file = $event"
+    v-model="data.file.communication_file_id"
+    @update:model-value="data.file.communication_file_id = $event"
     >
   </file-input>
   <a

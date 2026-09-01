@@ -1,5 +1,10 @@
-<p>
-  <% if block.template.file.present? %>
-    <%= block.template.file['filename'] %>
-  <% end %>
-</p>
+<%
+component = block.template.file_component
+l10n = component.communication_file_localization
+blob = component.blob
+%>
+<% if blob.present? %>
+  <p class="mb-0"><%= l10n.to_s %></p>
+  <span class="small"><%= l10n.original_filename %></span>
+
+<% end %>

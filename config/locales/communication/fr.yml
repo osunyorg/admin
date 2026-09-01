@@ -793,6 +793,7 @@ fr:
     library:
       context:
         cropped: photo recadrée
+        downloadable_summary: en document téléchargeable d'une formation 
         featured_media: en image à la une
         in_block: dans le bloc %{position}
     manage_authors: Gérer les auteur·rices
