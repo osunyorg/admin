@@ -36,7 +36,7 @@ module Admin::Localizable
   def redirect_if_not_localized
     return if @l10n.present?
 
-    if resource_is_website_direct_object? && !resource.website.localized_in?a(current_language)
+    if resource_is_website_direct_object? && !resource.website.localized_in?(current_language)
       redirect_to [:confirm_localization, :admin, resource.website, { about: resource.to_gid.to_s }]
     elsif resource_is_extranet_object? && !resource.extranet.localized_in?(current_language)
       redirect_to [:confirm_localization, :admin, resource.extranet, { about: resource.to_gid.to_s }]
