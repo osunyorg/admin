@@ -1,26 +1,39 @@
 <script>
-import { createApp, provide, reactive } from 'vue';
+import { createApp, provide, reactive, ref } from 'vue';
 import { VueDraggableNext } from 'vue-draggable-next';
-import RichTextInput from './inputs/RichTextInput.vue';
-import CodeInput from './inputs/CodeInput.vue';
-import UploadInput from './inputs/UploadInput.vue';
-import FileUploadInput from './inputs/FileUploadInput.vue';
-import MultiImageInput from './inputs/MultiImageInput.vue';
+import { getI18n } from '../../i18n';
+import Picker from '../../picker/Picker.vue';
+// Inputs
+import CodeInput              from '../../components/inputs/CodeInput.vue';
+import FileInput              from '../../components/inputs/FileInput.vue';
+import MediaInput             from '../../components/inputs/MediaInput.vue';
+import RichTextInput          from '../../components/inputs/RichTextInput.vue';
+import UploadInput            from '../../components/inputs/UploadInput.vue';
+// Selected objects
+import SelectedFile           from '../../components/selected-objects/SelectedFile.vue';
+import SelectedMedia          from '../../components/selected-objects/SelectedMedia.vue';
+import SelectedObject         from '../../components/selected-objects/SelectedObject.vue';
+import SelectedOrganization   from '../../components/selected-objects/SelectedOrganization.vue';
+import SelectedPerson         from '../../components/selected-objects/SelectedPerson.vue';
+import SelectedProgram        from '../../components/selected-objects/SelectedProgram.vue';
 
 // Renders the block-edit form fetched from the server, mounts a fresh inner
 // Vue app on it for reactive v-model bindings, and unmounts on close.
 //
 // The inner app exposes a small reactive surface (data, addElement,
 // deleteElement, getImageUrl) for the ERB-rendered templates, and registers
-// 4 wrapper components (RichTextInput, CodeInput, UploadInput,
-// MultiImageInput) that each own their own DOM lifecycle.
+// the input components that the templates bind to via v-model — each
+// owns its own DOM lifecycle.
 
 export default {
   name: 'Editor',
   props: {
     url: { type: String, required: true },
   },
-  emits: ['save', 'close'],
+  emits: [
+    'save',
+    'close'
+  ],
   data() {
     return {
       html: null,
@@ -54,13 +67,13 @@ export default {
         const root = doc.querySelector('[data-editor-form-root]');
         this.html = root ? root.outerHTML : '';
         await this.$nextTick();
-        this.mountInner();
+        await this.mountInner();
       } finally {
         this.loading = false;
       }
     },
 
-    mountInner() {
+    async mountInner() {
       const container = this.$refs.container;
       if (!container) return;
       const root = container.querySelector('[data-editor-form-root]');
@@ -70,20 +83,24 @@ export default {
       // takes the element's innerHTML as its template, compiles it, then
       // replaces the element's children with the rendered output — any
       // listener attached beforehand would be discarded with the old DOM.
-      this.mountVueApp(root);
+      await this.mountVueApp(root);
       this.wireForm(root);
       this.wireCancelButtons(root);
     },
 
-    mountVueApp(root) {
+    async mountVueApp(root) {
       const payload = JSON.parse(root.dataset.payload);
+      const i18n = await getI18n();
+      // Défini à l'extérieur du setup pour pouvoir y accéder après.
+      this.saving = ref(false);
       this.innerApp = createApp({
-        setup() {
+        setup: () => {
           // Reactive state + helpers exposed to the server-rendered Vue
           // templates inside the block's edit form. The templates reference
           // `data.title`, `data.elements`, `addElement()`, `deleteElement()`,
           // `getImageUrl()`, `defaultElement` at top-level scope.
           const data = reactive(payload.data);
+          const saving = this.saving;
           const defaultElement = payload.defaultElement;
           const directUpload = {
             url: payload.directUploadUrl,
@@ -101,20 +118,23 @@ export default {
             if (!image?.signed_id) return '';
             const parts = image.filename.split('.');
             const extension = parts[parts.length - 1];
-            // Substitute :signed_id and :filename in the blob URL template
-            // we got from the server (medium_url helper, see edit.html.erb).
             return directUpload.blobUrlTemplate
               .replace(':signed_id', image.signed_id)
               .replace(':filename', `image_1024x.${extension}`);
           }
 
-          // The input wrappers reach for these via inject() instead of
-          // prop-drilling them through every server-rendered partial.
           provide('directUpload', directUpload);
           provide('getImageUrl', getImageUrl);
           provide('summernoteLocale', payload.summernoteLocale);
 
-          return { data, defaultElement, deleteElement, addElement, getImageUrl };
+          return {
+            data,
+            saving,
+            defaultElement,
+            deleteElement,
+            addElement,
+            getImageUrl,
+          };
         },
         mounted() {
           // LanguageTool grammar checker — LTAssistant is a global from a
@@ -143,12 +163,22 @@ export default {
         },
       });
 
+      this.innerApp.use(i18n);
       this.innerApp.component('draggable', VueDraggableNext);
-      this.innerApp.component('RichTextInput', RichTextInput);
+      this.innerApp.component('Picker', Picker);
+      // Inputs
       this.innerApp.component('CodeInput', CodeInput);
+      this.innerApp.component('FileInput', FileInput);
+      this.innerApp.component('MediaInput', MediaInput);
+      this.innerApp.component('RichTextInput', RichTextInput);
       this.innerApp.component('UploadInput', UploadInput);
-      this.innerApp.component('FileUploadInput', FileUploadInput);
-      this.innerApp.component('MultiImageInput', MultiImageInput);
+      // Selected objects
+      this.innerApp.component('SelectedFile', SelectedFile);
+      this.innerApp.component('SelectedMedia', SelectedMedia);
+      this.innerApp.component('SelectedObject', SelectedObject);
+      this.innerApp.component('SelectedOrganization', SelectedOrganization);
+      this.innerApp.component('SelectedPerson', SelectedPerson);
+      this.innerApp.component('SelectedProgram', SelectedProgram);
 
       this.innerApp.mount(root);
     },
@@ -171,7 +201,10 @@ export default {
       event.preventDefault();
       const form = event.target;
       const submit = form.querySelector('[type=submit]');
-      if (submit) submit.disabled = true;
+      if (submit) {
+        submit.disabled = true;
+        this.saving.value = true;
+      }
 
       const res = await fetch(form.action, {
         method: form.method.toUpperCase(),
@@ -184,8 +217,10 @@ export default {
         return;
       }
 
-      // Re-enable submit on error so the user can retry.
-      if (submit) submit.disabled = false;
+      if (submit) {
+        submit.disabled = false;
+        this.saving.value = false;
+      }
       if (res.status === 422) {
         // Server re-rendered the form with errors — swap it in and re-mount.
         const text = await res.text();
@@ -195,7 +230,7 @@ export default {
           this.cleanup();
           this.html = fresh.outerHTML;
           await this.$nextTick();
-          this.mountInner();
+          await this.mountInner();
         }
       }
     },
@@ -205,6 +240,7 @@ export default {
         try { this.innerApp.unmount(); } catch (_) { /* noop */ }
         this.innerApp = null;
       }
+      this.saving = null;
       this.html = null;
     },
   },

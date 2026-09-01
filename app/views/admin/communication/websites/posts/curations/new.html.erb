@@ -4,11 +4,18 @@
                     url: admin_communication_website_post_curations_path, 
                     html: { id: 'new_communication_website_post_curation' } do |f| %>
   <%= f.error_notification %>
-  <%= f.input :url,
-              label: t('curation.label'),
-              placeholder: t('curation.placeholder'),
-              input_html: { value: @url } %>
 
+  <div class="row">
+    <div class="col-lg-6">
+      <%= f.input :url,
+                  label: t('curation.label'),
+                  placeholder: t('curation.placeholder'),
+                  input_html: { value: @url } %>
+      <div class="alert alert-danger" role="alert">
+        <%= t('curation.warning') %>
+      </div>
+    </div>
+  </div>
   <% content_for :action_bar_right do %>
     <%= cancel [:admin, @website] %>
     <%= submit f %>

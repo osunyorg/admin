@@ -1,10 +1,14 @@
 <% content_for :title, User.model_name.human(count: 2) %>
 
-<div class="d-flex justify-content-between mb-4">
-  <p>
-    <%= @users.total_count %>
-    <%= User.model_name.human(count: @users.total_count).downcase %>
-  </p>
+<div class="d-flex justify-content-between mb-5">
+  <ul class="nav nav-pills osuny__lifecycle">
+    <li class="nav-item">
+      <a  class="nav-link active" aria-current="page">
+        <%= t("lifecycle.status.#{Lifecyclable::LIFECYCLE_ALL}") %>
+        <span class="text-muted">(<%= @users.total_count %>)</span>
+      </a>
+    </li>
+  </ul>
   <%= render 'filters', current_path: admin_users_path %>
 </div>
 

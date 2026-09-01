@@ -1,3 +1,7 @@
+<%
+picker_endpoint = picker_admin_university_people_path(format: :json)
+object_endpoint = admin_university_people_path
+%>
 <%= block_component_edit block, :description, summernote_config: 'mini' %>
 <%= block_component_edit block, :mode %>
 
@@ -7,37 +11,55 @@
 
 <div v-if="data.mode === 'selection'">
   <div><%= osuny_label University::Person.model_name.human(count: 2) %></div>
-  <%= block_component_add_element block, t('.add_person') %>
-  <draggable :list="data.elements" handle=".dragHandle" class="mb-3">
-    <div v-for="(element, index) in data.elements" class="draggable-item">
-      <div class="d-flex">
-        <div>
-          <a class="btn ps-0 dragHandle" title="<%= t('admin.communication.block.drag_and_drop') %>">
-            <i class="<%= Icon::DRAG %> handle"></i>
-          </a>
-        </div>
-        <div class="flex-fill">
-          <div class="row mb-n3">
-            <div class="col-sm-6">
-              <%= block_component_edit block, :id, template: @element, label: '' %>
-            </div>
-            <div class="col-sm-6">
-              <%= block_component_edit block, :role, template: @element, label: '' %>
-            </div>
+
+  <picker
+    ref="picker"
+    title="<%= University::Person.model_name.human(count: 2) %>"
+    endpoint="<%= picker_endpoint %>"
+    @update:model-value="data.elements.push({id: $event.id})">
+  </picker>
+
+  <a
+    class="<%= button_classes %>"
+    @click="$refs.picker.open()">
+    <%= t('.add_person') %>
+  </a>
+
+  <draggable
+    :list="data.elements"
+    handle=".osuny__thumbnail"
+    class="row g-2 mb-2">
+    <div
+      v-for="(element, index) in data.elements"
+      class="d-flex align-items-center">
+      <div class="flex-fill">
+        <div class="row align-items-center">
+          <div class="col-sm-6">
+            <selected-person
+              :id="element.id"
+              endpoint="<%= object_endpoint %>">
+            </selected-object>
+          </div>
+          <div class="col-sm-6 mb-n3">
+            <%= block_component_edit block, :role, template: @element, label: '' %>
           </div>
         </div>
-        <div>
-          <a  class="btn btn-sm text-danger"
-              @click="deleteElement(element)"
-              title="<%= t('delete') %>">
-              <i class="<%= Icon::DELETE %>"></i>
-          </a>
-        </div>
+      </div>
+      <div>
+        <a  class="btn btn-sm text-danger"
+            @click="deleteElement(element)"
+            title="<%= t('delete') %>">
+            <i class="<%= Icon::DELETE %>"></i>
+        </a>
       </div>
     </div>
   </draggable>
   <div v-show="data.elements.length > 2">
-    <%= block_component_add_element block, t('.add_person') %>
+    <a
+      class="<%= button_classes('mb-4') %>"
+      @click="$refs.picker.open()">
+      <%= t('.add_person') %>
+    </a>
   </div>
 </div>
 

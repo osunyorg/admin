@@ -7,26 +7,14 @@ module HasOriginalBlob
 
     attr_accessor :original_uploaded_file
 
-    before_validation :create_original_blob_from_upload, on: :create, if: :original_uploaded_file
+    before_validation :create_original_blob_from_upload,
+                      if: :original_uploaded_file
+    before_save :denormalize_extension
 
-    validates :original_uploaded_file, presence: true, on: :create, unless: :original_blob
-  end
-
-  # TODO Quand on voudra généraliser l'usage (pas seulement les featured_images)
-  # il faudra ajouter la clé au contexte (le même média peut être utilisé pour 2 clés différentes).
-  def attach(about, key)
-    # Création du nouveau contexte
-    contexts.where(
-      university: university,
-      active_storage_blob: original_blob,
-      about: about
-    ).first_or_create
-    # Attachement du nouveau blob
-    ActiveStorage::Attachment.where(
-      name: key,
-      blob: original_blob,
-      record: about
-    ).first_or_create
+    validates :original_uploaded_file,
+              presence: true,
+              on: :create,
+              unless: :original_blob
   end
 
   def original_blob=(value)
@@ -38,12 +26,17 @@ module HasOriginalBlob
     self.original_byte_size = value.byte_size
   end
 
+  def original_guessed_name
+    File.basename(original_filename, ".*").humanize
+  end
+
   def max_file_size
     raise NotImplementedError, "You must implement max_file_size in the including class"
   end
 
   protected
 
+  # Utile pour les envois directs, via la photothèque ou la bibliothèque de fichiers
   def create_original_blob_from_upload
     return if wrong_uploaded_file? || file_size_too_big?
     original_uploaded_file_io = original_uploaded_file.open
@@ -77,7 +70,7 @@ module HasOriginalBlob
 
   def exists_for_blob_checksum?(blob)
     objects = self.class.where(university_id: university.id)
-    if objects.where(original_checksum: blob.checksum).any?
+    if objects.where(original_checksum: blob.checksum).where.not(id: self.id).any?
       errors.add :original_uploaded_file, :already_imported
       true
     else
@@ -96,5 +89,9 @@ module HasOriginalBlob
       filename: original_uploaded_file.original_filename,
       content_type: original_uploaded_file.content_type
     )
+  end
+
+  def denormalize_extension
+    self.original_extension = File.extname(original_filename)
   end
 end

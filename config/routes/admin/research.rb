@@ -25,6 +25,9 @@ namespace :research do
       post :restore
     end
     resources :volumes, controller: 'journals/volumes' do
+      collection do
+        get :picker
+      end
       member do
         get :static
         post :restore
@@ -38,6 +41,7 @@ namespace :research do
             post :restore
           end
         end
+        get :picker
         post :reorder
       end
       member do

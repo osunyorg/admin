@@ -16,6 +16,15 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
     breadcrumb
   end
 
+  def picker
+    @picker = Osuny::Picker::Research::Journal::Paper.new(
+      university: current_university,
+      language: current_language,
+      params: params,
+      context: @journal
+    )
+  end
+
   def show
     breadcrumb
   end

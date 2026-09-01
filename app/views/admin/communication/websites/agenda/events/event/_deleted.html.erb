@@ -1,0 +1,14 @@
+<div class="<%= osuny_card_classes(horizontal: true) %> flex-grow-1">
+  <%= osuny_thumbnail_localized event %>
+  <div class="card-body">
+    <%= event.best_localization_for(current_language) %>
+  </div>
+  <% if can?(:restore, event) %>
+    <div class="card-footer mb-n2">
+      <%= link_to t('restore'),
+                  restore_admin_communication_website_agenda_event_path(event),
+                  method: :post,
+                  class: button_classes %>
+    </div>
+  <% end %>
+</div>

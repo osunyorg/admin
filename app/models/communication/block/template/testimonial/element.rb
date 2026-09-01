@@ -9,6 +9,18 @@ class Communication::Block::Template::Testimonial::Element < Communication::Bloc
     text.blank?
   end
 
+  def blob
+    photo_component.blob
+  end
+
+  def communication_media
+    photo_component.communication_media
+  end
+
+  def communication_media_l10n
+    communication_media.localization_for(block.language)
+  end
+
   def dom_count
     2 +
     text_component.dom_count +

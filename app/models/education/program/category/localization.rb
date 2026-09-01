@@ -4,8 +4,8 @@
 #
 #  id                    :uuid             not null, primary key
 #  breadcrumb_title      :string
-#  featured_image_alt    :text
 #  featured_image_credit :text
+#  featured_media_alt    :text
 #  header_cta            :boolean          default(FALSE)
 #  header_cta_label      :string
 #  header_cta_url        :string
@@ -18,12 +18,14 @@
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  about_id              :uuid             uniquely indexed => [language_id], indexed
+#  featured_media_id     :uuid             indexed
 #  language_id           :uuid             uniquely indexed => [about_id], indexed
 #  university_id         :uuid             indexed
 #
 # Indexes
 #
 #  idx_on_about_id_language_id_a020d83b5c                         (about_id,language_id) UNIQUE
+#  idx_on_featured_media_id_1545e9bc7c                            (featured_media_id)
 #  idx_on_university_id_833fd3c673                                (university_id)
 #  index_education_program_category_localizations_on_about_id     (about_id)
 #  index_education_program_category_localizations_on_language_id  (language_id)
@@ -31,6 +33,7 @@
 # Foreign Keys
 #
 #  fk_rails_00cd45d2d3  (university_id => universities.id)
+#  fk_rails_92597ed700  (featured_media_id => communication_medias.id) ON DELETE => nullify
 #  fk_rails_f2b3e230b9  (about_id => education_program_categories.id)
 #  fk_rails_fee1ce58f8  (language_id => languages.id)
 #

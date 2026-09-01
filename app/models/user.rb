@@ -62,10 +62,9 @@ class User < ApplicationRecord
   include Filterable
   include Initials
   include WithAuthentication
-  include WithAuthorship
   include WithAvatar
   include WithBrevo
-  include WithCreatedElements
+  include WithCreatedOrEditedElements
   include WithFavorites
   include WithOmniauth
   include WithPerson

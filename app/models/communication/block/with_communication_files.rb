@@ -4,6 +4,17 @@ module Communication::Block::WithCommunicationFiles
   included do
     after_create :check_if_all_files_are_localized
     after_save :manage_file_contexts
+    after_destroy :destroy_file_contexts
+  end
+
+  def destroy_file_contexts
+    communication_file_contexts.delete_all
+  end
+
+  def restore_file_contexts
+    communication_file_localizations.each do |file_l10n|
+      file_l10n.add_context(self)
+    end
   end
 
   protected
@@ -12,8 +23,7 @@ module Communication::Block::WithCommunicationFiles
     # As many files as localizations, no need to check
     return if commmunication_file_ids.size == commmunication_file_localization_ids.size
     communication_files.each do |file|
-      file_l10n = file.localizations.find_by(language_id: language.id)
-      file.original_localization.localize_in!(language) unless file_l10n
+      file.create_localization_if_missing!(language)
     end
   end
 
@@ -58,11 +68,9 @@ module Communication::Block::WithCommunicationFiles
   end
 
   def communication_file_contexts
-    Communication::File::Context
-      .where(
-        university_id: university_id,
-        about_id: self.id,
-        about_type: self.class.polymorphic_name
-      )
+    Communication::File::Context.where(
+      university_id: university_id,
+      about: self
+    )
   end
 end

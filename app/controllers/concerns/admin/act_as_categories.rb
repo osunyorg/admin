@@ -48,7 +48,6 @@ module Admin::ActAsCategories
       localizations_attributes: [
         :id, :name, :slug, :subtitle, :summary, :meta_description, :breadcrumb_title,
         :header_text, :header_cta, :header_cta_label, :header_cta_url,
-        :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
         :shared_image, :shared_image_delete, :shared_image_infos,
         :language_id
       ]).merge(university_id: current_university.id)

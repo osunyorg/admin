@@ -1,0 +1,11 @@
+<div class="<%= osuny_card_classes(horizontal: true) %>">
+  <%= osuny_thumbnail_localized job %>
+  <div class="card-body">
+    <%= osuny_link_localized  job,
+                              admin_communication_website_jobboard_job_path(
+                                website_id: job.website.id,
+                                id: job.id
+                              ),
+                              classes: "stretched-link" %>
+  </div>
+</div>

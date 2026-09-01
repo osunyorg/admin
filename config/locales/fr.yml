@@ -250,8 +250,6 @@ fr:
   category:
     breadcrumb_title: Nom affiché dans le fil d'ariane
     children: Sous-catégories
-    featured_image: Image à la une
-    featured_image_alt: Texte alternatif
     free: Catégories libres (sans taxonomie)
     header_text: Titre affiché en haut de page
     is_taxonomy: Est une taxonomie (une famille de catégories)
@@ -425,13 +423,6 @@ fr:
         pending: En cours de traitement
   export: Exporter (xlsx)
   false: Non
-  featured_image:
-    alt:
-      hint: Ce texte est essentiel pour l'accessibilité. Si l'image donne une information importante, il faut écrire ici cette information. Si l'information est déjà présente ailleurs dans la page, ou si l'image est purement décorative, il faut laisser le texte alternatif vide, pour éviter de polluer la navigation vocale.
-      label: Texte alternatif
-    credit:
-      hint: Le crédit photo doit être indiqué, dans le respect du droit d'auteur.
-      label: Crédit
   file_hint_with_formats: "Fichiers %{formats} uniquement. %{filesize} max."
   file_hint_without_formats: "%{filesize} max."
   filters:
@@ -554,6 +545,13 @@ fr:
   move: Déplacer
   open: Ouvrir
   organize: Organiser
+  picker:
+    sort:
+      alpha: Par ordre alphabétique
+      date_desc: Par date décroissante
+      date_asc: Par date croissante
+      size_desc: Par poids décroissant
+      size_asc: Par poids croissant
   please_confirm:
     deletion: Est-ce que vous confirmez la suppression ?
     duplication: Est-ce que vous confirmez la duplication ?

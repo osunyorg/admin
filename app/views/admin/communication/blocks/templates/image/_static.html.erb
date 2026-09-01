@@ -1,4 +1,18 @@
-<%= block_component_static block, :text %>
-<%= block_component_static block, :image %>
-<%= block_component_static block, :alt, depth: 4 %>
-<%= block_component_static block, :credit, depth: 4 %>
+<%
+component = block.template.image_component
+media_l10n = component.communication_media_localization
+blob = component.blob
+%>
+<%= osuny_static_text :text,
+                      block.template.text,
+                      depth: 4 %>
+<% if blob.present? %>
+      image:
+        id: "<%= blob.id %>"
+<%= osuny_static_text :alt,
+                      block.template.alt,
+                      depth: 5 %>
+<%= osuny_static_text :credit,
+                      media_l10n&.credit,
+                      depth: 5 %>
+<% end %>

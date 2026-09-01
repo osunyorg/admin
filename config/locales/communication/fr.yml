@@ -86,14 +86,15 @@ fr:
       communication/extranet/post/category/localization:
         name: Nom
       communication/extranet/post/localization:
-        featured_image: Image à la une
-        featured_image_alt: Texte alternatif
-        featured_image_credit: Crédit
         pinned: Mis en avant
         published: Publié ?
         published_at: Date de publication
         slug: Identifiant
         title: Titre
+      communication/file:
+        created_by: Envoyé par
+      communication/file/context:
+        about_type: Type
       communication/file/localization:
         internal_description: Description interne
         name: Nom
@@ -101,8 +102,12 @@ fr:
         original_content_type: Type de contenu
         original_filename: Nom du fichier original
         original_uploaded_file: Fichier original
+        published: Publié ?
+        published_at: Date de publication
+        updated_by: Dernière modification
       communication/media:
         collection: Collection
+        created_by: Création
         height: Hauteur
         origin: Provenance
         original_byte_size: Poids
@@ -115,6 +120,8 @@ fr:
       communication/media/localization:
         internal_description: Description interne
         name: Nom
+        published_at: Publication
+        updated_by: Dernière modification
       communication/website:
         about: Sujet du site
         about_: Site indépendant
@@ -187,7 +194,6 @@ fr:
         time_zone: Fuseau horaire
         to_day: Jour de fin
       communication/website/agenda/event/localization:
-        featured_image: Image à la une
         notes: Notes
         published: Publié
         subtitle: Sous-titre
@@ -206,7 +212,6 @@ fr:
         time_zone: Fuseau horaire
         to_day: Jour de fin
       communication/website/agenda/exhibition/localization:
-        featured_image: Image à la une
         notes: Notes
         place: Lieu
         published: Publié
@@ -236,7 +241,6 @@ fr:
         from_day: Date de publication
         to_day: Date de clôture
       communication/website/jobboard/job/localization:
-        featured_image: Image à la une
         published: Publiée
         subtitle: Sous-titre
         title: Titre
@@ -289,8 +293,6 @@ fr:
         website: Site Web
       communication/website/page/localization:
         breadcrumb_title: Nom affiché dans le fil d'ariane
-        featured_image: Image à la une
-        featured_image_alt: Texte alternatif
         header_text: Titre affiché en haut de page
         path: Chemin
         published: Publié ?
@@ -309,7 +311,6 @@ fr:
         full_width: Pleine largeur
         from_day: Date
       communication/website/portfolio/project/localization:
-        featured_image: Image à la une
         published: Publié
         subtitle: Sous-titre
         title: Titre
@@ -321,9 +322,6 @@ fr:
       communication/website/post/localization:
         category: Catégorie
         date: Date
-        featured_image: Image à la une
-        featured_image_alt: Texte alternatif
-        featured_image_credit: Crédit
         pinned: Mis en avant
         published: Publié ?
         published_at: Date de publication
@@ -532,7 +530,7 @@ fr:
         confirm_localization:
           text_html: "La création de <i>%{about}</i> en %{language} nécessite la traduction de l'extranet <i>%{extranet}</i> en %{language}."
           title: Confirmation de traduction
-        invitation_messages: 
+        invitation_messages:
           automatic: Message automatique
           automatic_hint: Ce message sera envoyé après un import d'alumni ou lors du clic sur le bouton "envoyer l'invitation" dans l'admin, si l'alumnus a un email.
           manual: Message manuel
@@ -541,6 +539,28 @@ fr:
         languages: Langues
         sso:
           label: SSO
+      file:
+        replacement_file_hint: Renseignez un fichier uniquement si vous souhaitez le changer.
+        localizations:
+          draft: Brouillon
+          published: Publié
+      file_types:
+        archive: Archive
+        audio: Audio
+        image: Image
+        pdf: PDF
+        presentation: Présentation
+        spreadsheet: Tableur
+        text: Texte
+        title: Type de fichier
+        video: Vidéo
+      media:
+        alt:
+          hint: Ce texte est essentiel pour l'accessibilité. Si l'image donne une information importante, il faut écrire ici cette information. Si l'information est déjà présente ailleurs dans la page, ou si l'image est purement décorative, il faut laisser le texte alternatif vide, pour éviter de polluer la navigation vocale.
+          label: Texte alternatif
+        credit:
+          hint: Le crédit photo doit être indiqué, dans le respect du droit d'auteur.
+          label: Crédit
       website:
         agenda:
           event:
@@ -626,6 +646,11 @@ fr:
                 zero: Cette page est une page spéciale, qui présente nativement les expositions du site.
                 one: Cette page est une page spéciale, qui présente nativement les expositions du site. Pour l'instant, il y a 1 exposition publiée.
                 other: Cette page est une page spéciale, qui présente nativement les %{count} expositions publiées.
+            communication_file:
+              native:
+                zero: Cette page est une page spéciale, qui présente nativement les fichiers liés au site. Pour l'instant, il n'y a aucun fichier dans le site.
+                one: Cette page est une page spéciale, qui présente nativement les fichiers liés au site. Pour l'instant, il y a 1 fichier.
+                other: Cette page est une page spéciale, qui présente nativement les %{count} fichiers liés au site.
             communication_jobboard:
               native:
                 zero: Cette page est une page spéciale, qui présente nativement les offres d'emploi du site.
@@ -765,6 +790,11 @@ fr:
           draft: Brouillon
           planned_on: Publication prévue le %{date}
           published_on: Publiée le %{date}
+    library:
+      context:
+        cropped: photo recadrée
+        featured_media: en image à la une
+        in_block: dans le bloc %{position}
     manage_authors: Gérer les auteur·rices
     number_of_posts: Nombre d'actualités
     summary:
@@ -814,6 +844,9 @@ fr:
           communication_agenda_exhibition_archive:
             slug: archives-expositions
             title: Archives des expositions
+          communication_file:
+            slug: fichiers
+            title: Fichiers
           communication_jobboard:
             slug: offres-d-emploi
             title: Offres d'emploi
@@ -886,10 +919,12 @@ fr:
     error: Erreur lors de la curation, veillez à utiliser une URL valide
     label: URL de l'article à importer
     placeholder: https://...
+    warning: Attention aux droits d'auteurs sur les contenus ! Les textes comme les images peuvent être protégés par le droit d'auteur, et l'import via cet outil de curation engage votre responsabilité.
   enums:
     communication:
       media:
         origin:
+          curator: Système de curation
           pexels: Photothèque Pexels
           unsplash: Photothèque Unsplash
           upload: Envoi direct de fichier

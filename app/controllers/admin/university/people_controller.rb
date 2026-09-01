@@ -32,6 +32,14 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
                                 .ordered(current_language)
   end
 
+  def picker
+    @picker = Osuny::Picker::University::Person.new(
+      university: current_university,
+      language: current_language,
+      params: params
+    )
+  end
+
   def show
     @teacher_involvements = @person.involvements_as_teacher
                                    .includes(:target)

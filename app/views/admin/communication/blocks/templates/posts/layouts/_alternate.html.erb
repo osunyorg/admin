@@ -4,8 +4,9 @@
     next if post.nil?
     post_l10n = post.localization_for(block.language)
     permalink = post_l10n.current_permalink_url_in_website(@website)
+    image_present = block.template.option_image && post_l10n.featured_blob
   %>
-    <article class="post<% if !block.template.option_image || !post_l10n.best_featured_image.attached? %> without-image<% end %>" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+    <article class="post<% if !image_present %> without-image<% end %>" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
       <div class="post-content">
         <%= render 'admin/communication/blocks/templates/posts/partials/heading', 
                     level: block.heading_rank_children,
@@ -24,11 +25,9 @@
                     post: post,
                     post_l10n: post_l10n %>
       </div>
-      <% if block.template.option_image %>
+      <% if image_present %>
         <div class="media">
-          <% if post_l10n.best_featured_image.attached? %>
-            <%= kamifusen_tag post_l10n.best_featured_image %>
-          <% end %>
+          <%= kamifusen_tag post_l10n.featured_blob %>
         </div>
       <% end %>
     </article>

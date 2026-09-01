@@ -28,11 +28,9 @@ date_format = "%e %B %Y"
                     post: post,
                     post_l10n: post_l10n %>
       </div>
-      <% if block.template.option_image %>
+      <% if block.template.option_image && post_l10n.featured_blob %>
         <div class="media">
-          <% if post_l10n.best_featured_image.attached? %>
-            <%= kamifusen_tag post_l10n.best_featured_image %>
-          <% end %>
+          <%= kamifusen_tag post_l10n.featured_blob %>
         </div>
       <% end %>
     </article>

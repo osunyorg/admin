@@ -1,0 +1,47 @@
+.vue__media-input
+    &__cloud
+        &__results
+            column-count: 2
+            column-gap: 16px
+            @include media-breakpoint-up(lg)
+                column-count: 3
+            img
+                cursor: pointer
+            &--medias
+                column-count: 2
+                @include media-breakpoint-up(md)
+                    column-count: 3
+                @include media-breakpoint-up(lg)
+                    column-count: 4
+                @include media-breakpoint-up(xl)
+                    column-count: 5
+                @include media-breakpoint-up(xxl)
+                    column-count: 6
+            &__result
+                display: block
+                margin-bottom: 16px
+                max-width: 100%
+        &__button_container
+            min-width: 70px
+    &__uploader
+        position: relative
+        align-items: center
+        aspect-ratio: 16/9
+        background: $color-bg-soft
+        display: flex
+        flex-direction: column
+        justify-content: center
+        margin-bottom: 10px
+        padding: 20px
+        text-align: center
+        width: 100%
+        &--dragging
+            border: 5px solid $color-black
+        &__progress
+            background: $color-black
+            bottom: 0
+            left: 0
+            opacity: 0.3
+            position: absolute
+            right: 0
+            transition: height 0.1s

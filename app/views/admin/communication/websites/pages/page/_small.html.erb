@@ -1,0 +1,11 @@
+<div class="<%= osuny_card_classes(horizontal: true) %>">
+  <%= osuny_thumbnail_localized page %>
+  <div class="card-body">
+    <%= osuny_link_localized  page,
+                              admin_communication_website_page_path(website_id: page.website.id, id: page.id),
+                              classes: "stretched-link" %>
+  </div>
+  <div class="card-footer">
+    <span class="small text-muted"><%= l page.updated_at.to_date, format: :short %></small>
+  </div>
+</div>

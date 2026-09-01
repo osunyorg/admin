@@ -1,0 +1,14 @@
+<div class="<%= osuny_card_classes(horizontal: true) %>">
+  <%= osuny_thumbnail_localized job %>
+  <div class="card-body">
+    <%= job.best_localization_for(current_language) %>
+  </div>
+  <% if can?(:restore, job) %>
+    <div class="card-footer mb-n2">
+      <%= link_to t('restore'),
+                  restore_admin_communication_website_jobboard_job_path(job),
+                  method: :post,
+                  class: button_classes %>
+    </div>
+  <% end %>
+</div>

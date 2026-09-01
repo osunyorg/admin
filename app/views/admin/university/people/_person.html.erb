@@ -1,0 +1,9 @@
+<%
+if person.deleted?
+  partial_name = 'deleted'
+else
+  partial_name = 'default'
+end
+%>
+<%= render "admin/university/people/person/#{partial_name}",
+            person: person %>

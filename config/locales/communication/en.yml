@@ -86,14 +86,15 @@ en:
       communication/extranet/post/category/localization:
         name: Name
       communication/extranet/post/localization:
-        featured_image: Featured image
-        featured_image_alt: Alt text
-        featured_image_credit: Credit
         pinned: Pinned
         published: Published?
         published_at: Publication date
         slug: Slug
         title: Title
+      communication/file:
+        created_by: Uploaded by
+      communication/file/context:
+        about_type: Type
       communication/file/localization:
         internal_description: Internal description
         name: Name
@@ -101,8 +102,12 @@ en:
         original_content_type: Content type
         original_filename: Original filename
         original_uploaded_file: Original file
+        published: Published?
+        published_at: Publication date
+        updated_by: Last update
       communication/media:
         collection: Collection
+        created_by: Envoyée par
         height: Height
         origin: Origin
         original_byte_size: Size
@@ -115,6 +120,8 @@ en:
       communication/media/localization:
         internal_description: Internal description
         name: Name
+        published_at: Publication date
+        updated_by: Last update
       communication/website:
         about: About
         about_: Independent website
@@ -187,7 +194,6 @@ en:
         time_zone: Time zone
         to_day: To day
       communication/website/agenda/event/localization:
-        featured_image: Featured image
         notes: Notes
         published: Published
         subtitle: Subtitle
@@ -206,7 +212,6 @@ en:
         time_zone: Time zone
         to_day: To day
       communication/website/agenda/exhibition/localization:
-        featured_image: Featured image
         notes: Notes
         place: Place
         published: Published
@@ -236,7 +241,6 @@ en:
         from_day: Publication date
         to_day: End date
       communication/website/jobboard/job/localization:
-        featured_image: Featured image
         published: Published
         subtitle: Subtitle
         title: Title
@@ -289,8 +293,6 @@ en:
         website: Website
       communication/website/page/localization:
         breadcrumb_title: Title in breadcrumbs
-        featured_image: Featured image
-        featured_image_alt: Alt text
         header_text: Title displayed in header
         path: Path
         published: Published?
@@ -309,7 +311,6 @@ en:
         full_width: Full width
         from_day: Date
       communication/website/portfolio/project/localization:
-        featured_image: Featured image
         published: Published
         subtitle: Subtitle
         title: Title
@@ -321,9 +322,6 @@ en:
       communication/website/post/localization:
         category: Category
         date: Date
-        featured_image: Featured image
-        featured_image_alt: Alt text
-        featured_image_credit: Credit
         pinned: Pinned
         published: Published?
         published_at: Publication date
@@ -532,7 +530,7 @@ en:
         confirm_localization:
           text_html: "The creation of <i>%{about}</i> in %{language} requires the localization of the extranet <i>%{extranet}</i> in %{language}."
           title: Localization confirmation
-        invitation_messages: 
+        invitation_messages:
           automatic: Automatic message
           automatic_hint: This message will be sent after an alumni import or when clicking on the "send invitation" button on admin, if the alumnus has an email.
           manual: Manual message
@@ -541,6 +539,28 @@ en:
         languages: Languages
         sso:
           label: SSO
+      file:
+        replacement_file_hint: Add a file only if you want to change it.
+        localizations:
+          draft: Draft
+          published: Published
+      file_types:
+        archive: Archive
+        audio: Audio
+        image: Image
+        pdf: PDF
+        presentation: Presentation
+        spreadsheet: Spreadsheet
+        text: Text
+        title: File type
+        video: Video
+      media:
+        alt:
+          hint: This text is important for accessibility. If the image conveys important information, it must be written here. If the information is already written somewhere else in the page, or if the image is purely decorative, the field must be left empty. Otherwise, it would pollute voice navigation.
+          label: Alternative text
+        credit:
+          hint: The credit must be present according to copyright or copyleft licenses.
+          label: Credit
       website:
         agenda:
           event:
@@ -626,6 +646,11 @@ en:
                 zero: This page is a special page, which natively presents the site's exhibitions.
                 one: This page is a special page, which natively presents the site's exhibitions. For now, there's a single exhibition published.
                 other: This page is a special page, which natively presents the %{count} published exhibitions.
+            communication_file:
+              native:
+                zero: This page is a special page, which natively presents the site's files.
+                one: This page is a special page, which natively presents the site's files. For the moment, there's a single published file.
+                other: This page is a special page, which natively presents the %{count} published files.
             communication_jobboard:
               native:
                 zero: This page is a special page, which natively presents the site's job offers.
@@ -765,6 +790,11 @@ en:
           draft: Draft
           planned_on: Publication planned on %{date}
           published_on: Published on %{date}
+    library:
+      context:
+        cropped: cropped photo
+        featured_media: as featured media
+        in_block: in block %{position}
     manage_authors: Manage authors
     number_of_posts: Number of posts
     summary:
@@ -814,6 +844,9 @@ en:
           communication_agenda_exhibition_archive:
             slug: exhibitions-archives
             title: Exhibitions' archives
+          communication_file:
+            slug: files
+            title: Files
           communication_jobboard:
             slug: job-offers
             title: Job offers
@@ -886,10 +919,12 @@ en:
     error: Import error, be sure to use a valid URL
     label: URL of the post to import
     placeholder: https://...
+    warning: Please be aware of copyright issues relating to content! Both text and images may be protected by copyright, and importing content via this curation tool makes you liable.
   enums:
     communication:
       media:
         origin:
+          curator: Curation system
           pexels: Pexels photo library
           unsplash: Unsplash photo library
           upload: Direct file upload

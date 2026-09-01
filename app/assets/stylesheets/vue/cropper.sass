@@ -1,5 +1,20 @@
 .vue__cropper
+    // Passe au-dessus de la barre de sauvegarde (.vue__changes -> z-index 9999)
+    z-index: 10000
+    &__button
+        background: white
+        border-radius: $border-radius
+        cursor: pointer
+        padding: 5px
+        position: absolute
+        right: 10px
+        top: 10px
+        z-index: 10
+    &__preview
+        overflow: hidden
+        position: relative
+        width: 100%
+    .modal-body
+        background: #000000
     .vue-advanced-cropper
         height: 100%
-    .modal-body
-        height: 60vh

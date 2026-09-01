@@ -15,6 +15,18 @@ class Communication::Block::Template::Link::Element < Communication::Block::Temp
     title.blank? && description.blank? && url.blank?
   end
 
+  def blob
+    image_component.blob
+  end
+
+  def communication_media
+    image_component.communication_media
+  end
+
+  def communication_media_l10n
+    communication_media.localization_for(block.language)
+  end
+
   def dom_count
     1 + 
     title_component.dom_count +
