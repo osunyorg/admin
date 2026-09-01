@@ -432,6 +432,7 @@ en:
       facet: Filter by responsibility
       kind: Filter by kind
       role: Filter by role
+      website: Filter by website
     buttons:
       close: Close
       expand: Search and filter

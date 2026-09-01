@@ -31,5 +31,14 @@
                         %>
     <% end %>
 
+    <% if current_university.communication_websites.many? %>
+      <%= render_filter f,
+                        :select,
+                        :for_website,
+                        label: t('filters.attributes.website'),
+                        collection: osuny_collection(current_university.communication_websites, localized: true)
+                        %>
+    <% end %>
+
   <% end %>
 <% end %>

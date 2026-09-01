@@ -84,6 +84,7 @@ class Communication::Media < ApplicationRecord
         communication_website_id: website_ids
       }
     )
+    .distinct
   }
   scope :for_extension, -> (extensions, language) {
     where(original_extension: extensions)
