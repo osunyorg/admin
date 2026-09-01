@@ -3,12 +3,15 @@ if context.about_type == 'Communication::Block'
   block = context.about
   l10n = block.about
   object = l10n.about
+  label = t('communication.library.context.in_block', position: block.position)
 elsif context.about_type == 'Education::Program'
   object = context.about
   l10n = object.best_localization_for(current_language)
+  label = t('communication.library.context.downloadable_summary')
 else
   l10n = context.about
   object = l10n.about
+  label = t('communication.library.context.featured_media')
 end
 
 # website, extranet, journal
@@ -56,13 +59,7 @@ end
           </p>
           <p class="small mb-0">
             <i class="bi bi-arrow-right" style="margin-right: 2px"></i>
-            <% if block.present? %>
-              <%= t('communication.library.context.in_block', position: block.position) %>
-            <% elsif context.about_type == 'Education::Program' %>
-              <%= t('communication.library.context.downloadable_summary') %>
-            <% else %>
-              <%= t('communication.library.context.featured_media') %>
-            <% end %>
+            <%= label %>
           </p>
           <% if context.try(:cropped?) %>
             <p class="small mb-0">
