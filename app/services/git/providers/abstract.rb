@@ -53,6 +53,13 @@ class Git::Providers::Abstract
     []
   end
 
+  # Tous les providers ne savent pas lister le contenu du dépôt.
+  # Quand c'est faux, `files_in_the_repository` ne peut pas servir à
+  # conclure qu'un fichier est absent du dépôt.
+  def files_in_the_repository_reliable?
+    false
+  end
+
   protected
 
   def batch

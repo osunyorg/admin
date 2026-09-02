@@ -44,6 +44,7 @@ class Communication::Website::GitFile < ApplicationRecord
 
   scope :generated, -> { where.not(generated_at: nil) }
   scope :desynchronized, -> { where(desynchronized: true) }
+  scope :synchronized, -> { where(desynchronized: false) }
   scope :desynchronized_since, -> (time) { desynchronized.where('desynchronized_at > ?', time) }
   scope :desynchronized_until, -> (time) { desynchronized.where('desynchronized_at <= ?', time) }
   scope :ordered, -> { order("communication_website_git_files.desynchronized_at DESC NULLS LAST, communication_website_git_files.updated_at DESC") }

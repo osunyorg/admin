@@ -56,6 +56,10 @@ class Git::Repository
     provider.files_in_the_repository
   end
 
+  def files_in_the_repository_reliable?
+    provider.files_in_the_repository_reliable?
+  end
+
   protected
 
   def provider

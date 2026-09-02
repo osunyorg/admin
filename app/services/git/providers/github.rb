@@ -126,6 +126,12 @@ class Git::Providers::Github < Git::Providers::Abstract
     @files_in_the_repository ||= tree[:tree].map { |file| file[:path] }
   end
 
+  # L'API Git Trees de Github tronque la réponse au delà de 100 000 entrées.
+  # Dans ce cas, la liste est incomplète et ne prouve pas l'absence d'un fichier.
+  def files_in_the_repository_reliable?
+    !tree[:truncated]
+  end
+
   protected
 
   def check_batch_integrity!
