@@ -43,6 +43,13 @@ export default {
     <div class="card-body">
       <PublicationState :published="resource?.published" />
       {{ resource?.name }}
+      <a
+        :href="resource?.path"
+        class="small float-end text-muted"
+        target="_blank"
+        >
+        {{ $t('components.selectedObjects.open') }}
+      </a>
     </div>
   </div>
 </template>
