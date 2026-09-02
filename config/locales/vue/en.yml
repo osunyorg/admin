@@ -115,6 +115,7 @@ en:
           remove: Remove image
           title: Image
       selectedObjects:
+        open: Open
         selectedMedia:
           draft: This photo is not published, it won't appear
     downloadableSummary:
