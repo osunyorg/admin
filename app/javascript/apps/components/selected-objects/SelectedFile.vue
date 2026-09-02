@@ -45,7 +45,7 @@ export default {
       {{ resource?.name }}
       <a
         :href="resource?.path"
-        class="small float-end"
+        class="small float-end text-muted"
         target="_blank"
         >
         {{ $t('components.selectedObjects.open') }}
