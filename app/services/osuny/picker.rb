@@ -23,6 +23,7 @@ class Osuny::Picker
     {
       filters: filters,
       sort: sort,
+      query_parameters: query_parameters,
     }
   end
 
@@ -34,6 +35,11 @@ class Osuny::Picker
       total_pages: results.total_pages,
       query_parameters: "&page=#{current_page}"
     }
+  end
+
+  def query_parameters
+    query = params.to_unsafe_h.slice(:filters, :sort).to_query
+    query.present? ? "&#{query}" : ''
   end
 
   def current_sort
