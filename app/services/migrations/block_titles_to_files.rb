@@ -2,7 +2,7 @@ class Migrations::BlockTitlesToFiles
 
   def self.migrate
     Communication::Block.where(template_kind: [:files, :sound]).with_deleted.find_each do |block|
-      return if block.language.nil?
+      next if block.language.nil?
       case block.template_kind.to_sym
       when :sound
         report_title(
