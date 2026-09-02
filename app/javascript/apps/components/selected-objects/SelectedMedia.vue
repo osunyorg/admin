@@ -81,6 +81,17 @@ export default {
       </span>
     </div>
     <div
+      class="vue__selected-media__link"
+      >
+      <a
+        :href="resource?.path"
+        class="small float-end"
+        target="_blank"
+        >
+        {{ $t('components.selectedObjects.open') }}
+      </a>
+    </div>
+    <div
       v-if="cropperButton"
       class="vue__cropper__button"
       @click="openCropper"
