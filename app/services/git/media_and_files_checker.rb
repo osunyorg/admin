@@ -34,8 +34,9 @@ class Git::MediaAndFilesChecker
   # Renvoie les git_files dont le fichier est absent du dépôt.
   # Renvoie un tableau vide si le dépôt n'est pas vérifiable (voir skip_reason).
   def missing_git_files
-    return [] if skip_reason.present?
-    git_files.reject { |git_file| present_on_git?(git_file) }
+    return @missing_git_files if defined?(@missing_git_files)
+    @missing_git_files = skip_reason.present? ? []
+                                              : git_files.reject { |git_file| present_on_git?(git_file) }
   end
 
   # Nil si on peut conclure, sinon la raison pour laquelle on ne peut pas.
