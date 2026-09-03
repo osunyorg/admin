@@ -110,24 +110,24 @@ module Communication::Website::WithGitRepository
     git_repository.update_theme_version!
   end
 
-  def analyse_repository_safely
-    return unless git_repository.valid?
-    Git::OrphanAndLayoutAnalyzer.new(self).launch
-  end
-
   def analyse_repository
     return unless git_repository.valid?
     Communication::Website::AnalyseJob.perform_later(id)
   end
 
-  def check_git_files_integrity_safely
+  def analyse_repository_safely
     return unless git_repository.valid?
-    Git::FilesIntegrityChecker.new(self).launch
+    Git::OrphanAndLayoutAnalyzer.new(self).launch
   end
 
   def check_git_files_integrity
     return unless git_repository.valid?
     Communication::Website::CheckGitFilesIntegrityJob.perform_later(id)
+  end
+
+  def check_git_files_integrity_safely
+    return unless git_repository.valid?
+    Git::FilesIntegrityChecker.new(self).launch
   end
 
   def desynchronized_generated_git_files
