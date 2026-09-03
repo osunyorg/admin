@@ -56,6 +56,10 @@ class Git::Repository
     provider.files_in_the_repository
   end
 
+  def can_check_git_files_integrity?
+    provider.can_check_git_files_integrity?
+  end
+
   protected
 
   def provider

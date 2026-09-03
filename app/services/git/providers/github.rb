@@ -126,6 +126,10 @@ class Git::Providers::Github < Git::Providers::Abstract
     @files_in_the_repository ||= tree[:tree].map { |file| file[:path] }
   end
 
+  def can_check_git_files_integrity?
+    !tree[:truncated]
+  end
+
   protected
 
   def check_batch_integrity!

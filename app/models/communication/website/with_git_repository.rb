@@ -120,6 +120,16 @@ module Communication::Website::WithGitRepository
     Communication::Website::AnalyseJob.perform_later(id)
   end
 
+  def check_git_files_integrity_safely
+    return unless git_repository.valid?
+    Git::FilesIntegrityChecker.new(self).launch
+  end
+
+  def check_git_files_integrity
+    return unless git_repository.valid?
+    Communication::Website::CheckGitFilesIntegrityJob.perform_later(id)
+  end
+
   def desynchronized_generated_git_files
     git_files_list = git_files.generated
     last_sync_at.nil? ? git_files_list.desynchronized
