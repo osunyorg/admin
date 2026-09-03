@@ -1,0 +1,17 @@
+<%
+Server::Evolution.planned.each do |evolution|
+  l10n = evolution.localizations.find_by(language: current_language) %>
+  <div class="alert alert-danger my-4 px-0">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <b><%= l10n.title %></b>
+          <%= l10n.text %>
+        </div>
+        <div class="col-lg-4 text-end">
+          <%= l evolution.released_at, format: :long %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

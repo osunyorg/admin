@@ -22,7 +22,8 @@ class Server::EmergencyMessagesController < Server::ApplicationController
 
   def create
     if @emergency_message.save
-      redirect_to [:server, @emergency_message], notice: t('admin.successfully_created_html', model: @emergency_message.to_s)
+      redirect_to @emergency_message,
+                  notice: t('admin.successfully_created_html', model: @emergency_message.to_s)
     else
       breadcrumb
       render :new, status: :unprocessable_content
@@ -31,7 +32,8 @@ class Server::EmergencyMessagesController < Server::ApplicationController
 
   def update
     if @emergency_message.update(emergency_message_params)
-      redirect_to [:server, @emergency_message], notice: t('admin.successfully_updated_html', model: @emergency_message.to_s)
+      redirect_to @emergency_message,
+                  notice: t('admin.successfully_updated_html', model: @emergency_message.to_s)
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -41,22 +43,24 @@ class Server::EmergencyMessagesController < Server::ApplicationController
   
   def deliver
     @emergency_message.deliver!
-    redirect_to [:server, @emergency_message], notice: t('server_admin.emergency_messages.delivered')
+    redirect_to @emergency_message,
+                notice: t('server_admin.emergency_messages.delivered')
   end
 
   def destroy
     @emergency_message.destroy
-    redirect_to server_emergency_messages_url, notice: t('admin.successfully_destroyed_html', model: @emergency_message.to_s)
+    redirect_to server_emergency_messages_url,
+                notice: t('admin.successfully_destroyed_html', model: @emergency_message.to_s)
   end
 
   protected
 
   def breadcrumb
     super
-    add_breadcrumb EmergencyMessage.model_name.human(count: 2), server_emergency_messages_path
+    add_breadcrumb Server::EmergencyMessage.model_name.human(count: 2), server_emergency_messages_path
     if @emergency_message
       if @emergency_message.persisted?
-        add_breadcrumb @emergency_message, [:server, @emergency_message]
+        add_breadcrumb @emergency_message, @emergency_message
       else
         add_breadcrumb t('create')
       end
@@ -64,6 +68,6 @@ class Server::EmergencyMessagesController < Server::ApplicationController
   end
 
   def emergency_message_params
-    params.require(:emergency_message).permit(:name, :subject_fr, :subject_en, :content_fr, :content_en, :university_id, :role)
+    params.require(:server_emergency_message).permit(:name, :subject_fr, :subject_en, :content_fr, :content_en, :university_id, :role)
   end
 end

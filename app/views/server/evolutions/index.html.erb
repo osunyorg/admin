@@ -1,0 +1,28 @@
+<% content_for :title, Server::Evolution.model_name.human(count: 2) %>
+
+<% content_for :title_right do %>
+  <%= link_to t('create'), new_server_evolution_path, class: button_classes %>
+<% end %>
+
+<div class="row g-2 mb-3">
+  <% @evolutions.each do |evolution| %>
+    <div>
+      <div class="card card--horizontal">
+        <div class="card-body">
+          <%= link_to evolution, evolution %><br>
+        </div>
+        <div class="card-footer">
+          <%= link_to t('edit'),
+                    [:edit, evolution],
+                    class: button_classes %>
+          <%= link_to t('delete'),
+                    evolution,
+                    method: :delete,
+                    data: { confirm: t('please_confirm.deletion') },
+                    class: button_classes_danger %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<%= paginate @evolutions %>
