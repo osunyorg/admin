@@ -136,6 +136,13 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     )
   }
 
+  scope :autosort_by_date_desc, -> (language) {
+    order(created_at: :desc)
+  }
+  scope :autosort_by_date_asc, -> (language) {
+    order(created_at: :asc)
+  }
+
   def dependencies
     [website.config_default_content_security_policy] +
     localizations.in_languages(website.active_language_ids) +
