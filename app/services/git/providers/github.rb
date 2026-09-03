@@ -79,9 +79,8 @@ class Git::Providers::Github < Git::Providers::Abstract
 
   def push(commit_message)
     return if !valid? || batch.empty?
-    check_batch_integrity!
-    commit = create_commit_from_batch(batch, commit_message)
-    client.update_branch repository, default_branch, commit[:sha]
+    last_commit = create_commits_from_batch(batch, commit_message)
+    client.update_branch repository, default_branch, last_commit[:sha]
     # The repo changed, invalidate the tree
     @tree = nil
     @tree_items_by_path = nil
@@ -89,19 +88,59 @@ class Git::Providers::Github < Git::Providers::Abstract
     true
   end
 
-  def create_commit_from_batch(batch, commit_message)
+  def create_commits_from_batch(batch, commit_message)
     base_tree_sha = tree[:sha]
     base_commit_sha = branch_sha
     commit = nil
-    commits_count = (batch.size / COMMIT_BATCH_SIZE.to_f).ceil
-    batch.each_slice(COMMIT_BATCH_SIZE).with_index do |sub_batch, i|
+    prepare_sub_batches(batch).each_with_index do |sub_batch, i|
       sub_commit_message = commit_message
-      sub_commit_message += " (#{i+1}/#{commits_count})" if commits_count > 1
+      sub_commit_message += " (#{i+1}/#{sub_batches.size})" if sub_batches.many?
       commit = create_sub_commit(sub_batch, sub_commit_message, base_tree_sha, base_commit_sha)
       base_tree_sha = commit[:tree][:sha]
       base_commit_sha = commit[:sha]
     end
     commit
+  end
+
+  def prepare_sub_batches(batch)
+    sub_batches = []
+    current_batch = []
+    current_path = ''
+    # On crée des lots, sans jamais séparer un path entre deux commits
+    order_batch(batch).each do |item|
+      next if redundant_item?(item)
+      should_create_new_batch = current_batch.size >= COMMIT_BATCH_SIZE && current_path != item[:path]
+      if should_create_new_batch
+        sub_batches << current_batch
+        current_batch = []
+      end
+      current_batch << item
+      current_path = item[:path]
+    end
+    sub_batches << current_batch if current_batch.any?
+    sub_batches
+  end
+
+  def order_batch(items)
+    items.sort_by { |item|
+      [
+        # Clé 1, le path
+        item[:path].to_s,
+        # Clé 2, l'éventuelle opération de suppression à placer avant la création
+        deletion?(item) ? 0 : 1
+      ]
+    }
+  end
+
+  def deletion?(item)
+    item.has_key?(:sha) && item[:sha].nil?
+  end
+
+  def redundant_item?(item)
+    path = item[:path]
+    is_redundant_deletion = deletion?(item) && files_states[path] == 'DELETED'
+    files_states[path] = deletion?(item) ? 'DELETED' : 'EXISTS'
+    is_redundant_deletion
   end
 
   def create_sub_commit(sub_batch, sub_commit_message, base_tree_sha, base_commit_sha)
@@ -127,30 +166,6 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   protected
-
-  def check_batch_integrity!
-    # Delete files first
-    batch.sort_by! { |item| item.has_key?(:sha) && item[:sha].nil? ? 0 : 1 }
-    # Use files states to fix actions
-    batch.each do |item|
-      check_batch_item_integrity!(item)
-    end
-    # Reject
-    batch.reject! { |item| item[:path].nil? }
-  end
-
-  def check_batch_item_integrity!(item)
-    is_deleting_action = item.has_key?(:sha) && item[:sha].nil?
-    path = item[:path]
-    current_state = files_states[path]
-    target_state = is_deleting_action ? 'DELETED' : 'EXISTS'
-
-    if is_deleting_action && current_state == 'DELETED'
-      # No need to delete an already deleted file => nullify path to reject later
-      item[:path] = nil
-    end
-    files_states[path] = target_state
-  end
 
   def client
     @client ||= Octokit::Client.new access_token: access_token

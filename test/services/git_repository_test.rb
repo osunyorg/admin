@@ -55,6 +55,78 @@ class GitRepositoryTest < ActiveSupport::TestCase
     end
   end
 
+  test "order_batch sorts by path, deletion first" do
+    provider = website_with_github.git_repository.send(:provider)
+    items = [
+      { path: "b.html", mode: '100644', type: 'blob', content: "new b" },
+      { path: "a.html", mode: '100644', type: 'blob', content: "new a" },
+      { path: "b.html", mode: '100644', type: 'blob', sha: nil },
+      { path: "a.html", mode: '100644', type: 'blob', sha: nil }
+    ]
+
+    ordered = provider.send(:order_batch, items)
+
+    assert_equal [
+      ["a.html", true],
+      ["a.html", false],
+      ["b.html", true],
+      ["b.html", false]
+    ], ordered.map { |item| [item[:path], provider.send(:deletion?, item)] }
+  end
+
+  test "commit chunking never splits a path's operations across two commits" do
+    provider = website_with_github.git_repository.send(:provider)
+    # 40 renamed/updated files => 80 items (delete + create per file), more than
+    # COMMIT_BATCH_SIZE (75): this must be split into several commits, but never
+    # in the middle of a single path's operations - otherwise the file would be
+    # briefly deleted-then-recreated on the live site between the two pushes.
+    items = 40.times.flat_map do |i|
+      [
+        { path: "file_#{i}.html", mode: '100644', type: 'blob', sha: nil },
+        { path: "file_#{i}.html", mode: '100644', type: 'blob', content: "content #{i}" }
+      ]
+    end
+
+    sub_batches = capture_sub_commits(provider) do
+      provider.send(:create_commits_from_batch, items, 'Sync from osuny')
+    end
+
+    assert sub_batches.size > 1, "expected the 80 items to be split into several commits"
+    # A chunk only cuts at a path boundary, so it may slightly overshoot
+    # COMMIT_BATCH_SIZE by the size of the run that pushed it over - never more.
+    sub_batches.each { |sub_batch| assert sub_batch.size <= Git::Providers::Github::COMMIT_BATCH_SIZE + 2 }
+    # Every path's items must all be found in the very same single sub-commit.
+    items.map { |item| item[:path] }.uniq.each do |path|
+      containing = sub_batches.select { |sub_batch| sub_batch.any? { |item| item[:path] == path } }
+      assert_equal 1, containing.size, "operations on #{path} were split across commits"
+    end
+  end
+
+  test "a path collision between three different git_files still keeps that path's operations in one commit" do
+    provider = website_with_github.git_repository.send(:provider)
+    # Simulates two different `about` records (not just one update_file call)
+    # colliding on the same target path: one being destroyed, another recreated,
+    # padded with unrelated items so the shared path lands mid-batch.
+    items = 40.times.map { |i| { path: "other_#{i}.html", mode: '100644', type: 'blob', content: "x" } }
+    items += [
+      { path: "shared.html", mode: '100644', type: 'blob', sha: nil },
+      { path: "shared.html", mode: '100644', type: 'blob', sha: nil },
+      { path: "shared.html", mode: '100644', type: 'blob', content: "new owner" }
+    ]
+    items += 40.times.map { |i| { path: "other_#{40 + i}.html", mode: '100644', type: 'blob', content: "x" } }
+
+    sub_batches = capture_sub_commits(provider) do
+      provider.send(:create_commits_from_batch, items, 'Sync from osuny')
+    end
+
+    containing = sub_batches.select { |sub_batch| sub_batch.any? { |item| item[:path] == "shared.html" } }
+    assert_equal 1, containing.size, "the operations on shared.html were split across commits"
+    shared_items = containing.first.select { |item| item[:path] == "shared.html" }
+    # The redundant 2nd deletion is deduped by keep_item?: only the first
+    # deletion and the final creation survive.
+    assert_equal [true, false], shared_items.map { |item| provider.send(:deletion?, item) }
+  end
+
   test "incorrect credentials for gitlab" do
     VCR.use_cassette(location) do
       assert_enqueued_emails 1 do
@@ -104,5 +176,24 @@ class GitRepositoryTest < ActiveSupport::TestCase
         result = provider.push 'Destroying new_test.txt file'
       end
     end
+  end
+
+  private
+
+  # Overrides the network-touching parts of create_commits_from_batch (the base
+  # tree/branch lookup and the actual Octokit calls in create_sub_commit) on this
+  # one-off provider instance, so we can exercise its real chunking/ordering
+  # logic and capture, for each sub-commit it would have created, the exact
+  # sub-batch it was given.
+  def capture_sub_commits(provider)
+    captured = []
+    provider.define_singleton_method(:tree) { { sha: 'base-tree-sha' } }
+    provider.define_singleton_method(:branch_sha) { 'base-commit-sha' }
+    provider.define_singleton_method(:create_sub_commit) do |sub_batch, _message, _base_tree_sha, _base_commit_sha|
+      captured << sub_batch
+      { tree: { sha: "tree-#{captured.size}" }, sha: "commit-#{captured.size}" }
+    end
+    yield
+    captured
   end
 end
