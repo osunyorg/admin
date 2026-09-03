@@ -17,6 +17,6 @@
 
 ## Changement d'interface
 
-- [ ] Aucune 😌
+- [ ] Aucun 😌
 - [ ] Changements mineurs 😲
 - [ ] Changments majeurs 😱
