@@ -92,7 +92,8 @@ class Git::Providers::Github < Git::Providers::Abstract
     base_tree_sha = tree[:sha]
     base_commit_sha = branch_sha
     commit = nil
-    prepare_sub_batches(batch).each_with_index do |sub_batch, i|
+    sub_batches = prepare_sub_batches(batch)
+    sub_batches.each_with_index do |sub_batch, i|
       sub_commit_message = commit_message
       sub_commit_message += " (#{i+1}/#{sub_batches.size})" if sub_batches.many?
       commit = create_sub_commit(sub_batch, sub_commit_message, base_tree_sha, base_commit_sha)
@@ -103,19 +104,20 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def prepare_sub_batches(batch)
+    ordered_batch = order_batch(batch)
     sub_batches = []
     current_batch = []
-    current_path = ''
+    last_item_path = ''
     # On crée des lots, sans jamais séparer un path entre deux commits
-    order_batch(batch).each do |item|
+    ordered_batch.each do |item|
       next if redundant_item?(item)
-      should_create_new_batch = current_batch.size >= COMMIT_BATCH_SIZE && current_path != item[:path]
+      should_create_new_batch = current_batch.size >= COMMIT_BATCH_SIZE && last_item_path != item[:path]
       if should_create_new_batch
         sub_batches << current_batch
         current_batch = []
       end
       current_batch << item
-      current_path = item[:path]
+      last_item_path = item[:path]
     end
     sub_batches << current_batch if current_batch.any?
     sub_batches
