@@ -58,19 +58,19 @@ class GitRepositoryTest < ActiveSupport::TestCase
   test "order_batch sorts by path, deletion first" do
     provider = website_with_github.git_repository.send(:provider)
     items = [
-      { path: "b.html", mode: '100644', type: 'blob', content: "new b" },
-      { path: "a.html", mode: '100644', type: 'blob', content: "new a" },
+      { path: "c.html", mode: '100644', type: 'blob', sha: nil },
+      { path: "b.html", mode: '100644', type: 'blob', content: "from c to b" },
       { path: "b.html", mode: '100644', type: 'blob', sha: nil },
-      { path: "a.html", mode: '100644', type: 'blob', sha: nil }
+      { path: "a.html", mode: '100644', type: 'blob', content: "from b to a" }
     ]
 
     ordered = provider.send(:order_batch, items)
 
     assert_equal [
-      ["a.html", true],
       ["a.html", false],
       ["b.html", true],
-      ["b.html", false]
+      ["b.html", false],
+      ["c.html", true]
     ], ordered.map { |item| [item[:path], provider.send(:deletion?, item)] }
   end
 
