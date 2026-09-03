@@ -15,8 +15,13 @@ class Git::Repository
     provider.class::COMMIT_BATCH_SIZE
   end
 
+  def synchronization_locked?
+    website.synchronization_locked?
+  end
+
   def sync!
     return if git_files.empty?
+    return if synchronization_locked?
     puts "Start sync"
     synchronize_git_files
     provider.push('Sync from osuny')
@@ -24,6 +29,7 @@ class Git::Repository
   end
 
   def update_theme_version!
+    return if synchronization_locked?
     provider.update_theme!
   end
 
@@ -45,10 +51,12 @@ class Git::Repository
   end
 
   def init_from_template(name)
+    return if synchronization_locked?
     provider.init_from_template(name)
   end
 
   def update_secrets(secrets)
+    return if synchronization_locked?
     provider.update_secrets(secrets)
   end
 

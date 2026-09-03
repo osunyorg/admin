@@ -56,6 +56,7 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def update_theme!
+    return if synchronization_locked?
     return unless should_update_theme?
     batch << {
       path: ENV["GITHUB_WEBSITE_THEME_PATH"],
@@ -78,7 +79,7 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def push(commit_message)
-    return if !valid? || batch.empty?
+    return if synchronization_locked? || !valid? || batch.empty?
     check_batch_integrity!
     commit = create_commit_from_batch(batch, commit_message)
     client.update_branch repository, default_branch, commit[:sha]

@@ -2,6 +2,10 @@ module Communication::Website::WithGitRepository
   extend ActiveSupport::Concern
 
   included do
+    belongs_to  :synchronization_locked_by,
+                class_name: 'User',
+                optional: true
+
     has_many  :website_git_files,
               class_name: 'Communication::Website::GitFile',
               dependent: :destroy
@@ -29,6 +33,19 @@ module Communication::Website::WithGitRepository
 
   def git_repository
     @git_repository ||= Git::Repository.new self
+  end
+
+  def synchronization_locked?
+    synchronization_locked_by_id.present?
+  end
+
+  def lock_synchronization!(user)
+    update_column :synchronization_locked_by_id, user.id
+  end
+
+  def unlock_synchronization!
+    update_column :synchronization_locked_by_id, nil
+    # TODO website.sync_with_git ?
   end
 
   def repository_url
