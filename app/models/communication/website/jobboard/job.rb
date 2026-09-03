@@ -62,7 +62,7 @@ class Communication::Website::Jobboard::Job < ApplicationRecord
       .where(communication_website_jobboard_job_localizations: { language_id: language.id })
       . where("
       unaccent(communication_website_jobboard_job_localizations.meta_description) ILIKE unaccent(:term) OR
-      unaccent(communication_website_jobboard_job_localizations.description) ILIKE unaccent(:term) OR
+      unaccent(communication_website_jobboard_job_localizations.summary) ILIKE unaccent(:term) OR
       unaccent(communication_website_jobboard_job_localizations.title) ILIKE unaccent(:term) OR
       unaccent(communication_website_jobboard_job_localizations.subtitle) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
