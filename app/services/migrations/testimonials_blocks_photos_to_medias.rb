@@ -1,33 +1,32 @@
-class Migrations::OrganizationsBlocksLogosToMedias
+class Migrations::TestimonialsBlocksPhotosToMedias
   def self.migrate
-    Communication::Block.where(template_kind: :organizations).with_deleted.find_each do |block|
+    Communication::Block.where(template_kind: :testimonial).with_deleted.find_each do |block|
       data = block.data.dup
       something_to_migrate = false
       (data['elements'] || []).each do |element|
         next unless element.is_a?(Hash)
         # {
-        #   "id" => "",
-        #   "name" => "Université de Rennes",
-        #   "url" => "https://www.univ-rennes.fr/",
-        #   "logo" => {
+        #   "text" => "<p>...</p>",
+        #   "author" => "Prénom Nom",
+        #   "job" => "Rôle",
+        #   "photo" => {
         #     "id" => "<uuid>",
-        #     "filename" => "Universite_de_Rennes.svg",
+        #     "filename" => "1732791055365.jpg",
         #     "signed_id" => "<signed_id>"
-        #   },
-        #   "role" => ""
+        #   }
         # }
-        name = element['name'].presence
-        logo = element['logo']
-        next unless logo.is_a?(Hash)
-        blob_id = logo['id']
+        author = element['author'].presence
+        photo = element['photo']
+        next unless photo.is_a?(Hash)
+        blob_id = photo['id']
         next unless blob_id.present?
         # Déjà migré
-        next if logo['communication_media_id']
-        media = blob_to_media(block, blob_id, name)
+        next if element.dig('photo', 'communication_media_id')
+        media = blob_to_media(block, blob_id, author)
         # Pas de blob, donc pas de média
         next if media.nil?
         something_to_migrate = true
-        logo['communication_media_id'] = media.id
+        element['photo']['communication_media_id'] = media.id
       end
       next unless something_to_migrate
       block.data = data
@@ -38,12 +37,12 @@ class Migrations::OrganizationsBlocksLogosToMedias
 
   protected
 
-  def self.blob_to_media(block, blob_id, name)
+  def self.blob_to_media(block, blob_id, author)
     blob = ActiveStorage::Blob.find_by(id: blob_id)
     # Blob absent
     return if blob.nil?
     media = Communication::Media.find_or_create_media_from_blob(blob)
-    media_l10n = media.find_or_create_localization(block.language, name: name)
+    media_l10n = media.find_or_create_localization(block.language, name: author)
     media.add_context(block)
     media
   end
