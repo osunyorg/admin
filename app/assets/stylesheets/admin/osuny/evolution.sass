@@ -1,0 +1,25 @@
+.osuny_evolution
+    background: $color-flexoki-150
+    padding-top: 1rem
+    padding-bottom: 1rem    
+    @include media-breakpoint-down(md)
+        text-align: center
+        &__text
+            margin-bottom: 15px
+    @include media-breakpoint-up(md)
+        .container-fluid
+            display: flex
+            justify-content: space-between
+    &__text
+        margin-top: -2px
+        &__title
+            font-weight: bold
+            margin-bottom: 0
+        &__text
+            margin-bottom: 0
+    &__date
+        font-family: $font-family-serif
+        font-size: 60px
+        font-variant-numeric: oldstyle-nums
+        line-height: 60px
+        margin-top: -18px
