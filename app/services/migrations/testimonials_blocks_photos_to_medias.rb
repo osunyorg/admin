@@ -1,6 +1,6 @@
 class Migrations::TestimonialsBlocksPhotosToMedias
   def self.migrate
-    Communication::Block.where(template_kind: :testimonial).with_deleted.find_each do |block|
+    Communication::Block.where(template_kind: :testimonials).with_deleted.find_each do |block|
       data = block.data.dup
       something_to_migrate = false
       (data['elements'] || []).each do |element|
