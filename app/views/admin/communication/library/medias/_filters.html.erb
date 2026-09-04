@@ -33,12 +33,16 @@
                         %>
     <% end %>
 
+    <% creator_ids = current_university.communication_medias
+                                       .where.not(created_by_id: nil)
+                                       .distinct
+                                       .pluck(:created_by_id) %>
     <%= render_filter f,
                       :select,
                       :for_creator,
                       label: Communication::Media.human_attribute_name(:created_by),
                       collection: current_university.users
-                                                    .where(id: current_university.communication_medias.pluck(:created_by_id).compact_blank.uniq)
+                                                    .where(id: creator_ids)
                                                     .ordered(current_language)
                                                     .map { |user| [user.to_s, user.id] }
                       %>
