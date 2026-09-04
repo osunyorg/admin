@@ -45,7 +45,7 @@ en:
     error_label: Hashcash verification failed. Please try again.
   activerecord:
     attributes:
-      emergency_message:
+      server/emergency_message:
         content_en: Message (en)
         content_fr: Message (fr)
         delivered_at: Delivered at
@@ -93,7 +93,7 @@ en:
       messages:
         invalid_year: The year must be a 4-digit number.
       models:
-        emergency_message:
+        server/emergency_message:
           one: Emergency message
           other: Emergency messages
         import:
@@ -112,7 +112,10 @@ en:
       language:
         one: Language
         other: Languages
-      tasks_count:
+      server/evolution:
+        one: Evolution
+        other: Evolutions
+      server/tasks_count:
         one: Pending task
         other: Pending tasks
       user:
@@ -421,6 +424,8 @@ en:
         finished_with_errors: Finished with errors
         pending: Pending
   export: Export (xlsx)
+  evolutions:
+    listen: Listen on
   false: No
   file_hint_with_formats: "%{formats} files only. %{filesize} max."
   file_hint_without_formats: "%{filesize} max"
@@ -586,7 +591,7 @@ en:
     error_notification:
       default_message: "Please review the problems below:"
     hints:
-      emergency_message:
+      server/emergency_message:
         role: Leave blank to send to all roles
         university: Leave blank to send to all universities
       import:

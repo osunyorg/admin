@@ -45,15 +45,6 @@ fr:
     error_label: La vérification hashcash a échoué. Veuillez réessayer.
   activerecord:
     attributes:
-      emergency_message:
-        content_en: Message (en)
-        content_fr: Message (fr)
-        delivered_at: Date d'envoi
-        name: Nom
-        role: Rôle de destination
-        subject_en: Sujet (en)
-        subject_fr: Sujet (fr)
-        university: Université de destination
       import:
         date: Date
         file: Fichier
@@ -63,6 +54,20 @@ fr:
         iso_code: Code Iso
         name: Nom
         summernote_locale: Nom de la locale Summernote
+      server/emergency_message:
+        content_en: Message (en)
+        content_fr: Message (fr)
+        delivered_at: Date d'envoi
+        name: Nom
+        role: Rôle de destination
+        subject_en: Sujet (en)
+        subject_fr: Sujet (fr)
+        university: Université de destination
+      server/evolution:
+        released_at: Date de sortie
+      server/evolution/localization:
+        text: Texte
+        title: Titre
       user:
         admin_theme: Thème de l'administration
         current_sign_in_at: Dernière connexion
@@ -103,16 +108,19 @@ fr:
             password:
               password_strength: ne répond pas aux critères de sécurité
     models:
-      emergency_message:
-        one: Message d'urgence
-        other: Messages d'urgence
       import:
         one: Import
         other: Imports
       language:
         one: Langue
         other: Langues
-      tasks_count:
+      server/emergency_message:
+        one: Message d'urgence
+        other: Messages d'urgence
+      server/evolution:
+        one: Évolution
+        other: Évolutions
+      server/tasks_count:
         one: Tâche en cours
         other: Tâches en cours
       user:
@@ -421,6 +429,8 @@ fr:
         finished: Traité
         finished_with_errors: Traité avec des erreurs
         pending: En cours de traitement
+  evolutions:
+    listen: Écouter sur
   export: Exporter (xlsx)
   false: Non
   file_hint_with_formats: "Fichiers %{formats} uniquement. %{filesize} max."
@@ -587,7 +597,7 @@ fr:
     error_notification:
       default_message: "Les erreurs ci-dessous empêchent la validation :"
     hints:
-      emergency_message:
+      server/emergency_message:
         role: Laisser vide pour envoyer à tous les rôles
         university: Laisser vide pour envoyer à toutes les universités
       import:

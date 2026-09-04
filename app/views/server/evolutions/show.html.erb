@@ -1,0 +1,20 @@
+<% content_for :title, @evolution %>
+
+<% content_for :title_right do %>
+  <%= link_to t('edit'), [:edit, @evolution], class: button_classes %>
+<% end %>
+
+<div class="row">
+  <div class="col-lg-4">
+    <p><%= l @evolution.released_at %></p>
+  </div>
+  <div class="col-lg-8">
+    <% Language.available_for_interface.each do |language| %>
+      <% l10n = @evolution.localizations.where(language: language).first_or_initialize %>
+      <div class="mb-5">
+        <h2><%= l10n.title %></h2>
+        <%= simple_format l10n.text %>
+      </div>
+    <% end %>
+  </div>
+</div>

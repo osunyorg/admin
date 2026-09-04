@@ -20,6 +20,7 @@ namespace :server do
   end
   resources :blocks, only: [:index, :show]
   resources :optin_users, only: :index
+  resources :evolutions
   resources :emergency_messages do
     member do
       post :deliver

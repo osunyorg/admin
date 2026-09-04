@@ -1,4 +1,4 @@
-<%= simple_form_for [:server, emergency_message] do |f| %>
+<%= simple_form_for emergency_message do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
@@ -35,7 +35,7 @@
   </div>
 
   <% content_for :action_bar_right do %>
-    <%= cancel [:server, emergency_message] %>
+    <%= cancel emergency_message %>
     <%= submit f %>
   <% end %>
 <% end %>
