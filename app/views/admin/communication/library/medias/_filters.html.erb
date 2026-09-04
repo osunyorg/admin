@@ -9,13 +9,6 @@
 
     <%= render_filter f,
                       :select,
-                      :for_origin,
-                      label: Communication::Media.human_attribute_name(:origin),
-                      collection: Communication::Media::origins.keys.map { |r| { to_s: t("enums.communication.media.origin.#{r}"), id: r } }
-                      %>
-
-    <%= render_filter f,
-                      :select,
                       :for_collection,
                       label: Communication::Media.human_attribute_name(:collection),
                       collection: osuny_collection(current_university.communication_media_collections, localized: true)
@@ -39,6 +32,23 @@
                         collection: osuny_collection(current_university.communication_websites, localized: true)
                         %>
     <% end %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_creator,
+                      label: Communication::Media.human_attribute_name(:created_by),
+                      collection: current_university.users
+                                                    .where(id: current_university.communication_medias.pluck(:created_by_id).compact_blank.uniq)
+                                                    .ordered(current_language)
+                                                    .map { |user| [user.to_s, user.id] }
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_origin,
+                      label: Communication::Media.human_attribute_name(:origin),
+                      collection: Communication::Media::origins.keys.map { |r| { to_s: t("enums.communication.media.origin.#{r}"), id: r } }
+                      %>
 
   <% end %>
 <% end %>
