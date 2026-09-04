@@ -17,10 +17,6 @@ class Communication::Block::Template::Testimonial::Element < Communication::Bloc
     photo_component.communication_media
   end
 
-  def communication_media_l10n
-    communication_media.localization_for(block.language)
-  end
-
   def dom_count
     2 +
     text_component.dom_count +

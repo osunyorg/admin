@@ -182,9 +182,10 @@ class Communication::Media < ApplicationRecord
     )
   end
 
-  def find_or_create_localization(language, alt: nil, credit: nil)
+  def find_or_create_localization(language, name: nil, alt: nil, credit: nil)
     localizations.where(language: language)
                 .first_or_create do |l10n|
+      l10n.name = name
       l10n.alt = alt
       l10n.credit = credit
       l10n.published = true

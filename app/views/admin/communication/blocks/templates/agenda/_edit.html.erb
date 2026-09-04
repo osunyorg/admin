@@ -34,7 +34,7 @@ object_endpoint = admin_communication_website_agenda_events_path(website_id: web
     class="mb-5">
     <picker
       ref="picker"
-      title="<%= Communication::Website::Post.model_name.human(count: 2) %>"
+      title="<%= Communication::Website::Agenda::Event.model_name.human(count: 2) %>"
       endpoint="<%= picker_endpoint %>"
       @update:model-value="data.elements.push({id: $event.id})">
     </picker>
