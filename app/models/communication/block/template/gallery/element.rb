@@ -12,10 +12,6 @@ class Communication::Block::Template::Gallery::Element < Communication::Block::T
     image_component.communication_media
   end
 
-  def communication_media_l10n
-    communication_media.localization_for(block.language)
-  end
-
   def check_accessibility
     super
     accessibility_warning 'accessibility.commons.alt.empty' if image_component.blob && alt.blank?
