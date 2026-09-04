@@ -19,4 +19,4 @@
 
 - [ ] Aucun 😌
 - [ ] Changements mineurs 😲
-- [ ] Changments majeurs 😱
+- [ ] Changements majeurs 😱

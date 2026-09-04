@@ -1,14 +1,14 @@
 class Migrations::BlocksWithMedias
 
   TEMPLATES = [
-    :chapter, 
+    :chapter,
     :image,
     :call_to_action
   ]
 
   TEMPLATES_WITH_ELEMENTS = [
     :features,
-    :gallery, 
+    :gallery,
     :key_figures,
     :links
   ]
@@ -55,28 +55,6 @@ class Migrations::BlocksWithMedias
         block.save
         puts "Block #{block.id} migrated"
       end
-    end
-    Communication::Block.where(template_kind: :testimonial).with_deleted.find_each do |block|
-        data = block.data.dup
-        something_to_migrate = false
-        (data['elements'] || []).each do |element|
-          next unless element.is_a?(Hash)
-          photo = element['photo']
-          next unless photo.is_a?(Hash)
-          blob_id = photo['id']
-          next unless blob_id.present?
-          # Déjà migré
-          next if element.dig('photo', 'communication_media_id')
-          media = blob_to_media(block, blob_id, '', '')
-          # Pas de blob, donc pas de média
-          next if media.nil?
-          something_to_migrate = true
-          element['photo']['communication_media_id'] = media.id
-        end
-        next unless something_to_migrate
-        block.data = data
-        block.save
-        puts "Block #{block.id} migrated"
     end
   end
 

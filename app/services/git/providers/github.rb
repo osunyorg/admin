@@ -168,6 +168,13 @@ class Git::Providers::Github < Git::Providers::Abstract
     @files_in_the_repository ||= tree[:tree].map { |file| file[:path] }
   end
 
+  # The limit for the tree array is 100,000 entries.
+  # If it contains more, the tree is returned as truncated, so we can't use it for checking.
+  # https://docs.github.com/fr/rest/git/trees?apiVersion=2026-03-10#get-a-tree
+  def can_check_git_files_integrity?
+    !tree[:truncated]
+  end
+
   protected
 
   def client
