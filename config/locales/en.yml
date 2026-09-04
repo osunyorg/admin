@@ -424,6 +424,8 @@ en:
         finished_with_errors: Finished with errors
         pending: Pending
   export: Export (xlsx)
+  evolutions:
+    listen: Listen on
   false: No
   file_hint_with_formats: "%{formats} files only. %{filesize} max."
   file_hint_without_formats: "%{filesize} max"

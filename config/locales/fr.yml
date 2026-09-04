@@ -429,6 +429,8 @@ fr:
         finished: Traité
         finished_with_errors: Traité avec des erreurs
         pending: En cours de traitement
+  evolutions:
+    listen: Écouter sur
   export: Exporter (xlsx)
   false: Non
   file_hint_with_formats: "Fichiers %{formats} uniquement. %{filesize} max."

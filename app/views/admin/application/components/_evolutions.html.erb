@@ -16,7 +16,7 @@ Server::Evolution.planned.each do |evolution|
         <p class="osuny_evolution__song__title"><%= song['title'] %></p>
         <p class="osuny_evolution__song__by"><%= song['by'] %></p>
         <div class="osuny_evolution__song__listen">
-          Écouter sur
+          <%= t('evolutions.listen') %>
           <ul>
             <% song['listen'].each do |key, value| %>
               <li><%= link_to key, value, target: :_blank %></li>
