@@ -125,13 +125,20 @@ export default {
 </script>
 
 <template>
-  <button type="button"
-        class="btn btn-sm ms-n2"
-        @click="open()">
+  <button
+    type="button"
+    class="btn btn-sm ms-n2"
+    @click="open()"
+    >
     <CloudDownload stroke-width="1.5" />
     {{ $t('components.inputs.mediaInput.cloud.button') }}
   </button>
-  <div class="modal" tabindex="-1" role="dialog" :class="{'d-block': modal}">
+  <div
+    class="modal"
+    tabindex="-1"
+    role="dialog"
+    :class="{'d-block': modal}"
+    >
     <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
@@ -177,10 +184,12 @@ export default {
                 class="d-flex justify-content-between mb-2">
                 <div class="vue__media-input__cloud__button_container">
                   <button
+                    type="button"
                     class="btn btn-sm ps-0"
                     v-if="unsplash.page > 1"
                     @click="unsplash.page = unsplash.page - 1"
-                    :title="$t('components.inputs.mediaInput.cloud.previous')">
+                    :title="$t('components.inputs.mediaInput.cloud.previous')"
+                    >
                     <ArrowLeft stroke-width="1.5" />
                   </button>
                 </div>
@@ -189,20 +198,24 @@ export default {
                 </p>
                 <div class="vue__media-input__cloud__button_container text-end">
                   <button
+                    type="button"
                     class="btn btn-sm pe-0"
                     v-if="unsplash.page < unsplash.data.total_pages"
                     @click="unsplash.page = unsplash.page + 1"
-                    :title="$t('components.inputs.mediaInput.cloud.next')">
+                    :title="$t('components.inputs.mediaInput.cloud.next')"
+                    >
                     <ArrowRight stroke-width="1.5" />
                   </button>
                 </div>
               </div>
               <div class="vue__media-input__cloud__results">
-                <img  :src="image.thumb"
-                      :alt="image.alt"
-                      class="vue__media-input__cloud__results__result"
-                      v-for="image in unsplash.data.results"
-                      @click="selectUnsplash(image)">
+                <img
+                  :src="image.thumb"
+                  :alt="image.alt"
+                  class="vue__media-input__cloud__results__result"
+                  v-for="image in unsplash.data.results"
+                  @click="selectUnsplash(image)"
+                  >
               </div>
             </div>
             <div class="col-lg-6">
@@ -214,10 +227,12 @@ export default {
                 class="d-flex justify-content-between mb-2">
                 <div class="vue__media-input__cloud__button_container">
                   <button
+                    type="button"
                     class="btn btn-sm ps-0"
                     v-if="pexels.page > 1"
                     @click="pexels.page = pexels.page - 1"
-                    :title="$t('components.inputs.mediaInput.cloud.previous')">
+                    :title="$t('components.inputs.mediaInput.cloud.previous')"
+                    >
                     <ArrowLeft stroke-width="1.5" />
                   </button>
                 </div>
@@ -226,20 +241,24 @@ export default {
                 </p>
                 <div class="vue__media-input__cloud__button_container text-end">
                   <button
+                    type="button"
                     class="btn btn-sm pe-0"
                     v-if="pexels.page < pexels.data.total_pages"
                     @click="pexels.page = pexels.page + 1"
-                    :title="$t('components.inputs.mediaInput.cloud.next')">
+                    :title="$t('components.inputs.mediaInput.cloud.next')"
+                    >
                     <ArrowRight stroke-width="1.5" />
                   </button>
                 </div>
               </div>
               <div class="vue__media-input__cloud__results">
-                <img  :src="image.thumb"
-                      :alt="image.alt"
-                      class="vue__media-input__cloud__results__result"
-                      v-for="image in pexels.data.results"
-                      @click="selectPexels(image)">
+                <img
+                  :src="image.thumb"
+                  :alt="image.alt"
+                  class="vue__media-input__cloud__results__result"
+                  v-for="image in pexels.data.results"
+                  @click="selectPexels(image)"
+                  >
               </div>
             </div>
           </div>
