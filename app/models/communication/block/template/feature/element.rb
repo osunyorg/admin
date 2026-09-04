@@ -18,12 +18,8 @@ class Communication::Block::Template::Feature::Element < Communication::Block::T
     image_component.communication_media
   end
 
-  def communication_media_l10n
-    communication_media.localization_for(block.language)
-  end
-
   def dom_count
-    2 + 
+    2 +
     description_component.dom_count +
     image_component.dom_count +
     alt_component.dom_count +
