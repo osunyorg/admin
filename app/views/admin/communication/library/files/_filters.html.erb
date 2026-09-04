@@ -17,6 +17,14 @@
                         %>
     <% end %>
 
+    <%= render_filter f,
+                      :select,
+                      :for_filetype,
+                      label: I18n.t('admin.communication.file_types.title'),
+                      collection: Communication::File.filetypes_present_in(current_university.communication_files)
+                                                     .map { |filetype| [I18n.t("admin.communication.file_types.#{filetype}"), filetype]}
+                      %>
+
     <% if current_university.communication_websites.many? %>
       <%= render_filter f,
                         :select,
@@ -25,6 +33,20 @@
                         collection: osuny_collection(current_university.communication_websites, localized: true)
                         %>
     <% end %>
+
+    <% creator_ids = current_university.communication_files
+                                       .where.not(created_by_id: nil)
+                                       .distinct
+                                       .pluck(:created_by_id) %>
+    <%= render_filter f,
+                      :select,
+                      :for_creator,
+                      label: Communication::Media.human_attribute_name(:created_by),
+                      collection: current_university.users
+                                                    .where(id: creator_ids)
+                                                    .ordered(current_language)
+                                                    .map { |user| [user.to_s, user.id] }
+                      %>
 
   <% end %>
 <% end %>

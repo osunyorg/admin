@@ -114,5 +114,22 @@ module Communication::File::WithFileTypes
         FILE_TYPES.dig(filetype.to_sym, :content_types)
       }.compact
     end
+
+    # Récupère seulement les types de fichiers vraiment présents dans la liste
+    def filetypes_present_in(files)
+      FILE_TYPES.keys.select do |filetype|
+        all_content_types_for_filetype = content_types_for(filetype)
+        present_content_types = content_types_present_in(files)
+        intersected = all_content_types_for_filetype & present_content_types
+        intersected.any?
+      end
+    end
+
+    def content_types_present_in(files)
+      files.joins(:localizations)
+           .distinct
+           .pluck(:original_content_type)
+           .compact
+    end
   end
 end
