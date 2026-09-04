@@ -4,5 +4,6 @@ class UnicornsJob < ApplicationJob
 
   def perform
     Migrations::OrganizationsBlocksLogosToMedias.migrate
+    Migrations::TestimonialsBlocksPhotosToMedias.migrate
   end
 end
