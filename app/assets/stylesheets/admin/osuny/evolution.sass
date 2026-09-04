@@ -6,10 +6,18 @@
         text-align: center
         &__text
             margin-bottom: 15px
+        &__date
+            margin-bottom: 20px
     @include media-breakpoint-up(md)
         .container-fluid
             display: flex
             justify-content: space-between
+        &__text,
+        &__song
+            width: 40%
+        &__song
+            margin-top: -1px
+            text-align: right
     &__text
         margin-top: -2px
         &__title
@@ -23,3 +31,23 @@
         font-variant-numeric: oldstyle-nums
         line-height: 60px
         margin-top: -18px
+    &__song
+        &__title
+            display: inline
+            font-style: italic
+            &::before
+                content: '“'
+            &::after
+                content: '”'
+        &__by
+            display: inline
+        &__listen
+            font-size: 12px
+            margin-top: 3px
+            margin-right: -3px
+            ul
+                padding: 0
+                display: inline
+                li
+                    display: inline
+                    list-style: none
