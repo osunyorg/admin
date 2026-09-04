@@ -131,4 +131,12 @@ class GitRepositoryTest < ActiveSupport::TestCase
     assert_nil provider.push('Creating test.txt file')
   end
 
+  test "no sync job enqueued when synchronization is locked" do
+    website_with_github.lock_synchronization! users(:admin)
+    assert_no_enqueued_jobs only: Communication::Website::SyncWithGitJob do
+      website_with_github.sync_with_git
+      # git_file_2 stays desynchronized, but the job must not requeue itself
+      website_with_github.sync_with_git_safely
+    end
+  end
 end

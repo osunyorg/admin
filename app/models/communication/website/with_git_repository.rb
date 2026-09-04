@@ -61,11 +61,13 @@ module Communication::Website::WithGitRepository
   end
 
   def sync_with_git
+    return if synchronization_locked?
     update_column(:last_sync_at, Time.now)
     Communication::Website::SyncWithGitJob.perform_later(id)
   end
 
   def sync_with_git_safely
+    return if synchronization_locked?
     return unless git_repository.valid?
     git_repository.git_files = git_files.generated
                                         .desynchronized_until(last_sync_at)
