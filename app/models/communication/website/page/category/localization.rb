@@ -54,7 +54,8 @@ class Communication::Website::Page::Category::Localization < ApplicationRecord
 
   def should_sync_to?(website)
     website.id == communication_website_id &&
-    website.active_language_ids.include?(language_id)
+    website.active_language_ids.include?(language_id) &&
+    category_objects_localizations.published_now.any?
   end
 
   def git_path_relative

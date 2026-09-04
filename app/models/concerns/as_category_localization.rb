@@ -18,6 +18,8 @@ module AsCategoryLocalization
     has_summernote :summary
 
     validates :name, presence: true
+
+    alias :category :about
   end
 
   def template_static
@@ -61,5 +63,15 @@ module AsCategoryLocalization
     category_objects_ids = about.category_objects.pluck(:id)
     localization_class_name = "#{about.category_objects.klass.name}::Localization"
     localization_class_name.constantize.where(university_id: university_id, about_id: category_objects_ids)
+  end
+
+  def has_category_objects_in_website?(website)
+    # Rien du tout !
+    return false if category_objects_localizations.none?
+    # Intersection avec le site
+    objects_in_website = website.recursive_dependencies & category_objects_localizations
+    # Des choses, mais pas dans ce site
+    return false if objects_in_website.none?
+    true
   end
 end
