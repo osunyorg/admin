@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_29_043355) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_03_090000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -1661,6 +1661,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_29_043355) do
     t.string "repository"
     t.text "style"
     t.date "style_updated_at"
+    t.uuid "synchronization_locked_by_id"
     t.string "theme_version", default: "NA"
     t.uuid "university_id", null: false
     t.datetime "updated_at", null: false
@@ -1668,6 +1669,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_29_043355) do
     t.integer "years_before_archive_content", default: 3
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"
+    t.index ["synchronization_locked_by_id"], name: "index_communication_websites_on_synchronization_locked_by_id"
     t.index ["university_id"], name: "index_communication_websites_on_university_id"
   end
 
@@ -3016,6 +3018,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_29_043355) do
   add_foreign_key "communication_website_posts", "universities"
   add_foreign_key "communication_websites", "languages", column: "default_language_id"
   add_foreign_key "communication_websites", "universities"
+  add_foreign_key "communication_websites", "users", column: "synchronization_locked_by_id", on_delete: :nullify
   add_foreign_key "education_diploma_localizations", "education_diplomas", column: "about_id"
   add_foreign_key "education_diploma_localizations", "languages"
   add_foreign_key "education_diploma_localizations", "universities"

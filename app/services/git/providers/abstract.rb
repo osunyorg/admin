@@ -13,6 +13,10 @@ class Git::Providers::Abstract
     repository.present? && access_token.present?
   end
 
+  def synchronization_locked?
+    git_repository.synchronization_locked?
+  end
+
   def url
     raise NoMethodError, "You must implement the `url` method in #{self.class.name}"
   end

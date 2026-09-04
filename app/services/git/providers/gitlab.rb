@@ -42,6 +42,7 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
   end
 
   def update_theme!
+    return if synchronization_locked?
     return unless should_update_theme?
     client.edit_submodule repository,
                           ENV["GITHUB_WEBSITE_THEME_PATH"],
@@ -61,7 +62,7 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
   end
 
   def push(commit_message)
-    return if !valid? || batch.empty?
+    return if synchronization_locked? || !valid? || batch.empty?
     check_batch_integrity!
     client.create_commit  repository,
                           branch,
