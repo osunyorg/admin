@@ -80,6 +80,7 @@ class Git::Providers::Github < Git::Providers::Abstract
   def push(commit_message)
     return if !valid? || batch.empty?
     last_commit = create_commits_from_batch(batch, commit_message)
+    return if last_commit.nil?
     client.update_branch repository, default_branch, last_commit[:sha]
     # The repo changed, invalidate the tree
     @tree = nil
