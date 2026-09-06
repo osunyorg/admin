@@ -87,6 +87,9 @@ class Server::UniversitiesController < Server::ApplicationController
       file_server_attributes: [:id, :url, :ftp_host, :ftp_port, :ftp_username, :ftp_password, :ftp_path]
     ]
     attribute_names << :default_github_access_token unless params[:university][:default_github_access_token].blank?
+    if params[:university][:file_server_attributes]&.[](:ftp_password).blank?
+      params[:university][:file_server_attributes]&.delete(:ftp_password)
+    end
     params.require(:university).permit(attribute_names)
   end
 

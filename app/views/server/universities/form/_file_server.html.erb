@@ -15,7 +15,10 @@ file_server = university.file_server || university.build_file_server
       <%= lf.input :ftp_username %>
     </div>
     <div class="col-lg-6">
-      <%= lf.input :ftp_password %>
+      <%= lf.input  :ftp_password,
+                    placeholder: masked_string(file_server.ftp_password),
+                    hint: t("simple_form.hints.university_file_server.ftp_password_#{file_server.ftp_password.blank? ? 'without' : 'with'}_existing").html_safe,
+                    input_html: { value: '' } %>
     </div>
   </div>
   <%= lf.input :ftp_path %>

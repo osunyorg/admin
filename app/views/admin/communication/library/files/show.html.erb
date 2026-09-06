@@ -4,6 +4,10 @@
   <%= button_advanced do %>
     <%= destroy_link @file if @file.contexts.none? %>
   <% end %>
+  <%= link_to t('open'),
+              @l10n.file_server_url,
+              target: :_blank,
+              class: button_classes if current_university.file_server? %>
   <%= edit_link @file %>
 <% end %>
 

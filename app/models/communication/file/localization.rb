@@ -59,6 +59,7 @@ class Communication::File::Localization < ApplicationRecord
   include Permalinkable
   include Publishable
   include Sanitizable
+  include WithFileServer
   include WithOpenApi
 
   belongs_to  :updated_by,
