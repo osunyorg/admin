@@ -11,19 +11,12 @@ module Communication::File::Localization::WithFileServer
   end
 
   def file_server_url
+    return unless university.file_server?
     "#{file_server.url}/#{file_server_path}"
-  end
-
-  def file_server_directory
-    "#{created_at.year}"
   end
 
   def file_server_filename
     "#{slug}#{original_extension}"
-  end
-
-  def file_server_path
-    "#{file_server_directory}/#{file_server_filename}"
   end
 
   def sync_to_file_server_safely
@@ -44,6 +37,14 @@ module Communication::File::Localization::WithFileServer
     @file_server ||= university.file_server
   end
 
+  def file_server_directory
+    "#{created_at.year}"
+  end
+
+  def file_server_path
+    "#{file_server_directory}/#{file_server_filename}"
+  end
+
   def ftp
     unless @ftp
       @ftp = Net::FTP.new
@@ -56,7 +57,7 @@ module Communication::File::Localization::WithFileServer
   end
 
   def file_server_remote_directory
-    File.join(*[file_server.ftp_path.presence, file_server_directory].compact)
+    "#{file_server.ftp_path}/#{file_server_directory}"
   end
 
   def create_file_server_directory_if_necessary(path)
