@@ -29,6 +29,13 @@ en:
       university/app:
         name: Name
         token: Secret token
+      university/file_server:
+        ftp_host: FTP host (without protocole)
+        ftp_path: FTP path
+        ftp_password: FTP password
+        ftp_port: FTP port
+        ftp_username: FTP username
+        url: URL
       university/organization:
         address: Address
         categories: Categories
@@ -146,6 +153,9 @@ en:
       university/app:
         one: App
         other: Apps
+      university/file_server:
+        one: File server
+        other: File servers
       university/organization:
         one: Organization
         other: Organizations

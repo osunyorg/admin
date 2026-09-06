@@ -29,6 +29,13 @@ fr:
       university/app:
         name: Nom
         token: Jeton secret
+      university/file_server:
+        ftp_host: Hôte FTP (sans protocole)
+        ftp_path: Chemin FTP
+        ftp_password: Mot de passe FTP
+        ftp_port: Port FTP
+        ftp_username: Nom d'utilisateur FTP
+        url: URL
       university/organization:
         address: Adresse
         categories: Catégories
@@ -146,6 +153,9 @@ fr:
       university/app:
         one: App
         other: Apps
+      university/file_server:
+        one: Serveur de fichiers
+        other: Serveurs de fichiers
       university/organization:
         one: Organisation
         other: Organisations
