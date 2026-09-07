@@ -27,7 +27,7 @@ class Osuny::Picker::Communication::Library::File < Osuny::Picker::Communication
   def filters_filetypes
     @filters << {
       name: I18n.t('admin.communication.file_types.title', locale: language.iso_code),
-      values: ::  Communication::File.filetypes_present_in(objects).map { |filetype|
+      values: ::Communication::File.filetypes_present_in(objects).map { |filetype|
         {
           id: filetype,
           name: I18n.t("admin.communication.file_types.#{filetype}", locale: language.iso_code),
@@ -41,7 +41,7 @@ class Osuny::Picker::Communication::Library::File < Osuny::Picker::Communication
   def filters_websites
     @filters << {
       name: ::Communication::Website.model_name.human(count: 2, locale: language.iso_code),
-      values: websites.map { |website| 
+      values: websites.map { |website|
         {
           id: website.id,
           name: website.to_s_in(language),
