@@ -1,7 +1,8 @@
-<rich-text-input v-model="<%= model %>.<%= property %>"
-                 config="<%= summernote_config %>"
-                 placeholder="<%= placeholder %>"
-                 label="<%= label %>">
+<rich-text-input
+  v-model="<%= model %>.<%= property %>"
+  config="<%= summernote_config %>"
+  placeholder="<%= placeholder %>"
+  label="<%= label %>">
 <% if hint.present? %>
   <template #hint>
     <div class="form-text"><%= hint %></div>

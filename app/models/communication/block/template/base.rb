@@ -87,14 +87,20 @@ class Communication::Block::Template::Base
   # Called before block validation
   # Has an override in some templates (video)
   def before_validation
-  end
-
-  def media_blobs
-    []
+    components.each(&:before_validation)
+    elements.each(&:before_validation)
   end
 
   def communication_files
     Communication::File.none
+  end
+
+  def communication_medias
+    Communication::Media.none
+  end
+
+  def crop_settings_for(media)
+    nil
   end
 
   def dom_count

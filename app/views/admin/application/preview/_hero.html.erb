@@ -4,9 +4,9 @@
 @summary = @l10n.summary
 
 hero_classes = "hero"
-if @l10n.featured_image.present? && @l10n.featured_image.attached?
-  format = ActiveStorage::Utils.format(@l10n.featured_image)
-  hero_classes += " hero--with-image hero--image-#{format}" if format.present?
+if @l10n.featured_blob.present?
+  blob = @l10n.featured_blob
+  hero_classes += " hero--with-image hero--image-#{blob.orientation}" if blob.orientation.present?
 end
 %>
 <header class="<%= hero_classes %>">

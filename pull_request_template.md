@@ -14,3 +14,9 @@
 - [ ] Incidence faible 😌
 - [ ] Incidence moyenne 😲
 - [ ] Incidence forte 😱
+
+## Changement d'interface
+
+- [ ] Aucun 😌
+- [ ] Changements mineurs 😲
+- [ ] Changements majeurs 😱

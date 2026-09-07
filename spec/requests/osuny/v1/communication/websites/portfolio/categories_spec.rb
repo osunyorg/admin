@@ -86,7 +86,7 @@ RSpec.describe 'Communication::Website::Portfolio::Category' do
       response '201', 'Successful creation' do
         it 'creates a portfolio category and its localization', rswag: true do |example|
           assert_difference ->{ Communication::Website::Portfolio::Category.count } => 1, ->{ Communication::Website::Portfolio::Category::Localization.count } => 1 do
-            assert_enqueued_jobs 1, only: Api::AttachFeaturedImageFromUrlJob do
+            assert_enqueued_jobs 1, only: Api::CreateFeaturedMediaFromUrlJob do
               submit_request(example.metadata)
               assert_response_matches_metadata(example.metadata)
             end
@@ -222,7 +222,7 @@ RSpec.describe 'Communication::Website::Portfolio::Category' do
       response '200', 'Successful upsertion' do
         it 'creates a portfolio category and updates another with their localizations', rswag: true do |example|
           assert_difference ->{ Communication::Website::Portfolio::Category.count } => 1, ->{ Communication::Website::Portfolio::Category::Localization.count } => 1 do
-            assert_enqueued_jobs 1, only: Api::AttachFeaturedImageFromUrlJob do
+            assert_enqueued_jobs 1, only: Api::CreateFeaturedMediaFromUrlJob do
               submit_request(example.metadata)
               assert_response_matches_metadata(example.metadata)
             end

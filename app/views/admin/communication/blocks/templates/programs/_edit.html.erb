@@ -1,32 +1,55 @@
-<%= block_component_add_element block, t('.add') %>
-<draggable :list="data.elements" handle=".dragHandle" class="mb-3">
-  <div v-for="(element, index) in data.elements" class="d-flex draggable-item">
-    <div>
-      <a class="btn ps-0 pt-0 dragHandle" title="<%= t('admin.communication.block.drag_and_drop') %>">
-        <i class="<%= Icon::DRAG %> handle"></i>
-      </a>
-    </div>
-    <div class="flex-fill mb-n3">
-      <%= block_component_edit block, :id, template: @element, label: false %>
-    </div>
-    <div>
-      <a  class="btn btn-sm text-danger ms-3"
-          @click="deleteElement(element)"
-          title="Supprimer">
-          <i class="<%= Icon::DELETE %>"></i>
-      </a>
-    </div>
+<%
+picker_endpoint = picker_admin_education_programs_path(format: :json)
+picker_title = Education::Program.model_name.human(count: 2)
+object_endpoint = admin_education_programs_path
+%>
+
+<picker
+  ref="picker"
+  title="<%= picker_title %>"
+  endpoint="<%= picker_endpoint %>"
+  @update:model-value="data.elements.push({id: $event.id})">
+</picker>
+
+<a
+  class="<%= button_classes %>"
+  @click="$refs.picker.open()">
+  <%= t('.add') %>
+</a>
+
+<draggable
+  :list="data.elements"
+  handle=".osuny__thumbnail"
+  class="row g-2 mb-2">
+  <div
+    v-for="(element, index) in data.elements"
+    class="d-flex align-items-center">
+    <selected-program
+      :id="element.id"
+      endpoint="<%= object_endpoint %>"
+      class="flex-fill">
+    </selected-program>
+    <a  class="btn btn-sm text-danger ms-3"
+        @click="deleteElement(element)"
+        title="Supprimer">
+        <i class="<%= Icon::DELETE %>"></i>
+    </a>
   </div>
 </draggable>
+
 <div v-show="data.elements.length > 2">
-  <%= block_component_add_element block, t('.add') %>
+  <a
+    class="<%= button_classes %>"
+    @click="$refs.picker.open()">
+    <%= t('.add') %>
+  </a>
 </div>
 
 <%= osuny_separator %>
 <%= osuny_small_panel t('admin.communication.blocks.components.layouts.label') do %>
   <%= block_component_edit block, :layout %>
   <%= osuny_label t('admin.communication.blocks.display_options.title') %>
-  <%= block_component_edit block, :option_image, label: Education::Program::Localization.human_attribute_name(:featured_image) %>
+  <%= block_component_edit block, :option_image, label: Education::Program::Localization.human_attribute_name(:featured_media) %>
   <%= block_component_edit block, :option_summary, label: t('admin.summary.label') %>
   <%= block_component_edit block, :option_diploma, label: Education::Program.human_attribute_name(:diploma) %>
 <% end %>

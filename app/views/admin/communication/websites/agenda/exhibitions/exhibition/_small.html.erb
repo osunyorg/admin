@@ -1,0 +1,11 @@
+<div class="<%= osuny_card_classes(horizontal: true) %>">
+  <%= osuny_thumbnail_localized exhibition %>
+  <div class="card-body d-flex">
+    <%= osuny_link_localized  exhibition,
+                              admin_communication_website_agenda_exhibition_path(
+                                website_id: exhibition.website.id,
+                                id: exhibition.id
+                              ),
+                              classes: "stretched-link" %>
+  </div>
+</div>

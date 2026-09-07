@@ -53,11 +53,14 @@
                   compare_with_field: :password,
                   input_html: { autocomplete: "new-password" } %>
       <%= f.input :mobile_phone %>
-      <%= f.input :picture,
-                        as: :single_deletable_file,
-                        input_html: { accept: default_images_formats_accepted },
-                        preview: 200,
-                        resize: 1 %>
+
+      <% unless resource.invitation&.person&.picture&.attached? %>
+        <%= f.input :picture,
+                    as: :single_deletable_file,
+                    input_html: { accept: default_images_formats_accepted },
+                    preview: 200,
+                    resize: 1 %>
+      <% end %>
     </div>
   </div>
   <%= f.button :submit, t(".sign_up"), class: 'btn btn-primary' %>

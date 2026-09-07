@@ -1,17 +1,19 @@
 <div class="mb-3">
   <% unless label.blank? %>
-    <label  class="form-label" 
-            aria-label="<%= label %>"
-            :for="<%= dom_id.html_safe %>">
+    <label
+      class="form-label" 
+      aria-label="<%= label %>"
+      :for="<%= dom_id.html_safe %>">
       <%= label %>
     </label>
   <% end %>
-  <input  :id="<%= dom_id.html_safe %>"
-          class="form-control"
-          data-translatable="true"
-          v-model="<%= model %>.<%= property %>"
-          placeholder="<%= placeholder %>"
-          type="text" />
+  <input
+    :id="<%= dom_id.html_safe %>"
+    class="form-control"
+    data-translatable="true"
+    v-model="<%= model %>.<%= property %>"
+    placeholder="<%= placeholder %>"
+    type="text" />
   <% if hint.present? %>
     <div class="form-text"><%= hint %></div>
   <% end %>

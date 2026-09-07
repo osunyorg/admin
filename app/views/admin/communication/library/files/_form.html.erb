@@ -4,17 +4,18 @@
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
     <%= lf.hidden_field :language_id, value: current_language.id %>
 
+    <%= render 'admin/application/publication/form', f: lf, about: file %>
     <div class="row">
       <div class="col-lg-4">
-        <% if l10n.new_record? %>
-          <%= lf.input :original_uploaded_file,
-                      as: :file %>
-        <% end %>
+        <%= lf.input  :original_uploaded_file,
+                      as: :file,
+                      hint: (t('admin.communication.file.replacement_file_hint') unless l10n.new_record?) %>
       </div>
       <div class="col-lg-8">
         <%= lf.input :name %>
         <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
         <%= lf.input :internal_description, hint: t('simple_form.hints.communication_file_localization.internal_description') %>
+        <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
       </div>
     </div>
     <% content_for :action_bar_right do %>

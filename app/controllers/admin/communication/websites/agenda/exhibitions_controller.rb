@@ -16,6 +16,15 @@ class Admin::Communication::Websites::Agenda::ExhibitionsController < Admin::Com
     breadcrumb
   end
 
+  def picker
+    @picker = Osuny::Picker::Communication::Website::Agenda::Exhibition.new(
+      university: current_university,
+      language: current_language,
+      params: params,
+      context: @website
+    )
+  end
+
   def publish
     @l10n.publish!
     redirect_back fallback_location: admin_communication_website_agenda_exhibition_path(@exhibition),
@@ -104,7 +113,6 @@ class Admin::Communication::Websites::Agenda::ExhibitionsController < Admin::Com
         :id, :title, :subtitle, :meta_description, :summary, :text, :notes, :place,
         :published, :published_at, :slug,
         :header_cta, :header_cta_label, :header_cta_url,
-        :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
         :shared_image, :shared_image_delete, :shared_image_infos,
         :language_id
       ]

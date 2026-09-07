@@ -1,0 +1,11 @@
+<%
+if event.deleted?
+  partial_name = 'deleted'
+elsif event.is_template?
+  partial_name = 'template'
+else
+  partial_name = 'default'
+end
+%>
+<%= render "admin/communication/websites/agenda/events/event/#{partial_name}",
+            event: event %>

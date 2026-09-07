@@ -6,8 +6,8 @@
       %>
     <article class="col-lg-4">
       <div class="position-relative">
-        <% if l10n.featured_image.attached? %>
-          <%= kamifusen_tag l10n.featured_image, 
+        <% if l10n.featured_blob.present? %>
+          <%= kamifusen_tag l10n.featured_blob, 
                             width: 800, 
                             height: 500, 
                             class: 'img-fluid' %>

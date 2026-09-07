@@ -42,14 +42,8 @@ module Duplicable
       instance_l10n.published = false if instance_l10n.respond_to?(:published)
       instance_l10n.published_at = nil if instance_l10n.respond_to?(:published_at)
       instance_l10n.save
-      duplicate_featured_image(l10n, instance_l10n)
       duplicate_blocks(l10n, instance_l10n)
     end
-  end
-
-  def duplicate_featured_image(from, to)
-    return unless from.respond_to?(:featured_image) && from.featured_image.attached?
-    ActiveStorage::Utils.duplicate(from.featured_image, to.featured_image)
   end
 
   def duplicate_block(instance, block)

@@ -53,6 +53,10 @@ class Git::Providers::Abstract
     []
   end
 
+  def can_check_git_files_integrity?
+    false
+  end
+
   protected
 
   def batch

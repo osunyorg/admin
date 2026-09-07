@@ -81,7 +81,6 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
             localizations_attributes: [
               :id, :language_id,
               :name, :address_additional, :address_name, :url, :summary, :slug,
-              :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
             ]
           )
           .merge(

@@ -1,0 +1,14 @@
+<div class="<%= osuny_card_classes %>">
+  <%= osuny_thumbnail_localized volume, large: true %>
+  <div class="card-body">
+    <%= volume.best_localization_for(current_language) %>
+  </div>
+  <% if can?(:restore, volume) %>
+    <div class="card-footer">
+      <%= link_to t('restore'),
+                  restore_admin_research_journal_volume_path(journal_id: @journal, id: volume),
+                  method: :post,
+                  class: button_classes %>
+    </div>
+  <% end %>
+</div>

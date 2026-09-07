@@ -86,6 +86,10 @@ module HasDependencies
     Rails.cache.write(dependencies_cache_key, current_dependencies)
   end
 
+  def touch_references
+    references.to_a.flatten.compact.each &:touch
+  end
+
   protected
 
   def recursive_dependencies_add(array, dependency, skip_direct)

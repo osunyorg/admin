@@ -63,4 +63,9 @@ class Communication::Block::Component::Base
     self.class.to_s.demodulize
   end
 
+  # Called before block validation
+  # Has an override in some components (image)
+  def before_validation
+  end
+
 end

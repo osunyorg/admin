@@ -38,6 +38,8 @@ class Research::Journal::Paper < ApplicationRecord
   acts_as_paranoid
 
   include AsIndirectObject
+  include Autosortable
+  include Filterable
   include GeneratesGitFiles
   include HasUniversity
   include Lifecyclable

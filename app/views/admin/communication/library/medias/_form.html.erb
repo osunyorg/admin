@@ -4,6 +4,7 @@
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
     <%= lf.hidden_field :language_id, value: current_language.id %>
 
+    <%= render 'admin/application/publication/form', f: lf, about: media %>
     <div class="row">
       <div class="col-lg-4">
         <% if @media.new_record? %>
@@ -30,8 +31,8 @@
         </div>
         <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
         <%= lf.input :alt,
-                      label: t('featured_image.alt.label'),
-                      hint: t('featured_image.alt.hint'),
+                      label: t('admin.communication.media.alt.label'),
+                      hint: t('admin.communication.media.alt.hint'),
                       input_html: {
                         data: {
                           translatable: true
@@ -39,8 +40,8 @@
                       } %>
         <%= lf.input :credit,
                       as: :summernote,
-                      label: t('featured_image.credit.label'),
-                      hint: t('featured_image.credit.hint'),
+                      label: t('admin.communication.media.credit.label'),
+                      hint: t('admin.communication.media.credit.hint'),
                       input_html: {
                         data: {
                           translatable: true,

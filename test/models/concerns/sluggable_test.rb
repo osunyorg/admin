@@ -19,6 +19,10 @@ class SluggableTest < ActiveSupport::TestCase
     orga_l10n.set_slug
     assert_equal "un-nom-dentreprise-avec-caracteres-speciaux-123", orga_l10n.slug, "Special chars are removed"
 
+    orga_l10n.assign_attributes(slug: nil, name: "un-nom-de-fichier_avec_underscores.pdf")
+    orga_l10n.set_slug
+    assert_equal "un-nom-de-fichier-avec-underscorespdf", orga_l10n.slug, "Underscores are replaced"
+
     # TODO: Handle Vietnamese
     # orga_l10n.assign_attributes(slug: nil, name: "L'art de cuisiner les phở đặc biệt")
     # orga_l10n.set_slug

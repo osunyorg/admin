@@ -4,13 +4,14 @@
   <%= create_link Communication::Media %>
 <% end %>
 
-<div class="d-flex justify-content-between mb-4">
-  <p>
-    <%= @medias.total_count %>
-    <%= Communication::Media.model_name.human(count: @medias.total_count).downcase %>
-  </p>
-  <%= render 'filters', current_path: admin_communication_medias_path %>
+<div class="d-flex justify-content-between mb-5">
+  <%= render 'admin/application/components/lifecycle/pills',
+              path_method: :admin_communication_medias_path %>
+  <%= render 'filters',
+              current_path: admin_communication_medias_path,
+              website: @website %>
 </div>
+<%= render 'admin/application/components/lifecycle/label' %>
 
 <%= render 'admin/communication/library/medias/list', medias: @medias %>
 <%= paginate @medias %>

@@ -43,6 +43,7 @@ class Communication::Website::GitFile < ApplicationRecord
   validates :about_id, uniqueness: { scope: [:about_type, :website_id] }, allow_nil: true
 
   scope :generated, -> { where.not(generated_at: nil) }
+  scope :synchronized, -> { where(desynchronized: false) }
   scope :desynchronized, -> { where(desynchronized: true) }
   scope :desynchronized_since, -> (time) { desynchronized.where('desynchronized_at > ?', time) }
   scope :desynchronized_until, -> (time) { desynchronized.where('desynchronized_at <= ?', time) }
