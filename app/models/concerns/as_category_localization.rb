@@ -47,10 +47,6 @@ module AsCategoryLocalization
     "#{name}"
   end
 
-  def has_published_category_objects_localizations?
-    category_objects_localizations.published_now.any?
-  end
-
   protected
 
   def explicit_blob_ids
@@ -61,6 +57,10 @@ module AsCategoryLocalization
 
   def hugo_slug_in_website(website)
     slug_with_ancestors_slugs
+  end
+
+  def has_published_category_objects_localizations?
+    category_objects_localizations.published_now.any?
   end
 
   def category_objects_localizations
