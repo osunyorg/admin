@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_06_061411) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_07_101353) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -519,6 +519,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_06_061411) do
     t.index ["communication_file_localization_id"], name: "idx_on_communication_file_localization_id_a9a8fdc48e"
     t.index ["communication_website_id"], name: "index_communication_file_contexts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_file_contexts_on_university_id"
+  end
+
+  create_table "communication_file_localization_permalinks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "communication_file_localization_id", null: false
+    t.datetime "created_at", null: false
+    t.boolean "is_current"
+    t.string "path"
+    t.datetime "updated_at", null: false
+    t.index ["communication_file_localization_id"], name: "idx_on_communication_file_localization_id_d9f5f5a2f8"
   end
 
   create_table "communication_file_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1886,20 +1895,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_06_061411) do
     t.string "zipcode"
     t.index ["university_id"], name: "index_education_schools_on_university_id"
   end
-  create_table "emergency_messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.text "content_en"
-    t.text "content_fr"
-    t.datetime "created_at", null: false
-    t.datetime "delivered_at"
-    t.integer "delivered_count"
-    t.string "name"
-    t.string "role"
-    t.string "subject_en"
-    t.string "subject_fr"
-    t.uuid "university_id"
-    t.datetime "updated_at", null: false
-    t.index ["university_id"], name: "index_emergency_messages_on_university_id", where: "(university_id IS NOT NULL)"
-  end
   create_table "good_job_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "callback_priority"
     t.text "callback_queue_name"
@@ -2836,6 +2831,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_06_061411) do
   add_foreign_key "communication_file_contexts", "communication_file_localizations"
   add_foreign_key "communication_file_contexts", "communication_websites"
   add_foreign_key "communication_file_contexts", "universities"
+  add_foreign_key "communication_file_localization_permalinks", "communication_file_localizations"
   add_foreign_key "communication_file_localizations", "active_storage_blobs", column: "original_blob_id"
   add_foreign_key "communication_file_localizations", "communication_files", column: "about_id"
   add_foreign_key "communication_file_localizations", "communication_medias", column: "featured_media_id", on_delete: :nullify
@@ -3048,7 +3044,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_06_061411) do
   add_foreign_key "education_school_localizations", "languages"
   add_foreign_key "education_school_localizations", "universities"
   add_foreign_key "education_schools", "universities"
-  add_foreign_key "emergency_messages", "universities"
   add_foreign_key "imports", "languages"
   add_foreign_key "imports", "universities"
   add_foreign_key "imports", "users"

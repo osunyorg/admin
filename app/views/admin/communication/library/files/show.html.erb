@@ -72,7 +72,16 @@
   </div>
 </div>
 
-<%= render 'admin/application/l10n/widget', about: @file, l10n: @l10n %>  
+<div class="row">
+  <div class="col-lg-4">
+    <%= render 'admin/communication/library/files/permalinks', about: @l10n %>  
+  </div>   
+  <div class="col-lg-8">
+    <%= render 'admin/application/l10n/widget', about: @file, l10n: @l10n %>  
+  </div>   
+</div>   
+
+
 
 <%= render 'admin/communication/library/contexts/list', contexts: @contexts %>
 
