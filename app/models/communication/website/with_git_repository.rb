@@ -121,10 +121,12 @@ module Communication::Website::WithGitRepository
   end
 
   def update_theme_version
+    return if synchronization_locked?
     Communication::Website::UpdateThemeVersionJob.perform_later(id)
   end
 
   def update_theme_version_safely
+    return if synchronization_locked?
     return unless git_repository.valid?
     git_repository.update_theme_version!
   end
