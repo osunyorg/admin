@@ -73,8 +73,7 @@ class Communication::Website::Jobboard::Job::Localization < ApplicationRecord
     website.id == communication_website_id &&
     website.active_language_ids.include?(language_id) &&
     published? &&
-    job.current? &&
-    category_objects_localizations.published_now.any?
+    job.current?
   end
 
   # jobs/2025/01/01-nom-offre.html
