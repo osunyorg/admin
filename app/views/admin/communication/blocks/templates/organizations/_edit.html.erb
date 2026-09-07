@@ -25,7 +25,7 @@ object_endpoint = admin_university_organizations_path
   </a>
   <a
     class="<%= button_classes %>"
-    @click="data.elements.push({})">
+    @click="addElement()">
     <%= t('.add_organization_unregistered') %>
   </a>
 
@@ -103,7 +103,7 @@ object_endpoint = admin_university_organizations_path
     </a>
     <a
       class="<%= button_classes %>"
-      @click="data.elements.push({})">
+      @click="addElement()">
       <%= t('.add_organization_unregistered') %>
     </a>
   </div>

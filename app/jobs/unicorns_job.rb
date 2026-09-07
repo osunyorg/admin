@@ -3,7 +3,7 @@ class UnicornsJob < ApplicationJob
   queue_as :unicorns
 
   def perform
-    Migrations::BlockTitlesToFiles.migrate
-    Migrations::CleanOrphanAttachments.migrate
+    Migrations::OrganizationsBlocksLogosToMedias.migrate
+    Migrations::TestimonialsBlocksPhotosToMedias.migrate
   end
 end

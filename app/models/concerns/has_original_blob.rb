@@ -27,7 +27,7 @@ module HasOriginalBlob
   end
 
   def original_guessed_name
-    File.basename(original_filename, ".*").humanize
+    File.basename(original_filename.to_s, ".*").humanize
   end
 
   def max_file_size
