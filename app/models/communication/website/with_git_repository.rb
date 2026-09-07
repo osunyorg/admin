@@ -45,7 +45,7 @@ module Communication::Website::WithGitRepository
 
   def unlock_synchronization!
     update_column :synchronization_locked_by_id, nil
-    # TODO website.sync_with_git ?
+    sync_with_git if desynchronized_generated_git_files.any?
   end
 
   def repository_url
