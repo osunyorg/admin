@@ -232,6 +232,10 @@ class Communication::Website::PermalinkTest < ActiveSupport::TestCase
       ]
     )
 
+    # Add page to the child category to make it syncable
+    page = communication_website_pages(:test_page)
+    child.pages << page
+
     moved_l10n = moved.localization_for(french)
     child_l10n = child.localization_for(french)
 

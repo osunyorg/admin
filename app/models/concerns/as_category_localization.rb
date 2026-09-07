@@ -47,6 +47,10 @@ module AsCategoryLocalization
     "#{name}"
   end
 
+  def has_published_category_objects_localizations?
+    category_objects_localizations.published_now.any?
+  end
+
   protected
 
   def explicit_blob_ids
