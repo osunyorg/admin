@@ -45,17 +45,20 @@
 #  default_language_id          :uuid             not null, indexed
 #  deuxfleurs_access_key_id     :string
 #  locked_by_job_id             :uuid
+#  synchronization_locked_by_id :uuid             indexed
 #  university_id                :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_communication_websites_on_about                (about_type,about_id)
-#  index_communication_websites_on_default_language_id  (default_language_id)
-#  index_communication_websites_on_university_id        (university_id)
+#  index_communication_websites_on_about                         (about_type,about_id)
+#  index_communication_websites_on_default_language_id           (default_language_id)
+#  index_communication_websites_on_synchronization_locked_by_id  (synchronization_locked_by_id)
+#  index_communication_websites_on_university_id                 (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_2b6d929310  (default_language_id => languages.id)
+#  fk_rails_49c2afa13d  (synchronization_locked_by_id => users.id) ON DELETE => nullify
 #  fk_rails_bb6a496c08  (university_id => universities.id)
 #
 class Communication::Website < ApplicationRecord
