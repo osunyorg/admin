@@ -21,6 +21,10 @@ class Video::Provider::Instagram < Video::Provider::Default
     iframe_tag
   end
 
+  def snippet_classes
+    ""
+  end
+
   def script
     "<script async src=\"https://www.instagram.com/embed.js\"></script>"
   end
