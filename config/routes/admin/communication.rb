@@ -322,6 +322,7 @@ namespace :communication do
       member do
         get :static
       end
+      resources :permalinks
     end
   end
   root to: 'dashboard#index'

@@ -29,6 +29,13 @@ fr:
       university/app:
         name: Nom
         token: Jeton secret
+      university/file_server:
+        ftp_host: Hôte FTP (sans protocole)
+        ftp_path: Chemin FTP
+        ftp_password: Mot de passe FTP
+        ftp_port: Port FTP
+        ftp_username: Nom d'utilisateur FTP
+        url: URL
       university/organization:
         address: Adresse
         categories: Catégories
@@ -146,6 +153,9 @@ fr:
       university/app:
         one: App
         other: Apps
+      university/file_server:
+        one: Serveur de fichiers
+        other: Serveurs de fichiers
       university/organization:
         one: Organisation
         other: Organisations
@@ -191,6 +201,9 @@ fr:
         languages: "Ces langues sont actuellement utilisées sans les sites web : %{used_languages}"
         sms_sender_name: "11 caractères maximum. Que des caractères alphadécimaux ([A-Z][a-z][0-9])."
         sso_button_label: "Par défaut : Se connecter en SSO"
+      university_file_server:
+        ftp_password_with_existing: Laisser le champ vide pour ne pas modifier le mot de passe existant.
+        ftp_password_without_existing: Aucun mot de passe n'est enregistré pour le moment.
       university_organization:
         description: Si ce champ est vide le début du texte principal sera utilisé.
         logo: Ce logo doit contraster sur un fond clair (blanc ou gris pâle)

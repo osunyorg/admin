@@ -29,6 +29,13 @@ en:
       university/app:
         name: Name
         token: Secret token
+      university/file_server:
+        ftp_host: FTP host (without protocole)
+        ftp_path: FTP path
+        ftp_password: FTP password
+        ftp_port: FTP port
+        ftp_username: FTP username
+        url: URL
       university/organization:
         address: Address
         categories: Categories
@@ -146,6 +153,9 @@ en:
       university/app:
         one: App
         other: Apps
+      university/file_server:
+        one: File server
+        other: File servers
       university/organization:
         one: Organization
         other: Organizations
@@ -191,6 +201,9 @@ en:
         languages: "Those languages are currently used on websites: %{used_languages}"
         sms_sender_name: "11 characters max. Only alphanumeric chars ([A-Z][a-z][0-9])."
         sso_button_label: "Default: Sign in via SSO"
+      university_file_server:
+        ftp_password_with_existing: Leave the field blank if you don't want to change the existing password.
+        ftp_password_without_existing: No password is currently saved.
       university_organization:
         description: If this field is empty the main text's begining will be used.
         logo: This logo should contrast properly on a light bacgkground (white or pale grey)

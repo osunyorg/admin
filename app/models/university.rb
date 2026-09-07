@@ -49,6 +49,7 @@ class University < ApplicationRecord
   include WithCommunication
   include HasCountry
   include WithEducation
+  include WithFileServer
   include WithGithub
   include WithIdentifier
   include WithInvoice

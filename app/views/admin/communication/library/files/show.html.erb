@@ -4,6 +4,10 @@
   <%= button_advanced do %>
     <%= destroy_link @file if @file.contexts.none? %>
   <% end %>
+  <%= link_to t('open'),
+              @l10n.file_server_url,
+              target: :_blank,
+              class: button_classes if current_university.file_server? %>
   <%= edit_link @file %>
 <% end %>
 
@@ -68,7 +72,16 @@
   </div>
 </div>
 
-<%= render 'admin/application/l10n/widget', about: @file, l10n: @l10n %>  
+<div class="row">
+  <div class="col-lg-4">
+    <%= render 'admin/communication/library/files/permalinks', about: @l10n %>  
+  </div>   
+  <div class="col-lg-8">
+    <%= render 'admin/application/l10n/widget', about: @file, l10n: @l10n %>  
+  </div>   
+</div>   
+
+
 
 <%= render 'admin/communication/library/contexts/list', contexts: @contexts %>
 
