@@ -4,8 +4,8 @@
 #
 #  id                       :uuid             not null, primary key
 #  breadcrumb_title         :string
-#  featured_image_alt       :string
 #  featured_image_credit    :text
+#  featured_media_alt       :string
 #  header_cta               :boolean          default(FALSE)
 #  header_cta_label         :string
 #  header_cta_url           :string
@@ -21,6 +21,7 @@
 #  updated_at               :datetime         not null
 #  about_id                 :uuid             indexed, uniquely indexed => [language_id]
 #  communication_website_id :uuid             not null, indexed
+#  featured_media_id        :uuid             indexed
 #  language_id              :uuid             not null, uniquely indexed => [about_id], indexed
 #  university_id            :uuid             not null, indexed
 #
@@ -29,6 +30,7 @@
 #  idx_on_about_id_6e430d4efc                  (about_id)
 #  idx_on_about_id_language_id_94336f5680      (about_id,language_id) UNIQUE
 #  idx_on_communication_website_id_0c06c1ae6f  (communication_website_id)
+#  idx_on_featured_media_id_e923a3f3fd         (featured_media_id)
 #  idx_on_language_id_cc5f73e306               (language_id)
 #  idx_on_university_id_fb03a6e3c0             (university_id)
 #
@@ -37,6 +39,7 @@
 #  fk_rails_04d5596411  (communication_website_id => communication_websites.id)
 #  fk_rails_49ba67b5ed  (university_id => universities.id)
 #  fk_rails_9edc398287  (about_id => communication_website_post_categories.id)
+#  fk_rails_c4eeb111ad  (featured_media_id => communication_medias.id) ON DELETE => nullify
 #  fk_rails_e1dc625b2e  (language_id => languages.id)
 #
 class Communication::Website::Post::Category::Localization < ApplicationRecord

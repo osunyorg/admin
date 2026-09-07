@@ -9,4 +9,20 @@ class Communication::Block::Template::Feature::Element < Communication::Block::T
   def empty?
     title.blank? && description.blank?
   end
+
+  def blob
+    image_component.blob
+  end
+
+  def communication_media
+    image_component.communication_media
+  end
+
+  def dom_count
+    2 +
+    description_component.dom_count +
+    image_component.dom_count +
+    alt_component.dom_count +
+    credit_component.dom_count
+  end
 end

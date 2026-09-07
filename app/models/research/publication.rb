@@ -20,7 +20,7 @@
 #  publication_date       :date
 #  ref                    :string
 #  slug                   :string           indexed
-#  source                 :integer          default("osuny")
+#  source                 :integer          default(0)
 #  title                  :string
 #  url                    :string
 #  created_at             :datetime         not null
@@ -33,11 +33,11 @@
 #
 class Research::Publication < ApplicationRecord
   include AsIndirectObject
+  include Citable
   include Filterable
   include HasGitFiles
   include Permalinkable
   include Sanitizable
-  include WithCitations
 
   enum :source, {
     osuny: 0,

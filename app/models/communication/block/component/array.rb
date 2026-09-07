@@ -17,4 +17,7 @@ class Communication::Block::Component::Array < Communication::Block::Component::
     ['']
   end
 
+  def dom_count
+    data.count
+  end
 end

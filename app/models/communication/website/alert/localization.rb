@@ -39,11 +39,11 @@ class Communication::Website::Alert::Localization < ApplicationRecord
 
   include AsLocalization
   include HasGitFiles
+  include HasUniversity
   include Initials
   include Permalinkable # slug_unavailable method overwrite in this file
   include Publishable
   include Sanitizable
-  include WithUniversity
 
   belongs_to :website,
               class_name: 'Communication::Website',

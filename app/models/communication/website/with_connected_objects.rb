@@ -96,17 +96,23 @@ module Communication::Website::WithConnectedObjects
   # TODO factoriser avec les extranets
   def connected_people
     ids = connections.where(indirect_object_type: 'University::Person').pluck(:indirect_object_id)
-    University::Person.where(id: ids)
+    university.people.where(id: ids)
   end
 
   def connected_organizations
     ids = connections.where(indirect_object_type: 'University::Organization').pluck(:indirect_object_id)
-    University::Organization.where(id: ids)
+    university.organizations.where(id: ids)
   end
 
   def connected_publications
     ids = connections.where(indirect_object_type: 'Research::Publication').pluck(:indirect_object_id)
+    # Research publications live across universities
     Research::Publication.where(id: ids)
+  end
+
+  def connected_communication_files
+    ids = connections.where(indirect_object_type: 'Communication::File').pluck(:indirect_object_id)
+    university.communication_files.where(id: ids)
   end
 
   # ensure the object "website" respond to both is_direct_object? and is_indirect_object? as website doesn't include neither as_direct_object nor as_indirect_object

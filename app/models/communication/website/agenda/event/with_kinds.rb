@@ -120,6 +120,8 @@ module Communication::Website::Agenda::Event::WithKinds
   end
 
   def in_parent_dates?
+    return if from_day.nil? || to_day.nil?
+
     if from_day < parent.from_day || to_day > parent.to_day
       errors.add(:parent_id, :outside_parent_dates)
     end

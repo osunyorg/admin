@@ -6,6 +6,8 @@
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
 
+  <%= hidden_field_tag :invitation_token, params[:invitation_token] if params[:invitation_token].present? %>
+
   <div class="row">
     <div class="col-lg-6">
       <%= f.invisible_captcha :osuny_verification %>
@@ -51,11 +53,14 @@
                   compare_with_field: :password,
                   input_html: { autocomplete: "new-password" } %>
       <%= f.input :mobile_phone %>
-      <%= f.input :picture,
-                        as: :single_deletable_file,
-                        input_html: { accept: default_images_formats_accepted },
-                        preview: 200,
-                        resize: 1 %>
+
+      <% unless resource.invitation&.person&.picture&.attached? %>
+        <%= f.input :picture,
+                    as: :single_deletable_file,
+                    input_html: { accept: default_images_formats_accepted },
+                    preview: 200,
+                    resize: 1 %>
+      <% end %>
     </div>
   </div>
   <%= f.button :submit, t(".sign_up"), class: 'btn btn-primary' %>

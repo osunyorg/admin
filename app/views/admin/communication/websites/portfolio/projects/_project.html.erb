@@ -1,0 +1,9 @@
+<%
+if project.deleted?
+  partial_name = 'deleted'
+else
+  partial_name = 'default'
+end
+%>
+<%= render "admin/communication/websites/portfolio/projects/project/#{partial_name}",
+            project: project %>

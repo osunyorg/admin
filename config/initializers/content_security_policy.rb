@@ -13,6 +13,7 @@ Rails.application.configure do
   script_urls = %w(
     https://example.osuny.org/js/
     https://plausible.io
+    https://tally.so
     https://d2wy8f7a9ursnm.cloudfront.net/v7/
   )
   script_urls << "https://cdn.jsdelivr.net/npm/summernote@#{SummernoteRails::Rails::VERSION.split('.').take(3).join('.')}/dist/lang/"

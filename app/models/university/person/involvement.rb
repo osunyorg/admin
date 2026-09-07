@@ -27,9 +27,9 @@
 class University::Person::Involvement < ApplicationRecord
   acts_as_paranoid
   
+  include HasUniversity
   include Localizable
   include Orderable
-  include WithUniversity
 
   enum :kind, {
     administrator: 10,

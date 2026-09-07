@@ -37,7 +37,7 @@ class Communication::Extranet::Connection < ApplicationRecord
   def send_invitation_to_person
     # Do not send invitation if there is no email on the person's user or the person itself
     return unless about.user.try(:email).present? || about.email.present?
-    ExtranetMailer.invitation_message(extranet, about).deliver_later
+    ExtranetMailer.invitation_message_automatic(extranet, about).deliver_later
     about.update_column(:invitation_sent_at, Time.current)
   end
 end

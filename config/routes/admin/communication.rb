@@ -1,9 +1,5 @@
 namespace :communication do
   resources :authors, only: [:index, :show]
-  scope 'photo-imports' do
-    get 'unsplash' => 'photo_imports#unsplash'
-    get 'pexels' => 'photo_imports#pexels'
-  end
   resources :websites do
     member do
       scope 'settings' do
@@ -51,6 +47,7 @@ namespace :communication do
     end
     resources :pages, controller: 'websites/pages' do
       collection do
+        get :picker
         post :reorder
         get 'list' => 'websites/pages#index_list'
       end
@@ -70,6 +67,7 @@ namespace :communication do
     namespace :post, path: '' do
       resources :categories, controller: '/admin/communication/websites/posts/categories' do
         collection do
+          get :picker
           post :reorder
         end
         member do
@@ -81,10 +79,11 @@ namespace :communication do
     end
     resources :posts, controller: 'websites/posts' do
       collection do
-        resources :curations, as: :post_curations, controller: 'websites/posts/curations', only: [:new, :create]
+        get :picker
         get :move_batch
         post :do_move_batch
         post :publish_batch
+        resources :curations, as: :post_curations, controller: 'websites/posts/curations', only: [:new, :create]
       end
       member do
         get :move
@@ -109,6 +108,7 @@ namespace :communication do
           end
         end
         collection do
+          get :picker
           get :move_batch
           post :do_move_batch
         end
@@ -124,6 +124,9 @@ namespace :communication do
         end
       end
       resources :exhibitions, controller: '/admin/communication/websites/agenda/exhibitions' do
+        collection do
+          get :picker
+        end
         member do
           get :preview
           get :static
@@ -157,6 +160,9 @@ namespace :communication do
     end
     namespace :portfolio do
       resources :projects, controller: '/admin/communication/websites/portfolio/projects' do
+        collection do
+          get :picker
+        end
         member do
           get :preview
           get :static
@@ -178,6 +184,9 @@ namespace :communication do
     end
     namespace :jobboard do
       resources :jobs, controller: '/admin/communication/websites/jobboard/jobs' do
+        collection do
+          get :picker
+        end
         member do
           get :preview
           get :static
@@ -235,6 +244,7 @@ namespace :communication do
   end
   resources :extranets, controller: 'extranets' do
     member do
+      get :sso
       get :confirm_localization
       post :do_confirm_localization
     end
@@ -274,18 +284,44 @@ namespace :communication do
     end
     resources :jobs, controller: 'extranets/jobs'
   end
-  resources :medias do
-    collection do
-      post 'pick' => 'medias#pick', as: :pick
-      resources :categories, controller: '/admin/communication/medias/categories', as: 'media_categories' do
-        collection do
-          post :reorder
+  scope module: 'library' do
+    resources :medias do
+      collection do
+        post 'direct-upload' => 'medias#direct_upload', as: :direct_upload
+        get :picker
+        post 'set-featured' => 'medias#set_featured', as: :set_featured
+        scope 'photo-imports' do
+          get 'unsplash' => 'medias/photo_imports#unsplash'
+          get 'pexels' => 'medias/photo_imports#pexels'
+          post 'select' => 'medias/photo_imports#select', as: :cloud_select
         end
-        member do
-          get :children
+        resources :categories, controller: '/admin/communication/library/medias/categories', as: 'media_categories' do
+          collection do
+            post :reorder
+          end
+          member do
+            get :children
+          end
+        end
+        resources :collections, controller: '/admin/communication/library/medias/collections', as: 'media_collections'
+      end
+    end
+    resources :files do
+      collection do
+        post 'direct-upload' => 'files#direct_upload', as: :direct_upload
+        get :picker
+        resources :categories, controller: '/admin/communication/library/files/categories', as: 'file_categories' do
+          collection do
+            post :reorder
+          end
+          member do
+            get :children
+          end
         end
       end
-      resources :collections, controller: '/admin/communication/medias/collections', as: 'media_collections'
+      member do
+        get :static
+      end
     end
   end
   root to: 'dashboard#index'

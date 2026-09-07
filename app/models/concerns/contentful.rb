@@ -10,6 +10,9 @@ module Contentful
               dependent: :destroy
 
     accepts_nested_attributes_for :blocks, allow_destroy: true
+
+    after_destroy :destroy_contexts
+    after_restore :restore_contexts if respond_to?(:after_restore)
   end
 
   def contents
@@ -56,7 +59,24 @@ module Contentful
     about.touch
   end
 
+  def dom_count
+    blocks_dom_count + website_dom_count
+  end
+
   protected
+
+  def blocks_dom_count
+    count = 0
+    blocks.each do |block|
+      next if block.empty?
+      count += block.dom_count
+    end
+    count
+  end
+
+  def website_dom_count
+    websites.first&.dom_count || Communication::Website::DEFAULT_DOM_COUNT
+  end
 
   def generate_block(hash)
     hash[:university] = university
@@ -71,5 +91,19 @@ module Contentful
     data = data.gsub('{website}', website.to_s)
     data = data.gsub('{website.url}', website.url)
     hash[:data] = data
+  end
+
+  def destroy_contexts
+    blocks.with_deleted.each do |block|
+      block.destroy_media_contexts
+      block.destroy_file_contexts
+    end
+  end
+
+  def restore_contexts
+    blocks.each do |block|
+      block.restore_media_contexts
+      block.restore_file_contexts
+    end
   end
 end

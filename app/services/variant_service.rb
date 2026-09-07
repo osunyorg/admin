@@ -88,6 +88,7 @@ class VariantService
 
   # Is there a target size set (or maybe 2!) different from blob size?
   def should_resize?
+    blob.variable? &&
     variant_dimensions != blob_size
   end
 
@@ -153,10 +154,7 @@ class VariantService
 
   # [1024, 1365]
   def blob_size
-    @blob_size ||= begin
-      @blob.analyze unless @blob.analyzed?
-      @blob.metadata.slice('width', 'height').values
-    end
+    @blob_size ||= [@blob.width, @blob.height]
   end
 
   def blob_width

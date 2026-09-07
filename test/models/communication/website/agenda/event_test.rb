@@ -81,6 +81,21 @@ class Communication::Website::Agenda::EventTest < ActiveSupport::TestCase
     assert_nothing_raised { event_l10n.cal }
   end
 
+  test "child event with a missing start date is invalid, not a crash" do
+    parent = new_event(
+      from_day: Date.tomorrow,
+      to_day: Date.tomorrow + 2.days
+    )
+    parent.save!
+
+    child = new_event(
+      from_day: nil,
+      parent: parent
+    )
+    assert_nothing_raised { child.valid? }
+    assert_not(child.valid?)
+  end
+
   protected
 
   def new_event(**options)

@@ -27,7 +27,7 @@ class Admin::Communication::Extranets::AlumniController < Admin::Communication::
   def send_invitation
     person = @extranet.alumni.find(params[:id])
     unless person.user_id
-      ExtranetMailer.invitation_message(@extranet, person).deliver_later
+      ExtranetMailer.invitation_message_automatic(@extranet, person).deliver_later
       person.update_column(:invitation_sent_at, Time.current)
       redirect_to admin_communication_extranet_alumni_path(@extranet), 
                   notice: t('admin.communication.extranet.alumni.send_invitation.just_sent', name: person.to_s_in(current_language))

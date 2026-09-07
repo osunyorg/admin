@@ -8,6 +8,7 @@ module Communication::Website::Page::WithSpecialPage
       # Home always first
       Communication::Website::Page::Home,
       # Global objects
+      Communication::Website::Page::CommunicationFile,
       Communication::Website::Page::CommunicationPost,
       Communication::Website::Page::CommunicationAgenda,
       Communication::Website::Page::CommunicationAgendaExhibition,

@@ -1,0 +1,14 @@
+<div class="<%= osuny_card_classes(horizontal: true) %>">
+  <%= osuny_thumbnail_localized project %>
+  <div class="card-body">
+    <%= project.best_localization_for(current_language) %>
+  </div>
+  <% if can?(:restore, project) %>
+    <div class="card-footer mb-n2">
+      <%= link_to t('restore'),
+                  restore_admin_communication_website_portfolio_project_path(project),
+                  method: :post,
+                  class: button_classes %>
+    </div>
+  <% end %>
+</div>

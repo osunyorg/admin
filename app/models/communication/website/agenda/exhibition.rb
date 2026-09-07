@@ -32,6 +32,7 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
   acts_as_paranoid
 
   include AsDirectObject
+  include Autosortable
   include Communication::Website::Agenda::Period::InPeriod
   include Communication::Website::Agenda::WithStatus
   include Duplicable
@@ -39,18 +40,15 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include HasCreator
+  include HasListBlocks
+  include HasUniversity
   include Lifecyclable
   include Localizable
+  include MenuItemTargetable
   include Sanitizable
   include Searchable
-  include WithMenuItemTarget
   include WithOpenApi
-  include HasListBlocks
-  include WithUniversity
-
-  belongs_to  :created_by,
-              class_name: "User",
-              optional: true
 
   validates :from_day, presence: true
   validates :to_day, presence: true, comparison: { greater_than: :from_day }

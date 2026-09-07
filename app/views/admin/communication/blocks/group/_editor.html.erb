@@ -27,3 +27,7 @@ reorder_url = reorder_admin_communication_blocks_path(
 </div>
 <%= render 'admin/communication/blocks/group/editor/paste', about: about  %>
 <%= render 'admin/communication/blocks/group/editor/reset', about: about  %>
+
+<% content_for :javascript do %>
+<script src="https://tally.so/widgets/embed.js"></script>
+<% end %>

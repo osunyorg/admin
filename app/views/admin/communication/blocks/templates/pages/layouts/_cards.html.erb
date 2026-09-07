@@ -15,8 +15,8 @@
       </p>
       <% if block.template.option_image %>
         <div class="media" itemprop="image">
-          <% if page_l10n.featured_image.attached? %>
-            <%= kamifusen_tag page_l10n.featured_image %>
+          <% if page_l10n.featured_blob.present? %>
+            <%= kamifusen_tag page_l10n.featured_blob %>
           <% end %>
         </div>
       <% end %>

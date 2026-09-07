@@ -8,13 +8,8 @@ class Communication::Block::Template::Gallery::Element < Communication::Block::T
     image_component.blob
   end
 
-  def media_blob
-    return unless image_component.blob.present?
-    {
-      blob: image_component.blob,
-      alt: alt,
-      credit: credit
-    }
+  def communication_media
+    image_component.communication_media
   end
 
   def check_accessibility
@@ -24,5 +19,12 @@ class Communication::Block::Template::Gallery::Element < Communication::Block::T
 
   def empty?
     blob.blank?
+  end
+
+  def dom_count
+    image_component.dom_count +
+    alt_component.dom_count +
+    credit_component.dom_count +
+    text_component.dom_count
   end
 end

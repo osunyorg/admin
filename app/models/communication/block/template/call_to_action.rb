@@ -19,15 +19,17 @@ class Communication::Block::Template::CallToAction < Communication::Block::Templ
     text
   end
 
-  def media_blobs
-    return [] unless image_component.blob.present?
-    [
-      {
-        blob: image_component.blob,
-        alt: alt,
-        credit: credit
-      }
-    ]
+  def media
+    image_component.communication_media
+  end
+
+  # Permet de gérer les contextes
+  def communication_medias
+    [media].compact_blank
+  end
+
+  def crop_settings_for(media)
+    data.dig('image', 'crop_settings')
   end
 
   protected

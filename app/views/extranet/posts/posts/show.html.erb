@@ -1,9 +1,9 @@
 <% content_for :header do %>
   <%
-  if @l10n.featured_image.attached?
+  if @l10n.featured_blob.present?
     image_classes = 'col-md-3 offset-2'
     image_width = 400
-    width, height = @l10n.featured_image.metadata.values_at('width', 'height')
+    width, height = @l10n.featured_blob.width, @l10n.featured_blob.height
     ratio = width.present? && height.present? ? (width.to_f / height.to_f) : nil
     if ratio && ratio > 1
       image_classes = 'col-md-5'
@@ -23,13 +23,13 @@
         <% end %>
       </p>
     </div>
-    <% if @l10n.featured_image.attached? %>
+    <% if @l10n.featured_blob.present? %>
       <div class="<%= image_classes %>">
-        <figure class="<% if @l10n.featured_image_credit.present? %>with-credit<% end %>">
-          <%= kamifusen_tag @l10n.featured_image, class: 'img-fluid', width: image_width %>
-          <% if @l10n.featured_image_credit.present? %>
+        <figure class="<% if @l10n.featured_media_credit.present? %>with-credit<% end %>">
+          <%= kamifusen_tag @l10n.featured_blob, class: 'img-fluid', width: image_width %>
+          <% if @l10n.featured_media_credit.present? %>
             <figcaption tabindex="0">
-                <%= sanitize @l10n.featured_image_credit %>
+                <%= sanitize @l10n.featured_media_credit %>
             </figcaption>
           <% end %>
         </figure>

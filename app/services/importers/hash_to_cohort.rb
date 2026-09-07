@@ -36,13 +36,7 @@ module Importers
     protected
 
     def add_to_cohort(person, cohort)
-      add_object_if_necessary cohort, person.cohorts
-      add_object_if_necessary cohort.academic_year, person.diploma_years
-      add_object_if_necessary cohort.program, person.diploma_programs
-    end
-
-    def add_object_if_necessary(object, list)
-      list << object unless object.in?(list)
+      person.add_cohort(cohort)
     end
 
     def extract_variables

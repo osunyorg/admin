@@ -4,8 +4,8 @@
 #
 #  id                       :uuid             not null, primary key
 #  breadcrumb_title         :string
-#  featured_image_alt       :string
 #  featured_image_credit    :text
+#  featured_media_alt       :string
 #  header_cta               :boolean          default(FALSE)
 #  header_cta_label         :string
 #  header_cta_url           :string
@@ -21,6 +21,7 @@
 #  updated_at               :datetime         not null
 #  about_id                 :uuid             indexed, uniquely indexed => [language_id]
 #  communication_website_id :uuid             not null, indexed
+#  featured_media_id        :uuid             indexed
 #  language_id              :uuid             uniquely indexed => [about_id], indexed
 #  university_id            :uuid             indexed
 #
@@ -29,6 +30,7 @@
 #  idx_on_about_id_973f5413e1                  (about_id)
 #  idx_on_about_id_language_id_3473524a0e      (about_id,language_id) UNIQUE
 #  idx_on_communication_website_id_1bf1f14ca6  (communication_website_id)
+#  idx_on_featured_media_id_bc9ed66fde         (featured_media_id)
 #  idx_on_language_id_56b9ed6a5c               (language_id)
 #  idx_on_slug_6db7a1bcbc                      (slug)
 #  idx_on_university_id_f8e53f00be             (university_id)
@@ -39,6 +41,7 @@
 #  fk_rails_4b878426e9  (language_id => languages.id)
 #  fk_rails_58d0ec0384  (communication_website_id => communication_websites.id)
 #  fk_rails_c9af6a3d24  (university_id => universities.id)
+#  fk_rails_ebe5b6956b  (featured_media_id => communication_medias.id) ON DELETE => nullify
 #
 class Communication::Website::Jobboard::Category::Localization < ApplicationRecord
   include AsCategoryLocalization

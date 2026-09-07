@@ -4,8 +4,8 @@
 #
 #  id                       :uuid             not null, primary key
 #  breadcrumb_title         :string
-#  featured_image_alt       :string
 #  featured_image_credit    :text
+#  featured_media_alt       :string
 #  header_cta               :boolean          default(FALSE)
 #  header_cta_label         :string
 #  header_cta_url           :string
@@ -21,6 +21,7 @@
 #  updated_at               :datetime         not null
 #  about_id                 :uuid             indexed, uniquely indexed => [language_id]
 #  communication_website_id :uuid             not null, indexed
+#  featured_media_id        :uuid             indexed
 #  language_id              :uuid             uniquely indexed => [about_id], indexed
 #  university_id            :uuid             indexed
 #
@@ -29,6 +30,7 @@
 #  idx_on_about_id_012efb471f                  (about_id)
 #  idx_on_about_id_language_id_e6b981c826      (about_id,language_id) UNIQUE
 #  idx_on_communication_website_id_2eaea4d96e  (communication_website_id)
+#  idx_on_featured_media_id_901968a3a4         (featured_media_id)
 #  idx_on_language_id_8542c3d2f9               (language_id)
 #  idx_on_slug_55ae2c29d7                      (slug)
 #  idx_on_university_id_934ff72e5e             (university_id)
@@ -39,6 +41,7 @@
 #  fk_rails_4adca7760a  (communication_website_id => communication_websites.id)
 #  fk_rails_622a67bc3b  (university_id => universities.id)
 #  fk_rails_b8a90413e8  (about_id => communication_website_agenda_categories.id)
+#  fk_rails_df9cf6cff3  (featured_media_id => communication_medias.id) ON DELETE => nullify
 #
 class Communication::Website::Agenda::Category::Localization < ApplicationRecord
   # Needs to be included before Sluggable (which is included by AsCategoryLocalization > Permalinkable)

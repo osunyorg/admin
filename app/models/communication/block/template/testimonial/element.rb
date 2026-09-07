@@ -8,4 +8,20 @@ class Communication::Block::Template::Testimonial::Element < Communication::Bloc
   def empty?
     text.blank?
   end
+
+  def blob
+    photo_component.blob
+  end
+
+  def communication_media
+    photo_component.communication_media
+  end
+
+  def dom_count
+    2 +
+    text_component.dom_count +
+    author_component.dom_count +
+    job_component.dom_count +
+    photo_component.dom_count
+  end
 end

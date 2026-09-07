@@ -30,10 +30,10 @@ class Communication::Website::Menu < ApplicationRecord
 
   include AsDirectObject
   include HasGitFiles
+  include HasUniversity
   include Initials
   include Sanitizable
   include WithAutomatism
-  include WithUniversity
 
   belongs_to :language
   has_many :items, class_name: 'Communication::Website::Menu::Item', dependent: :destroy
@@ -61,7 +61,9 @@ class Communication::Website::Menu < ApplicationRecord
   end
 
   def should_sync_to?(website)
-    website.id == communication_website_id && website.active_language_ids.include?(language_id) && items.any?
+    website.id == communication_website_id && 
+    website.active_language_ids.include?(language_id) &&
+    items.any?
   end
 
   def template_static

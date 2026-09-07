@@ -10,9 +10,9 @@ module AsCategoryLocalization
   include Permalinkable
   include Sanitizable
   include Shareable
-  include WithBlobs
-  include WithFeaturedImage
-  include WithUniversity
+  include HasBlobs
+  include HasFeaturedMedia
+  include HasUniversity
 
   included do
     has_summernote :summary
@@ -48,11 +48,9 @@ module AsCategoryLocalization
   protected
 
   def explicit_blob_ids
-    super.concat [featured_image&.blob_id]
-  end
-
-  def inherited_blob_ids
-    [featured_image&.blob_id]
+    super.concat [
+      featured_blob&.id
+    ]
   end
 
   def hugo_slug_in_website(website)

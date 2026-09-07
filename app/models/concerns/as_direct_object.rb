@@ -4,7 +4,7 @@
 module AsDirectObject
   extend ActiveSupport::Concern
 
-  include WithDependencies
+  include HasDependencies
 
   included do
     belongs_to :website,

@@ -1,12 +1,12 @@
 <%
 if about.resetable_blocks?
-  original_language = about.original.language.to_s.downcase
+  original_language_name = language_name(about.original.language.iso_code)
   %>
   <div class="vue__blocks-editor__actions row mt-5 mb-4">
     <div class="offset-lg-4 col-lg-8 col-xxl-6">
-      <%= link_to t('admin.communication.contents.blocks.reset', language: original_language),
+      <%= link_to t('admin.communication.contents.blocks.reset', language: original_language_name),
                   reset_admin_communication_group_blocks_path(
-                    about_id: about.id, 
+                    about_id: about.id,
                     about_type: about.class.polymorphic_name
                   ),
                   method: :post,

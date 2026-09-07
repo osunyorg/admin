@@ -23,9 +23,9 @@
 class University::Role < ApplicationRecord
   acts_as_paranoid
 
+  include HasUniversity
   include Localizable
   include Orderable
-  include WithUniversity
 
   # Can be an Education::School or an Education::Program
   belongs_to :target, polymorphic: true, optional: true

@@ -35,6 +35,11 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
     @elements
   end
 
+  # Permet de gérer les contextes
+  def communication_medias
+    elements.map(&:communication_media).compact_blank
+  end
+
   def dependencies
     selected_elements
   end
@@ -73,6 +78,11 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
 
   def filters_categories
     organizations.collect(&:categories).flatten.compact.uniq
+  end
+
+  def dom_count
+    5 +
+    children.length * 15
   end
 
   protected

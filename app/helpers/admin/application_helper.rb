@@ -153,6 +153,15 @@ module Admin::ApplicationHelper
     about.respond_to?(publicity) ? about.public_send(publicity) : true
   end
 
+  # Pour dépolluer les urls simplement
+  def reset_context
+    {
+      website_id: nil,
+      extranet_id: nil,
+      journal_id: nil
+    }
+  end
+
   private
 
   def polymorphic_url_param(object_or_class, **options)

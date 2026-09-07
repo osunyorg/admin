@@ -15,7 +15,7 @@ keysPropValue = mapping_keys.map { |key| [key, User.human_attribute_name(key)] }
       data-keys="<%= keysPropValue.to_json %>">
   <div class="app-form">
     <draggable :list="fields" handle=".dragHandle" >
-      <div v-for="(field, index) in fields">
+      <div v-for="(field, index) in fields" class="mb-2">
         <div class="card">
           <div class="card-header d-flex justify-content-between">
             <div>
@@ -32,18 +32,23 @@ keysPropValue = mapping_keys.map { |key| [key, User.human_attribute_name(key)] }
             </a>
           </div>
           <div class="card-body collapse pt-0" :id="'sso_mapping_collapse_' + index ">
-            <hr class="mt-0">
-            <div class="form-group">
-              <label for="" class="form-control-label"><%= t('university.sso_key') %> <abbr title="required">*</abbr></label>
-              <input
-                v-model="field.sso_key"
-                type="text" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="" class="form-control-label"><%= t('university.internal_key') %> <abbr title="required">*</abbr></label>
-              <select v-model="field.internal_key" id="" class="form-select" required>
-                <option v-for="(label, key) in keys" :value="key">{{ label }}</option>
-              </select>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="" class="form-label"><%= t('university.sso_key') %> <abbr title="required">*</abbr></label>
+                  <input
+                    v-model="field.sso_key"
+                    type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="" class="form-label"><%= t('university.internal_key') %> <abbr title="required">*</abbr></label>
+                  <select v-model="field.internal_key" id="" class="form-select" required>
+                    <option v-for="(label, key) in keys" :value="key">{{ label }}</option>
+                  </select>
+                </div>
+              </div>
             </div>
             <% if kind == 'university' %>
               <div v-if="field.internal_key === 'role'">

@@ -44,4 +44,16 @@ class Communication::Block::Template::Organization::Element < Communication::Blo
     organization_l10n.logo&.blob
   end
 
+  def communication_media
+    logo_component.communication_media
+  end
+
+  def dom_count
+    2 +
+    name_component.dom_count +
+    url_component.dom_count +
+    logo_component.dom_count +
+    role_component.dom_count
+  end
+
 end

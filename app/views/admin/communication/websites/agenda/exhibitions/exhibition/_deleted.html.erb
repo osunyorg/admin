@@ -1,0 +1,14 @@
+<div class="<%= osuny_card_classes(horizontal: true) %>">
+  <%= osuny_thumbnail_localized exhibition %>
+  <div class="card-body">
+    <%= exhibition.best_localization_for(current_language) %>
+  </div>
+  <% if can?(:restore, exhibition) %>
+    <div class="card-footer mb-n2">
+      <%= link_to t('restore'),
+                  restore_admin_communication_website_agenda_exhibition_path(exhibition),
+                  method: :post,
+                  class: button_classes %>
+    </div>
+  <% end %>
+</div>

@@ -1,6 +1,6 @@
 class Git::Providers::Github < Git::Providers::Abstract
   BASE_URL = "https://github.com".freeze
-  COMMIT_BATCH_SIZE = 20
+  COMMIT_BATCH_SIZE = 75
 
   include WithSecrets
 
@@ -79,6 +79,7 @@ class Git::Providers::Github < Git::Providers::Abstract
 
   def push(commit_message)
     return if !valid? || batch.empty?
+    check_batch_integrity!
     commit = create_commit_from_batch(batch, commit_message)
     client.update_branch repository, default_branch, commit[:sha]
     # The repo changed, invalidate the tree
@@ -125,7 +126,38 @@ class Git::Providers::Github < Git::Providers::Abstract
     @files_in_the_repository ||= tree[:tree].map { |file| file[:path] }
   end
 
+  # The limit for the tree array is 100,000 entries.
+  # If it contains more, the tree is returned as truncated, so we can't use it for checking.
+  # https://docs.github.com/fr/rest/git/trees?apiVersion=2026-03-10#get-a-tree
+  def can_check_git_files_integrity?
+    !tree[:truncated]
+  end
+
   protected
+
+  def check_batch_integrity!
+    # Delete files first
+    batch.sort_by! { |item| item.has_key?(:sha) && item[:sha].nil? ? 0 : 1 }
+    # Use files states to fix actions
+    batch.each do |item|
+      check_batch_item_integrity!(item)
+    end
+    # Reject
+    batch.reject! { |item| item[:path].nil? }
+  end
+
+  def check_batch_item_integrity!(item)
+    is_deleting_action = item.has_key?(:sha) && item[:sha].nil?
+    path = item[:path]
+    current_state = files_states[path]
+    target_state = is_deleting_action ? 'DELETED' : 'EXISTS'
+
+    if is_deleting_action && current_state == 'DELETED'
+      # No need to delete an already deleted file => nullify path to reject later
+      item[:path] = nil
+    end
+    files_states[path] = target_state
+  end
 
   def client
     @client ||= Octokit::Client.new access_token: access_token

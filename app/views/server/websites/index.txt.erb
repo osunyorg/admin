@@ -1,5 +1,5 @@
 [
-<% @websites.where.not(repository: [nil, '']).each do |website| %>
+<% @websites.each do |website| %>
   "<%= website.repository_url %>",
 <% end %>
 ]
