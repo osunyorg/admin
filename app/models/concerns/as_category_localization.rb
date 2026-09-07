@@ -43,6 +43,17 @@ module AsCategoryLocalization
     breadcrumb_title.presence || name
   end
 
+  def self_or_descendant_has_published_category_objects_localizations?
+    has_published_category_objects_localizations? ||
+      descendants.any? { |descendant|
+        descendant.has_published_category_objects_localizations?
+      }
+  end
+
+  def has_published_category_objects_localizations?
+    category_objects_localizations.published_now.any?
+  end
+
   def to_s
     "#{name}"
   end
@@ -57,10 +68,6 @@ module AsCategoryLocalization
 
   def hugo_slug_in_website(website)
     slug_with_ancestors_slugs
-  end
-
-  def has_published_category_objects_localizations?
-    category_objects_localizations.published_now.any?
   end
 
   def category_objects_localizations
