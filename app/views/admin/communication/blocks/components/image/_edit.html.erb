@@ -13,5 +13,6 @@
   v-model="<%= model %>.<%= property %>.communication_media_id"
   @picked="<%= model %>.alt = $event.alt"
   @cropped="<%= model %>.<%= property %>.crop_settings = $event"
+  @unselected="<%= model %>.<%= property %>.id = ''"
   >
 </media-input>
