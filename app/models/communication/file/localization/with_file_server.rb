@@ -2,6 +2,15 @@ module Communication::File::Localization::WithFileServer
   extend ActiveSupport::Concern
 
   included do
+    validate  :file_server_slug_available,
+              on: :redirection
+    validates :file_server_slug,
+              format: {
+                with: /\A[a-z0-9\-]+\z/,
+                message: I18n.t('slug_error')
+              },
+              on: :redirection
+
     before_validation :set_file_server_slug_if_empty?
     after_save :sync_to_file_server
   end
@@ -100,5 +109,21 @@ module Communication::File::Localization::WithFileServer
 
   def file_server
     @file_server ||= university.file_server
+  end
+
+  def file_server_slug_available
+    taken = self.class
+                .unscoped
+                .where(
+                  university_id: university_id,
+                  file_server_slug: file_server_slug
+                )
+                .where(
+                  "date_part('year', created_at) = ?",
+                  created_at&.year
+                )
+                .where.not(id: id)
+                .exists?
+    errors.add(:file_server_slug, :taken) if taken
   end
 end

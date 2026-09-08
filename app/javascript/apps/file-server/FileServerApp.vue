@@ -9,82 +9,75 @@ export default {
   },
   methods: {
     async load() {
-      try {
-        const response = await fetch(this.endpoint);
-        if (!response.ok) throw new Error(response.statusText);
-        this.data = await response.json();
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error(error);
+      await this.request(this.endpoint);
+    },
+    blockInvalidPermalinkChars(event) {
+      // Empêche l'insertion avant qu'elle n'atteigne le DOM, pour éviter
+      // le clignotement d'un caractère invalide le temps que `parsePermalink`
+      // (déclenché après coup par @input) le retire.
+      if (event.data && /[^a-zA-Z0-9-]/.test(event.data)) {
+        event.preventDefault();
       }
     },
     parsePermalink(event) {
-      // TODO filtre
-      this.data.file_server.slug = event.target.value;
+      this.data.file_server.slug = event.target.value
+        .toLowerCase()
+        .replace(/[^a-z0-9-]/g, '');
       this.permalinkChanged = true;
     },
     async savePermalink() {
-      const response = await fetch(this.data.file_server.endpoint, {
+      const json = await this.request(this.data.file_server.endpoint, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-Token': this.csrfToken,
-        },
-        body: JSON.stringify({
-          file_server_slug: this.data.file_server.slug
-        }),
-      });
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      } else {
-        this.permalinkChanged = false;
-        this.data = await response.json();
-        this.notify(this.$t('fileServer.permalink.changed'));
-      }
+        body: { file_server_slug: this.data.file_server.slug },
+      }, this.$t('fileServer.permalink.changed'));
+      if (json) this.permalinkChanged = false;
     },
     parseRedirection(event) {
       // TODO filtre
       this.redirection = event.target.value;
     },
     async addRedirection() {
-      const response = await fetch(this.data.redirections.endpoint, {
+      await this.request(this.data.redirections.endpoint, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-Token': this.csrfToken,
-        },
-        body: JSON.stringify({
-          path_without_extension: this.redirection
-        }),
-      });
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      } else {
-        this.data = await response.json();
-        this.notify(this.$t('fileServer.redirections.added'));
-      }
+        body: { path_without_extension: this.redirection },
+      }, this.$t('fileServer.redirections.added'));
     },
     async removeRedirection(redirection) {
-      const response = await fetch(redirection.endpoint, {
+      await this.request(redirection.endpoint, {
         method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-Token': this.csrfToken,
-        },
-      });
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      } else {
-        this.data = await response.json();
-        this.notify(this.$t('fileServer.redirections.removed'));
+      }, this.$t('fileServer.redirections.removed'));
+    },
+    async request(url, options = {}, successMessage = null) {
+      try {
+        const response = await fetch(url, {
+          method: options.method || 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': this.csrfToken,
+          },
+          body: options.body ? JSON.stringify(options.body) : undefined,
+        });
+        const json = await response.json();
+        if (!response.ok) {
+          this.notify(json.error, 'error');
+          return null;
+        }
+        this.data = json;
+        if (successMessage) this.notify(successMessage, 'success');
+        return json;
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error);
+        this.notify(this.$t('fileServer.error'), 'error');
+        return null;
       }
     },
-    notify(message) {
+    notify(message, type) {
       const notyf = new Notyf();
       notyf.open({
-        type: 'success',
-        position: { x: 'left', y: 'bottom' },
         message: message,
+        type: type,
+        position: { x: 'left', y: 'bottom' },
         duration: 9000,
         ripple: true,
         dismissible: true,
@@ -115,6 +108,7 @@ export default {
             type="text"
             class="form-control"
             :value="data.file_server?.slug"
+            @beforeinput="blockInvalidPermalinkChars"
             @input="parsePermalink"
             />
           <span class="ms-2 me-5 text-muted">
