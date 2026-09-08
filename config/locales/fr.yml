@@ -76,6 +76,11 @@ fr:
         picture: Photo de profil
         picture_url: Url de la photo de profil
         programs_to_manage: Formation(s) gérée(s)
+        roles: Rôles
+        server_admin: Administrateurice du serveur
+        university: Université
+        websites_to_manage: Sites gérés
+      user/role:
         role: Rôle
         roles:
           admin: Administrateur
@@ -83,12 +88,9 @@ fr:
           author: Auteur
           contributor: Contributeur
           program_manager: Responsable de formation
-          server_admin: Administrateur du serveur
           teacher: Enseignant·e
           visitor: Visiteur
           website_manager: Responsable de site web
-        university: Université
-        websites_to_manage: Sites gérés
     errors:
       messages:
         invalid_year: L'année doit être un nombre à 4 chiffres.
@@ -226,6 +228,9 @@ fr:
       done: Traduction effectuée ! Merci de relire avant d'enregistrer.
       running: Traduction en cours
       unavailable_button: Traduction automatique indisponible
+    users:
+      add_role: Ajouter un rôle
+      roles_hint: Un utilisateur peut cumuler plusieurs rôles, chacun pouvant être limité à un site ou une formation.
     users_alerts:
       already_confirmed: "Votre compte est déjà confirmé."
       not_locked_html: "<i>%{model}</i> n'était pas verrouillé(e)."

@@ -1,4 +1,4 @@
-class Ability::Teacher < Ability
+class User::Ability::Teacher < User::Ability
 
   def initialize(user)
     super

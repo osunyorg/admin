@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_ability
-    @current_ability ||= Ability.for(current_user)
+    @current_ability ||= User::Ability.for(current_user)
   end
 
   def ensure_university

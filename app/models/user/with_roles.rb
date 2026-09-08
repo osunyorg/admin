@@ -4,6 +4,7 @@ module User::WithRoles
   included do
     attr_accessor :modified_by, :just_autopromoted
 
+    # TODO(multiroles) remove
     enum :role, {
       visitor: 0,
       contributor: 4,
@@ -16,60 +17,92 @@ module User::WithRoles
       server_admin: 30
     }
 
-    has_and_belongs_to_many :programs_to_manage,
-                            class_name: 'Education::Program',
-                            join_table: :education_programs_users,
-                            association_foreign_key: :education_program_id
+    has_many :roles,
+             class_name: 'User::Role',
+             dependent: :destroy,
+             inverse_of: :user
+    accepts_nested_attributes_for :roles, reject_if: :all_blank, allow_destroy: true
 
-    has_and_belongs_to_many :websites_to_manage,
-                            class_name: 'Communication::Website',
-                            join_table: :communication_websites_users,
-                            association_foreign_key: :communication_website_id
-
+    # TODO(multiroles) écrire ça en fonction des rôles liés au user
     scope :for_role, -> (role, language = nil) { where(role: role) }
 
     before_validation :set_default_role, on: :create
-    before_validation :check_modifier_role
+    validate :assigned_roles_within_modifier_scope
+    after_create :bootstrap_role_assignment
     after_create :set_university_autopromote_option, if: :just_autopromoted
 
     def self.roles_with_access_to_global_menu
       roles.keys - ['contributor', 'author', 'website_manager']
     end
 
+    # Rôles effectifs (distincts), ordonnés du moins au plus privilégié.
+    # L'ordre est volontaire : Ability fusionne les abilities dans cet ordre pour
+    # que les règles du rôle le plus puissant soient déclarées en dernier et
+    # l'emportent (CanCanCan évalue de la dernière règle définie à la première).
+    def ability_roles
+      roles.map(&:role).uniq.sort_by { |name| self.class.roles[name] }
+    end
+
+    # Détient ce rôle (sur n'importe quelle cible) ?
+    def has_role?(name)
+      roles.any? { |user_role| user_role.role == name.to_s }
+    end
+
+    # Cibles (records) attachées à un rôle donné.
+    def scopes_for(role_name)
+      roles.select { |user_role| user_role.role == role_name.to_s }
+           .filter_map(&:scope)
+    end
+
+    def grant_role!(role_name, scope: nil)
+      roles.find_or_create_by!(
+        role: role_name,
+        scope_type: scope&.class&.base_class&.name,
+        scope_id: scope&.id
+      )
+    end
+
     def managed_roles
-      User.roles.map do |role_name, role_id|
-        next if role_id > User.roles[role]
-        role_name
-      end.compact
+      can_grant_roles? ? User::Role.roles.keys : []
+    end
+
+    def can_grant_roles?
+      server_admin? || has_role?('admin')
     end
 
     def managed_websites
-      if server_admin?
+      if has_role?('server_admin')
         Communication::Website.all
-      elsif admin?
+      elsif has_role?('admin')
         Communication::Website.where(university_id: university_id)
-      elsif website_manager?
-        Communication::Website.where(id: websites_to_manage_ids)
+      elsif has_role?('website_manager')
+        Communication::Website.where(id: scopes_for('website_manager').map(&:id))
       else
         Communication::Website.none
       end
     end
 
     def can_display_global_menu?
-      User.roles_with_access_to_global_menu.include?(role)
+      (ability_roles & User.roles_with_access_to_global_menu).any?
     end
 
     protected
 
-    def check_modifier_role
-      errors.add(:role, 'cannot be set to this role') if modified_by && !modified_by.managed_roles.include?(self.role)
+    # Empêche d'attribuer un rôle au-dessus de ce que le modificateur gère.
+    def assigned_roles_within_modifier_scope
+      return unless modified_by
+      assigned = roles.reject(&:marked_for_destruction?).map(&:role).uniq
+      forbidden = assigned - modified_by.managed_roles
+      errors.add(:base, 'cannot assign a role above your own') if forbidden.any?
     end
 
     def set_default_role
       return if server_admin?
       if User.all.empty?
+        # Premier user de toutes les instances
         self.role = :server_admin
       elsif !university.admin_already_auto_promoted? && university.users.not_server_admin.empty?
+        # Premier user de l'instsance
         self.role = :admin
         self.just_autopromoted = true
       end
