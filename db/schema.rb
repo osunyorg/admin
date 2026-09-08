@@ -3096,7 +3096,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_101353) do
   add_foreign_key "search_index", "communication_extranets", column: "extranet_id"
   add_foreign_key "search_index", "communication_websites", column: "website_id"
   add_foreign_key "search_index", "universities"
-  add_foreign_key "server_emergency_messages", "universities"
   add_foreign_key "server_evolution_localizations", "languages"
   add_foreign_key "server_evolution_localizations", "server_evolutions", column: "evolution_id"
   add_foreign_key "universities", "languages", column: "default_language_id"
