@@ -124,6 +124,20 @@ fr:
       alt:
         hint: Ce texte est essentiel pour l'accessibilité. Si l'image donne une information importante, il faut écrire ici cette information. Si l'information est déjà présente ailleurs dans la page, ou si l'image est purement décorative, il faut laisser le texte alternatif vide, pour éviter de polluer la navigation vocale.
         label: Texte alternatif
+    fileServer:
+      permalink:
+        changed: Le permalien a été modifié
+        open: Ouvrir
+        save: Enregistrer
+        title: Permalien
+      redirections:
+        add: Ajouter
+        added: La redirection a été ajoutée
+        error: Impossible d'ajouter cette redirection
+        open: Ouvrir
+        remove: Supprimer
+        removed: La redirection a été supprimée
+        title: Redirections
     picker:
       pagination:
         next: Page suivante

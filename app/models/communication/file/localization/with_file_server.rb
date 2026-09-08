@@ -2,6 +2,7 @@ module Communication::File::Localization::WithFileServer
   extend ActiveSupport::Concern
 
   included do
+    before_validation :set_file_server_slug_if_empty?
     after_save :sync_to_file_server
   end
 
@@ -11,43 +12,81 @@ module Communication::File::Localization::WithFileServer
   end
 
   def sync_to_file_server_safely
-    ftp.send_blob(
-      original_blob,
-      file_server_remote_directory,
-      file_server_filename
-    )
+    if file_server_current_path.blank?
+      ftp.send_blob(
+        original_blob,
+        file_server_remote_directory,
+        file_server_filename
+      )
+    else
+      ftp.move(
+        file_server.ftp_path,
+        file_server_current_path,
+        file_server_path
+      )
+    end
+    update_column :file_server_current_path,
+                  file_server_path
+  end
+
+  # rapport-annuel
+  # file_server_slug
+
+  # .pdf
+  def file_server_extension
+    "#{original_extension}"
+  end
+
+  # rapport-annuel.pdf
+  def file_server_filename
+    "#{file_server_slug}#{file_server_extension}"
+  end
+
+  # /fr/2026/
+  def file_server_directory
+    "/#{language.iso_code}/#{created_at.year}/"
+  end
+
+  # /fr/2026/rapport-annuel.pdf
+  def file_server_path
+    "#{file_server_directory}#{file_server_filename}"
+  end
+
+  # /fr/2026/rapport-annuel
+  def file_server_path_without_extension
+    "#{file_server_directory}#{file_server_slug}"
+  end
+
+  # /path-on-ftp-server/fr/2026/
+  def file_server_remote_directory
+    "#{file_server.ftp_path}#{file_server_directory}".gsub('//', '/')
+  end
+
+  # /path-on-ftp-server/fr/2026/rapport-annuel.pdf
+  def file_server_remote_path
+    "#{file_server.ftp_path}#{file_server_path}"
+  end
+
+  # https://files.osuny.org/
+  def file_server_base_url
+    "#{file_server.url}/"
+  end
+  # https://files.osuny.org/fr/2026/
+  def file_server_base_directory_url
+    "#{file_server.url}#{file_server_directory}"
   end
 
   # https://files.osuny.org/fr/2026/rapport-annuel.pdf
   def file_server_url
     return unless university.file_server?
-    "#{file_server.url}/#{file_server_path}"
-  end
-
-  # rapport-annuel.pdf
-  def file_server_filename
-    "#{slug}#{original_extension}"
+    "#{file_server.url}#{file_server_path}"
   end
 
   protected
 
-  def file_server
-    @file_server ||= university.file_server
-  end
-
-  # fr/2026
-  def file_server_directory
-    "#{language.iso_code}/#{created_at.year}"
-  end
-
-  # fr/2026/rapport-annuel.pdf
-  def file_server_path
-    "#{file_server_directory}/#{file_server_filename}"
-  end
-
-  # /path-on-ftp-server/fr/2026/rapport-annuel.pdf
-  def file_server_remote_directory
-    "#{file_server.ftp_path}/#{file_server_directory}"
+  def set_file_server_slug_if_empty?
+    return if file_server_slug.present?
+    self.file_server_slug = slug
   end
 
   def ftp
@@ -59,4 +98,7 @@ module Communication::File::Localization::WithFileServer
     )
   end
 
+  def file_server
+    @file_server ||= university.file_server
+  end
 end

@@ -2,29 +2,31 @@
 #
 # Table name: communication_file_localizations
 #
-#  id                    :uuid             not null, primary key
-#  deleted_at            :datetime
-#  featured_image_credit :text
-#  featured_media_alt    :string
-#  internal_description  :text
-#  meta_description      :text
-#  name                  :string
-#  original_byte_size    :bigint
-#  original_checksum     :string
-#  original_content_type :string
-#  original_extension    :string           default("")
-#  original_filename     :string
-#  published             :boolean          default(FALSE)
-#  published_at          :datetime
-#  slug                  :string
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  about_id              :uuid             not null, indexed
-#  featured_media_id     :uuid             indexed
-#  language_id           :uuid             not null, indexed
-#  original_blob_id      :uuid             not null, indexed
-#  university_id         :uuid             not null, indexed
-#  updated_by_id         :uuid             indexed
+#  id                       :uuid             not null, primary key
+#  deleted_at               :datetime
+#  featured_image_credit    :text
+#  featured_media_alt       :string
+#  file_server_current_path :string
+#  file_server_slug         :string
+#  internal_description     :text
+#  meta_description         :text
+#  name                     :string
+#  original_byte_size       :bigint
+#  original_checksum        :string
+#  original_content_type    :string
+#  original_extension       :string           default("")
+#  original_filename        :string
+#  published                :boolean          default(FALSE)
+#  published_at             :datetime
+#  slug                     :string
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  about_id                 :uuid             not null, indexed
+#  featured_media_id        :uuid             indexed
+#  language_id              :uuid             not null, indexed
+#  original_blob_id         :uuid             not null, indexed
+#  university_id            :uuid             not null, indexed
+#  updated_by_id            :uuid             indexed
 #
 # Indexes
 #
@@ -59,9 +61,9 @@ class Communication::File::Localization < ApplicationRecord
   include Permalinkable
   include Publishable
   include Sanitizable
+  include WithRedirections
   include WithFileServer
   include WithOpenApi
-  include WithPermalinks
 
   belongs_to  :updated_by,
               class_name: 'User',

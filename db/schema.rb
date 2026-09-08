@@ -521,15 +521,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_101353) do
     t.index ["university_id"], name: "index_communication_file_contexts_on_university_id"
   end
 
-  create_table "communication_file_localization_permalinks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "communication_file_localization_id", null: false
-    t.datetime "created_at", null: false
-    t.boolean "is_current"
-    t.string "path"
-    t.datetime "updated_at", null: false
-    t.index ["communication_file_localization_id"], name: "idx_on_communication_file_localization_id_d9f5f5a2f8"
-  end
-
   create_table "communication_file_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "about_id", null: false
     t.datetime "created_at", null: false
@@ -537,6 +528,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_101353) do
     t.text "featured_image_credit"
     t.string "featured_media_alt"
     t.uuid "featured_media_id"
+    t.string "file_server_current_path"
+    t.string "file_server_slug"
     t.text "internal_description"
     t.uuid "language_id", null: false
     t.text "meta_description"
@@ -559,6 +552,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_101353) do
     t.index ["original_blob_id"], name: "index_communication_file_localizations_on_original_blob_id"
     t.index ["university_id"], name: "index_communication_file_localizations_on_university_id"
     t.index ["updated_by_id"], name: "index_communication_file_localizations_on_updated_by_id"
+  end
+
+  create_table "communication_file_redirections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "communication_file_localization_id", null: false
+    t.datetime "created_at", null: false
+    t.string "path"
+    t.uuid "university_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["communication_file_localization_id"], name: "idx_on_communication_file_localization_id_b5293392d9"
+    t.index ["university_id"], name: "index_communication_file_redirections_on_university_id"
   end
 
   create_table "communication_files", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1895,6 +1898,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_101353) do
     t.string "zipcode"
     t.index ["university_id"], name: "index_education_schools_on_university_id"
   end
+
   create_table "good_job_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "callback_priority"
     t.text "callback_queue_name"
@@ -2831,13 +2835,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_101353) do
   add_foreign_key "communication_file_contexts", "communication_file_localizations"
   add_foreign_key "communication_file_contexts", "communication_websites"
   add_foreign_key "communication_file_contexts", "universities"
-  add_foreign_key "communication_file_localization_permalinks", "communication_file_localizations"
   add_foreign_key "communication_file_localizations", "active_storage_blobs", column: "original_blob_id"
   add_foreign_key "communication_file_localizations", "communication_files", column: "about_id"
   add_foreign_key "communication_file_localizations", "communication_medias", column: "featured_media_id", on_delete: :nullify
   add_foreign_key "communication_file_localizations", "languages"
   add_foreign_key "communication_file_localizations", "universities"
   add_foreign_key "communication_file_localizations", "users", column: "updated_by_id"
+  add_foreign_key "communication_file_redirections", "communication_file_localizations"
+  add_foreign_key "communication_file_redirections", "universities"
   add_foreign_key "communication_files", "universities"
   add_foreign_key "communication_files", "users", column: "created_by_id"
   add_foreign_key "communication_media_categories", "communication_media_categories", column: "parent_id"
@@ -3091,6 +3096,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_101353) do
   add_foreign_key "search_index", "communication_extranets", column: "extranet_id"
   add_foreign_key "search_index", "communication_websites", column: "website_id"
   add_foreign_key "search_index", "universities"
+  add_foreign_key "server_emergency_messages", "universities"
+  add_foreign_key "server_evolution_localizations", "languages"
+  add_foreign_key "server_evolution_localizations", "server_evolutions", column: "evolution_id"
   add_foreign_key "universities", "languages", column: "default_language_id"
   add_foreign_key "university_apps", "universities"
   add_foreign_key "university_file_servers", "universities"

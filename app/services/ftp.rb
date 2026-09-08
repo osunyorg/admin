@@ -10,12 +10,18 @@ class Ftp
 
   def send_blob(blob, directory, filename)
     manage_directory(directory)
-    send_blob(blob, filename)
+    send(blob, filename)
   rescue => e
     Rails.logger.error("Échec de la synchronisation FTP vers #{host.inspect} : #{e.class} #{e.message}")
     raise
   ensure
     server.close
+  end
+
+  def move(root_path, from_path, to_path)
+    from = "#{root_path}#{from_path}"
+    to = "#{root_path}#{to_path}"
+    server.rename(from, to)
   end
 
   protected
@@ -45,7 +51,7 @@ class Ftp
     end
   end
 
-  def send_blob(blob, filename)
+  def send(blob, filename)
     blob.open do |file|
       server.putbinaryfile(file.path, filename)
     end
