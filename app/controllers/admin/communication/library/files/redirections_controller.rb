@@ -10,6 +10,10 @@ class Admin::Communication::Library::Files::RedirectionsController < Admin::Comm
   # - c'est utilisé par `FileServerApp.vue`
   # - ça doit render l'index pour renvoyer des données à jour (avec le nouvel alias)
   def change_server_slug
+    @l10n.redirections.create(
+      path: @l10n.file_server_path,
+      university: @l10n.university,
+    )
     @l10n.file_server_slug = params[:file_server_slug]
     @l10n.save
     render :index

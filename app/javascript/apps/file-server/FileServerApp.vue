@@ -103,98 +103,102 @@ export default {
 </script>
 
 <template>
-  <h2>{{ $t('fileServer.permalink.title') }}</h2>
-  <div class="card card--horizontal mt-2">
-    <div class="card-body">
-      <div class="d-lg-flex align-items-center">
-        <span class="me-1 text-muted">
-          {{ data.file_server?.base_url }}
-        </span>
-        <input
-          type="text"
-          class="form-control"
-          :value="data.file_server?.slug"
-          @input="parsePermalink"
-          />
-        <span class="ms-2 me-5 text-muted">
-          {{ data.file_server?.extension }}
-        </span>
-      </div>
-    </div>
-    <div class="card-footer">
-      <button
-        type="button"
-        class="btn btn-light text-nowrap me-2"
-        :disabled="!this.permalinkChanged"
-        @click.prevent="savePermalink"
-        >
-        {{ $t('fileServer.permalink.save') }}
-      </button>
-      <a
-        class="btn btn-light text-nowrap"
-        :href="data.file_server?.url"
-        target="_blank"
-        >
-        {{ $t('fileServer.permalink.open') }}
-      </a>
-    </div>
-  </div>
-
-  <div class="mt-4">
-    {{ $t('fileServer.redirections.title') }}
-    <div class="row g-2">
-      <div v-for="redirection in data.redirections?.list">
-        <div class="card card--horizontal">
-          <div class="card-body">
-            {{ redirection.url }}
-          </div>
-          <div class="card-footer">
-            <button
-              type="button"
-              class="btn btn-danger text-nowrap me-2"
-              @click.prevent="removeRedirection(redirection)"
-              >
-              {{ $t('fileServer.redirections.remove') }}
-            </button>
-            <a
-              class="btn btn-light text-nowrap"
-              :href="redirection.url"
-              target="_blank"
-              >
-              {{ $t('fileServer.redirections.open') }}
-            </a>
-          </div>
+  <section class="mb-5">
+    <h2>{{ $t('fileServer.permalink.title') }}</h2>
+    <div class="card card--horizontal mt-2">
+      <div class="card-body">
+        <div class="d-lg-flex align-items-center">
+          <span class="me-1 text-muted">
+            {{ data.file_server?.base_url }}
+          </span>
+          <input
+            type="text"
+            class="form-control"
+            :value="data.file_server?.slug"
+            @input="parsePermalink"
+            />
+          <span class="ms-2 me-5 text-muted">
+            {{ data.file_server?.extension }}
+          </span>
         </div>
       </div>
-      <div>
-        <div class="card card--horizontal">
-          <div class="card-body">
-            <div class="button-group d-lg-flex align-items-center">
-              <span class="me-1 text-muted">
-                {{ data.redirections?.base_url }}
-              </span>
-              <input
-                type="text"
-                class="form-control"
-                @input="parseRedirection"
-                />
-              <span class="ms-2 me-5 text-muted">
-                {{ data.file_server?.extension }}
-              </span>
-              <div class="card-footer p-0">
-                <button
-                  type="button"
-                  class="btn btn-light text-nowrap"
-                  :disabled="this.redirection == ''"
-                  @click.prevent="addRedirection"
-                  >
-                  {{ $t('fileServer.redirections.add') }}
-                </button>
+      <div class="card-footer">
+        <button
+          type="button"
+          class="btn btn-light text-nowrap me-2"
+          :disabled="!this.permalinkChanged"
+          @click.prevent="savePermalink"
+          >
+          {{ $t('fileServer.permalink.save') }}
+        </button>
+        <a
+          class="btn btn-light text-nowrap"
+          :href="data.file_server?.url"
+          target="_blank"
+          >
+          {{ $t('fileServer.permalink.open') }}
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      {{ $t('fileServer.redirections.title') }}
+      <div class="row g-2">
+        <div v-for="redirection in data.redirections?.list">
+          <div class="card card--horizontal">
+            <div class="card-body">
+              <p class="my-2">
+                {{ redirection.url }}
+              </p>
+            </div>
+            <div class="card-footer">
+              <button
+                type="button"
+                class="btn btn-danger text-nowrap me-2"
+                @click.prevent="removeRedirection(redirection)"
+                >
+                {{ $t('fileServer.redirections.remove') }}
+              </button>
+              <a
+                class="btn btn-light text-nowrap"
+                :href="redirection.url"
+                target="_blank"
+                >
+                {{ $t('fileServer.redirections.open') }}
+              </a>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card card--horizontal">
+            <div class="card-body">
+              <div class="button-group d-lg-flex align-items-center">
+                <span class="me-1 text-muted">
+                  {{ data.redirections?.base_url }}
+                </span>
+                <input
+                  type="text"
+                  class="form-control"
+                  @input="parseRedirection"
+                  />
+                <span class="ms-2 me-5 text-muted">
+                  {{ data.file_server?.extension }}
+                </span>
+                <div class="card-footer p-0">
+                  <button
+                    type="button"
+                    class="btn btn-light text-nowrap"
+                    :disabled="this.redirection == ''"
+                    @click.prevent="addRedirection"
+                    >
+                    {{ $t('fileServer.redirections.add') }}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>

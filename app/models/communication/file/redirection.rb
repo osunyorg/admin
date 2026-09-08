@@ -55,6 +55,7 @@ class Communication::File::Redirection < ApplicationRecord
   protected
 
   def set_path
+    return if path.present?
     self.path = "/#{@path_without_extension}#{extension}"
   end
 end
