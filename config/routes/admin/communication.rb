@@ -327,6 +327,7 @@ namespace :communication do
                 defaults: { format: :json } do
         collection do
           patch :change_server_slug
+          get :static, defaults: { format: :html }
         end
       end
     end

@@ -18,6 +18,14 @@ class Ftp
     server.close
   end
 
+  def send_text(text, path)
+    file = ::Tempfile.new
+    file.write(text)
+    file.rewind
+    server.puttextfile(file, path)
+    file.unlink
+  end
+
   def move(root_path, from_path, to_path)
     from = "#{root_path}#{from_path}"
     to = "#{root_path}#{to_path}"

@@ -45,6 +45,12 @@ class Admin::Communication::Library::Files::RedirectionsController < Admin::Comm
     end
   end
 
+  def static
+    @about = @file
+    render  layout: false, 
+            content_type: "text/plain; charset=utf-8"
+  end
+
   protected
 
   def load_and_authorize

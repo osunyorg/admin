@@ -36,6 +36,7 @@ module Communication::File::Localization::WithFileServer
     end
     update_column :file_server_current_path,
                   file_server_path
+    send_htaccess
   end
 
   # rapport-annuel
@@ -73,7 +74,7 @@ module Communication::File::Localization::WithFileServer
 
   # /path-on-ftp-server/fr/2026/rapport-annuel.pdf
   def file_server_remote_path
-    "#{file_server.ftp_path}#{file_server_path}"
+    "#{file_server.ftp_path}#{file_server_path}".gsub('//', '/')
   end
 
   # https://files.osuny.org/
@@ -92,6 +93,22 @@ module Communication::File::Localization::WithFileServer
   end
 
   protected
+
+  def send_htaccess
+    ftp.send_text(htaccess_content, htaccess_path)
+  end
+
+  def htaccess_content
+    Static.render(htaccess_template_static, self, nil)
+  end
+
+  def htaccess_template_static
+    'admin/communication/library/files/redirections/static'
+  end
+
+  def htaccess_path
+    "#{file_server.ftp_path}.htaccess"
+  end
 
   def set_file_server_slug_if_empty?
     return if file_server_slug.present?
