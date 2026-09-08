@@ -96,6 +96,7 @@ fr:
       communication/file/context:
         about_type: Type
       communication/file/localization:
+        file_server_slug: Chemin
         internal_description: Description interne
         name: Nom
         original_byte_size: Poids
@@ -105,6 +106,8 @@ fr:
         published: Publié ?
         published_at: Date de publication
         updated_by: Dernière modification
+      communication/file/redirection:
+        path: Chemin
       communication/media:
         collection: Collection
         created_by: Création
@@ -353,9 +356,11 @@ fr:
               cannot_unpublished_default: ne peut pas être dépubliée (langue par défaut)
         communication/file/localization:
           attributes:
+            file_server_slug:
+              taken: déjà utilisé
             original_uploaded_file:
               already_imported: déjà importé dans la bibliothèque de fichiers
-              too_big: trop lourd !
+              too_big: trop lourd !              
         communication/media:
           attributes:
             original_uploaded_file:

@@ -322,6 +322,14 @@ namespace :communication do
       member do
         get :static
       end
+      resources :redirections,
+                controller: '/admin/communication/library/files/redirections',
+                defaults: { format: :json } do
+        collection do
+          patch :change_server_slug
+          get :static, defaults: { format: :html }
+        end
+      end
     end
   end
   root to: 'dashboard#index'

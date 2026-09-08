@@ -96,6 +96,7 @@ en:
       communication/file/context:
         about_type: Type
       communication/file/localization:
+        file_server_slug: Path
         internal_description: Internal description
         name: Name
         original_byte_size: Size
@@ -105,6 +106,8 @@ en:
         published: Published?
         published_at: Publication date
         updated_by: Last update
+      communication/file/redirection:
+        path: Path
       communication/media:
         collection: Collection
         created_by: Envoyée par
@@ -353,6 +356,8 @@ en:
               cannot_unpublished_default: cannot be unpublished (default language)
         communication/file/localization:
           attributes:
+            file_server_slug:
+              taken: already taken
             original_uploaded_file:
               already_imported: already imported in file library
               too_big: too heavy!

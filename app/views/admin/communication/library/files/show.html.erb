@@ -23,6 +23,9 @@
         <%= link_to t('download'),
               download_medium_path(signed_id: @l10n.original_blob.signed_id),
               class: button_classes %>
+        <div class="mt-4">
+          <%= render 'admin/application/l10n/widget', about: @file, l10n: @l10n %>  
+        </div>
       </div>
       <div class="col-lg-9">
         <div class="row">
@@ -68,10 +71,15 @@
   </div>
 </div>
 
-<%= render 'admin/application/l10n/widget', about: @file, l10n: @l10n %>  
+<%= render 'admin/communication/library/files/redirections/app',
+            about: @file,
+            l10n: @l10n if current_university.file_server? %>  
 
 <%= render 'admin/communication/library/contexts/list', contexts: @contexts %>
 
 <% content_for :server_admin_only do %>
   <%= static_link static_admin_communication_file_path(@file) %>
+  <%= link_to '.htaccess',
+              static_admin_communication_file_redirections_path(@file),
+              class: button_classes %>
 <% end %>
