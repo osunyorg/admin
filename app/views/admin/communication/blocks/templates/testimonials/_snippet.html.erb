@@ -3,9 +3,19 @@
     <blockquote class="fst-italic">
       <%= block_component_snippet block, :text, template: element %>
     </blockquote>
-    <p class="small mt-n2">
-      — <b><%= block_component_snippet block, :author, template: element %></b>
-      <%= block_component_snippet block, :job, template: element %>
-    </p>
+    <%
+    blob = element.photo_component.blob
+    %>
+    <div class="d-flex align-items-center">
+      <% if blob.present? %>
+        <div class="osuny__thumbnail osuny__thumbnail--small osuny__thumbnail--cropped rounded-circle me-3">
+          <%= kamifusen_tag blob, width: 70 %>
+        </div>
+      <% end %>
+      <p class="small mb-0">
+        <b><%= block_component_snippet block, :author, template: element %></b><br>
+        <%= block_component_snippet block, :job, template: element %>
+      </p>
+    </div>
   </div>
 <% end %>

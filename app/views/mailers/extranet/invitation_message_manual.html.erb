@@ -1,0 +1,7 @@
+<%= simple_format @invitation.message %>
+
+<p>
+  <%= link_to t('mailers.extranet.invitation_messages.manual.cta'), @registration_url, target: '_blank' %>
+</p>
+
+<%= simple_format @signature %>

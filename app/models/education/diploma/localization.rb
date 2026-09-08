@@ -46,11 +46,11 @@ class Education::Diploma::Localization < ApplicationRecord
   include Backlinkable
   include Contentful
   include HasGitFiles
+  include HasUniversity
   include Initials
   include Permalinkable
   include Sanitizable
   include Shareable
-  include WithUniversity
 
   has_summernote :summary
 

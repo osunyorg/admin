@@ -1,14 +1,12 @@
 <%= block_component_snippet block, :description %>
-<div class="row mb-3">
-  <% block.template.elements.each do |element| %>
-    <div class="col-sm-6 mb-4">
-      <% if element.image.present? %>
-        <div class="row">
-          <div class="col-4">
-            <%= block_component_snippet block, :image, template: element %>
-          </div>
-        </div>
-      <% end %>
+<% block.template.elements.each do |element| %>
+  <div class="row mb-3">
+    <% if element.image_component.blob.present? %>
+      <div class="col-2">
+        <%= block_component_snippet block, :image, template: element %>
+      </div>
+    <% end %>
+    <div class="col-10">
       <div class="lead">
         <%= block_component_snippet block, :number, template: element %>
         <%= block_component_snippet block, :unit, template: element %>

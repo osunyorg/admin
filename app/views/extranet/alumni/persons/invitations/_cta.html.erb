@@ -1,0 +1,12 @@
+<% if person.user_id.blank? && person.email.blank? %>
+  <div class="mb-4">
+    <p><%= t('extranet.alumni.invitations.send.label') %></p>
+    <% if Communication::Extranet::Invitation.sendable_to?(person) %>
+      <%= link_to t('extranet.alumni.invitations.send.cta', name: l10n.first_name), 
+                  alumni_new_invitation_path(person), 
+                  class: 'btn btn-primary btn-sm position-relative z-2' %>
+    <% else %>
+      <%= t('extranet.alumni.invitations.send.too_soon') %>
+    <% end %>
+  </div>
+<% end %>

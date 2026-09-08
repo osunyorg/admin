@@ -30,8 +30,8 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
   include Communication::Website::Agenda::Period::InPeriod
   include Communication::Website::Agenda::WithStatus
   include HasGitFiles
+  include HasUniversity
   include Permalinkable
-  include WithUniversity
 
   belongs_to  :event,
               foreign_key: :communication_website_agenda_event_id

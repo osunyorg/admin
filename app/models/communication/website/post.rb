@@ -27,20 +27,21 @@ class Communication::Website::Post < ApplicationRecord
   acts_as_paranoid
 
   include AsDirectObject
+  include Autosortable
   include Duplicable
   include Federated
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include HasListBlocks
+  include HasUniversity
   include Lifecyclable
   include Localizable
   include MovableToWebsite
   include Sanitizable
   include Searchable
-  include WithMenuItemTarget
+  include MenuItemTargetable
   include WithOpenApi
-  include HasListBlocks
-  include WithUniversity
 
   has_and_belongs_to_many :authors,
                           class_name: 'University::Person',

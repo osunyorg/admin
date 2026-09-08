@@ -11,7 +11,7 @@
           exhibition_l10n = exhibition.localization_for(block.language)
           exhibition_link = exhibition_l10n.current_permalink_url_in_website(@website) || '#'
         %>
-          <article class="exhibition <% if exhibition_l10n.featured_image.attached? %>exhibition--with-image<% end %>" itemscope itemtype="https://schema.org/ExhibitionEvent">
+          <article class="exhibition <% if exhibition_l10n.featured_blob.present? %>exhibition--with-image<% end %>" itemscope itemtype="https://schema.org/ExhibitionEvent">
             <div class="exhibition-content">
               <% if exhibition_l10n.subtitle %>
                 <hgroup>
@@ -75,8 +75,8 @@
               <% end %>
             </div>
             <div class="media">
-              <% if exhibition_l10n.featured_image.attached? %>
-                <%= kamifusen_tag exhibition_l10n.featured_image %>
+              <% if exhibition_l10n.featured_blob.present? %>
+                <%= kamifusen_tag exhibition_l10n.featured_blob %>
               <% end %>
             </div>
           </article>

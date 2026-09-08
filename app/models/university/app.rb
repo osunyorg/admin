@@ -22,7 +22,7 @@
 class University::App < ApplicationRecord
   TOKEN_LENGTH = 30
 
-  include WithUniversity
+  include HasUniversity
 
   validates :token, uniqueness: true
 

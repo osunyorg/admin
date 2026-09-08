@@ -1,17 +1,20 @@
 <%= block_component_snippet block, :description %>
-<div class="row">
-  <%
-  block.template.elements.each do |element|
-    image_blob = element.image_component.blob
-    file_blob = element.file_component.blob
-    %>
-    <div class="col-6 col-md-4">
-      <%= kamifusen_tag image_blob, width: 200, class: 'img-fluid' if image_blob %>
-      <%= element.title %>
-      <% if file_blob %>
-        <br>
-        <span class="small"><%= file_blob.filename %></span>
+<% block.template.communication_file_localizations_published.each do |l10n| %>
+  <div class="row mb-4">
+    <div class="col-2">
+      <% if l10n.featured_blob %>
+        <%= kamifusen_tag l10n.featured_blob, width: 200, class: 'img-fluid' %>
+      <% else %>
+        <div class="osuny__thumbnail osuny__thumbnail--small" style="width: 100%">
+          <span class="osuny__thumbnail__icon">
+            <i class="<%= l10n.icon %>"></i>
+          </span>
+        </div>
       <% end %>
     </div>
-  <% end %>
-</div>
+    <div class="col-10">
+      <p class="mb-0"><%= l10n.name %></p>
+      <span class="small"><%= l10n.original_filename %></span>
+    </div>
+  </div>
+<% end %>

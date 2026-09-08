@@ -86,6 +86,7 @@ class Api::Osuny::Communication::Websites::Pages::CategoriesController < Api::Os
     [
       :migration_identifier, :language, :name, :meta_description,
       :path, :slug, :summary, :_destroy,
+      :featured_media_id, :featured_media_alt,
       featured_image: [:blob_id, :url, :alt, :credit, :_destroy],
       **nested_blocks_params
     ]

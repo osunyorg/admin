@@ -2,6 +2,10 @@ module Communication::Website::WithGitRepository
   extend ActiveSupport::Concern
 
   included do
+    belongs_to  :synchronization_locked_by,
+                class_name: 'User',
+                optional: true
+
     has_many  :website_git_files,
               class_name: 'Communication::Website::GitFile',
               dependent: :destroy
@@ -31,6 +35,19 @@ module Communication::Website::WithGitRepository
     @git_repository ||= Git::Repository.new self
   end
 
+  def synchronization_locked?
+    synchronization_locked_by_id.present?
+  end
+
+  def lock_synchronization!(user)
+    update_column :synchronization_locked_by_id, user.id
+  end
+
+  def unlock_synchronization!
+    update_column :synchronization_locked_by_id, nil
+    sync_with_git if desynchronized_generated_git_files.any?
+  end
+
   def repository_url
     git_repository.url
   end
@@ -44,11 +61,13 @@ module Communication::Website::WithGitRepository
   end
 
   def sync_with_git
+    return if synchronization_locked?
     update_column(:last_sync_at, Time.now)
     Communication::Website::SyncWithGitJob.perform_later(id)
   end
 
   def sync_with_git_safely
+    return if synchronization_locked?
     return unless git_repository.valid?
     git_repository.git_files = git_files.generated
                                         .desynchronized_until(last_sync_at)
@@ -78,7 +97,7 @@ module Communication::Website::WithGitRepository
       begin
         dependency = git_file.about
       rescue NameError
-        depdendency = nil
+        dependency = nil
       end
       # Here, dependency can be nil (object was previously destroyed)
       is_obsolete = dependency.nil? || !dependency.in?(recursive_dependencies_following_direct)
@@ -102,12 +121,19 @@ module Communication::Website::WithGitRepository
   end
 
   def update_theme_version
+    return if synchronization_locked?
     Communication::Website::UpdateThemeVersionJob.perform_later(id)
   end
 
   def update_theme_version_safely
+    return if synchronization_locked?
     return unless git_repository.valid?
     git_repository.update_theme_version!
+  end
+
+  def analyse_repository
+    return unless git_repository.valid?
+    Communication::Website::AnalyseJob.perform_later(id)
   end
 
   def analyse_repository_safely
@@ -115,9 +141,14 @@ module Communication::Website::WithGitRepository
     Git::OrphanAndLayoutAnalyzer.new(self).launch
   end
 
-  def analyse_repository
+  def check_git_files_integrity
     return unless git_repository.valid?
-    Communication::Website::AnalyseJob.perform_later(id)
+    Communication::Website::CheckGitFilesIntegrityJob.perform_later(id)
+  end
+
+  def check_git_files_integrity_safely
+    return unless git_repository.valid?
+    Git::FilesIntegrityChecker.new(self).launch
   end
 
   def desynchronized_generated_git_files

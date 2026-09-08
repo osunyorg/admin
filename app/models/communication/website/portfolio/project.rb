@@ -5,6 +5,7 @@
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
 #  deleted_at               :datetime
+#  from_day                 :date
 #  full_width               :boolean          default(TRUE)
 #  migration_identifier     :string
 #  year                     :integer
@@ -30,24 +31,28 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   acts_as_paranoid
 
   include AsDirectObject
+  include Autosortable
   include Duplicable
   include Filterable
-  include GeneratesGitFiles
   include Categorizable # Must be loaded after Filterable to be filtered by categories
+  include GeneratesGitFiles
+  include HasCreator
+  include HasListBlocks
+  include HasUniversity
   include Lifecyclable
   include Localizable
+  include MenuItemTargetable
   include Sanitizable
   include Searchable
-  include WithMenuItemTarget
   include WithOpenApi
-  include HasListBlocks
-  include WithUniversity
 
   belongs_to  :created_by,
               class_name: 'User',
               optional: true
 
-  validates :year, presence: true
+  validates :from_day, presence: true
+
+  before_validation :set_from_day_from_year, if: -> { from_day.blank? && year.present? }
 
   scope :ordered, -> (language) {
     localization_title_select = <<-SQL
@@ -69,7 +74,7 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
     ]))
     .select("communication_website_portfolio_projects.*", localization_title_select)
     .group("communication_website_portfolio_projects.id")
-    .order("communication_website_portfolio_projects.year DESC, localization_title ASC")
+    .order("communication_website_portfolio_projects.from_day DESC, localization_title ASC")
   }
   scope :latest_in, -> (language) { published_now_in(language).order("communication_website_portfolio_project_localizations.updated_at DESC").limit(5) }
   scope :for_search_term, -> (term, language) {
@@ -99,6 +104,10 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
 
   def list_blocks_template_kind
     :projects
+  end
+
+  def set_from_day_from_year
+    self.from_day = Date.new(year)
   end
 
 end

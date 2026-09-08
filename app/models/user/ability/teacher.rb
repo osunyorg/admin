@@ -12,6 +12,7 @@ class User::Ability::Teacher < User::Ability
     can :read, University::Person::Involvement, university_id: @user.university_id
     can :read, University::Role, university_id: @user.university_id
     can :manage, Communication::Media, university_id: @user.university_id
+    can :manage, Communication::File, university_id: @user.university_id
     cannot :destroy, Communication::Website
   end
 

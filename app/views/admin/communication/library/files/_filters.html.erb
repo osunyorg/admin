@@ -1,0 +1,52 @@
+<%= simple_form_for :filters, url: current_path, method: :get do |f| %>
+  <%= filters_panel current_path: current_path, active_filters_count: active_filters_count do |form| %>
+
+    <%= render_filter f,
+                      :string,
+                      :for_search_term,
+                      label: t('search')
+                      %>
+
+    <% if current_university.communication_file_categories.any? %>
+      <%= render_filter f,
+                        :select,
+                        :for_category,
+                        label: t('filters.attributes.category'),
+                        collection: osuny_collection_tree(current_university.communication_file_categories.root, localized: true),
+                        multiple: true
+                        %>
+    <% end %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_filetype,
+                      label: I18n.t('admin.communication.file_types.title'),
+                      collection: Communication::File.filetypes_present_in(current_university.communication_files)
+                                                     .map { |filetype| [I18n.t("admin.communication.file_types.#{filetype}"), filetype] }
+                      %>
+
+    <% if current_university.communication_websites.many? %>
+      <%= render_filter f,
+                        :select,
+                        :for_website,
+                        label: t('filters.attributes.website'),
+                        collection: osuny_collection(current_university.communication_websites, localized: true)
+                        %>
+    <% end %>
+
+    <% creator_ids = current_university.communication_files
+                                       .where.not(created_by_id: nil)
+                                       .distinct
+                                       .pluck(:created_by_id) %>
+    <%= render_filter f,
+                      :select,
+                      :for_creator,
+                      label: Communication::File.human_attribute_name(:created_by),
+                      collection: current_university.users
+                                                    .where(id: creator_ids)
+                                                    .ordered(current_language)
+                                                    .map { |user| [user.to_s, user.id] }
+                      %>
+
+  <% end %>
+<% end %>

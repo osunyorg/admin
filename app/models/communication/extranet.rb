@@ -17,7 +17,7 @@
 #  sso_cert                   :text
 #  sso_mapping                :jsonb
 #  sso_name_identifier_format :string
-#  sso_provider               :integer          default("saml")
+#  sso_provider               :integer          default(0)
 #  sso_target_url             :string
 #  upper_menu                 :text             default("")
 #  created_at                 :datetime         not null
@@ -43,16 +43,16 @@ class Communication::Extranet < ApplicationRecord
   # We don't include Sanitizable because too many complex attributes. We handle it below.
   include Favoritable
   include Filterable
+  include HasAbouts
+  include HasUniversity
   include Localizable
   include LocalizableOrderByNameScope
   include Searchable
   include SsoEnabled
-  include WithAbouts
   include WithConnectedObjects
   include WithFeatures
   include WithLegal
   include WithStyle
-  include WithUniversity
 
   belongs_to :default_language, class_name: "Language"
   has_many :languages, through: :localizations
@@ -67,6 +67,7 @@ class Communication::Extranet < ApplicationRecord
   has_many :documents
   has_many :document_categories, class_name: 'Communication::Extranet::Document::Category'
   has_many :document_kinds, class_name: 'Communication::Extranet::Document::Kind'
+  has_many :invitations, class_name: 'Communication::Extranet::Invitation', dependent: :destroy
 
   validates :host, presence: true
 

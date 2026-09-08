@@ -10,14 +10,16 @@ module AsCategoryLocalization
   include Permalinkable
   include Sanitizable
   include Shareable
-  include WithBlobs
-  include WithFeaturedImage
-  include WithUniversity
+  include HasBlobs
+  include HasFeaturedMedia
+  include HasUniversity
 
   included do
     has_summernote :summary
 
     validates :name, presence: true
+
+    alias :category :about
   end
 
   def template_static
@@ -41,6 +43,17 @@ module AsCategoryLocalization
     breadcrumb_title.presence || name
   end
 
+  def self_or_descendant_has_published_category_objects_localizations?
+    has_published_category_objects_localizations? ||
+      descendants.any? { |descendant|
+        descendant.has_published_category_objects_localizations?
+      }
+  end
+
+  def has_published_category_objects_localizations?
+    category_objects_localizations.published_now.any?
+  end
+
   def to_s
     "#{name}"
   end
@@ -48,11 +61,9 @@ module AsCategoryLocalization
   protected
 
   def explicit_blob_ids
-    super.concat [featured_image&.blob_id]
-  end
-
-  def inherited_blob_ids
-    [featured_image&.blob_id]
+    super.concat [
+      featured_blob&.id
+    ]
   end
 
   def hugo_slug_in_website(website)

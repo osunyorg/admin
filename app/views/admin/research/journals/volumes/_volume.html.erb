@@ -1,0 +1,9 @@
+<%
+if volume.deleted?
+  partial_name = 'deleted'
+else
+  partial_name = 'default'
+end
+%>
+<%= render "admin/research/journals/volumes/volume/#{partial_name}",
+            volume: volume %>

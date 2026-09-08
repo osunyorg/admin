@@ -25,7 +25,7 @@
 #  fk_rails_ab48a3445f  (university_id => universities.id)
 #
 class Communication::Website::ContentFederation < ApplicationRecord
-  include WithUniversity
+  include HasUniversity
 
   belongs_to  :website,
               class_name: "Communication::Website",

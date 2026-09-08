@@ -47,12 +47,13 @@ module AsLocalization
     # Localized should not be published immediately
     l10n.published = false if respond_to?(:published)
 
-    # Handle featured image if object has one, and other attachments
-    localize_attachment(l10n, :featured_image) if try(:featured_image)&.attached?
     localize_other_attachments(l10n)
 
     # Blocks need an about, so we save before localizing blocks
     l10n.save
+
+    # After save, we can manage crop settings
+    localize_featured_media(l10n) if respond_to?(:featured_media)
 
     # Handle blocks if object has any
     localize_contents!(l10n) if respond_to?(:contents)
@@ -83,6 +84,21 @@ module AsLocalization
   def localize_contents!(localization)
     blocks.ordered.each do |block|
       block.localize_for!(localization)
+    end
+  end
+
+  def localize_featured_media(localization)
+    return unless featured_media_id
+    localization.set_featured_media!(
+      id: featured_media_id,
+      alt: featured_media_alt,
+      language: localization.language,
+      crop_settings: featured_media_context&.crop_settings
+    )
+    media_l10n = featured_media.localization_for(localization.language)
+    # Si on vient de le créer, il manque le crédit
+    if featured_media_credit.present? && media_l10n.credit.blank?
+      media_l10n.update_column :credit, featured_media_credit
     end
   end
 

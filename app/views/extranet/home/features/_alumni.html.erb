@@ -6,6 +6,7 @@
         <ul>
             <% @experiences.ordered.each do |experience| %>
               <% l10n = experience.localization_for(current_language) %>
+              <% person_l10n = experience.person.best_localization_for(current_language) %>
               <% organization_l10n = experience.organization.best_localization_for(current_language) if experience.organization.present? %>
             <li>
               <div>
@@ -23,14 +24,14 @@
               <div>
                 <div>
                   <p class="mb-md-0">
-                    <%= experience.person.best_localization_for(current_language) %>
+                    <%= person_l10n %>
                     <br>
                     <%= [l10n&.description, organization_l10n&.to_s].compact_blank.join('-') %>
                   </p>
                   <small><%= l experience.created_at, format: :date_with_explicit_month %></small>
                 </div>
                 <% if organization_l10n && organization_l10n.logo.attached? %>
-                    <%= link_to [:alumni, experience.organization] do %>
+                    <%= link_to [:alumni, experience.organization], class: 'position-relative z-2' do %>
                       <%= kamifusen_tag organization_l10n.logo, height: 80, class: 'img-fluid' %>
                     <% end %>
                 <% end %>

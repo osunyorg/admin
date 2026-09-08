@@ -1,4 +1,5 @@
 class Extranet::Alumni::PersonsController < Extranet::Alumni::ApplicationController
+
   def index
     @facets = University::Person::Alumnus::Facets.new params[:facets], {
       model: current_extranet.about.university_person_alumni,
@@ -36,4 +37,5 @@ class Extranet::Alumni::PersonsController < Extranet::Alumni::ApplicationControl
     super
     add_breadcrumb University::Person.model_name.human(count: 2), alumni_university_persons_path
   end
+
 end

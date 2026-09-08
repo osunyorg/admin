@@ -14,6 +14,15 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
     breadcrumb
   end
 
+  def picker
+    @picker = Osuny::Picker::Research::Journal::Volume.new(
+      university: current_university,
+      language: current_language,
+      params: params,
+      context: @journal
+    )
+  end
+
   def show
     @papers = @volume.papers.ordered_by_position
     breadcrumb
@@ -87,7 +96,6 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
             localizations_attributes: [
               :id, :language_id,
               :title, :slug, :keywords, :published, :published_at, :meta_description, :summary, :text,
-              :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
             ]
           )
           .merge(university_id: current_university.id)

@@ -1,0 +1,10 @@
+dan_gold_fr:
+  name: Dan Gold
+  alt: Voiture par Dan Gold
+  credit: Dan Gold
+  published: true
+  published_at: <%= Time.current %>
+  updated_by: admin
+  about: dan_gold
+  language: fr
+  university: default_university

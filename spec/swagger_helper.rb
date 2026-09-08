@@ -15,6 +15,8 @@ RSpec.configure do |config|
   # document below. You can override this behavior by adding a openapi_spec tag to the
   # the root example_group in your specs, e.g. describe '...', openapi_spec: 'v2/swagger.json'
   schemas = {
+    communication_file: Communication::File::OPENAPI_SCHEMA,
+    communication_file_localization: Communication::File::Localization::OPENAPI_SCHEMA,
     communication_media: Communication::Media::OPENAPI_SCHEMA,
     communication_media_localization: Communication::Media::Localization::OPENAPI_SCHEMA,
     communication_website: Communication::Website::OPENAPI_SCHEMA,

@@ -5,21 +5,21 @@ fr:
       templates:
         embed:
           title_missing:
-            text_html: L'intégration HTML n'a pas de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle le contenu intégré, comme expliqué dans le <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">critère 4.7 du RGAA</a>. Merci d'ajouter une balise <b>title</b> explicite à votre iframe.
+            text_html: L'intégration HTML n'a pas de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle le contenu intégré, comme expliqué dans le <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#4" target="_blank">thématique 4 du RGAA</a>. Merci d'ajouter une balise <b>title</b> explicite à votre iframe.
             title: Pas de titre de cadre
           transcription_missing:
             text_html: Le cadre HTML n'est pas accompagné d'une transcription textuelle pour les personnes malvoyantes, ou pour les situations de faible débit qui empêcheraient la lecture.
             title: Pas de transcription
         sound:
           title_missing:
-            text_html: Ni le bloc ni le fichier audio n'ont de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle l'enregistrement, comme expliqué dans le <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">critère 4.7 du RGAA</a>. Merci d'ajouter un titre à l'enregistrement.
+            text_html: Ni le bloc ni le fichier audio n'ont de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle l'enregistrement, comme expliqué dans le <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#4" target="_blank">thématique 4 du RGAA</a>. Merci d'ajouter un titre à l'enregistrement.
             title: Pas de titre
           transcription_missing:
             text_html: L'enregistrement n'est pas accompagné d'une transcription textuelle pour les personnes malvoyantes, ou pour les situations de faible débit qui empêcheraient la lecture.
             title: Pas de transcription
         video:
           title_missing:
-            text_html: Ni le bloc ni la vidéo n'ont de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle la vidéo, comme expliqué dans le <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">critère 4.7 du RGAA</a>. Merci d'ajouter un titre à la vidéo.
+            text_html: Ni le bloc ni la vidéo n'ont de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle la vidéo, comme expliqué dans le <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#4" target="_blank">thématique 4 du RGAA</a>. Merci d'ajouter un titre à la vidéo.
             title: Pas de titre
           transcription_missing:
             text_html: La vidéo n'est pas accompagnée d'une transcription textuelle pour les personnes malvoyantes, ou pour les situations de faible débit qui empêcheraient la lecture.
@@ -255,8 +255,6 @@ fr:
   category:
     breadcrumb_title: Nom affiché dans le fil d'ariane
     children: Sous-catégories
-    featured_image: Image à la une
-    featured_image_alt: Texte alternatif
     free: Catégories libres (sans taxonomie)
     header_text: Titre affiché en haut de page
     is_taxonomy: Est une taxonomie (une famille de catégories)
@@ -430,13 +428,6 @@ fr:
         pending: En cours de traitement
   export: Exporter (xlsx)
   false: Non
-  featured_image:
-    alt:
-      hint: Ce texte est essentiel pour l'accessibilité. Si l'image donne une information importante, il faut écrire ici cette information. Si l'information est déjà présente ailleurs dans la page, ou si l'image est purement décorative, il faut laisser le texte alternatif vide, pour éviter de polluer la navigation vocale.
-      label: Texte alternatif
-    credit:
-      hint: Le crédit photo doit être indiqué, dans le respect du droit d'auteur.
-      label: Crédit
   file_hint_with_formats: "Fichiers %{formats} uniquement. %{filesize} max."
   file_hint_without_formats: "%{filesize} max."
   filters:
@@ -447,6 +438,7 @@ fr:
       facet: Filtrer par responsabilité
       kind: Filtrer par type
       role: Filtrer par rôle
+      website: Filtrer par site
     buttons:
       close: Fermer
       expand: Rechercher et filtrer
@@ -503,11 +495,25 @@ fr:
   look_feel: Look & feel
   mailers:
     extranet:
-      invitation_message:
-        subject: Bienvenue sur votre extranet
-        text: Vous avez désormais accès à l'extranet.
-        with_user_html: Vous pouvez vous y connecter avec votre adresse email <b>%{email}</b> en <a href="%{sign_in_url}">cliquant ici</a>.
-        without_user_html: Vous pouvez vous y inscrire avec votre adresse email <b>%{email}</b> en <a href="%{sign_up_url}">cliquant ici</a>.
+      invitation_messages:
+        automatic:
+          subject: Bienvenue sur votre extranet
+          text: Vous avez désormais accès à l'extranet.
+          with_user_html: Vous pouvez vous y connecter avec votre adresse email <b>%{email}</b> en <a href="%{sign_in_url}">cliquant ici</a>.
+          without_user_html: Vous pouvez vous y inscrire avec votre adresse email <b>%{email}</b> en <a href="%{sign_up_url}">cliquant ici</a>.
+        manual:
+          cta: Rejoindre l'extranet
+          signature: Cordialement
+          subject: Invitation de {{sender_name}} (promotion {{sender_years}}) à rejoindre l'extranet
+          text: |
+            Bonjour {{name}},
+
+            {{sender_name}} vous invite à rejoindre l'extranet des Alumni.
+          
+            Vous y retrouverez notamment l'annuaire de toutes les promotions.
+            À très bientôt !
+            
+            {{sender_name}} (promotion {{sender_years}})
     notifications:
       gdpr_deletion_incoming:
         subject: "osuny - votre compte va bientôt être supprimé"
@@ -545,6 +551,13 @@ fr:
   move: Déplacer
   open: Ouvrir
   organize: Organiser
+  picker:
+    sort:
+      alpha: Par ordre alphabétique
+      date_desc: Par date décroissante
+      date_asc: Par date croissante
+      size_desc: Par poids décroissant
+      size_asc: Par poids croissant
   please_confirm:
     deletion: Est-ce que vous confirmez la suppression ?
     duplication: Est-ce que vous confirmez la duplication ?

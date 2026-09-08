@@ -40,6 +40,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   include AsDirectObject
   include AsTree
+  include Autosortable
   include Communication::Website::Agenda::Period::InPeriod
   include Communication::Website::Agenda::WithStatus
   include Duplicable
@@ -47,8 +48,12 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include HasListBlocks
+  include HasCreator
+  include HasUniversity
   include Lifecyclable
   include Localizable
+  include MenuItemTargetable
   include MovableToWebsite
   include Sanitizable
   include Searchable
@@ -57,14 +62,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include WithPeriodSync
   include WithTimeSlots
   include WithKinds
-  include WithMenuItemTarget
   include WithOpenApi
-  include HasListBlocks
-  include WithUniversity
-
-  belongs_to  :created_by,
-              class_name: "User",
-              optional: true
 
   belongs_to  :parent,
               class_name: 'Communication::Website::Agenda::Event',
@@ -136,6 +134,13 @@ class Communication::Website::Agenda::Event < ApplicationRecord
       today: Date.current,
       yesterday: Date.yesterday
     )
+  }
+
+  scope :autosort_by_date_desc, -> (language) {
+    order(created_at: :desc)
+  }
+  scope :autosort_by_date_asc, -> (language) {
+    order(created_at: :asc)
   }
 
   def dependencies

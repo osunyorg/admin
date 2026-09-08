@@ -32,7 +32,7 @@ module User::WithRegistrationContext
     end
 
     def user_can_access_registration_context?
-      user_is_alumni? || user_is_contact?
+      user_is_alumni? || user_is_contact? || user_is_invited?
     end
 
     def user_is_alumni?
@@ -41,6 +41,10 @@ module User::WithRegistrationContext
 
     def user_is_contact?
       registration_context.has_feature?(:contacts) && registration_context.connected_people.where(email: email).any?
+    end
+
+    def user_is_invited?
+      invitation.present? && invitation.extranet_id == registration_context.id
     end
 
     def send_notification_to_admins

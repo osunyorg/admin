@@ -13,34 +13,19 @@
           <%= render 'admin/application/summary/form', f: lf, about: l10n %>
           <%= render 'admin/application/header_cta/form', f: lf %>
         <% end %>
-        <%= osuny_panel Communication::Website::Jobboard::Job.human_attribute_name('dates') do %>
-          <div class="row">
-            <div class="col-lg-4">
-              <%= f.input :from_day, html5: true  %>
-            </div>
-            <div class="col-lg-4">
-              <%= f.input :to_day, html5: true %>
-            </div>
-          </div>
-        <% end %>
-
         <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
-        <div class="row">
-          <div class="col-lg-6">
-           <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
-          </div>
-          <div class="col-lg-6">
-            <%= render 'admin/application/images/shared/form', f: lf, about: l10n %>
-          </div>
-        </div>
+        <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
       </div>
       <div class="col-md-4">
         <%= osuny_panel t('metadata') do %>
           <%= render 'admin/application/publication/form', f: lf, about: job %>
+          <%= f.input :from_day, html5: true  %>
+          <%= f.input :to_day, html5: true %>
           <%= render 'admin/application/slug/form',
                       f: lf,
                       source: '#communication_website_jobboard_job_localizations_attributes_0_title' %>
           <%= f.input :bodyclass, label: t('admin.bodyclass') %>
+          <%= render 'admin/application/images/shared/form', f: lf, about: l10n %>
         <% end %>
       </div>
     </div>

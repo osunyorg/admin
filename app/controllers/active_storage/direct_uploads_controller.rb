@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+# Ce controller est une réécriture du controller natif de Rails :
+# https://github.com/rails/rails/blob/main/activestorage/app/controllers/active_storage/direct_uploads_controller.rb
+# Elle sert à ajouter la propriété `university_id`, afin de cloisonner les instances du multitenant.
+
 # Creates a new blob on the server side in anticipation of a direct-to-service upload from the client side.
 # When the client-side upload is completed, the signed_blob_id can be submitted as part of the form to reference
 # the blob that was created up front.

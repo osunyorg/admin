@@ -1,0 +1,28 @@
+<% content_for :title, t('admin.subnav.settings') %>
+
+<%= simple_form_for [:admin, @extranet] do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <%= f.simple_fields_for :localizations, @l10n do |lf| %>
+    <%= lf.hidden_field :language_id, value: current_language.id %>
+
+    <%= f.input :has_sso, input_html: { data: { 'conditional': true }, id: 'has_sso' } %>
+    <div class="d-none"
+        data-conditional-source="has_sso"
+        data-conditional-value="true"
+        >
+      <%= f.input :sso_target_url, required: true %>
+      <%= f.input :sso_cert, required: true, input_html: { rows: 20 } %>
+      <%= f.input :sso_name_identifier_format, required: true %>
+      <%= lf.input :sso_button_label %>
+      <h4 class="mb-4"><%= University.human_attribute_name('sso_mapping') %></h4>
+      <%= f.error_notification message: f.object.errors[:sso_mapping].to_sentence if f.object.errors[:sso_mapping].present? %>
+      <%= render 'admin/communication/extranets/settings/sso_mapping', extranet: @extranet %>
+    </div>
+
+    <% content_for :action_bar_right do %>
+      <%= cancel [:admin, @extranet] %>
+      <%= submit f %>
+    <% end %>
+  <% end %>
+<% end %>

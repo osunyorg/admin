@@ -86,6 +86,7 @@ class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::
     [
       :migration_identifier, :language, :title, :meta_description,
       :published, :published_at, :slug, :subtitle, :summary, :_destroy,
+      :featured_media_id, :featured_media_alt,
       featured_image: [:blob_id, :url, :alt, :credit, :_destroy],
       **nested_aliases_params,
       **nested_blocks_params
@@ -96,7 +97,7 @@ class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::
     @project_params ||= begin
       permitted_params = params.require(:project)
                           .permit(
-                            :migration_identifier, :full_width, :year, :bodyclass, category_ids: [], localizations: {}
+                            :migration_identifier, :full_width, :year, :from_day, :bodyclass, category_ids: [], localizations: {}
                           ).merge(
                             university_id: current_university.id,
                             communication_website_id: website.id
@@ -109,7 +110,7 @@ class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::
   def project_params_for_upsert(project_params)
     permitted_params = project_params
                           .permit(
-                            :migration_identifier, :full_width, :year, :bodyclass, category_ids: [], localizations: {}
+                            :migration_identifier, :full_width, :year, :from_day, :bodyclass, category_ids: [], localizations: {}
                           ).merge(
                             university_id: current_university.id,
                             communication_website_id: website.id

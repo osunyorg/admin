@@ -43,6 +43,7 @@ class Communication::Website::GitFile < ApplicationRecord
   validates :about_id, uniqueness: { scope: [:about_type, :website_id] }, allow_nil: true
 
   scope :generated, -> { where.not(generated_at: nil) }
+  scope :synchronized, -> { where(desynchronized: false) }
   scope :desynchronized, -> { where(desynchronized: true) }
   scope :desynchronized_since, -> (time) { desynchronized.where('desynchronized_at > ?', time) }
   scope :desynchronized_until, -> (time) { desynchronized.where('desynchronized_at <= ?', time) }
@@ -76,15 +77,11 @@ class Communication::Website::GitFile < ApplicationRecord
       generate_content if valid?
     elsif persisted?
       # There, but not syncable, so bye bye
-      mark_for_destruction!
+      # If never synced, no previous path, we can destroy the git file,
+      # else we mark it for destruction
+      previous_path.nil?  ? destroy
+                          : mark_for_destruction!
     end
-  end
-
-  def mark_for_update!
-    update(
-      desynchronized: true,
-      desynchronized_at: Time.zone.now
-    )
   end
 
   def mark_for_destruction!
@@ -141,6 +138,7 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   def should_generate_content?
+    about.present? &&
     about.try(:can_have_git_file?) &&
     about.try(:should_sync_to?, website)
   end

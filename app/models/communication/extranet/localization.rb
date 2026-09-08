@@ -2,23 +2,26 @@
 #
 # Table name: communication_extranet_localizations
 #
-#  id                         :uuid             not null, primary key
-#  cookies_policy             :text
-#  home_sentence              :text
-#  invitation_message_subject :string           default("")
-#  invitation_message_text    :text             default("")
-#  name                       :string
-#  privacy_policy             :text
-#  published                  :boolean          default(FALSE)
-#  published_at               :datetime
-#  registration_contact       :string
-#  sso_button_label           :string
-#  terms                      :text
-#  created_at                 :datetime         not null
-#  updated_at                 :datetime         not null
-#  about_id                   :uuid             uniquely indexed => [language_id], indexed
-#  language_id                :uuid             uniquely indexed => [about_id], indexed
-#  university_id              :uuid             indexed
+#  id                                   :uuid             not null, primary key
+#  cookies_policy                       :text
+#  home_sentence                        :text
+#  invitation_message_automatic_subject :string           default("")
+#  invitation_message_automatic_text    :text             default("")
+#  invitation_message_manual_signature  :text
+#  invitation_message_manual_subject    :string
+#  invitation_message_manual_text       :text
+#  name                                 :string
+#  privacy_policy                       :text
+#  published                            :boolean          default(FALSE)
+#  published_at                         :datetime
+#  registration_contact                 :string
+#  sso_button_label                     :string
+#  terms                                :text
+#  created_at                           :datetime         not null
+#  updated_at                           :datetime         not null
+#  about_id                             :uuid             uniquely indexed => [language_id], indexed
+#  language_id                          :uuid             uniquely indexed => [about_id], indexed
+#  university_id                        :uuid             indexed
 #
 # Indexes
 #
@@ -35,9 +38,9 @@
 #
 class Communication::Extranet::Localization < ApplicationRecord
   include AsLocalization
+  include HasUniversity
   include Initials
   include Sanitizable
-  include WithUniversity
 
   has_summernote :home_sentence
   has_summernote :terms
@@ -49,7 +52,7 @@ class Communication::Extranet::Localization < ApplicationRecord
     attachable.variant :thumb, resize_to_limit: [228, 228]
   end
 
-  before_validation :set_default_invitation_message
+  before_validation :set_default_invitation_messages
 
   validates :name, presence: true
   validates :logo, size: { less_than: 1.megabytes }
@@ -60,7 +63,29 @@ class Communication::Extranet::Localization < ApplicationRecord
     "#{name}"
   end
 
+  def invitation_manual_subject(from_name:, from_years:, to_name:)
+    substitute_invitation_placeholders(invitation_message_manual_subject, from_name: from_name, from_years: from_years, to_name: to_name)
+  end
+
+  def invitation_manual_text(from_name:, from_years:, to_name:)
+    substitute_invitation_placeholders(invitation_message_manual_text, from_name: from_name, from_years: from_years, to_name: to_name)
+  end
+
+  def invitation_manual_signature(from_name:, from_years:, to_name:)
+    substitute_invitation_placeholders(invitation_message_manual_signature, from_name: from_name, from_years: from_years, to_name: to_name)
+  end
+
   protected
+
+  def substitute_invitation_placeholders(text, from_name:, from_years:, to_name:)
+    substitutions = {
+      'name' => to_name,
+      'sender_name' => from_name,
+      'sender_years' => from_years
+    }
+    substitutions.each { |key, value| text = text.gsub("{{#{key}}}", value.to_s) }
+    text
+  end
 
   def prevent_unpublishing_default_language
     return unless about.default_language_id == language_id
@@ -68,9 +93,12 @@ class Communication::Extranet::Localization < ApplicationRecord
     errors.add(:published, :cannot_unpublished_default)
   end
 
-  def set_default_invitation_message
-    self.invitation_message_subject = I18n.t('mailers.extranet.invitation_message.subject') if self.invitation_message_subject.blank?
-    self.invitation_message_text = I18n.t('mailers.extranet.invitation_message.text') if self.invitation_message_text.blank?
+  def set_default_invitation_messages
+    self.invitation_message_automatic_subject = I18n.t('mailers.extranet.invitation_messages.automatic.subject', locale: language.iso_code) if self.invitation_message_automatic_subject.blank?
+    self.invitation_message_automatic_text = I18n.t('mailers.extranet.invitation_messages.automatic.text', locale: language.iso_code) if self.invitation_message_automatic_text.blank?
+    self.invitation_message_manual_subject = I18n.t('mailers.extranet.invitation_messages.manual.subject', locale: language.iso_code) if self.invitation_message_manual_subject.blank?
+    self.invitation_message_manual_text = I18n.t('mailers.extranet.invitation_messages.manual.text', locale: language.iso_code) if self.invitation_message_manual_text.blank?
+    self.invitation_message_manual_signature = I18n.t('mailers.extranet.invitation_messages.manual.signature', locale: language.iso_code) if self.invitation_message_manual_signature.blank?
   end
 
 end

@@ -8,32 +8,58 @@ class Communication::Block::Component::File < Communication::Block::Component::B
     {
       properties: {
         id: { type: :string, format: :uuid, nullable: true },
-        filename: { type: :string, nullable: true },
-        signed_id: { type: :string, nullable: true }
+        communication_file_id: { type: :string, format: :uuid, nullable: true },
+        filename: { type: :string, nullable: true }
       }
     }
   end
 
   def blob
-    return if data.nil? || data['id'].blank?
-    @blob ||= template.block
-                      .university
-                      .active_storage_blobs
-                      .find_by id: data['id']
+    return if data_empty?
+    @blob ||= communication_file_localization&.blob_if_published
+  end
+
+  def communication_file_id
+    data['communication_file_id']
+  end
+
+  def communication_file
+    return if data_empty? || communication_file_id.blank?
+    @communication_file ||= university.communication_files.find_by(id: communication_file_id)
+  end
+
+  def communication_file_localization
+    return if data_empty? || communication_file.nil?
+    @communication_file_localization ||= communication_file.localization_for(language)
+  end
+
+  def published?
+    communication_file_localization&.published
   end
 
   def default_data
     {
-      'id' => ''
+      'id' => '', # Legacy active storage blob id
+      'communication_file_id' => '' # New file id
     }
   end
 
   def dependencies
-    [blob]
+    [
+      blob,
+      communication_file,
+      communication_file_localization
+    ]
+  end
+  
+  def dom_count
+    5
   end
 
-  def blob_count
-    5
+  protected
+
+  def data_empty?
+    data.nil? || data['communication_file_id'].blank?
   end
 
 end

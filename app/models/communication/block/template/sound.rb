@@ -8,8 +8,16 @@ class Communication::Block::Template::Sound < Communication::Block::Template::Ba
     !about.respond_to?(:extranet)
   end
 
+  def blob
+    file_component.blob
+  end
+
+  def communication_file
+    file_component.communication_file
+  end
+
   def empty?
-    file_component.blob.nil?
+    blob.nil?
   end
 
   def dom_count
@@ -17,6 +25,11 @@ class Communication::Block::Template::Sound < Communication::Block::Template::Ba
     file_component.dom_count +
     title_component.dom_count +
     transcription_component.dom_count
+  end
+
+  # Permet de gérer les contextes
+  def communication_files
+    communication_file.nil? ? [] : [communication_file]
   end
   
   protected

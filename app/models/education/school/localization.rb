@@ -29,15 +29,15 @@
 class Education::School::Localization < ApplicationRecord
   acts_as_paranoid
 
+  include Accessible
   include AsLocalization
   include Contentful
+  include HasBlobs
   include HasGitFiles
+  include HasUniversity
   include Initials
   include Permalinkable
   include Sanitizable
-  include WithAccessibility
-  include WithBlobs
-  include WithUniversity
 
   has_one_attached_deletable :logo
 

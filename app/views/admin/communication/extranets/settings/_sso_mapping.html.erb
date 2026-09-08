@@ -1,0 +1,61 @@
+<%
+mapping_keys = ['email', 'first_name', 'last_name', 'mobile_phone', 'language', 'picture_url']
+fieldsPropValue = extranet.sso_mapping.blank? ? [] : extranet.sso_mapping
+keysPropValue = mapping_keys.map { |key| [key, User.human_attribute_name(key)] }.to_h
+%>
+
+<div  id="sso-mapping-app"
+      data-fields="<%= fieldsPropValue.to_json %>"
+      data-keys="<%= keysPropValue.to_json %>">
+  <div class="app-form">
+    <draggable :list="fields" handle=".dragHandle" >
+      <div v-for="(field, index) in fields" class="mb-2">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between">
+            <div>
+              <i class="<%= Icon::SORT %> dragHandle"></i>
+              &nbsp;
+              <a data-bs-toggle="collapse" :href="'#sso_mapping_collapse_' + index ">
+                {{index + 1}}. {{ field.sso_key }} -> {{ keys[field.internal_key]}}
+              </a>
+            </div>
+            <a
+              @click="fields.splice(fields.indexOf(field), 1)"
+              title="Remove field">
+              <i class="<%= Icon::DELETE %>"></i>
+            </a>
+          </div>
+          <div class="card-body collapse pt-0" :id="'sso_mapping_collapse_' + index ">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="" class="form-label"><%= t('university.sso_key') %> <abbr title="required">*</abbr></label>
+                  <input
+                    v-model="field.sso_key"
+                    type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="" class="form-label"><%= t('university.internal_key') %> <abbr title="required">*</abbr></label>
+                  <select v-model="field.internal_key" id="" class="form-select" required>
+                    <option v-for="(label, key) in keys" :value="key">{{ label }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </draggable>
+
+    <a @click="addField" class="btn btn-primary btn-sm">
+      <%= t('add_field') %>
+    </a>
+  </div>
+
+  <textarea name="communication_extranet[sso_mapping]" id="communication_extranet_sso_mapping" rows="20" cols="200" class="d-none">
+    {{ JSON.stringify(fields) }}
+  </textarea>
+
+</div>

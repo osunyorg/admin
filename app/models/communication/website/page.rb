@@ -39,20 +39,21 @@ class Communication::Website::Page < ApplicationRecord
 
   include AsDirectObject
   include AsTree
+  include Autosortable
   include Duplicable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include HasUniversity
+  include HasListBlocks
   include Lifecyclable
   include Localizable
+  include MenuItemTargetable
   include Sanitizable
   include Searchable
   include WithAutomaticMenus
-  include WithMenuItemTarget
   include WithOpenApi
-  include HasListBlocks
   include WithSpecialPage
-  include WithUniversity
   include Orderable # Must be loaded after WithSpecialPage to use the correct last_ordered_element method
 
   belongs_to :parent,
@@ -98,6 +99,16 @@ class Communication::Website::Page < ApplicationRecord
       ", term: "%#{sanitize_sql_like(term)}%")
   }
   scope :for_full_width, -> (full_width, language = nil) { where(full_width: full_width == 'true') }
+
+  scope :autosort_by_alpha, -> (language) {
+    ordered_by_title(language)
+  }
+  scope :autosort_by_date_desc, -> (language) {
+    order(created_at: :desc)
+  }
+  scope :autosort_by_date_asc, -> (language) {
+    order(created_at: :asc)
+  }
 
   def dependencies
     localizations.in_languages(website.active_language_ids) +

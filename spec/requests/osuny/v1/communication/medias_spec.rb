@@ -5,7 +5,7 @@ RSpec.describe 'Communication::Media' do
 
   path '/communication/medias' do
     post 'Create a media' do
-      tags 'Communication::Website::Media'
+      tags 'Communication::Media'
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
@@ -35,7 +35,7 @@ RSpec.describe 'Communication::Media' do
       end
 
       response '201', 'Successful creation from file' do
-        let(:file) { fixture_file_upload('dan-gold.jpeg', 'image/jpeg') }
+        let(:file) { fixture_file_upload('ahmet-yuksek.jpeg', 'image/jpeg') }
         it 'creates a media and its localization from file', vcr: true, rswag: true do |example|
           assert_difference ->{ Communication::Media.count } => 1, ->{ Communication::Media::Localization.count } => 1 do
             submit_request(example.metadata)
@@ -46,6 +46,31 @@ RSpec.describe 'Communication::Media' do
 
       response '401', 'Unauthorized. Please make sure you provide a valid API key.' do
         let("X-Osuny-Token") { 'fake-token' }
+        run_test!
+      end
+    end
+  end
+
+  path '/communication/medias/{id}' do
+    get 'Shows a media' do
+      tags 'Communication::Media'
+      security [{ api_key: [] }]
+      let("X-Osuny-Token") { university_apps(:default_app).token }
+
+      parameter name: :id, in: :path, type: :string, description: 'Media identifier'
+      let(:id) { communication_medias(:dan_gold).id }
+
+      response '200', 'Successful operation' do
+        run_test!
+      end
+
+      response '401', 'Unauthorized. Please make sure you provide a valid API key.' do
+        let("X-Osuny-Token") { 'fake-token' }
+        run_test!
+      end
+
+      response '404', 'Media not found' do
+        let(:id) { 'fake-id' }
         run_test!
       end
     end

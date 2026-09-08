@@ -53,10 +53,20 @@ class Git::Providers::Abstract
     []
   end
 
+  def can_check_git_files_integrity?
+    false
+  end
+
   protected
 
   def batch
     @batch ||= []
+  end
+
+  # Keep track of the file states while generating the batch
+  # { "/path/to/file1" => "EXISTS", "/path/to/file1" => "DELETED" }
+  def files_states
+    @files_states ||= {}
   end
 
   def current_theme_sha

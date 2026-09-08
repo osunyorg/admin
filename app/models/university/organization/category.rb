@@ -27,9 +27,9 @@ class University::Organization::Category < ApplicationRecord
   include AsCategory
   include AsIndirectObject
   include GeneratesGitFiles
+  include HasUniversity
   include Localizable
   include WithOpenApi
-  include WithUniversity
 
   has_and_belongs_to_many :organizations
   alias                   :category_objects :organizations

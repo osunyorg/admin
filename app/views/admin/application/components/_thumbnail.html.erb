@@ -3,9 +3,9 @@ size = large ? 600 : 140
 classes ||= ''
 image_class = 'img-fluid'
 content_type = ''
-if image && image.attached?
-  content_type = image.blob.content_type
-  image_class += ' h-100 w-100 object-fit-contain' if image.variable? && !cropped
+if image_blob
+  content_type = image_blob.content_type
+  image_class += ' h-100 w-100 object-fit-contain' if image_blob.variable? && !cropped
 end
 %>
 <div class="osuny__thumbnail
@@ -13,8 +13,8 @@ end
             osuny__thumbnail--<%= cropped ? 'cropped' : 'uncropped' %>
             osuny__thumbnail--<%= content_type.parameterize.underscore %>
             <%= classes %>">
-  <% if image && image.attached? %>
-    <%= kamifusen_tag image,
+  <% if image_blob %>
+    <%= kamifusen_tag image_blob,
                       width: size,
                       height: size,
                       crop: cropped,

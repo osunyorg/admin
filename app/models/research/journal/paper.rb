@@ -38,13 +38,15 @@ class Research::Journal::Paper < ApplicationRecord
   acts_as_paranoid
 
   include AsIndirectObject
+  include Autosortable
+  include Filterable
   include GeneratesGitFiles
+  include HasUniversity
   include Lifecyclable
   include Localizable
   include Orderable
   include Sanitizable
   include Searchable
-  include WithUniversity
 
   belongs_to  :journal,
               foreign_key: :research_journal_id
