@@ -1,7 +1,7 @@
 <%
 Server::Evolution.planned.each do |evolution|
   song = Osuny::Evolution::Song.random
-  l10n = evolution.localizations.find_by(language: current_language)
+  l10n = evolution.best_localization_for(current_language)
   %>
   <div class="osuny_evolution">
     <div class="container-fluid">
