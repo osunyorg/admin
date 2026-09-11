@@ -15,7 +15,7 @@ module Duplicable
   def duplicate_blocks(from, to)
     return unless from.respond_to?(:blocks)
     from.blocks.ordered.each do |block|
-      duplicate_block(to, block)
+      block.duplicate(to: to, keep_position: true)
     end
   end
 
@@ -23,6 +23,7 @@ module Duplicable
 
   def duplicate_instance
     instance = self.dup
+    instance.migration_identifier = nil if instance.respond_to?(:migration_identifier)
     instance.position = nil if instance.respond_to?(:position)
     instance.save
     instance
@@ -39,17 +40,11 @@ module Duplicable
       instance_l10n.about = instance
       # note: fragile. It only works because every duplicate objects currently has a "title" property.
       instance_l10n.title = I18n.t('copy_of', title: l10n.title)
+      instance_l10n.migration_identifier = nil if instance_l10n.respond_to?(:migration_identifier)
       instance_l10n.published = false if instance_l10n.respond_to?(:published)
       instance_l10n.published_at = nil if instance_l10n.respond_to?(:published_at)
       instance_l10n.save
       duplicate_blocks(l10n, instance_l10n)
     end
-  end
-
-  def duplicate_block(instance, block)
-    duplicated_block = block.dup
-    duplicated_block.about = instance
-    duplicated_block.position = block.position
-    duplicated_block.save
   end
 end

@@ -63,7 +63,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   def duplicate
-    @block = @block.duplicate
+    @block = @block.duplicate(keep_position: true)
     head :ok
   end
 
