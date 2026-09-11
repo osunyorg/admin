@@ -9,7 +9,10 @@
     <div>
       <div class="card card--horizontal">
         <div class="card-body">
-          <%= link_to evolution, evolution %><br>
+          <%= link_to evolution, evolution %>
+          <span class="float-end text-muted small">
+            <%= l evolution.released_at, format: :full %>
+          </span>
         </div>
         <div class="card-footer">
           <%= link_to t('edit'),

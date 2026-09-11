@@ -12,6 +12,7 @@
     <% Language.available_for_interface.each do |language| %>
       <% l10n = @evolution.localizations.where(language: language).first_or_initialize %>
       <div class="mb-5">
+        <%= osuny_label language %>
         <h2><%= l10n.title %></h2>
         <%= simple_format l10n.text %>
       </div>
