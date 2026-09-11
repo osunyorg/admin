@@ -15,7 +15,7 @@ module Duplicable
   def duplicate_blocks(from, to)
     return unless from.respond_to?(:blocks)
     from.blocks.ordered.each do |block|
-      block.duplicate(to: to)
+      block.duplicate(to: to, keep_position: true)
     end
   end
 
