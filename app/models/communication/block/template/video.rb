@@ -41,6 +41,10 @@ class Communication::Block::Template::Video < Communication::Block::Template::Ba
     video_provider.embed_with_defaults
   end
 
+  def video_snippet_classes
+    video_provider.snippet_classes
+  end
+
   def before_validation
     super
     if url.present? && video_title.blank? && video_provider.present?

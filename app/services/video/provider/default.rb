@@ -61,6 +61,10 @@ class Video::Provider::Default
     content_tag(:iframe, nil, options)
   end
 
+  def snippet_classes
+    "ratio ratio-16x9"
+  end
+
   def correct?
     url_in_domains?
   end
