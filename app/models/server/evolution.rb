@@ -23,6 +23,14 @@ class Server::Evolution < ApplicationRecord
     localizations.find_by(language: french)
   end
 
+  def localization_for(language)
+    localizations.find_by(language_id: language.id)
+  end
+
+  def best_localization_for(language)
+    localization_for(language) || original_localization
+  end
+
   def to_s
     original_localization.to_s
   end
