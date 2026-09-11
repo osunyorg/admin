@@ -100,11 +100,11 @@ class Communication::Block < ApplicationRecord
     @language ||= about.language
   end
 
-  def duplicate(to: about, reset_position: true)
+  def duplicate(to: about, keep_position: false)
     block = self.dup
     block.about = to
     block.migration_identifier = nil
-    block.position = nil if reset_position
+    block.position = nil unless keep_position
     block.save
     block
   end
@@ -114,7 +114,7 @@ class Communication::Block < ApplicationRecord
   end
 
   def localize_for!(new_localization)
-    duplicate(to: new_localization, reset_position: false)
+    duplicate(to: new_localization, keep_position: true)
   end
 
   def empty?
