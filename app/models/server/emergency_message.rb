@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: emergency_messages
+# Table name: server_emergency_messages
 #
 #  id              :uuid             not null, primary key
 #  content_en      :text
@@ -17,13 +17,13 @@
 #
 # Indexes
 #
-#  index_emergency_messages_on_university_id  (university_id) WHERE (university_id IS NOT NULL)
+#  index_server_emergency_messages_on_university_id  (university_id) WHERE (university_id IS NOT NULL)
 #
 # Foreign Keys
 #
 #  fk_rails_3bd377a11a  (university_id => universities.id)
 #
-class EmergencyMessage < ApplicationRecord
+class Server::EmergencyMessage < ApplicationRecord
   belongs_to :university, optional: true
 
   validates :name, :subject_fr, :subject_en, :content_fr, :content_en, presence: true

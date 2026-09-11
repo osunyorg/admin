@@ -1,4 +1,4 @@
-<% content_for :title, TasksCount.model_name.human(count: 2) %>
+<% content_for :title, Server::TasksCount.model_name.human(count: 2) %>
 
 <% content_for :title_right do %>
     <div class="btn-group btn-group-sm" role="group" aria-label="<%= t('admin.pending_tasks.ranges.label') %>">

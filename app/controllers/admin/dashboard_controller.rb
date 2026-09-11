@@ -16,9 +16,9 @@ class Admin::DashboardController < Admin::ApplicationController
   end
 
   def tasks_count
-    @chart = TasksCountChart.new(params[:range])
+    @chart = Server::TasksCount::Chart.new(params[:range])
     breadcrumb
-    add_breadcrumb TasksCount.model_name.human(count: 2)
+    add_breadcrumb Server::TasksCount.model_name.human(count: 2)
   end
 
 end

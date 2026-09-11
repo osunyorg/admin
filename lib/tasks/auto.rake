@@ -41,7 +41,7 @@ namespace :auto do
     count = GoodJob::Job.where(scheduled_at: ..Time.current)
                         .where(finished_at: nil)
                         .count
-    TasksCount.create!(tasks_pending: count)
-    TasksCount.where('created_at < ?', 3.months.ago).delete_all
+    Server::TasksCount.create!(tasks_pending: count)
+    Server::TasksCount.where('created_at < ?', 3.months.ago).delete_all
   end
 end

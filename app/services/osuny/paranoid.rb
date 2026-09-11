@@ -30,12 +30,15 @@ class Osuny::Paranoid
       Communication::Extranet,
       Education::Program::Category::Localization,
       Education::Program::Category,
+      Server::EmergencyMessage,
+      Server::Evolution::Localization,
+      Server::Evolution,
+      Server::TasksCount,
       University::Organization::Category::Localization,
       University::Organization::Category,
       University::Person::Category::Localization,
       University::Person::Category,
       University::App,
-      EmergencyMessage,
       Import
     ].freeze
   OBJECTS_PARANOID = [
