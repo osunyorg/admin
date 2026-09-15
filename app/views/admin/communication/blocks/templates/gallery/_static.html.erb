@@ -3,11 +3,16 @@
       images:
 <%
 block.template.elements.each do |element|
-  next if element.empty? %>
+  next if element.empty?
+  component = element.image_component
+  media_l10n = component.communication_media_localization
+  blob = component.blob
+  next if blob.nil?
+  %>
         - 
-          id: "<%= element.blob.id %>"<%# TODO legacy remove when theme ready %>
+          id: "<%= blob.id %>"<%# TODO legacy remove when theme ready %>
 <%= block_component_static block, :image, template: element, depth: 5 %>
-<%= block_component_static block, :alt, template: element, depth: 5 %>
-<%= block_component_static block, :credit, template: element, depth: 5 %>
+<%= osuny_static_text :alt, element.alt, depth: 7 %>
+<%= osuny_static_html :credit, media_l10n&.credit, depth: 7 %>
 <%= block_component_static block, :text, template: element, depth: 5 %>
 <% end %>
