@@ -22,7 +22,10 @@ module Communication::Website::WithRealmResearch
   end
 
   def research_paper_localizations
-    Research::Journal::Paper::Localization.where(about: research_papers)
+    Research::Journal::Paper::Localization.where(
+      about: research_papers,
+      language: active_languages
+    )
   end
 
   def researchers

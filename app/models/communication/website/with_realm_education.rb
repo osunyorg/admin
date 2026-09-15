@@ -16,7 +16,10 @@ module Communication::Website::WithRealmEducation
   end
 
   def education_diploma_localizations
-    Education::Diploma::Localization.where(about: education_diplomas)
+    Education::Diploma::Localization.where(
+      about: education_diplomas,
+      language: active_languages
+    )
   end
 
   def education_programs
@@ -24,7 +27,10 @@ module Communication::Website::WithRealmEducation
   end
 
   def education_program_localizations
-    Education::Program::Localization.where(about: education_programs)
+    Education::Program::Localization.where(
+      about: education_programs,
+      language: active_languages
+    )
   end
 
   def teachers

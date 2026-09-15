@@ -8,11 +8,17 @@ module Communication::Website::WithRealmUniversity
   end
 
   def university_person_localizations
-    University::Person::Localization.where(about: connected_people)
+    University::Person::Localization.where(
+      about: connected_people,
+      language: active_languages
+    )
   end
 
   def university_organization_localizations
-    University::Organization::Localization.where(about: connected_organizations)
+    University::Organization::Localization.where(
+      about: connected_organizations,
+      language: active_languages
+    )
   end
 
   def has_organizations?
