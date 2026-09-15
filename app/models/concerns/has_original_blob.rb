@@ -92,6 +92,6 @@ module HasOriginalBlob
   end
 
   def denormalize_extension
-    self.original_extension = File.extname(original_filename)
+    self.original_extension = File.extname(original_filename).downcase
   end
 end
