@@ -2,9 +2,17 @@ module Communication::Website::WithRealmUniversity
   extend ActiveSupport::Concern
 
   def blocks_from_university
-    Communication::Block.where(about: connected_people).or(
-      Communication::Block.where(about: connected_organizations)
+    Communication::Block.where(about: university_person_localizations).or(
+      Communication::Block.where(about: university_organization_localizations)
     )
+  end
+
+  def university_person_localizations
+    University::Person::Localization.where(about: connected_people)
+  end
+
+  def university_organization_localizations
+    University::Organization::Localization.where(about: connected_organizations)
   end
 
   def has_organizations?

@@ -32,7 +32,8 @@ module Communication::Website::WithSecurity
     all_blocks.template_video.each do |block|
       video_url = block.template.url
       next unless video_url.present?
-      list.concat Video::Provider.find(video_url).csp_domains
+      video_provider = block.template.video_provider
+      list.concat video_provider.csp_domains
     end
     list
   end

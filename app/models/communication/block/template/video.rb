@@ -60,11 +60,11 @@ class Communication::Block::Template::Video < Communication::Block::Template::Ba
     transcription_component.dom_count
   end
 
-  protected
-
   def video_provider
     @video_provider ||= Video::Provider.find(url.to_s.strip, block)
   end
+
+  protected
 
   def check_accessibility
     super

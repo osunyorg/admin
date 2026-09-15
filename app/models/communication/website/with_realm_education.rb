@@ -2,8 +2,8 @@ module Communication::Website::WithRealmEducation
   extend ActiveSupport::Concern
 
   def blocks_from_education
-    Communication::Block.where(about: education_programs).or(
-      Communication::Block.where(about: education_diplomas)
+    Communication::Block.where(about: education_program_localizations).or(
+      Communication::Block.where(about: education_diploma_localizations)
     )
   end
 
@@ -15,8 +15,16 @@ module Communication::Website::WithRealmEducation
     has_education_diplomas? ? about.diplomas : Education::Diploma.none
   end
 
+  def education_diploma_localizations
+    Education::Diploma::Localization.where(about: education_diplomas)
+  end
+
   def education_programs
     has_education_programs? ? about.programs : Education::Program.none
+  end
+
+  def education_program_localizations
+    Education::Program::Localization.where(about: education_programs)
   end
 
   def teachers

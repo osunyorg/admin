@@ -2,7 +2,7 @@ module Communication::Website::WithRealmResearch
   extend ActiveSupport::Concern
 
   def blocks_from_research
-    Communication::Block.where(about: research_papers)
+    Communication::Block.where(about: research_paper_localizations)
   end
 
   def research_journals
@@ -19,6 +19,10 @@ module Communication::Website::WithRealmResearch
 
   def research_papers
     has_research_papers? ? about.papers : Research::Journal::Paper.none
+  end
+
+  def research_paper_localizations
+    Research::Journal::Paper::Localization.where(about: research_papers)
   end
 
   def researchers
