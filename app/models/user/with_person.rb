@@ -18,7 +18,8 @@ module User::WithPerson
     person_l10n = person.original_localization
     person_l10n.first_name = first_name
     person_l10n.last_name = last_name
-    person_l10n.slug = person_l10n.to_s.parameterize
+    person_l10n.chosen_name = chosen_name
+    person_l10n.slug = "#{first_name} #{last_name}".parameterize
     person_l10n.save
     if picture.attached?
       ActiveStorage::Utils.duplicate(picture, person.picture)
@@ -38,7 +39,7 @@ module User::WithPerson
     person.localizations_attributes = [
       {
         id: person_l10n&.id, language_id: university.default_language_id,
-        first_name: first_name, last_name: last_name
+        first_name: first_name, last_name: last_name, chosen_name: chosen_name
       }
     ]
     person.save

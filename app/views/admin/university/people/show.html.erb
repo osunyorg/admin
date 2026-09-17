@@ -42,6 +42,11 @@
       <% end %>
     <% end %>
 
+    <% if @l10n.chosen_name.present? %>
+      <%= osuny_label University::Person::Localization.human_attribute_name('chosen_name') %>
+      <p><%= @l10n.chosen_name %></p>
+    <% end %>
+
     <% if @person.user.present? %>
       <%= osuny_label University::Person.human_attribute_name('user') %>
       <p><%= link_to_if can?(:read, @person.user), @person.user, admin_user_path(@person.user) %></p>

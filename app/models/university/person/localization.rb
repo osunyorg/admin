@@ -4,6 +4,7 @@
 #
 #  id                    :uuid             not null, primary key
 #  biography             :text
+#  chosen_name           :string
 #  deleted_at            :datetime
 #  featured_image_credit :text
 #  featured_media_alt    :text
@@ -113,7 +114,7 @@ class University::Person::Localization < ApplicationRecord
   end
 
   def to_s
-    "#{first_name} #{last_name}".strip
+    with_chosen_name("#{first_name} #{last_name}".strip)
   end
 
   def to_s_with_mail
@@ -121,7 +122,7 @@ class University::Person::Localization < ApplicationRecord
   end
 
   def to_s_alphabetical
-    "#{last_name} #{first_name}".strip
+    with_chosen_name("#{last_name} #{first_name}".strip)
   end
 
   def initials
@@ -149,6 +150,11 @@ class University::Person::Localization < ApplicationRecord
 
   def prepare_name
     self.name = to_s
+  end
+
+  # "Jean Dupont (Martin)" si nom d'usage, sinon "Jean Dupont"
+  def with_chosen_name(base)
+    chosen_name.present? ? "#{base} (#{chosen_name})" : base
   end
 
 end
