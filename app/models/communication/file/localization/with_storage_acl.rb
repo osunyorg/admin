@@ -1,11 +1,3 @@
-# Synchronise l'ACL du blob sur l'object storage (Scaleway) :
-# le blob est privé tant qu'aucune localisation le référençant n'est
-# publiée, et public dès qu'au moins une l'est.
-#
-# Plusieurs localisations (langues différentes) peuvent partager le
-# même original_blob (voir AsLocalization#localize_in! qui duplique
-# l'enregistrement). L'ACL ne passe donc à « private » que si aucune
-# localisation référençant ce blob n'est publiée.
 module Communication::File::Localization::WithStorageAcl
   extend ActiveSupport::Concern
 
