@@ -19,6 +19,7 @@ export default {
     contextAboutGid: { type: String, default: '' },
     cropSettings: { type: Object, default: () => ({}) },
     cropperButton: { type: Boolean, default: true },
+    mediaLink: { type: Boolean, default: true },
   },
   data() {
     return {
@@ -81,6 +82,7 @@ export default {
       </span>
     </div>
     <div
+      v-if="mediaLink"
       class="vue__selected-media__link"
       >
       <a
