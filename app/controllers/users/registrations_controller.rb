@@ -39,7 +39,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     person_l10n = invitation.person&.best_localization_for(current_language)
     resource.assign_attributes(
       first_name: person_l10n&.first_name,
-      last_name: person_l10n&.last_name,    
+      last_name: person_l10n&.last_name,
+      chosen_name: person_l10n&.chosen_name,
       email: invitation.to_email,
       mobile_phone: invitation.person&.phone_mobile
     )
@@ -65,11 +66,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:mobile_phone, :language_id, :first_name, :last_name, :optin_newsletter, :picture, :picture_infos, :picture_delete])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:mobile_phone, :language_id, :first_name, :last_name, :chosen_name, :optin_newsletter, :picture, :picture_infos, :picture_delete])
   end
 
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:mobile_phone, :language_id, :first_name, :last_name, :optin_newsletter, :picture, :picture_infos, :picture_delete, :admin_theme])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:mobile_phone, :language_id, :first_name, :last_name, :chosen_name, :optin_newsletter, :picture, :picture_infos, :picture_delete, :admin_theme])
   end
 
   def sign_up_params
