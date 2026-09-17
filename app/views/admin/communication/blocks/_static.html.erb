@@ -2,7 +2,8 @@
 template_path = "admin/communication/blocks/templates/#{block.template_kind}/static"
 should_render_data = block.data && block.data.present?
 %>
-  - template: <%= block.template_kind %>
+  - kind: block
+    template: <%= block.template_kind %>
 <%= osuny_static_text 'title', block.title, depth: 3 %>
 <%= osuny_static_text 'slug', block.slug, depth: 3 %>
     ranks:
