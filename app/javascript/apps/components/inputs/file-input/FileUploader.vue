@@ -11,6 +11,7 @@ export default {
   },
   props: {
     endpoint: { type: String, required: true },
+    isLasting: { type: Boolean, default: true },
     accept: { type: String, required: true },
     sizeLimit: { type: Number, required: true },
   },
@@ -96,7 +97,13 @@ export default {
     uploadFile() {
       this.uploadProgress = 0;
       this.$emit('uploading', 0);
-      this.directUpload = new window.ActiveStorage.DirectUpload(this.fileUploaded, this.endpoint, this)
+      this.directUpload = new window.ActiveStorage.DirectUpload(
+        this.fileUploaded,
+        this.endpoint,
+        this,
+        { "X-Osuny-File-Lasting": this.isLasting }
+      )
+
       this.directUpload.create(
         (error, data) => {
           this.uploadProgress = null;
@@ -143,7 +150,7 @@ export default {
   <Warning
     :active="sizeTooBig"
     :title="$t('components.inputs.fileInput.fileUploader.size.title')"
-    :text="sizeWarningSentence" 
-    :close="$t('components.inputs.fileInput.fileUploader.size.close')" 
+    :text="sizeWarningSentence"
+    :close="$t('components.inputs.fileInput.fileUploader.size.close')"
     />
 </template>

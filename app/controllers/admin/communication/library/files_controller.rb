@@ -43,11 +43,15 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
   def direct_upload
     @blob = ActiveStorage::Blob.create_before_direct_upload!(**blob_args)
     @blob.update_column(:university_id, current_university&.id)
+    is_lasting = request.headers["X-Osuny-File-Lasting"] == "true"
     # Le blob est sur la localisation, contrairement aux médias
     @l10n = Communication::File::Localization.find_or_create_file_localization_from_blob(
       @blob,
       language: current_language,
-      user: current_user
+      new_file_attributes: {
+        created_by: current_user,
+        is_lasting: is_lasting
+      }
     )
     @file = @l10n.file
   end
@@ -101,7 +105,7 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
   def file_params
     params.require(:communication_file)
           .permit(
-            category_ids: [],
+            :is_lasting, category_ids: [],
             localizations_attributes: [
               :id, :name, :alt, :credit, :internal_description, :meta_description, :published,
               :original_uploaded_file, :language_id

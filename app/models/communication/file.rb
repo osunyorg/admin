@@ -4,6 +4,7 @@
 #
 #  id            :uuid             not null, primary key
 #  deleted_at    :datetime
+#  is_lasting    :boolean          default(TRUE)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  created_by_id :uuid             indexed
@@ -66,6 +67,9 @@ class Communication::File < ApplicationRecord
     .where(communication_file_localizations: {
       original_extension: extensions
     })
+  }
+  scope :for_lasting, -> (value, language = nil) {
+    where(is_lasting: value)
   }
 
   scope :autosort_by_alpha, -> (language) {

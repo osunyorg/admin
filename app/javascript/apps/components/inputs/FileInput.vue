@@ -18,6 +18,7 @@ export default {
     pickerLabel: { type: String, default: '' },
     pickerTitle: { type: String, required: true },
     uploaderEndpoint: { type: String, required: true },
+    isLasting: { type: Boolean, default: false },
     uploaderSizeLimit: { type: Number, required: true },
   },
   emits: [
@@ -80,13 +81,14 @@ export default {
         :value="uploadProgress"
         v-show="isUploading"
         />
-      <div 
+      <div
         v-show="!isUploading"
         class="d-flex flex-wrap justify-content-between mb-4"
         >
         <FileUploader
           :accept="accept"
           :endpoint="uploaderEndpoint"
+          :is-lasting="isLasting"
           :size-limit="uploaderSizeLimit"
           @uploaded="uploaded"
           @uploading="uploading"
