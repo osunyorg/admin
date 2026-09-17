@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_07_101353) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_17_132109) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -2655,6 +2655,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_101353) do
   create_table "university_person_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "about_id"
     t.text "biography"
+    t.string "chosen_name"
     t.datetime "created_at", null: false
     t.datetime "deleted_at"
     t.text "featured_image_credit"
@@ -2722,6 +2723,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_101353) do
 
   create_table "users", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.integer "brevo_contact_id"
+    t.string "chosen_name"
     t.datetime "confirmation_sent_at", precision: nil
     t.string "confirmation_token"
     t.datetime "confirmed_at", precision: nil

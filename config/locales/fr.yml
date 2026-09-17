@@ -70,6 +70,7 @@ fr:
         title: Titre
       user:
         admin_theme: Thème de l'administration
+        chosen_name: Nom d'usage
         current_sign_in_at: Dernière connexion
         email: Email
         first_name: Prénom

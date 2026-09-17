@@ -17,6 +17,10 @@
     <p><%= @user.first_name %></p>
     <%= osuny_label User.human_attribute_name('last_name') %>
     <p><%= @user.last_name %></p>
+    <% if @user.chosen_name.present? %>
+      <%= osuny_label User.human_attribute_name('chosen_name') %>
+      <p><%= @user.chosen_name %></p>
+    <% end %>
     <%= osuny_label User.human_attribute_name('language') %>
     <p><%= language_name(@user.language.iso_code) %></p>
   </div>
