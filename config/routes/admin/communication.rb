@@ -305,6 +305,9 @@ namespace :communication do
         end
         resources :collections, controller: '/admin/communication/library/medias/collections', as: 'media_collections'
       end
+      member do
+        post :restore
+      end
     end
     resources :files do
       collection do
@@ -321,6 +324,7 @@ namespace :communication do
       end
       member do
         get :static
+        post :restore
       end
       resources :redirections,
                 controller: '/admin/communication/library/files/redirections',

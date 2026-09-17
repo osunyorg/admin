@@ -111,6 +111,14 @@ class Admin::Communication::Library::MediasController < Admin::Communication::Li
                 notice: t('admin.successfully_destroyed_html', model: @media.to_s_in(current_language))
   end
 
+  def restore
+    @media = current_university.communication_medias.only_deleted.find(params[:id])
+    authorize!(:restore, @media)
+    @media.restore(recursive: true)
+    redirect_to admin_communication_media_path(@media),
+                notice: t('admin.successfully_restored_html', model: @media.to_s_in(current_language))
+  end
+
   protected
 
   def blob_args

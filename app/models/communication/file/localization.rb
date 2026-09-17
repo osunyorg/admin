@@ -72,14 +72,13 @@ class Communication::File::Localization < ApplicationRecord
   has_many    :contexts,
               foreign_key: :communication_file_localization_id,
               dependent: :destroy
-  alias :file :about
 
   validates :name, presence: true
 
   after_commit :touch_references, on: :update
 
   def self.find_or_create_file_localization_from_blob(blob, language:, new_file_attributes: {})
-    localization = where(
+    localization = with_deleted.where(
       university_id: blob.university_id,
       language_id: language.id,
       original_checksum: blob.checksum
@@ -90,8 +89,15 @@ class Communication::File::Localization < ApplicationRecord
       # Ceux qui sont envoyés via la file library ne le sont pas.
       localization.published = true
     end
+    localization.restore if localization.deleted?
+    localization.file.restore if localization.file.deleted?
     localization
   end
+
+  def about
+    Communication::File.unscoped { super }
+  end
+  alias file about
 
   def blob
     original_blob

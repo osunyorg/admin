@@ -96,6 +96,14 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
                 notice: t('admin.successfully_destroyed_html', model: @file.to_s_in(current_language))
   end
 
+  def restore
+    @file = current_university.communication_files.only_deleted.find(params[:id])
+    authorize!(:restore, @file)
+    @file.restore(recursive: true)
+    redirect_to [:admin, @file],
+                notice: t('admin.successfully_restored_html', model: @file.to_s_in(current_language))
+  end
+
   protected
 
   def blob_args
