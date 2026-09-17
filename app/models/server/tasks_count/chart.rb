@@ -1,6 +1,6 @@
 # Prépare les données du graphique des tâches en attente (page admin/dashboard#tasks_count) :
 # plages temporelles sélectionnables, filtrage + agrégation, et unité de l'axe temporel.
-class TasksCountChart
+class Server::TasksCount::Chart
 
   # Plages temporelles sélectionnables sur le graphique.
   RANGES = {
@@ -29,11 +29,11 @@ class TasksCountChart
   # Historique sur la plage choisie, agrégé par tranche de 10 minutes (max de la tranche, pour
   # conserver les pics) afin d'alléger le rendu du graphique.
   def data
-    @data ||= TasksCount.where(created_at: duration.ago..)
-                        .order(:created_at)
-                        .pluck(:created_at, :tasks_pending)
-                        .group_by { |created_at, _| created_at.change(min: created_at.min / 10 * 10) }
-                        .transform_values { |rows| rows.map(&:last).max }
+    @data ||= Server::TasksCount.where(created_at: duration.ago..)
+                                .order(:created_at)
+                                .pluck(:created_at, :tasks_pending)
+                                .group_by { |created_at, _| created_at.change(min: created_at.min / 10 * 10) }
+                                .transform_values { |rows| rows.map(&:last).max }
   end
 
   # Unité de l'axe temporel selon la plage choisie. On la fixe explicitement car chartkick

@@ -18,6 +18,8 @@ module AsCategoryLocalization
     has_summernote :summary
 
     validates :name, presence: true
+
+    alias :category :about
   end
 
   def template_static
@@ -39,6 +41,17 @@ module AsCategoryLocalization
 
   def best_breadcrumb_title
     breadcrumb_title.presence || name
+  end
+
+  def self_or_descendant_has_published_category_objects_localizations?
+    has_published_category_objects_localizations? ||
+      descendants.any? { |descendant|
+        descendant.has_published_category_objects_localizations?
+      }
+  end
+
+  def has_published_category_objects_localizations?
+    category_objects_localizations.published_now.any?
   end
 
   def to_s

@@ -1,4 +1,4 @@
-<% content_for :title, "#{@emergency_messages.total_count} #{EmergencyMessage.model_name.human(count: @emergency_messages.total_count).downcase}" %>
+<% content_for :title, "#{@emergency_messages.total_count} #{Server::EmergencyMessage.model_name.human(count: @emergency_messages.total_count).downcase}" %>
 
 <% content_for :title_right do %>
   <%= link_to t('create'), new_server_emergency_message_path, class: button_classes %>
@@ -9,17 +9,17 @@
     <div>
       <div class="card card--horizontal">
         <div class="card-body">
-          <%= link_to emergency_message, [:server, emergency_message] %><br>
+          <%= link_to emergency_message, emergency_message %><br>
         </div>
         <div class="card-footer">
           <% if emergency_message.delivered? %>
             <%= l(emergency_message.delivered_at) %>
           <% else %>
             <%= link_to t('edit'),
-                      [:edit, :server, emergency_message],
+                      [:edit, emergency_message],
                       class: button_classes %>
             <%= link_to t('delete'),
-                      [:server, emergency_message],
+                      emergency_message,
                       method: :delete,
                       data: { confirm: t('please_confirm.deletion') },
                       class: button_classes_danger %>

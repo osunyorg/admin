@@ -48,6 +48,20 @@ export default {
         if (!confirm(this.$t('blocksEditor.confirm.duplication'))) return;
         this.$emit('duplicate', block);
       },
+      loadSnippetScripts(event) {
+        // Script elements are note executed when loaded in v-html.
+        // We replace them with same content here to force the load (protected by CSP)
+        var snippetElement = event.el,
+            scriptElements = snippetElement.querySelectorAll('script');
+
+        scriptElements.forEach(script => {
+          const executableScript = document.createElement('script');
+          Array.from(script.attributes).forEach(attribute => {
+            executableScript.setAttribute(attribute.name, attribute.value);
+          });
+          script.replaceWith(executableScript);
+        });
+      },
     }
 };
 </script>
@@ -102,7 +116,7 @@ export default {
                     @click="onDuplicate($event, block)">
                     {{ $t('blocksEditor.actions.duplicate') }}</a>
                 </span>
-                <a 
+                <a
                   href="#"
                   class="action ms-2"
                   @click="onEdit($event, block)">
@@ -111,7 +125,9 @@ export default {
               <div
                 class="vue__blocks-editor__elements__preview"
                 :class="`vue__blocks-editor__elements__preview--${block.template.kind}`">
-                <div v-html="block.snippet"></div>
+                <div
+                  v-html="block.snippet"
+                  @vue:mounted="loadSnippetScripts"></div>
               </div>
               <span v-html="block.a11y.status"></span>
             </div>

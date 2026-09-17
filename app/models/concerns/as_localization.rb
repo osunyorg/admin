@@ -47,6 +47,8 @@ module AsLocalization
     # Localized should not be published immediately
     l10n.published = false if respond_to?(:published)
 
+    l10n.migration_identifier = nil if respond_to?(:migration_identifier)
+
     localize_other_attachments(l10n)
 
     # Blocks need an about, so we save before localizing blocks

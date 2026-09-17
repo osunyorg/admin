@@ -2,9 +2,10 @@ class Video::Provider
   PROVIDERS = [
     Arte,
     Canalu,
+    Dailymotion,
+    Instagram,
     Vimeo,
     Youtube,
-    Dailymotion,
     Peertube # Comes last because detection is less reliable
   ]
 

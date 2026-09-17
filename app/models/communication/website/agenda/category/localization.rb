@@ -55,11 +55,17 @@ class Communication::Website::Agenda::Category::Localization < ApplicationRecord
 
   def should_sync_to?(website)
     website.id == communication_website_id &&
-    website.active_language_ids.include?(language_id)
+    website.active_language_ids.include?(language_id) &&
+    self_or_descendant_has_published_category_objects_localizations?
   end
 
   def git_path_relative
     "events_categories/#{slug_with_ancestors_slugs}/_index.html"
+  end
+
+  def has_published_category_objects_localizations?
+    category.events.published_now_in(language).any? ||
+      category.exhibitions.published_now_in(language).any?
   end
 
   protected

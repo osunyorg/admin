@@ -15,7 +15,13 @@ export default {
       loading: true,
       data: this.defaultData(),
       preview: null,
+      squareLocked: false,
     }
+  },
+  computed: {
+    stencilAspectRatio() {
+      return this.squareLocked ? 1 : undefined;
+    },
   },
   methods: {
     defaultData() {
@@ -58,6 +64,9 @@ export default {
     },
     reset() {
       this.$refs.cropper.reset();
+    },
+    toggleSquareLock() {
+      this.squareLocked = !this.squareLocked;
     },
 		defaultSize({ imageSize, visibleArea }) {
 			return {
@@ -118,6 +127,9 @@ export default {
               :minWidth="600"
               :resizeImage="{ wheel: false }"
               :src="url"
+              :stencil-props="{
+                aspectRatio: stencilAspectRatio,
+              }"
               @ready="ready"
               />
             <div
@@ -141,11 +153,20 @@ export default {
               <button
                 type="button"
                 class="btn btn-sm"
-                :aria-label="$t('components.cropperModal.rotate')"
+                :aria-label="$t('components.cropperModal.reset')"
                 @click="reset"
                 >
                 <i class="bi bi-arrows-fullscreen"></i>
                 {{ $t('components.cropperModal.reset') }}
+              </button>
+              <button
+                type="button"
+                class="btn btn-sm"
+                :aria-label="$t('components.cropperModal.squareLock')"
+                @click="toggleSquareLock"
+                >
+                <i class="bi" :class="squareLocked ? 'bi-square-fill' : 'bi-square'"></i>
+                {{ $t('components.cropperModal.squareLock') }}
               </button>
             </div>
             <div>

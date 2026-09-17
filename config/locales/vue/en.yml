@@ -83,6 +83,7 @@ en:
         cancel: Cancel
         reset: Reset
         rotate: Rotate image
+        squareLock: Square format
         title: Frame image
         validate: Validate
       inputs:

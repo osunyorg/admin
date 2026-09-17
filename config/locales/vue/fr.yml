@@ -83,6 +83,7 @@ fr:
         cancel: Annuler
         reset: Réinitialiser
         rotate: Tourner l'image
+        squareLock: Format carré
         title: Cadrer l'image
         validate: Valider
       inputs:
