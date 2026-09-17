@@ -528,6 +528,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_17_132109) do
     t.text "featured_image_credit"
     t.string "featured_media_alt"
     t.uuid "featured_media_id"
+    t.string "file_server_current_path"
+    t.string "file_server_slug"
     t.text "internal_description"
     t.uuid "language_id", null: false
     t.text "meta_description"
@@ -550,6 +552,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_17_132109) do
     t.index ["original_blob_id"], name: "index_communication_file_localizations_on_original_blob_id"
     t.index ["university_id"], name: "index_communication_file_localizations_on_university_id"
     t.index ["updated_by_id"], name: "index_communication_file_localizations_on_updated_by_id"
+  end
+
+  create_table "communication_file_redirections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "communication_file_localization_id", null: false
+    t.datetime "created_at", null: false
+    t.string "path"
+    t.uuid "university_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["communication_file_localization_id"], name: "idx_on_communication_file_localization_id_b5293392d9"
+    t.index ["university_id"], name: "index_communication_file_redirections_on_university_id"
   end
 
   create_table "communication_files", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -2405,6 +2417,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_17_132109) do
     t.index ["university_id"], name: "index_university_apps_on_university_id"
   end
 
+  create_table "university_file_servers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "ftp_host"
+    t.string "ftp_password"
+    t.string "ftp_path"
+    t.integer "ftp_port"
+    t.string "ftp_username"
+    t.uuid "university_id"
+    t.datetime "updated_at", null: false
+    t.string "url"
+    t.index ["university_id"], name: "index_university_file_servers_on_university_id", unique: true
+  end
+
   create_table "university_organization_categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "bodyclass"
     t.datetime "created_at", null: false
@@ -2495,6 +2520,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_17_132109) do
     t.uuid "created_by_id"
     t.datetime "deleted_at"
     t.string "email"
+    t.boolean "is_laboratory", default: false
+    t.boolean "is_location", default: false
+    t.boolean "is_school", default: false
     t.integer "kind", default: 10
     t.float "latitude"
     t.float "longitude"
@@ -2721,6 +2749,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_17_132109) do
     t.index ["user_id"], name: "index_user_favorites_on_user_id"
   end
 
+  create_table "user_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "role", null: false
+    t.uuid "scope_id"
+    t.string "scope_type"
+    t.uuid "university_id", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "user_id", null: false
+    t.index ["scope_type", "scope_id"], name: "index_user_roles_on_scope"
+    t.index ["university_id"], name: "index_user_roles_on_university_id"
+    t.index ["user_id", "role", "scope_type", "scope_id"], name: "index_user_roles_uniqueness", unique: true
+    t.index ["user_id"], name: "index_user_roles_on_user_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.integer "brevo_contact_id"
     t.string "chosen_name"
@@ -2753,6 +2795,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_17_132109) do
     t.string "reset_password_token"
     t.integer "role", default: 0
     t.integer "second_factor_attempts_count", default: 0
+    t.boolean "server_admin", default: false
     t.string "session_token"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "totp_timestamp", precision: nil
@@ -2853,6 +2896,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_17_132109) do
   add_foreign_key "communication_file_localizations", "languages"
   add_foreign_key "communication_file_localizations", "universities"
   add_foreign_key "communication_file_localizations", "users", column: "updated_by_id"
+  add_foreign_key "communication_file_redirections", "communication_file_localizations"
+  add_foreign_key "communication_file_redirections", "universities"
   add_foreign_key "communication_files", "universities"
   add_foreign_key "communication_files", "users", column: "created_by_id"
   add_foreign_key "communication_media_categories", "communication_media_categories", column: "parent_id"
@@ -3112,6 +3157,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_17_132109) do
   add_foreign_key "server_evolution_localizations", "server_evolutions", column: "evolution_id"
   add_foreign_key "universities", "languages", column: "default_language_id"
   add_foreign_key "university_apps", "universities"
+  add_foreign_key "university_file_servers", "universities"
   add_foreign_key "university_organization_categories", "universities"
   add_foreign_key "university_organization_categories", "university_organization_categories", column: "parent_id"
   add_foreign_key "university_organization_categories_organizations", "university_organization_categories", column: "category_id"
@@ -3157,6 +3203,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_17_132109) do
   add_foreign_key "university_role_localizations", "university_roles", column: "about_id"
   add_foreign_key "university_roles", "universities"
   add_foreign_key "user_favorites", "users"
+  add_foreign_key "user_roles", "universities"
+  add_foreign_key "user_roles", "users"
   add_foreign_key "users", "languages"
   add_foreign_key "users", "universities"
 end

@@ -753,6 +753,8 @@ fr:
         technical:
           description: Tout ce qui est lié aux réglages techniques
           label: Technique
+    image:
+      label: Image
   communication:
     authors:
       one: Auteur·ice
