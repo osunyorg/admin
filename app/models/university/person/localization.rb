@@ -115,7 +115,8 @@ class University::Person::Localization < ApplicationRecord
 
   # "Jean Dupont (Martin)" si nom d'usage, sinon "Jean Dupont"
   def to_s
-    chosen_name.present? ? "#{first_name} #{last_name} (#{chosen_name})".strip : "#{first_name} #{last_name}".strip
+    chosen_name.present? ? "#{first_name} #{last_name} (#{chosen_name})".strip 
+                         : "#{first_name} #{last_name}".strip
   end
   
   def to_s_with_mail
@@ -124,7 +125,8 @@ class University::Person::Localization < ApplicationRecord
   
   # "Dupont (Martin) Jean" si nom d'usage, sinon "Dupont Jean"
   def to_s_alphabetical
-    chosen_name.present? ? "#{last_name} #{first_name} (#{chosen_name})".strip : "#{last_name} #{first_name}".strip
+    chosen_name.present? ? "#{last_name} #{first_name} (#{chosen_name})".strip 
+                         : "#{last_name} #{first_name}".strip
   end
 
   def initials
