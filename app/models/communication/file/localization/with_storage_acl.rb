@@ -20,19 +20,13 @@ module Communication::File::Localization::WithStorageAcl
 
   def sync_blob_acl
     return if original_blob.nil?
-    s3_object.acl.put(acl: any_localization_published? ? ACL_PUBLIC : ACL_PRIVATE)
+    s3_object.acl.put(acl: s3_acl)
   rescue StandardError => e
     Rails.logger.error("[Storage ACL] Localization #{id}: #{e.class} #{e.message}")
   end
 
-  # Une localisation est considérée publiée si published = true ET
-  # published_at est dans le passé, conformément à Publishable#published_now?
-  def any_localization_published?
-    self.class
-        .where(original_blob_id: original_blob_id)
-        .where(published: true)
-        .where('published_at IS NOT NULL AND published_at <= ?', Time.zone.now)
-        .exists?
+  def s3_acl
+    published? ? ACL_PUBLIC : ACL_PRIVATE
   end
 
   def s3_service?
