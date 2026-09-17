@@ -3,7 +3,7 @@ should_show = !post.categories.empty? &&
               !post.federated_in?(@website) &&
               block.template.option_categories
 %>
-<% if !post.categories.empty? && block.template.option_categories %>
+<% if should_show %>
   <ul class="post-categories">
     <% post.categories.each do |category| %>
       <%
