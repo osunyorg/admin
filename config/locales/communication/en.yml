@@ -753,6 +753,8 @@ en:
         technical:
           description: Everything related to technical settings
           label: Technical
+    image:
+      label: Image
   communication:
     authors:
       one: Author

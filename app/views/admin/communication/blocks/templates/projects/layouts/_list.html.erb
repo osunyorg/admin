@@ -4,9 +4,19 @@
       project_l10n = project.localization_for(block.language)
       %>
     <article class="project" itemscope itemtype="https://schema.org/CreativeWork">
-      <h<%= block.heading_rank_children %> class='project-title' itemprop='name'>
-        <%= link_to project_l10n, project_l10n.current_permalink_url_in_website(@website) %>
-      </h<%= block.heading_rank_children %>>
+      <hgroup>
+        <h<%= block.heading_rank_children %> class='project-title' itemprop='name'>
+          <%= link_to project_l10n, project_l10n.current_permalink_url_in_website(@website) %>
+        </h<%= block.heading_rank_children %>>
+      </hgroup>
+      <%= render 'admin/communication/blocks/templates/projects/partials/summary',
+                  block: block,
+                  project: project,
+                  project_l10n: project_l10n %>
+      <%= render 'admin/communication/blocks/templates/projects/partials/categories',
+                  block: block,
+                  project: project,
+                  project_l10n: project_l10n %>
     </article>
   <% end %>
 </div>
