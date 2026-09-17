@@ -18,7 +18,7 @@ export default {
     pickerLabel: { type: String, default: '' },
     pickerTitle: { type: String, required: true },
     uploaderEndpoint: { type: String, required: true },
-    isLasting: { type: Boolean, default: false },
+    isLasting: { type: Boolean, default: true },
     uploaderSizeLimit: { type: Number, required: true },
   },
   emits: [
