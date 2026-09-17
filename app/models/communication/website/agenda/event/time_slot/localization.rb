@@ -48,12 +48,22 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
 
   alias :time_slot :about
 
-  delegate :event, to: :about
-
-  delegate :federated_in?, to: :event
-
-  delegate :to_s, :title, :subtitle, :summary, :contents_full_text, :previous_permalinks_in_website, to: :event_l10n, allow_nil: true
-  delegate :best_bodyclass, :archive?, to: :event
+  delegate  :event,
+            to: :about,
+            allow_nil: true
+  delegate  :federated_in?,
+            :best_bodyclass,
+            :archive?,
+            to: :event,
+            allow_nil: true
+  delegate  :to_s,
+            :title,
+            :subtitle,
+            :summary,
+            :contents_full_text,
+            :previous_permalinks_in_website,
+            to: :event_l10n,
+            allow_nil: true
 
   # /content/fr/events/YYYY/MM/DD-hh-mm-slug.html
   def git_path_relative
@@ -61,6 +71,8 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   end
 
   def should_sync_to?(website)
+    about.present? && 
+    event.present? &&
     event.allowed_in?(website) &&
     website.active_language_ids.include?(language_id) && # Language is active on website
     event_l10n.present? && # Event localized in this language
