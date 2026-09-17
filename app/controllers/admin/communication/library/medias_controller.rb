@@ -1,6 +1,7 @@
 class Admin::Communication::Library::MediasController < Admin::Communication::Library::Medias::ApplicationController
   load_and_authorize_resource class: Communication::Media,
-                              through: :current_university
+                              through: :current_university,
+                              except: :restore
 
   include Admin::Localizable
 

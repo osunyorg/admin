@@ -1,6 +1,7 @@
 class Admin::Communication::Library::FilesController < Admin::Communication::Library::Files::ApplicationController
   load_and_authorize_resource class: Communication::File,
-                              through: :current_university
+                              through: :current_university,
+                              except: :restore
 
   include Admin::HasStaticAction
   include Admin::Localizable
