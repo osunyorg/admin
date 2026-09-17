@@ -71,9 +71,9 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   end
 
   def should_sync_to?(website)
-    about.present? && 
-    event.present? &&
-    event.allowed_in?(website) &&
+    about.present? && # Timeslot exists
+    event.present? && # Event exists
+    event.allowed_in?(website) && # Event is native or federated
     website.active_language_ids.include?(language_id) && # Language is active on website
     event_l10n.present? && # Event localized in this language
     event_l10n.published? # and published
