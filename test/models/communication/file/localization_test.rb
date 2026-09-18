@@ -9,10 +9,11 @@ class Communication::File::LocalizationTest < ActiveSupport::TestCase
     public_acl = Communication::File::Localization::ACL_PUBLIC
     private_acl = Communication::File::Localization::ACL_PRIVATE
 
-    file_l10n = communication_file_localizations(:example_pdf_fr)
-    file = file_l10n.about
+    file = communication_files(:example_pdf)
+    file_l10n = file.localizations.first
 
     assert_equal(public_acl, file_l10n.send(:s3_acl))
+    Communication::File::Localization.any_instance.expects(:sync_blob_acl).times(4)
 
     file_l10n.update(published: false)
     assert_equal(private_acl, file_l10n.send(:s3_acl))
@@ -21,13 +22,11 @@ class Communication::File::LocalizationTest < ActiveSupport::TestCase
     assert_equal(public_acl, file_l10n.send(:s3_acl))
 
     file.destroy
-    file_l10n.reload
-    assert(file_l10n.deleted?)
+    assert(file_l10n.reload.deleted?)
     assert_equal(private_acl, file_l10n.send(:s3_acl))
 
     file.restore(recursive: true)
-    file_l10n.reload
-    refute(file_l10n.deleted?)
+    refute(file_l10n.reload.deleted?)
     assert_equal(public_acl, file_l10n.send(:s3_acl))
 
   end
