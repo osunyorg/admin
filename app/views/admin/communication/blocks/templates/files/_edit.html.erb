@@ -32,6 +32,7 @@ object_endpoint = admin_communication_files_path
   picker-label="<%= t('admin.communication.blocks.components.file.button') %>"
   picker-title="<%= Communication::File.model_name.human(count: 2) %>"
   uploader-endpoint="<%= direct_upload_admin_communication_files_path %>"
+  :is-lasting="false"
   :uploader-size-limit="Number(<%= Rails.application.config.default_file_max_size %>)"
   @update:model-value="data.elements.push({ file: { communication_file_id: $event } })"
   >

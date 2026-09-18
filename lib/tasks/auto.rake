@@ -29,6 +29,9 @@ namespace :auto do
     GdprUserDeletionJob.perform_later
     # Truly destroy soft-deleted records
     TrulyDestroySoftDeletedRecordsJob.perform_later
+    # Destroy not lasting files missing contexts
+    Communication::DestroyNotLastingFilesJob.perform_later
+    # Perform GDPR-related user deletion tasks
     GdprUserDeletionJob.perform_later
     # Reindex crucial tables for GoodJob
     # https://github.com/bensheldon/good_job/issues/896

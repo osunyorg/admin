@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_07_101353) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_17_123256) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -568,6 +568,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_101353) do
     t.datetime "created_at", null: false
     t.uuid "created_by_id"
     t.datetime "deleted_at"
+    t.boolean "is_lasting", default: true
     t.uuid "university_id", null: false
     t.datetime "updated_at", null: false
     t.index ["created_by_id"], name: "index_communication_files_on_created_by_id"
