@@ -986,7 +986,7 @@ en:
         host: Sans le protocole
         sso_button_label: "Default: Sign in via SSO"
       communication_file:
-        is_lasting: If unchecked, after 30 days, this file will be deleted if no context exist anymore.
+        is_lasting: If unchecked, after 30 days, this file will be deleted if no context exists anymore.
       communication_file_localization:
         internal_description: Complementary complémentaire of the file. You can write this text to help the users to find a specific file, or learn how it should be used (rights, dates, contexts...).
       communication_media_localization:

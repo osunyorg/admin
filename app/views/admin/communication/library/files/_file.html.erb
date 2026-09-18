@@ -1,5 +1,5 @@
 <%
-hide_dates ||= false
+hide_date ||= false
 hide_size ||= false
 if file.deleted?
   partial_name = 'deleted'
@@ -9,5 +9,5 @@ end
 %>
 <%= render "admin/communication/library/files/file/#{partial_name}",
             file: file,
-            hide_date: hide_dates,
+            hide_date: hide_date,
             hide_size: hide_size %>

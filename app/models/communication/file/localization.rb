@@ -90,7 +90,7 @@ class Communication::File::Localization < ApplicationRecord
       localization.published = true
     end
     localization.restore if localization.deleted?
-    localization.file.restore if localization.file.deleted?
+    localization.file.restore(recursive: true) if localization.file.deleted?
     localization
   end
 
