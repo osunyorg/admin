@@ -11,6 +11,7 @@
                       as: :file,
                       input_html: { accept: default_files_formats_accepted },
                       hint: (t('admin.communication.file.replacement_file_hint') unless l10n.new_record?) %>
+        <%= f.input :is_lasting %>
       </div>
       <div class="col-lg-8">
         <%= lf.input :name %>
