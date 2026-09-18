@@ -105,6 +105,9 @@
       <%= f.input :contribution_amount %>
     </div>
   </div>
+
+  <%= render 'server/universities/form/file_server', university: university, f: f %>
+
   <% content_for :action_bar_right do %>
     <%= cancel [:server, university] %>
     <%= submit f %>

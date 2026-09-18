@@ -1,6 +1,7 @@
 class Admin::Communication::Library::FilesController < Admin::Communication::Library::Files::ApplicationController
   load_and_authorize_resource class: Communication::File,
-                              through: :current_university
+                              through: :current_university,
+                              except: :restore
 
   include Admin::HasStaticAction
   include Admin::Localizable
@@ -43,11 +44,15 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
   def direct_upload
     @blob = ActiveStorage::Blob.create_before_direct_upload!(**blob_args)
     @blob.update_column(:university_id, current_university&.id)
+    is_lasting = request.headers["X-Osuny-File-Lasting"] == "true"
     # Le blob est sur la localisation, contrairement aux médias
     @l10n = Communication::File::Localization.find_or_create_file_localization_from_blob(
       @blob,
       language: current_language,
-      user: current_user
+      new_file_attributes: {
+        created_by: current_user,
+        is_lasting: is_lasting
+      }
     )
     @file = @l10n.file
   end
@@ -92,6 +97,14 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
                 notice: t('admin.successfully_destroyed_html', model: @file.to_s_in(current_language))
   end
 
+  def restore
+    @file = current_university.communication_files.only_deleted.find(params[:id])
+    authorize!(:restore, @file)
+    @file.restore(recursive: true)
+    redirect_to [:admin, @file],
+                notice: t('admin.successfully_restored_html', model: @file.to_s_in(current_language))
+  end
+
   protected
 
   def blob_args
@@ -101,7 +114,7 @@ class Admin::Communication::Library::FilesController < Admin::Communication::Lib
   def file_params
     params.require(:communication_file)
           .permit(
-            category_ids: [],
+            :is_lasting, category_ids: [],
             localizations_attributes: [
               :id, :name, :alt, :credit, :internal_description, :meta_description, :published,
               :original_uploaded_file, :language_id

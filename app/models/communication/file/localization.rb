@@ -2,29 +2,32 @@
 #
 # Table name: communication_file_localizations
 #
-#  id                    :uuid             not null, primary key
-#  deleted_at            :datetime
-#  featured_image_credit :text
-#  featured_media_alt    :string
-#  internal_description  :text
-#  meta_description      :text
-#  name                  :string
-#  original_byte_size    :bigint
-#  original_checksum     :string
-#  original_content_type :string
-#  original_extension    :string           default("")
-#  original_filename     :string
-#  published             :boolean          default(FALSE)
-#  published_at          :datetime
-#  slug                  :string
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  about_id              :uuid             not null, indexed
-#  featured_media_id     :uuid             indexed
-#  language_id           :uuid             not null, indexed
-#  original_blob_id      :uuid             not null, indexed
-#  university_id         :uuid             not null, indexed
-#  updated_by_id         :uuid             indexed
+#  id                           :uuid             not null, primary key
+#  deleted_at                   :datetime
+#  featured_image_credit        :text
+#  featured_media_alt           :string
+#  file_server_current_checksum :string
+#  file_server_current_path     :string
+#  file_server_slug             :string
+#  internal_description         :text
+#  meta_description             :text
+#  name                         :string
+#  original_byte_size           :bigint
+#  original_checksum            :string
+#  original_content_type        :string
+#  original_extension           :string           default("")
+#  original_filename            :string
+#  published                    :boolean          default(FALSE)
+#  published_at                 :datetime
+#  slug                         :string
+#  created_at                   :datetime         not null
+#  updated_at                   :datetime         not null
+#  about_id                     :uuid             not null, indexed
+#  featured_media_id            :uuid             indexed
+#  language_id                  :uuid             not null, indexed
+#  original_blob_id             :uuid             not null, indexed
+#  university_id                :uuid             not null, indexed
+#  updated_by_id                :uuid             indexed
 #
 # Indexes
 #
@@ -59,7 +62,10 @@ class Communication::File::Localization < ApplicationRecord
   include Permalinkable
   include Publishable
   include Sanitizable
+  include WithRedirections
+  include WithFileServer
   include WithOpenApi
+  include WithStorageAcl
 
   belongs_to  :updated_by,
               class_name: 'User',
@@ -68,26 +74,32 @@ class Communication::File::Localization < ApplicationRecord
   has_many    :contexts,
               foreign_key: :communication_file_localization_id,
               dependent: :destroy
-  alias :file :about
 
   validates :name, presence: true
 
   after_commit :touch_references, on: :update
 
-  def self.find_or_create_file_localization_from_blob(blob, language:, user: nil)
-    localization = where(
+  def self.find_or_create_file_localization_from_blob(blob, language:, new_file_attributes: {})
+    localization = with_deleted.where(
       university_id: blob.university_id,
       language_id: language.id,
       original_checksum: blob.checksum
     ).first_or_create do |localization|
-      localization.about = find_or_create_file_from_blob(blob, user: user)
+      localization.about = find_or_create_file_from_blob(blob, new_file_attributes)
       localization.original_blob = blob
       # Les fichiers créés par cette méthode sont autopubliés.
       # Ceux qui sont envoyés via la file library ne le sont pas.
       localization.published = true
     end
+    localization.restore if localization.deleted?
+    localization.file.restore(recursive: true) if localization.file.deleted?
     localization
   end
+
+  def about
+    Communication::File.unscoped { super }
+  end
+  alias file about
 
   def blob
     original_blob
@@ -167,12 +179,13 @@ class Communication::File::Localization < ApplicationRecord
   # ça renvoie un file vide afin de créer le File::Localization derrière.
   # On casse un peu le principe d'encapsulation, afin de ne pas exposer une méthode qui renvoie un objet instable.
   # Concrètement, cette méthode est appelée uniquement par "find_or_create_file_localization_from_blob" au-dessus.
-  def self.find_or_create_file_from_blob(blob, user:)
+  def self.find_or_create_file_from_blob(blob, new_file_attributes = {})
     # Soit il y a un fichier (dans n'importe quelle langue), on le renvoie
     Communication::File.find_by_blob(blob) ||
     # Soit il n'y en a aucun, on le crée
     Communication::File.create!(university_id: blob.university_id) do |file|
-      file.created_by = user
+      file.created_by = new_file_attributes[:created_by]
+      file.is_lasting = new_file_attributes.fetch(:is_lasting, true)
     end
   end
 
