@@ -73,26 +73,32 @@ class Communication::File::Localization < ApplicationRecord
   has_many    :contexts,
               foreign_key: :communication_file_localization_id,
               dependent: :destroy
-  alias :file :about
 
   validates :name, presence: true
 
   after_commit :touch_references, on: :update
 
-  def self.find_or_create_file_localization_from_blob(blob, language:, user: nil)
-    localization = where(
+  def self.find_or_create_file_localization_from_blob(blob, language:, new_file_attributes: {})
+    localization = with_deleted.where(
       university_id: blob.university_id,
       language_id: language.id,
       original_checksum: blob.checksum
     ).first_or_create do |localization|
-      localization.about = find_or_create_file_from_blob(blob, user: user)
+      localization.about = find_or_create_file_from_blob(blob, new_file_attributes)
       localization.original_blob = blob
       # Les fichiers créés par cette méthode sont autopubliés.
       # Ceux qui sont envoyés via la file library ne le sont pas.
       localization.published = true
     end
+    localization.restore if localization.deleted?
+    localization.file.restore(recursive: true) if localization.file.deleted?
     localization
   end
+
+  def about
+    Communication::File.unscoped { super }
+  end
+  alias file about
 
   def blob
     original_blob
@@ -172,12 +178,13 @@ class Communication::File::Localization < ApplicationRecord
   # ça renvoie un file vide afin de créer le File::Localization derrière.
   # On casse un peu le principe d'encapsulation, afin de ne pas exposer une méthode qui renvoie un objet instable.
   # Concrètement, cette méthode est appelée uniquement par "find_or_create_file_localization_from_blob" au-dessus.
-  def self.find_or_create_file_from_blob(blob, user:)
+  def self.find_or_create_file_from_blob(blob, new_file_attributes = {})
     # Soit il y a un fichier (dans n'importe quelle langue), on le renvoie
     Communication::File.find_by_blob(blob) ||
     # Soit il n'y en a aucun, on le crée
     Communication::File.create!(university_id: blob.university_id) do |file|
-      file.created_by = user
+      file.created_by = new_file_attributes[:created_by]
+      file.is_lasting = new_file_attributes.fetch(:is_lasting, true)
     end
   end
 

@@ -93,6 +93,7 @@ fr:
         title: Titre
       communication/file:
         created_by: Envoyé par
+        is_lasting: Fichier pérenne
       communication/file/context:
         about_type: Type
       communication/file/localization:
@@ -360,7 +361,7 @@ fr:
               taken: déjà utilisé
             original_uploaded_file:
               already_imported: déjà importé dans la bibliothèque de fichiers
-              too_big: trop lourd !              
+              too_big: trop lourd !
         communication/media:
           attributes:
             original_uploaded_file:
@@ -798,7 +799,7 @@ fr:
     library:
       context:
         cropped: photo recadrée
-        downloadable_summary: en document téléchargeable d'une formation 
+        downloadable_summary: en document téléchargeable d'une formation
         featured_media: en image à la une
         in_block: dans le bloc %{position}
     manage_authors: Gérer les auteur·rices
@@ -984,6 +985,8 @@ fr:
         favicon: 'Fichier .png uniquement'
         host: Sans le protocole
         sso_button_label: "Par défaut : Se connecter en SSO"
+      communication_file:
+        is_lasting: Si décoché, après 30 jours, ce fichier sera supprimé en l'absence de tout contexte d'utilisation.
       communication_file_localization:
         internal_description: Description complémentaire du fichier. Vous pouvez donner des informations complémentaires sur le fichier, utiles pour la recherche et indiquer des instructions spécifiques d'usage.
       communication_media_localization:

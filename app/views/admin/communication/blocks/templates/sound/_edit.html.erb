@@ -8,6 +8,7 @@
     picker-label="<%= t('admin.communication.blocks.components.file.button') %>"
     picker-title="<%= Communication::File.model_name.human(count: 2) %>"
     uploader-endpoint="<%= direct_upload_admin_communication_files_path %>"
+    :is-lasting="false"
     uplader-size-limit="<%= Rails.application.config.default_file_max_size %>"
     v-model="data.file.communication_file_id"
     @update:model-value="data.file.communication_file_id = $event"
@@ -24,5 +25,5 @@
 <%= block_component_edit block, :title %>
 <%= block_component_edit block, :transcription,
       label: t('admin.communication.blocks.components.transcription.label'),
-      placeholder: t('admin.communication.blocks.components.transcription.placeholder'), 
+      placeholder: t('admin.communication.blocks.components.transcription.placeholder'),
       summernote_config: 'link' %>
