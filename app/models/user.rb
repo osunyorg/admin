@@ -94,7 +94,8 @@ class User < ApplicationRecord
   }
 
   def to_s
-    "#{first_name} #{last_name}".strip
+    name = "#{first_name} #{last_name}".strip
+    chosen_name.present? ? "#{name} (#{chosen_name})" : name
   end
 
 end

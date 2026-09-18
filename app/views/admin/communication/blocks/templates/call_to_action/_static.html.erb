@@ -1,9 +1,14 @@
+<%
+component = block.template.image_component
+media_l10n = component.communication_media_localization
+blob = component.blob
+%>
 <%= block_component_static block, :layout %>
 <%= block_component_static block, :text %>
+<% if blob %>
 <%= block_component_static block, :image %>
-<% if block.template.image_component.blob %>
-<%= block_component_static block, :alt, depth: 4 %>
-<%= block_component_static block, :credit, depth: 4 %>
+<%= osuny_static_text :alt, block.template.alt, depth: 5 %>
+<%= osuny_static_html :credit, media_l10n&.credit, depth: 5 %>
 <% end %>
       buttons:
 <%

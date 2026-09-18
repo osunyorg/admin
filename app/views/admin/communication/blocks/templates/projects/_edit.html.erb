@@ -61,13 +61,13 @@ object_endpoint = admin_communication_website_portfolio_projects_path(website_id
     <%= osuny_label t('admin.communication.blocks.display_options.title') %>
     <div class="row">
       <div class="col-sm-6">
-        <%= block_component_edit block, :option_image, label: Communication::Website::Portfolio::Project::Localization.human_attribute_name(:featured_media) %>
+        <%= block_component_edit block, :option_image, label: t('admin.image.label') %>
         <%= block_component_edit block, :option_subtitle, label: Communication::Website::Portfolio::Project::Localization.human_attribute_name(:subtitle) %>
         <%= block_component_edit block, :option_summary, label: t('admin.summary.label') %>
       </div>
       <div class="col-sm-6">
         <%= block_component_edit block, :option_categories, label: Communication::Website::Portfolio::Project.human_attribute_name(:categories) %>
-        <%= block_component_edit block, :option_year, label: Communication::Website::Portfolio::Project.human_attribute_name(:year) %>
+        <%= block_component_edit block, :option_year, label: Communication::Website::Portfolio::Project.human_attribute_name(:from_day) %>
       </div>
     </div>
   <% end %>

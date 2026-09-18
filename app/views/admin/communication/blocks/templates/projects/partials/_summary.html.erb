@@ -1,0 +1,7 @@
+<% if project_l10n.summary.present? && block.template.option_summary %>
+  <div itemprop="abstract" class="project-summary">
+    <div class="rich-text">
+      <%= sanitize project_l10n.summary %>
+    </div>
+  </div>
+<% end %>

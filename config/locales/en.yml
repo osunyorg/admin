@@ -70,6 +70,7 @@ en:
         title: Title
       user:
         admin_theme: Admin Theme
+        chosen_name: Chosen name
         current_sign_in_at: Last sign in
         email: Email
         first_name: First name

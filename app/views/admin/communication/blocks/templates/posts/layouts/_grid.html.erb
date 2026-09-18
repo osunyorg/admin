@@ -1,9 +1,9 @@
-<div class="grid">
+<div class="grid posts posts--grid">
   <% block.template.selected_posts.each do |post|
     next if post.nil?
     post_l10n = post.localization_for(block.language)
     permalink = post_l10n.current_permalink_url_in_website(@website)
-  %>
+    %>
     <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
       <div class="post-content">
         <%= render 'admin/communication/blocks/templates/posts/partials/heading', 
