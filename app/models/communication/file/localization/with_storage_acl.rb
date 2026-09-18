@@ -5,13 +5,14 @@ module Communication::File::Localization::WithStorageAcl
   ACL_PRIVATE = 'private'
 
   included do
-    after_commit :sync_blob_acl, if: :should_sync_blob_acl?
+    after_save :sync_blob_acl, if: :should_sync_blob_acl?
+    after_destroy :sync_blob_acl
+    after_restore :sync_blob_acl
   end
 
   private
 
   def should_sync_blob_acl?
-    return false unless original_blob_id.present?
     return false unless saved_change_to_original_blob_id? ||
                         saved_change_to_published? ||
                         saved_change_to_published_at?
@@ -19,18 +20,16 @@ module Communication::File::Localization::WithStorageAcl
   end
 
   def sync_blob_acl
-    return if original_blob.nil?
     s3_object.acl.put(acl: s3_acl)
   rescue StandardError => e
     Rails.logger.error("[Storage ACL] Localization #{id}: #{e.class} #{e.message}")
   end
 
   def s3_acl
-    published? ? ACL_PUBLIC : ACL_PRIVATE
+    published? && !deleted? ? ACL_PUBLIC : ACL_PRIVATE
   end
 
   def s3_service?
-    return false unless original_blob.present?
     original_blob.service.is_a?(ActiveStorage::Service::S3Service)
   end
 
