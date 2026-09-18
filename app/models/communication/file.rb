@@ -45,7 +45,7 @@ class Communication::File < ApplicationRecord
   }
 
   scope :deletable, -> {
-    .for_lasting(false)
+    for_lasting(false)
     .where(
       "communication_files.created_at < ?",
       NOT_LASTING_DELAY_BEFORE_DESTROY.ago
