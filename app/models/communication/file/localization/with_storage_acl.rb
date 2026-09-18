@@ -13,10 +13,12 @@ module Communication::File::Localization::WithStorageAcl
   private
 
   def should_sync_blob_acl?
-    return false unless saved_change_to_original_blob_id? ||
-                        saved_change_to_published? ||
-                        saved_change_to_published_at?
-    s3_service?
+    s3_service? &&
+    (
+      saved_change_to_original_blob_id? ||
+      saved_change_to_published? ||
+      saved_change_to_published_at?
+    )
   end
 
   def sync_blob_acl
