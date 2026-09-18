@@ -4,6 +4,7 @@
 #
 #  id                    :uuid             not null, primary key
 #  biography             :text
+#  chosen_name           :string
 #  deleted_at            :datetime
 #  featured_image_credit :text
 #  featured_media_alt    :text

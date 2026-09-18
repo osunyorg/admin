@@ -13,6 +13,8 @@ module Communication::File::Localization::WithFileServer
 
     before_validation :set_file_server_slug_if_empty?
     after_save :sync_to_file_server
+    after_destroy :sync_to_file_server
+    after_restore :sync_to_file_server
   end
 
   def sync_to_file_server
@@ -21,22 +23,16 @@ module Communication::File::Localization::WithFileServer
   end
 
   def sync_to_file_server_safely
-    if file_server_current_path.blank?
-      ftp.send_blob(
-        original_blob,
-        file_server_remote_directory,
-        file_server_filename
-      )
-    else
-      ftp.move(
-        file_server.ftp_path,
-        file_server_current_path,
-        file_server_path
-      )
+    if file_server_should_delete?
+      file_server_delete!
+    elsif file_server_should_create?
+      file_server_create!
+    elsif file_server_should_update?
+      file_server_update!
+    elsif file_server_should_move?
+      file_server_move!
     end
-    update_column :file_server_current_path,
-                  file_server_path
-    send_htaccess
+    ftp.close
   end
 
   # rapport-annuel
@@ -77,6 +73,11 @@ module Communication::File::Localization::WithFileServer
     "#{file_server.ftp_path}#{file_server_path}".gsub('//', '/')
   end
 
+  # /path-on-ftp-server/fr/2026/rapport-annuel.pdf
+  def file_server_remote_current_path
+    "#{file_server.ftp_path}#{file_server_current_path}".gsub('//', '/')
+  end
+
   # https://files.osuny.org/
   def file_server_base_url
     "#{file_server.url}/"
@@ -93,6 +94,64 @@ module Communication::File::Localization::WithFileServer
   end
 
   protected
+
+  # Premier envoi
+  def file_server_should_create?
+    file_server_current_path.blank?
+  end
+
+  # Nouveau fichier
+  def file_server_should_update?
+    file_server_current_checksum != original_checksum
+  end
+
+  # Déplacement
+  def file_server_should_move?
+    file_server_current_path.present? &&
+    file_server_current_path != file_server_path
+  end
+
+  # Suppression
+  def file_server_should_delete?
+    !published? || deleted?
+  end
+
+  # Le fichier n'est pas sur le ftp
+  def file_server_create!
+    ftp.send_blob(
+      original_blob,
+      file_server_remote_directory,
+      file_server_filename
+    )
+    update_columns  file_server_current_path: file_server_path,
+                    file_server_current_checksum: file_server_current_checksum
+    send_htaccess
+  end
+
+  # On change de blob
+  def file_server_update!
+    file_server_delete!
+    file_server_create!
+  end
+
+  # Le slug a changé, on bouge le fichier
+  def file_server_move!
+    ftp.move(
+      file_server.ftp_path,
+      file_server_current_path,
+      file_server_path
+    )
+    update_columns  file_server_current_path: file_server_path
+    send_htaccess
+  end
+
+  # On supprime le fichier
+  def file_server_delete!
+    ftp.delete(file_server_remote_current_path)
+    update_columns  file_server_current_path: nil,
+                    file_server_current_checksum: nil
+    send_htaccess
+  end
 
   def send_htaccess
     ftp.send_text(htaccess_content, htaccess_path)

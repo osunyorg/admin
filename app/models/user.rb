@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                            :uuid             not null, primary key
+#  chosen_name                   :string
 #  confirmation_sent_at          :datetime
 #  confirmation_token            :string           uniquely indexed
 #  confirmed_at                  :datetime
