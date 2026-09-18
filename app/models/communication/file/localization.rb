@@ -64,6 +64,7 @@ class Communication::File::Localization < ApplicationRecord
   include WithRedirections
   include WithFileServer
   include WithOpenApi
+  include WithStorageAcl
 
   belongs_to  :updated_by,
               class_name: 'User',

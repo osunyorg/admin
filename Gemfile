@@ -98,6 +98,7 @@ gem "vimeo"
 group :development, :test do
   gem "byebug", platforms: [:mri, :windows]
   gem "figaro"
+  gem "mocha", "~> 3.1"
   gem "rspec-rails"
   gem "vcr"
   gem "webmock"
