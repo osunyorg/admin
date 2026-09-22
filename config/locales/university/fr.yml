@@ -214,6 +214,8 @@ fr:
         from_year: "En poste depuis..."
         organization_name: "Choisissez l'organisation si elle existe, en la cherchant par nom ou SIREN. Si elle n'existe pas encore, créez-là en entrant simplement son nom."
         to_year: "Si vous êtes toujours à ce poste, laissez vide"
+      university_person_localization:
+        chosen_name: "Remplissez ce champ uniquement si vous avez un nom d’usage distinct de votre nom légal"
     include_blanks:
       defaults:
         organization: Sélectionnez une organisation
