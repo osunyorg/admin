@@ -214,6 +214,8 @@ en:
         from_year: "In charge since..."
         organization_name: "Choose the organization if it exists, by searching with name or SIREN code.<br>Otherwise create it by entering it's name."
         to_year: "Leave blank if you are still in charge"
+      university_person_localization:
+        chosen_name: "Only fill in this field if you have a chosen name that differs from your legal name"
     include_blanks:
       defaults:
         organization: Select organization
