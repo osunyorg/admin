@@ -20,29 +20,22 @@ class Extranet::PagesController < Extranet::ApplicationController
   def data
     @metrics = []
     if current_extranet.has_feature?(:alumni)
-      alumni_count = current_extranet.alumni.count
-      academic_years_count = current_extranet.academic_years.count
-      cohorts_count = current_extranet.cohorts.count
-      alumni_organizations_count = current_extranet.about.university_person_alumni_organizations.count
       @metrics.concat [
-        { value: alumni_count, name: University::Person::Alumnus.model_name.human(count: alumni_count) },
-        { value: academic_years_count, name: Administration::AcademicYear.model_name.human(count: academic_years_count) },
-        { value: cohorts_count, name: Administration::Cohort.model_name.human(count: cohorts_count) },
-        { value: alumni_organizations_count, name: University::Organization.model_name.human(count: alumni_organizations_count) }
+        { value: current_extranet.alumni.count, model_name: University::Person::Alumnus.model_name },
+        { value: current_extranet.academic_years.count, model_name: Administration::AcademicYear.model_name },
+        { value: current_extranet.cohorts.count, model_name: Administration::Cohort.model_name },
+        { value: current_extranet.about.university_person_alumni_organizations.count, model_name: University::Organization.model_name }
       ]
     end
     if current_extranet.has_feature?(:contacts)
-      connected_organizations_count = current_extranet.connected_organizations.count
       @metrics.concat [
-        { value: connected_organizations_count, name: University::Organization.model_name.human(count: connected_organizations_count) }
+        { value: current_extranet.connected_organizations.count, model_name: University::Organization.model_name }
       ]
     end
     if current_extranet.has_feature?(:alumni) || current_extranet.has_feature?(:contacts)
-      users_count = current_extranet.users.count
-      experiences_count = current_extranet.experiences.count
       @metrics.concat [
-        { value: users_count, name: User.model_name.human(count: users_count) },
-        { value: experiences_count, name: University::Person::Experience.model_name.human(count: experiences_count) },
+        { value: current_extranet.users.count, model_name: User.model_name },
+        { value: current_extranet.experiences.count, model_name: University::Person::Experience.model_name },
       ]
     end
     breadcrumb
