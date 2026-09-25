@@ -18,7 +18,6 @@
 #  mail_from_name              :string
 #  name                        :string           indexed
 #  private                     :boolean
-#  sms_sender_name             :string
 #  sso_button_label            :string
 #  sso_cert                    :text
 #  sso_mapping                 :jsonb
@@ -67,7 +66,6 @@ class University < ApplicationRecord
   has_many :search, dependent: :destroy
 
   validates :name, presence: true
-  validates :sms_sender_name, presence: true, length: { maximum: 11 }
   validates :logo, size: { less_than: 1.megabytes }
 
   before_validation :sanitize_fields
@@ -112,7 +110,6 @@ class University < ApplicationRecord
     self.mail_from_address = Osuny::Sanitizer.sanitize(self.mail_from_address, 'string')
     self.mail_from_name = Osuny::Sanitizer.sanitize(self.mail_from_name, 'string')
     self.name = Osuny::Sanitizer.sanitize(self.name, 'string')
-    self.sms_sender_name = Osuny::Sanitizer.sanitize(self.sms_sender_name, 'string')
     self.sso_button_label = Osuny::Sanitizer.sanitize(self.sso_button_label, 'string')
     self.zipcode = Osuny::Sanitizer.sanitize(self.zipcode, 'string')
   end
