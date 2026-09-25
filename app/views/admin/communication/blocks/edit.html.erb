@@ -73,9 +73,21 @@ payload = {
     </div>
     <div class="vue__editor__actions">
       <div class="container-fluid d-flex">
-        <button type="button" class="btn btn-light vue__editor__actions__cancel"><%= t('vue.changes.cancel') %></button>
-        <%= render 'admin/application/l10n/libre_translate_button', l10n: @block.about %>
-        <%= f.button :submit, t('save'), class: 'btn btn-success ms-auto vue__editor__actions__save', form: f.options.dig(:html, :id) %>
+        <button type="button" class="btn btn-light vue__editor__actions__cancel">
+          <%= t('cancel') %>
+        </button>
+        <%= render 'admin/application/l10n/libre_translate_button',
+                    l10n: @block.about %>
+        <%= f.button  :submit,
+                      t('save'),
+                      class: 'btn btn-success ms-auto vue__editor__actions__save',
+                      form: f.options.dig(:html, :id) %>
+      </div>
+      <div
+        v-if="saving"
+        class="position-absolute top-0 end-50 mt-3"
+        >
+        <span class="spinner-border spinner-border-sm text-primary" role="status"></span>
       </div>
     </div>
   <% end %>

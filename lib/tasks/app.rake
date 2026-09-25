@@ -1,13 +1,6 @@
 namespace :app do
   desc 'Fix things'
   task fix: :environment do
-    Communication::Block.where(
-      communication_website_id: nil,
-      about_type: "Communication::Website::Localization"
-    ).each do |block|
-      block.update_column :communication_website_id,
-                          block.about.communication_website_id
-    end
   end
 
   namespace :search do

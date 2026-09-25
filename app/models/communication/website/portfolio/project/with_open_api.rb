@@ -11,6 +11,7 @@ module Communication::Website::Portfolio::Project::WithOpenApi
         full_width: { type: :boolean },
         bodyclass: { type: :string, nullable: true },
         year: { type: :integer },
+        from_day: { type: :string, format: "date" },
         localizations: {
           type: :object,
           description: "Localizations of the project. The key is the language's ISO 639-1 code.",

@@ -1,3 +1,13 @@
-<%= block_component_static block, :file %>
+<%
+template = block.template
+blob = template.file_component.blob
+communication_file = template.file_component.communication_file
+%>
+<% if blob.present? %>
+      file:
+        id: "<%= blob.id %>"
+        blob_id: "<%= blob.id %>"
+        communication_file_id: "<%= communication_file.id %>"
 <%= block_component_static block, :title %>
 <%= block_component_static block, :transcription %>
+<% end %>

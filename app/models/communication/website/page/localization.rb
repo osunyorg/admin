@@ -5,8 +5,8 @@
 #  id                       :uuid             not null, primary key
 #  breadcrumb_title         :string
 #  deleted_at               :datetime
-#  featured_image_alt       :string
 #  featured_image_credit    :text
+#  featured_media_alt       :string
 #  header_cta               :boolean
 #  header_cta_label         :string
 #  header_cta_url           :string
@@ -24,6 +24,7 @@
 #  updated_at               :datetime         not null
 #  about_id                 :uuid             uniquely indexed => [language_id], indexed
 #  communication_website_id :uuid             indexed
+#  featured_media_id        :uuid             indexed
 #  language_id              :uuid             uniquely indexed => [about_id], indexed
 #  university_id            :uuid             indexed
 #
@@ -31,6 +32,7 @@
 #
 #  idx_on_about_id_language_id_44e0a2bf9b                         (about_id,language_id) UNIQUE
 #  idx_on_communication_website_id_64c4831480                     (communication_website_id)
+#  idx_on_featured_media_id_fafd1eb0cd                            (featured_media_id)
 #  idx_on_university_id_e62b2aba53                                (university_id)
 #  index_communication_website_page_localizations_on_about_id     (about_id)
 #  index_communication_website_page_localizations_on_language_id  (language_id)
@@ -38,6 +40,7 @@
 # Foreign Keys
 #
 #  fk_rails_20a94720a9  (communication_website_id => communication_websites.id)
+#  fk_rails_20aeaaac17  (featured_media_id => communication_medias.id) ON DELETE => nullify
 #  fk_rails_6845f29842  (about_id => communication_website_pages.id)
 #  fk_rails_877bee88b8  (university_id => universities.id)
 #  fk_rails_c6b93016c7  (language_id => languages.id)
@@ -59,7 +62,7 @@ class Communication::Website::Page::Localization < ApplicationRecord
   include Sanitizable
   include Shareable
   include HasBlobs
-  include HasFeaturedImage
+  include HasFeaturedMedia
   include WithOpenApi
   include HasUniversity
 
@@ -154,13 +157,9 @@ class Communication::Website::Page::Localization < ApplicationRecord
 
   def explicit_blob_ids
     super.concat [
-      featured_image&.blob_id,
+      featured_blob_id,
       shared_image&.blob_id
     ]
-  end
-
-  def inherited_blob_ids
-    [best_featured_image&.blob_id]
   end
 
   def localize_other_attachments(localization)

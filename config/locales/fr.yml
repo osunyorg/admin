@@ -45,15 +45,6 @@ fr:
     error_label: La vérification hashcash a échoué. Veuillez réessayer.
   activerecord:
     attributes:
-      emergency_message:
-        content_en: Message (en)
-        content_fr: Message (fr)
-        delivered_at: Date d'envoi
-        name: Nom
-        role: Rôle de destination
-        subject_en: Sujet (en)
-        subject_fr: Sujet (fr)
-        university: Université de destination
       import:
         date: Date
         file: Fichier
@@ -63,8 +54,23 @@ fr:
         iso_code: Code Iso
         name: Nom
         summernote_locale: Nom de la locale Summernote
+      server/emergency_message:
+        content_en: Message (en)
+        content_fr: Message (fr)
+        delivered_at: Date d'envoi
+        name: Nom
+        role: Rôle de destination
+        subject_en: Sujet (en)
+        subject_fr: Sujet (fr)
+        university: Université de destination
+      server/evolution:
+        released_at: Date de sortie
+      server/evolution/localization:
+        text: Texte
+        title: Titre
       user:
         admin_theme: Thème de l'administration
+        chosen_name: Nom d'usage
         current_sign_in_at: Dernière connexion
         email: Email
         first_name: Prénom
@@ -103,16 +109,19 @@ fr:
             password:
               password_strength: ne répond pas aux critères de sécurité
     models:
-      emergency_message:
-        one: Message d'urgence
-        other: Messages d'urgence
       import:
         one: Import
         other: Imports
       language:
         one: Langue
         other: Langues
-      tasks_count:
+      server/emergency_message:
+        one: Message d'urgence
+        other: Messages d'urgence
+      server/evolution:
+        one: Évolution
+        other: Évolutions
+      server/tasks_count:
         one: Tâche en cours
         other: Tâches en cours
       user:
@@ -238,7 +247,6 @@ fr:
       pending_confirmation_html: "Votre compte n'a pas encore été <b>confirmé</b>. Vous avez reçu un e-mail contenant un lien de confirmation. En l'absence de confirmation, votre compte cessera de fonctionner après <b>%{duration}</b>. Si vous n'avez pas reçu cet email pensez à vérifier votre dossier spam ou cliquez sur le bouton ci-dessous."
       successfully_unlocked_html: "<i>%{model}</i> a bien été déverrouillé(e)."
     will_be_published_html: "<i>%{model}</i> va bientôt être publié(e)."
-    title: Modifier la sélection
   batch:
     movable:
       confirm: Êtes-vous sûr de vouloir déplacer les éléments sélectionnés ?
@@ -250,8 +258,6 @@ fr:
   category:
     breadcrumb_title: Nom affiché dans le fil d'ariane
     children: Sous-catégories
-    featured_image: Image à la une
-    featured_image_alt: Texte alternatif
     free: Catégories libres (sans taxonomie)
     header_text: Titre affiché en haut de page
     is_taxonomy: Est une taxonomie (une famille de catégories)
@@ -423,15 +429,10 @@ fr:
         finished: Traité
         finished_with_errors: Traité avec des erreurs
         pending: En cours de traitement
+  evolutions:
+    listen: Écouter sur
   export: Exporter (xlsx)
   false: Non
-  featured_image:
-    alt:
-      hint: Ce texte est essentiel pour l'accessibilité. Si l'image donne une information importante, il faut écrire ici cette information. Si l'information est déjà présente ailleurs dans la page, ou si l'image est purement décorative, il faut laisser le texte alternatif vide, pour éviter de polluer la navigation vocale.
-      label: Texte alternatif
-    credit:
-      hint: Le crédit photo doit être indiqué, dans le respect du droit d'auteur.
-      label: Crédit
   file_hint_with_formats: "Fichiers %{formats} uniquement. %{filesize} max."
   file_hint_without_formats: "%{filesize} max."
   filters:
@@ -442,6 +443,7 @@ fr:
       facet: Filtrer par responsabilité
       kind: Filtrer par type
       role: Filtrer par rôle
+      website: Filtrer par site
     buttons:
       close: Fermer
       expand: Rechercher et filtrer
@@ -554,6 +556,13 @@ fr:
   move: Déplacer
   open: Ouvrir
   organize: Organiser
+  picker:
+    sort:
+      alpha: Par ordre alphabétique
+      date_desc: Par date décroissante
+      date_asc: Par date croissante
+      size_desc: Par poids décroissant
+      size_asc: Par poids croissant
   please_confirm:
     deletion: Est-ce que vous confirmez la suppression ?
     duplication: Est-ce que vous confirmez la duplication ?
@@ -588,7 +597,7 @@ fr:
     error_notification:
       default_message: "Les erreurs ci-dessous empêchent la validation :"
     hints:
-      emergency_message:
+      server/emergency_message:
         role: Laisser vide pour envoyer à tous les rôles
         university: Laisser vide pour envoyer à toutes les universités
       import:
@@ -598,6 +607,7 @@ fr:
         name: Nom dans la langue (= "Français", "Deutsch", ...)
         summernote_locale: 'Nom de la locale de summernote (fr-FR / en-US). Vérifier ici que la locale est disponible : <a href="https://github.com/summernote/summernote/tree/develop/src/lang" target="_blank">repo summernote</a>'
       user:
+        chosen_name: "Remplissez ce champ uniquement si vous avez un nom d’usage distinct de votre nom légal"
         mobile_phone: "Format international (+XX). Ce numéro reste privé. En renseignant ce champ, vous acceptez de recevoir vos codes de double authentification par SMS."
     include_blanks:
       defaults:

@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                            :uuid             not null, primary key
+#  chosen_name                   :string
 #  confirmation_sent_at          :datetime
 #  confirmation_token            :string           uniquely indexed
 #  confirmed_at                  :datetime
@@ -62,10 +63,9 @@ class User < ApplicationRecord
   include Filterable
   include Initials
   include WithAuthentication
-  include WithAuthorship
   include WithAvatar
   include WithBrevo
-  include WithCreatedElements
+  include WithCreatedOrEditedElements
   include WithFavorites
   include WithOmniauth
   include WithPerson
@@ -94,7 +94,8 @@ class User < ApplicationRecord
   }
 
   def to_s
-    "#{first_name} #{last_name}".strip
+    name = "#{first_name} #{last_name}".strip
+    chosen_name.present? ? "#{name} (#{chosen_name})" : name
   end
 
 end

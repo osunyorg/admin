@@ -139,18 +139,23 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
 
   def test_connecting_and_disconnecting_indirect_to_website_directly
     # En connectant l'école au site, on crée une connexion pour :
-    # L'école, avec ses formations et ses diplômes en cascade, donc 3 connexions avec direct_source = website
-    # En cascade, le save du website va créer les pages de liste des formations et des diplômes, qui ont elles aussi leurs dépendances
-    # La page des diplômes aura en dépendance les diplômes (default_diploma), donc 1 connexion avec direct_source = page diplômes
-    # La page des formations aura en dépendance les formations (default_program) et leurs diplômes en cascade (default_diploma), donc 2 connexions avec direct_source = page formations
-    # Donc un total de 3 + 1 + 2 = 6 connexions directes au site
-    assert_difference -> { Communication::Website::Connection.where(direct_source_type: "Communication::Website").count } => 6 do
+    # L'école et sa localization, donc 2 connexions avec direct_source = website
+    # A noter que les formations seront connectées au site via la page spéciale des formations.
+    # De même pour les diplômes, via la page spéciale des diplômes
+    # Cela permet de s'astreindre aux formations et diplômes du website (via l'about)
+    assert_difference -> { Communication::Website::Connection.where(direct_source_type: "Communication::Website").count } => 2 do
       website_with_github.update(about: default_school)
       perform_enqueued_jobs
     end
 
+    # On vérifie que la formation est bien connectée via
+    programs_page = website_with_github.pages.find_by(type: "Communication::Website::Page::EducationProgram")
+    program = education_programs(:default_program)
+    assert programs_page
+    assert website_with_github.connections.find_by(direct_source: programs_page, indirect_object: program)
+
     # En déconnectant l'école du site, on supprime les connexions créées précédemment
-    assert_difference -> { Communication::Website::Connection.where(direct_source_type: "Communication::Website").count } => -6 do
+    assert_difference -> { Communication::Website::Connection.where(direct_source_type: "Communication::Website").count } => -2 do
       assert_enqueued_with(job: Communication::Website::CleanJob, args: [website_with_github.id]) do
         assert_enqueued_with(job: Dependencies::CleanWebsitesIfNecessaryJob) do
           website_with_github.update(about: nil)

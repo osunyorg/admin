@@ -5,8 +5,8 @@
 #  id                       :uuid             not null, primary key
 #  add_to_calendar_urls     :jsonb
 #  deleted_at               :datetime
-#  featured_image_alt       :string
 #  featured_image_credit    :text
+#  featured_media_alt       :string
 #  header_cta               :boolean          default(FALSE)
 #  header_cta_label         :string
 #  header_cta_url           :string
@@ -24,6 +24,7 @@
 #  updated_at               :datetime         not null
 #  about_id                 :uuid             indexed, uniquely indexed => [language_id]
 #  communication_website_id :uuid             indexed
+#  featured_media_id        :uuid             indexed
 #  language_id              :uuid             uniquely indexed => [about_id], indexed
 #  university_id            :uuid             indexed
 #
@@ -32,6 +33,7 @@
 #  idx_on_about_id_db6323806a                  (about_id)
 #  idx_on_about_id_language_id_10e350e257      (about_id,language_id) UNIQUE
 #  idx_on_communication_website_id_87f393a516  (communication_website_id)
+#  idx_on_featured_media_id_857e574936         (featured_media_id)
 #  idx_on_language_id_c00e1d0218               (language_id)
 #  idx_on_university_id_eaf79b0514             (university_id)
 #
@@ -41,6 +43,7 @@
 #  fk_rails_945cb27530  (about_id => communication_website_agenda_events.id)
 #  fk_rails_991b1838ec  (university_id => universities.id)
 #  fk_rails_bb85c47fb8  (communication_website_id => communication_websites.id)
+#  fk_rails_ce9dafadee  (featured_media_id => communication_medias.id) ON DELETE => nullify
 #
 class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   acts_as_paranoid
@@ -53,7 +56,7 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   include Communication::Website::Agenda::AddableToCalendar
   include Contentful
   include HasBlobs
-  include HasFeaturedImage
+  include HasFeaturedMedia
   include HasGitFiles
   include HasUniversity
   include HeaderCallToAction
@@ -210,7 +213,7 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   def explicit_blob_ids
     super.concat [
-      featured_image&.blob_id,
+      featured_blob_id,
       shared_image&.blob_id
     ]
   end

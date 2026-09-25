@@ -45,15 +45,6 @@ en:
     error_label: Hashcash verification failed. Please try again.
   activerecord:
     attributes:
-      emergency_message:
-        content_en: Message (en)
-        content_fr: Message (fr)
-        delivered_at: Delivered at
-        name: Name
-        role: Target role
-        subject_en: Subject (en)
-        subject_fr: Subject (fr)
-        university: Target university
       import:
         date: Date
         file: File
@@ -63,8 +54,23 @@ en:
         iso_code: Iso code
         name: Name
         summernote_locale: Summernote locale code
+      server/emergency_message:
+        content_en: Message (en)
+        content_fr: Message (fr)
+        delivered_at: Delivered at
+        name: Name
+        role: Target role
+        subject_en: Subject (en)
+        subject_fr: Subject (fr)
+        university: Target university
+      server/evolution:
+        released_at: Released at
+      server/evolution/localization:
+        text: Text
+        title: Title
       user:
         admin_theme: Admin Theme
+        chosen_name: Chosen name
         current_sign_in_at: Last sign in
         email: Email
         first_name: First name
@@ -93,9 +99,6 @@ en:
       messages:
         invalid_year: The year must be a 4-digit number.
       models:
-        emergency_message:
-          one: Emergency message
-          other: Emergency messages
         import:
           attributes:
             file:
@@ -112,7 +115,13 @@ en:
       language:
         one: Language
         other: Languages
-      tasks_count:
+      server/emergency_message:
+          one: Emergency message
+          other: Emergency messages
+      server/evolution:
+        one: Evolution
+        other: Evolutions
+      server/tasks_count:
         one: Pending task
         other: Pending tasks
       user:
@@ -249,8 +258,6 @@ en:
   category:
     breadcrumb_title: Title in breadcrumbs
     children: Sub-categories
-    featured_image: Featured image
-    featured_image_alt: Alternative text
     free: Free categories (without taxonomy)
     header_text: Title displayed in header
     is_taxonomy: Is a taxonomy (a family of categories)?
@@ -423,14 +430,9 @@ en:
         finished_with_errors: Finished with errors
         pending: Pending
   export: Export (xlsx)
+  evolutions:
+    listen: Listen on
   false: No
-  featured_image:
-    alt:
-      hint: This text is important for accessibility. If the image conveys important information, it must be written here. If the information is already written somewhere else in the page, or if the image is purely decorative, the field must be left empty. Otherwise, it would pollute voice navigation.
-      label: Alternative text
-    credit:
-      hint: The credit must be present according to copyright or copyleft licenses.
-      label: Credit
   file_hint_with_formats: "%{formats} files only. %{filesize} max."
   file_hint_without_formats: "%{filesize} max"
   filters:
@@ -441,6 +443,7 @@ en:
       facet: Filter by responsibility
       kind: Filter by kind
       role: Filter by role
+      website: Filter by website
     buttons:
       close: Close
       expand: Search and filter
@@ -553,6 +556,13 @@ en:
   move: Move
   open: Open
   organize: Organize
+  picker:
+    sort:
+      alpha: Alphabetical
+      date_desc: Most recent first
+      date_asc: Oldest first
+      size_desc: Heaviest first
+      size_asc: Lightest first
   please_confirm:
     deletion: Are you sure you want to delete?
     duplication: Are you sure you want to duplicate?
@@ -587,7 +597,7 @@ en:
     error_notification:
       default_message: "Please review the problems below:"
     hints:
-      emergency_message:
+      server/emergency_message:
         role: Leave blank to send to all roles
         university: Leave blank to send to all universities
       import:
@@ -597,6 +607,7 @@ en:
         name: Name in the language (= "Français", "Deutsch", ...)
         summernote_locale: 'Name of summernote locale (fr-FR / en-US). Check here and ensure locale is available: <a href="https://github.com/summernote/summernote/tree/develop/src/lang" target="_blank">summernote repo</a>'
       user:
+        chosen_name: "Only fill in this field if you have a chosen name that differs from your legal name"
         mobile_phone: "International format (+XX). This number remains private. By filling this field, you accept to receive your two-factor authentication codes via SMS."
     include_blanks:
       defaults:

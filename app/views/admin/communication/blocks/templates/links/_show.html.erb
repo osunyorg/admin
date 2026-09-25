@@ -15,7 +15,7 @@
                   <% if isExternal %> rel="noopener" target="_blank"<% end %>>
                 <%= element.title %>
               </a>
-              <p><%= element.description %></p>
+              <%= block_component_show block, :description, template: element %>
             </div>
             <div class="media">
               <%= block_component_show block, :image, template: element %>

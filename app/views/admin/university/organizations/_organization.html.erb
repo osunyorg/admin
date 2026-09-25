@@ -1,0 +1,9 @@
+<%
+if organization.deleted?
+  partial_name = 'deleted'
+else
+  partial_name = 'default'
+end
+%>
+<%= render "admin/university/organizations/organization/#{partial_name}",
+            organization: organization %>

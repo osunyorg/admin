@@ -28,6 +28,7 @@ module Sluggable
 
   def generate_slug_from_to_s
     slug = to_s.to_slug.normalize.to_s
+    slug.gsub!("_", "-")
     Romaji.kana2romaji(slug)
   end
 

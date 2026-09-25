@@ -1,4 +1,4 @@
-# osuny
+# osuny, CMS d'intérêt général
 
 [osuny.org](https://www.osuny.org)
 

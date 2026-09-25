@@ -29,10 +29,7 @@ call_to_action_class += ' call_to_action--with-title' unless block.title.blank?
             </div>
           <% end %>
         </div>
-        <% component = block.template.image_component %>
-        <% if component.blob %>
-          <%= kamifusen_tag component.blob, width: 600, class: 'img-fluid mb-1', alt: block.template.alt %>
-        <% end %>
+        <%= block_component_show block, :image %>
       </div>
     </div>
   </div>

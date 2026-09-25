@@ -16,6 +16,15 @@ class Admin::Communication::Websites::Jobboard::JobsController < Admin::Communic
     breadcrumb
   end
 
+  def picker
+    @picker = Osuny::Picker::Communication::Website::Jobboard::Job.new(
+      university: current_university,
+      language: current_language,
+      params: params,
+      context: @website
+    )
+  end
+
   def publish
     @l10n.publish!
     redirect_back fallback_location: admin_communication_website_jobboard_job_path(@job),
@@ -102,7 +111,6 @@ class Admin::Communication::Websites::Jobboard::JobsController < Admin::Communic
         :id, :title, :subtitle, :meta_description, :summary,
         :published, :published_at, :slug,
         :header_cta, :header_cta_label, :header_cta_url,
-        :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
         :shared_image, :shared_image_delete, :shared_image_infos,
         :language_id
       ]

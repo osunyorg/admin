@@ -4,7 +4,7 @@ taxonomies = categories.taxonomies.ordered
 free_categories = person.categories.ordered_by_position_in_tree.reject { |category| category.in_taxonomy? }
 %>
 <div class="taxonomies-container row">
-  <% if free_categories %>
+  <% if free_categories.any? %>
     <div class="col-lg-4 taxonomy-container">
       <p><strong>Catégories</strong></p>
       <ul class="list-unstyled taxonomy-items">

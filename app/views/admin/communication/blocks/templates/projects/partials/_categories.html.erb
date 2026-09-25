@@ -1,0 +1,13 @@
+<% if project.categories.present? && block.template.option_categories %>
+  <ul class="project-categories">
+    <% project.categories.each do |category| %>
+      <%
+      category_l10n = category.localization_for(block.language)
+      next if category_l10n.nil?
+      %>
+      <li>
+        <%= link_to category_l10n, category_l10n.current_permalink_url_in_website(@website) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

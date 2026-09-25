@@ -21,21 +21,21 @@ class Extranet::PagesController < Extranet::ApplicationController
     @metrics = []
     if current_extranet.has_feature?(:alumni)
       @metrics.concat [
-        { value: current_extranet.alumni.count, name: University::Person::Alumnus.model_name.human(count: 2) },
-        { value: current_extranet.academic_years.count, name: Administration::AcademicYear.model_name.human(count: 2) },
-        { value: current_extranet.cohorts.count, name: Administration::Cohort.model_name.human(count: 2) },
-        { value: current_extranet.about.university_person_alumni_organizations.count, name: University::Organization.model_name.human(count: 2) }
+        { value: current_extranet.alumni.count, model_name: University::Person::Alumnus.model_name },
+        { value: current_extranet.academic_years.count, model_name: Administration::AcademicYear.model_name },
+        { value: current_extranet.cohorts.count, model_name: Administration::Cohort.model_name },
+        { value: current_extranet.about.university_person_alumni_organizations.count, model_name: University::Organization.model_name }
       ]
     end
     if current_extranet.has_feature?(:contacts)
       @metrics.concat [
-        { value: current_extranet.connected_organizations.count, name: University::Organization.model_name.human(count: 2) }
+        { value: current_extranet.connected_organizations.count, model_name: University::Organization.model_name }
       ]
     end
     if current_extranet.has_feature?(:alumni) || current_extranet.has_feature?(:contacts)
       @metrics.concat [
-        { value: current_extranet.users.count, name: User.model_name.human(count: 2) },
-        { value: current_extranet.experiences.count, name: University::Person::Experience.model_name.human(count: 2) },
+        { value: current_extranet.users.count, model_name: User.model_name },
+        { value: current_extranet.experiences.count, model_name: University::Person::Experience.model_name },
       ]
     end
     breadcrumb

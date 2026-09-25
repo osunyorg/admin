@@ -3,7 +3,7 @@
     <div class="col-sm-6 col-lg-3 col-xxl-2">
       <div class="<%= osuny_card_classes %>">
         <%= render 'admin/application/components/thumbnail',
-                    image: user.picture,
+                    image_blob: user.picture.attached? ? user.picture.blob : nil,
                     initials: user.initials,
                     large: true,
                     cropped: true

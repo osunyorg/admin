@@ -1,0 +1,9 @@
+<%
+if exhibition.deleted?
+  partial_name = 'deleted'
+else
+  partial_name = 'default'
+end
+%>
+<%= render "admin/communication/websites/agenda/exhibitions/exhibition/#{partial_name}",
+            exhibition: exhibition %>

@@ -14,7 +14,7 @@
     },
     {
       "command": "*/10 * * * * rails auto:synchronize_websites",
-      "size": "S"
+      "size": "M"
     },
     {
       "command": "*/10 * * * * rails auto:log_tasks_count",

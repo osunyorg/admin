@@ -1,17 +1,36 @@
 <%
+hide_date ||= false
+hide_size ||= false
 l10n = file.best_localization_for(current_language)
 %>
 <div class="<%= osuny_card_classes(horizontal: true) %>">
-  <div class="osuny__thumbnail
-              osuny__thumbnail--small
-              osuny__thumbnail--cropped">
-    <span class="osuny__thumbnail__icon">
-      <i class="<%= l10n.icon %>" title="<%= l10n.original_content_type %>"></i>
-    </span>
-  </div>
+  <% if l10n.featured_blob.present? %>
+    <%= osuny_thumbnail l10n %>
+  <% else %>
+    <div class="osuny__thumbnail
+                osuny__thumbnail--small
+                osuny__thumbnail--cropped">
+      <span class="osuny__thumbnail__icon">
+        <i class="<%= l10n.icon %>" title="<%= l10n.original_content_type %>"></i>
+      </span>
+    </div>
+  <% end %>
   <div class="card-body">
+    <%= osuny_published_localized file %>
     <%= osuny_link_localized  file,
                               admin_communication_file_path(file),
                               classes: 'stretched-link' %>
+  </div>
+  <div class="card-footer small text-muted">
+    <% unless hide_date %>
+      <span class="ms-3">
+        <%= l file.created_at, format: :date_with_explicit_month %>
+      </span>
+    <% end %>
+    <% unless hide_size %>
+      <span class="ms-3">
+        <%= number_to_human_size l10n.original_byte_size %>
+      </span>
+    <% end %>
   </div>
 </div>

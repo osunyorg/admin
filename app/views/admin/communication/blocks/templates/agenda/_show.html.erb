@@ -19,7 +19,7 @@
           event_l10n = event.localization_for(block.language)
           event_link = event_l10n.current_permalink_url_in_website(@website) || '#'
         %>
-          <article class="event <% if event_l10n.featured_image.attached? %>event--with-image<% end %>" itemscope itemtype="https://schema.org/Event">
+          <article class="event <% if event_l10n.featured_blob.present? %>event--with-image<% end %>" itemscope itemtype="https://schema.org/Event">
             <div class="event-content">
               <% if event_l10n.subtitle %>
                 <hgroup>
@@ -83,8 +83,8 @@
               <% end %>
             </div>
             <div class="media">
-              <% if event_l10n.featured_image.attached? %>
-                <%= kamifusen_tag event_l10n.featured_image %>
+              <% if event_l10n.featured_blob.present? %>
+                <%= kamifusen_tag event_l10n.featured_blob %>
               <% end %>
             </div>
           </article>

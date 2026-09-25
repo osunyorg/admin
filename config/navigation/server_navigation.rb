@@ -12,8 +12,11 @@ SimpleNavigation::Configuration.run do |navigation|
                   Language.model_name.human(count: 2),
                   server_languages_path
     primary.item  :emergency_messages,
-                  EmergencyMessage.model_name.human(count: 2),
+                  Server::EmergencyMessage.model_name.human(count: 2),
                   server_emergency_messages_path
+    primary.item  :evolutions,
+                  Server::Evolution.model_name.human(count: 2),
+                  server_evolutions_path
     primary.item  :optin_users,
                   t('server_admin.optin_users.title'),
                   server_optin_users_path

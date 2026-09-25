@@ -1,0 +1,4 @@
+dan_gold: <%= ActiveStorage::FixtureSet.blob(
+  filename: "dan-gold.jpeg",
+  university_id: ActiveRecord::FixtureSet.identify(:default_university, :uuid)
+) %>

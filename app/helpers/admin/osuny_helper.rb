@@ -36,11 +36,10 @@ module Admin::OsunyHelper
 
   def osuny_thumbnail(object, large: false, cropped: true, classes: '')
     return if object.nil?
-    image = object.respond_to?(:featured_image) ? object.featured_image
-                                                : nil
+    image_blob = object.try(:featured_blob)
     render  partial: "admin/application/components/thumbnail",
             locals: {
-              image: image,
+              image_blob: image_blob,
               initials: object.initials,
               large: large,
               cropped: cropped,
@@ -61,7 +60,8 @@ module Admin::OsunyHelper
   end
 
   def osuny_published_localized(object)
-    state = object.published_in?(current_language)
+    l10n = object.localization_for(current_language)
+    state = l10n.try(:publication_state) || object.published_in?(current_language)
     osuny_published(state)
   end
 

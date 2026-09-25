@@ -2,20 +2,21 @@
   <div class="container">
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
-
       <ul class="files">
-        <% block.template.elements.each do |element| %>
-          <% next unless element.blob %>
-          <li>
+        <% block.template.communication_file_localizations_published.each do |l10n| %>
+          <li<% if l10n.featured_blob.present? %> class="with-image"<% end %>>
             <figure>
-              <a href="<%= element.blob.url %>" target="_blank" title="<%= element.title %>">
-                <%= element.title %>
+              <a href="" target="_blank" title="<%= l10n.name %>">
+                <%= l10n.name %>
                 <figcaption>
-                  <abbr title=""><%= element.blob.filename.extension.upcase %></abbr>
-                  - <abbr title=""><%= number_to_human_size element.blob.byte_size %></abbr>
+                  <abbr title=""><%= l10n.original_extension.sub('.', '').upcase %></abbr>
+                  - <abbr title=""><%= number_to_human_size l10n.original_byte_size %></abbr>
                 </figcaption>
               </a>
             </figure>
+            <% if l10n.featured_blob %>
+              <%= kamifusen_tag l10n.featured_blob, width: 300, class: 'img-fluid' %>
+            <% end %>
           </li>
         <% end %>
       </ul>

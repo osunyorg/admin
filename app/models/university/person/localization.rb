@@ -4,9 +4,10 @@
 #
 #  id                    :uuid             not null, primary key
 #  biography             :text
+#  chosen_name           :string
 #  deleted_at            :datetime
-#  featured_image_alt    :text
 #  featured_image_credit :text
+#  featured_media_alt    :text
 #  first_name            :string
 #  last_name             :string
 #  linkedin              :string
@@ -23,22 +24,25 @@
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  about_id              :uuid             uniquely indexed => [language_id], indexed
+#  featured_media_id     :uuid             indexed
 #  language_id           :uuid             uniquely indexed => [about_id], indexed
 #  university_id         :uuid             indexed
 #
 # Indexes
 #
-#  idx_on_about_id_language_id_54757d0dad                  (about_id,language_id) UNIQUE
-#  index_university_person_localizations_on_about_id       (about_id)
-#  index_university_person_localizations_on_language_id    (language_id)
-#  index_university_person_localizations_on_slug           (slug)
-#  index_university_person_localizations_on_university_id  (university_id)
+#  idx_on_about_id_language_id_54757d0dad                      (about_id,language_id) UNIQUE
+#  index_university_person_localizations_on_about_id           (about_id)
+#  index_university_person_localizations_on_featured_media_id  (featured_media_id)
+#  index_university_person_localizations_on_language_id        (language_id)
+#  index_university_person_localizations_on_slug               (slug)
+#  index_university_person_localizations_on_university_id      (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_469b2f6a6f  (about_id => university_people.id)
 #  fk_rails_5eca3fe920  (university_id => universities.id)
 #  fk_rails_bf16824595  (language_id => languages.id)
+#  fk_rails_f217ecfb87  (featured_media_id => communication_medias.id) ON DELETE => nullify
 #
 class University::Person::Localization < ApplicationRecord
   acts_as_paranoid
@@ -47,14 +51,12 @@ class University::Person::Localization < ApplicationRecord
   include Backlinkable
   include Contentful
   include HasBlobs
-  include HasFeaturedImage # TODO Arnaud: Future feature of person's cover image
+  include HasFeaturedMedia # TODO Arnaud: Future feature of person's cover image
   include HasGitFiles
   include HasUniversity
   include Permalinkable
   include Publishable
   include Sanitizable
-
-  delegate :featured_image, to: :person
 
   has_summernote :summary
   has_summernote :biography
@@ -66,6 +68,12 @@ class University::Person::Localization < ApplicationRecord
     University::Person.unscoped { super }
   end
   alias person about
+
+  # Persons have no featured media yet, their picture is used as illustration
+  def featured_blob
+    person.best_picture.attached? ? person.best_picture.blob
+                                  : super
+  end
 
   def person_l10n
     @person_l10n ||= University::Person::Localization.with_deleted.find(id)
@@ -105,22 +113,25 @@ class University::Person::Localization < ApplicationRecord
     "admin/university/people/static"
   end
 
+  # "Jean Dupont (Martin)" si nom d'usage, sinon "Jean Dupont"
   def to_s
-    "#{first_name} #{last_name}".strip
+    chosen_name.present? ? "#{first_name} #{last_name} (#{chosen_name})".strip 
+                         : "#{first_name} #{last_name}".strip
   end
-
+  
   def to_s_with_mail
     about.email.present? ? "#{to_s} (#{about.email})" : to_s
   end
-
+  
+  # "Dupont (Martin) Jean" si nom d'usage, sinon "Dupont Jean"
   def to_s_alphabetical
-    "#{last_name} #{first_name}".strip
+    chosen_name.present? ? "#{last_name} #{first_name} (#{chosen_name})".strip 
+                         : "#{last_name} #{first_name}".strip
   end
 
   def initials
     "#{first_name.to_s.first}#{last_name.to_s.first}"
   end
-
 
   # user in statics where we don't need the cateogries not localized
   def categories
@@ -130,7 +141,7 @@ class University::Person::Localization < ApplicationRecord
   def explicit_blob_ids
     [
       picture&.blob_id,
-      featured_image&.blob_id
+      featured_blob&.id
     ]
   end
 

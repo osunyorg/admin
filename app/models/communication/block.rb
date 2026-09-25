@@ -48,9 +48,9 @@ class Communication::Block < ApplicationRecord
   include Orderable
   include Sanitizable
   include WithCommunicationFiles
+  include WithCommunicationMedias
   include WithHeadingRanks
   include WithHtmlClass
-  include WithMediaLibrary
   include WithTemplate
   include WithOpenApi # Must be included after WithTemplate to load template_kinds
 
@@ -100,24 +100,21 @@ class Communication::Block < ApplicationRecord
     @language ||= about.language
   end
 
-  def duplicate
+  def duplicate(to: about, keep_position: false)
     block = self.dup
+    block.about = to
+    block.migration_identifier = nil
+    block.position = nil unless keep_position
     block.save
     block
   end
 
   def paste(about)
-    block = self.dup
-    block.about = about
-    block.position = nil # Will be computed on save
-    block.save
-    block
+    duplicate(to: about)
   end
 
   def localize_for!(new_localization)
-    localized_block = self.dup
-    localized_block.about = new_localization
-    localized_block.save
+    duplicate(to: new_localization, keep_position: true)
   end
 
   def empty?
@@ -155,6 +152,7 @@ class Communication::Block < ApplicationRecord
 
   def execute_template_before_validation
     template.before_validation
+    self.data = template.data
   end
 
   def check_accessibility
@@ -163,7 +161,7 @@ class Communication::Block < ApplicationRecord
 
   def touch_about
     return if Osuny::BulkOperation.in_progress?
-    about.touch
+    about&.touch
   end
 
   def connect_to_websites

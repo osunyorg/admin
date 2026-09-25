@@ -5,7 +5,7 @@ large ||= false
 <% if l10n.logo.attached? %>
   <%= render partial: "admin/application/components/thumbnail",
             locals: {
-              image: l10n.logo,
+              image_blob: l10n.logo.blob,
               initials: l10n.initials,
               large: large,
               cropped: false

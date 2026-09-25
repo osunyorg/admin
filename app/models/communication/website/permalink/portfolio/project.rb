@@ -46,7 +46,7 @@ class Communication::Website::Permalink::Portfolio::Project < Communication::Web
 
   def substitutions
     {
-      year: about.about.year,
+      year: about.about.from_day.year,
       slug: about.slug
     }
   end

@@ -6,6 +6,7 @@ module Communication::Website::Permalink::WithMapping
       "Administration::AcademicYear::Localization" => Communication::Website::Permalink::AcademicYear,
       "Administration::Cohort::Localization" => Communication::Website::Permalink::Cohort,
       "Administration::Location::Localization" => Communication::Website::Permalink::Location,
+      "Communication::File::Localization" => Communication::Website::Permalink::File,
       "Communication::Website::Agenda::Event::Day" => Communication::Website::Permalink::Agenda::Event::Day,
       "Communication::Website::Agenda::Event::Localization" => Communication::Website::Permalink::Agenda::Event,
       "Communication::Website::Agenda::Event::TimeSlot::Localization" => Communication::Website::Permalink::Agenda::Event::TimeSlot,

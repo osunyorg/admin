@@ -1,0 +1,25 @@
+<div class="<%= osuny_card_classes(horizontal: true) %> align-items-start flex-grow-1">
+  <%= osuny_thumbnail_localized event, large: true %>
+  <div class="card-body">
+    <div class="d-flex">
+      <div>
+        <p class="mb-1">
+          <%= osuny_link_localized  event,
+                                    admin_communication_website_agenda_event_path(
+                                      website_id: event.website.id,
+                                      id: event.id
+                                    ),
+                                    classes: "stretched-link" %>
+        </p>
+        <%
+        event_l10n = event.best_localization_for(current_language)
+        %>
+        <% if event_l10n&.subtitle.present? %>
+          <p class="text-muted mt-1">
+            <%= event_l10n.subtitle.truncate(100) %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

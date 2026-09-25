@@ -1,4 +1,4 @@
-json.extract! project, :id, :migration_identifier, :full_width, :year, :bodyclass
+json.extract! project, :id, :migration_identifier, :full_width, :year, :from_day, :bodyclass
 json.localizations do
   project.localizations.each do |l10n|
     json.set! l10n.language.iso_code do

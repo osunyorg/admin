@@ -30,6 +30,15 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     add_breadcrumb t('admin.communication.website.pages.as_list')
   end
 
+  def picker
+    @picker = Osuny::Picker::Communication::Website::Page.new(
+      university: current_university,
+      language: current_language,
+      params: params,
+      context: @website
+    )
+  end
+
   def reorder
     result = @website.reorder_pages(
       item_id: params[:itemId],
@@ -175,7 +184,6 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
             localizations_attributes: [
               :id, :title, :subtitle, :breadcrumb_title, :meta_description, :summary, :header_text, :text, :slug, :published,
               :header_cta, :header_cta_label, :header_cta_url,
-              :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
               :shared_image, :shared_image_delete, :shared_image_infos,
               :language_id
             ]

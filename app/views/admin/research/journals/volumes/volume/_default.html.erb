@@ -1,0 +1,9 @@
+<div class="<%= osuny_card_classes %>">
+  <%= osuny_thumbnail_localized volume, large: true %>
+  <div class="card-body">
+    <%= osuny_published_localized volume %>
+    <%= osuny_link_localized  volume,
+                              admin_research_journal_volume_path(journal_id: @journal, id: volume),
+                              classes: 'stretched-link' %>
+  </div>
+</div>

@@ -27,6 +27,7 @@ class Communication::Website::Post < ApplicationRecord
   acts_as_paranoid
 
   include AsDirectObject
+  include Autosortable
   include Duplicable
   include Federated
   include Filterable

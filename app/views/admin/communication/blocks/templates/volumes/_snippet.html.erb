@@ -4,8 +4,8 @@
     %>
     <div class="row mb-3">
       <div class="col-2">
-        <% if l10n.featured_image.attached? %>
-          <%= kamifusen_tag l10n.featured_image, width: 200, class: 'img-fluid mb-2' %>
+        <% if l10n.featured_blob.present? %>
+          <%= kamifusen_tag l10n.featured_blob, width: 200, class: 'img-fluid mb-2' %>
         <% else %>
           <%= image_tag 'admin/placeholder.png', class: 'img-fluid mb-2' %>
         <% end %>

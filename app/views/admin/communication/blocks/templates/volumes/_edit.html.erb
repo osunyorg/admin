@@ -1,3 +1,10 @@
+<%
+website = block.about.website
+journal_id = website.about_id
+picker_title = Research::Journal::Paper.model_name.human(count: 2)
+picker_endpoint = picker_admin_research_journal_volumes_path(journal_id: journal_id, format: :json)
+object_endpoint = admin_research_journal_volumes_path(journal_id: journal_id)
+%>
 <%= block_component_edit block, :mode %>
 
 <div class="row">
@@ -8,26 +15,37 @@
 
 <div class="mb-4" v-if="data.mode == 'selection'">
   <h2 class="h4"><%= t '.selection.title' %></h2>
-  <%= block_component_add_element block, t('.selection.add') %>
-  <draggable :list="data.elements" handle=".dragHandle">
-    <div v-for="(element, index) in data.elements" class="draggable-item">
-      <div class="d-flex mb-n3">
-        <div>
-          <a class="btn ps-0 pt-0 dragHandle" title="Drag and drop">
-            <i class="<%= Icon::DRAG %> handle"></i>
-          </a>
-        </div>
-        <div class="flex-fill">
-          <%= block_component_edit block, :id, template: @element %>
-        </div>
-        <div>
-          <a  class="btn btn-sm text-danger ms-3"
-              @click="deleteElement(element)"
-              title="Supprimer">
-              <i class="<%= Icon::DELETE %>"></i>
-          </a>
-        </div>
-      </div>
+
+  <picker
+    ref="picker"
+    title="<%= picker_title %>"
+    endpoint="<%= picker_endpoint %>"
+    @update:model-value="data.elements.push({id: $event.id})">
+  </picker>
+
+  <a
+    class="<%= button_classes %>"
+    @click="$refs.picker.open()">
+    <%= t('.selection.add') %>
+  </a>
+
+  <draggable
+    :list="data.elements"
+    handle=".osuny__thumbnail"
+    class="row g-2 mb-2">
+    <div
+      v-for="(element, index) in data.elements"
+      class="d-flex align-items-center">
+      <selected-object
+        :id="element.id"
+        endpoint="<%= object_endpoint %>"
+        class="flex-fill">
+      </selected-object>
+      <a  class="btn btn-sm text-danger ms-3"
+          @click="deleteElement(element)"
+          title="Supprimer">
+          <i class="<%= Icon::DELETE %>"></i>
+      </a>
     </div>
   </draggable>
 </div>

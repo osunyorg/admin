@@ -1,0 +1,42 @@
+<div class="<%= osuny_card_classes(horizontal: true) %> align-items-start">
+  <%= osuny_thumbnail_localized exhibition, large: true %>
+  <div class="card-body row">
+    <div class="col-lg-8">
+      <div class="d-flex">
+        <div class="me-2">
+          <%= osuny_published_localized exhibition %>
+        </div>
+        <div>
+          <p class="mb-1">
+            <%= osuny_link_localized  exhibition,
+                                      admin_communication_website_agenda_exhibition_path(
+                                        website_id: exhibition.website.id,
+                                        id: exhibition.id
+                                      ),
+                                      classes: "stretched-link" %>
+          </p>
+          <%
+          exhibition_l10n = exhibition.best_localization_for(current_language)
+          %>
+          <% if exhibition_l10n&.subtitle.present? %>
+            <p class="text-muted mt-1">
+              <%= exhibition_l10n.subtitle.truncate(100) %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="row mb-2">
+        <div class="col-lg-6">
+          <%= osuny_label Communication::Website::Agenda::Exhibition.human_attribute_name(:from_day) %>
+          <p><%= l exhibition.from_day %></p>
+        </div>
+        <div class="col-lg-6">
+          <%= osuny_label Communication::Website::Agenda::Exhibition.human_attribute_name(:to_day) %>
+          <p><%= l exhibition.to_day %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<%= simple_form_for evolution do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="row">
+    <div class="col-lg-4">
+      <%= f.input :released_at, html5: true %>
+    </div>
+    <div class="col-lg-8">
+      <% Language.available_for_interface.each do |language| %>
+        <div class="mb-5">
+          <h2><%= language %></h2>
+          <% l10n = evolution.localizations.where(language: language).first_or_initialize %>
+          <%= f.simple_fields_for :localizations, l10n do |lf| %>
+            <%= lf.hidden_field :language_id, value: language.id %>
+            <%= lf.input :title %>
+            <%= lf.input :text %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <% content_for :action_bar_right do %>
+    <%= cancel evolution %>
+    <%= submit f %>
+  <% end %>
+<% end %>

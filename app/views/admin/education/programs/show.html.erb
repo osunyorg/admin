@@ -19,11 +19,11 @@
         <%= render 'admin/education/programs/show/children', children: @program.children %>
         <%= render 'admin/education/programs/show/schools', schools: @program.schools %>
         <%= render 'admin/education/programs/show/locations', locations: @program.locations %>
+        <%= render 'admin/education/programs/show/downloadable_summary', program: @program %>
       </div>
       <div class="col-lg-6">
         <%= render 'admin/education/programs/show/duration', duration: @l10n.duration %>
         <%= render 'admin/education/programs/show/registration_scheme', program: @program %>
-        <%= render 'admin/education/programs/show/downloadable_summary', downloadable_summary: @l10n.downloadable_summary %>
         <%= render 'admin/application/categories/widget/show', about: @program %>
       </div>
     </div>

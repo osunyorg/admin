@@ -10,6 +10,7 @@ module Communication::File::Localization::WithOpenApi
         name: { type: :string, nullable: true },
         slug: { type: :string, nullable: true },
         internal_description: { type: :string, nullable: true },
+        meta_description: { type: :string, nullable: true },
         original_byte_size: { type: :string, nullable: true },
         original_checksum: { type: :string, nullable: true },
         original_content_type: { type: :string, nullable: true },

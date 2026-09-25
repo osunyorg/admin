@@ -30,24 +30,20 @@ en:
             preview:
               sanitized_notice: For security reasons, the content has been filtered. Scripts will not be loaded and/or executed, and the apparence may be altered.
           file:
-            input:
-              label: File
-              remove: Remove file
+            button: Choose a file in the library
           image:
             alt:
               label: Alternative text
               placeholder: Enter alternative text
-            credit:
-              label: Credit
-              placeholder: Enter credit
-            input:
-              label: Image
-              remove: Remove image
           layouts:
             button: Choose the layout
             label: Layout
           link:
             target_blank: Open in new window
+          page:
+            button: Choose a page
+          person:
+            button: Choose a person
           text:
             label: Text
             placeholder: Enter text
@@ -368,7 +364,7 @@ en:
                 label: Description
               element:
                 file:
-                  label: File
+                  label: Send a file (max 500 MB)
                 title:
                   label: Title
                   placeholder: Enter title here
@@ -402,10 +398,9 @@ en:
                 text:
                   label: Image label
                   placeholder: Enter text
+              edit_texts: Edit the texts describing the images below
               move_images: Move images below to define the order
               remove_image: Remove image
-              send_and_edit_images: Send the images and enter the text below
-              send_multiple_images: Send multiple images
             layouts:
               carousel:
                 description: Images are big, with a previous / next navigation and a constant height.
@@ -545,6 +540,7 @@ en:
             description: A list of organizations with logo, name and website.
             edit:
               add_organization: Add organization
+              add_organization_unregistered: Add unregistered organization
               alphabetical:
                 label: Alphabetical order
               category_id:

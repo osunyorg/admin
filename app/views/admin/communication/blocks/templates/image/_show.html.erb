@@ -1,12 +1,36 @@
-<div class="<%= block_html_class(block) %>">
-  <div class="container">
-    <div class="block-content">
-      <%= render 'admin/communication/blocks/partials/top', block: block, without_description: true %>
-      <% if block.template.image.present? %>
-        <figure>
-          <%= block_component_show block, :image %>
-        </figure>
-      <% end %>
+<%
+component = block.template.image_component
+media = component.communication_media
+media_l10n = component.communication_media_localization
+blob = component.blob
+credit = media_l10n&.credit
+%>
+<% if blob.present? %>
+  <div class="<%= block_html_class(block) %>">
+    <div class="container">
+      <div class="block-content">
+        <%= render 'admin/communication/blocks/partials/top',
+                    block: block,
+                    without_description: true %>
+        <% if block.template.image.present? %>
+          <figure class="image-<%= blob.orientation %> lightbox-figure" role="figure">
+            <%= kamifusen_tag blob,
+                              width: 1024,
+                              alt: block.template.alt %>
+
+            <figcaption>
+              <div>
+                <%= block_component_snippet block, :text %>
+              </div>
+              <% if credit %>
+              <div class="credit">
+                <%= sanitize credit %>
+              </div>
+              <% end %>
+            </figcaption>
+          </figure>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
+<% end %>

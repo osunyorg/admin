@@ -1,0 +1,9 @@
+<%
+if paper.deleted?
+  partial_name = 'deleted'
+else
+  partial_name = 'default'
+end
+%>
+<%= render "admin/research/journals/papers/paper/#{partial_name}",
+            paper: paper %>

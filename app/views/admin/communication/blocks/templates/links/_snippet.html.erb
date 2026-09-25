@@ -1,5 +1,14 @@
-<ul class="list-unstyled">
-  <% block.template.elements.each do |element| %>
-    <li><%= element.title %></li>
-  <% end %>
-</ul>
+<% block.template.elements.each do |element| %>
+  <div class="row mb-3">
+    <% if element.image_component.blob.present? %>
+      <div class="col-2">
+        <%= block_component_snippet block, :image, template: element %>
+      </div>
+    <% end %>
+    <div class="col-10">
+      <p class="mb-0"><b><%= element.title %></b></p>
+      <%= sanitize element.description %>
+      <p><%= element.url %></p>
+    </div>
+  </div>
+<% end %>

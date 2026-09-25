@@ -18,6 +18,12 @@
           </div>
           <div class="row">
             <div class="col-xl-6">
+              <%= lf.input  :chosen_name,
+                            hint: t('simple_form.hints.university_person_localization.chosen_name') %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-6">
               <%= f.input :gender, label_method: lambda { |g| t("activerecord.attributes.university/person.genders.#{g[1]}") } %>
             </div>
             <div class="col-xl-6">
@@ -157,7 +163,7 @@
                       resize: 1 %>
           <%= lf.input :picture_credit,
                 as: :summernote,
-                hint: t('featured_image.credit.hint'),
+                hint: t('admin.communication.media.credit.hint'),
                 input_html: {
                   data: {
                     translatable: true,

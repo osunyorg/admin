@@ -16,7 +16,7 @@ class Communication::Block::Component::File < Communication::Block::Component::B
 
   def blob
     return if data_empty?
-    @blob ||= communication_file_localization&.original_blob
+    @blob ||= communication_file_localization&.blob_if_published
   end
 
   def communication_file_id
@@ -24,13 +24,17 @@ class Communication::Block::Component::File < Communication::Block::Component::B
   end
 
   def communication_file
-    return if data_empty?
+    return if data_empty? || communication_file_id.blank?
     @communication_file ||= university.communication_files.find_by(id: communication_file_id)
   end
 
   def communication_file_localization
-    return if data_empty?
+    return if data_empty? || communication_file.nil?
     @communication_file_localization ||= communication_file.localization_for(language)
+  end
+
+  def published?
+    communication_file_localization&.published
   end
 
   def default_data

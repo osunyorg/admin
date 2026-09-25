@@ -1,0 +1,34 @@
+<%
+Server::Evolution.planned.each do |evolution|
+  song = Osuny::Evolution::Song.random
+  l10n = evolution.best_localization_for(current_language)
+  %>
+  <div class="osuny_evolution">
+    <div class="container-fluid">
+      <div class="osuny_evolution__text">
+        <p class="osuny_evolution__text__title"><%= l10n.title %></p>
+        <div class="osuny_evolution__text__text"><%= simple_format l10n.text %></div>
+      </div>
+      <div class="osuny_evolution__date">
+        <div class="osuny_evolution__date__big">
+          <%= l evolution.released_at, format: "%d·%m" %>
+        </div>
+        <div class="osuny_evolution__date__long">
+          <%= l evolution.released_at, format: :full %>
+        </div>
+      </div>
+      <div class="osuny_evolution__song">
+        <p class="osuny_evolution__song__title"><%= song['title'] %></p>
+        <p class="osuny_evolution__song__by"><%= song['by'] %></p>
+        <div class="osuny_evolution__song__listen">
+          <%= t('evolutions.listen') %>
+          <ul>
+            <% song['listen'].each do |key, value| %>
+              <li><%= link_to key, value, target: :_blank %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

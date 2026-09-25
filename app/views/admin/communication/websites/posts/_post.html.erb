@@ -1,0 +1,11 @@
+<%
+if post.deleted?
+  partial_name = 'deleted'
+else
+  partial_name = 'default'
+end
+%>
+<%= render "admin/communication/websites/posts/post/#{partial_name}",
+            post: post,
+            hide_badges: hide_badges,
+            website: website %>

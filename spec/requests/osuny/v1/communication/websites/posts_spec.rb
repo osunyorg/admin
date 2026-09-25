@@ -93,12 +93,150 @@ RSpec.describe 'Communication::Website::Post' do
         }
       }
 
-      response '201', 'Successful creation' do
+      response '201', 'Successful creation with featured image blob id' do
+        let(:communication_website_post) {
+          {
+            post: {
+              migration_identifier: 'post-from-api-1',
+              full_width: false,
+              localizations: {
+                fr: {
+                  migration_identifier: 'post-from-api-1-fr',
+                  title: 'Ma nouvelle actualité',
+                  meta_description: 'Une nouvelle actualité depuis l\'API',
+                  featured_image: {
+                    blob_id: active_storage_blobs(:dan_gold).id,
+                    alt: 'La lumière brille sur les parois du canyon',
+                    credit: 'Photo de <a href="https://unsplash.com/fr/@johnnzhou">John Zhou</a> sur <a href="https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk">Unsplash</a>'
+                  },
+                  pinned: false,
+                  published: true,
+                  published_at: '2024-11-29T16:49:00Z',
+                  slug: 'ma-nouvelle-actualite',
+                  subtitle: 'Une nouvelle actualité',
+                  summary: 'Ceci est une nouvelle actualité créée depuis l\'API.'
+                }
+              }
+            }
+          }
+        }
+
         it 'creates a post and its localization', rswag: true do |example|
+          assert_difference ->{ Communication::Website::Post.count } => 1,
+                            ->{ Communication::Website::Post::Localization.count } => 1 do
+            submit_request(example.metadata)
+            assert_response_matches_metadata(example.metadata)
+            new_post = Communication::Website::Post.find_by(migration_identifier: 'post-from-api-1')
+            assert(new_post)
+            new_post_l10n = new_post.localizations.find_by(migration_identifier: 'post-from-api-1-fr')
+            assert(new_post_l10n)
+            assert_equal(communication_medias(:dan_gold).id, new_post_l10n.featured_media_id)
+          end
+        end
+      end
+
+      response '201', 'Successful creation with featured media id' do
+        let(:communication_website_post) {
+          {
+            post: {
+              migration_identifier: 'post-from-api-1',
+              full_width: false,
+              localizations: {
+                fr: {
+                  migration_identifier: 'post-from-api-1-fr',
+                  title: 'Ma nouvelle actualité',
+                  meta_description: 'Une nouvelle actualité depuis l\'API',
+                  featured_media_id: communication_medias(:dan_gold).id,
+                  pinned: false,
+                  published: true,
+                  published_at: '2024-11-29T16:49:00Z',
+                  slug: 'ma-nouvelle-actualite',
+                  subtitle: 'Une nouvelle actualité',
+                  summary: 'Ceci est une nouvelle actualité créée depuis l\'API.'
+                }
+              }
+            }
+          }
+        }
+
+        it 'creates a post and its localization', rswag: true do |example|
+          assert_difference ->{ Communication::Website::Post.count } => 1,
+                            ->{ Communication::Website::Post::Localization.count } => 1 do
+            submit_request(example.metadata)
+            assert_response_matches_metadata(example.metadata)
+            new_post = Communication::Website::Post.find_by(migration_identifier: 'post-from-api-1')
+            assert(new_post)
+            new_post_l10n = new_post.localizations.find_by(migration_identifier: 'post-from-api-1-fr')
+            assert(new_post_l10n)
+            assert_equal(communication_medias(:dan_gold).id, new_post_l10n.featured_media_id)
+          end
+        end
+      end
+
+      response '201', 'Successful creation with image block' do
+        let(:communication_website_post) {
+          {
+            post: {
+              migration_identifier: 'post-from-api-1',
+              full_width: false,
+              localizations: {
+                fr: {
+                  migration_identifier: 'post-from-api-1-fr',
+                  title: 'Ma nouvelle actualité',
+                  meta_description: 'Une nouvelle actualité depuis l\'API',
+                  pinned: false,
+                  published: true,
+                  published_at: '2024-11-29T16:49:00Z',
+                  slug: 'ma-nouvelle-actualite',
+                  subtitle: 'Une nouvelle actualité',
+                  summary: 'Ceci est une nouvelle actualité créée depuis l\'API.',
+                  blocks: [
+                    {
+                      migration_identifier: 'post-from-api-1-fr-block-1',
+                      template_kind: 'image',
+                      title: 'Mon premier chapitre',
+                      position: 1,
+                      published: true,
+                      data: {
+                        image: {
+                          id: active_storage_blobs(:dan_gold).id,
+                          filename: active_storage_blobs(:dan_gold).filename.to_s,
+                          signed_id: active_storage_blobs(:dan_gold).signed_id
+                        },
+                        alt: "Texte alternatif",
+                        credit: "Crédit de l'image",
+                        text: "Description de l'image"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+
+        it 'creates a post and its localization', rswag: true do |example|
+          assert_difference ->{ Communication::Website::Post.count } => 1,
+                            ->{ Communication::Website::Post::Localization.count } => 1 do
+            submit_request(example.metadata)
+            assert_response_matches_metadata(example.metadata)
+            new_post = Communication::Website::Post.find_by(migration_identifier: 'post-from-api-1')
+            assert(new_post)
+            new_post_l10n = new_post.localizations.find_by(migration_identifier: 'post-from-api-1-fr')
+            assert(new_post_l10n)
+            block = new_post_l10n.blocks.first
+            assert block.data["image"]
+            assert_equal communication_medias(:dan_gold).id, block.data["image"]["communication_media_id"]
+          end
+        end
+      end
+
+      response '201', 'Successful creation' do
+        it 'creates a post and its localization', rswag: true, vcr: true do |example|
           assert_difference ->{ Communication::Website::Post.count } => 1,
                             ->{ Communication::Website::Post::Localization.count } => 1,
                             ->{ Communication::Website::Permalink.count } => 1 do
-            assert_enqueued_jobs 1, only: Api::AttachFeaturedImageFromUrlJob do
+            assert_enqueued_jobs 1, only: Api::CreateFeaturedMediaFromUrlJob do
               submit_request(example.metadata)
               assert_response_matches_metadata(example.metadata)
               new_post = Communication::Website::Post.find_by(migration_identifier: 'post-from-api-1')
@@ -107,6 +245,12 @@ RSpec.describe 'Communication::Website::Post' do
               assert(new_post_l10n)
               permalink = Communication::Website::Permalink.find_by(about: new_post_l10n, path: '/fr/actus/nouvelle-actu/')
               assert(permalink)
+            end
+            assert_difference ->{ Communication::Media.count } => 1,
+                              ->{ Communication::Media::Localization.count } => 1 do
+              perform_enqueued_jobs only: Api::CreateFeaturedMediaFromUrlJob
+              media = Communication::Media.find_by(original_filename: "photo-1703923633616-254e78f6e9df")
+              assert(media)
             end
           end
         end
@@ -254,7 +398,7 @@ RSpec.describe 'Communication::Website::Post' do
       response '200', 'Successful upsertion' do
         it 'creates a post and updates another with their localizations', rswag: true do |example|
           assert_difference ->{ Communication::Website::Post.count } => 1, ->{ Communication::Website::Post::Localization.count } => 1 do
-            assert_enqueued_jobs 1, only: Api::AttachFeaturedImageFromUrlJob do
+            assert_enqueued_jobs 1, only: Api::CreateFeaturedMediaFromUrlJob do
               submit_request(example.metadata)
               assert_response_matches_metadata(example.metadata)
             end

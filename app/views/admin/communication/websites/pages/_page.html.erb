@@ -1,0 +1,9 @@
+<%
+if page.deleted?
+  partial_name = 'deleted'
+else
+  partial_name = 'default'
+end
+%>
+<%= render "admin/communication/websites/pages/page/#{partial_name}",
+            page: page %>
