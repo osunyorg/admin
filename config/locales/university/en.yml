@@ -18,7 +18,6 @@ en:
         private: Private
         public: Public
         public_or_private: Public/private
-        sms_sender_name: SMS sender name
         sso_button_label: Sign in button's label
         sso_cert: Certificate
         sso_mapping: Mapping
@@ -190,7 +189,6 @@ en:
         default_github_access_token_without_existing: Your Github confidential access token, used by default for websites created with Deuxfleurs hosting.<br>If empty, a token is defined on application level.
         is_really_a_university: Uncheck this to hide the 5 realms.
         languages: "Those languages are currently used on websites: %{used_languages}"
-        sms_sender_name: "11 characters max. Only alphanumeric chars ([A-Z][a-z][0-9])."
         sso_button_label: "Default: Sign in via SSO"
       university_organization:
         description: If this field is empty the main text's begining will be used.

@@ -22,8 +22,7 @@ module Brevo
     private
 
     def self.send_message(user, message)
-      sender_name = user.university.sms_sender_name
-      sender_name ||= DEFAULT_SENDER_NAME
+      sender_name = DEFAULT_SENDER_NAME
 
       api_instance = Brevo::TransactionalSMSApi.new
       send_transac_sms = Brevo::SendTransacSms.new(
