@@ -17,16 +17,22 @@ json.blocks @blocks do |block|
     json.copy copy_admin_communication_block_path(block, website_id: nil, extranet_id: nil)
   end
   json.text block.full_text.to_s.squish.truncate(200)
-  json.snippet  render(
-                  partial: 'admin/communication/blocks/block/snippet',
-                  locals: { block: block },
-                  formats: [:html]
-                )
+  if block.empty?
+    snippet = "<p class=\"small\">#{t('admin.communication.blocks.empty')}</p>"
+  else
+    snippet = render(
+      partial: 'admin/communication/blocks/block/snippet',
+      locals: { block: block },
+      formats: [:html]
+    )
+  end
+  json.snippet snippet
   json.a11y do
-      json.status render(
-                    partial: 'admin/application/a11y/status',
-                    locals: { about: block },
-                    formats: [:html]
-                  )
+    status = render(
+      partial: 'admin/application/a11y/status',
+      locals: { about: block },
+      formats: [:html]
+    )
+    json.status status
   end
 end
