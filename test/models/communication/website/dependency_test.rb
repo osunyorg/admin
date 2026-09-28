@@ -38,6 +38,35 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     page = page.reload
     assert_equal 5, page.recursive_dependencies(skip_direct: false).count
 
+    # On ajoute un block Fichiers : + 1 dépendance
+    # - le block Fichiers
+    block_file = page_l10n.blocks.new(position: 2, published: true, template_kind: :files)
+    assert_enqueued_with(job: Communication::Website::GitFile::IdentifyJob, args: [page_l10n]) do
+      block_file.save
+    end
+    perform_enqueued_jobs
+    assert_equal 6, page.recursive_dependencies(skip_direct: false).count
+
+    block_file.data = "{ \"elements\": [{\"title\": \"\", \"file\": {\"communication_file_id\": \"#{communication_files(:example_pdf).id}\"}, \"image\": {\"id\": \"\", \"communication_media_id\": \"\"}}], \"description\": \"\"}"
+    assert_enqueued_with(job: Communication::Website::GitFile::IdentifyJob, args: [page_l10n]) do
+      block_file.save
+    end
+    # On ajoute un fichiers : + 2 dépendances
+    # - le fichier lui-même
+    # - la localisation FR du fichier
+    # - l'original blob de la localisation
+    assert_equal 9, page.recursive_dependencies(skip_direct: false).count
+    clear_enqueued_jobs
+
+    # Vérifie qu'on a bien  une tâche de nettoyage (dépendances du bloc supprimé)
+    assert_enqueued_with(job: Dependencies::CleanObjectAfterDestroyJob) do
+      block_file.destroy
+    end
+    # Vérifie que le bloc Fichiers est bien marqué comme détruit avec paranoia
+    assert block_file.deleted?
+    # On a enlevé le bloc, reste les 5 dépendances avant l'ajout du bloc Fichiers
+    assert_equal 5, page.recursive_dependencies(skip_direct: false).count
+
     # On modifie le target du block
     block.data = "{ \"elements\": [ { \"id\": \"#{olivia.id}\" } ] }"
     assert_enqueued_with(job: Dependencies::CleanWebsitesIfNecessaryJob) do
@@ -48,7 +77,6 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     assert_enqueued_with(job: Communication::Website::CleanJob) do
       perform_enqueued_jobs(only: Dependencies::CleanWebsitesIfNecessaryJob)
     end
-      
     perform_enqueued_jobs(only: Communication::Website::CleanJob)
 
     # On modifie le bloc Personnes en remplaçant Arnaud par Olivia : -2 puis +2 dépendances

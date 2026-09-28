@@ -528,6 +528,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_25_073108) do
     t.text "featured_image_credit"
     t.string "featured_media_alt"
     t.uuid "featured_media_id"
+    t.string "file_server_current_checksum"
+    t.string "file_server_current_path"
+    t.string "file_server_slug"
     t.text "internal_description"
     t.uuid "language_id", null: false
     t.text "meta_description"
@@ -552,10 +555,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_25_073108) do
     t.index ["updated_by_id"], name: "index_communication_file_localizations_on_updated_by_id"
   end
 
+  create_table "communication_file_redirections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "communication_file_localization_id", null: false
+    t.datetime "created_at", null: false
+    t.string "path"
+    t.uuid "university_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["communication_file_localization_id"], name: "idx_on_communication_file_localization_id_b5293392d9"
+    t.index ["university_id"], name: "index_communication_file_redirections_on_university_id"
+  end
+
   create_table "communication_files", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.uuid "created_by_id"
     t.datetime "deleted_at"
+    t.boolean "is_lasting", default: true
     t.uuid "university_id", null: false
     t.datetime "updated_at", null: false
     t.index ["created_by_id"], name: "index_communication_files_on_created_by_id"
@@ -2404,6 +2418,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_25_073108) do
     t.index ["university_id"], name: "index_university_apps_on_university_id"
   end
 
+  create_table "university_file_servers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "ftp_host"
+    t.string "ftp_password"
+    t.string "ftp_path"
+    t.integer "ftp_port"
+    t.string "ftp_username"
+    t.uuid "university_id"
+    t.datetime "updated_at", null: false
+    t.string "url"
+    t.index ["university_id"], name: "index_university_file_servers_on_university_id", unique: true
+  end
+
   create_table "university_organization_categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "bodyclass"
     t.datetime "created_at", null: false
@@ -2852,6 +2879,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_25_073108) do
   add_foreign_key "communication_file_localizations", "languages"
   add_foreign_key "communication_file_localizations", "universities"
   add_foreign_key "communication_file_localizations", "users", column: "updated_by_id"
+  add_foreign_key "communication_file_redirections", "communication_file_localizations"
+  add_foreign_key "communication_file_redirections", "universities"
   add_foreign_key "communication_files", "universities"
   add_foreign_key "communication_files", "users", column: "created_by_id"
   add_foreign_key "communication_media_categories", "communication_media_categories", column: "parent_id"
@@ -3111,6 +3140,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_25_073108) do
   add_foreign_key "server_evolution_localizations", "server_evolutions", column: "evolution_id"
   add_foreign_key "universities", "languages", column: "default_language_id"
   add_foreign_key "university_apps", "universities"
+  add_foreign_key "university_file_servers", "universities"
   add_foreign_key "university_organization_categories", "universities"
   add_foreign_key "university_organization_categories", "university_organization_categories", column: "parent_id"
   add_foreign_key "university_organization_categories_organizations", "university_organization_categories", column: "category_id"
