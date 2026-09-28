@@ -34,6 +34,10 @@ class Communication::Block::Template::Form < Communication::Block::Template::Bas
     !about.respond_to?(:extranet)
   end
 
+  def empty?
+    url.blank?
+  end
+
   protected
 
   def embed_url

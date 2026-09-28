@@ -607,6 +607,7 @@ fr:
         name: Nom dans la langue (= "Français", "Deutsch", ...)
         summernote_locale: 'Nom de la locale de summernote (fr-FR / en-US). Vérifier ici que la locale est disponible : <a href="https://github.com/summernote/summernote/tree/develop/src/lang" target="_blank">repo summernote</a>'
       user:
+        chosen_name: "Remplissez ce champ uniquement si vous avez un nom d’usage distinct de votre nom légal"
         mobile_phone: "Format international (+XX). Ce numéro reste privé. En renseignant ce champ, vous acceptez de recevoir vos codes de double authentification par SMS."
     include_blanks:
       defaults:

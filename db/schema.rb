@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_18_115553) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_25_073108) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -2395,7 +2395,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_18_115553) do
     t.string "mail_from_name"
     t.string "name"
     t.boolean "private"
-    t.string "sms_sender_name"
     t.string "sso_button_label"
     t.text "sso_cert"
     t.jsonb "sso_mapping"

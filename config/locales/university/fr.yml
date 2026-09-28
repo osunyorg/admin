@@ -18,7 +18,6 @@ fr:
         private: Etablissement privé
         public: Public
         public_or_private: Public/privé
-        sms_sender_name: Nom de l'expéditeur SMS
         sso_button_label: Libellé du bouton de connexion
         sso_cert: Certificat
         sso_mapping: Mapping
@@ -200,7 +199,6 @@ fr:
         default_github_access_token_without_existing: Votre jeton d'accès Github confidentiel, utilisé par défaut pour les sites créés avec l'hébergement Deuxfleurs.<br>Si vide, un jeton est défini au niveau de l'application.
         is_really_a_university: Décocher cette case masque les 5 royaumes.
         languages: "Ces langues sont actuellement utilisées sans les sites web : %{used_languages}"
-        sms_sender_name: "11 caractères maximum. Que des caractères alphadécimaux ([A-Z][a-z][0-9])."
         sso_button_label: "Par défaut : Se connecter en SSO"
       university_file_server:
         ftp_password_with_existing: Laisser le champ vide pour ne pas modifier le mot de passe existant.
@@ -227,6 +225,8 @@ fr:
         from_year: "En poste depuis..."
         organization_name: "Choisissez l'organisation si elle existe, en la cherchant par nom ou SIREN. Si elle n'existe pas encore, créez-là en entrant simplement son nom."
         to_year: "Si vous êtes toujours à ce poste, laissez vide"
+      university_person_localization:
+        chosen_name: "Remplissez ce champ uniquement si vous avez un nom d’usage distinct de votre nom légal"
     include_blanks:
       defaults:
         organization: Sélectionnez une organisation

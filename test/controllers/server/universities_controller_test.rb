@@ -29,7 +29,6 @@ class Server::UniversitiesControllerTest < ActionDispatch::IntegrationTest
         university: {
           name: "Nouvelle université",
           identifier: "my-second-university",
-          sms_sender_name: "unitest2",
           default_language_id: languages(:fr).id
         }
       }
@@ -43,7 +42,6 @@ class Server::UniversitiesControllerTest < ActionDispatch::IntegrationTest
       post server_universities_path, params: {
         university: {
           name: "Nouvelle université",
-          sms_sender_name: "unitest2"
         }
       }
       assert_response(:unprocessable_content)

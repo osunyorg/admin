@@ -3,7 +3,6 @@ Language.where(name: 'English', iso_code: 'en').first_or_create
 
 University.where(identifier: 'demo').first_or_create(
   name: 'osuny',
-  sms_sender_name: 'osuny',
   default_language: fr
 )
 
