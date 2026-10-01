@@ -92,10 +92,10 @@ module Communication::Website::WithGitRepository
 
   def generate_git_file_for_references(references)
     references.each do |reference|
-      if !reference.try(:can_have_git_file?) && reference.respond_to?(:localizations)
-        generate_git_file_for_array(reference.localizations)
-      else
+      if reference.try(:can_have_git_file?)
         generate_git_file_for_object(reference)
+      elsif reference.respond_to?(:localizations)
+        generate_git_file_for_array(reference.localizations)
       end
     end
   end
