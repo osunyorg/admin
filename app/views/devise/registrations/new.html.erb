@@ -25,7 +25,6 @@
       <%= f.input :last_name,
                   required: true,
                   input_html: { autocomplete: "last_name" } %>
-      <%= f.input :chosen_name %>
       <%= f.association :language,
                         required: true,
                         collection: Language.available_for_interface,
