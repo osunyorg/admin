@@ -90,6 +90,16 @@ module Communication::Website::WithGitRepository
     Communication::Website::GitFile.generate self, object
   end
 
+  def generate_git_file_for_references(references)
+    references.each do |reference|
+      # Le test can_have_git_file? n'est pas utile pour que ça fonctionne,
+      # c'est déjà fait après. Mais ça évite du calcul inutile, c'est de l'optimisation.
+      generate_git_file_for_object(reference) if reference.try(:can_have_git_file?)
+      # Si l'objet a des localisations, on transmet.
+      generate_git_file_for_array(reference.localizations) if reference.respond_to?(:localizations)
+    end
+  end
+
   # Marque comme obsolete tous les git_files qui ne sont pas dans les recursive_dependencies_following_direct
   def mark_obsolete_git_files
     return unless git_repository.valid?
