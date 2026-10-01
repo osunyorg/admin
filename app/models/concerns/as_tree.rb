@@ -62,6 +62,11 @@ module AsTree
 
   protected
 
+  def tree_localizations
+    tree = [parent] + siblings + descendants
+    localizations.klass.where(about_id: tree.compact.map(&:id))
+  end
+
   def original_language
     self.respond_to?(:original_localization) ? original_localization.language : nil
   end
