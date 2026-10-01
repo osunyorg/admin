@@ -101,7 +101,9 @@ class Education::Program < ApplicationRecord
     super +
     schools +
     locations +
-    tree_localizations
+    siblings +
+    descendants +
+    [parent]
   end
 
   def has_administrative_information?

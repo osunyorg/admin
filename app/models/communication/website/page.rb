@@ -116,7 +116,9 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def references
-    tree_localizations.in_languages(website.active_language_ids) +
+    [parent] +
+    siblings +
+    descendants +
     website.menus.in_languages(website.active_language_ids)
   end
 
