@@ -92,7 +92,10 @@ module Communication::Website::WithGitRepository
 
   def generate_git_file_for_references(references)
     references.each do |reference|
+      # Le test can_have_git_file? n'est pas utile pour que ça fonctionne,
+      # c'est déjà fait après. Mais ça évite du calcul inutile, c'est de l'optimisation.
       generate_git_file_for_object(reference) if reference.try(:can_have_git_file?)
+      # Si l'objet a des localisations, on transmet.
       generate_git_file_for_array(reference.localizations) if reference.respond_to?(:localizations)
     end
   end
