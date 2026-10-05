@@ -62,6 +62,7 @@ class Ability::Admin < Ability
     # Est-ce bien raisonnable de laisser supprimer un site ?
     # Le risque de faussse manip est grand.
     cannot :destroy, Communication::Website, university_id: @user.university_id
+    cannot :unlock_synchronization, Communication::Website, synchronization_locked_by: { role: 'server_admin' }
     can :manage, Communication::Website::Localization, university_id: @user.university_id
     can :manage, Communication::Website::Alert, university_id: @user.university_id
     can :manage, Communication::Website::Agenda::Event, university_id: @user.university_id

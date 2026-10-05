@@ -149,7 +149,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   def update_synchronization
     enabled = params.dig(:communication_website, :synchronization_enabled)
     return if enabled.nil?
-    if enabled == '1' && @website.synchronization_locked?
+    if enabled == '1' && @website.synchronization_locked? && can?(:unlock_synchronization, @website)
       @website.unlock_synchronization!
     elsif enabled == '0' && !@website.synchronization_locked?
       @website.lock_synchronization!(current_user)

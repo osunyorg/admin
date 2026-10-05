@@ -29,6 +29,7 @@
                       as: :boolean,
                       wrapper: :custom_boolean_switch,
                       hint: render('admin/communication/websites/form/synchronization_hint', website: @website),
+                      disabled: @website.synchronization_locked? && cannot?(:unlock_synchronization, @website),
                       input_html: { checked: !@website.synchronization_locked? } %>
         </div>
       </div>
