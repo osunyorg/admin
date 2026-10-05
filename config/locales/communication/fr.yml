@@ -748,8 +748,10 @@ fr:
           previous_paths: Redirections (anciens chemins)
           title: Gérer les redirections
         see_showcase: Voir le showcase
-        synchronization_locked_by: Désactivée par %{user}.
-        synchronization_locked_by_role: Désactivée par un %{role}.
+        synchronization_locked_by: La synchronisation est actuellement désactivée (désactivée par %{user}).
+        synchronization_locked_by_role: La synchronisation est actuellement désactivée (désactivée par un %{role}).
+        synchronization_unlock: Réactiver la synchronisation
+        synchronization_unlocked: La synchronisation est réactivée, les modifications en attente vont être envoyées.
         synchronize:
           button: Synchroniser
           locked: La synchronisation est désactivée dans les réglages du site, aucune modification n'a été envoyée.

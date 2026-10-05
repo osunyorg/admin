@@ -79,6 +79,12 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     end
   end
 
+  def unlock_synchronization
+    @website.unlock_synchronization!
+    redirect_back fallback_location: admin_communication_website_path(@website),
+                  notice: t('admin.communication.website.synchronization_unlocked')
+  end
+
   def static
     @about = @website
     render layout: false, content_type: "text/plain; charset=utf-8"

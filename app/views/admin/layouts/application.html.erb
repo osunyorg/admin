@@ -21,6 +21,7 @@
   <%= render 'application/notice' %>
   <main class="container-fluid">
     <%= render 'admin/application/components/user_unconfirmed' unless current_user.confirmed? %>
+    <%= render 'admin/application/components/website_synchronization_locked', website: @website if @website&.synchronization_locked? %>
     <%# the next line (and the associated action / route / locales) can be safely deleted when every user has an optin_newsletter set %>
     <%= render 'admin/application/components/user_optin_unconfirmed' if current_user.optin_newsletter.nil? && @hide_optin_alert != true %>
     <div class="position-relative">
