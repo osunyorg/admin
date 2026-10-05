@@ -255,7 +255,7 @@ fr:
       title: Modifier la sélection
   cancel: Annuler
   category:
-    breadcrumb_title: Nom affiché dans le fil d'ariane
+    breadcrumb_title: Nom affiché dans le fil d'Ariane
     children: Sous-catégories
     free: Catégories libres (sans taxonomie)
     header_text: Titre affiché en haut de page
