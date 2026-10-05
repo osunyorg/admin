@@ -748,8 +748,8 @@ en:
           previous_paths: Redirects (old paths)
           title: Manage redirects
         see_showcase: See showcase
-        synchronization_locked_by: Synchronization has been disabled by %{user}.
-        synchronization_locked_by_role: Synchronization has been disabled by a %{role}.
+        synchronization_locked_by: Synchronization with Git has been disabled by %{user}.
+        synchronization_locked_by_role: Synchronization with Git has been disabled by a %{role}.
         synchronization_unlock: Enable synchronization
         synchronization_unlocked: Synchronization is enabled, pending changes will be pushed.
         synchronize:
