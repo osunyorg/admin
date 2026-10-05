@@ -177,6 +177,7 @@ fr:
         showcase_tags: Mots-clés
         social: Réseaux sociaux
         source_websites: Sources de contenus fédérées
+        synchronization_enabled: Synchronisation avec Git
         university: Université
         url: URL
         years_before_archive_content: Nombre d'années avant l'archivage du contenu
@@ -747,8 +748,11 @@ fr:
           previous_paths: Redirections (anciens chemins)
           title: Gérer les redirections
         see_showcase: Voir le showcase
+        synchronization_locked_by: Désactivée par %{user}.
+        synchronization_locked_by_role: Désactivée par un %{role}.
         synchronize:
           button: Synchroniser
+          locked: La synchronisation est désactivée dans les réglages du site, aucune modification n'a été envoyée.
           running: La synchronisation est lancée, un peu de patience...
         technical:
           description: Tout ce qui est lié aux réglages techniques
@@ -1006,6 +1010,7 @@ fr:
         plausible_url: Lien de partage généré selon la <a href="https://plausible.io/docs/shared-links" target="_blank">documentation officielle Plausible</a>.
         repository: Sous la forme organisation/nom, par exemple noesya/bordeauxmontaigne-iut, à laisser vide lors de la création d'un site avec Deuxfleurs.
         source_websites: Choisissez les sites Web qui pourront envoyer du contenu vers celui-ci
+        synchronization_enabled: Lorsque la synchronisation est désactivée, aucune modification n'est envoyée vers le dépôt Git du site. Les modifications en attente seront envoyées à la réactivation.
         university: Attention, le changement d'université va déconnecter les personnes et organisations qui sont utilisées dans d'autres sites, et déconnecter les personnes des utilisateurs ou utilisatrices.
         url: Laisser ce champ vide à la création du site avec Deuxfleurs, il sera rempli automatiquement.
       communication_website_menu_item:

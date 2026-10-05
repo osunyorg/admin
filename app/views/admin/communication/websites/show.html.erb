@@ -10,7 +10,7 @@
               production_admin_communication_website_path(@website),
               class: button_classes unless @website.in_production %>
   <% if can?(:synchronize, @website) && @desynchronized_generated_git_files.any? %>
-    <%= link_to synchronize_admin_communication_website_path(@website), method: :post, class: button_classes do %>
+    <%= link_to synchronize_admin_communication_website_path(@website), method: :post, class: button_classes(disabled: @website.synchronization_locked?) do %>
       <%= t('admin.communication.website.synchronize.button') %>
       <span class="badge rounded-pill border border-subtle text-dark"><%= @desynchronized_generated_git_files.length %></span>
     <% end %>

@@ -69,9 +69,14 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   end
 
   def synchronize
-    @website.sync_with_git
-    redirect_to admin_communication_website_path(@website),
-                notice: t('admin.communication.website.synchronize.running')
+    if @website.synchronization_locked?
+      redirect_to admin_communication_website_path(@website),
+                  alert: t('admin.communication.website.synchronize.locked')
+    else
+      @website.sync_with_git
+      redirect_to admin_communication_website_path(@website),
+                  notice: t('admin.communication.website.synchronize.running')
+    end
   end
 
   def static
@@ -99,6 +104,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def update
     if @website.update(website_params)
+      update_synchronization
       redirect_to [:admin, @website], notice: t('admin.successfully_updated_html', model: @website.to_s_in(current_language))
     else
       load_invalid_localization
@@ -132,6 +138,16 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def set_feature_nav
     @feature_nav = 'navigation/admin/communication/website/settings'
+  end
+
+  def update_synchronization
+    enabled = params.dig(:communication_website, :synchronization_enabled)
+    return if enabled.nil?
+    if enabled == '1' && @website.synchronization_locked?
+      @website.unlock_synchronization!
+    elsif enabled == '0' && !@website.synchronization_locked?
+      @website.lock_synchronization!(current_user)
+    end
   end
 
   def website_params

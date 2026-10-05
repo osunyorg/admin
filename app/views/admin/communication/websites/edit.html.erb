@@ -24,6 +24,13 @@
             <%= f.input :years_before_archive_content %>
           </div>
         </div>
+        <div class="col-lg-4 mb-4">
+          <%= f.input :synchronization_enabled,
+                      as: :boolean,
+                      wrapper: :custom_boolean_switch,
+                      hint: render('admin/communication/websites/form/synchronization_hint', website: @website),
+                      input_html: { checked: !@website.synchronization_locked? } %>
+        </div>
       </div>
     <% end %>
 
