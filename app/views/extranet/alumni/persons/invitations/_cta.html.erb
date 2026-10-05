@@ -5,7 +5,7 @@
       <%= link_to t('extranet.alumni.invitations.send.cta', name: l10n.first_name), 
                   alumni_new_invitation_path(person), 
                   class: 'btn btn-primary btn-sm position-relative z-2' %>
-    <% elsif person.extranet_invitations.latest.first.user_id == current_user.id %>
+    <% elsif person.last_extranet_invitation_sent_by?(current_user) %>
       <%= t('extranet.alumni.invitations.send.too_soon_same_user') %>
     <% else %>
       <%= t('extranet.alumni.invitations.send.too_soon_different_user') %>

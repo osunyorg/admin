@@ -75,6 +75,14 @@ module University::Person::WithAlumnus
     diploma_years.map(&:year).compact.uniq.sort.join(', ')
   end
 
+  def last_extranet_invitation
+    extranet_invitations.latest.first
+  end
+
+  def last_extranet_invitation_sent_by?(user)
+    last_extranet_invitation&.user_id == user.id
+  end
+
   def find_cohorts
     # based on https://stackoverflow.com/questions/3579924/accepts-nested-attributes-for-with-find-or-create
     cohorts_to_set = []

@@ -49,7 +49,7 @@ class Extranet::Alumni::Persons::InvitationsController < Extranet::Alumni::Appli
 
   def ensure_person_is_invitable
     unless Communication::Extranet::Invitation.sendable_to?(@person)
-      message = @person.extranet_invitations.latest.first.user_id == current_user.id ? 
+      message = @person.last_extranet_invitation_sent_by?(current_user) ?
         t('extranet.alumni.invitations.send.too_soon_same_user') : 
         t('extranet.alumni.invitations.send.too_soon_different_user')
       redirect_to [:alumni, @person], alert: message
