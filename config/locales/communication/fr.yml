@@ -292,7 +292,7 @@ fr:
         special_page: Page spéciale
         website: Site Web
       communication/website/page/localization:
-        breadcrumb_title: Nom affiché dans le fil d'ariane
+        breadcrumb_title: Nom affiché dans le fil d'Ariane
         header_text: Titre affiché en haut de page
         path: Chemin
         published: Publié ?
