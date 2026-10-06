@@ -754,8 +754,6 @@ fr:
           locked: La synchronisation est désactivée dans les réglages du site, aucune modification n'a été envoyée.
           locked_by: La synchronisation avec Git a été désactivée par %{user}
           running: La synchronisation est lancée, un peu de patience...
-          unlock: Réactiver la synchronisation
-          unlocked: La synchronisation est réactivée, les modifications en attente vont être envoyées.
         technical:
           description: Tout ce qui est lié aux réglages techniques
           label: Technique
