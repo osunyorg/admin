@@ -7,38 +7,29 @@
 
     <%= lf.hidden_field :language_id, value: current_language.id %>
 
-    <%= render 'admin/communication/websites/form/features', f: f %>
-
-    <%= osuny_separator %>
-
-    <%= osuny_panel t('communication.website.advanced_options') do %>
-      <div class="row">
-        <div class="col-lg-4 mb-4">
-          <%= f.input :feature_hourly_publication %>
-          <%= f.input :feature_unpublication_date %>
-        </div>
-        <div class="col-lg-4 mb-4">
-          <%= f.input :archive_content, input_html: { data: { conditional: true } } %>
+    <div class="row">
+      <div class="col-lg-6 col-xxl-4 mb-4">
+        <%= render 'admin/communication/websites/form/features', f: f %>
+      </div>
+      <div class="col-lg-6 col-xxl-4 mb-4">
+        <%= osuny_panel t('communication.website.advanced_options') do %>
+          <%= render 'admin/communication/websites/synchronization/form',
+                      f: f,
+                      website: @website %>
+          <%= f.input :feature_hourly_publication,
+                      wrapper: :custom_boolean_switch %>
+          <%= f.input :feature_unpublication_date,
+                      wrapper: :custom_boolean_switch %>
+          <%= f.input :archive_content,
+                      wrapper: :custom_boolean_switch,
+                      input_html: { data: { conditional: true } } %>
           <div  data-conditional-source="communication_website_archive_content"
                 data-conditional-value="true">
             <%= f.input :years_before_archive_content %>
           </div>
-        </div>
-        <div class="col-lg-4 mb-4">
-          <%= f.input :synchronization_enabled,
-                      as: :boolean,
-                      wrapper: :custom_boolean_switch,
-                      hint: render('admin/communication/websites/form/synchronization_hint', website: @website),
-                      disabled: @website.synchronization_locked? && cannot?(:unlock_synchronization, @website),
-                      input_html: { checked: !@website.synchronization_locked? } %>
-        </div>
+        <% end %>
       </div>
-    <% end %>
-
-    <%= osuny_separator %>
-
-    <div class="row">
-      <div class="col-lg-4">
+      <div class="col-lg-6 col-xxl-4 mb-4">
         <%= lf.input :name unless @website.persisted? %>
         <% if @website.localizations.many? %>
           <%= f.association :default_language,
@@ -50,8 +41,6 @@
                     collection: time_zones_for_select,
                     include_blank: false,
                     selected: f.object.default_time_zone || Time.zone.name %>
-      </div>
-      <div class="col-lg-4">
         <%= lf.input :default_image,
                       as: :single_deletable_file,
                       hint: images_formats_accepted_hint,
@@ -60,8 +49,6 @@
         <p class="form-text">
           <%= t('admin.communication.website.default_image') %>
         </p>
-      </div>
-      <div class="col-lg-4">
         <%= lf.input :default_shared_image,
                       as: :single_deletable_file,
                       hint: images_formats_accepted_hint,
@@ -69,7 +56,7 @@
                       preview: 300 %>
       </div>
     </div>
-    <%= osuny_separator %>
+
     <%= submit f %>
   <% end %>
 <% end %>

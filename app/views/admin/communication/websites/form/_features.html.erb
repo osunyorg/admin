@@ -1,24 +1,14 @@
 <%= osuny_panel Communication::Website.human_attribute_name('features') do %>
-  <div class="row">
-    <div class="col-lg-4 mb-4">
-      <%= f.input :feature_posts %>
-    </div>
-    <div class="col-lg-4 mb-4">
-      <%= f.input :feature_agenda %>
-    </div>
-    <div class="col-lg-4 mb-4">
-      <%= f.input :feature_portfolio %>
-    </div>
-    <div class="col-lg-4 mb-4">
-      <%= f.input :feature_jobboard %>
-    </div>
-    <% if @website.can_have_feature_alumni? %>
-      <div class="col-lg-4 mb-4">
-        <%= f.input :feature_alumni %>
-      </div>
-    <% end %>
-    <div class="col-lg-4 mb-4">
-      <%= f.input :feature_alerts %>
-    </div>
-  </div>
+  <%= f.input :feature_posts,
+              wrapper: :custom_boolean_switch %>
+  <%= f.input :feature_agenda,
+              wrapper: :custom_boolean_switch %>
+  <%= f.input :feature_portfolio,
+              wrapper: :custom_boolean_switch %>
+  <%= f.input :feature_jobboard,
+              wrapper: :custom_boolean_switch %>
+  <%= f.input :feature_alumni,
+              wrapper: :custom_boolean_switch if @website.can_have_feature_alumni? %>
+  <%= f.input :feature_alerts,
+              wrapper: :custom_boolean_switch %>
 <% end %>

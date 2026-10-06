@@ -1,0 +1,16 @@
+<% if can?(:synchronize, @website) && @desynchronized_generated_git_files.any? %>
+  <% if @website.synchronization_locked? %>
+    <%= link_to synchronize_admin_communication_website_path(@website, website_id: nil), method: :post, class: button_classes('disabled') do %>
+      <%= lucide_icon('lock') %>
+      <%= t('admin.communication.website.synchronization.button_locked') %>
+      <span class="badge rounded-pill border border-subtle text-dark">
+        <%= @desynchronized_generated_git_files.length %>
+      </span>
+    <% end %>
+  <% else %>
+    <%= link_to synchronize_admin_communication_website_path(@website, website_id: nil), method: :post, class: button_classes do %>
+      <%= t('admin.communication.website.synchronization.button') %>
+      <span class="badge rounded-pill border border-subtle text-dark"><%= @desynchronized_generated_git_files.length %></span>
+    <% end %>
+  <% end %>
+<% end %>

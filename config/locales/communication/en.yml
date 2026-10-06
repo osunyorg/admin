@@ -177,7 +177,7 @@ en:
         showcase_tags: Tags
         social: Social media
         source_websites: Sources of federated content
-        synchronization_enabled: Synchronization with Git
+        synchronization_active: Synchronization with Git
         university: University
         url: URL
         years_before_archive_content: Years before content archiving
@@ -748,8 +748,7 @@ en:
           previous_paths: Redirects (old paths)
           title: Manage redirects
         see_showcase: See showcase
-        synchronization_locked_by: Synchronization with Git has been disabled by %{user}.
-        synchronization_locked_by_role: Synchronization with Git has been disabled by a %{role}.
+        synchronization_locked_by: Synchronization with Git has been disabled by %{user}
         synchronization_unlock: Enable synchronization
         synchronization_unlocked: Synchronization is enabled, pending changes will be pushed.
         synchronize:
@@ -1012,7 +1011,7 @@ en:
         plausible_url: Dashboard link generated following the <a href="https://plausible.io/docs/shared-links" target="_blank">official Plausible documentation</a>.
         repository: As organization/name, for example noesya/bordeauxmontaigne-iut. Leave it empty when creating a website with Deuxfleurs.
         source_websites: Choose the websites that can send content to it
-        synchronization_enabled: When synchronization is disabled, no change is pushed to the website's Git repository. Pending changes will be pushed once it is enabled again.
+        synchronization_active: When synchronization is disabled, no change is pushed to the website's Git repository. Pending changes will be pushed once it is enabled again.
         university: Please note that changing university will disconnect people and organisations that are used on other sites, and will disconnect people from users.
         url: Leave this field empty when you create your website with Deuxfleurs, it will be filled in automatically.
       communication_website_menu_item:

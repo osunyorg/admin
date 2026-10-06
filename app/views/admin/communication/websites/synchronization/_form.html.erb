@@ -1,0 +1,4 @@
+<%= f.input :synchronization_active,
+            as: :boolean,
+            wrapper: :custom_boolean_switch,
+            disabled: cannot?(:unlock_synchronization, website) %>
