@@ -13,9 +13,10 @@
       </div>
       <div class="col-lg-6 col-xxl-4 mb-4">
         <%= osuny_panel t('communication.website.advanced_options') do %>
-          <%= render 'admin/communication/websites/synchronization/form',
-                      f: f,
-                      website: @website %>
+          <%= f.input :synchronization_active,
+                      as: :boolean,
+                      wrapper: :custom_boolean_switch,
+                      disabled: cannot?(:unlock_synchronization, @website) %>
           <%= f.input :feature_hourly_publication,
                       wrapper: :custom_boolean_switch %>
           <%= f.input :feature_unpublication_date,
