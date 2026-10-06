@@ -19,6 +19,10 @@ module Communication::Website::WithGitRepositoryLock
     !synchronization_locked?
   end
 
+  def synchronization_active?
+    synchronization_active
+  end
+
   def synchronization_locked?
     synchronization_locked_by_id.present?
   end

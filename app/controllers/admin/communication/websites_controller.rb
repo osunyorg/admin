@@ -69,7 +69,12 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   end
 
   def synchronize
-    term = @website.synchronization_locked? ? 'locked' : 'running'
+    if @website.synchronization_active?
+      term = 'running'
+      @website.sync_with_git
+    else
+      term = 'locked'
+    end
     redirect_to admin_communication_website_path(@website),
                 notice: t("admin.communication.website.synchronization.#{term}")
   end
