@@ -71,7 +71,7 @@ fr:
       user:
         admin_theme: Thème de l'administration
         current_sign_in_at: Dernière connexion
-        email: Email
+        email: Courriel
         first_name: Prénom
         language: Langue préférée
         last_name: Nom
@@ -271,7 +271,7 @@ fr:
     emails:
       email:
         hint: ''
-        label: Email
+        label: Courriel
     phone_numbers:
       phone:
         hint: ''
@@ -367,8 +367,8 @@ fr:
       new:
         title: Confirmation de compte
     failure:
-      invalid: "Email ou mot de passe incorrect."
-      not_found_in_database: "Email ou mot de passe incorrect."
+      invalid: "Courriel ou mot de passe incorrect."
+      not_found_in_database: "Courriel ou mot de passe incorrect."
       unauthenticated: ''
     mailer:
       two_factor_authentication_code:
