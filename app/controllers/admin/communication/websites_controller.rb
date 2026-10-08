@@ -69,9 +69,14 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   end
 
   def synchronize
-    @website.sync_with_git
+    if @website.synchronization_active?
+      notice = t("admin.communication.website.synchronization.running")
+      @website.sync_with_git
+    else
+      notice = t("admin.communication.website.synchronization.locked")
+    end
     redirect_to admin_communication_website_path(@website),
-                notice: t('admin.communication.website.synchronize.running')
+                notice: notice
   end
 
   def static
@@ -90,7 +95,8 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def create
     if @website.save
-      redirect_to [:admin, @website], notice: t('admin.successfully_created_html', model: @website.to_s_in(current_language))
+      redirect_to [:admin, @website],
+                  notice: t('admin.successfully_created_html', model: @website.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_content
@@ -99,7 +105,12 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def update
     if @website.update(website_params)
-      redirect_to [:admin, @website], notice: t('admin.successfully_updated_html', model: @website.to_s_in(current_language))
+      if can?(:unlock_synchronization, @website)
+        active = params.dig(:communication_website, :synchronization_active) == "1"
+        @website.manage_sync(active, current_user)
+      end 
+      redirect_to [:admin, @website],
+                  notice: t('admin.successfully_updated_html', model: @website.to_s_in(current_language))
     else
       load_invalid_localization
       breadcrumb
