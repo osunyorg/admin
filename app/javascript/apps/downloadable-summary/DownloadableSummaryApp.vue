@@ -33,7 +33,7 @@ export default {
 
 <template>
   <FileInput
-    accept="*"
+    :accept="dataset.accept"
     :object-endpoint="dataset.objectEndpoint"
     :picker-endpoint="dataset.pickerEndpoint"
     :picker-label="dataset.pickerLabel"
