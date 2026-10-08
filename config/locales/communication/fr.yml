@@ -60,7 +60,7 @@ fr:
         from_email: Votre email
         from_name: De la part de
         message: Message
-        to_email: Email de la personne invitée
+        to_email: Courriel de la personne invitée
         to_name: Pour
       communication/extranet/localization:
         cookies_policy: Politique de cookies

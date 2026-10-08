@@ -34,7 +34,7 @@ fr:
         city: Ville
         country: Pays
         digital: Coordonnées numériques
-        email: Email
+        email: Courriel
         geolocation: Coordonnées géographiques
         kind: Type
         legal: Informations légales
@@ -68,7 +68,7 @@ fr:
         contacts: Coordonnées
         country: Pays
         education_programs: Formations
-        email: Email
+        email: Courriel
         email_visibility: Visibilité de l'email
         essentials: Informations essentielles
         gender: Genre
