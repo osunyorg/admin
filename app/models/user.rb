@@ -3,7 +3,6 @@
 # Table name: users
 #
 #  id                            :uuid             not null, primary key
-#  chosen_name                   :string
 #  confirmation_sent_at          :datetime
 #  confirmation_token            :string           uniquely indexed
 #  confirmed_at                  :datetime
@@ -94,8 +93,7 @@ class User < ApplicationRecord
   }
 
   def to_s
-    name = "#{first_name} #{last_name}".strip
-    chosen_name.present? ? "#{name} (#{chosen_name})" : name
+    "#{first_name} #{last_name}".strip
   end
 
 end

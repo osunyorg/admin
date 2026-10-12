@@ -118,6 +118,7 @@ class Communication::Website::Page < ApplicationRecord
   def references
     [parent] +
     siblings +
+    descendants +
     website.menus.in_languages(website.active_language_ids)
   end
 

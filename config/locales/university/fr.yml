@@ -41,7 +41,7 @@ fr:
         city: Ville
         country: Pays
         digital: Coordonnées numériques
-        email: Email
+        email: Courriel
         geolocation: Coordonnées géographiques
         kind: Type
         legal: Informations légales
@@ -75,7 +75,7 @@ fr:
         contacts: Coordonnées
         country: Pays
         education_programs: Formations
-        email: Email
+        email: Courriel
         email_visibility: Visibilité de l'email
         essentials: Informations essentielles
         gender: Genre
@@ -126,7 +126,6 @@ fr:
         description: Mission (dans ce contexte)
       university/person/localization:
         biography: Biographie
-        chosen_name: Nom d'usage
         first_name: Prénom
         last_name: Nom de famille
         linkedin: LinkedIn (URL)
@@ -225,8 +224,6 @@ fr:
         from_year: "En poste depuis..."
         organization_name: "Choisissez l'organisation si elle existe, en la cherchant par nom ou SIREN. Si elle n'existe pas encore, créez-là en entrant simplement son nom."
         to_year: "Si vous êtes toujours à ce poste, laissez vide"
-      university_person_localization:
-        chosen_name: "Remplissez ce champ uniquement si vous avez un nom d’usage distinct de votre nom légal"
     include_blanks:
       defaults:
         organization: Sélectionnez une organisation

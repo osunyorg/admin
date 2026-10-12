@@ -14,14 +14,14 @@ url = page.new_record?  ? admin_communication_website_pages_path
         <%= osuny_panel t('content') do %>
           <%= lf.input  :title, input_html: { data: { translatable: true } } %>
           <%= lf.input  :subtitle, input_html: { data: { translatable: true } } %>
-          <%= lf.input  :breadcrumb_title,
-                        input_html: { data: { translatable: true } },
-                        hint: t('simple_form.hints.communication_website_page_localization.breadcrumb_title') %>
-          <%= render    'admin/application/summary/form', f: lf, about: l10n %>
           <%= lf.input  :header_text,
                         as: :string,
                         input_html: { data: { translatable: true } },
                         hint: t('simple_form.hints.communication_website_page_localization.header_text') %>
+          <%= lf.input  :breadcrumb_title,
+                        input_html: { data: { translatable: true } },
+                        hint: t('simple_form.hints.communication_website_page_localization.breadcrumb_title') %>
+          <%= render    'admin/application/summary/form', f: lf, about: l10n %>
           <%= render    'admin/application/header_cta/form', f: lf %>
           <%= lf.input  :text,
                         as: :summernote,

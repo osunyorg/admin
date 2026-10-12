@@ -60,7 +60,7 @@ fr:
         from_email: Votre email
         from_name: De la part de
         message: Message
-        to_email: Email de la personne invitée
+        to_email: Courriel de la personne invitée
         to_name: Pour
       communication/extranet/localization:
         cookies_policy: Politique de cookies
@@ -296,7 +296,7 @@ fr:
         special_page: Page spéciale
         website: Site Web
       communication/website/page/localization:
-        breadcrumb_title: Nom affiché dans le fil d'ariane
+        breadcrumb_title: Nom affiché dans le fil d'Ariane
         header_text: Titre affiché en haut de page
         path: Chemin
         published: Publié ?
