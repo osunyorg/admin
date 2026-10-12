@@ -17,6 +17,10 @@ module HasOriginalBlob
               unless: :original_blob
   end
 
+  def deleted_original_blob
+    @deleted_original_blob ||= ActiveStorage::Blob.find(original_blob_id)
+  end
+
   def original_blob=(value)
     super(value)
     return if value.blank?
@@ -69,7 +73,7 @@ module HasOriginalBlob
   end
 
   def exists_for_blob_checksum?(blob)
-    objects = self.class.where(university_id: university.id)
+    objects = self.class.where(university_id: university.id).with_deleted
     if objects.where(original_checksum: blob.checksum).where.not(id: self.id).any?
       errors.add :original_uploaded_file, :already_imported
       true

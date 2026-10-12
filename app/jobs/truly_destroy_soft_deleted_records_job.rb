@@ -6,6 +6,8 @@ class TrulyDestroySoftDeletedRecordsJob < ApplicationJob
     Administration::Location,
     Administration::Location::Localization,
     Communication::Block,
+    Communication::File,
+    Communication::File::Localization,
     Communication::Website::Alert,
     Communication::Website::Page,
     Communication::Website::Post,

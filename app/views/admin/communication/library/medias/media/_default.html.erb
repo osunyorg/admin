@@ -1,0 +1,29 @@
+<%
+l10n = media.best_localization_for(current_language)
+initials = l10n.initials
+image = media.original_blob
+%>
+<div class="<%= osuny_card_classes %>">
+  <div class="osuny__thumbnail
+              osuny__thumbnail--large
+              osuny__thumbnail--cropped">
+    <% if image.variable? %>
+      <%= kamifusen_tag image,
+                        width: 600,
+                        height: 600,
+                        crop: true,
+                        quality: 50,
+                        class: 'img-fluid' %>
+    <% else %>
+      <span class="osuny__thumbnail__initials">
+        <%= initials %>
+      </span>
+    <% end %>
+  </div>
+  <div class="card-body">
+    <%= osuny_published_localized media %>
+    <%= osuny_link_localized  media,
+                              admin_communication_media_path(media),
+                              classes: 'small stretched-link' %>
+  </div>
+</div>
