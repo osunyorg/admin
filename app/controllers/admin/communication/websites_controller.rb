@@ -142,7 +142,9 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       :feature_posts, :feature_agenda, :feature_portfolio, :feature_jobboard, :feature_alumni, :feature_syndication, :feature_alerts, :feature_hourly_publication, :feature_unpublication_date,
       :default_time_zone, :hosting, :apache_config_custom_content,
       :deployment_status_badge, :autoupdate_theme, :archive_content, :years_before_archive_content,
+      :kelmscott_active, :kelmscott_sync_method,
       showcase_tag_ids: [], source_website_ids: [],
+      variables_attributes: [:id, :key, :value],
       localizations_attributes: [
         :id, :language_id, :name, :published,
         :social_mastodon, :social_x, :social_linkedin, :social_youtube,

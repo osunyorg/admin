@@ -173,6 +173,8 @@ en:
         in_production: Production
         in_production_at: Production release date
         in_showcase: List website in showcase
+        kelmscott_active: Enable Kelmscott
+        kelmscott_sync_method: Synchronization type
         languages: Languages
         locked_at: Locked for background jobs at
         name: Name
@@ -393,6 +395,10 @@ en:
               blank: must be correct, as defined by RFC2396
               not_unique: already used by another alias
               reserved_for_home: is reserved for the home page
+        communication/website/variable:
+          attributes:
+            value:
+              kelmscott_public_key_missing: cannot be encrypted, the Kelmscott public key is not configured
     models:
       communication/block:
         one: Content block
@@ -818,6 +824,11 @@ en:
         button: Go live
         title: Go live
       hosting: Hosting
+      kelmscott:
+        masked: Secret saved and encrypted, it can never be displayed again. Leave blank to keep it.
+        subtitle: Website build and deployment by Kelmscott, on a sovereign infrastructure.
+        title: Kelmscott
+        variables: Variables and secrets
       menus:
         automatic: This menu is created automatically. <br>This means that it reflects the site's tree structure. <br>As soon as you want to modify it, by creating an item, the automatism will stop.
         default_title:
@@ -949,6 +960,11 @@ en:
           netlify: Netlify
           nginx: Nginx
           undefined: Undefined
+        kelmscott_sync_method:
+          dxfl: dxfl
+          rsync: rsync
+          s3: S3
+          sftp: SFTP
         menu:
           item:
             kind:

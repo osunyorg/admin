@@ -30,6 +30,8 @@
 #  in_production                :boolean          default(FALSE)
 #  in_production_at             :datetime
 #  in_showcase                  :boolean          default(TRUE)
+#  kelmscott_active             :boolean          default(FALSE)
+#  kelmscott_sync_method        :integer
 #  last_sync_at                 :datetime
 #  locked_at                    :datetime
 #  plausible_url                :string
@@ -87,6 +89,7 @@ class Communication::Website < ApplicationRecord
   include WithFederations
   include WithGitRepository
   include WithHosting
+  include WithKelmscott
   include WithLock
   include WithManagers
   include WithOpenApi

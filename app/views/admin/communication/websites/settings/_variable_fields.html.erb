@@ -1,0 +1,20 @@
+<% variable = f.object
+   secret_saved = variable.persisted? && variable.secret? %>
+<%= f.hidden_field :key %>
+<% if variable.secret? %>
+  <%# Un secret enregistré est chiffré : il n'est jamais renvoyé, le champ reste vide %>
+  <%= f.input :value,
+              as: variable.multiline? ? :text : :password,
+              label: variable.key,
+              hint: (t('communication.website.kelmscott.masked') if secret_saved),
+              input_html: {
+                value: '',
+                autocomplete: 'new-password',
+                style: ('-webkit-text-security: disc' if variable.multiline?)
+              } %>
+<% else %>
+  <%= f.input :value,
+              as: :string,
+              label: variable.key,
+              input_html: { autocomplete: 'off' } %>
+<% end %>

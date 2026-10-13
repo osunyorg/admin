@@ -173,6 +173,8 @@ fr:
         in_production: Site en production
         in_production_at: Date de mise en production
         in_showcase: Présenter le site dans le showcase
+        kelmscott_active: Activer Kelmscott
+        kelmscott_sync_method: Type de synchronisation
         languages: Langues
         locked_at: Verrouillé pour les background jobs à
         name: Nom
@@ -393,6 +395,10 @@ fr:
               blank: doit être un chemin correct, comme défini par la RFC2396
               not_unique: déjà utilisé par un autre alias
               reserved_for_home: est réservé pour la page d'accueil
+        communication/website/variable:
+          attributes:
+            value:
+              kelmscott_public_key_missing: la clé publique de Kelmscott n'est pas configurée, le secret ne peut pas être chiffré
     models:
       communication/block:
         one: Bloc de contenu
@@ -818,6 +824,11 @@ fr:
         button: Mettre en production
         title: Mise en production
       hosting: Hébergement
+      kelmscott:
+        masked: Secret enregistré et chiffré, il ne peut plus être affiché. Laisser vide pour le conserver.
+        subtitle: Construction et déploiement du site par Kelmscott, sur une infrastructure souveraine.
+        title: Kelmscott
+        variables: Variables et secrets
       menus:
         automatic: Ce menu se constitue automatiquement. <br>Cela signifie qu'il reflète l'arborescence du site. <br>Dès que vous souhaiterez le modifier, en créant un élément, l'automatisme s'arrêtera.
         default_title:
@@ -949,6 +960,11 @@ fr:
           netlify: Netlify
           nginx: Nginx
           undefined: Non défini
+        kelmscott_sync_method:
+          dxfl: dxfl
+          rsync: rsync
+          s3: S3
+          sftp: SFTP
         menu:
           item:
             kind:
