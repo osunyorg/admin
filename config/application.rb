@@ -65,6 +65,7 @@ module Osuny
 
     # FILES
     config.default_file_max_size = 100.megabytes
+    config.default_files_formats = ['.avif', '.doc', '.docx', '.eps', '.fig', '.ics', '.jpeg', '.jpg', '.m4a', '.mov', '.mp3', '.mp4', '.msg', '.ods', '.odt', '.pdf', '.png', '.potx', '.pptx', '.rar', '.rdf', '.svg', '.vcf', '.xls', '.xlsx', '.zip']
     config.default_image_max_size = 5.megabytes
     config.default_images_formats = ['.jpg', '.jpeg', '.png', '.svg']
     config.default_audio_formats = ['.mp3']
