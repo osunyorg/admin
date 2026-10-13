@@ -32,9 +32,7 @@ class Communication::Website::Variable < ApplicationRecord
     SFTP_USER: 102,
     SFTP_PASSWORD: 103,
     SFTP_PATH: 104,
-    DXFL_USERNAME: 200,
-    DXFL_PASSWORD: 201,
-    DXFL_WEBSITE: 202,
+    DXFL_BUCKET: 200,
     RSYNC_HOST: 300,
     RSYNC_PORT: 301,
     RSYNC_USER: 302,
@@ -56,9 +54,9 @@ class Communication::Website::Variable < ApplicationRecord
       'SFTP_PATH'
     ],
     'dxfl' => [
-      'DXFL_USERNAME',
-      'DXFL_PASSWORD',
-      'DXFL_WEBSITE'
+      'DXFL_BUCKET',
+      'AWS_ACCESS_KEY_ID',
+      'AWS_SECRET_ACCESS_KEY'
     ],
     'rsync' => [
       'RSYNC_HOST',
@@ -78,7 +76,6 @@ class Communication::Website::Variable < ApplicationRecord
 
   SECRET_KEYS = [
     'SFTP_PASSWORD',
-    'DXFL_PASSWORD',
     'RSYNC_SSH_PRIVATE_KEY',
     'AWS_SECRET_ACCESS_KEY'
   ].freeze
