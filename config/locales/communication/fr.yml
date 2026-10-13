@@ -137,7 +137,7 @@ fr:
         access_token: Jeton d'accès
         apache_config_custom_content: Configuration Apache personnalisée (fichier .htaccess)
         appearance: Apparence
-        archive_content: Archiver le contenu ?
+        archive_content: Cycle de vie du contenu
         autoupdate_theme: Mise à jour automatique du thème osuny
         config_apache_config: Fichier de configuration Apache (.htaccess)
         config_default_content_security_policy: Politiques de sécurités pour définir les CSP (CORS)
@@ -160,7 +160,7 @@ fr:
         feature_alerts: Alertes
         feature_alumni: Alumni
         feature_hourly_publication: Programmation à l'heure
-        feature_unpublication_date: Dépublication planifiée
+        feature_unpublication_date: Planification de la dépublication
         feature_jobboard: Offres d'emploi
         feature_portfolio: Portfolio
         feature_posts: Actualités

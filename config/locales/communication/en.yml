@@ -137,7 +137,7 @@ en:
         access_token: Access token
         apache_config_custom_content: Custom Apache configuration (.htaccess file)
         appearance: Appearance
-        archive_content: Archive content?
+        archive_content: Content lifecycle
         autoupdate_theme: Automatically update osuny theme
         config_apache_config: Apache specific configuration (.htaccess)
         config_default_content_security_policy: Security policies (CORS)
