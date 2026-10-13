@@ -137,7 +137,7 @@ fr:
         access_token: Jeton d'accès
         apache_config_custom_content: Configuration Apache personnalisée (fichier .htaccess)
         appearance: Apparence
-        archive_content: Archiver le contenu ?
+        archive_content: Cycle de vie du contenu
         autoupdate_theme: Mise à jour automatique du thème osuny
         config_apache_config: Fichier de configuration Apache (.htaccess)
         config_default_content_security_policy: Politiques de sécurités pour définir les CSP (CORS)
@@ -160,7 +160,7 @@ fr:
         feature_alerts: Alertes
         feature_alumni: Alumni
         feature_hourly_publication: Programmation à l'heure
-        feature_unpublication_date: Dépublication planifiée
+        feature_unpublication_date: Planification de la dépublication
         feature_jobboard: Offres d'emploi
         feature_portfolio: Portfolio
         feature_posts: Actualités
@@ -181,6 +181,7 @@ fr:
         showcase_tags: Mots-clés
         social: Réseaux sociaux
         source_websites: Sources de contenus fédérées
+        synchronization_active: Synchronisation avec Git
         university: Université
         url: URL
         years_before_archive_content: Nombre d'années avant l'archivage du contenu
@@ -753,8 +754,11 @@ fr:
           previous_paths: Redirections (anciens chemins)
           title: Gérer les redirections
         see_showcase: Voir le showcase
-        synchronize:
+        synchronization:
           button: Synchroniser
+          button_locked: Synchronisation bloquée
+          locked: La synchronisation est désactivée dans les réglages du site, aucune modification n'a été envoyée.
+          locked_by: La synchronisation avec Git a été désactivée par %{user}
           running: La synchronisation est lancée, un peu de patience...
         technical:
           description: Tout ce qui est lié aux réglages techniques
@@ -1014,6 +1018,7 @@ fr:
         plausible_url: Lien de partage généré selon la <a href="https://plausible.io/docs/shared-links" target="_blank">documentation officielle Plausible</a>.
         repository: Sous la forme organisation/nom, par exemple noesya/bordeauxmontaigne-iut, à laisser vide lors de la création d'un site avec Deuxfleurs.
         source_websites: Choisissez les sites Web qui pourront envoyer du contenu vers celui-ci
+        synchronization_active: Lorsque la synchronisation est désactivée, aucune modification n'est envoyée vers le dépôt Git du site. Les modifications en attente seront envoyées à la réactivation.
         university: Attention, le changement d'université va déconnecter les personnes et organisations qui sont utilisées dans d'autres sites, et déconnecter les personnes des utilisateurs ou utilisatrices.
         url: Laisser ce champ vide à la création du site avec Deuxfleurs, il sera rempli automatiquement.
       communication_website_menu_item:

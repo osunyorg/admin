@@ -1,0 +1,8 @@
+<% if @website && @website&.synchronization_locked? %>
+  <div class="container-fluid text-center mb-5">
+    <%= lucide_icon('lock') %>
+    <span class="small ms-2">
+      <%= t('admin.communication.website.synchronization.locked_by', user: @website.synchronization_locked_by) %>
+    </span>
+  </div>
+<% end %>
