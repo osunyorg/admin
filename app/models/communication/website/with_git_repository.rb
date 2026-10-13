@@ -77,6 +77,9 @@ module Communication::Website::WithGitRepository
     if git_files.desynchronized_until(last_sync_at).any?
       # More than one batch, we need to requeue the job
       Communication::Website::SyncWithGitJob.perform_later(id)
+    else
+      # Sync is over, the website can be built
+      kelmscott_publish
     end
   end
 

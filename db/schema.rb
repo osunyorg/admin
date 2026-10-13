@@ -1639,11 +1639,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_13_162501) do
   create_table "communication_website_variables", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "communication_website_id", null: false
     t.datetime "created_at", null: false
-    t.integer "key"
+    t.integer "key", null: false
     t.uuid "university_id", null: false
     t.datetime "updated_at", null: false
     t.string "value"
-    t.index ["communication_website_id"], name: "idx_on_communication_website_id_960c95f303"
+    t.index ["communication_website_id", "key"], name: "idx_on_communication_website_id_key_682d89f654", unique: true
     t.index ["university_id"], name: "index_communication_website_variables_on_university_id"
   end
 

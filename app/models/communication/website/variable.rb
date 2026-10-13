@@ -3,16 +3,16 @@
 # Table name: communication_website_variables
 #
 #  id                       :uuid             not null, primary key
-#  key                      :integer
+#  key                      :integer          not null, uniquely indexed => [communication_website_id]
 #  value                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  communication_website_id :uuid             not null, indexed
+#  communication_website_id :uuid             not null, uniquely indexed => [key]
 #  university_id            :uuid             not null, indexed
 #
 # Indexes
 #
-#  idx_on_communication_website_id_960c95f303              (communication_website_id)
+#  idx_on_communication_website_id_key_682d89f654          (communication_website_id,key) UNIQUE
 #  index_communication_website_variables_on_university_id  (university_id)
 #
 # Foreign Keys
@@ -89,10 +89,12 @@ class Communication::Website::Variable < ApplicationRecord
 
   validates :key, presence: true, uniqueness: { scope: :communication_website_id }
 
+  # Un secret enregistré n'est jamais renvoyé au navigateur : un champ vide signifie "ne pas modifier"
   before_validation :keep_secret_value_if_blank
   before_validation :set_university
-
-  scope :ordered, -> (language = nil) { order(:key) }
+  # Les secrets sont chiffrés avec la clé publique de Kelmscott (libsodium sealed box), seul Kelmscott peut les déchiffrer
+  validate :kelmscott_public_key_must_be_present, if: :secret_value_to_encrypt?
+  before_save :encrypt_secret_value, if: :secret_value_to_encrypt?
 
   def to_s
     "#{key}"

@@ -827,8 +827,6 @@ fr:
       kelmscott:
         masked: Secret enregistré et chiffré, il ne peut plus être affiché. Laisser vide pour le conserver.
         subtitle: Construction et déploiement du site par Kelmscott, sur une infrastructure souveraine.
-        title: Kelmscott
-        variables: Variables et secrets
       menus:
         automatic: Ce menu se constitue automatiquement. <br>Cela signifie qu'il reflète l'arborescence du site. <br>Dès que vous souhaiterez le modifier, en créant un élément, l'automatisme s'arrêtera.
         default_title:

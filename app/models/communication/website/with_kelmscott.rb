@@ -13,13 +13,25 @@ module Communication::Website::WithKelmscott
     has_many  :variables,
               class_name: 'Communication::Website::Variable',
               foreign_key: :communication_website_id,
+              inverse_of: :communication_website,
               dependent: :destroy
     accepts_nested_attributes_for :variables,
                                   reject_if: -> (attributes) { attributes['id'].blank? && attributes['value'].blank? }
 
     validates :kelmscott_sync_method, presence: true, if: :kelmscott_active?
 
-    after_save :clean_kelmscott_variables
+    after_save :clean_kelmscott_variables, if: :saved_change_to_kelmscott_sync_method?
+  end
+
+  def kelmscott_publish
+    return unless kelmscott_active?
+    Communication::Website::Kelmscott::PublishJob.perform_later(id)
+  end
+
+  def kelmscott_publish_safely
+    return unless kelmscott_active? && repository.present?
+    response = Kelmscott.new(self).publish
+    raise "Kelmscott refused to publish #{repository}: #{response.status} #{response.body}" unless response.status == 202
   end
 
   def kelmscott_variable(key)
