@@ -133,7 +133,7 @@ class Communication::Website::Variable < ApplicationRecord
   end
 
   def libsodium_box
-    public_key = RbNaCl::PublicKey.new(Base64.decode64(ENV['KELMSCOTT_PUBLIC_KEY']))
+    public_key = RbNaCl::PublicKey.new(Base64.strict_decode64(ENV['KELMSCOTT_PUBLIC_KEY']))
     RbNaCl::Boxes::Sealed.from_public_key(public_key)
   end
 end

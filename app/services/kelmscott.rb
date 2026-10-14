@@ -13,18 +13,13 @@ class Kelmscott
   def publish
     body = payload.to_json
     timestamp = Time.now.to_i.to_s
-    client.post path, body, {
+    client.post website.kelmscott_path, body, {
       'X-Kelmscott-Timestamp' => timestamp,
       'X-Kelmscott-Signature' => signature(timestamp, body)
     }
   end
 
   protected
-
-  # /noesya/noesya-www
-  def path
-    "/#{website.repository}"
-  end
 
   def payload
     {
@@ -34,9 +29,10 @@ class Kelmscott
     }
   end
 
+  # Signée en octets (.b) : avec une chaîne UTF-8, RbNaCl tronque la signature par caractères
   def signature(timestamp, body)
-    message = "#{timestamp}\nPOST #{path}\n#{body}"
-    Base64.strict_encode64(signing_key.sign(message))
+    message = "#{timestamp}\nPOST #{website.kelmscott_path}\n#{body}"
+    Base64.strict_encode64(signing_key.sign(message.b))
   end
 
   def signing_key

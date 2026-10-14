@@ -24,22 +24,27 @@ module Communication::Website::WithKelmscott
   end
 
   def kelmscott_publish
-    return unless kelmscott_active?
+    return unless kelmscott_publishable?
     Communication::Website::Kelmscott::PublishJob.perform_later(id)
   end
 
   def kelmscott_publish_safely
-    return unless kelmscott_active? && repository.present?
+    return unless kelmscott_publishable?
     response = Kelmscott.new(self).publish
-    raise "Kelmscott refused to publish #{repository}: #{response.status} #{response.body}" unless response.status == 202
+    raise "Kelmscott refused to publish #{kelmscott_path}: #{response.status} #{response.body}" unless response.status == 202
   end
 
-  # https://kelmscott.osuny.org/noesya/noesya-www
+  # Identifiant de l'université et nom du dépôt : osunydev/rennes-ici -> /rennes-staging/rennes-ici
+  def kelmscott_path
+    "/#{university.identifier}/#{repository.split('/').last}"
+  end
+
+  # https://kelmscott.osuny.org/rennes-staging/rennes-ici
   def kelmscott_url
-    "#{ENV['KELMSCOTT_URL']}/#{repository}"
+    "#{ENV['KELMSCOTT_URL']}#{kelmscott_path}"
   end
 
-  # https://kelmscott.osuny.org/noesya/noesya-www/badge.svg
+  # https://kelmscott.osuny.org/rennes-staging/rennes-ici/badge.svg
   def kelmscott_badge_url
     "#{kelmscott_url}/badge.svg"
   end
@@ -49,6 +54,10 @@ module Communication::Website::WithKelmscott
   end
 
   protected
+
+  def kelmscott_publishable?
+    kelmscott_active? && repository.present?
+  end
 
   # Les variables dépendent du type de synchronisation :
   # celles qui ne correspondent plus au type choisi sont supprimées.
