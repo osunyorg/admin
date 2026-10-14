@@ -74,6 +74,11 @@ class Communication::Website::Variable < ApplicationRecord
     ]
   }.freeze
 
+  # Toutes les variables, toutes méthodes confondues
+  KEYS = KEYS_BY_SYNC_METHOD.values.flatten.uniq.freeze
+
+  # Chiffrés à l'enregistrement. Ils arrivent en clair dans le formulaire, sous leur nom :
+  # chaque nom doit être masqué par les filtres de config/initializers/filter_parameter_logging.rb (passw, secret, _key).
   SECRET_KEYS = [
     'SFTP_PASSWORD',
     'RSYNC_SSH_PRIVATE_KEY',
@@ -86,8 +91,6 @@ class Communication::Website::Variable < ApplicationRecord
 
   validates :key, presence: true, uniqueness: { scope: :communication_website_id }
 
-  # Un secret enregistré n'est jamais renvoyé au navigateur : un champ vide signifie "ne pas modifier"
-  before_validation :keep_secret_value_if_blank
   before_validation :set_university
   # Les secrets sont chiffrés avec la clé publique de Kelmscott (libsodium sealed box), seul Kelmscott peut les déchiffrer
   validate :kelmscott_public_key_must_be_present, if: :secret_value_to_encrypt?
@@ -110,11 +113,6 @@ class Communication::Website::Variable < ApplicationRecord
   end
 
   protected
-
-  def keep_secret_value_if_blank
-    return unless persisted? && secret? && value.blank?
-    restore_attributes [:value]
-  end
 
   def set_university
     self.university_id ||= communication_website&.university_id

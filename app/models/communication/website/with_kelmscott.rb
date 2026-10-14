@@ -14,9 +14,8 @@ module Communication::Website::WithKelmscott
               class_name: 'Communication::Website::Variable',
               foreign_key: :communication_website_id,
               inverse_of: :communication_website,
+              autosave: true,
               dependent: :destroy
-    accepts_nested_attributes_for :variables,
-                                  reject_if: -> (attributes) { attributes['id'].blank? && attributes['value'].blank? }
 
     validates :kelmscott_sync_method, presence: true, if: :kelmscott_active?
 
@@ -51,6 +50,19 @@ module Communication::Website::WithKelmscott
 
   def kelmscott_variable(key)
     variables.detect { |variable| variable.key == key } || variables.build(key: key)
+  end
+
+  # Valeurs du formulaire, par nom de variable.
+  # Un champ vide supprime la variable, sauf un secret déjà enregistré : il n'est jamais renvoyé au formulaire.
+  def kelmscott_variables=(values)
+    values.each do |key, value|
+      variable = kelmscott_variable(key)
+      if value.present?
+        variable.value = value
+      elsif variable.new_record? || !variable.secret?
+        variable.mark_for_destruction
+      end
+    end
   end
 
   protected
