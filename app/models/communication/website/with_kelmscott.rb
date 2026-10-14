@@ -81,7 +81,7 @@ module Communication::Website::WithKelmscott
   # Les variables dépendent du type de synchronisation :
   # celles qui ne correspondent plus au type choisi sont supprimées.
   def clean_kelmscott_variables
-    keys = Communication::Website::Variable.keys_for(kelmscott_sync_method)
+    keys = Communication::Website::Variable::KEYS_BY_SYNC_METHOD.fetch(kelmscott_sync_method.to_s, [])
     variables.where.not(key: keys).destroy_all
   end
 

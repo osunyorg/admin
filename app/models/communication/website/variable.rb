@@ -97,10 +97,6 @@ class Communication::Website::Variable < ApplicationRecord
     "#{key}"
   end
 
-  def self.keys_for(sync_method)
-    KEYS_BY_SYNC_METHOD.fetch(sync_method.to_s, [])
-  end
-
   def secret?
     key.in?(SECRET_KEYS)
   end
