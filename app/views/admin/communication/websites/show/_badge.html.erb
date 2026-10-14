@@ -1,5 +1,15 @@
-<% if website.deployment_status_badge.present? && website.git_repository.present? %>
-  <%= link_to website.repository_url, target: :_blank do %>
-    <%= image_tag website.deployment_status_badge, alt: '' %>
+<% if website.repository.present? %>
+  <% if website.kelmscott_active? %>
+    <%= link_to website.kelmscott_url, target: :_blank do %>
+      <%= image_tag website.kelmscott_badge_url, alt: '' %>
+    <% end %><br>
+    <%= link_to t('admin.communication.website.kelmscott_publish.button'),
+                kelmscott_publish_admin_communication_website_path(website),
+                method: :post,
+                class: button_classes('btn-xs mt-2') if can?(:kelmscott_publish, website) %>
+  <% elsif website.deployment_status_badge.present? %>
+    <%= link_to website.repository_url, target: :_blank do %>
+      <%= image_tag website.deployment_status_badge, alt: '' %>
+    <% end %>
   <% end %>
 <% end %>

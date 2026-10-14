@@ -617,6 +617,9 @@ fr:
             button: Afficher un bouton d'action dans l'entête
             label: Texte du bouton d'action
             url: URL du bouton d'action
+        kelmscott_publish:
+          button: Relancer la publication
+          running: La publication est lancée, un peu de patience...
         localizations:
           fallback_hint_html: "Laisser vide pour utiliser la valeur par défaut : <i>%{master_value}</i>"
           title: Internationalisation

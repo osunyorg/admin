@@ -74,6 +74,12 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
                 notice: t('admin.communication.website.synchronize.running')
   end
 
+  def kelmscott_publish
+    @website.kelmscott_publish
+    redirect_to admin_communication_website_path(@website),
+                notice: t('admin.communication.website.kelmscott_publish.running')
+  end
+
   def static
     @about = @website
     render layout: false, content_type: "text/plain; charset=utf-8"

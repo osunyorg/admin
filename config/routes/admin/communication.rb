@@ -15,6 +15,7 @@ namespace :communication do
       get :confirm_localization
       post :do_confirm_localization
       post :synchronize
+      post :kelmscott_publish
       scope 'git-analysis' do
         get '' => 'websites/git_analysis#index', as: :git_analysis
         post '' => 'websites/git_analysis#launch'

@@ -34,6 +34,16 @@ module Communication::Website::WithKelmscott
     raise "Kelmscott refused to publish #{repository}: #{response.status} #{response.body}" unless response.status == 202
   end
 
+  # https://kelmscott.osuny.org/noesya/noesya-www
+  def kelmscott_url
+    "#{ENV['KELMSCOTT_URL']}/#{repository}"
+  end
+
+  # https://kelmscott.osuny.org/noesya/noesya-www/badge.svg
+  def kelmscott_badge_url
+    "#{kelmscott_url}/badge.svg"
+  end
+
   def kelmscott_variable(key)
     variables.detect { |variable| variable.key == key } || variables.build(key: key)
   end
