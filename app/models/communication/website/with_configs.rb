@@ -65,6 +65,7 @@ module Communication::Website::WithConfigs
 
   def config_deuxfleurs_workflow
     return unless hosted_with_deuxfleurs?
+    return if kelmscott_active
     @config_deuxfleurs_workflow ||= Communication::Website::Configs::DeuxfleursWorkflow.find(id)
   end
 
