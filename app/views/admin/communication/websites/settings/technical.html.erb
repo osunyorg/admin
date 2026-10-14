@@ -67,7 +67,7 @@
       </div>
     </div>
 
-    <%= render 'admin/communication/websites/settings/kelmscott', f: f %>
+    <%= render 'admin/communication/websites/settings/kelmscott', f: f if can?(:kelmscott_publish, @website) %>
 
     <%= submit f %>
   <% end %>
