@@ -1,6 +1,8 @@
-# Étape 2 de https://developers.osuny.org/docs/admin/sites-web/publisher/
-# Kelmscott reçoit en une seule requête la demande de build et ses paramètres (étape 3) :
+# Demande de compilation, https://developers.osuny.org/docs/admin/sites-web/kelmscott/
+# Kelmscott reçoit en une seule requête la demande et ses paramètres :
 # dépôt, type de synchronisation et variables, avec les secrets déjà chiffrés par sa clé publique.
+# La demande est signée avec la clé privée de l'admin. 
+# Kelmscott, qui n'a que la clé publique, vérifie qu'elle vient bien de l'admin et qu'elle est récente.
 class Kelmscott
   attr_reader :website
 
@@ -9,10 +11,20 @@ class Kelmscott
   end
 
   def publish
-    client.post(website.repository, payload.to_json)
+    body = payload.to_json
+    timestamp = Time.now.to_i.to_s
+    client.post path, body, {
+      'X-Kelmscott-Timestamp' => timestamp,
+      'X-Kelmscott-Signature' => signature(timestamp, body)
+    }
   end
 
   protected
+
+  # /noesya/noesya-www
+  def path
+    "/#{website.repository}"
+  end
 
   def payload
     {
@@ -22,11 +34,21 @@ class Kelmscott
     }
   end
 
+  def signature(timestamp, body)
+    message = "#{timestamp}\nPOST #{path}\n#{body}"
+    Base64.strict_encode64(signing_key.sign(message))
+  end
+
+  def signing_key
+    RbNaCl::SigningKey.new(Base64.strict_decode64(ENV['KELMSCOTT_SIGNING_KEY']))
+  end
+
+  # HTTPS obligatoire, y compris en développement : les paramètres non secrets (hôtes, utilisateurs, chemins)
+  # ne sont protégés que par TLS pendant le transport
   def client
+    raise ArgumentError, 'KELMSCOTT_URL must use https' unless URI.parse(ENV['KELMSCOTT_URL'].to_s).scheme == 'https'
     @client ||= Faraday.new url: ENV['KELMSCOTT_URL'],
-                            headers: { 'Content-Type' => 'application/json' } do |faraday|
-      faraday.request :authorization, 'Bearer', ENV['KELMSCOTT_TOKEN']
-    end
+                            headers: { 'Content-Type' => 'application/json' }
   end
 
 end
