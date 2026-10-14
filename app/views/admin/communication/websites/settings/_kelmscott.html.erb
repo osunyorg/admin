@@ -18,7 +18,9 @@
           data-conditional-value="<%= sync_method %>">
       <% keys.each do |key| %>
         <div class="col-lg-6 col-xxl-4">
-          <%= render 'admin/communication/websites/settings/variable_fields', variable: f.object.kelmscott_variable(key) %>
+          <%= render 'admin/communication/websites/settings/variable_fields',
+                     variable: f.object.kelmscott_variable(key),
+                     sync_method: sync_method %>
         </div>
       <% end %>
     </div>

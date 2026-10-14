@@ -142,6 +142,7 @@ module Communication::Website::WithGitRepository
     return if synchronization_locked?
     return unless git_repository.valid?
     git_repository.update_theme_version!
+    kelmscott_publish
   end
 
   def analyse_repository

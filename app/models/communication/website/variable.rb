@@ -74,9 +74,6 @@ class Communication::Website::Variable < ApplicationRecord
     ]
   }.freeze
 
-  # Toutes les variables, toutes méthodes confondues
-  KEYS = KEYS_BY_SYNC_METHOD.values.flatten.uniq.freeze
-
   # Chiffrés à l'enregistrement. Ils arrivent en clair dans le formulaire, sous leur nom :
   # chaque nom doit être masqué par les filtres de config/initializers/filter_parameter_logging.rb (passw, secret, _key).
   SECRET_KEYS = [

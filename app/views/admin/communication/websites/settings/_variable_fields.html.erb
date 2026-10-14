@@ -1,5 +1,6 @@
-<% name = "communication_website[kelmscott_variables][#{variable.key}]"
-   id = "communication_website_kelmscott_variables_#{variable.key.downcase}"
+<%# Nommé par méthode : un bloc masqué, envoyé aussi, n'écrase pas la variable du même nom d'une autre méthode %>
+<% name = "communication_website[kelmscott_variables][#{sync_method}][#{variable.key}]"
+   id = "communication_website_kelmscott_variables_#{sync_method}_#{variable.key.downcase}"
    secret_saved = variable.persisted? && variable.secret? %>
 <div class="mb-3">
   <%= label_tag id, variable.key, class: 'form-label' %>

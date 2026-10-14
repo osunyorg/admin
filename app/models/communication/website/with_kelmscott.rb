@@ -19,6 +19,7 @@ module Communication::Website::WithKelmscott
 
     validates :kelmscott_sync_method, presence: true, if: :kelmscott_active?
 
+    before_validation :assign_kelmscott_variables
     after_save :clean_kelmscott_variables, if: :saved_change_to_kelmscott_sync_method?
   end
 
@@ -52,10 +53,17 @@ module Communication::Website::WithKelmscott
     variables.detect { |variable| variable.key == key } || variables.build(key: key)
   end
 
-  # Valeurs du formulaire, par nom de variable.
+  # Valeurs du formulaire, par méthode puis par nom de variable. Les blocs des autres méthodes, masqués,
+  # sont envoyés aussi, et certaines variables sont communes à plusieurs méthodes (AWS_*) :
+  # seules les valeurs de la méthode choisie sont gardées, à l'enregistrement.
+  attr_writer :kelmscott_variables
+
+  protected
+
   # Un champ vide supprime la variable, sauf un secret déjà enregistré : il n'est jamais renvoyé au formulaire.
-  def kelmscott_variables=(values)
-    values.each do |key, value|
+  def assign_kelmscott_variables
+    return if @kelmscott_variables.nil?
+    @kelmscott_variables.to_h.fetch(kelmscott_sync_method.to_s, {}).each do |key, value|
       variable = kelmscott_variable(key)
       if value.present?
         variable.value = value
@@ -63,9 +71,8 @@ module Communication::Website::WithKelmscott
         variable.mark_for_destruction
       end
     end
+    @kelmscott_variables = nil
   end
-
-  protected
 
   def kelmscott_publishable?
     kelmscott_active? && repository.present?

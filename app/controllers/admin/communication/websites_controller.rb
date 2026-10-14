@@ -150,7 +150,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       :deployment_status_badge, :autoupdate_theme, :archive_content, :years_before_archive_content,
       :kelmscott_active, :kelmscott_sync_method,
       showcase_tag_ids: [], source_website_ids: [],
-      kelmscott_variables: Communication::Website::Variable::KEYS,
+      kelmscott_variables: Communication::Website::Variable::KEYS_BY_SYNC_METHOD,
       localizations_attributes: [
         :id, :language_id, :name, :published,
         :social_mastodon, :social_x, :social_linkedin, :social_youtube,
