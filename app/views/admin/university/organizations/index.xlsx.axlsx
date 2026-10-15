@@ -49,7 +49,7 @@ wb.add_worksheet(name: "index") do |sheet|
       organization.zipcode,
       organization.city,
       organization.country_name,
-      organization.kind_i18n,
+      organization.kind,
       organization.siren,
       organization.phone,
       l10n.url,
