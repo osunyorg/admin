@@ -1049,3 +1049,7 @@ en:
       communication_website_post:
         full_width: On large screens, a full width post uses all available space for the content.
         text: This field is deprecated, content will not be displayed on the website.
+      communication_website_variable:
+        rsync_bastion_host: Provide only if you use a SSH bastion
+        rsync_bastion_port: Provide only if you use a SSH bastion
+        rsync_bastion_user: Provide only if you use a SSH bastion

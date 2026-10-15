@@ -41,6 +41,9 @@ class Communication::Website::Variable < ApplicationRecord
     RSYNC_USER: 302,
     RSYNC_PATH: 303,
     RSYNC_SSH_PRIVATE_KEY: 304,
+    RSYNC_BASTION_HOST: 305,
+    RSYNC_BASTION_PORT: 306,
+    RSYNC_BASTION_USER: 307,
     S3_BUCKET: 400,
     S3_ENDPOINT: 401,
     S3_REGION: 402,
@@ -66,7 +69,10 @@ class Communication::Website::Variable < ApplicationRecord
       'RSYNC_PORT',
       'RSYNC_USER',
       'RSYNC_PATH',
-      'RSYNC_SSH_PRIVATE_KEY'
+      'RSYNC_SSH_PRIVATE_KEY',
+      'RSYNC_BASTION_HOST',
+      'RSYNC_BASTION_PORT',
+      'RSYNC_BASTION_USER'
     ],
     's3' => [
       'S3_BUCKET',

@@ -1,12 +1,19 @@
 <%# Nommé par méthode : un bloc masqué, envoyé aussi, n'écrase pas la variable du même nom d'une autre méthode %>
-<% name = "communication_website[kelmscott_variables][#{sync_method}][#{variable.key}]"
-   id = "communication_website_kelmscott_variables_#{sync_method}_#{variable.key.downcase}"
-   secret_saved = variable.persisted? && variable.secret? %>
+<%
+name = "communication_website[kelmscott_variables][#{sync_method}][#{variable.key}]"
+id = "communication_website_kelmscott_variables_#{sync_method}_#{variable.key.downcase}"
+hint_i18n_key = "simple_form.hints.communication_website_variable.#{variable.key.downcase}"
+secret_saved = variable.persisted? && variable.secret?
+%>
 <div class="mb-3">
   <%= label_tag id, variable.key, class: 'form-label' %>
-  <% if variable.secret? && variable.multiline? %>
-    <%# Un secret enregistré est chiffré : il n'est jamais renvoyé, le champ reste vide %>
-    <%= text_area_tag name, '', id: id, rows: 5, autocomplete: 'off', class: 'form-control', style: '-webkit-text-security: disc' %>
+  <% if variable.multiline? %>
+    <%
+    # Un secret enregistré est chiffré : il n'est jamais renvoyé, le champ reste vide
+    displayed_value = variable.secret? ? '' : variable.value
+    inline_style = variable.secret? ? '-webkit-text-security: disc' : ''
+    %>
+    <%= text_area_tag name, displayed_value, id: id, rows: 5, autocomplete: 'off', class: 'form-control', style: inline_style %>
   <% elsif variable.secret? %>
     <%= password_field_tag name, '', id: id, autocomplete: 'new-password', class: 'form-control' %>
   <% else %>
@@ -14,6 +21,9 @@
   <% end %>
   <% if variable.errors[:value].any? %>
     <div class="invalid-feedback d-block"><%= variable.errors[:value].to_sentence %></div>
+  <% end %>
+  <% if I18n.exists?(hint_i18n_key) %>
+    <div class="form-text"><%= t(hint_i18n_key) %></div>
   <% end %>
   <% if secret_saved %>
     <div class="form-text"><%= t('communication.website.kelmscott.masked') %></div>
