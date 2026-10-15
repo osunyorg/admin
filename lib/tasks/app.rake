@@ -3,6 +3,26 @@ namespace :app do
   task fix: :environment do
   end
 
+  namespace :kelmscott do
+    desc 'Generate the key used by the admin to sign its requests to Kelmscott'
+    task :signing_key do
+      require 'rbnacl'
+      require 'base64'
+      signing_key = RbNaCl::SigningKey.generate
+      puts <<~TEXT
+
+        1. Dans la configuration de l'admin (config/application.yml ou variables d'environnement), jamais versionnée :
+
+        KELMSCOTT_SIGNING_KEY: #{Base64.strict_encode64(signing_key.to_bytes)}
+
+        2. Sur Kelmscott :
+
+        ~/kelmscott/bin/configure/keys #{Base64.strict_encode64(signing_key.verify_key.to_bytes)}
+
+      TEXT
+    end
+  end
+
   namespace :search do
     task build_index: :environment do
       Search::BuildIndexJob.perform_later

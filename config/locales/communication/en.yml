@@ -173,6 +173,8 @@ en:
         in_production: Production
         in_production_at: Production release date
         in_showcase: List website in showcase
+        kelmscott_active: Enable Kelmscott
+        kelmscott_sync_method: Synchronization type
         languages: Languages
         locked_at: Locked for background jobs at
         name: Name
@@ -393,6 +395,10 @@ en:
               blank: must be correct, as defined by RFC2396
               not_unique: already used by another alias
               reserved_for_home: is reserved for the home page
+        communication/website/variable:
+          attributes:
+            value:
+              kelmscott_public_key_missing: cannot be encrypted, the Kelmscott public key is not configured
     models:
       communication/block:
         one: Content block
@@ -611,6 +617,10 @@ en:
             button: Display call to action in header
             label: Call to action label
             url: Call to action URL
+        kelmscott_publish:
+          button: Restart publication
+          running: The publication is running, please be patient...
+          show_logs: Show logs
         localizations:
           fallback_hint_html: "Leave blank to use the default value: <i>%{master_value}</i>"
           title: Internationalization
@@ -753,6 +763,7 @@ en:
           previous_paths: Redirects (old paths)
           title: Manage redirects
         see_showcase: See showcase
+        show_repository: Show repository
         synchronize:
           button: Synchronize
           running: Synchronization launched, please be patient...
@@ -818,6 +829,9 @@ en:
         button: Go live
         title: Go live
       hosting: Hosting
+      kelmscott:
+        masked: Secret saved and encrypted, it can never be displayed again. Leave blank to keep it.
+        subtitle: Website build and deployment by Kelmscott, on a sovereign infrastructure.
       menus:
         automatic: This menu is created automatically. <br>This means that it reflects the site's tree structure. <br>As soon as you want to modify it, by creating an item, the automatism will stop.
         default_title:
@@ -949,6 +963,11 @@ en:
           netlify: Netlify
           nginx: Nginx
           undefined: Undefined
+        kelmscott_sync_method:
+          dxfl: dxfl
+          rsync: rsync
+          s3: S3
+          sftp: SFTP
         menu:
           item:
             kind:
@@ -1032,3 +1051,7 @@ en:
       communication_website_post:
         full_width: On large screens, a full width post uses all available space for the content.
         text: This field is deprecated, content will not be displayed on the website.
+      communication_website_variable:
+        rsync_bastion_host: Provide only if you use a SSH bastion
+        rsync_bastion_port: Provide only if you use a SSH bastion
+        rsync_bastion_user: Provide only if you use a SSH bastion

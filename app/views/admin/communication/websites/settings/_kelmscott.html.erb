@@ -1,0 +1,28 @@
+<%= f.input :kelmscott_active,
+            wrapper: :custom_boolean_switch,
+            input_html: { data: { conditional: true }, id: 'kelmscott_active' } %>
+<p class="small"><%= t('communication.website.kelmscott.subtitle') %></p>
+<div  class="d-none"
+      data-conditional-source="kelmscott_active"
+      data-conditional-value="true">
+  <div class="row">
+    <div class="col-lg-6 col-xxl-4">
+      <%= f.input :kelmscott_sync_method,
+                  include_blank: false,
+                  input_html: { data: { conditional: true }, id: 'kelmscott_sync_method' } %>
+    </div>
+  </div>
+  <% Communication::Website::Variable::KEYS_BY_SYNC_METHOD.each do |sync_method, keys| %>
+    <div  class="row d-none"
+          data-conditional-source="kelmscott_sync_method"
+          data-conditional-value="<%= sync_method %>">
+      <% keys.each do |key| %>
+        <div class="col-lg-6 col-xxl-4">
+          <%= render 'admin/communication/websites/settings/variable_fields',
+                     variable: f.object.kelmscott_variable(key),
+                     sync_method: sync_method %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

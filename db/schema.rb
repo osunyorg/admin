@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_01_100000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_13_162501) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -1636,6 +1636,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_01_100000) do
     t.index ["communication_website_showcase_tag_id", "communication_website_id"], name: "index_showcase_tag_website"
   end
 
+  create_table "communication_website_variables", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "communication_website_id", null: false
+    t.datetime "created_at", null: false
+    t.integer "key", null: false
+    t.uuid "university_id", null: false
+    t.datetime "updated_at", null: false
+    t.string "value"
+    t.index ["communication_website_id", "key"], name: "idx_on_communication_website_id_key_682d89f654", unique: true
+    t.index ["university_id"], name: "index_communication_website_variables_on_university_id"
+  end
+
   create_table "communication_websites", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "about_id"
     t.string "about_type"
@@ -1668,6 +1679,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_01_100000) do
     t.boolean "in_production", default: false
     t.datetime "in_production_at"
     t.boolean "in_showcase", default: true
+    t.boolean "kelmscott_active", default: false
+    t.integer "kelmscott_sync_method"
     t.datetime "last_sync_at"
     t.datetime "locked_at"
     t.uuid "locked_by_job_id"
@@ -3062,6 +3075,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_01_100000) do
   add_foreign_key "communication_website_post_localizations", "universities"
   add_foreign_key "communication_website_posts", "communication_websites"
   add_foreign_key "communication_website_posts", "universities"
+  add_foreign_key "communication_website_variables", "communication_websites"
+  add_foreign_key "communication_website_variables", "universities"
   add_foreign_key "communication_websites", "languages", column: "default_language_id"
   add_foreign_key "communication_websites", "universities"
   add_foreign_key "communication_websites", "users", column: "synchronization_locked_by_id", on_delete: :nullify

@@ -74,6 +74,12 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
                 notice: t('admin.communication.website.synchronize.running')
   end
 
+  def kelmscott_publish
+    @website.kelmscott_publish
+    redirect_to admin_communication_website_path(@website),
+                notice: t('admin.communication.website.kelmscott_publish.running')
+  end
+
   def static
     @about = @website
     render layout: false, content_type: "text/plain; charset=utf-8"
@@ -154,6 +160,12 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     ]
     attribute_names << :access_token unless params[:communication_website][:access_token].blank?
     attribute_names << :default_language_id if @website&.persisted?
+    if can?(:kelmscott_publish, @website)
+      attribute_names += [
+        :kelmscott_active, :kelmscott_sync_method,
+        { kelmscott_variables: Communication::Website::Variable::KEYS_BY_SYNC_METHOD }
+      ]
+    end
     params.require(:communication_website)
           .permit(*attribute_names)
           .merge(
