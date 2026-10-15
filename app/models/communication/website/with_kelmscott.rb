@@ -2,6 +2,11 @@ module Communication::Website::WithKelmscott
   extend ActiveSupport::Concern
 
   included do
+    # Valeurs du formulaire, par méthode puis par nom de variable. Les blocs des autres méthodes, masqués,
+    # sont envoyés aussi, et certaines variables sont communes à plusieurs méthodes (AWS_*) :
+    # seules les valeurs de la méthode choisie sont gardées, à l'enregistrement.
+    attr_writer :kelmscott_variables
+
     enum :kelmscott_sync_method, {
       sftp: 10,
       dxfl: 20,
@@ -52,11 +57,6 @@ module Communication::Website::WithKelmscott
   def kelmscott_variable(key)
     variables.detect { |variable| variable.key == key } || variables.build(key: key)
   end
-
-  # Valeurs du formulaire, par méthode puis par nom de variable. Les blocs des autres méthodes, masqués,
-  # sont envoyés aussi, et certaines variables sont communes à plusieurs méthodes (AWS_*) :
-  # seules les valeurs de la méthode choisie sont gardées, à l'enregistrement.
-  attr_writer :kelmscott_variables
 
   protected
 
