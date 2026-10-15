@@ -1,7 +1,6 @@
 default_university:
   name: Université de test
   identifier: my-university
-  sms_sender_name: "unitest"
   default_language: fr
   is_really_a_university: true
   languages:
@@ -11,7 +10,6 @@ default_university:
 stale_university:
   name: Université obsolète
   identifier: stale-university
-  sms_sender_name: "unistale"
   default_language: fr
   is_really_a_university: false
   languages:

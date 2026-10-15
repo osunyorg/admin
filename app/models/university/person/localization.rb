@@ -4,7 +4,6 @@
 #
 #  id                    :uuid             not null, primary key
 #  biography             :text
-#  chosen_name           :string
 #  deleted_at            :datetime
 #  featured_image_credit :text
 #  featured_media_alt    :text
@@ -113,25 +112,22 @@ class University::Person::Localization < ApplicationRecord
     "admin/university/people/static"
   end
 
-  # "Jean Dupont (Martin)" si nom d'usage, sinon "Jean Dupont"
   def to_s
-    chosen_name.present? ? "#{first_name} #{last_name} (#{chosen_name})".strip 
-                         : "#{first_name} #{last_name}".strip
+    "#{first_name} #{last_name}".strip
   end
-  
+
   def to_s_with_mail
     about.email.present? ? "#{to_s} (#{about.email})" : to_s
   end
-  
-  # "Dupont (Martin) Jean" si nom d'usage, sinon "Dupont Jean"
+
   def to_s_alphabetical
-    chosen_name.present? ? "#{last_name} #{first_name} (#{chosen_name})".strip 
-                         : "#{last_name} #{first_name}".strip
+    "#{last_name} #{first_name}".strip
   end
 
   def initials
     "#{first_name.to_s.first}#{last_name.to_s.first}"
   end
+
 
   # user in statics where we don't need the cateogries not localized
   def categories

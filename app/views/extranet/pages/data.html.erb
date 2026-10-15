@@ -8,7 +8,7 @@
     <% 
     value = metric[:value]
     next if value.zero?
-    name = metric[:name]
+    name = metric[:model_name].human(count: value)
     %>
     <div class="col-md-3">
       <p class="h1 mb-0"><%= value %></p>

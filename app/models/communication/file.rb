@@ -4,6 +4,7 @@
 #
 #  id            :uuid             not null, primary key
 #  deleted_at    :datetime
+#  is_lasting    :boolean          default(TRUE)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  created_by_id :uuid             indexed
@@ -20,6 +21,8 @@
 #  fk_rails_e95d85eee7  (created_by_id => users.id)
 #
 class Communication::File < ApplicationRecord
+  NOT_LASTING_DELAY_BEFORE_DESTROY = 30.days
+
   acts_as_paranoid
 
   include AsIndirectObject
@@ -39,6 +42,15 @@ class Communication::File < ApplicationRecord
   scope :with_localizations, -> (language) {
     joins(:localizations)
     .where(communication_file_localizations: { language_id: language.id })
+  }
+
+  scope :deletable, -> {
+    for_lasting(false)
+    .where(
+      "communication_files.created_at < ?",
+      NOT_LASTING_DELAY_BEFORE_DESTROY.ago
+    )
+    .where.missing(:contexts)
   }
 
   scope :for_search_term, -> (term, language = nil) {
@@ -66,6 +78,9 @@ class Communication::File < ApplicationRecord
     .where(communication_file_localizations: {
       original_extension: extensions
     })
+  }
+  scope :for_lasting, -> (value, language = nil) {
+    where(is_lasting: value)
   }
 
   scope :autosort_by_alpha, -> (language) {

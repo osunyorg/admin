@@ -18,7 +18,6 @@ fr:
         private: Etablissement privé
         public: Public
         public_or_private: Public/privé
-        sms_sender_name: Nom de l'expéditeur SMS
         sso_button_label: Libellé du bouton de connexion
         sso_cert: Certificat
         sso_mapping: Mapping
@@ -29,13 +28,20 @@ fr:
       university/app:
         name: Nom
         token: Jeton secret
+      university/file_server:
+        ftp_host: Hôte FTP (sans protocole)
+        ftp_path: Chemin FTP
+        ftp_password: Mot de passe FTP
+        ftp_port: Port FTP
+        ftp_username: Nom d'utilisateur FTP
+        url: URL
       university/organization:
         address: Adresse
         categories: Catégories
         city: Ville
         country: Pays
         digital: Coordonnées numériques
-        email: Email
+        email: Courriel
         geolocation: Coordonnées géographiques
         kind: Type
         legal: Informations légales
@@ -69,7 +75,7 @@ fr:
         contacts: Coordonnées
         country: Pays
         education_programs: Formations
-        email: Email
+        email: Courriel
         email_visibility: Visibilité de l'email
         essentials: Informations essentielles
         gender: Genre
@@ -120,7 +126,6 @@ fr:
         description: Mission (dans ce contexte)
       university/person/localization:
         biography: Biographie
-        chosen_name: Nom d'usage
         first_name: Prénom
         last_name: Nom de famille
         linkedin: LinkedIn (URL)
@@ -147,6 +152,9 @@ fr:
       university/app:
         one: App
         other: Apps
+      university/file_server:
+        one: Serveur de fichiers
+        other: Serveurs de fichiers
       university/organization:
         one: Organisation
         other: Organisations
@@ -190,8 +198,10 @@ fr:
         default_github_access_token_without_existing: Votre jeton d'accès Github confidentiel, utilisé par défaut pour les sites créés avec l'hébergement Deuxfleurs.<br>Si vide, un jeton est défini au niveau de l'application.
         is_really_a_university: Décocher cette case masque les 5 royaumes.
         languages: "Ces langues sont actuellement utilisées sans les sites web : %{used_languages}"
-        sms_sender_name: "11 caractères maximum. Que des caractères alphadécimaux ([A-Z][a-z][0-9])."
         sso_button_label: "Par défaut : Se connecter en SSO"
+      university_file_server:
+        ftp_password_with_existing: Laisser le champ vide pour ne pas modifier le mot de passe existant.
+        ftp_password_without_existing: Aucun mot de passe n'est enregistré pour le moment.
       university_organization:
         description: Si ce champ est vide le début du texte principal sera utilisé.
         logo: Ce logo doit contraster sur un fond clair (blanc ou gris pâle)
@@ -214,8 +224,6 @@ fr:
         from_year: "En poste depuis..."
         organization_name: "Choisissez l'organisation si elle existe, en la cherchant par nom ou SIREN. Si elle n'existe pas encore, créez-là en entrant simplement son nom."
         to_year: "Si vous êtes toujours à ce poste, laissez vide"
-      university_person_localization:
-        chosen_name: "Remplissez ce champ uniquement si vous avez un nom d’usage distinct de votre nom légal"
     include_blanks:
       defaults:
         organization: Sélectionnez une organisation

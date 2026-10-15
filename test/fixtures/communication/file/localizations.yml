@@ -1,0 +1,15 @@
+example_pdf_fr:
+  name: Example
+  slug: example
+  file_server_slug: example
+  original_blob: example_pdf
+  original_byte_size: 9756
+  original_checksum: "DnKiAb2/AYUpQeLg6Dn4aw=="
+  original_content_type: "application/pdf"
+  original_extension: ".pdf"
+  original_filename: "example.pdf"
+  published: true
+  published_at: <%= Time.current %>
+  language: fr
+  about: example_pdf
+  university: default_university

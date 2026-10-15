@@ -93,9 +93,11 @@ en:
         title: Title
       communication/file:
         created_by: Uploaded by
+        is_lasting: Lasting file
       communication/file/context:
         about_type: Type
       communication/file/localization:
+        file_server_slug: Path
         internal_description: Internal description
         name: Name
         original_byte_size: Size
@@ -105,6 +107,8 @@ en:
         published: Published?
         published_at: Publication date
         updated_by: Last update
+      communication/file/redirection:
+        path: Path
       communication/media:
         collection: Collection
         created_by: Envoyée par
@@ -353,6 +357,8 @@ en:
               cannot_unpublished_default: cannot be unpublished (default language)
         communication/file/localization:
           attributes:
+            file_server_slug:
+              taken: already taken
             original_uploaded_file:
               already_imported: already imported in file library
               too_big: too heavy!
@@ -981,6 +987,8 @@ en:
         favicon: '.png file only'
         host: Sans le protocole
         sso_button_label: "Default: Sign in via SSO"
+      communication_file:
+        is_lasting: If unchecked, after 30 days, this file will be deleted if no context exists anymore.
       communication_file_localization:
         internal_description: Complementary complémentaire of the file. You can write this text to help the users to find a specific file, or learn how it should be used (rights, dates, contexts...).
       communication_media_localization:

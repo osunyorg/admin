@@ -1,12 +1,12 @@
 <% if categories.any? %>
   <div class="row">
-    <% categories.taxonomies.each do |taxonomy| %>
+    <% categories.taxonomies.ordered.each do |taxonomy| %>
       <div class="col-lg-6 col-xxl-4">
         <%= f.association :categories,
                           label: taxonomy.to_s_in(current_language),
                           as: :tree,
                           language: current_language,
-                          collection: taxonomy.children %>
+                          collection: taxonomy.children.ordered %>
       </div>
     <% end %>
     <% if categories.free.any? %>
@@ -15,7 +15,7 @@
                           label: t('category.title'),
                           as: :tree,
                           language: current_language,
-                          collection: categories.free %>
+                          collection: categories.free.ordered %>
       </div>
     <% end %>
   </div>

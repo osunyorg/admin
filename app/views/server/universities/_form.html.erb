@@ -8,8 +8,6 @@
       <%= f.input :identifier %>
       <%= f.input :is_really_a_university %>
       <%= f.input :private %>
-      <%= f.input :sms_sender_name,
-                  maxlength: 11 %>
     </div>
     <div class="col-md-4">
       <%= f.input :address %>
@@ -105,6 +103,9 @@
       <%= f.input :contribution_amount %>
     </div>
   </div>
+
+  <%= render 'server/universities/form/file_server', university: university, f: f %>
+
   <% content_for :action_bar_right do %>
     <%= cancel [:server, university] %>
     <%= submit f %>

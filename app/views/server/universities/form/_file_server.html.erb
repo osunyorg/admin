@@ -1,0 +1,25 @@
+<%
+file_server = university.file_server || university.build_file_server
+%>
+<h3 class="mt-5"><%= University::FileServer.model_name.human %></h3>
+<%= f.simple_fields_for :file_server, file_server do |lf| %>
+  <%= lf.input :url %>
+  <div class="row">
+    <div class="col-lg-10">
+      <%= lf.input :ftp_host %>
+    </div>
+    <div class="col-lg-2">
+      <%= lf.input :ftp_port %>
+    </div>
+    <div class="col-lg-6">
+      <%= lf.input :ftp_username %>
+    </div>
+    <div class="col-lg-6">
+      <%= lf.input  :ftp_password,
+                    placeholder: masked_string(file_server.ftp_password),
+                    hint: t("simple_form.hints.university_file_server.ftp_password_#{file_server.ftp_password.blank? ? 'without' : 'with'}_existing").html_safe,
+                    input_html: { value: '' } %>
+    </div>
+  </div>
+  <%= lf.input :ftp_path %>
+<% end %>
