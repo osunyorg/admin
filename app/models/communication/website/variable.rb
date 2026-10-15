@@ -23,8 +23,11 @@
 class Communication::Website::Variable < ApplicationRecord
   self.filter_attributes += [:value]
 
+  belongs_to :website,
+             class_name: 'Communication::Website',
+             foreign_key: :communication_website_id
+
   belongs_to :university
-  belongs_to :communication_website, class_name: 'Communication::Website'
 
   enum :key, {
     SFTP_HOST: 100,
@@ -108,7 +111,7 @@ class Communication::Website::Variable < ApplicationRecord
   protected
 
   def set_university
-    self.university_id ||= communication_website&.university_id
+    self.university_id ||= website&.university_id
   end
 
   def secret_value_to_encrypt?

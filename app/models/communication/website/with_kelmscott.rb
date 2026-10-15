@@ -13,7 +13,7 @@ module Communication::Website::WithKelmscott
     has_many  :variables,
               class_name: 'Communication::Website::Variable',
               foreign_key: :communication_website_id,
-              inverse_of: :communication_website,
+              inverse_of: :website,
               autosave: true,
               dependent: :destroy
 
