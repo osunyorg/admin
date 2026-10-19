@@ -20,7 +20,7 @@ class ApplicationJob < ActiveJob::Base
     # invoked in the context of the job instance (see "Dynamic labels" below).
     # The rule only applies to jobs that were enqueued with this label in
     # `good_job_labels`.
-    label: -> { "#{self.class.name}-#{queue_name}-#{digest_arguments(arguments)}" }
+    label: -> { "#{self.class.name}-#{queue_name}-#{digest_arguments(arguments)}" },
 
     # Apply the rule's label to every job of this class (and its subclasses),
     # so the jobs don't need to be enqueued with it. Defaults to false.
