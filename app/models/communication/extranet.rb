@@ -9,7 +9,6 @@
 #  feature_alumni             :boolean          default(FALSE)
 #  feature_contacts           :boolean          default(FALSE)
 #  feature_documents          :boolean          default(FALSE)
-#  feature_jobs               :boolean          default(FALSE)
 #  feature_posts              :boolean          default(FALSE)
 #  has_sso                    :boolean          default(FALSE)
 #  host                       :string

@@ -27,7 +27,6 @@ fr:
         feature_alumni: Alumni
         feature_contacts: Répertoire
         feature_documents: Documents
-        feature_jobs: Offres d'emploi
         feature_posts: Actualités
         has_sso: Single sign-on
         host: Domaine
