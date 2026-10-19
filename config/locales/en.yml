@@ -430,7 +430,9 @@ en:
         pending: Pending
   export: Export (xlsx)
   evolutions:
+    countdown: T-%{days}
     listen: Listen on
+    release: Release date
   false: No
   file_hint_with_formats: "%{formats} files only. %{filesize} max."
   file_hint_without_formats: "%{filesize} max"
