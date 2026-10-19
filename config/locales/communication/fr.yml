@@ -75,7 +75,7 @@ fr:
         name: Nom
         privacy_policy: Politique de confidentialité
         published: Langue publiée
-        registration_contact: Mail de contact pour les problèmes d'inscription
+        registration_contact: Mail de contact en cas de problème
         sso_button_label: Libellé du bouton de connexion
         terms: Conditions d'utilisation
       communication/extranet/post:
