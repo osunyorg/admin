@@ -429,9 +429,8 @@ fr:
         finished_with_errors: Traité avec des erreurs
         pending: En cours de traitement
   evolutions:
-    countdown: J-%{days}
     listen: Écouter sur
-    release: Sortie le
+    release: Sortie le %{day}, un peu de musique en attendant ?
   export: Exporter (xlsx)
   false: Non
   file_hint_with_formats: "Fichiers %{formats} uniquement. %{filesize} max."
