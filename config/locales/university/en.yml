@@ -237,7 +237,12 @@ en:
     alumni:
       cohorts:
         import_btn: Import cohorts
-        import_hint_html: "<i>School</i> field should contain the internal school id.<br><i>Program</i> field should contain the internal program id."
+        import_columns:
+          program_id: Program (ID)
+          program_name: Program (Name)
+          school_id: School (ID)
+          school_name: School (Name)
+        import_hint_html: "<i>school_id</i> field should contain the internal school id.<br><i>program_id</i> field should contain the internal program id.<br>The <i>school_name</i> and <i>program_name</i> columns are not used in the import, they allow to use the alumni export file as is."
         import_warning_html: "Please note: If you have one or more extranets affected by these alumni, this import will send emails to the imported people, to inform them that they now have access to the extranet.<br>They will receive emails even if they have already activated their access.<br>If an alumnus is added multiple times in the import, they will only receive one email per extranet."
         title: Cohorts imports
     apps:

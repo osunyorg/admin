@@ -237,7 +237,12 @@ fr:
     alumni:
       cohorts:
         import_btn: Importer des promotions
-        import_hint_html: "Le champ <i>school</i> doit contenir l'id interne de l'école.<br>Le champ <i>program</i> doit contenir l'id interne de la formation."
+        import_columns:
+          program_id: Formation (ID)
+          program_name: Formation (Nom)
+          school_id: École (ID)
+          school_name: École (Nom)
+        import_hint_html: "Le champ <i>school_id</i> doit contenir l'id interne de l'école.<br>Le champ <i>program_id</i> doit contenir l'id interne de la formation.<br>Les colonnes <i>school_name</i> et <i>program_name</i> ne sont pas utilisées dans l'import, elles permettent d'utiliser un fichier d'export d'alumni tel quel."
         import_warning_html: "Attention : Si vous avez un ou plusieurs extranets concernés par ces alumni, cet import va envoyer des emails aux personnes importées, pour leur indiquer qu'elles ont désormais accès à l'extranet.<br>Elles recevront des mails même si elles ont déjà activé leur accès.<br>Si un alumnus est ajouté plusieurs fois dans l'import, il ne recevra qu'un seul email par extranet."
         title: Imports de promotions
     apps:
