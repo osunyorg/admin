@@ -1,11 +1,11 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "4.0.6"
+ruby "4.0.7"
 
 gem "activestorage-scaleway-service"#, path: "../activestorage-scaleway-service"
 gem "active_hashcash", "0.4.0"
-gem "active_storage_validations", "~> 1"
+gem "active_storage_validations", "~> 4"
 gem "add_to_calendar"
 gem "aws-sdk-s3"
 gem "babosa", "~> 2.1"
@@ -19,9 +19,9 @@ gem "bugsnag"
 # (les authorize through des modèles qui faisaient des faux négatifs sur les rôles intermédiaires)
 gem "cancancan", "~> 3.3.0"
 gem "caxlsx_rails", "~> 0"
-gem "cgi", "~> 0.5.1" # To handle CGI::parse
+gem "cgi" # To handle CGI::parse
 gem "chartkick", "~> 5.2"
-gem "citeproc", "~> 1"
+gem "citeproc", "~> 2"
 gem "citeproc-ruby", "~> 2"
 gem "cocoon", "~> 1"
 gem "country_select"
@@ -69,13 +69,13 @@ gem "pghero"
 gem "pg_query"
 gem "puma"
 gem "rack-timeout"
-gem "rails", "~> 8.1.3"
+gem "rails", "~> 8.1.4"
 gem "rails-autocomplete", "~> 2"
 gem "rails-i18n"
 gem "rbnacl", "~> 7.1"
-gem "redis", "~> 5.4"
+gem "redis", "~> 6.0"
 gem "romaji", "~> 0.3.0"
-gem "roo", "~> 2"
+gem "roo", "~> 3"
 # gem "rorvswild"
 gem "rswag", "~> 2"
 gem "ruby-vips", "~> 2.3"
@@ -92,7 +92,7 @@ gem "two_factor_authentication", git: "https://github.com/noesya/two_factor_auth
 # gem "two_factor_authentication", path: "../two_factor_authentication"
 gem "tzinfo-data", platforms: [:windows, :jruby]
 # gem "unsplash", "~> 3"
-gem "unsplash", git: "https://github.com/SebouChu/unsplash_rb.git", branch: 'ruby-4-compatibility'
+gem "unsplash", git: "https://github.com/SebouChu/unsplash_rb.git", branch: "ruby-4-compatibility"
 gem "vimeo"
 
 group :development, :test do
