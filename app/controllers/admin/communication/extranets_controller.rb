@@ -131,7 +131,6 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
       :feature_alumni,
       :feature_contacts,
       :feature_documents,
-      :feature_jobs,
       :feature_posts,
       :has_sso,
       :host,

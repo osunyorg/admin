@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_13_162501) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_19_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -448,7 +448,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_13_162501) do
     t.boolean "feature_alumni", default: false
     t.boolean "feature_contacts", default: false
     t.boolean "feature_documents", default: false
-    t.boolean "feature_jobs", default: false
     t.boolean "feature_posts", default: false
     t.boolean "has_sso", default: false
     t.string "host"
