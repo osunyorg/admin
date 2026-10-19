@@ -4,14 +4,14 @@
 #
 #  id                            :uuid             not null, primary key
 #  address                       :string
-#  address_visibility            :integer          default(0)
+#  address_visibility            :integer          default("private")
 #  birthdate                     :date
 #  bodyclass                     :string
 #  city                          :string
 #  country                       :string
 #  deleted_at                    :datetime
 #  email                         :string
-#  email_visibility              :integer          default(0)
+#  email_visibility              :integer          default("private")
 #  gender                        :integer
 #  habilitation                  :boolean          default(FALSE)
 #  invitation_sent_at            :datetime
@@ -20,16 +20,16 @@
 #  is_author                     :boolean
 #  is_researcher                 :boolean
 #  is_teacher                    :boolean
-#  linkedin_visibility           :integer          default(0)
-#  mastodon_visibility           :integer          default(0)
+#  linkedin_visibility           :integer          default("private")
+#  mastodon_visibility           :integer          default("private")
 #  phone_mobile                  :string
-#  phone_mobile_visibility       :integer          default(0)
+#  phone_mobile_visibility       :integer          default("private")
 #  phone_personal                :string
-#  phone_personal_visibility     :integer          default(0)
+#  phone_personal_visibility     :integer          default("private")
 #  phone_professional            :string
-#  phone_professional_visibility :integer          default(0)
+#  phone_professional_visibility :integer          default("private")
 #  tenure                        :boolean          default(FALSE)
-#  twitter_visibility            :integer          default(0)
+#  twitter_visibility            :integer          default("private")
 #  zipcode                       :string
 #  created_at                    :datetime         not null
 #  updated_at                    :datetime         not null
