@@ -11,9 +11,10 @@ Server::Evolution.planned.each do |evolution|
       </div>
       <div class="osuny_evolution__date">
         <div class="osuny_evolution__date__big">
-          <%= l evolution.released_at, format: "%d·%m" %>
+          <%= t('evolutions.countdown', days: evolution.days_left) %>
         </div>
         <div class="osuny_evolution__date__long">
+          <%= t('evolutions.release') %>
           <%= l evolution.released_at, format: :full %>
         </div>
       </div>
