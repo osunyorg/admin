@@ -44,6 +44,9 @@ about = current_extranet.about
                     cookies_policy_path(lang: current_language),
                     rel: 'noreferrer' if current_extranet.has_cookies_policy_in?(current_language) %>
         <%= link_to t('extranet.data'), data_path(lang: current_language) %>
+        <% if current_extranet_l10n.registration_contact.present? %>
+          <%= mail_to current_extranet_l10n.registration_contact, t('extranet.registration_contact') %>
+        <% end %>
         <%= t 'extranet.osuny_html' %>
       </nav>
     </div>

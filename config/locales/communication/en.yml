@@ -75,7 +75,7 @@ en:
         name: Name
         privacy_policy: Privacy policy
         published: Language published
-        registration_contact: Contact mail for registrations problems
+        registration_contact: Contact email in case of problems
         sso_button_label: Sign in button's label
         terms: Terms of service
       communication/extranet/post:
