@@ -9,12 +9,21 @@ module Importers
       @language = import.language
       @university = import.university
       @errors = []
-      analyze_xlsx
+      analyze_xlsx if columns_count_valid?
       manage_errors
       save
     end
 
     protected
+
+    def columns_count_valid?
+      return unless xlsx
+      if defined?(COLUMNS_COUNT) && xlsx.first.size != COLUMNS_COUNT
+        add_error("Incorrect number of columns", 0)
+        return false
+      end
+      true
+    end
 
     def xlsx
       return @xlsx if defined?(@xlsx)

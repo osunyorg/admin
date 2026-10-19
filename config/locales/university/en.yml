@@ -43,9 +43,11 @@ en:
         digital: Digital contact
         email: Email
         geolocation: Geographical coordinates
+        id: ID
         kind: Kind
         legal: Legal information
         map: Map
+        nic: Legal facility identification number
         phone: Telephone
         physical: Contact information
         siren: Legal identification number
@@ -57,6 +59,7 @@ en:
         logo: Logo for light backgrounds (default)
         logo_on_dark_background: Logo for dark backgrounds (optional)
         long_name: Long name
+        meta_description: SEO description
         name: Name
         text: Text
         twitter: Twitter
@@ -87,6 +90,7 @@ en:
         hal_doc_identifier: Doc identifier
         hal_form_identifier: Form identifier
         hal_person_identifier: Person identifier
+        id: ID
         is_administration: Administrative staff
         is_alumnus: Alumnus
         is_author: Author
@@ -262,7 +266,7 @@ en:
     manage_experiences: Manage experiences
     organization:
       employees: Employees
-      import_hint_html: "Possible values for <i>kind</i> are: company, non_profit, government, public_organization, collective.<br><i>Siren</i>, <i>nic</i>, <i>zipcode</i> and <i>phone</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>)."
+      import_hint_html: "In case of missing ID, organizations will still be searched by SIREN, NIC or name.<br>Possible values for <i>kind</i> are: company, non_profit, government, public_organization, collective.<br><i>Siren</i>, <i>nic</i>, <i>zipcode</i> and <i>phone</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>)."
       logo: Logo
       search: Search by name
     person:

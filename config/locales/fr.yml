@@ -464,7 +464,7 @@ fr:
     error_msg: "Ligne %{line} : %{error}"
     errors: Erreurs
     example_file_html: Télécharger un <a href="%{link}" target="_blank">fichier d'exemple</a>
-    hint_html: "Les données doivent être au format xlsx.<br>La première ligne doit être dédiée aux en-têtes.<br>Les noms des entêtes sont obligatoires et doivent être respectés strictement.<br>Les caractères doivent être encodés en UTF-8.<br>Les champs marqués d'une astérisque sont obligatoires."
+    hint_html: "Les données doivent être au format xlsx.<br>La première ligne doit être dédiée aux en-têtes.<br>Les noms des entêtes sont obligatoires et doivent être respectés strictement.<br>Les caractères doivent être encodés en UTF-8.<br>Les champs marqués d'une astérisque sont obligatoires.<br>La colonne \"id\" permet de gérer l'import d'un fichier exporté."
     initiated_by: "Initié par :"
     number_of_lines: "Nombre de lignes dans le fichier :"
     status: "Statut :"
@@ -513,10 +513,10 @@ fr:
             Bonjour {{name}},
 
             {{sender_name}} vous invite à rejoindre l'extranet des Alumni.
-          
+
             Vous y retrouverez notamment l'annuaire de toutes les promotions.
             À très bientôt !
-            
+
             {{sender_name}} (promotion {{sender_years}})
     notifications:
       gdpr_deletion_incoming:
