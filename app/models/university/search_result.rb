@@ -31,9 +31,8 @@
 #  fk_rails_62a3af3969  (extranet_id => communication_extranets.id)
 #  fk_rails_bab17fceaa  (university_id => universities.id)
 #
-class Search < ApplicationRecord
-  self.table_name = 'search_index'
-
+class University::SearchResult < ApplicationRecord
+  
   SEARCHABLE_MODELS = [
     Communication::Extranet,
     Communication::Extranet::Document,
