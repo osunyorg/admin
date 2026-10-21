@@ -106,6 +106,7 @@ class Communication::Website < ApplicationRecord
   include WithScreenshot
   include WithSecurity
   include WithShowcase
+  include WithStatusBadge
   include WithStyle
   include WithTheme
   include WithTimeZone
