@@ -431,6 +431,7 @@ en:
   export: Export (xlsx)
   evolutions:
     listen: Listen on
+    release: Release on %{day}, a bit of music in the meantime?
   false: No
   file_hint_with_formats: "%{formats} files only. %{filesize} max."
   file_hint_without_formats: "%{filesize} max"
@@ -501,15 +502,15 @@ en:
     extranet:
       invitation_messages:
         automatic:
-          subject: Welcome to your extranet
-          text: You now have access to the extranet.
+          default_subject: Welcome to your extranet
+          default_text: You now have access to the extranet.
           with_user_html: You can sign in with your email address <b>%{email}</b> by <a href="%{sign_in_url}">clicking here</a>.
           without_user_html: You can sign up with your email address <b>%{email}</b> by <a href="%{sign_up_url}">clicking here</a>.
         manual:
           cta: Join the extranet
-          signature: Yours
-          subject: Invitation from {{sender_name}} (promotion {{sender_years}}) to join the extranet
-          text: |
+          default_signature: Yours
+          default_subject: Invitation from {{sender_name}} (promotion {{sender_years}}) to join the extranet
+          default_text: |
             Hello {{name}},
             
             {{sender_name}} invites you to join the Alumni extranet.

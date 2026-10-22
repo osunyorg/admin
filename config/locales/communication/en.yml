@@ -27,7 +27,6 @@ en:
         feature_alumni: Alumni
         feature_contacts: Directory
         feature_documents: Documents
-        feature_jobs: Job board
         feature_posts: News
         has_sso: Single sign-on
         host: Domain
@@ -75,7 +74,7 @@ en:
         name: Name
         privacy_policy: Privacy policy
         published: Language published
-        registration_contact: Contact mail for registrations problems
+        registration_contact: Contact email in case of problems
         sso_button_label: Sign in button's label
         terms: Terms of service
       communication/extranet/post:

@@ -24,9 +24,13 @@ metadata:
   - name: "citation_pdf_url"
     content: "<%= "#{@l10n.university.url}#{download_medium_path(signed_id: @l10n.pdf.blob.signed_id, lang: nil)}" %>"
 <% end %>
+<% if paper.doi.present? %>
+  - name: "citation_doi"
+    content: "<%= paper.doi %>"
+<% end %>
 <% if @l10n.volume_l10n %>
   - name: "citation_volume"
-    content: "<%= prepare_text_for_static @l10n.volume_l10n.to_s %>"
+    content: "<%= @l10n.volume_l10n.number %>"
 <% end %>
 <% if paper.kind %>
 paper_kind: "<%= prepare_text_for_static paper.kind.to_s_in(language) %>"
