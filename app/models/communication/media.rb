@@ -4,7 +4,7 @@
 #
 #  id                                :uuid             not null, primary key
 #  deleted_at                        :datetime         indexed
-#  origin                            :integer          default(1), not null
+#  origin                            :integer          default("upload"), not null
 #  original_byte_size                :bigint
 #  original_checksum                 :string
 #  original_content_type             :string

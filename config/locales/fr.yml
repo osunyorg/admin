@@ -430,6 +430,7 @@ fr:
         pending: En cours de traitement
   evolutions:
     listen: Écouter sur
+    release: Sortie le %{day}, un peu de musique en attendant ?
   export: Exporter (xlsx)
   false: Non
   file_hint_with_formats: "Fichiers %{formats} uniquement. %{filesize} max."
@@ -501,15 +502,15 @@ fr:
     extranet:
       invitation_messages:
         automatic:
-          subject: Bienvenue sur votre extranet
-          text: Vous avez désormais accès à l'extranet.
+          default_subject: Bienvenue sur votre extranet
+          default_text: Vous avez désormais accès à l'extranet.
           with_user_html: Vous pouvez vous y connecter avec votre adresse email <b>%{email}</b> en <a href="%{sign_in_url}">cliquant ici</a>.
           without_user_html: Vous pouvez vous y inscrire avec votre adresse email <b>%{email}</b> en <a href="%{sign_up_url}">cliquant ici</a>.
         manual:
           cta: Rejoindre l'extranet
-          signature: Cordialement
-          subject: Invitation de {{sender_name}} (promotion {{sender_years}}) à rejoindre l'extranet
-          text: |
+          default_signature: Cordialement
+          default_subject: Invitation de {{sender_name}} (promotion {{sender_years}}) à rejoindre l'extranet
+          default_text: |
             Bonjour {{name}},
 
             {{sender_name}} vous invite à rejoindre l'extranet des Alumni.

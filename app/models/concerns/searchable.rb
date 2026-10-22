@@ -13,7 +13,7 @@ module Searchable
 
   def save_search_data
     localizations.each do |l10n|
-      search = Search.where(
+      search = University::SearchResult.where(
         university: university,
         about_object: self,
         about_localization: l10n,

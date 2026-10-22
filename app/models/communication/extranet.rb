@@ -9,7 +9,6 @@
 #  feature_alumni             :boolean          default(FALSE)
 #  feature_contacts           :boolean          default(FALSE)
 #  feature_documents          :boolean          default(FALSE)
-#  feature_jobs               :boolean          default(FALSE)
 #  feature_posts              :boolean          default(FALSE)
 #  has_sso                    :boolean          default(FALSE)
 #  host                       :string
@@ -17,7 +16,7 @@
 #  sso_cert                   :text
 #  sso_mapping                :jsonb
 #  sso_name_identifier_format :string
-#  sso_provider               :integer          default(0)
+#  sso_provider               :integer          default("saml")
 #  sso_target_url             :string
 #  upper_menu                 :text             default("")
 #  created_at                 :datetime         not null

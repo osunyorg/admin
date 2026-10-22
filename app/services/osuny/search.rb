@@ -10,13 +10,13 @@ class Osuny::Search
   end
 
   def results
-    term.present? ? build_search_results : Search.none
+    term.present? ? build_search_results : University::SearchResult.none
   end
 
   protected
 
   def build_search_results
-    results = university.search
+    results = university.search_results
                         .for_title(term)
                         .for_language(language)
                         .limit(30)

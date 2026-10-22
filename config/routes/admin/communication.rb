@@ -283,7 +283,6 @@ namespace :communication do
         resources :kinds, controller: 'extranets/documents/kinds', as: 'document_kinds'
       end
     end
-    resources :jobs, controller: 'extranets/jobs'
   end
   scope module: 'library' do
     resources :medias do
