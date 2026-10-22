@@ -18,7 +18,7 @@ module Importers
 
     def columns_count_valid?
       return unless xlsx
-      if defined?(NUMBER_OF_COLUMNS) && xlsx.first.size != NUMBER_OF_COLUMNS
+      if defined?(self.class::NUMBER_OF_COLUMNS) && xlsx.first.size != self.class::NUMBER_OF_COLUMNS
         add_error("Incorrect number of columns", 0)
         return false
       end
