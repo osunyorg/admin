@@ -3,9 +3,7 @@ class ApplicationJob < ActiveJob::Base
 
   discard_on  ActiveJob::DeserializationError # Discard if object does not exist anymore
 
-  # https://github.com/bensheldon/good_job?tab=readme-ov-file#labelled-jobs
-  include GoodJob::ActiveJobExtensions::Labels
-
+  # https://github.com/bensheldon/good_job#concurrency-controls
   include GoodJob::ActiveJobExtensions::Concurrency
 
   # Define one or more concurrency rules. Each rule is scoped to a label,
@@ -62,7 +60,7 @@ class ApplicationJob < ActiveJob::Base
     []
   end
 
-  private
+  protected
 
   def add_good_job_labels
     return if good_job_additional_labels.empty?
