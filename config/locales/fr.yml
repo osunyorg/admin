@@ -465,7 +465,7 @@ fr:
     error_msg: "Ligne %{line} : %{error}"
     errors: Erreurs
     example_file_html: Télécharger un <a href="%{link}" target="_blank">fichier d'exemple</a>
-    hint_html: "Les données doivent être au format xlsx.<br>La première ligne doit être dédiée aux en-têtes.<br>Les noms des entêtes sont obligatoires et doivent être respectés strictement.<br>Les caractères doivent être encodés en UTF-8.<br>Les champs marqués d'une astérisque sont obligatoires.<br>La colonne \"id\" permet de gérer le ré-import d'un fichier exporté."
+    hint_html: "Les données doivent être au format xlsx.<br>La première ligne doit être dédiée aux en-têtes.<br>Les noms des entêtes sont obligatoires et doivent être respectés strictement.<br>Les caractères doivent être encodés en UTF-8.<br>Les champs marqués d'une astérisque sont obligatoires.<br>Le champ <i>id</i> permet de gérer le ré-import d'un fichier exporté."
     initiated_by: "Initié par :"
     number_of_lines: "Nombre de lignes dans le fichier :"
     status: "Statut :"
