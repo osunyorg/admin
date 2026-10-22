@@ -41,8 +41,10 @@ module Importers
 
     def extract_variables
       @school_id = @hash[offset].to_s.strip
-      @program_id = @hash[offset + 1].to_s.strip
-      @year = @hash[offset + 2].to_s.strip.to_i
+      # offset + 1 is the school name, we don't use it
+      @program_id = @hash[offset + 2].to_s.strip
+      # offset + 3 is the program name, we don't use it
+      @year = @hash[offset + 4].to_s.strip.to_i
     end
 
     def school
