@@ -60,8 +60,6 @@ class ApplicationJob < ActiveJob::Base
     []
   end
 
-  protected
-
   def add_good_job_labels
     return if good_job_additional_labels.empty?
     self.good_job_labels |= good_job_additional_labels
