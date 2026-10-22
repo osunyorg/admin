@@ -1,24 +1,33 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "index") do |sheet|
   options = [
+    University::Organization.human_attribute_name('id'),
     University::Organization::Localization.human_attribute_name('name'),
+    University::Organization::Localization.human_attribute_name('long_name'),
+    University::Organization.human_attribute_name('kind'),
+    University::Organization.human_attribute_name('siren'),
+    University::Organization.human_attribute_name('nic'),
+    University::Organization::Localization.human_attribute_name('meta_description'),
     University::Organization::Localization.human_attribute_name('address_name'),
     University::Organization.human_attribute_name('address'),
     University::Organization::Localization.human_attribute_name('address_additional'),
     University::Organization.human_attribute_name('zipcode'),
     University::Organization.human_attribute_name('city'),
     University::Organization.human_attribute_name('country'),
-    University::Organization.human_attribute_name('kind'),
-    University::Organization.human_attribute_name('siren'),
+    University::Organization.human_attribute_name('email'),
     University::Organization.human_attribute_name('phone'),
     University::Organization::Localization.human_attribute_name('url'),
-    University::Organization.human_attribute_name('email'),
     University::Organization::Localization.human_attribute_name('linkedin'),
     University::Organization::Localization.human_attribute_name('twitter'),
+    University::Organization::Localization.human_attribute_name('mastodon'),
     University::Organization.human_attribute_name('categories')
     ]
 
   types = [
+    :string,
+    :string,
+    :string,
+    :string,
     :string,
     :string,
     :string,
@@ -42,21 +51,26 @@ wb.add_worksheet(name: "index") do |sheet|
   @organizations.each do |organization|
     l10n = organization.best_localization_for(current_language)
     infos = [
+      organization.id,
       l10n.name,
+      l10n.long_name,
+      organization.kind,
+      organization.siren,
+      organization.nic,
+      l10n.meta_description,
       l10n.address_name,
       organization.address,
       l10n.address_additional,
       organization.zipcode,
       organization.city,
-      organization.country_name,
-      organization.kind,
-      organization.siren,
+      organization.country,
+      organization.email,
       organization.phone,
       l10n.url,
-      organization.email,
       l10n.linkedin,
-      l10n.twitter.present? ? "@#{l10n.twitter}" : '',
-      organization.categories.map { |category| category.to_s_in(current_language) }.join(', ')
+      l10n.twitter,
+      l10n.mastodon,
+      organization.categories.map { |category| category.to_s_in(current_language) }.join('|')
     ]
 
     sheet.add_row infos, types: types

@@ -1,6 +1,7 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "index") do |sheet|
   columns = [
+    University::Person.human_attribute_name(:id),
     University::Person::Localization.human_attribute_name(:first_name),
     University::Person::Localization.human_attribute_name(:last_name),
     University::Person.human_attribute_name(:gender),
@@ -27,12 +28,15 @@ wb.add_worksheet(name: "index") do |sheet|
 
     University::Person.human_attribute_name(:categories),
 
-    Education::School.model_name.human,
-    Education::Program.model_name.human,
+    t("university.alumni.cohorts.import_columns.school_id"),
+    t("university.alumni.cohorts.import_columns.school_name"),
+    t("university.alumni.cohorts.import_columns.program_id"),
+    t("university.alumni.cohorts.import_columns.program_name"),
     Administration::AcademicYear.model_name.human
   ]
 
   types = [
+    :string,
     :string,
     :string,
     :string,
@@ -61,6 +65,8 @@ wb.add_worksheet(name: "index") do |sheet|
 
     :string,
     :string,
+    :string,
+    :string,
     :string
   ]
 
@@ -69,6 +75,7 @@ wb.add_worksheet(name: "index") do |sheet|
   @alumni.each do |alumnus|
     alumnus_l10n = alumnus.best_localization_for(current_language)
     alumnus_infos = [
+      alumnus.id,
       alumnus_l10n.first_name,
       alumnus_l10n.last_name,
       alumnus.xlsx_gender,
@@ -98,7 +105,9 @@ wb.add_worksheet(name: "index") do |sheet|
     alumnus.cohorts.each do |cohort|
       infos = [
         *alumnus_infos,
+        cohort.school_id,
         cohort.school.to_s_in(current_language),
+        cohort.program_id,
         cohort.program.to_s_in(current_language),
         cohort.academic_year.to_s_in(current_language)
       ]

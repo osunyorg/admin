@@ -465,7 +465,7 @@ en:
     error_msg: "Line %{line}: %{error}"
     errors: Errors
     example_file_html: Download an <a href="%{link}" target="_blank">example file</a>
-    hint_html: "File must be an .xlsx excel file.<br>The first line must contain the headers.<br>The hearders are mandatory and must be strictly respected.<br>All characters must be encoded as UTF-8.<br>Fields marked with an asterisk are mandatory."
+    hint_html: "File must be an .xlsx excel file.<br>The first line must contain the headers.<br>The hearders are mandatory and must be strictly respected.<br>All characters must be encoded as UTF-8.<br>Fields marked with an asterisk are mandatory.<br>The <i>id</i> field allows to re-import an exported file."
     initiated_by: "Initiated by:"
     number_of_lines: "Number of lines in the file:"
     status: "Status:"
@@ -512,12 +512,12 @@ en:
           default_subject: Invitation from {{sender_name}} (promotion {{sender_years}}) to join the extranet
           default_text: |
             Hello {{name}},
-            
+
             {{sender_name}} invites you to join the Alumni extranet.
-            
+
             You will find, in particular, the directory of all promotions.
             See you soon!
-            
+
             {{sender_name}} (promotion {{sender_years}})"
     notifications:
       gdpr_deletion_incoming:
