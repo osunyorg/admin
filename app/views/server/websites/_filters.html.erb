@@ -50,5 +50,15 @@
                       collection: Communication::Website.hostings.keys.map { |r| { to_s: t("enums.communication.website.hosting.#{r}"), id: r } }
                       %>
 
+    <%= render_filter f,
+                      :select,
+                      :for_kelmscott,
+                      label: t('filters.attributes.element', element: t('server_admin.websites.kelmscott_status').downcase),
+                      collection: [
+                        { to_s: t('true'), id: 'true' },
+                        { to_s: t('false'), id: 'false' }
+                      ]
+                      %>
+
     <% end %>
 <% end %>

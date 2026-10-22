@@ -432,7 +432,7 @@ en:
   evolutions:
     listen: Listen on
     release: Release on %{day}, a bit of music in the meantime?
-  false: No
+  false: "No"
   file_hint_with_formats: "%{formats} files only. %{filesize} max."
   file_hint_without_formats: "%{filesize} max"
   filters:
@@ -629,7 +629,7 @@ en:
       date_with_hour: "%B %d, %Y %H:%M"
       time_only: "%H:%M"
   today: Today
-  true: Yes
+  true: "Yes"
   user:
     admins:
       one: Administrator

@@ -26,6 +26,8 @@ module Communication::Website::WithKelmscott
 
     before_validation :assign_kelmscott_variables
     after_save :clean_kelmscott_variables, if: :saved_change_to_kelmscott_sync_method?
+
+    scope :for_kelmscott, -> (kelmscott, language = nil) { where(kelmscott_active: kelmscott) }
   end
 
   def kelmscott_publish
