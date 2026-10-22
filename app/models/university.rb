@@ -64,7 +64,7 @@ class University < ApplicationRecord
   has_many :active_storage_blobs, class_name: 'ActiveStorage::Blob'
   has_many :imports, dependent: :destroy
   has_many :apps, dependent: :destroy
-  has_many :search, dependent: :destroy
+  has_many :search_results, dependent: :destroy
 
   validates :name, presence: true
   validates :logo, size: { less_than: 1.megabytes }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_19_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_20_121410) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -2356,27 +2356,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_19_120000) do
     t.index ["university_id"], name: "index_research_thesis_localizations_on_university_id"
   end
 
-  create_table "search_index", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.string "title"
-    t.text "text"
-    t.uuid "language_id", null: false
-    t.string "about_object_type", null: false
-    t.uuid "about_object_id", null: false
-    t.string "about_localization_type", null: false
-    t.uuid "about_localization_id", null: false
-    t.uuid "website_id"
-    t.uuid "extranet_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["about_localization_type", "about_localization_id"], name: "index_search_on_about_localization"
-    t.index ["about_object_type", "about_object_id"], name: "index_search_on_about_object"
-    t.index ["extranet_id"], name: "index_search_index_on_extranet_id"
-    t.index ["language_id"], name: "index_search_index_on_language_id"
-    t.index ["university_id"], name: "index_search_index_on_university_id"
-    t.index ["website_id"], name: "index_search_index_on_website_id"
-  end
-
   create_table "server_emergency_messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id"
     t.string "name"
@@ -2775,6 +2754,27 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_19_120000) do
     t.index ["university_id"], name: "index_university_roles_on_university_id"
   end
 
+  create_table "university_search_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.string "title"
+    t.text "text"
+    t.uuid "language_id", null: false
+    t.string "about_object_type", null: false
+    t.uuid "about_object_id", null: false
+    t.string "about_localization_type", null: false
+    t.uuid "about_localization_id", null: false
+    t.uuid "website_id"
+    t.uuid "extranet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_localization_type", "about_localization_id"], name: "index_search_on_about_localization"
+    t.index ["about_object_type", "about_object_id"], name: "index_search_on_about_object"
+    t.index ["extranet_id"], name: "index_university_search_results_on_extranet_id"
+    t.index ["language_id"], name: "index_university_search_results_on_language_id"
+    t.index ["university_id"], name: "index_university_search_results_on_university_id"
+    t.index ["website_id"], name: "index_university_search_results_on_website_id"
+  end
+
   create_table "user_favorites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.string "about_type", null: false
@@ -3171,9 +3171,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_19_120000) do
   add_foreign_key "research_thesis_localizations", "languages"
   add_foreign_key "research_thesis_localizations", "research_theses", column: "about_id"
   add_foreign_key "research_thesis_localizations", "universities"
-  add_foreign_key "search_index", "communication_extranets", column: "extranet_id"
-  add_foreign_key "search_index", "communication_websites", column: "website_id"
-  add_foreign_key "search_index", "universities"
   add_foreign_key "server_emergency_messages", "universities"
   add_foreign_key "server_evolution_localizations", "languages"
   add_foreign_key "server_evolution_localizations", "server_evolutions", column: "evolution_id"
@@ -3224,6 +3221,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_19_120000) do
   add_foreign_key "university_role_localizations", "universities"
   add_foreign_key "university_role_localizations", "university_roles", column: "about_id"
   add_foreign_key "university_roles", "universities"
+  add_foreign_key "university_search_results", "communication_extranets", column: "extranet_id"
+  add_foreign_key "university_search_results", "communication_websites", column: "website_id"
+  add_foreign_key "university_search_results", "universities"
   add_foreign_key "user_favorites", "users"
   add_foreign_key "users", "languages"
   add_foreign_key "users", "universities"
