@@ -37,6 +37,6 @@ count = 0
   <% end %>
 </div>
 
-<% if @results.none? || count.zero? %>
+<% if count.zero? %>
   <p class="text-white text-center"><%= t('admin.search.no_results') %></p>
 <% end %>
