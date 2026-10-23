@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "4.0.7"
+ruby "4.0.9"
 
 gem "activestorage-scaleway-service"#, path: "../activestorage-scaleway-service"
 gem "active_hashcash", "0.4.0"
@@ -20,7 +20,7 @@ gem "bugsnag"
 gem "cancancan", "~> 3.3.0"
 gem "caxlsx_rails", "~> 0"
 gem "cgi" # To handle CGI::parse
-gem "chartkick", "~> 5.2"
+gem "chartkick", "~> 5.3"
 gem "citeproc", "~> 2"
 gem "citeproc-ruby", "~> 2"
 gem "cocoon", "~> 1"
