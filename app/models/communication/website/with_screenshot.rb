@@ -6,7 +6,12 @@ module Communication::Website::WithScreenshot
     has_one_attached :screenshot_full_page
   end
 
-  def screenshot!
+  def screenshot_later
+    return if url.blank?
+    Communication::Website::ScreenshotJob.perform_later(id)
+  end
+
+  def screenshot_safely
     return if url.blank?
     make_screenshot!
     make_screenshot!(full_page: true)
