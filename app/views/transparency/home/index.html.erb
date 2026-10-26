@@ -54,18 +54,18 @@
   <article class="border-bottom py-2">
     <div class="row">
       <div class="col-md-4">
-        <%= cost.first %>
+        <%= cost.name %>
       </div>
       <div class="col-md-6">
-        <%= cost.second %>
+        <%= cost.description %>
       </div>
       <div class="col-md-2">
-        <%= number_to_currency cost.last, precision: 0, locale: :fr  %>
+        <%= number_to_currency cost.annual_amount, precision: 0, locale: :fr  %>
       </div>
     </div>
   </article>
 <% end %>
-<div class="row">
+<div class="row py-2">
   <div class="col-md-10">
     Coûts (total)
   </div>

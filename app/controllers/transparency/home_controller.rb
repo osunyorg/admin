@@ -2,22 +2,10 @@ class Transparency::HomeController < Transparency::ApplicationController
   def index
     @universities = University.contributing.ordered
     @contributions_total = University.sum(:contribution_amount)
-    @costs = [
-      ['Brevo', 'SMS et mails transactionnels', 420],
-      ['CodeClimate', 'Qualité de code (gratuit pour l\'open source)', 0],
-      ['Deuxfleurs', 'Hébergement sans data center', 5000],
-      ['Insight Hub', 'Interception d\'erreur (gratuit pour l\'open source)', 0],
-      ['KeyCDN', 'Redimensionnement des images', 3000],
-      ['LanguageTool', 'Aide à la qualité des contenus', 1200],
-      ['LibreTranslate', 'Aide à  la traduction', 660],
-      ['MicroLink', 'Captures d\'écran', 144],
-      ['noesya', 'Tierce maintenance applicative (pro bono, estimée à 60k€)', 0],
-      ['Plausible', 'Mesure d\'audience', 948],
-      ['Scalingo', 'Hébergement de l\'admin', 6700],
-      ['Scaleway', 'Stockage des fichiers', 20],
-      ['Violenn Simon', 'Droits photographiques', 1000]
-    ]
-    @costs_total = @costs.sum { |cost| cost.last }
+
+    @costs = Server::Cost.ordered
+    @costs_total = Server::Cost.sum(:annual_amount)
+
     @balance = @contributions_total - @costs_total
   end
 end
