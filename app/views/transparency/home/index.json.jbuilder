@@ -1,4 +1,4 @@
-json.contributions do 
+json.contributions do
   json.total @contributions_total
   json.list @universities do |instance|
     json.id instance.id
@@ -11,9 +11,9 @@ end
 json.costs do
   json.total @costs_total
   json.list @costs do |cost|
-    json.name cost[0]
-    json.description cost[1]
-    json.amount cost[2]
+    json.name cost.name
+    json.description cost.description
+    json.amount cost.annual_amount
   end
 end
 json.balance @balance

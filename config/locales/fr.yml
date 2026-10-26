@@ -54,6 +54,10 @@ fr:
         iso_code: Code Iso
         name: Nom
         summernote_locale: Nom de la locale Summernote
+      server/cost:
+        annual_amount: Montant annuel
+        description: Description
+        name: Nom
       server/emergency_message:
         content_en: Message (en)
         content_fr: Message (fr)
@@ -114,6 +118,9 @@ fr:
       language:
         one: Langue
         other: Langues
+      server/cost:
+        one: Coût de fonctionnement
+        other: Coûts de fonctionnement
       server/emergency_message:
         one: Message d'urgence
         other: Messages d'urgence

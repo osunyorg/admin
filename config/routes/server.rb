@@ -26,6 +26,7 @@ namespace :server do
       post :deliver
     end
   end
+  resources :costs
   get 'background-jobs' => 'background_jobs#index', as: :background_jobs
   get 'overrides' => 'overrides#index'
   get 'overrides/show' => 'overrides#show', as: :override

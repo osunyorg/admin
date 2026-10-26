@@ -1,0 +1,39 @@
+<% content_for :title, Server::Cost.model_name.human(count: 2) %>
+
+<% content_for :title_right do %>
+  <%= link_to t('create'), new_server_cost_path, class: button_classes %>
+<% end %>
+
+<div class="table-responsive">
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th><%= Server::Cost.human_attribute_name(:name) %></th>
+        <th><%= Server::Cost.human_attribute_name(:description) %></th>
+        <th><%= Server::Cost.human_attribute_name(:annual_amount) %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @costs.each do |cost| %>
+        <tr>
+          <td><%= link_to cost, cost %></td>
+          <td><%= cost.description %></td>
+          <td><%= number_to_currency cost.annual_amount, precision: 0, locale: :fr %></td>
+          <td class="text-end">
+            <div class="btn-group" role="group">
+              <%= link_to t('edit'),
+                        [:edit, cost],
+                        class: button_classes %>
+              <%= link_to t('delete'),
+                        cost,
+                        method: :delete,
+                        data: { confirm: t('please_confirm.deletion') },
+                        class: button_classes_danger %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
