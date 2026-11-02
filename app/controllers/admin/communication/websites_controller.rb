@@ -111,7 +111,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def update
     if @website.update(website_params)
-      if can?(:unlock_synchronization, @website)
+      if can?(:unlock_synchronization, @website) && !params.dig(:communication_website, :synchronization_active).nil?
         active = params.dig(:communication_website, :synchronization_active) == "1"
         @website.manage_sync(active, current_user)
       end
