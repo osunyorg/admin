@@ -1,4 +1,4 @@
-<% if @website && @website&.synchronization_locked? %>
+<% if @website && @website.synchronization_locked? %>
   <div class="container-fluid text-center mb-5">
     <%= lucide_icon('lock') %>
     <span class="small ms-2">
