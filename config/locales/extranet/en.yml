@@ -55,5 +55,7 @@ en:
     posts:
       home: Recent posts
       read_post: Read post
+    registration_contact: Contact us
+    registration_contact_sign_up_screen: Contact us for any questions regarding registration
     search:
       no_results: No results

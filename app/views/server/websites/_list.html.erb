@@ -35,8 +35,7 @@
                         target: :_blank,
                         class: 'action' if website.repository.present? %>
           </td>
-          <td><%= image_tag website.deployment_status_badge,
-                            alt: '' if website.deployment_status_badge.present? %></td>
+          <td><%= image_tag website.status_badge_url, alt: '' if website.status_badge? %></td>
           <td class="js-version">
             <%= website.theme_version %>
             <%= link_to t('server_admin.websites.buttons.theme.sync'),

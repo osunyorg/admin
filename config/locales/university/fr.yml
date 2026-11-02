@@ -43,9 +43,11 @@ fr:
         digital: Coordonnées numériques
         email: Courriel
         geolocation: Coordonnées géographiques
+        id: ID
         kind: Type
         legal: Informations légales
         map: Carte
+        nic: Numéro NIC
         phone: Téléphone
         physical: Coordonnées physiques
         siren: Numéro de SIREN
@@ -57,6 +59,7 @@ fr:
         logo: Logo sur fond clair (par défaut)
         logo_on_dark_background: Logo sur fond sombre (optionnel)
         long_name: Nom complet
+        meta_description: Description SEO
         name: Nom
         text: Texte
         twitter: Twitter
@@ -87,6 +90,7 @@ fr:
         hal_doc_identifier: Identifiant doc
         hal_form_identifier: Identifiant form
         hal_person_identifier: Identifiant person
+        id: ID
         is_administration: Personnel administratif
         is_alumnus: Alumnus
         is_author: Auteur·rice
@@ -233,7 +237,12 @@ fr:
     alumni:
       cohorts:
         import_btn: Importer des promotions
-        import_hint_html: "Le champ <i>school</i> doit contenir l'id interne de l'école.<br>Le champ <i>program</i> doit contenir l'id interne de la formation."
+        import_columns:
+          program_id: Formation (ID)
+          program_name: Formation (Nom)
+          school_id: École (ID)
+          school_name: École (Nom)
+        import_hint_html: "Le champ <i>school_id</i> doit contenir l'id interne de l'école.<br>Le champ <i>program_id</i> doit contenir l'id interne de la formation.<br>Les colonnes <i>school_name</i> et <i>program_name</i> ne sont pas utilisées dans l'import, elles permettent d'utiliser un fichier d'export d'alumni tel quel."
         import_warning_html: "Attention : Si vous avez un ou plusieurs extranets concernés par ces alumni, cet import va envoyer des emails aux personnes importées, pour leur indiquer qu'elles ont désormais accès à l'extranet.<br>Elles recevront des mails même si elles ont déjà activé leur accès.<br>Si un alumnus est ajouté plusieurs fois dans l'import, il ne recevra qu'un seul email par extranet."
         title: Imports de promotions
     apps:
@@ -262,7 +271,7 @@ fr:
     manage_experiences: Gérer les expériences professionnelles
     organization:
       employees: Employé·es
-      import_hint_html: "Les valeurs possibles pour <i>kind</i> sont : company, non_profit, government, public_organization, collective.<br>Les champs <i>siren</i>, <i>nic</i>, <i>zipcode</i> et <i>phone</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caractères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)"
+      import_hint_html: "En cas d'absence d'ID, les organisations seront quand même recherchées par leur SIREN, NIC ou nom.<br>Les valeurs possibles pour <i>kind</i> sont : company, non_profit, government, public_organization, collective.<br>Les champs <i>siren</i>, <i>nic</i>, <i>zipcode</i> et <i>phone</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caractères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>categories</i> peut contenir une liste de catégories auxquelles l'utilisateur sera rattaché. Il s'agit d'une liste de noms séparés par un caractère \"|\". Si une catégorie de la liste n'existe pas elle sera créée à la volée."
       logo: Logo
       search: Rechercher par nom d'organisation
     person:
@@ -289,7 +298,7 @@ fr:
           programs: Enseignements
           programs_of: Enseignements de %{name}
       import_btn: Importer des personnes
-      import_hint_html: "Les valeurs pour <i>gender</i> peuvent être m (masculin), f (féminin) et n (non binaire).<br>Le champ <i>photo</i> doit être une URL valide d'une image quelque part en ligne. Il doit impérativement s'agir d'une url se finissant par une extension acceptée (%{formats}).<br>Les champs <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> et <i>zipcode</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caractères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>social_twitter</i> ne doit pas contenir d'@.<br>Le champ <i>categories</i> peut contenir une liste de catégories auxquelles l'utilisateur sera rattaché. Il s'agit d'une liste de noms séparés par un caractère \"|\". Si une catégorie de la liste n'existe pas elle sera créée à la volée."
+      import_hint_html: "Les valeurs pour <i>gender</i> peuvent être m (masculin), f (féminin) et n (non binaire).<br>Le champ <i>photo</i> doit être une URL valide d'une image quelque part en ligne. Il doit impérativement s'agir d'une url se finissant par une extension acceptée (%{formats}). Si la personne a déjà une photo, le champ sera ignoré.<br>Les champs <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> et <i>zipcode</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caractères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>social_twitter</i> ne doit pas contenir d'@.<br>Le champ <i>categories</i> peut contenir une liste de catégories auxquelles l'utilisateur sera rattaché. Il s'agit d'une liste de noms séparés par un caractère \"|\". Si une catégorie de la liste n'existe pas elle sera créée à la volée."
       personal_data_visibilities:
         private: Privé
         public: Public

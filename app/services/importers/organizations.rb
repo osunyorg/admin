@@ -1,5 +1,6 @@
 module Importers
   class Organizations < Base
+    NUMBER_OF_COLUMNS = 20
 
     protected
 

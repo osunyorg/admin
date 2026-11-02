@@ -6,7 +6,7 @@
 #  kind              :integer
 #  number_of_lines   :integer
 #  processing_errors :jsonb
-#  status            :integer          default(0)
+#  status            :integer          default("pending")
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  language_id       :uuid             not null, indexed

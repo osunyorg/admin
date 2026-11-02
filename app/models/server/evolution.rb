@@ -31,6 +31,10 @@ class Server::Evolution < ApplicationRecord
     localization_for(language) || original_localization
   end
 
+  def days_left
+    (released_at - Date.current).to_i
+  end
+
   def to_s
     original_localization.to_s
   end

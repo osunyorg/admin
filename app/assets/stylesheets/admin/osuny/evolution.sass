@@ -1,26 +1,8 @@
 .osuny_evolution
     background: $color-flexoki-150
     padding-top: 1rem
-    padding-bottom: 1rem    
-    @include media-breakpoint-down(md)
-        text-align: center
-        &__text
-            margin-bottom: 15px
-        &__date
-            margin-bottom: 20px
-    @include media-breakpoint-up(md)
-        .container-fluid
-            align-items: center
-            display: flex
-            justify-content: space-between
-        &__text,
-        &__song
-            width: 40%
-        &__song
-            margin-top: -1px
-            text-align: right
+    padding-bottom: 1rem
     &__text
-        margin-top: -2px
         &__title
             font-weight: bold
             margin-bottom: 0
@@ -28,16 +10,7 @@
             p
                 margin-bottom: 0
     &__date
-        text-align: center
-        margin-top: -30px
-        &__big
-            font-family: $font-family-serif
-            font-size: 60px
-            font-variant-numeric: oldstyle-nums
-            line-height: 80px
-        &__long
-            font-size: 12px
-            color: $color-flexoki-800
+        font-size: 12px
     &__song
         &__title
             display: inline
@@ -58,3 +31,21 @@
                 li
                     display: inline
                     list-style: none
+    @include media-breakpoint-down(md)
+        &__date
+            text-align: left
+            margin-top: 3px
+            margin-bottom: 30px
+        &__song
+            text-align: right
+    @include media-breakpoint-up(md)
+        .container-fluid
+            display: flex
+            justify-content: space-between
+        &__text
+            width: 60%
+        &__date
+            margin-bottom: 1px
+        &__song
+            width: 40%
+            text-align: right

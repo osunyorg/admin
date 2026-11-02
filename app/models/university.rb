@@ -22,7 +22,7 @@
 #  sso_cert                    :text
 #  sso_mapping                 :jsonb
 #  sso_name_identifier_format  :string
-#  sso_provider                :integer          default(0)
+#  sso_provider                :integer          default("saml")
 #  sso_target_url              :string
 #  zipcode                     :string
 #  created_at                  :datetime         not null
@@ -32,7 +32,7 @@
 # Indexes
 #
 #  index_universities_on_default_language_id  (default_language_id)
-#  index_universities_on_name                 (name) USING gin
+#  index_universities_on_name                 (name gin_trgm_ops) USING gin
 #
 # Foreign Keys
 #
@@ -64,7 +64,7 @@ class University < ApplicationRecord
   has_many :active_storage_blobs, class_name: 'ActiveStorage::Blob'
   has_many :imports, dependent: :destroy
   has_many :apps, dependent: :destroy
-  has_many :search, dependent: :destroy
+  has_many :search_results, dependent: :destroy
 
   validates :name, presence: true
   validates :logo, size: { less_than: 1.megabytes }

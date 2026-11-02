@@ -15,6 +15,7 @@ namespace :communication do
       get :confirm_localization
       post :do_confirm_localization
       post :synchronize
+      post :kelmscott_publish
       scope 'git-analysis' do
         get '' => 'websites/git_analysis#index', as: :git_analysis
         post '' => 'websites/git_analysis#launch'
@@ -282,7 +283,6 @@ namespace :communication do
         resources :kinds, controller: 'extranets/documents/kinds', as: 'document_kinds'
       end
     end
-    resources :jobs, controller: 'extranets/jobs'
   end
   scope module: 'library' do
     resources :medias do

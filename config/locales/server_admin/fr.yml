@@ -62,6 +62,7 @@ fr:
         short: Référentiel
         status: Statut
       in_production: "%{count} en production"
+      kelmscott_status: Utilisation de Kelmscott
       manage_versions: Gérer les versions
       outdated: Ces sites ne sont pas à jour
       pages_count: "%{count} pages"

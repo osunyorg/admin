@@ -4,7 +4,7 @@ module Importers
     def person
       @person ||= begin
         person = build_person
-        person.is_alumnus = true
+        person&.is_alumnus = true
         person
       end
     end

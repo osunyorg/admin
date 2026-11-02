@@ -37,7 +37,6 @@ module AsTree
     self.class.unscoped
               .where(parent: parent, university: university)
               .where.not(id: id)
-              .ordered(original_language)
   end
 
   def self_and_children(level)

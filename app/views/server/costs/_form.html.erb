@@ -1,0 +1,9 @@
+<%= simple_form_for cost do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :annual_amount %>
+
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>

@@ -64,4 +64,10 @@
     </div>
   </div>
   <%= f.button :submit, t(".sign_up"), class: 'btn btn-primary' %>
+
+
+<% if current_extranet.present? && current_extranet_l10n.registration_contact.present? %>
+  <p class="mt-4"><%= mail_to current_extranet_l10n.registration_contact, t('extranet.registration_contact_sign_up_screen') %></p>
+<% end %>
+
 <% end %>

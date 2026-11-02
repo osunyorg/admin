@@ -24,12 +24,14 @@
 #  git_branch                   :string
 #  git_endpoint                 :string
 #  git_files_analysed_at        :datetime
-#  git_provider                 :integer          default(0)
+#  git_provider                 :integer          default("github")
 #  highlighted_in_showcase      :boolean          default(FALSE)
-#  hosting                      :integer          default(1), not null
+#  hosting                      :integer          default("deuxfleurs"), not null
 #  in_production                :boolean          default(FALSE)
 #  in_production_at             :datetime
 #  in_showcase                  :boolean          default(TRUE)
+#  kelmscott_active             :boolean          default(FALSE)
+#  kelmscott_sync_method        :integer
 #  last_sync_at                 :datetime
 #  locked_at                    :datetime
 #  plausible_url                :string
@@ -88,6 +90,7 @@ class Communication::Website < ApplicationRecord
   include WithGitRepository
   include WithGitRepositoryLock
   include WithHosting
+  include WithKelmscott
   include WithLock
   include WithManagers
   include WithOpenApi
@@ -104,6 +107,7 @@ class Communication::Website < ApplicationRecord
   include WithScreenshot
   include WithSecurity
   include WithShowcase
+  include WithStatusBadge
   include WithStyle
   include WithTheme
   include WithTimeZone

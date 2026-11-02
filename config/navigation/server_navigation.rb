@@ -23,6 +23,9 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item  :background_jobs,
                   'Jobs',
                   server_background_jobs_path
+    primary.item  :costs,
+                  Server::Cost.model_name.human(count: 2),
+                  server_costs_path
     primary.item  :communication, Communication.model_name.human, nil, html: { class: 'section' }
     primary.item  :websites,
                   Communication::Website.model_name.human(count: 2),

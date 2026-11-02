@@ -37,7 +37,7 @@ module Communication::Website::WithConnectedObjects
     check_period_years
     get_current_theme_version!
     analyse_repository_safely
-    screenshot!
+    screenshot_later
   end
 
   def clean

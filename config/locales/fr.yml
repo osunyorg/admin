@@ -54,6 +54,10 @@ fr:
         iso_code: Code Iso
         name: Nom
         summernote_locale: Nom de la locale Summernote
+      server/cost:
+        annual_amount: Montant annuel
+        description: Description
+        name: Nom
       server/emergency_message:
         content_en: Message (en)
         content_fr: Message (fr)
@@ -114,6 +118,9 @@ fr:
       language:
         one: Langue
         other: Langues
+      server/cost:
+        one: Coût de fonctionnement
+        other: Coûts de fonctionnement
       server/emergency_message:
         one: Message d'urgence
         other: Messages d'urgence
@@ -430,6 +437,7 @@ fr:
         pending: En cours de traitement
   evolutions:
     listen: Écouter sur
+    release: Sortie le %{day}, un peu de musique en attendant ?
   export: Exporter (xlsx)
   false: Non
   file_hint_with_formats: "Fichiers %{formats} uniquement. %{filesize} max."
@@ -464,7 +472,7 @@ fr:
     error_msg: "Ligne %{line} : %{error}"
     errors: Erreurs
     example_file_html: Télécharger un <a href="%{link}" target="_blank">fichier d'exemple</a>
-    hint_html: "Les données doivent être au format xlsx.<br>La première ligne doit être dédiée aux en-têtes.<br>Les noms des entêtes sont obligatoires et doivent être respectés strictement.<br>Les caractères doivent être encodés en UTF-8.<br>Les champs marqués d'une astérisque sont obligatoires."
+    hint_html: "Les données doivent être au format xlsx.<br>La première ligne doit être dédiée aux en-têtes.<br>Les noms des entêtes sont obligatoires et doivent être respectés strictement.<br>Les caractères doivent être encodés en UTF-8.<br>Les champs marqués d'une astérisque sont obligatoires.<br>Le champ <i>id</i> permet de gérer le ré-import d'un fichier exporté."
     initiated_by: "Initié par :"
     number_of_lines: "Nombre de lignes dans le fichier :"
     status: "Statut :"
@@ -501,22 +509,22 @@ fr:
     extranet:
       invitation_messages:
         automatic:
-          subject: Bienvenue sur votre extranet
-          text: Vous avez désormais accès à l'extranet.
+          default_subject: Bienvenue sur votre extranet
+          default_text: Vous avez désormais accès à l'extranet.
           with_user_html: Vous pouvez vous y connecter avec votre adresse email <b>%{email}</b> en <a href="%{sign_in_url}">cliquant ici</a>.
           without_user_html: Vous pouvez vous y inscrire avec votre adresse email <b>%{email}</b> en <a href="%{sign_up_url}">cliquant ici</a>.
         manual:
           cta: Rejoindre l'extranet
-          signature: Cordialement
-          subject: Invitation de {{sender_name}} (promotion {{sender_years}}) à rejoindre l'extranet
-          text: |
+          default_signature: Cordialement
+          default_subject: Invitation de {{sender_name}} (promotion {{sender_years}}) à rejoindre l'extranet
+          default_text: |
             Bonjour {{name}},
 
             {{sender_name}} vous invite à rejoindre l'extranet des Alumni.
-          
+
             Vous y retrouverez notamment l'annuaire de toutes les promotions.
             À très bientôt !
-            
+
             {{sender_name}} (promotion {{sender_years}})
     notifications:
       gdpr_deletion_incoming:

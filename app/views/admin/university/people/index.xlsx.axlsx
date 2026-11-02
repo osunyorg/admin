@@ -1,58 +1,60 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "index") do |sheet|
   options = [
-    University::Person::Localization.human_attribute_name('last_name'),
-    University::Person::Localization.human_attribute_name('first_name'),
-    University::Person.human_attribute_name('email'),
-    University::Person.human_attribute_name('email_visibility'),
-    University::Person.human_attribute_name('gender'),
-    University::Person.human_attribute_name('address'),
-    University::Person.human_attribute_name('address_visibility'),
-    University::Person.human_attribute_name('zipcode'),
-    University::Person.human_attribute_name('city'),
-    University::Person.human_attribute_name('country'),
-    University::Person.human_attribute_name('birthdate'),
-    University::Person.human_attribute_name('phone_personal'),
-    University::Person.human_attribute_name('phone_personal_visibility'),
-    University::Person.human_attribute_name('phone_professional'),
-    University::Person.human_attribute_name('phone_professional_visibility'),
-    University::Person.human_attribute_name('phone_mobile'),
-    University::Person.human_attribute_name('phone_mobile_visibility'),
-    University::Person::Localization.human_attribute_name('url'),
-    University::Person::Localization.human_attribute_name('linkedin'),
-    University::Person.human_attribute_name('linkedin_visibility'),
-    University::Person::Localization.human_attribute_name('twitter'),
-    University::Person.human_attribute_name('twitter_visibility'),
-    University::Person::Localization.human_attribute_name('mastodon'),
-    University::Person.human_attribute_name('mastodon_visibility'),
-    University::Person.human_attribute_name('categories')
-    ]
+    University::Person.human_attribute_name(:id),
+    University::Person::Localization.human_attribute_name(:first_name),
+    University::Person::Localization.human_attribute_name(:last_name),
+    University::Person.human_attribute_name(:gender),
+
+    University::Person.human_attribute_name(:birthdate),
+    University::Person.human_attribute_name(:email),
+    University::Person.human_attribute_name(:picture),
+    University::Person::Localization.human_attribute_name(:url),
+
+    University::Person.human_attribute_name(:phone_professional),
+    University::Person.human_attribute_name(:phone_personal),
+    University::Person.human_attribute_name(:phone_mobile),
+
+    University::Person.human_attribute_name(:address),
+    University::Person.human_attribute_name(:zipcode),
+    University::Person.human_attribute_name(:city),
+    University::Person.human_attribute_name(:country),
+
+    University::Person::Localization.human_attribute_name(:biography),
+
+    University::Person::Localization.human_attribute_name(:twitter),
+    University::Person::Localization.human_attribute_name(:linkedin),
+    University::Person::Localization.human_attribute_name(:mastodon),
+
+    University::Person.human_attribute_name(:categories)
+  ]
 
   types = [
     :string,
     :string,
     :string,
     :string,
+
+    nil,
+    :string,
+    :string,
+    :string,
+
+    :string,
+    :string,
+    :string,
+
     :string,
     :string,
     :string,
     :string,
+
+    :string,
+
     :string,
     :string,
     :string,
-    :string,
-    :string,
-    :string,
-    :string,
-    :string,
-    :string,
-    :string,
-    :string,
-    :string,
-    :string,
-    :string,
-    :string,
-    :string,
+
     :string
   ]
 
@@ -61,31 +63,32 @@ wb.add_worksheet(name: "index") do |sheet|
   @people.each do |person|
     l10n = person.best_localization_for(current_language)
     infos = [
-      l10n.last_name,
+      person.id,
       l10n.first_name,
+      l10n.last_name,
+      person.xlsx_gender,
+
+      person.birthdate,
       person.email,
-      person.email_visibility,
-      person.gender.present? ? t("activerecord.attributes.university/person.genders.#{person.gender}") : '',
+      person.picture.url,
+      l10n.url,
+
+      person.phone_professional,
+      person.phone_personal,
+      person.phone_mobile,
+
       person.address,
-      person.address_visibility,
       person.zipcode,
       person.city,
-      person.country_name,
-      person.birthdate.present? ? l(person.birthdate, format: :birthday) : '',
-      person.phone_personal,
-      person.phone_personal_visibility,
-      person.phone_professional,
-      person.phone_professional_visibility,
-      person.phone_mobile,
-      person.phone_mobile_visibility,
-      l10n.url,
+      person.country,
+
+      l10n.biography,
+
+      l10n.twitter,
       l10n.linkedin,
-      person.linkedin_visibility,
-      l10n.twitter.present? ? "@#{l10n.twitter}" : '',
-      person.twitter_visibility,
       l10n.mastodon,
-      person.mastodon_visibility,
-      person.categories.map { |category| category.to_s_in(current_language) }.join(', ')
+
+      person.categories.map { |category| category.to_s_in(current_language) }.join('|')
     ]
 
     sheet.add_row infos, types: types

@@ -44,7 +44,7 @@ class Communication::Website::DestroyWebsiteJob < ApplicationJob
       access_token: nil,
       repository: nil,
     )
-    Search.remove_data_for_website(website)
+    University::SearchResult.remove_data_for_website(website)
     OBJECTS_NOT_PARANOID.each do |klass|
       klass.where(communication_website_id: website.id).destroy_all
     end
