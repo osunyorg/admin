@@ -88,6 +88,7 @@ class Communication::Website < ApplicationRecord
   include WithFeaturePortfolio
   include WithFederations
   include WithGitRepository
+  include WithGitRepositoryLock
   include WithHosting
   include WithKelmscott
   include WithLock
