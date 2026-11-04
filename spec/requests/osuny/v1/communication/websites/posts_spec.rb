@@ -131,6 +131,7 @@ RSpec.describe 'Communication::Website::Post' do
             new_post_l10n = new_post.localizations.find_by(migration_identifier: 'post-from-api-1-fr')
             assert(new_post_l10n)
             assert_equal(communication_medias(:dan_gold).id, new_post_l10n.featured_media_id)
+            assert(communication_medias(:dan_gold).contexts.find_by(about: new_post_l10n))
           end
         end
       end
