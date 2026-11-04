@@ -9,6 +9,7 @@ module HasFeaturedMedia
                 optional: true
 
     after_commit :create_featured_media_from_url_later, on: [:create, :update]
+    after_commit :create_featured_media_context, on: [:create, :update], if: :saved_change_to_featured_media_id?
     after_destroy :destroy_featured_media_context
     after_restore :restore_featured_media_context if respond_to?(:after_restore)
   end
@@ -38,6 +39,7 @@ module HasFeaturedMedia
     if id.present?
       media = university.communication_medias.find(id)
       media.find_or_create_localization(language, alt: alt)
+      # Need to add context here to apply crop settings directly
       context = media.add_context(self)
       context.apply_crop_settings!(crop_settings)
     else
@@ -74,6 +76,11 @@ module HasFeaturedMedia
   end
 
   def restore_featured_media_context
+    featured_media&.add_context(self)
+  end
+
+  def create_featured_media_context
+    return if paranoia_destroyed?
     featured_media&.add_context(self)
   end
 end
