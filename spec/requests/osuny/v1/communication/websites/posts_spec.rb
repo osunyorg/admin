@@ -252,6 +252,9 @@ RSpec.describe 'Communication::Website::Post' do
               perform_enqueued_jobs only: Api::CreateFeaturedMediaFromUrlJob
               media = Communication::Media.find_by(original_filename: "photo-1703923633616-254e78f6e9df")
               assert(media)
+              new_post_l10n = Communication::Website::Post::Localization.find_by(migration_identifier: 'post-from-api-1-fr')
+              assert(new_post_l10n)
+              assert(media.contexts.find_by(about: new_post_l10n))
             end
           end
         end
