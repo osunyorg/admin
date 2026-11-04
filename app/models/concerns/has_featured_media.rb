@@ -80,7 +80,7 @@ module HasFeaturedMedia
   end
 
   def create_featured_media_context
-    return if paranoia_destroyed?
+    return if respond_to?(:paranoia_destroyed?) && paranoia_destroyed?
     featured_media&.add_context(self)
   end
 end
