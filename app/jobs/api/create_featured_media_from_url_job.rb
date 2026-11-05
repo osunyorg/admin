@@ -19,6 +19,5 @@ class Api::CreateFeaturedMediaFromUrlJob < ApplicationJob
 
     object.featured_media = media
     object.save
-    media.add_context(object)
   end
 end
