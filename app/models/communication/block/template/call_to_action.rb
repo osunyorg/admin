@@ -2,6 +2,7 @@ class Communication::Block::Template::CallToAction < Communication::Block::Templ
 
   has_layouts [
     :accent_background,
+    :alt_background,
     :no_background
   ]
 

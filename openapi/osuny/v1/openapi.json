@@ -4563,6 +4563,7 @@
                 "type": "string",
                 "enum": [
                   "accent_background",
+                  "alt_background",
                   "no_background"
                 ]
               },
