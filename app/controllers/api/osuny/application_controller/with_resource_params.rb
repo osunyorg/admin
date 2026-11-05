@@ -47,7 +47,8 @@ module Api::Osuny::ApplicationController::WithResourceParams
           alt: featured_image_data[:alt],
           credit: featured_image_data[:credit]
         )
-        l10n_params[:featured_media_id] = media.id
+        media.add_context(l10n) if l10n.present?
+        l10n_params[:featured_media_id] = media.id if media.present?
       end
     end
     # Set the image URL so that the object can delay the import if needed
