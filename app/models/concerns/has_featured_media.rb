@@ -9,7 +9,7 @@ module HasFeaturedMedia
                 optional: true
 
     after_commit :create_featured_media_from_url_later, on: [:create, :update]
-    after_commit :create_featured_media_context, on: [:create, :update], if: :saved_change_to_featured_media_id?
+    after_commit :create_featured_media_context, on: [:create, :update]
     after_destroy :destroy_featured_media_context
     after_restore :restore_featured_media_context if respond_to?(:after_restore)
   end
