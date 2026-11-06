@@ -137,6 +137,9 @@ en:
               accent_background:
                 description: A block with a strong background.
                 label: Strong highlight
+              alt_background:
+                description: A block on a light background.
+                label: Subtle highlight
               no_background:
                 description: A much more discrete block layout.
                 label: Simple
