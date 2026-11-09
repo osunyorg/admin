@@ -15,6 +15,14 @@ module Communication::Website::WithHosting
     scope :for_hosting, ->(hosting, language = nil) { where(hosting: hosting) }
   end
 
+  def hosting_hint
+    if hosted_with_nodc?
+      nodc_identifier
+    elsif hosted_with_deuxfleurs?
+      deuxfleurs_identifier
+    end
+  end
+
   def should_use_hugo_aliases?
     hosted_with_undefined? || hosted_with_nginx?
   end

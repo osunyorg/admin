@@ -43,17 +43,8 @@
       </div>
       <div class="col-lg-6 col-xxl-4">
         <%= osuny_panel t('communication.website.hosting') do %>
-          <%
-          if @website.hosted_with_deuxfleurs?
-            hosting_hint = @website.deuxfleurs_identifier
-          elsif @website.hosted_with_nodc?
-            hosting_hint = @website.nodc_identifier
-          else
-            hosting_hint = nil
-          end
-          %>
           <%= f.input :hosting,
-                      hint: hosting_hint,
+                      hint: @website.hosting_hint,
                       include_blank: false,
                       input_html: { data: { 'conditional': true }, id: 'hosting' } %>
           <div  class="d-none"
