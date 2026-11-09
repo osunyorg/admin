@@ -23,7 +23,7 @@ module Communication::Website::WithNodc
   def nodc_setup_safely
     return unless hosted_with_nodc?
     if repository.blank?
-      nodc_create_github_repository
+      create_github_repository
       sleep 10
     end
     if nodc_identifier.blank?
@@ -64,14 +64,7 @@ module Communication::Website::WithNodc
     update_columns  nodc_identifier: bucket_info[:identifier],
                     nodc_access_key_id: bucket_info[:access_key_id],
                     nodc_secret_access_key: bucket_info[:secret_access_key],
-                    url: nodc_default_url
-  end
-
-  def nodc_create_github_repository
-    update_columns  access_token: university.github_access_token,
-                    repository: nodc_default_github_repository,
-                    deployment_status_badge: nodc_default_badge_url
-    git_repository.init_from_template(nodc_default_github_repository_name)
+                    url: "https://#{nodc_default_identifier}"
   end
 
   def nodc_update_github_secrets
@@ -84,25 +77,6 @@ module Communication::Website::WithNodc
   # cartographie.agit.nodc.osuny.site
   def nodc_default_identifier
     "#{original_localization.to_s.parameterize}.#{university.identifier}.nodc.osuny.site"
-  end
-
-  # https://cartographie.agit.nodc.osuny.site
-  def nodc_default_url
-    "https://#{nodc_default_identifier}"
-  end
-
-  # agit-cartographie
-  def nodc_default_github_repository_name
-    "#{university.identifier}-#{original_localization.to_s.parameterize}"
-  end
-
-  # osunyorg/agit-cartographie
-  def nodc_default_github_repository
-    "#{ENV['GITHUB_WEBSITE_OWNER']}/#{nodc_default_github_repository_name}"
-  end
-
-  def nodc_default_badge_url
-    "https://github.com/#{nodc_default_github_repository}/actions/workflows/nodc.yml/badge.svg"
   end
 
   def nodc_generate_certificate

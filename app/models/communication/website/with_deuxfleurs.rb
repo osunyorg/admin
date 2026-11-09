@@ -23,7 +23,7 @@ module Communication::Website::WithDeuxfleurs
   def deuxfleurs_setup_safely
     return unless hosted_with_deuxfleurs?
     if repository.blank?
-      deuxfleurs_create_github_repository
+      create_github_repository
       sleep 10
     end
     if deuxfleurs_identifier.blank?
@@ -64,14 +64,7 @@ module Communication::Website::WithDeuxfleurs
     update_columns  deuxfleurs_identifier: bucket_info[:identifier],
                     deuxfleurs_access_key_id: bucket_info[:access_key_id],
                     deuxfleurs_secret_access_key: bucket_info[:secret_access_key],
-                    url: deuxfleurs_default_url
-  end
-
-  def deuxfleurs_create_github_repository
-    update_columns  access_token: university.github_access_token,
-                    repository: deuxfleurs_default_github_repository,
-                    deployment_status_badge: deuxfleurs_default_badge_url
-    git_repository.init_from_template(deuxfleurs_default_github_repository_name)
+                    url: "https://#{deuxfleurs_default_identifier}"
   end
 
   def deuxfleurs_update_github_secrets
@@ -84,25 +77,6 @@ module Communication::Website::WithDeuxfleurs
   # cartographie.agit.osuny.site
   def deuxfleurs_default_identifier
     "#{original_localization.to_s.parameterize}.#{university.identifier}.osuny.site"
-  end
-
-  # https://cartographie.agit.osuny.site
-  def deuxfleurs_default_url
-    "https://#{deuxfleurs_default_identifier}"
-  end
-
-  # agit-cartographie
-  def deuxfleurs_default_github_repository_name
-    "#{university.identifier}-#{original_localization.to_s.parameterize}"
-  end
-
-  # osunyorg/agit-cartographie
-  def deuxfleurs_default_github_repository
-    "#{ENV['GITHUB_WEBSITE_OWNER']}/#{deuxfleurs_default_github_repository_name}"
-  end
-
-  def deuxfleurs_default_badge_url
-    "https://github.com/#{deuxfleurs_default_github_repository}/actions/workflows/deuxfleurs.yml/badge.svg"
   end
 
   def deuxfleurs_generate_certificate
