@@ -23,7 +23,7 @@
 #  git_branch                   :string
 #  git_endpoint                 :string
 #  git_files_analysed_at        :datetime
-#  git_provider                 :integer          default("github")
+#  git_provider                 :integer          default(0)
 #  highlighted_in_showcase      :boolean          default(FALSE)
 #  hosting                      :integer          default("deuxfleurs"), not null
 #  in_production                :boolean          default(FALSE)
@@ -33,6 +33,8 @@
 #  kelmscott_sync_method        :integer
 #  last_sync_at                 :datetime
 #  locked_at                    :datetime
+#  nodc_identifier              :string
+#  nodc_secret_access_key       :string
 #  plausible_url                :string
 #  repository                   :string
 #  style                        :text
@@ -46,6 +48,7 @@
 #  default_language_id          :uuid             not null, indexed
 #  deuxfleurs_access_key_id     :string
 #  locked_by_job_id             :uuid
+#  nodc_access_key_id           :string
 #  synchronization_locked_by_id :uuid             indexed
 #  university_id                :uuid             not null, indexed
 #
@@ -63,7 +66,7 @@
 #  fk_rails_bb6a496c08  (university_id => universities.id)
 #
 class Communication::Website < ApplicationRecord
-  self.filter_attributes += [:access_token, :deuxfleurs_secret_access_key]
+  self.filter_attributes += [:access_token, :deuxfleurs_secret_access_key, :nodc_secret_access_key]
 
   include Favoritable
   include Filterable
@@ -92,6 +95,7 @@ class Communication::Website < ApplicationRecord
   include WithKelmscott
   include WithLock
   include WithManagers
+  include WithNodc
   include WithOpenApi
   include WithPages
   include WithMenus # Menus must be created after special pages, so we can fill legal menu

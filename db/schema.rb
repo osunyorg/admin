@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_09_114910) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_09_123504) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -1691,6 +1691,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_09_114910) do
     t.uuid "synchronization_locked_by_id"
     t.boolean "kelmscott_active", default: false
     t.integer "kelmscott_sync_method"
+    t.string "nodc_access_key_id"
+    t.string "nodc_secret_access_key"
+    t.string "nodc_identifier"
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"
     t.index ["synchronization_locked_by_id"], name: "index_communication_websites_on_synchronization_locked_by_id"

@@ -5,6 +5,10 @@ json.deuxfleurs do
   json.hosting website.hosted_with_deuxfleurs?
   json.identifier website.deuxfleurs_identifier
 end
+json.nodc do
+  json.hosting website.hosted_with_nodc?
+  json.identifier website.nodc_identifier
+end
 json.features do
   json.agenda website.feature_agenda
   json.portfolio website.feature_portfolio

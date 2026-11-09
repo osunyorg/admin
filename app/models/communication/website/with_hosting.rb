@@ -7,7 +7,8 @@ module Communication::Website::WithHosting
       deuxfleurs: 1,
       apache: 2,
       nginx: 3,
-      netlify: 4
+      netlify: 4,
+      nodc: 5
     },
     prefix: :hosted_with
 

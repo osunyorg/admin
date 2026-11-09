@@ -176,6 +176,7 @@ en:
         languages: Languages
         locked_at: Locked for background jobs at
         name: Name
+        nodc_identifier: NoDC identifier
         plausible_url: Plausible dashboard URL
         repository: Repository
         showcase_tags: Tags
@@ -963,6 +964,7 @@ en:
           deuxfleurs: Deuxfleurs
           netlify: Netlify
           nginx: Nginx
+          nodc: NoDC
           undefined: Undefined
         kelmscott_sync_method:
           dxfl: dxfl
