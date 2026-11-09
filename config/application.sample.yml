@@ -38,6 +38,9 @@ MAINTENANCE: "false"
 
 MICROLINK_API_KEY:
 
+NODC_ACCESS_KEY_ID:
+NODC_SECRET_ACCESS_KEY:
+
 OSUNY_API_AUTOUPDATE_THEME_KEY:
 OSUNY_DEVELOPMENT_DBNAME: # Can be used when working on two incompatible branches (e.g. main & i18n)
 OSUNY_DESIGN:
