@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_26_094654) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_09_114910) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -1667,7 +1667,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_26_094654) do
     t.boolean "autoupdate_theme", default: true
     t.boolean "feature_posts", default: true
     t.boolean "feature_agenda", default: false
-    t.boolean "deuxfleurs_hosting", default: true
     t.string "deuxfleurs_identifier"
     t.string "default_time_zone"
     t.boolean "feature_portfolio", default: false

@@ -10,7 +10,6 @@
 #  autoupdate_theme             :boolean          default(TRUE)
 #  default_time_zone            :string
 #  deployment_status_badge      :text
-#  deuxfleurs_hosting           :boolean          default(TRUE)
 #  deuxfleurs_identifier        :string
 #  deuxfleurs_secret_access_key :string
 #  feature_agenda               :boolean          default(FALSE)
