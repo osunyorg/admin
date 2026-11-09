@@ -1,0 +1,52 @@
+name: nodc
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build_and_deploy:
+    name: Compilation du site Hugo et déploiement NoDC
+    runs-on: ubuntu-latest
+    concurrency:
+      group: nodc
+      cancel-in-progress: true
+    steps:
+
+    - name: Récupération des données
+      uses: actions/checkout@v6
+      with:
+        submodules: true
+
+    - name: Installation de Node
+      uses: actions/setup-node@v6
+      with:
+        node-version: 'lts/*'
+        cache: 'yarn'
+
+    - name: Installation des dépendances JavaScript
+      run: yarn install
+
+    - name: Installation de Hugo
+      uses: noesya/actions-hugo@release
+      with:
+        hugo-version: '0.165.0'
+        extended: true
+        withdeploy: true
+
+    - name: Compilation du site
+      run: yarn osuny build
+
+    - name: Déploiement NoDC
+      run: hugo deploy --force --maxDeletes -1
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.NODC_ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.NODC_SECRET }}
+
+    - name: Notification Slack en cas d'échecs
+      uses: rtCamp/action-slack-notify@v2
+      if: failure()
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+        SLACK_TITLE: 'Problem on repo ${{ github.event.repository.name }}'
+        SLACK_COLOR: '#FF0000'

@@ -2,8 +2,9 @@ class Nodc
 
   def create_bucket(host)
     response = client.post("website/#{host}")
+    raise if response.status != 200
     {
-      identifier: response.body.dig('vhost', 'name'),
+      identifier: response.body.dig('vhost', 'domain'),
       access_key_id: response.body.dig('access_key_id'),
       secret_access_key: response.body.dig('secret_access_key')
     }

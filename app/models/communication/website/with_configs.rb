@@ -29,6 +29,7 @@ module Communication::Website::WithConfigs
       config_deuxfleurs_config,
       config_netlify_config,
       config_nginx_config,
+      config_nodc_workflow,
       config_robots_txt,
     ].compact
   end
@@ -81,6 +82,11 @@ module Communication::Website::WithConfigs
   def config_nginx_config
     return unless hosted_with_nginx?
     @config_nginx_config ||= Communication::Website::Configs::NginxConfig.find(id)
+  end
+
+  def config_nodc_workflow
+    return unless hosted_with_nodc?
+    @config_nodc_workflow ||= Communication::Website::Configs::NodcWorkflow.find(id)
   end
 
   def config_robots_txt
