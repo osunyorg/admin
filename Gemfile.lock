@@ -356,6 +356,8 @@ GEM
     google-protobuf (4.36.2-x86_64-linux-gnu)
       bigdecimal
       rake (~> 13.3)
+    groupdate (6.8.0)
+      activesupport (>= 7.2)
     hal_openscience (1.0.0)
       json
       net-http
@@ -838,6 +840,7 @@ DEPENDENCIES
   geocoder (~> 1)
   gitlab
   good_job (~> 4)
+  groupdate
   hal_openscience
   i18n_data (~> 0)
   i18n_date_range
