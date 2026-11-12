@@ -4,7 +4,7 @@ class Ability::WebsiteManager < Ability
     super
     manage_blocks
     can :manage, Communication::Website, university_id: @user.university_id, id: managed_websites_ids
-    cannot :destroy, Communication::Website
+    cannot [:create, :destroy], Communication::Website
     cannot :unlock_synchronization, Communication::Website, synchronization_locked_by: { role: ['server_admin', 'admin'] }
     can :manage, Communication::Website::Localization, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Alert, university_id: @user.university_id, communication_website_id: managed_websites_ids
