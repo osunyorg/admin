@@ -768,6 +768,7 @@ en:
           button: Synchronize
           locked: Synchronization is disabled in the website settings, no change has been pushed.
           locked_by: Synchronization with Git has been disabled by %{user}
+          locked_for_maintenance: A maintenance operation is in progress on the website, synchronization is temporarily disabled.
           running: Synchronization launched, please be patient...
         technical:
           description: Everything related to technical settings
