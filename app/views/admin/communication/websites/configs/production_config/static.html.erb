@@ -31,5 +31,5 @@ deployment:
   ## NODC
   targets:
     - name: "production"
-      URL: "s3://<%= @website.nodc_identifier %>?endpoint=https://s3.nodc.eu&awssdk=v2&use_path_style=true&region=garage&disable_https=false"
+      URL: "<%= @website.nodc_s3_url %>"
 <% end %>

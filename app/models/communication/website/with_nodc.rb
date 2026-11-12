@@ -6,6 +6,11 @@ module Communication::Website::WithNodc
     after_save :nodc_golive, if: -> { hosted_with_nodc? && saved_change_to_in_production? && in_production }
   end
 
+  def nodc_s3_url
+    return unless hosted_with_nodc? && nodc_identifier.present?
+    "s3://#{nodc_identifier}?endpoint=#{Nodc::S3_ENDPOINT}&awssdk=v2&use_path_style=true&region=#{Nodc::S3_REGION}&disable_https=false"
+  end
+
   # 4 options:
   # 1. no nodc hosting at all -> do nothing
   # 2. no repo, nodc hosting : we need to create both

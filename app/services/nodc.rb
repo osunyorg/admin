@@ -1,5 +1,12 @@
 class Nodc
 
+  S3_ENDPOINT = 'https://s3.nodc.eu'
+  S3_REGION = 'eu'
+
+  API_BASE_URL = 'https://resourcemanager.nodc.eu/v1/'
+  API_SIGV4_SERVICE = 'resourcemanager'
+  API_SIGV4_REGION = 'eu'
+
   def create_bucket(host)
     response = client.post("website/#{host}")
     raise if response.status != 200
@@ -23,8 +30,8 @@ class Nodc
   def empty_bucket(host)
     response = client.get("website/#{host}")
     s3 =  Aws::S3::Resource.new(
-            endpoint: 'https://s3.nodc.eu',
-            region: 'garage',
+            endpoint: S3_ENDPOINT,
+            region: S3_REGION,
             access_key_id: response.body.dig('access_key_id'),
             secret_access_key: response.body.dig('secret_access_key')
           )
@@ -43,10 +50,10 @@ class Nodc
   protected
 
   def client
-    @client ||= Faraday.new(url: 'https://resourcemanager.nodc.eu/v1/') do |faraday|
+    @client ||= Faraday.new(url: API_BASE_URL) do |faraday|
       faraday.request :aws_sigv4,
-        service: 'resourcemanager',
-        region: 'eu',
+        service: API_SIGV4_SERVICE,
+        region: API_SIGV4_REGION,
         access_key_id: ENV['NODC_ACCESS_KEY_ID'],
         secret_access_key: ENV['NODC_SECRET_ACCESS_KEY']
 
