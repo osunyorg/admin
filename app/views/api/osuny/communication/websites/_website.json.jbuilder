@@ -2,8 +2,12 @@ json.id website.id
 json.url website.url
 json.hosting website.hosting
 json.deuxfleurs do
-  json.hosting website.deuxfleurs_hosting
+  json.hosting website.hosted_with_deuxfleurs?
   json.identifier website.deuxfleurs_identifier
+end
+json.nodc do
+  json.hosting website.hosted_with_nodc?
+  json.identifier website.nodc_identifier
 end
 json.features do
   json.agenda website.feature_agenda

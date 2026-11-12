@@ -23,10 +23,10 @@ class Deuxfleurs
   def empty_bucket(host)
     response = client.get("website/#{host}")
     data = JSON.parse(response.body)
-    s3 = Aws::S3::Resource.new(
+    s3 =  Aws::S3::Resource.new(
             endpoint: 'https://garage.deuxfleurs.fr',
-            region: 'garage', 
-            access_key_id: data.dig('access_key_id'), 
+            region: 'garage',
+            access_key_id: data.dig('access_key_id'),
             secret_access_key: data.dig('secret_access_key')
           )
     bucket = s3.bucket(host)

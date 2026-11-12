@@ -153,7 +153,6 @@ fr:
         default_time_zone: Fuseau horaire par défaut
         deployment_status_badge: Badge de statut du déploiement
         destination_websites: Sites dans lesquels diffuser
-        deuxfleurs_hosting: Hébergement avec Deuxfleurs
         deuxfleurs_identifier: Identifiant Deuxfleurs
         feature_agenda: Agenda
         feature_alerts: Alertes
@@ -177,6 +176,7 @@ fr:
         languages: Langues
         locked_at: Verrouillé pour les background jobs à
         name: Nom
+        nodc_identifier: Identifiant NoDC
         plausible_url: Tableau de bord Plausible
         repository: Référentiel
         showcase_tags: Mots-clés
@@ -966,6 +966,7 @@ fr:
           deuxfleurs: Deuxfleurs
           netlify: Netlify
           nginx: Nginx
+          nodc: NoDC
           undefined: Non défini
         kelmscott_sync_method:
           dxfl: dxfl
