@@ -153,4 +153,28 @@ module Communication::Website::WithGitRepository
     last_sync_at.nil? ? git_files_list.desynchronized
                       : git_files_list.desynchronized_since(last_sync_at)
   end
+
+  protected
+
+  def create_github_repository
+    update_columns  access_token: university.github_access_token,
+                    repository: default_github_repository,
+                    deployment_status_badge: default_badge_url
+    git_repository.init_from_template(default_github_repository_name)
+  end
+
+  # agit-cartographie
+  def default_github_repository_name
+    "#{university.identifier}-#{original_localization.to_s.parameterize}"
+  end
+
+  # osunyorg/agit-cartographie
+  def default_github_repository
+    "#{ENV['GITHUB_WEBSITE_OWNER']}/#{default_github_repository_name}"
+  end
+
+  def default_badge_url
+    return unless hosted_with_deuxfleurs? || hosted_with_nodc?
+    "https://github.com/#{default_github_repository}/actions/workflows/#{hosting}.yml/badge.svg"
+  end
 end

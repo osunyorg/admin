@@ -305,6 +305,9 @@ GEM
       net-http (~> 0.5)
     faraday-retry (2.4.0)
       faraday (~> 2.0)
+    faraday_middleware-aws-sigv4 (1.0.2)
+      aws-sigv4 (~> 1.0)
+      faraday (>= 2.0, < 3)
     fastimage (2.4.1)
     ffi (1.17.4-arm64-darwin)
     ffi (1.17.4-x86_64-darwin)
@@ -834,6 +837,8 @@ DEPENDENCIES
   enum_help
   execjs
   faceted_search
+  faraday (~> 2.15)
+  faraday_middleware-aws-sigv4 (~> 1.0)
   figaro
   font-awesome-sass
   geo_point
