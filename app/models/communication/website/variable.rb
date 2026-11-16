@@ -36,6 +36,7 @@ class Communication::Website::Variable < ApplicationRecord
     SFTP_PASSWORD: 103,
     SFTP_PATH: 104,
     DXFL_BUCKET: 200,
+    QUIX_BUCKET: 250,
     RSYNC_HOST: 300,
     RSYNC_PORT: 301,
     RSYNC_USER: 302,
@@ -61,6 +62,11 @@ class Communication::Website::Variable < ApplicationRecord
     ],
     'dxfl' => [
       'DXFL_BUCKET',
+      'AWS_ACCESS_KEY_ID',
+      'AWS_SECRET_ACCESS_KEY'
+    ],
+    'quix' => [
+      'QUIX_BUCKET',
       'AWS_ACCESS_KEY_ID',
       'AWS_SECRET_ACCESS_KEY'
     ],

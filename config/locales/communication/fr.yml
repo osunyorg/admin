@@ -970,6 +970,7 @@ fr:
           undefined: Non défini
         kelmscott_sync_method:
           dxfl: dxfl
+          quix: quix (NoDC)
           rsync: rsync
           s3: S3
           sftp: SFTP
