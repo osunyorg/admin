@@ -32,13 +32,12 @@ jobs:
       with:
         hugo-version: '0.165.0'
         extended: true
-        withdeploy: true
 
     - name: Compilation du site
       run: yarn osuny build
 
     - name: Déploiement NoDC
-      run: hugo deploy --force --maxDeletes -1
+      run: npx --package=quixcli --yes quix deploy <%= @website.nodc_identifier %> public/ --yes
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.NODC_ACCESS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.NODC_SECRET }}
