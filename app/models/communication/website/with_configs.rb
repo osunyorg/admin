@@ -93,7 +93,7 @@ module Communication::Website::WithConfigs
   end
 
   def config_nodc_workflow
-    return unless hosted_with_nodc?
+    return unless hosted_with_nodc? && !kelmscott_active?
     @config_nodc_workflow ||= Communication::Website::Configs::NodcWorkflow.find(id)
   end
 
