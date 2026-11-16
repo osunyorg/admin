@@ -2,7 +2,11 @@
   <div class="container-fluid text-center mb-5">
     <%= lucide_icon('lock') %>
     <span class="small ms-2">
-      <%= t('admin.communication.website.synchronization.locked_by', user: @website.synchronization_locked_by) %>
+      <% if @website.synchronization_locked_by.server_admin? %>
+        <%= t('admin.communication.website.synchronization.locked_for_maintenance') %>
+      <% else %>
+        <%= t('admin.communication.website.synchronization.locked_by', user: @website.synchronization_locked_by) %>
+      <% end %>
     </span>
   </div>
 <% end %>

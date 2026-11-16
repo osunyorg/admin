@@ -769,6 +769,7 @@ fr:
           button_locked: Synchronisation bloquée
           locked: La synchronisation est désactivée dans les réglages du site, aucune modification n'a été envoyée.
           locked_by: La synchronisation avec Git a été désactivée par %{user}
+          locked_for_maintenance: Une opération de maintenance est en cours sur le site, la synchronisation est temporairement désactivée.
           running: La synchronisation est lancée, un peu de patience...
         technical:
           description: Tout ce qui est lié aux réglages techniques
