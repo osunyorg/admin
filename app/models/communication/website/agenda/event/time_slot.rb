@@ -37,7 +37,10 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   include MovableToWebsite
   include WithOpenApi
 
+  # The event can be in the trash while its time slots are still there.
+  # We need to load it anyway to notice it (otherwise `event` is nil).
   belongs_to  :communication_website_agenda_event,
+              -> { with_deleted },
               class_name: 'Communication::Website::Agenda::Event',
               touch: true
   alias :event :communication_website_agenda_event
@@ -121,6 +124,12 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
 
   def first?
     @first ||= id == event.time_slots.ordered.first.id
+  end
+
+  def event_alive?
+    # A time slot can survive the trashing of its event
+    # (for example if it is created while the event is being deleted)
+    event.present? && !event.deleted?
   end
 
   def set_date_to(date)
