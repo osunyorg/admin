@@ -40,17 +40,7 @@ export default {
     </div>
     <div class="card-body">
       <PublicationState :published="resource?.published" />
-      <span v-if="resource?.published">
-        {{ resource?.name }}
-      </span>
-      <a
-        v-else
-        class="text-muted fst-italic"
-        :href="resource?.path"
-        target="_blank"
-        >
-        {{ resource?.name }}
-      </a>
+      {{ resource?.name }}
     </div>
   </div>
 </template>
