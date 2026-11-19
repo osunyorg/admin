@@ -41,6 +41,8 @@
 class University < ApplicationRecord
   self.filter_attributes += [:sso_cert, :default_github_access_token]
 
+  AUTOPROMOTE_ADMIN_DELAY = 1.month
+
   # We don't include Sanitizable because too many complex attributes. We handle it below.
   include Filterable
   include SsoEnabled
@@ -89,6 +91,16 @@ class University < ApplicationRecord
 
   def to_s
     "#{name}"
+  end
+
+  def can_autopromote_admin?
+    !admin_already_auto_promoted? &&
+      recently_created? &&
+      users.not_server_admin.empty?
+  end
+
+  def recently_created?
+    created_at > AUTOPROMOTE_ADMIN_DELAY.ago
   end
 
   def mail_from
