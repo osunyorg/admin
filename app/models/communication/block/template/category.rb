@@ -10,6 +10,7 @@ class Communication::Block::Template::Category < Communication::Block::Template:
   has_component :category_kind, :option, options: (
     Communication::Block::CATEGORIES[:references] - [
       :categories,
+      :exhibitions,
       :locations,
       :papers,
       :volumes,
@@ -35,6 +36,8 @@ class Communication::Block::Template::Category < Communication::Block::Template:
     case category_kind.to_sym
     when :agenda
       website&.agenda_categories
+    when :exhibitions
+      # No category of their own, exhibitions use agenda categories
     when :jobs
       website&.jobboard_categories
     when :locations
@@ -76,6 +79,7 @@ class Communication::Block::Template::Category < Communication::Block::Template:
 
   def selected_categories
     return [] if category_kind.nil?
+    return [] if available_categories.nil?
     if taxonomy.present?
       selected_categories_from_taxonomy
     else
