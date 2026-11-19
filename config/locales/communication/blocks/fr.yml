@@ -138,6 +138,9 @@ fr:
               accent_background:
                 description: Un bloc sur un fond très fort.
                 label: Forte mise en avant
+              alt_background:
+                description: Un bloc sur un fond discret, par exemple pour rythmer la page.
+                label: Légère mise en avant
               no_background:
                 description: Un bloc beaucoup plus discret.
                 label: Simple
