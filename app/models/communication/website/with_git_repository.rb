@@ -2,10 +2,6 @@ module Communication::Website::WithGitRepository
   extend ActiveSupport::Concern
 
   included do
-    belongs_to  :synchronization_locked_by,
-                class_name: 'User',
-                optional: true
-
     has_many  :website_git_files,
               class_name: 'Communication::Website::GitFile',
               dependent: :destroy
@@ -33,19 +29,6 @@ module Communication::Website::WithGitRepository
 
   def git_repository
     @git_repository ||= Git::Repository.new self
-  end
-
-  def synchronization_locked?
-    synchronization_locked_by_id.present?
-  end
-
-  def lock_synchronization!(user)
-    update_column :synchronization_locked_by_id, user.id
-  end
-
-  def unlock_synchronization!
-    update_column :synchronization_locked_by_id, nil
-    sync_with_git if desynchronized_generated_git_files.any?
   end
 
   def repository_url
@@ -77,6 +60,9 @@ module Communication::Website::WithGitRepository
     if git_files.desynchronized_until(last_sync_at).any?
       # More than one batch, we need to requeue the job
       Communication::Website::SyncWithGitJob.perform_later(id)
+    else
+      # Sync is over, the website can be built
+      kelmscott_publish
     end
   end
 
@@ -88,6 +74,16 @@ module Communication::Website::WithGitRepository
 
   def generate_git_file_for_object(object)
     Communication::Website::GitFile.generate self, object
+  end
+
+  def generate_git_file_for_references(references)
+    references.each do |reference|
+      # Le test can_have_git_file? n'est pas utile pour que ça fonctionne,
+      # c'est déjà fait après. Mais ça évite du calcul inutile, c'est de l'optimisation.
+      generate_git_file_for_object(reference) if reference.try(:can_have_git_file?)
+      # Si l'objet a des localisations, on transmet.
+      generate_git_file_for_array(reference.localizations) if reference.respond_to?(:localizations)
+    end
   end
 
   # Marque comme obsolete tous les git_files qui ne sont pas dans les recursive_dependencies_following_direct
@@ -129,6 +125,7 @@ module Communication::Website::WithGitRepository
     return if synchronization_locked?
     return unless git_repository.valid?
     git_repository.update_theme_version!
+    kelmscott_publish
   end
 
   def analyse_repository
@@ -155,5 +152,29 @@ module Communication::Website::WithGitRepository
     git_files_list = git_files.generated
     last_sync_at.nil? ? git_files_list.desynchronized
                       : git_files_list.desynchronized_since(last_sync_at)
+  end
+
+  protected
+
+  def create_github_repository
+    update_columns  access_token: university.github_access_token,
+                    repository: default_github_repository,
+                    deployment_status_badge: default_badge_url
+    git_repository.init_from_template(default_github_repository_name)
+  end
+
+  # agit-cartographie
+  def default_github_repository_name
+    "#{university.identifier}-#{original_localization.to_s.parameterize}"
+  end
+
+  # osunyorg/agit-cartographie
+  def default_github_repository
+    "#{ENV['GITHUB_WEBSITE_OWNER']}/#{default_github_repository_name}"
+  end
+
+  def default_badge_url
+    return unless hosted_with_deuxfleurs? || hosted_with_nodc?
+    "https://github.com/#{default_github_repository}/actions/workflows/#{hosting}.yml/badge.svg"
   end
 end

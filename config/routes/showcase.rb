@@ -3,7 +3,7 @@ constraints host: ENV['OSUNY_SHOWCASE'] do
   namespace :showcase, path: '' do
     resources :instances, only: :index
     resources :websites, only: [:index, :show]
-
+    get 'timeline' => 'websites#timeline'
     get ':feature' => 'websites#feature',
                     as: :feature,
                     constraints: {

@@ -3,7 +3,6 @@
 # Table name: users
 #
 #  id                            :uuid             not null, primary key
-#  chosen_name                   :string
 #  confirmation_sent_at          :datetime
 #  confirmation_token            :string           uniquely indexed
 #  confirmed_at                  :datetime
@@ -29,7 +28,7 @@
 #  remember_created_at           :datetime
 #  reset_password_sent_at        :datetime
 #  reset_password_token          :string           uniquely indexed
-#  role                          :integer          default(0)
+#  role                          :integer          default("visitor")
 #  second_factor_attempts_count  :integer          default(0)
 #  session_token                 :string
 #  sign_in_count                 :integer          default(0), not null
@@ -94,8 +93,7 @@ class User < ApplicationRecord
   }
 
   def to_s
-    name = "#{first_name} #{last_name}".strip
-    chosen_name.present? ? "#{name} (#{chosen_name})" : name
+    "#{first_name} #{last_name}".strip
   end
 
 end

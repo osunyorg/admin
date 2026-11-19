@@ -62,7 +62,7 @@ fr:
           offcanvas:
             close: Fermer l'édition du bloc
             title: Édition de bloc
-        empty: Ce bloc est vide et n'apparaitra pas
+        empty: Ce bloc est vide et n'apparaîtra pas.
         footer: Les blocs ajoutés ici apparaissent dans le pied de page (footer) du site, sur chaque page.
         templates:
           agenda:
@@ -240,8 +240,8 @@ fr:
                 placeholder: Entrer le code postal
             show:
               mail:
-                one: Email
-                other: Emails
+                one: Courriel
+                other: Courriels
               phone:
                 one: Téléphone
                 other: Téléphones

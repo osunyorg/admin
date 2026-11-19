@@ -16,6 +16,13 @@ module Communication::Website::WithOpenApi
             identifier: { type: :string, nullable: true }
           }
         },
+        nodc: {
+          type: :object,
+          properties: {
+            hosting: { type: :boolean },
+            identifier: { type: :string, nullable: true }
+          }
+        },
         features: {
           type: :object,
           properties: {

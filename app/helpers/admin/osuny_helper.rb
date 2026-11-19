@@ -60,7 +60,8 @@ module Admin::OsunyHelper
   end
 
   def osuny_published_localized(object)
-    state = object.published_in?(current_language)
+    l10n = object.localization_for(current_language)
+    state = l10n.try(:publication_state) || object.published_in?(current_language)
     osuny_published(state)
   end
 

@@ -14,7 +14,8 @@ fr:
         send:
           cta: Inviter %{name} à rejoindre les alumni
           label: Vous connaissez son email ? Vous pouvez l’inviter.
-          too_soon: Une invitation a déjà été envoyée à cette personne récemment. Vous pouvez réessayer plus tard.
+          too_soon_different_user: Une invitation a déjà été envoyée à cette personne récemment. Vous pouvez réessayer plus tard.
+          too_soon_same_user: Vous avez déjà envoyé une invitation à cette personne récemment. Vous pouvez réessayer plus tard.
         title: Inviter
     contacts:
       organizations:
@@ -54,5 +55,7 @@ fr:
     posts:
       home: Actualités récentes
       read_post: Lire l'article
+    registration_contact: Contactez-nous
+    registration_contact_sign_up_screen: Contactez-nous pour toute question concernant l'inscription
     search:
       no_results: Aucun résultat

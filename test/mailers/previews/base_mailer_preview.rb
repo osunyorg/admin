@@ -15,7 +15,6 @@ class BaseMailerPreview < ActionMailer::Preview
     @university ||= University.create!(
       name: 'Université de test',
       identifier: 'my-university',
-      sms_sender_name: 'unitest',
       default_language: Language.find_by(iso_code: 'fr'),
       is_really_a_university: true,
       languages: Language.where(iso_code: ['fr', 'en'])

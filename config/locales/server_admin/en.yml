@@ -62,6 +62,7 @@ en:
         short: Repository
         status: Status
       in_production: "%{count} in production"
+      kelmscott_status: Kelmscott usage
       manage_versions: Manage versions
       outdated: Those websites are outdated
       pages_count: "%{count} pages"

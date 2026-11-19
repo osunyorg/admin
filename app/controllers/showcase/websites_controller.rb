@@ -18,6 +18,21 @@ class Showcase::WebsitesController < Showcase::ApplicationController
     end
   end
 
+  def timeline
+    @title = 'Historique'
+    first_at = Communication::Website.in_production.minimum(:in_production_at)
+    monthly = if first_at
+      Communication::Website
+        .in_production
+        .group_by_month(:in_production_at, range: first_at..Time.current)
+        .count
+    else
+      {}
+    end
+    cumulative = 0
+    @websites_progression = monthly.transform_values { |count| cumulative += count }
+  end
+
   def tag
     @tag = Communication::Website::Showcase::Tag.find_by!(slug: params[:tag])
     @websites = @tag.websites.in_showcase

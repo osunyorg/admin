@@ -44,7 +44,7 @@ class Communication::Website::DestroyWebsiteJob < ApplicationJob
       access_token: nil,
       repository: nil,
     )
-    Search.remove_data_for_website(website)
+    University::SearchResult.remove_data_for_website(website)
     OBJECTS_NOT_PARANOID.each do |klass|
       klass.where(communication_website_id: website.id).destroy_all
     end
@@ -53,7 +53,8 @@ class Communication::Website::DestroyWebsiteJob < ApplicationJob
            .where(communication_website_id: website.id)
            .find_each(&:really_destroy!)
     end
-    website.deuxfleurs_destroy_bucket
+    website.deuxfleurs_destroy_bucket if website.hosted_with_deuxfleurs?
+    website.nodc_destroy_bucket if website.hosted_with_nodc?
     website.destroy
   end
 

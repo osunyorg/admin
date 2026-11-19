@@ -1,0 +1,9 @@
+<%
+# @about en preview, about en render
+university = @about&.university || about&.university
+university.communication_file_redirections.ordered.each do |redirection|
+  from = redirection.path
+  to = redirection.communication_file_localization.file_server_url
+  %>
+RedirectPermanent <%= from %> <%= to %>
+<% end %>

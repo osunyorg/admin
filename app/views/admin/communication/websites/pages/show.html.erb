@@ -33,6 +33,9 @@
     <%= osuny_small_panel Communication::Website::Page::Localization.human_attribute_name(:subtitle) do %>
       <p class="lead"><%= @l10n.subtitle %></p>
     <% end if @l10n.subtitle.present?  %>
+    <%= osuny_small_panel Communication::Website::Page::Localization.human_attribute_name(:header_text) do %>
+      <p class="lead"><%= @l10n.header_text %></p>
+    <% end if @l10n.header_text.present?  %>
     <%= render 'admin/application/summary/show', about: @l10n %>
   </div>
   <div class="offset-lg-1 col-lg-4">

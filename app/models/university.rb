@@ -18,12 +18,11 @@
 #  mail_from_name              :string
 #  name                        :string           indexed
 #  private                     :boolean
-#  sms_sender_name             :string
 #  sso_button_label            :string
 #  sso_cert                    :text
 #  sso_mapping                 :jsonb
 #  sso_name_identifier_format  :string
-#  sso_provider                :integer          default(0)
+#  sso_provider                :integer          default("saml")
 #  sso_target_url              :string
 #  zipcode                     :string
 #  created_at                  :datetime         not null
@@ -33,7 +32,7 @@
 # Indexes
 #
 #  index_universities_on_default_language_id  (default_language_id)
-#  index_universities_on_name                 (name) USING gin
+#  index_universities_on_name                 (name gin_trgm_ops) USING gin
 #
 # Foreign Keys
 #
@@ -42,6 +41,8 @@
 class University < ApplicationRecord
   self.filter_attributes += [:sso_cert, :default_github_access_token]
 
+  AUTOPROMOTE_ADMIN_DELAY = 1.month
+
   # We don't include Sanitizable because too many complex attributes. We handle it below.
   include Filterable
   include SsoEnabled
@@ -49,6 +50,7 @@ class University < ApplicationRecord
   include WithCommunication
   include HasCountry
   include WithEducation
+  include WithFileServer
   include WithGithub
   include WithIdentifier
   include WithInvoice
@@ -64,10 +66,9 @@ class University < ApplicationRecord
   has_many :active_storage_blobs, class_name: 'ActiveStorage::Blob'
   has_many :imports, dependent: :destroy
   has_many :apps, dependent: :destroy
-  has_many :search, dependent: :destroy
+  has_many :search_results, dependent: :destroy
 
   validates :name, presence: true
-  validates :sms_sender_name, presence: true, length: { maximum: 11 }
   validates :logo, size: { less_than: 1.megabytes }
 
   before_validation :sanitize_fields
@@ -92,6 +93,16 @@ class University < ApplicationRecord
     "#{name}"
   end
 
+  def can_autopromote_admin?
+    !admin_already_auto_promoted? &&
+      recently_created? &&
+      users.not_server_admin.empty?
+  end
+
+  def recently_created?
+    created_at > AUTOPROMOTE_ADMIN_DELAY.ago
+  end
+
   def mail_from
     address = mail_from_address.blank? ? ENV['MAIL_FROM_DEFAULT_ADDRESS'] : mail_from_address
     name = mail_from_name.blank? ? ENV['MAIL_FROM_DEFAULT_NAME'] : mail_from_name
@@ -112,7 +123,6 @@ class University < ApplicationRecord
     self.mail_from_address = Osuny::Sanitizer.sanitize(self.mail_from_address, 'string')
     self.mail_from_name = Osuny::Sanitizer.sanitize(self.mail_from_name, 'string')
     self.name = Osuny::Sanitizer.sanitize(self.name, 'string')
-    self.sms_sender_name = Osuny::Sanitizer.sanitize(self.sms_sender_name, 'string')
     self.sso_button_label = Osuny::Sanitizer.sanitize(self.sso_button_label, 'string')
     self.zipcode = Osuny::Sanitizer.sanitize(self.zipcode, 'string')
   end

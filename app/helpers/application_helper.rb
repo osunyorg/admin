@@ -39,6 +39,10 @@ module ApplicationHelper
     object.best_value(:key, current_language)
   end
 
+  def default_files_formats_accepted
+    Rails.application.config.default_files_formats.join(', ')
+  end
+  
   def default_images_formats_accepted
     Rails.application.config.default_images_formats.join(', ')
   end

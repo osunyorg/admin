@@ -22,6 +22,11 @@ module University::WithCommunication
               dependent: :destroy
     alias_method :file_localizations, :communication_file_localizations
 
+    has_many  :communication_file_redirections,
+              class_name: 'Communication::File::Redirection',
+              dependent: :destroy
+    alias_method :file_redirections, :communication_file_redirections
+
     has_many  :communication_file_categories,
               class_name: 'Communication::File::Category',
               dependent: :destroy

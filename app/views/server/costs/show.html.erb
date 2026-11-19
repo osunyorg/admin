@@ -1,0 +1,16 @@
+<% content_for :title, @cost %>
+
+<div class="row">
+  <div class="col-lg-4 mb-3">
+    <%= osuny_label Server::Cost.human_attribute_name(:annual_amount) %><br>
+    <%= number_to_currency @cost.annual_amount, precision: 0, locale: :fr %>
+  </div>
+  <div class="col-lg-8 mb-3">
+    <%= osuny_label Server::Cost.human_attribute_name(:description) %><br>
+    <%= @cost.description %>
+  </div>
+</div>
+
+<% content_for :title_right do %>
+  <%= link_to t('edit'), [:edit, @cost], class: button_classes %>
+<% end %>

@@ -15,6 +15,7 @@ namespace :communication do
       get :confirm_localization
       post :do_confirm_localization
       post :synchronize
+      post :kelmscott_publish
       scope 'git-analysis' do
         get '' => 'websites/git_analysis#index', as: :git_analysis
         post '' => 'websites/git_analysis#launch'
@@ -282,7 +283,6 @@ namespace :communication do
         resources :kinds, controller: 'extranets/documents/kinds', as: 'document_kinds'
       end
     end
-    resources :jobs, controller: 'extranets/jobs'
   end
   scope module: 'library' do
     resources :medias do
@@ -305,6 +305,9 @@ namespace :communication do
         end
         resources :collections, controller: '/admin/communication/library/medias/collections', as: 'media_collections'
       end
+      member do
+        post :restore
+      end
     end
     resources :files do
       collection do
@@ -321,6 +324,15 @@ namespace :communication do
       end
       member do
         get :static
+        post :restore
+      end
+      resources :redirections,
+                controller: '/admin/communication/library/files/redirections',
+                defaults: { format: :json } do
+        collection do
+          patch :change_server_slug
+          get :static, defaults: { format: :html }
+        end
       end
     end
   end

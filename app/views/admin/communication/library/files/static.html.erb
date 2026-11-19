@@ -9,5 +9,10 @@ file = @l10n.about
 <% if @l10n.original_blob.present? %>
 original_blob:
   id: "<%= @l10n.original_blob_id %>"
+<% if @l10n.file_server_url.present? %>
+file_server:
+  url: "<%= @l10n.file_server_url %>"
+  name: "<%= @l10n.file_server_filename %>"
+<% end %>
 <% end %>
 ---

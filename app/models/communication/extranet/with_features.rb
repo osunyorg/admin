@@ -7,7 +7,6 @@ module Communication::Extranet::WithFeatures
       :contacts,
       :documents,
       :alumni,
-      :jobs,
     ]
 
   validate :feature_alumni_is_available

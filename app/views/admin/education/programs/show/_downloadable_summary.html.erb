@@ -6,6 +6,7 @@ current = {
 <%= osuny_label Education::Program::Localization.human_attribute_name('downloadable_summary') %>
 <div
   id="downloadable-summary-app"
+  data-accept="<%= default_files_formats_accepted %>"
   data-changes-endpoint="<%= set_downloadable_summary_admin_education_program_path(program) %>"
   data-current="<%= current.to_json %>"
   data-object-endpoint="<%= admin_communication_files_path %>"

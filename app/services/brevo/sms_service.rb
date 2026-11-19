@@ -7,7 +7,7 @@ module Brevo
       duration =  ActiveSupport::Duration.build(Rails.application.config.devise.direct_otp_valid_for).inspect
       context = user.registration_context.respond_to?(:to_s_in) ? user.registration_context.to_s_in(user.language)
                                                                 : user.registration_context.to_s
-      message = I18n.t('sms_code', code: code, context: context, duration: duration)
+      message = I18n.t('sms_code', code: code, context: context, duration: duration, locale: user.language.iso_code.to_sym)
       self.send_message(user, message)
     end
 
@@ -22,8 +22,7 @@ module Brevo
     private
 
     def self.send_message(user, message)
-      sender_name = user.university.sms_sender_name
-      sender_name ||= DEFAULT_SENDER_NAME
+      sender_name = DEFAULT_SENDER_NAME
 
       api_instance = Brevo::TransactionalSMSApi.new
       send_transac_sms = Brevo::SendTransacSms.new(

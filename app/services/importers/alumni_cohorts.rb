@@ -1,5 +1,6 @@
 module Importers
   class AlumniCohorts < Base
+    NUMBER_OF_COLUMNS = HashToAlumnus::NUMBER_OF_COLUMNS + 5
 
     def initialize(import)
       @import = import
@@ -7,7 +8,7 @@ module Importers
       @university = import.university
       @connections = []
       @errors = []
-      analyze_xlsx
+      analyze_xlsx if columns_count_valid?
       manage_errors
       save
       send_extranet_invitation_emails
@@ -25,7 +26,7 @@ module Importers
             @connections << { person_id: person.id, communication_extranet_id: extranet_id }
           end
         else
-          add_error(hash_to_cohort.error, index + 1) 
+          add_error(hash_to_cohort.error, index + 1)
         end
       else
         add_error(hash_to_alumnus.error, index + 1)

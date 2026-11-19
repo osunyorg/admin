@@ -5,10 +5,10 @@ class Communication::Website::GitFile::GenerateContentJob < ApplicationJob
     git_file.generate_content_safely
   end
 
-  good_job_control_concurrency_with(
-    enqueue_limit: 1,
-    perform_limit: 1,
-    key: -> { "#{self.class.name}-#{queue_name}-#{arguments.first.to_global_id}" }
-  )
+  protected
+
+  def digest_arguments(arguments)
+    arguments.first.id
+  end
 
 end

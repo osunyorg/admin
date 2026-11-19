@@ -3,63 +3,56 @@ class ApplicationJob < ActiveJob::Base
 
   discard_on  ActiveJob::DeserializationError # Discard if object does not exist anymore
 
-  # https://github.com/bensheldon/good_job?tab=readme-ov-file#labelled-jobs
-  include GoodJob::ActiveJobExtensions::Labels
-
+  # https://github.com/bensheldon/good_job#concurrency-controls
   include GoodJob::ActiveJobExtensions::Concurrency
 
-  before_enqueue :add_good_job_labels
+  # Define one or more concurrency rules. Each rule is scoped to a label,
+  # which is a value derived from the job's arguments at enqueue time and
+  # stored on the job record. Jobs must be enqueued with the matching label
+  # via `good_job_labels:` for the rule to apply.
+  #
+  # Multiple rules can be defined; they are evaluated in order and the first
+  # exceeded rule short-circuits the rest.
+  good_job_concurrency_rule(
+    # A label that scopes this rule. Can be a static String or a Lambda/Proc
+    # invoked in the context of the job instance (see "Dynamic labels" below).
+    # The rule only applies to jobs that were enqueued with this label in
+    # `good_job_labels`.
+    label: -> { "#{self.class.name}-#{queue_name}-#{digest_arguments(arguments)}" },
 
-  good_job_control_concurrency_with(
-    # Maximum number of unfinished jobs to allow with the concurrency key
-    # Can be an Integer or Lambda/Proc that is invoked in the context of the job
-    # total_limit: 1,
+    # Apply the rule's label to every job of this class (and its subclasses),
+    # so the jobs don't need to be enqueued with it. Defaults to false.
+    # A Lambda/Proc label that returns nil is not applied.
+    apply_label: true,
+
+    # Maximum number of unfinished jobs with this label to allow.
+    # Can be an Integer or Lambda/Proc invoked in the context of the job.
+    total_limit: 1,
 
     # Or, if more control is needed:
-    # Maximum number of jobs with the concurrency key to be
-    # concurrently enqueued (excludes performing jobs)
-    # Can be an Integer or Lambda/Proc that is invoked in the context of the job
+    # Maximum number of jobs with this label to be concurrently enqueued
+    # (excludes performing jobs). Can be an Integer or Lambda/Proc.
     enqueue_limit: 1,
 
-    # Maximum number of jobs with the concurrency key to be
-    # concurrently performed (excludes enqueued jobs)
-    # Can be an Integer or Lambda/Proc that is invoked in the context of the job
+    # Maximum number of jobs with this label to be concurrently performed
+    # (excludes enqueued jobs). Can be an Integer or Lambda/Proc.
     perform_limit: 1,
 
-    # Maximum number of jobs with the concurrency key to be enqueued within
-    # the time period, looking backwards from the current time. Must be an array
-    # with two elements: the number of jobs and the time period.
+    # Maximum number of jobs with this label to be enqueued within the time
+    # period, looking backwards from now. Must be [count, period].
     enqueue_throttle: [10, 1.minute],
 
-    # Maximum number of jobs with the concurrency key to be performed within
-    # the time period, looking backwards from the current time. Must be an array
-    # with two elements: the number of jobs and the time period.
+    # Maximum number of jobs with this label to be performed within the time
+    # period, looking backwards from now. Must be [count, period].
     perform_throttle: [100, 1.hour],
 
     # Note: Under heavy load, the total number of jobs may exceed the
     # sum of `enqueue_limit` and `perform_limit` because of race conditions
     # caused by imperfectly disjunctive states. If you need to constrain
     # the total number of jobs, use `total_limit` instead. See #378.
-
-    # A unique key to be globally locked against.
-    # Can be String or Lambda/Proc that is invoked in the context of the job.
-    #
-    # If a key is not provided GoodJob will use the job class name.
-    #
-    # To disable concurrency control, for example in a subclass, set the
-    # key explicitly to nil (e.g. `key: nil` or `key: -> { nil }`)
-    #
-    # If you provide a custom concurrency key (for example, if concurrency is supposed
-    # to be controlled by the first job argument) make sure that it is sufficiently unique across
-    # jobs and queues by adding the job class or queue to the key yourself, if needed.
-    #
-    # Note: When using a model instance as part of your custom concurrency key, make sure
-    # to explicitly use its `id` or `to_global_id` because otherwise it will not stringify as expected.
-    #
-    # Note: Arguments passed to #perform_later can be accessed through Active Job's `arguments` method
-    # which is an array containing positional arguments and, optionally, a kwarg hash.
-    key: -> { "#{self.class.name}-#{queue_name}-#{digest_arguments(arguments)}" }
   )
+
+  before_enqueue :add_good_job_labels
 
   protected
 
@@ -67,15 +60,9 @@ class ApplicationJob < ActiveJob::Base
     []
   end
 
-  private
-
   def add_good_job_labels
     return if good_job_additional_labels.empty?
-    if @good_job_labels.nil?
-      @good_job_labels = good_job_additional_labels
-    else
-      @good_job_labels += good_job_additional_labels
-    end
+    self.good_job_labels |= good_job_additional_labels
   end
 
   def digest_arguments(arguments)

@@ -11,7 +11,7 @@ module GeneratesGitFiles
     websites.each do |website|
       website.generate_git_file_for_object(self)
       website.generate_git_file_for_array(recursive_dependencies) if respond_to?(:recursive_dependencies)
-      website.generate_git_file_for_array(references) if respond_to?(:references)
+      website.generate_git_file_for_references(references) if respond_to?(:references)
     end
   end
 

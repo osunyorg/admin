@@ -27,7 +27,6 @@ en:
         feature_alumni: Alumni
         feature_contacts: Directory
         feature_documents: Documents
-        feature_jobs: Job board
         feature_posts: News
         has_sso: Single sign-on
         host: Domain
@@ -75,7 +74,7 @@ en:
         name: Name
         privacy_policy: Privacy policy
         published: Language published
-        registration_contact: Contact mail for registrations problems
+        registration_contact: Contact email in case of problems
         sso_button_label: Sign in button's label
         terms: Terms of service
       communication/extranet/post:
@@ -93,9 +92,11 @@ en:
         title: Title
       communication/file:
         created_by: Uploaded by
+        is_lasting: Lasting file
       communication/file/context:
         about_type: Type
       communication/file/localization:
+        file_server_slug: Path
         internal_description: Internal description
         name: Name
         original_byte_size: Size
@@ -105,6 +106,8 @@ en:
         published: Published?
         published_at: Publication date
         updated_by: Last update
+      communication/file/redirection:
+        path: Path
       communication/media:
         collection: Collection
         created_by: Envoyée par
@@ -133,7 +136,7 @@ en:
         access_token: Access token
         apache_config_custom_content: Custom Apache configuration (.htaccess file)
         appearance: Appearance
-        archive_content: Archive content?
+        archive_content: Content lifecycle
         autoupdate_theme: Automatically update osuny theme
         config_apache_config: Apache specific configuration (.htaccess)
         config_default_content_security_policy: Security policies (CORS)
@@ -150,7 +153,6 @@ en:
         default_time_zone: Default time zone
         deployment_status_badge: Deployment status badge
         destination_websites: Websites to broadcast content to
-        deuxfleurs_hosting: Deuxfleurs hosting
         deuxfleurs_identifier: Deuxfleurs identifier
         feature_agenda: Agenda
         feature_alerts: Alerts
@@ -169,14 +171,18 @@ en:
         in_production: Production
         in_production_at: Production release date
         in_showcase: List website in showcase
+        kelmscott_active: Enable Kelmscott
+        kelmscott_sync_method: Synchronization type
         languages: Languages
         locked_at: Locked for background jobs at
         name: Name
+        nodc_identifier: NoDC identifier
         plausible_url: Plausible dashboard URL
         repository: Repository
         showcase_tags: Tags
         social: Social media
         source_websites: Sources of federated content
+        synchronization_active: Synchronization with Git
         university: University
         url: URL
         years_before_archive_content: Years before content archiving
@@ -353,6 +359,8 @@ en:
               cannot_unpublished_default: cannot be unpublished (default language)
         communication/file/localization:
           attributes:
+            file_server_slug:
+              taken: already taken
             original_uploaded_file:
               already_imported: already imported in file library
               too_big: too heavy!
@@ -387,6 +395,10 @@ en:
               blank: must be correct, as defined by RFC2396
               not_unique: already used by another alias
               reserved_for_home: is reserved for the home page
+        communication/website/variable:
+          attributes:
+            value:
+              kelmscott_public_key_missing: cannot be encrypted, the Kelmscott public key is not configured
     models:
       communication/block:
         one: Content block
@@ -605,6 +617,10 @@ en:
             button: Display call to action in header
             label: Call to action label
             url: Call to action URL
+        kelmscott_publish:
+          button: Restart publication
+          running: The publication is running, please be patient...
+          show_logs: Show logs
         localizations:
           fallback_hint_html: "Leave blank to use the default value: <i>%{master_value}</i>"
           title: Internationalization
@@ -747,8 +763,12 @@ en:
           previous_paths: Redirects (old paths)
           title: Manage redirects
         see_showcase: See showcase
-        synchronize:
+        show_repository: Show repository
+        synchronization:
           button: Synchronize
+          locked: Synchronization is disabled in the website settings, no change has been pushed.
+          locked_by: Synchronization with Git has been disabled by %{user}
+          locked_for_maintenance: A maintenance operation is in progress on the website, synchronization is temporarily disabled.
           running: Synchronization launched, please be patient...
         technical:
           description: Everything related to technical settings
@@ -812,6 +832,9 @@ en:
         button: Go live
         title: Go live
       hosting: Hosting
+      kelmscott:
+        masked: Secret saved and encrypted, it can never be displayed again. Leave blank to keep it.
+        subtitle: Website build and deployment by Kelmscott, on a sovereign infrastructure.
       menus:
         automatic: This menu is created automatically. <br>This means that it reflects the site's tree structure. <br>As soon as you want to modify it, by creating an item, the automatism will stop.
         default_title:
@@ -942,7 +965,14 @@ en:
           deuxfleurs: Deuxfleurs
           netlify: Netlify
           nginx: Nginx
+          nodc: NoDC
           undefined: Undefined
+        kelmscott_sync_method:
+          dxfl: dxfl
+          quix: quix (NoDC)
+          rsync: rsync
+          s3: S3
+          sftp: SFTP
         menu:
           item:
             kind:
@@ -981,6 +1011,8 @@ en:
         favicon: '.png file only'
         host: Sans le protocole
         sso_button_label: "Default: Sign in via SSO"
+      communication_file:
+        is_lasting: If unchecked, after 30 days, this file will be deleted if no context exists anymore.
       communication_file_localization:
         internal_description: Complementary complémentaire of the file. You can write this text to help the users to find a specific file, or learn how it should be used (rights, dates, contexts...).
       communication_media_localization:
@@ -1006,6 +1038,7 @@ en:
         plausible_url: Dashboard link generated following the <a href="https://plausible.io/docs/shared-links" target="_blank">official Plausible documentation</a>.
         repository: As organization/name, for example noesya/bordeauxmontaigne-iut. Leave it empty when creating a website with Deuxfleurs.
         source_websites: Choose the websites that can send content to it
+        synchronization_active: When synchronization is disabled, no change is pushed to the website's Git repository. Pending changes will be pushed once it is enabled again.
         university: Please note that changing university will disconnect people and organisations that are used on other sites, and will disconnect people from users.
         url: Leave this field empty when you create your website with Deuxfleurs, it will be filled in automatically.
       communication_website_menu_item:
@@ -1024,3 +1057,7 @@ en:
       communication_website_post:
         full_width: On large screens, a full width post uses all available space for the content.
         text: This field is deprecated, content will not be displayed on the website.
+      communication_website_variable:
+        rsync_bastion_host: Provide only if you use a SSH bastion
+        rsync_bastion_port: Provide only if you use a SSH bastion
+        rsync_bastion_user: Provide only if you use a SSH bastion

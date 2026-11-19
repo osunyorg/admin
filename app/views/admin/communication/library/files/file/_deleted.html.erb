@@ -1,0 +1,27 @@
+<%
+l10n = file.best_localization_for(current_language)
+%>
+<div class="<%= osuny_card_classes(horizontal: true) %>">
+  <% if l10n.featured_blob.present? %>
+    <%= osuny_thumbnail l10n %>
+  <% else %>
+    <div class="osuny__thumbnail
+                osuny__thumbnail--small
+                osuny__thumbnail--cropped">
+      <span class="osuny__thumbnail__icon">
+        <i class="<%= l10n.icon %>" title="<%= l10n.original_content_type %>"></i>
+      </span>
+    </div>
+  <% end %>
+  <div class="card-body">
+    <p class="small mb-0"><%= file.best_localization_for(current_language) %></p>
+  </div>
+  <% if can?(:restore, file) %>
+    <div class="card-footer mb-n2">
+      <%= link_to t('restore'),
+                  restore_admin_communication_file_path(file),
+                  method: :post,
+                  class: button_classes %>
+    </div>
+  <% end %>
+</div>

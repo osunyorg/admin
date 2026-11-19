@@ -1,5 +1,6 @@
 module Importers
   class PeopleExperiences < Base
+    NUMBER_OF_COLUMNS = HashToPerson::NUMBER_OF_COLUMNS + 6
 
     protected
 

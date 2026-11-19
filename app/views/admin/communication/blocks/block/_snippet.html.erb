@@ -1,2 +1,6 @@
+<% if block.empty? %>
+<p class="small text-muted"><%= t('admin.communication.blocks.empty') %></p>
+<% else %>
 <%= render "admin/communication/blocks/block/title", block: block unless block.template_title? %>
 <%= render "admin/communication/blocks/templates/#{block.template_kind}/snippet", block: block %>
+<% end %>

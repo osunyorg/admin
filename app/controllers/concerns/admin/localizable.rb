@@ -14,6 +14,10 @@ module Admin::Localizable
     before_action :redirect_if_not_localized,
                   only: [:show, :edit, :static, :publish, :preview],
                   unless: -> { request.format.json? }
+    
+    before_action :fallback_if_not_localized,
+                  only: :show,
+                  if: -> { request.format.json? }
   end
 
   protected
@@ -43,6 +47,14 @@ module Admin::Localizable
     else
       localize_resource_and_redirect_to_edit
     end
+  end
+
+  def fallback_if_not_localized
+    return if @l10n.present?
+
+    @l10n = resource.original_localization
+    @l10n.published = false if @l10n.respond_to?(:published)
+    @l10n.published_at = nil if @l10n.respond_to?(:published_at)
   end
 
   def resource_is_website_direct_object?
