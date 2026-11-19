@@ -15,6 +15,10 @@ module Communication::Website::Agenda::Event::WithDays
   end
 
   def generate_days
+    Communication::Website::Agenda::Event::GenerateDaysJob.perform_later(self)
+  end
+
+  def generate_days_safely
     # Days are used to group children
     existing_days_ids = []
     date = from_day
