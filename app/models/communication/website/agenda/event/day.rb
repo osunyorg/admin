@@ -33,7 +33,10 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
   include HasUniversity
   include Permalinkable
 
+  # The event can be in the trash while its days are still there.
+  # We need to load it anyway to notice it (otherwise `event` is nil).
   belongs_to  :event,
+              -> { with_deleted },
               foreign_key: :communication_website_agenda_event_id
   belongs_to  :language
 
@@ -49,6 +52,7 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
   end
 
   def should_sync_to?(website)
+    event_alive? && # Event in the trash (or gone): nothing to sync
     event.allowed_in?(website) && # Good website or federated
     website.active_language_ids.include?(language_id) && # Language is active on website
     events.published_in(language).any? && # With published events on this day
@@ -75,6 +79,12 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
 
   def from_day
     date
+  end
+
+  def event_alive?
+    # A day can survive the trashing of its event
+    # (for example if the days are generated asynchronously while the event is being deleted)
+    event.present? && !event.deleted?
   end
 
   def to_day
