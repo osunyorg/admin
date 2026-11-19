@@ -102,14 +102,21 @@ class Communication::Website::PermalinkTest < ActiveSupport::TestCase
   end
 
   def test_agenda_permalink
-    event = website_with_github.events.create!(
-      university_id: default_university.id,
-      from_day: Date.current,
-      to_day: Date.current + 1.day,
-      localizations_attributes: [
-        { language_id: french.id, title: "Festival", slug: "festival", published: true, published_at: Time.current }
-      ]
-    )
+    event = nil
+
+    assert_no_enqueued_jobs only: Communication::Website::Agenda::Event::GenerateDaysJob do
+      event = website_with_github.events.create!(
+        university_id: default_university.id,
+        from_day: Date.current,
+        to_day: Date.current + 1.day,
+        localizations_attributes: [
+          { language_id: french.id, title: "Festival", slug: "festival", published: true, published_at: Time.current }
+        ]
+      )
+    end
+
+    assert_equal 0, event.days.count
+
     event_l10n = event.localizations.first
 
     permalink = event_l10n.new_permalink_in_website(website_with_github)
@@ -120,14 +127,21 @@ class Communication::Website::PermalinkTest < ActiveSupport::TestCase
     # /agenda/2026/festival/
     assert_equal "/agenda/#{Date.current.year}/festival/", permalink.path
 
-    first_child_event = website_with_github.events.create!(
-      university_id: default_university.id,
-      parent_id: event.id,
-      from_day: Date.current,
-      localizations_attributes: [
-        { language_id: french.id, title: "Concert", slug: "concert", published: true, published_at: Time.current }
-      ]
-    )
+    first_child_event = nil
+    assert_enqueued_jobs 1, only: Communication::Website::Agenda::Event::GenerateDaysJob do
+      first_child_event = website_with_github.events.create!(
+        university_id: default_university.id,
+        parent_id: event.id,
+        from_day: Date.current,
+        localizations_attributes: [
+          { language_id: french.id, title: "Concert", slug: "concert", published: true, published_at: Time.current }
+        ]
+      )
+    end
+    assert_difference "Communication::Website::Agenda::Event::Day.count", 2 do
+      perform_enqueued_jobs only: Communication::Website::Agenda::Event::GenerateDaysJob
+    end
+
     first_child_event_l10n = first_child_event.localizations.first
 
     first_child_event_permalink = first_child_event_l10n.new_permalink_in_website(website_with_github)
@@ -156,7 +170,6 @@ class Communication::Website::PermalinkTest < ActiveSupport::TestCase
     # /agenda/2026/festival/conference/
     assert_equal "/agenda/#{Date.current.year}/festival/conference/", second_child_event_permalink.path
 
-    assert_equal 2, event.days.reload.count
     assert_difference "Communication::Website::Permalink.count", 2 do
       event.days.first.manage_permalink_in_website(website_with_github)
       event.days.second.manage_permalink_in_website(website_with_github)
