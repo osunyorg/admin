@@ -4,6 +4,10 @@ class Communication::Block::Template::Embed < Communication::Block::Template::Ba
   has_component :transcription, :rich_text
   has_component :transcription_title, :string
 
+  def empty?
+    code.blank?
+  end
+
   protected
 
   def check_accessibility
