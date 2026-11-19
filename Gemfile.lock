@@ -305,6 +305,9 @@ GEM
       net-http (~> 0.5)
     faraday-retry (2.4.0)
       faraday (~> 2.0)
+    faraday_middleware-aws-sigv4 (1.0.2)
+      aws-sigv4 (~> 1.0)
+      faraday (>= 2.0, < 3)
     fastimage (2.4.1)
     ffi (1.17.4-arm64-darwin)
     ffi (1.17.4-x86_64-darwin)
@@ -356,6 +359,8 @@ GEM
     google-protobuf (4.36.2-x86_64-linux-gnu)
       bigdecimal
       rake (~> 13.3)
+    groupdate (6.8.0)
+      activesupport (>= 7.2)
     hal_openscience (1.0.0)
       json
       net-http
@@ -832,12 +837,15 @@ DEPENDENCIES
   enum_help
   execjs
   faceted_search
+  faraday (~> 2.15)
+  faraday_middleware-aws-sigv4 (~> 1.0)
   figaro
   font-awesome-sass
   geo_point
   geocoder (~> 1)
   gitlab
   good_job (~> 4)
+  groupdate
   hal_openscience
   i18n_data (~> 0)
   i18n_date_range
@@ -902,7 +910,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-  ruby 4.0.9
+  ruby 4.0.10
 
 BUNDLED WITH
   4.0.23

@@ -10,6 +10,7 @@ module Communication::Website::WithKelmscott
     enum :kelmscott_sync_method, {
       sftp: 10,
       dxfl: 20,
+      quix: 25,
       rsync: 30,
       s3: 40
     },

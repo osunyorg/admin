@@ -153,7 +153,6 @@ en:
         default_time_zone: Default time zone
         deployment_status_badge: Deployment status badge
         destination_websites: Websites to broadcast content to
-        deuxfleurs_hosting: Deuxfleurs hosting
         deuxfleurs_identifier: Deuxfleurs identifier
         feature_agenda: Agenda
         feature_alerts: Alerts
@@ -177,6 +176,7 @@ en:
         languages: Languages
         locked_at: Locked for background jobs at
         name: Name
+        nodc_identifier: NoDC identifier
         plausible_url: Plausible dashboard URL
         repository: Repository
         showcase_tags: Tags
@@ -768,6 +768,7 @@ en:
           button: Synchronize
           locked: Synchronization is disabled in the website settings, no change has been pushed.
           locked_by: Synchronization with Git has been disabled by %{user}
+          locked_for_maintenance: A maintenance operation is in progress on the website, synchronization is temporarily disabled.
           running: Synchronization launched, please be patient...
         technical:
           description: Everything related to technical settings
@@ -964,9 +965,11 @@ en:
           deuxfleurs: Deuxfleurs
           netlify: Netlify
           nginx: Nginx
+          nodc: NoDC
           undefined: Undefined
         kelmscott_sync_method:
           dxfl: dxfl
+          quix: quix (NoDC)
           rsync: rsync
           s3: S3
           sftp: SFTP

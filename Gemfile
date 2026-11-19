@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "4.0.9"
+ruby "4.0.10"
 
 gem "activestorage-scaleway-service"#, path: "../activestorage-scaleway-service"
 gem "active_hashcash", "0.4.0"
@@ -33,11 +33,14 @@ gem "enum_help"
 gem "execjs"#, github: "rails/execjs"
 # gem "faceted_search"#, path: "../../noesya/faceted_search"
 gem "faceted_search"
+gem "faraday", "~> 2.15"
+gem "faraday_middleware-aws-sigv4", "~> 1.0"
 gem "font-awesome-sass"
 gem "geocoder", "~> 1"
 gem "geo_point"
 gem "gitlab"
 gem "good_job", "~> 4"#, path: "../../noesya/good_job"
+gem "groupdate"
 gem "hal_openscience"
 # gem "hal_openscience", path: "../../noesya/hal_openscience"
 # gem "hal_openscience", path: "../hal_openscience"

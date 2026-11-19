@@ -69,7 +69,7 @@ module User::WithRoles
       return if server_admin?
       if User.all.empty?
         self.role = :server_admin
-      elsif !university.admin_already_auto_promoted? && university.users.not_server_admin.empty?
+      elsif university.can_autopromote_admin?
         self.role = :admin
         self.just_autopromoted = true
       end

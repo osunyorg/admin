@@ -53,7 +53,8 @@ class Communication::Website::DestroyWebsiteJob < ApplicationJob
            .where(communication_website_id: website.id)
            .find_each(&:really_destroy!)
     end
-    website.deuxfleurs_destroy_bucket
+    website.deuxfleurs_destroy_bucket if website.hosted_with_deuxfleurs?
+    website.nodc_destroy_bucket if website.hosted_with_nodc?
     website.destroy
   end
 

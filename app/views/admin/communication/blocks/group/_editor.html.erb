@@ -19,13 +19,13 @@ reorder_url = reorder_admin_communication_blocks_path(
                 extranet_id: nil,
                 journal_id: nil)
 %>
+<%= render 'admin/communication/blocks/group/editor/paste', about: about  %>
 <div 
   id="blocks-editor-app"
   data-data-url="<%= data_url %>"
   data-new-url="<%= new_url %>"
   data-reorder-url="<%= reorder_url %>">
 </div>
-<%= render 'admin/communication/blocks/group/editor/paste', about: about  %>
 <%= render 'admin/communication/blocks/group/editor/reset', about: about  %>
 
 <% content_for :javascript do %>
