@@ -53,8 +53,8 @@ module Admin::Localizable
     return if @l10n.present?
 
     @l10n = resource.original_localization
-    @l10n.published = false
-    @l10n.published_at = nil
+    @l10n.published = false if @l10n.respond_to?(:published)
+    @l10n.published_at = nil if @l10n.respond_to?(:published_at)
   end
 
   def resource_is_website_direct_object?
