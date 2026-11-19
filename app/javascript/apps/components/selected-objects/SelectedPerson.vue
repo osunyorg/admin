@@ -2,20 +2,26 @@
 // La personne a un nom (et un prénom), et son image est une photo
 import logicMixin from './_mixin.js';
 import Placeholder from './Placeholder.vue';
+import PublicationState from './PublicationState.vue';
 
 export default {
   name: 'SelectedPerson',
   mixins: [logicMixin],
-  components: { Placeholder },
+  components: {
+    Placeholder,
+    PublicationState
+  },
 };
 </script>
 
 <template>
   <Placeholder
-    v-if="loading" />
+    v-if="loading"
+    />
   <div
     v-else
-    class="card card--osuny card--horizontal">
+    class="card card--osuny card--horizontal"
+    >
     <div class="osuny__thumbnail osuny__thumbnail--small osuny__thumbnail--cropped">
       <img
         v-if="resource?.photo"
@@ -23,15 +29,28 @@ export default {
         loading="lazy"
         decoding="async"
         width="70"
-        height="70" />
+        height="70"
+        />
       <span
         v-else
-        class="osuny__thumbnail__initials">
+        class="osuny__thumbnail__initials"
+        >
         {{ resource?.initials }}
       </span>
     </div>
     <div class="card-body">
-      {{ resource?.name }}
+      <PublicationState :published="resource?.published" />
+      <span v-if="resource?.published">
+        {{ resource?.name }}
+      </span>
+      <a
+        v-else
+        class="text-muted fst-italic"
+        :href="resource?.path"
+        target="_blank"
+        >
+        {{ resource?.name }}
+      </a>
     </div>
   </div>
 </template>

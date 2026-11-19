@@ -50,7 +50,11 @@ module Admin::Localizable
   end
 
   def fallback_if_not_localized
+    return if @l10n.present?
+
     @l10n = resource.original_localization
+    @l10n.published = false
+    @l10n.published_at = nil
   end
 
   def resource_is_website_direct_object?
