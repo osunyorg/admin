@@ -47,7 +47,7 @@
 #
 class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   acts_as_paranoid
-  
+
   include Accessible
   # Needs to be included before Sluggable (which is included by Permalinkable)
   include AsDirectObjectLocalization
@@ -104,6 +104,7 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   end
 
   def should_sync_to?(website)
+    event &&
     event.allowed_in?(website) &&
     website.active_language_ids.include?(language_id) &&
     published? &&

@@ -61,6 +61,7 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   end
 
   def should_sync_to?(website)
+    event &&
     event.allowed_in?(website) &&
     website.active_language_ids.include?(language_id) && # Language is active on website
     event_l10n.present? && # Event localized in this language
