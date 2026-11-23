@@ -598,6 +598,7 @@ en:
   select_language: Select language
   seo: SEO
   shared_image:
+    hint: .jpg or .png files only, max. 500 KB. If this image is included, it will replace the featured image when shared. You are under no obligation to use it; it is only relevant if you did prepare an image specifically for social media.
     title: Shared image
   show: Show
   simple_form:
