@@ -6,8 +6,8 @@
     <article class="project" itemscope itemtype="https://schema.org/CreativeWork">
       <div class="project-content">
         <div class="project-description">
-          <h<%= block.heading_rank_children %> class='project-title' itemprop='name'>
-            <%= link_to project_l10n, project_l10n.current_permalink_url_in_website(@website) %>
+          <h<%= block.heading_rank_children %> class="project-title" itemprop="name">
+            <a href="#"><%= project_l10n %></a>
           </h<%= block.heading_rank_children %>>
           <%= render 'admin/communication/blocks/templates/projects/partials/summary',
                       block: block,
