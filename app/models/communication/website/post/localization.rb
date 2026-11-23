@@ -90,6 +90,7 @@ class Communication::Website::Post::Localization < ApplicationRecord
   }
 
   def should_sync_to?(website)
+    post &&
     post.allowed_in?(website) &&
     website.active_language_ids.include?(language_id) &&
     published?

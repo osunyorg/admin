@@ -61,6 +61,7 @@ class Communication::Website::Alert::Localization < ApplicationRecord
   end
 
   def should_sync_to?(website)
+    alert &&
     alert.allowed_in?(website) &&
     website.active_language_ids.include?(language_id) &&
     published?
