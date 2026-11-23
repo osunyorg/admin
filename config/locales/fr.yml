@@ -598,6 +598,7 @@ fr:
   select_language: Sélectionnez une langue
   seo: SEO
   shared_image:
+    hint: Fichiers .jpg ou .png uniquement, 500 ko max. Si cette image est présente, elle remplacera l'image à la une lors des partages. Vous n'êtes pas du tout obligé·e de l'utiliser, ce n'est pertinent que si vous préparez une image spécifiquement pour les médias sociaux.
     title: Image de partage
   show: Voir
   simple_form:
