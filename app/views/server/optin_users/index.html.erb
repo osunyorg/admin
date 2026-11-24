@@ -13,6 +13,7 @@
     <%= number_with_delimiter @users.total_count %>
     <%= User.model_name.human(count: @users.total_count).downcase %>
   </p>
+  <%= render 'filters', current_path: server_optin_users_path %>
 </div>
 
 <div class="table-responsive">
