@@ -1,7 +1,9 @@
 class Server::OptinUsersController < Server::ApplicationController
-  
+
   def index
-    @users = User.select(:email).distinct
+    @users = User.filter_by(params[:filters], current_language)
+                 .select(:email)
+                 .distinct
                  .where(optin_newsletter: true)
                  .order(:email)
 
@@ -23,5 +25,5 @@ class Server::OptinUsersController < Server::ApplicationController
     super
     add_breadcrumb t('server_admin.optin_users.title'), server_optin_users_path
   end
-  
+
 end
