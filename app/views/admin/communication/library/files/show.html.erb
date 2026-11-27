@@ -27,37 +27,34 @@
           <%= render 'admin/application/l10n/widget', about: @file, l10n: @l10n %>
         </div>
       </div>
-      <div class="col-lg-9">
-        <div class="row">
-          <div class="col-lg-6">
-            <%= osuny_label Communication::File::Localization.human_attribute_name(:original_filename) %>
-            <p><%= @l10n.original_filename %></p>
-            <%= osuny_label Communication::File.human_attribute_name(:is_lasting) %>
-            <p><%= t(@file.is_lasting?) %></p>
-            <% if @l10n.meta_description.present? %>
-              <%= osuny_label t('admin.meta_description.label') %>
-              <p><%= @l10n.meta_description %></p>
-            <% end %>
-          </div>
-          <div class="col-lg-6">
-            <%= osuny_label Communication::File::Localization.human_attribute_name(:original_byte_size) %>
-            <p><%= number_to_human_size @l10n.original_byte_size %></p>
-            <%= osuny_label Communication::File::Localization.human_attribute_name(:original_content_type) %>
-            <p><%= @l10n.human_content_type %></p>
-            <% if @file.created_by.present? %>
-              <%= osuny_label Communication::File.human_attribute_name(:created_by) %>
-              <p><%= @file.created_by %></p>
-            <% end %>
-            <% if @l10n.updated_by.present? %>
-              <%= osuny_label Communication::File::Localization.human_attribute_name(:updated_by) %>
-              <p><%= @l10n.updated_by %></p>
-            <% end %>
-            <% if @l10n.published_at.present? %>
-              <%= osuny_label Communication::File::Localization.human_attribute_name(:published_at) %>
-              <p><%= l(@l10n.published_at, format: :long).humanize %></p>
-            <% end %>
-          </div>
-        </div>
+      <div class="offset-lg-1 col-lg-8">
+        <%= osuny_label Communication::File::Localization.human_attribute_name(:original_filename) %>
+        <p><%= @l10n.original_filename %></p>
+        <%= osuny_label Communication::File.human_attribute_name(:is_lasting) %>
+        <p><%= t(@file.is_lasting?) %></p>
+        <% if @l10n.meta_description.present? %>
+          <%= osuny_label t('admin.meta_description.label') %>
+          <p><%= @l10n.meta_description %></p>
+        <% end %>
+        <%= osuny_label Communication::File::Localization.human_attribute_name(:original_byte_size) %>
+        <p><%= number_to_human_size @l10n.original_byte_size %></p>
+        <%= osuny_label Communication::File::Localization.human_attribute_name(:original_content_type) %>
+        <p><%= @l10n.human_content_type %></p>
+        <% if @file.created_by.present? %>
+          <%= osuny_label Communication::File.human_attribute_name(:created_by) %>
+          <p><%= @file.created_by %></p>
+        <% end %>
+        <% if @l10n.published_at.present? %>
+          <%= osuny_label Communication::File::Localization.human_attribute_name(:published_at) %>
+          <p><%= l(@l10n.published_at, format: :long).humanize %></p>
+        <% end %>
+        <% if @l10n.updated_by.present? %>
+          <%= osuny_label Communication::File::Localization.human_attribute_name(:updated_by) %>
+          <p>
+            <%= @l10n.updated_by %>,
+            <%= l @l10n.updated_at, format: :long %>
+          </p>
+        <% end %>
         <% if @l10n.internal_description.present? %>
           <%= osuny_label Communication::File::Localization.human_attribute_name(:internal_description) %>
           <p><%= @l10n.internal_description %></p>

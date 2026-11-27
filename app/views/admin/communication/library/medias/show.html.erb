@@ -64,13 +64,16 @@
           <%= osuny_label Communication::Media.human_attribute_name(:created_by) %>
           <p><%= @media.created_by %></p>
         <% end %>
-        <% if @l10n.updated_by.present? %>
-          <%= osuny_label Communication::Media::Localization.human_attribute_name(:updated_by) %>
-          <p><%= @l10n.updated_by %></p>
-        <% end %>
         <% if @l10n.published_at.present? %>
           <%= osuny_label Communication::Media::Localization.human_attribute_name(:published_at) %>
           <p><%= l(@l10n.published_at, format: :long).humanize %></p>
+        <% end %>
+        <% if @l10n.updated_by.present? %>
+          <%= osuny_label Communication::Media::Localization.human_attribute_name(:updated_by) %>
+          <p>
+            <%= @l10n.updated_by %>,
+            <%= l @l10n.updated_at, format: :long %>
+          </p>
         <% end %>
       </div>
     </div>
