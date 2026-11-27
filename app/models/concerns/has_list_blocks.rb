@@ -8,14 +8,14 @@ module HasListBlocks
     after_touch   :synchronize_list_blocks
   end
 
-  protected
-
   def synchronize_list_blocks
     return if Osuny::BulkOperation.in_progress?
     websites.each do |website|
       Communication::Website::SynchronizeListBlocksJob.perform_later(website, list_blocks_template_kind)
     end
   end
+
+  protected
 
   def list_blocks_template_kind
     raise NoMethodError, "You must implement list_blocks_template_kind in #{self.class.name}"
