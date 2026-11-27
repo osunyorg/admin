@@ -91,7 +91,7 @@ en:
         slug: Slug
         title: Title
       communication/file:
-        created_by: Uploaded by
+        created_by: Creation
         is_lasting: Lasting file
       communication/file/context:
         about_type: Type
@@ -104,7 +104,7 @@ en:
         original_filename: Original filename
         original_uploaded_file: Original file
         published: Published?
-        published_at: Publication date
+        published_at: Publication
         updated_by: Last update
       communication/file/redirection:
         path: Path

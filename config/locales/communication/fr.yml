@@ -91,7 +91,7 @@ fr:
         slug: Identifiant
         title: Titre
       communication/file:
-        created_by: Envoyé par
+        created_by: Création
         is_lasting: Fichier pérenne
       communication/file/context:
         about_type: Type
@@ -104,7 +104,7 @@ fr:
         original_filename: Nom du fichier original
         original_uploaded_file: Fichier original
         published: Publié ?
-        published_at: Date de publication
+        published_at: Publication
         updated_by: Dernière modification
       communication/file/redirection:
         path: Chemin
