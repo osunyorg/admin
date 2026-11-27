@@ -20,10 +20,10 @@ module User::WithPerson
     person_l10n.last_name = last_name
     person_l10n.slug = person_l10n.to_s.parameterize
     person_l10n.save
-    if picture.attached?
-      ActiveStorage::Utils.duplicate(picture, person.picture)
-    elsif person.picture.attached?
-      ActiveStorage::Utils.duplicate(person.picture, picture)
+    if picture.attached? && picture.blob_id != person.picture&.blob_id
+      person.picture.attach(picture.blob)
+    elsif person.picture.attached? && person.picture.blob_id != picture&.blob_id
+      picture.attach(person.picture.blob)
     end
     person.save
   end
