@@ -13,7 +13,7 @@ module Communication::Website::Agenda::Exhibition::Localization::WithCal
       all_day: true,
       title: "#{title} #{subtitle}",
       url: current_permalink_url_in_website(website),
-      description: summary
+      description: cal_description
     )
   end
 
@@ -37,8 +37,11 @@ module Communication::Website::Agenda::Exhibition::Localization::WithCal
     add_to_calendar_urls['ical']
   end
 
-
   protected
+
+  def cal_description
+    Osuny::Sanitizer.sanitize(summary, 'string').strip.presence
+  end
 
   def cal_from_time
     from_day.to_time
